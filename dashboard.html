@@ -1,367 +1,512 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SAFA HIFZ CLASS - Admin</title>
+
+<title>SAFA HIFZ CLASS - Usthad</title>
 
 <style>
-*{
-  box-sizing:border-box;
+
+* {
+  box-sizing: border-box;
 }
 
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f4f7fb;
-  color:#222;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  color: #172033;
 }
 
-header{
-  background:#075e54;
-  color:white;
-  padding:16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
+header {
+  background: #0f766e;
+  color: white;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 }
 
-header h2{
-  margin:0;
-  font-size:20px;
+header h2 {
+  margin: 0;
 }
 
-button{
-  border:0;
-  border-radius:8px;
-  padding:10px 14px;
-  cursor:pointer;
-  font-size:14px;
+.logout {
+  background: #dc2626;
+  color: white;
+  border: 0;
+  padding: 10px 15px;
+  border-radius: 8px;
 }
 
-.logout{
-  background:#d32f2f;
-  color:white;
+nav {
+  background: white;
+  padding: 10px;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  border-bottom: 1px solid #ddd;
 }
 
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:15px;
+nav button {
+  white-space: nowrap;
+  border: 0;
+  padding: 11px 15px;
+  border-radius: 8px;
+  background: #e2e8f0;
+  cursor: pointer;
 }
 
-.notification{
-  background:#fff3cd;
-  border:1px solid #ffe69c;
-  border-radius:10px;
-  padding:12px;
-  margin-bottom:15px;
+nav button.active {
+  background: #0f766e;
+  color: white;
 }
 
-.notification button{
-  background:#075e54;
-  color:white;
-  margin:4px;
+main {
+  padding: 18px;
+  max-width: 1200px;
+  margin: auto;
 }
 
-.menu{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:10px;
-  margin-bottom:20px;
+.section {
+  display: none;
 }
 
-.menu button{
-  background:white;
-  border:1px solid #ddd;
-  color:#075e54;
-  font-weight:bold;
+.section.active {
+  display: block;
 }
 
-.menu button:hover{
-  background:#e8f5f2;
+.card {
+  background: white;
+  padding: 18px;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.08);
 }
 
-.section{
-  display:none;
-  background:white;
-  padding:18px;
-  border-radius:12px;
-  margin-bottom:20px;
-  box-shadow:0 2px 8px rgba(0,0,0,.06);
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 11px;
+  margin-top: 7px;
+  margin-bottom: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 15px;
 }
 
-.section.active{
-  display:block;
+textarea {
+  min-height: 90px;
 }
 
-h3{
-  margin-top:0;
-  color:#075e54;
+.save {
+  background: #0f766e;
+  color: white;
+  border: 0;
+  padding: 11px 18px;
+  border-radius: 8px;
 }
 
-input,select,textarea{
-  width:100%;
-  padding:10px;
-  margin:6px 0 12px;
-  border:1px solid #ccc;
-  border-radius:7px;
-  font-size:14px;
+.delete {
+  background: #dc2626;
+  color: white;
+  border: 0;
+  padding: 8px 12px;
+  border-radius: 7px;
 }
 
-textarea{
-  min-height:90px;
-  resize:vertical;
+.reply {
+  background: #2563eb;
+  color: white;
+  border: 0;
+  padding: 8px 12px;
+  border-radius: 7px;
 }
 
-.save{
-  background:#075e54;
-  color:white;
+.item {
+  border: 1px solid #e2e8f0;
+  padding: 14px;
+  border-radius: 10px;
+  margin-top: 10px;
 }
 
-.delete{
-  background:#d32f2f;
-  color:white;
+.small {
+  color: #64748b;
+  font-size: 13px;
 }
 
-.reply{
-  background:#1565c0;
-  color:white;
+.badge {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: #dcfce7;
+  color: #166534;
+  font-size: 12px;
 }
 
-.card{
-  border:1px solid #ddd;
-  border-radius:10px;
-  padding:14px;
-  margin:10px 0;
-  background:#fafafa;
+.empty {
+  color: #64748b;
+  padding: 15px;
 }
 
-.card p{
-  margin:7px 0;
-}
-
-.small{
-  color:#666;
-  font-size:13px;
-}
-
-.badge{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:15px;
-  background:#e0f2f1;
-  color:#075e54;
-  font-size:12px;
-}
-
-.danger-badge{
-  background:#ffebee;
-  color:#c62828;
-}
-
-.success-badge{
-  background:#e8f5e9;
-  color:#2e7d32;
-}
-
-.warning-badge{
-  background:#fff8e1;
-  color:#ef6c00;
-}
-
-hr{
-  border:0;
-  border-top:1px solid #ddd;
-  margin:15px 0;
-}
-
-.empty{
-  color:#777;
-  padding:10px 0;
-}
 </style>
+
 </head>
 
 <body>
 
 <header>
-  <h2>SAFA HIFZ CLASS - Usthad</h2>
-  <button class="logout" onclick="logout()">Logout</button>
+
+<h2>SAFA HIFZ CLASS - Usthad</h2>
+
+<button class="logout" id="logoutBtn">
+Logout
+</button>
+
 </header>
 
-<div class="container">
 
-  <div id="notificationArea" class="notification">
-    Loading notifications...
-  </div>
+<nav>
 
-  <div class="menu">
-    <button onclick="showSection('home')">🏠 Home</button>
-    <button onclick="showSection('students')">👨‍🎓 Students</button>
-    <button onclick="showSection('attendance')">📅 Attendance</button>
-    <button onclick="showSection('study')">📖 Study</button>
-    <button onclick="showSection('results')">🏆 Results</button>
-    <button onclick="showSection('notices')">📢 Notices</button>
-    <button onclick="showSection('leaves')">📝 Leave</button>
-    <button onclick="showSection('messages')">💬 Messages</button>
-  </div>
+<button data-section="home" class="active">Home</button>
+<button data-section="students">Students</button>
+<button data-section="attendance">Attendance</button>
+<button data-section="study">Study</button>
+<button data-section="results">Results</button>
+<button data-section="notices">Notices</button>
+<button data-section="leave">Leave</button>
+<button data-section="messages">Messages</button>
 
-  <!-- HOME -->
-  <div id="home" class="section active">
-    <h3>Admin Dashboard</h3>
-    <p>Welcome Usthad.</p>
-    <p class="small">
-      ഇവിടെ നിന്ന് students, attendance, study progress, results,
-      notices, leave requests, messages എന്നിവ manage ചെയ്യാം.
-    </p>
-  </div>
+</nav>
 
-  <!-- STUDENTS -->
-  <div id="students" class="section">
-    <h3>Students</h3>
 
-    <input id="studentNumber" placeholder="Student Number">
-    <input id="studentName" placeholder="Student Name">
-    <input id="className" placeholder="Class Name">
-    <input id="parentEmail" placeholder="Parent Email">
+<main>
 
-    <button class="save" onclick="saveStudent()">Save Student</button>
 
-    <hr>
+<!-- HOME -->
 
-    <div id="studentsList">Loading...</div>
-  </div>
+<section id="home" class="section active">
 
-  <!-- ATTENDANCE -->
-  <div id="attendance" class="section">
-    <h3>Attendance</h3>
+<div class="card">
 
-    <input id="attendanceStudentNumber" placeholder="Student Number">
-    <input id="attendanceDate" type="date">
+<h2>Assalamu Alaikum</h2>
 
-    <select id="attendanceStatus">
-      <option value="Present">Present</option>
-      <option value="Absent">Absent</option>
-      <option value="Leave">Leave</option>
-    </select>
+<p>
+SAFA HIFZ CLASS Admin Dashboard
+</p>
 
-    <button class="save" onclick="saveAttendance()">Save Attendance</button>
-
-    <hr>
-
-    <div id="attendanceList">Loading...</div>
-  </div>
-
-  <!-- STUDY -->
-  <div id="study" class="section">
-    <h3>Study Progress</h3>
-
-    <input id="studyStudentNumber" placeholder="Student Number">
-    <input id="studyDate" type="date">
-    <input id="studySurah" placeholder="Surah">
-
-    <input id="studyNewLesson" placeholder="New Lesson">
-    <input id="studyRevision" placeholder="Revision">
-    <input id="studyPerformance" placeholder="Performance">
-
-    <textarea id="studyNote" placeholder="Note"></textarea>
-
-    <button class="save" onclick="saveStudy()">Save Study Progress</button>
-
-    <hr>
-
-    <div id="studyList">Loading...</div>
-  </div>
-
-  <!-- RESULTS -->
-  <div id="results" class="section">
-    <h3>Results</h3>
-
-    <input id="resultStudentNumber" placeholder="Student Number">
-    <input id="resultTitle" placeholder="Result Title">
-    <input id="resultMark" placeholder="Mark">
-
-    <select id="resultStatus">
-      <option value="published">Published</option>
-      <option value="draft">Draft</option>
-    </select>
-
-    <button class="save" onclick="saveResult()">Save Result</button>
-
-    <hr>
-
-    <div id="resultsList">Loading...</div>
-  </div>
-
-  <!-- NOTICES -->
-  <div id="notices" class="section">
-    <h3>Notices</h3>
-
-    <input id="noticeTitle" placeholder="Notice Title">
-
-    <textarea id="noticeText" placeholder="Notice"></textarea>
-
-    <select id="noticeStatus">
-      <option value="published">Published</option>
-      <option value="draft">Draft</option>
-    </select>
-
-    <button class="save" onclick="saveNotice()">Save Notice</button>
-
-    <hr>
-
-    <div id="noticesList">Loading...</div>
-  </div>
-
-  <!-- LEAVES -->
-  <div id="leaves" class="section">
-    <h3>Leave Requests</h3>
-
-    <div id="leaveList">Loading...</div>
-  </div>
-
-  <!-- MESSAGES -->
-  <div id="messages" class="section">
-    <h3>Parent Messages</h3>
-
-    <div id="messagesList">Loading...</div>
-  </div>
+<p>
+Students, attendance, study progress, results,
+notices, leave requests and parent messages
+ഇവിടെ നിന്ന് manage ചെയ്യാം.
+</p>
 
 </div>
 
+</section>
+
+
+<!-- STUDENTS -->
+
+<section id="students" class="section">
+
+<div class="card">
+
+<h2>Add Student</h2>
+
+<label>Student Number</label>
+<input id="studentNumber" placeholder="Example: 131">
+
+<label>Student Name</label>
+<input id="studentName" placeholder="Student name">
+
+<label>Class</label>
+<input id="className" placeholder="Example: HIFZ A">
+
+<label>Parent Email</label>
+<input id="parentEmail" placeholder="Parent email">
+
+<button class="save" id="saveStudent">
+Save Student
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>Students</h2>
+
+<div id="studentList">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ATTENDANCE -->
+
+<section id="attendance" class="section">
+
+<div class="card">
+
+<h2>Attendance</h2>
+
+<label>Student Number</label>
+<input id="attendanceStudent">
+
+<label>Date</label>
+<input type="date" id="attendanceDate">
+
+<label>Status</label>
+
+<select id="attendanceStatus">
+
+<option value="Present">Present</option>
+<option value="Absent">Absent</option>
+<option value="Leave">Leave</option>
+
+</select>
+
+<button class="save" id="saveAttendance">
+Save Attendance
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>Attendance Records</h2>
+
+<div id="attendanceList">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+
+<!-- STUDY -->
+
+<section id="study" class="section">
+
+<div class="card">
+
+<h2>Study Progress</h2>
+
+<label>Student Number</label>
+<input id="studyStudent">
+
+<label>Date</label>
+<input type="date" id="studyDate">
+
+<label>Surah</label>
+<input id="studySurah">
+
+<label>New Lesson</label>
+<input id="newLesson">
+
+<label>Revision</label>
+<input id="revision">
+
+<label>Performance</label>
+<select id="performance">
+
+<option>Excellent</option>
+<option>Very Good</option>
+<option>Good</option>
+<option>Needs Improvement</option>
+
+</select>
+
+<label>Note</label>
+<textarea id="studyNote"></textarea>
+
+<button class="save" id="saveStudy">
+Save Study
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>Study Records</h2>
+
+<div id="studyList">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+
+<!-- RESULTS -->
+
+<section id="results" class="section">
+
+<div class="card">
+
+<h2>Publish Result</h2>
+
+<label>Student Number</label>
+<input id="resultStudent">
+
+<label>Result Title</label>
+<input id="resultTitle" placeholder="Monthly Exam">
+
+<label>Mark</label>
+<input id="resultMark">
+
+<label>Status</label>
+
+<select id="resultStatus">
+
+<option value="published">Published</option>
+<option value="draft">Draft</option>
+
+</select>
+
+<button class="save" id="saveResult">
+Save Result
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>Results</h2>
+
+<div id="resultList">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+
+<!-- NOTICES -->
+
+<section id="notices" class="section">
+
+<div class="card">
+
+<h2>Notice</h2>
+
+<label>Title</label>
+<input id="noticeTitle">
+
+<label>Notice</label>
+<textarea id="noticeText"></textarea>
+
+<label>Status</label>
+
+<select id="noticeStatus">
+
+<option value="published">Published</option>
+<option value="draft">Draft</option>
+
+</select>
+
+<button class="save" id="saveNotice">
+Publish Notice
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>Notices</h2>
+
+<div id="noticeList">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+
+<!-- LEAVE -->
+
+<section id="leave" class="section">
+
+<div class="card">
+
+<h2>Leave Requests</h2>
+
+<div id="leaveList">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MESSAGES -->
+
+<section id="messages" class="section">
+
+<div class="card">
+
+<h2>Parent Messages</h2>
+
+<div id="messageList">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+
+</main>
+
+
 <script type="module">
 
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 import {
   getAuth,
   onAuthStateChanged,
   signOut
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 import {
   getFirestore,
   collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  updateDoc,
   doc,
   getDoc,
-  getDocs,
-  addDoc,
-  updateDoc,
-  deleteDoc,
   query,
-  where,
   orderBy,
   serverTimestamp,
   onSnapshot
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPV0",
+  apiKey: "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
   authDomain: "safa-hifz-class-7e84b.firebaseapp.com",
   projectId: "safa-hifz-class-7e84b",
   storageBucket: "safa-hifz-class-7e84b.firebasestorage.app",
@@ -370,62 +515,88 @@ const firebaseConfig = {
   measurementId: "G-ZTBTJCB5SR"
 };
 
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-let currentUser = null;
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+function formatDate(timestamp) {
+
+  if (!timestamp) return "";
+
+  try {
+    return timestamp.toDate().toLocaleString();
+  } catch {
+    return "";
+  }
+
+}
 
 
 /* AUTH */
 
-auth.authStateReady().then(async () => {
+onAuthStateChanged(auth, async (user) => {
 
-  currentUser = auth.currentUser;
+  if (!user) {
 
-  if(!currentUser){
     window.location.href = "index.html";
     return;
+
   }
 
-  try{
+  try {
 
-    const userRef = doc(db,"users",currentUser.uid);
-    const userSnap = await getDoc(userRef);
+    const userSnap =
+      await getDoc(doc(db, "users", user.uid));
 
-    if(!userSnap.exists()){
+    if (!userSnap.exists()) {
+
       alert("User profile not found.");
       await signOut(auth);
-      window.location.href = "index.html";
       return;
+
     }
 
-    const userData = userSnap.data();
+    const data = userSnap.data();
 
-    if(userData.role !== "admin"){
+    if (
+      String(data.role || "")
+        .trim()
+        .toLowerCase() !== "admin"
+    ) {
+
       alert("Admin access only.");
       await signOut(auth);
-      window.location.href = "index.html";
       return;
-    }
 
-    startNotificationListeners();
+    }
 
     loadStudents();
     loadAttendance();
     loadStudy();
     loadResults();
     loadNotices();
-    loadLeaves();
-    loadMessages();
+    listenLeaves();
+    listenMessages();
 
-  }catch(error){
+  } catch (error) {
 
     console.error(error);
-    alert("Dashboard loading error: " + error.message);
+    alert(error.message);
 
-    await signOut(auth);
-    window.location.href = "index.html";
   }
 
 });
@@ -433,1017 +604,884 @@ auth.authStateReady().then(async () => {
 
 /* NAVIGATION */
 
-window.showSection = function(id){
+document.querySelectorAll("nav button").forEach(button => {
 
-  document.querySelectorAll(".section").forEach(section=>{
-    section.classList.remove("active");
+  button.addEventListener("click", () => {
+
+    document
+      .querySelectorAll("nav button")
+      .forEach(b => b.classList.remove("active"));
+
+    button.classList.add("active");
+
+    document
+      .querySelectorAll(".section")
+      .forEach(section => section.classList.remove("active"));
+
+    document
+      .getElementById(button.dataset.section)
+      .classList.add("active");
+
   });
 
-  const section = document.getElementById(id);
-
-  if(section){
-    section.classList.add("active");
-  }
-
-  if(id === "students") loadStudents();
-  if(id === "attendance") loadAttendance();
-  if(id === "study") loadStudy();
-  if(id === "results") loadResults();
-  if(id === "notices") loadNotices();
-  if(id === "leaves") loadLeaves();
-  if(id === "messages") loadMessages();
-};
+});
 
 
 /* LOGOUT */
 
-window.logout = async function(){
+document
+  .getElementById("logoutBtn")
+  .addEventListener("click", async () => {
 
-  try{
     await signOut(auth);
     window.location.href = "index.html";
-  }catch(error){
-    alert(error.message);
-  }
 
-};
+  });
 
 
 /* STUDENTS */
 
-window.saveStudent = async function(){
+async function loadStudents() {
 
-  const studentNumber =
-    document.getElementById("studentNumber").value.trim();
+  const box = document.getElementById("studentList");
 
-  const studentName =
-    document.getElementById("studentName").value.trim();
+  try {
 
-  const className =
-    document.getElementById("className").value.trim();
+    const snap =
+      await getDocs(collection(db, "students"));
 
-  const parentEmail =
-    document.getElementById("parentEmail").value.trim();
+    if (snap.empty) {
 
-  if(!studentNumber || !studentName){
-    alert("Student Number and Student Name are required.");
-    return;
-  }
-
-  try{
-
-    await addDoc(collection(db,"students"),{
-      studentNumber,
-      name:studentName,
-      className,
-      parentEmail,
-      createdAt:serverTimestamp()
-    });
-
-    alert("Student saved successfully.");
-
-    document.getElementById("studentNumber").value="";
-    document.getElementById("studentName").value="";
-    document.getElementById("className").value="";
-    document.getElementById("parentEmail").value="";
-
-    loadStudents();
-
-  }catch(error){
-
-    console.error(error);
-    alert("Student save failed: " + error.message);
-
-  }
-
-};
-
-
-async function loadStudents(){
-
-  const box = document.getElementById("studentsList");
-
-  try{
-
-    const snap = await getDocs(collection(db,"students"));
-
-    if(snap.empty){
-      box.innerHTML="<div class='empty'>No students found.</div>";
+      box.innerHTML = '<div class="empty">No students.</div>';
       return;
+
     }
 
-    box.innerHTML="";
+    box.innerHTML = "";
 
-    snap.forEach(item=>{
+    snap.forEach(item => {
 
-      const data=item.data();
+      const data = item.data();
 
       box.innerHTML += `
-        <div class="card">
-          <p><b>Student Number:</b> ${escapeHtml(data.studentNumber || "")}</p>
-          <p><b>Name:</b> ${escapeHtml(data.name || "")}</p>
-          <p><b>Class:</b> ${escapeHtml(data.className || "")}</p>
-          <p><b>Parent:</b> ${escapeHtml(data.parentEmail || "")}</p>
 
-          <button class="delete"
+        <div class="item">
+
+          <b>${escapeHtml(data.name)}</b>
+
+          <br>
+
+          Student No:
+          ${escapeHtml(data.studentNumber)}
+
+          <br>
+
+          Class:
+          ${escapeHtml(data.className)}
+
+          <br>
+
+          Parent:
+          ${escapeHtml(data.parentEmail)}
+
+          <br><br>
+
+          <button
+            class="delete"
             onclick="deleteStudent('${item.id}')">
             Delete
           </button>
+
         </div>
+
       `;
 
     });
 
-  }catch(error){
+  } catch (error) {
 
-    console.error(error);
-    box.innerHTML="Unable to load students.";
+    box.innerHTML = escapeHtml(error.message);
 
   }
 
 }
 
 
-window.deleteStudent = async function(id){
+document
+  .getElementById("saveStudent")
+  .addEventListener("click", async () => {
 
-  if(!confirm("Delete this student?")){
-    return;
-  }
+    const studentNumber =
+      document.getElementById("studentNumber")
+        .value.trim();
 
-  try{
+    const name =
+      document.getElementById("studentName")
+        .value.trim();
 
-    await deleteDoc(doc(db,"students",id));
+    const className =
+      document.getElementById("className")
+        .value.trim();
 
-    alert("Student deleted.");
+    const parentEmail =
+      document.getElementById("parentEmail")
+        .value.trim();
+
+
+    if (!studentNumber || !name) {
+
+      alert("Student number and name required.");
+      return;
+
+    }
+
+
+    await addDoc(
+      collection(db, "students"),
+      {
+        studentNumber: String(studentNumber),
+        name,
+        className,
+        parentEmail,
+        createdAt: serverTimestamp()
+      }
+    );
+
+
+    alert("Student saved.");
+
+    document.getElementById("studentNumber").value = "";
+    document.getElementById("studentName").value = "";
+    document.getElementById("className").value = "";
+    document.getElementById("parentEmail").value = "";
 
     loadStudents();
 
-  }catch(error){
+  });
 
-    alert("Delete failed: " + error.message);
 
-  }
+window.deleteStudent = async function(id) {
+
+  if (!confirm("Delete this student?")) return;
+
+  await deleteDoc(
+    doc(db, "students", id)
+  );
+
+  loadStudents();
 
 };
 
 
 /* ATTENDANCE */
 
-window.saveAttendance = async function(){
+document
+  .getElementById("saveAttendance")
+  .addEventListener("click", async () => {
 
-  const studentNumber =
-    document.getElementById("attendanceStudentNumber").value.trim();
+    const studentNumber =
+      document.getElementById("attendanceStudent")
+        .value.trim();
 
-  const date =
-    document.getElementById("attendanceDate").value;
+    const date =
+      document.getElementById("attendanceDate").value;
 
-  const status =
-    document.getElementById("attendanceStatus").value;
+    const status =
+      document.getElementById("attendanceStatus").value;
 
-  if(!studentNumber || !date){
-    alert("Student Number and Date are required.");
-    return;
-  }
 
-  try{
+    if (!studentNumber || !date) {
 
-    await addDoc(collection(db,"attendance"),{
-      studentNumber,
-      date,
-      status,
-      createdAt:serverTimestamp()
-    });
+      alert("Student number and date required.");
+      return;
+
+    }
+
+
+    await addDoc(
+      collection(db, "attendance"),
+      {
+        studentNumber: String(studentNumber),
+        date,
+        status,
+        createdAt: serverTimestamp()
+      }
+    );
+
 
     alert("Attendance saved.");
 
     loadAttendance();
 
-  }catch(error){
-
-    alert("Attendance save failed: " + error.message);
-
-  }
-
-};
+  });
 
 
-async function loadAttendance(){
+async function loadAttendance() {
 
-  const box=document.getElementById("attendanceList");
+  const box =
+    document.getElementById("attendanceList");
 
-  try{
+  const snap =
+    await getDocs(collection(db, "attendance"));
 
-    const snap=await getDocs(
-      query(
-        collection(db,"attendance"),
-        orderBy("createdAt","desc")
-      )
-    );
+  if (snap.empty) {
 
-    box.innerHTML="";
+    box.innerHTML =
+      '<div class="empty">No attendance records.</div>';
 
-    if(snap.empty){
-      box.innerHTML="<div class='empty'>No attendance records.</div>";
-      return;
-    }
-
-    snap.forEach(item=>{
-
-      const d=item.data();
-
-      box.innerHTML+=`
-        <div class="card">
-          <p><b>Student:</b> ${escapeHtml(d.studentNumber || "")}</p>
-          <p><b>Date:</b> ${escapeHtml(d.date || "")}</p>
-          <p><b>Status:</b> ${escapeHtml(d.status || "")}</p>
-
-          <button class="delete"
-            onclick="deleteAttendance('${item.id}')">
-            Delete
-          </button>
-        </div>
-      `;
-
-    });
-
-  }catch(error){
-
-    console.error(error);
-    box.innerHTML="Unable to load attendance.";
+    return;
 
   }
+
+  box.innerHTML = "";
+
+  snap.forEach(item => {
+
+    const d = item.data();
+
+    box.innerHTML += `
+
+      <div class="item">
+
+        <b>${escapeHtml(d.studentNumber)}</b>
+
+        <br>
+        Date: ${escapeHtml(d.date)}
+
+        <br>
+        Status:
+        <span class="badge">
+          ${escapeHtml(d.status)}
+        </span>
+
+        <br><br>
+
+        <button
+          class="delete"
+          onclick="deleteAttendance('${item.id}')">
+          Delete
+        </button>
+
+      </div>
+
+    `;
+
+  });
 
 }
 
 
-window.deleteAttendance=async function(id){
+window.deleteAttendance = async function(id) {
 
-  if(!confirm("Delete this attendance record?")) return;
+  await deleteDoc(
+    doc(db, "attendance", id)
+  );
 
-  try{
-
-    await deleteDoc(doc(db,"attendance",id));
-
-    loadAttendance();
-
-  }catch(error){
-
-    alert(error.message);
-
-  }
+  loadAttendance();
 
 };
 
 
 /* STUDY */
 
-window.saveStudy=async function(){
+document
+  .getElementById("saveStudy")
+  .addEventListener("click", async () => {
 
-  const studentNumber =
-    document.getElementById("studyStudentNumber").value.trim();
+    const studentNumber =
+      document.getElementById("studyStudent")
+        .value.trim();
 
-  const date =
-    document.getElementById("studyDate").value;
+    const date =
+      document.getElementById("studyDate").value;
 
-  const surah =
-    document.getElementById("studySurah").value.trim();
+    const surah =
+      document.getElementById("studySurah").value.trim();
 
-  const newLesson =
-    document.getElementById("studyNewLesson").value.trim();
+    const newLesson =
+      document.getElementById("newLesson").value.trim();
 
-  const revision =
-    document.getElementById("studyRevision").value.trim();
+    const revision =
+      document.getElementById("revision").value.trim();
 
-  const performance =
-    document.getElementById("studyPerformance").value.trim();
+    const performance =
+      document.getElementById("performance").value;
 
-  const note =
-    document.getElementById("studyNote").value.trim();
+    const note =
+      document.getElementById("studyNote").value.trim();
 
-  if(!studentNumber || !date){
-    alert("Student Number and Date are required.");
-    return;
-  }
 
-  try{
+    if (!studentNumber || !date) {
 
-    await addDoc(collection(db,"studyProgress"),{
-      studentNumber,
-      date,
-      surah,
-      newLesson,
-      revision,
-      performance,
-      note,
-      createdAt:serverTimestamp()
-    });
+      alert("Student number and date required.");
+      return;
+
+    }
+
+
+    await addDoc(
+      collection(db, "studyProgress"),
+      {
+        studentNumber: String(studentNumber),
+        date,
+        surah,
+        newLesson,
+        revision,
+        performance,
+        note,
+        createdAt: serverTimestamp()
+      }
+    );
+
 
     alert("Study progress saved.");
 
     loadStudy();
 
-  }catch(error){
-
-    alert("Study save failed: " + error.message);
-
-  }
-
-};
+  });
 
 
-async function loadStudy(){
+async function loadStudy() {
 
-  const box=document.getElementById("studyList");
+  const box =
+    document.getElementById("studyList");
 
-  try{
+  const snap =
+    await getDocs(collection(db, "studyProgress"));
 
-    const snap=await getDocs(
-      query(
-        collection(db,"studyProgress"),
-        orderBy("createdAt","desc")
-      )
-    );
+  if (snap.empty) {
 
-    box.innerHTML="";
+    box.innerHTML =
+      '<div class="empty">No study records.</div>';
 
-    if(snap.empty){
-      box.innerHTML="<div class='empty'>No study records.</div>";
-      return;
-    }
-
-    snap.forEach(item=>{
-
-      const d=item.data();
-
-      box.innerHTML+=`
-        <div class="card">
-          <p><b>Student:</b> ${escapeHtml(d.studentNumber || "")}</p>
-          <p><b>Date:</b> ${escapeHtml(d.date || "")}</p>
-          <p><b>Surah:</b> ${escapeHtml(d.surah || "")}</p>
-          <p><b>New Lesson:</b> ${escapeHtml(d.newLesson || "")}</p>
-          <p><b>Revision:</b> ${escapeHtml(d.revision || "")}</p>
-          <p><b>Performance:</b> ${escapeHtml(d.performance || "")}</p>
-          <p><b>Note:</b> ${escapeHtml(d.note || "")}</p>
-
-          <button class="delete"
-            onclick="deleteStudy('${item.id}')">
-            Delete
-          </button>
-        </div>
-      `;
-
-    });
-
-  }catch(error){
-
-    console.error(error);
-    box.innerHTML="Unable to load study progress.";
+    return;
 
   }
+
+  box.innerHTML = "";
+
+  snap.forEach(item => {
+
+    const d = item.data();
+
+    box.innerHTML += `
+
+      <div class="item">
+
+        <b>Student:
+          ${escapeHtml(d.studentNumber)}
+        </b>
+
+        <br>
+        Date: ${escapeHtml(d.date)}
+
+        <br>
+        Surah: ${escapeHtml(d.surah)}
+
+        <br>
+        New Lesson: ${escapeHtml(d.newLesson)}
+
+        <br>
+        Revision: ${escapeHtml(d.revision)}
+
+        <br>
+        Performance:
+        ${escapeHtml(d.performance)}
+
+        <br>
+        Note: ${escapeHtml(d.note)}
+
+        <br><br>
+
+        <button
+          class="delete"
+          onclick="deleteStudy('${item.id}')">
+          Delete
+        </button>
+
+      </div>
+
+    `;
+
+  });
 
 }
 
 
-window.deleteStudy=async function(id){
+window.deleteStudy = async function(id) {
 
-  if(!confirm("Delete this study record?")) return;
+  await deleteDoc(
+    doc(db, "studyProgress", id)
+  );
 
-  try{
-
-    await deleteDoc(doc(db,"studyProgress",id));
-
-    loadStudy();
-
-  }catch(error){
-
-    alert(error.message);
-
-  }
+  loadStudy();
 
 };
 
 
 /* RESULTS */
 
-window.saveResult=async function(){
+document
+  .getElementById("saveResult")
+  .addEventListener("click", async () => {
 
-  const studentNumber =
-    document.getElementById("resultStudentNumber").value.trim();
+    const studentNumber =
+      document.getElementById("resultStudent")
+        .value.trim();
 
-  const title =
-    document.getElementById("resultTitle").value.trim();
+    const title =
+      document.getElementById("resultTitle")
+        .value.trim();
 
-  const mark =
-    document.getElementById("resultMark").value.trim();
+    const mark =
+      document.getElementById("resultMark")
+        .value.trim();
 
-  const status =
-    document.getElementById("resultStatus").value;
+    const status =
+      document.getElementById("resultStatus").value;
 
-  if(!studentNumber || !title){
-    alert("Student Number and Result Title are required.");
-    return;
-  }
 
-  try{
+    if (!studentNumber || !title) {
 
-    await addDoc(collection(db,"results"),{
-      studentNumber,
-      title,
-      mark,
-      status,
-      createdAt:serverTimestamp()
-    });
+      alert("Student number and title required.");
+      return;
+
+    }
+
+
+    await addDoc(
+      collection(db, "results"),
+      {
+        studentNumber: String(studentNumber),
+        title,
+        mark,
+        status,
+        createdAt: serverTimestamp()
+      }
+    );
+
 
     alert("Result saved.");
 
     loadResults();
 
-  }catch(error){
-
-    alert("Result save failed: " + error.message);
-
-  }
-
-};
+  });
 
 
-async function loadResults(){
+async function loadResults() {
 
-  const box=document.getElementById("resultsList");
+  const box =
+    document.getElementById("resultList");
 
-  try{
+  const snap =
+    await getDocs(collection(db, "results"));
 
-    const snap=await getDocs(
-      query(
-        collection(db,"results"),
-        orderBy("createdAt","desc")
-      )
-    );
+  if (snap.empty) {
 
-    box.innerHTML="";
+    box.innerHTML =
+      '<div class="empty">No results.</div>';
 
-    if(snap.empty){
-      box.innerHTML="<div class='empty'>No results.</div>";
-      return;
-    }
-
-    snap.forEach(item=>{
-
-      const d=item.data();
-
-      box.innerHTML+=`
-        <div class="card">
-          <p><b>Student:</b> ${escapeHtml(d.studentNumber || "")}</p>
-          <p><b>Title:</b> ${escapeHtml(d.title || "")}</p>
-          <p><b>Mark:</b> ${escapeHtml(d.mark || "")}</p>
-          <p><b>Status:</b> ${escapeHtml(d.status || "")}</p>
-
-          <button class="delete"
-            onclick="deleteResult('${item.id}')">
-            Delete
-          </button>
-        </div>
-      `;
-
-    });
-
-  }catch(error){
-
-    console.error(error);
-    box.innerHTML="Unable to load results.";
+    return;
 
   }
+
+  box.innerHTML = "";
+
+  snap.forEach(item => {
+
+    const d = item.data();
+
+    box.innerHTML += `
+
+      <div class="item">
+
+        <b>
+          ${escapeHtml(d.title)}
+        </b>
+
+        <br>
+        Student:
+        ${escapeHtml(d.studentNumber)}
+
+        <br>
+        Mark:
+        ${escapeHtml(d.mark)}
+
+        <br>
+        Status:
+        ${escapeHtml(d.status)}
+
+        <br><br>
+
+        <button
+          class="delete"
+          onclick="deleteResult('${item.id}')">
+          Delete
+        </button>
+
+      </div>
+
+    `;
+
+  });
 
 }
 
 
-window.deleteResult=async function(id){
+window.deleteResult = async function(id) {
 
-  if(!confirm("Delete this result?")) return;
+  await deleteDoc(
+    doc(db, "results", id)
+  );
 
-  try{
-
-    await deleteDoc(doc(db,"results",id));
-
-    loadResults();
-
-  }catch(error){
-
-    alert(error.message);
-
-  }
+  loadResults();
 
 };
 
 
 /* NOTICES */
 
-window.saveNotice=async function(){
+document
+  .getElementById("saveNotice")
+  .addEventListener("click", async () => {
 
-  const title =
-    document.getElementById("noticeTitle").value.trim();
+    const title =
+      document.getElementById("noticeTitle")
+        .value.trim();
 
-  const text =
-    document.getElementById("noticeText").value.trim();
+    const text =
+      document.getElementById("noticeText")
+        .value.trim();
 
-  const status =
-    document.getElementById("noticeStatus").value;
+    const status =
+      document.getElementById("noticeStatus").value;
 
-  if(!title || !text){
-    alert("Title and Notice are required.");
-    return;
-  }
 
-  try{
+    if (!title || !text) {
 
-    await addDoc(collection(db,"notices"),{
-      title,
-      text,
-      status,
-      createdAt:serverTimestamp()
-    });
+      alert("Title and notice required.");
+      return;
+
+    }
+
+
+    await addDoc(
+      collection(db, "notices"),
+      {
+        title,
+        text,
+        status,
+        createdAt: serverTimestamp()
+      }
+    );
+
 
     alert("Notice saved.");
 
     loadNotices();
 
-  }catch(error){
-
-    alert("Notice save failed: " + error.message);
-
-  }
-
-};
+  });
 
 
-async function loadNotices(){
+async function loadNotices() {
 
-  const box=document.getElementById("noticesList");
+  const box =
+    document.getElementById("noticeList");
 
-  try{
+  const snap =
+    await getDocs(collection(db, "notices"));
 
-    const snap=await getDocs(
-      query(
-        collection(db,"notices"),
-        orderBy("createdAt","desc")
-      )
-    );
+  if (snap.empty) {
 
-    box.innerHTML="";
+    box.innerHTML =
+      '<div class="empty">No notices.</div>';
 
-    if(snap.empty){
-      box.innerHTML="<div class='empty'>No notices.</div>";
-      return;
-    }
-
-    snap.forEach(item=>{
-
-      const d=item.data();
-
-      box.innerHTML+=`
-        <div class="card">
-          <p><b>Title:</b> ${escapeHtml(d.title || "")}</p>
-          <p>${escapeHtml(d.text || "")}</p>
-          <p><b>Status:</b> ${escapeHtml(d.status || "")}</p>
-
-          <button class="delete"
-            onclick="deleteNotice('${item.id}')">
-            Delete
-          </button>
-        </div>
-      `;
-
-    });
-
-  }catch(error){
-
-    console.error(error);
-    box.innerHTML="Unable to load notices.";
+    return;
 
   }
+
+  box.innerHTML = "";
+
+  snap.forEach(item => {
+
+    const d = item.data();
+
+    box.innerHTML += `
+
+      <div class="item">
+
+        <b>${escapeHtml(d.title)}</b>
+
+        <br><br>
+
+        ${escapeHtml(d.text)}
+
+        <br><br>
+
+        Status:
+        ${escapeHtml(d.status)}
+
+        <br><br>
+
+        <button
+          class="delete"
+          onclick="deleteNotice('${item.id}')">
+          Delete
+        </button>
+
+      </div>
+
+    `;
+
+  });
 
 }
 
 
-window.deleteNotice=async function(id){
+window.deleteNotice = async function(id) {
 
-  if(!confirm("Delete this notice?")) return;
+  await deleteDoc(
+    doc(db, "notices", id)
+  );
 
-  try{
-
-    await deleteDoc(doc(db,"notices",id));
-
-    loadNotices();
-
-  }catch(error){
-
-    alert(error.message);
-
-  }
+  loadNotices();
 
 };
 
 
-/* LEAVES */
+/* LEAVE REQUESTS */
 
-async function loadLeaves(){
+function listenLeaves() {
 
-  const box=document.getElementById("leaveList");
+  const box =
+    document.getElementById("leaveList");
 
-  try{
+  onSnapshot(
+    query(
+      collection(db, "leaveRequests"),
+      orderBy("createdAt", "desc")
+    ),
+    snap => {
 
-    const snap=await getDocs(
-      query(
-        collection(db,"leaveRequests"),
-        orderBy("createdAt","desc")
-      )
-    );
+      if (snap.empty) {
 
-    box.innerHTML="";
+        box.innerHTML =
+          '<div class="empty">No leave requests.</div>';
 
-    if(snap.empty){
-      box.innerHTML="<div class='empty'>No leave requests.</div>";
-      return;
+        return;
+
+      }
+
+      box.innerHTML = "";
+
+      snap.forEach(item => {
+
+        const d = item.data();
+
+        box.innerHTML += `
+
+          <div class="item">
+
+            <b>
+              Student:
+              ${escapeHtml(d.studentNumber)}
+            </b>
+
+            <br>
+            Parent:
+            ${escapeHtml(d.parentEmail)}
+
+            <br>
+            Leave Date:
+            ${escapeHtml(d.leaveDate)}
+
+            <br>
+            Reason:
+            ${escapeHtml(d.reason)}
+
+            <br>
+            Status:
+            <b>${escapeHtml(d.status || "pending")}</b>
+
+            <br>
+
+            Reply:
+            ${escapeHtml(d.reply || "No reply")}
+
+            <br><br>
+
+            <button
+              class="reply"
+              onclick="replyLeave('${item.id}','approved')">
+              Approve
+            </button>
+
+            <button
+              class="delete"
+              onclick="replyLeave('${item.id}','rejected')">
+              Reject
+            </button>
+
+            <button
+              class="delete"
+              onclick="deleteLeave('${item.id}')">
+              Delete
+            </button>
+
+          </div>
+
+        `;
+
+      });
+
     }
-
-    snap.forEach(item=>{
-
-      const d=item.data();
-
-      const created =
-        d.createdAt?.toDate ?
-        d.createdAt.toDate().toLocaleString() : "";
-
-      const status=d.status || "pending";
-
-      box.innerHTML+=`
-        <div class="card">
-
-          <p><b>Student:</b> ${escapeHtml(d.studentNumber || "")}</p>
-
-          <p><b>Parent:</b> ${escapeHtml(d.parentEmail || "")}</p>
-
-          <p><b>Leave:</b> ${escapeHtml(d.leaveDate || "")}</p>
-
-          <p><b>Reason:</b> ${escapeHtml(d.reason || "")}</p>
-
-          <p><b>Sent:</b> ${escapeHtml(created)}</p>
-
-          <p>
-            <b>Status:</b>
-            <span class="badge">${escapeHtml(status)}</span>
-          </p>
-
-          <textarea
-            id="leaveReply_${item.id}"
-            placeholder="Reply to parent">${escapeHtml(d.reply || "")}</textarea>
-
-          <button class="reply"
-            onclick="replyLeave('${item.id}','approved')">
-            Approve
-          </button>
-
-          <button class="delete"
-            onclick="replyLeave('${item.id}','rejected')">
-            Reject
-          </button>
-
-          <button class="delete"
-            onclick="deleteLeave('${item.id}')">
-            Delete
-          </button>
-
-          ${
-            d.repliedAt
-            ?
-            `<p class="small">
-              Replied:
-              ${escapeHtml(d.repliedAt.toDate().toLocaleString())}
-            </p>`
-            :
-            ""
-          }
-
-        </div>
-      `;
-
-    });
-
-  }catch(error){
-
-    console.error(error);
-    box.innerHTML="Unable to load leave requests.";
-
-  }
+  );
 
 }
 
 
-window.replyLeave=async function(id,status){
+window.replyLeave = async function(id, status) {
 
   const reply =
-    document.getElementById("leaveReply_"+id).value.trim();
-
-  try{
-
-    await updateDoc(
-      doc(db,"leaveRequests",id),
-      {
-        status,
-        reply,
-        repliedAt:serverTimestamp()
-      }
+    prompt(
+      "Parent-ന് അയക്കേണ്ട reply:",
+      status === "approved"
+        ? "Leave approved."
+        : "Leave rejected."
     );
 
-    alert("Leave response saved.");
+  if (reply === null) return;
 
-    loadLeaves();
-    updateNotificationArea();
-
-  }catch(error){
-
-    alert("Reply failed: " + error.message);
-
-  }
+  await updateDoc(
+    doc(db, "leaveRequests", id),
+    {
+      status,
+      reply,
+      repliedAt: serverTimestamp()
+    }
+  );
 
 };
 
 
-window.deleteLeave=async function(id){
+window.deleteLeave = async function(id) {
 
-  if(!confirm("Delete this leave request completely?")) return;
+  if (!confirm("Delete leave request?")) return;
 
-  try{
-
-    await deleteDoc(doc(db,"leaveRequests",id));
-
-    loadLeaves();
-    updateNotificationArea();
-
-  }catch(error){
-
-    alert(error.message);
-
-  }
+  await deleteDoc(
+    doc(db, "leaveRequests", id)
+  );
 
 };
 
 
 /* MESSAGES */
 
-async function loadMessages(){
+function listenMessages() {
 
-  const box=document.getElementById("messagesList");
+  const box =
+    document.getElementById("messageList");
 
-  try{
+  onSnapshot(
+    query(
+      collection(db, "messages"),
+      orderBy("createdAt", "desc")
+    ),
+    snap => {
 
-    const snap=await getDocs(
-      query(
-        collection(db,"messages"),
-        orderBy("createdAt","desc")
-      )
-    );
+      if (snap.empty) {
 
-    box.innerHTML="";
+        box.innerHTML =
+          '<div class="empty">No messages.</div>';
 
-    if(snap.empty){
-      box.innerHTML="<div class='empty'>No messages.</div>";
-      return;
+        return;
+
+      }
+
+      box.innerHTML = "";
+
+      snap.forEach(item => {
+
+        const d = item.data();
+
+        box.innerHTML += `
+
+          <div class="item">
+
+            <b>
+              Student:
+              ${escapeHtml(d.studentNumber)}
+            </b>
+
+            <br>
+
+            Parent:
+            ${escapeHtml(d.parentEmail)}
+
+            <br><br>
+
+            Message:
+            ${escapeHtml(d.text)}
+
+            <br><br>
+
+            Reply:
+            ${escapeHtml(d.reply || "No reply")}
+
+            <br><br>
+
+            <button
+              class="reply"
+              onclick="replyMessage('${item.id}')">
+              Reply
+            </button>
+
+            <button
+              class="delete"
+              onclick="deleteMessage('${item.id}')">
+              Delete
+            </button>
+
+          </div>
+
+        `;
+
+      });
+
     }
-
-    snap.forEach(item=>{
-
-      const d=item.data();
-
-      const sentTime =
-        d.createdAt?.toDate
-        ? d.createdAt.toDate().toLocaleString()
-        : "Time unavailable";
-
-      const replyTime =
-        d.repliedAt?.toDate
-        ? d.repliedAt.toDate().toLocaleString()
-        : "";
-
-      box.innerHTML+=`
-        <div class="card">
-
-          <p>
-            <b>Student:</b>
-            ${escapeHtml(d.studentNumber || "")}
-          </p>
-
-          <p>
-            <b>Parent:</b>
-            ${escapeHtml(d.parentEmail || "")}
-          </p>
-
-          <p>
-            <b>💬 Parent Message:</b><br>
-            ${escapeHtml(d.text || "")}
-          </p>
-
-          <p class="small">
-            🕐 Sent: ${escapeHtml(sentTime)}
-          </p>
-
-          <hr>
-
-          <textarea
-            id="messageReply_${item.id}"
-            placeholder="Write Usthad reply">${escapeHtml(d.reply || "")}</textarea>
-
-          <p>
-            <b>Status:</b>
-            <span class="badge">
-              ${escapeHtml(d.status || "unread")}
-            </span>
-          </p>
-
-          ${
-            replyTime
-            ?
-            `<p class="small">
-              🕐 Replied: ${escapeHtml(replyTime)}
-            </p>`
-            :
-            ""
-          }
-
-          <button class="reply"
-            onclick="replyMessage('${item.id}')">
-            Send Reply
-          </button>
-
-          <button class="delete"
-            onclick="deleteMessage('${item.id}')">
-            🗑️ Delete Message
-          </button>
-
-        </div>
-      `;
-
-    });
-
-  }catch(error){
-
-    console.error(error);
-    box.innerHTML="Unable to load messages.";
-
-  }
+  );
 
 }
 
 
-window.replyMessage=async function(id){
+window.replyMessage = async function(id) {
 
   const reply =
-    document.getElementById("messageReply_"+id).value.trim();
+    prompt("Parent-ന് reply:");
 
-  if(!reply){
-    alert("Please write a reply.");
-    return;
-  }
+  if (reply === null) return;
 
-  try{
-
-    await updateDoc(
-      doc(db,"messages",id),
-      {
-        reply,
-        status:"replied",
-        repliedAt:serverTimestamp()
-      }
-    );
-
-    alert("Reply sent successfully.");
-
-    loadMessages();
-    updateNotificationArea();
-
-  }catch(error){
-
-    alert("Reply failed: " + error.message);
-
-  }
-
-};
-
-
-window.deleteMessage=async function(id){
-
-  const confirmed=confirm(
-    "ഈ message പൂർണ്ണമായി delete ചെയ്യണോ?\n\n" +
-    "Delete ചെയ്താൽ messageയും replyയും തിരിച്ചെടുക്കാൻ കഴിയില്ല."
-  );
-
-  if(!confirmed) return;
-
-  try{
-
-    await deleteDoc(doc(db,"messages",id));
-
-    alert("Message deleted successfully.");
-
-    loadMessages();
-    updateNotificationArea();
-
-  }catch(error){
-
-    console.error(error);
-    alert("Message delete ചെയ്യാൻ കഴിഞ്ഞില്ല: " + error.message);
-
-  }
-
-};
-
-
-/* NOTIFICATIONS */
-
-let leaveCount=0;
-let messageCount=0;
-
-function startNotificationListeners(){
-
-  onSnapshot(
-    query(
-      collection(db,"leaveRequests"),
-      where("status","==","pending")
-    ),
-    snap=>{
-      leaveCount=snap.size;
-      updateNotificationArea();
-    },
-    error=>console.error(error)
-  );
-
-
-  onSnapshot(
-    query(
-      collection(db,"messages"),
-      where("status","==","unread")
-    ),
-    snap=>{
-      messageCount=snap.size;
-      updateNotificationArea();
-    },
-    error=>console.error(error)
-  );
-
-}
-
-
-window.updateNotificationArea=function(){
-
-  const box=document.getElementById("notificationArea");
-
-  if(leaveCount===0 && messageCount===0){
-
-    box.innerHTML=
-      "🔔 No new notifications.";
-
-    return;
-  }
-
-  box.innerHTML=`
-    <b>🔔 New Notifications</b><br><br>
-
-    ${
-      leaveCount>0
-      ?
-      `<button onclick="showSection('leaves')">
-        📝 ${leaveCount} Pending Leave Request(s)
-      </button>`
-      :
-      ""
+  await updateDoc(
+    doc(db, "messages", id),
+    {
+      reply,
+      status: "replied",
+      repliedAt: serverTimestamp()
     }
-
-    ${
-      messageCount>0
-      ?
-      `<button onclick="showSection('messages')">
-        💬 ${messageCount} New Message(s)
-      </button>`
-      :
-      ""
-    }
-  `;
+  );
 
 };
 
 
-/* HTML SAFETY */
+window.deleteMessage = async function(id) {
 
-function escapeHtml(value){
+  if (!confirm("Delete message?")) return;
 
-  return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+  await deleteDoc(
+    doc(db, "messages", id)
+  );
 
-}
+};
 
 </script>
 
