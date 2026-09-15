@@ -135,21 +135,6 @@ button:disabled{
   background:#b3261e;
 }
 
-.student{
-  border:1px solid #ddd;
-  padding:15px;
-  margin-top:10px;
-  border-radius:10px;
-}
-
-.record{
-  border:1px solid #ddd;
-  padding:15px;
-  margin-top:10px;
-  border-radius:10px;
-  background:#fafafa;
-}
-
 .logout{
   width:100%;
   margin-top:25px;
@@ -173,6 +158,21 @@ button:disabled{
   font-size:13px;
 }
 
+.student{
+  border:1px solid #ddd;
+  padding:15px;
+  margin-top:10px;
+  border-radius:10px;
+}
+
+.record{
+  border:1px solid #ddd;
+  padding:15px;
+  margin-top:10px;
+  border-radius:10px;
+  background:#fafafa;
+}
+
 #loadingScreen{
   position:fixed;
   inset:0;
@@ -184,6 +184,8 @@ button:disabled{
 }
 
 .loadingBox{
+  width:90%;
+  max-width:430px;
   background:white;
   padding:30px;
   border-radius:15px;
@@ -194,6 +196,27 @@ button:disabled{
 .errorBox{
   color:#b3261e;
   line-height:1.6;
+  word-break:break-word;
+}
+
+.successBox{
+  color:#166534;
+  line-height:1.6;
+}
+
+.infoBox{
+  color:#555;
+  line-height:1.6;
+}
+
+.uidBox{
+  background:#f4f7f6;
+  padding:10px;
+  border-radius:8px;
+  font-size:12px;
+  word-break:break-all;
+  text-align:left;
+  margin-top:10px;
 }
 
 </style>
@@ -203,7 +226,7 @@ button:disabled{
 <body>
 
 
-<!-- ================= LOADING ================= -->
+<!-- ================= LOADING SCREEN ================= -->
 
 <div id="loadingScreen">
 
@@ -336,9 +359,7 @@ button:disabled{
 
 
 <button class="logout" onclick="logout()">
-
 Logout
-
 </button>
 
 
@@ -461,7 +482,6 @@ Loading...
 <button class="back" onclick="goHome()">← Back</button>
 
 <h3>Update Study Progress</h3>
-
 
 <select id="studyStudent">
 
@@ -690,42 +710,35 @@ No messages yet.
 ===================================================== */
 
 import {
-
   initializeApp
-
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 
 import {
-
   getAuth,
-
-  signOut
-
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+  signOut,
+  setPersistence,
+  browserLocalPersistence
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 
 import {
-
   getFirestore,
-
   collection,
-
   addDoc,
-
   getDocs,
-
   getDoc,
-
   doc,
-
   serverTimestamp
-
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
 /* =====================================================
-   NEW FIREBASE CONFIG
+   FIREBASE CONFIG
+   USE ONLY THIS CONFIG
 ===================================================== */
 
 const firebaseConfig = {
@@ -755,7 +768,7 @@ const firebaseConfig = {
 
 
 /* =====================================================
-   INITIALIZE FIREBASE
+   INITIALIZE
 ===================================================== */
 
 const app =
@@ -769,23 +782,46 @@ const db =
 
 
 /* =====================================================
-   AUTHENTICATION CHECK
+   ELEMENTS
+===================================================== */
+
+const loadingScreen =
+  document.getElementById("loadingScreen");
+
+const loadingText =
+  document.getElementById("loadingText");
+
+
+/* =====================================================
+   AUTHENTICATION
 ===================================================== */
 
 async function startDashboard(){
 
-  const loadingText =
-    document.getElementById("loadingText");
-
   try{
 
     loadingText.textContent =
-      "Checking Firebase login...";
+      "Restoring secure login session...";
 
 
     /*
-      Wait until Firebase finishes restoring
-      the saved login session.
+      Make dashboard use the same local
+      persistence as the login page.
+    */
+
+    await setPersistence(
+      auth,
+      browserLocalPersistence
+    );
+
+
+    loadingText.textContent =
+      "Checking your account...";
+
+
+    /*
+      Wait until Firebase restores the
+      existing authentication session.
     */
 
     await auth.authStateReady();
@@ -796,13 +832,16 @@ async function startDashboard(){
 
 
     /*
-      No user = return to login.
+      IMPORTANT:
+      Do not immediately redirect.
+      Show the actual reason instead.
     */
 
     if(!user){
 
-      window.location.replace(
-        "index.html"
+      showAuthProblem(
+        "Login session കണ്ടെത്താനായില്ല.",
+        "Login page-ൽ login successful ആയതിന് ശേഷം Firebase session dashboard-ലേക്ക് എത്തുന്നില്ല."
       );
 
       return;
@@ -811,17 +850,22 @@ async function startDashboard(){
 
 
     console.log(
-      "Logged in user:",
+      "Authenticated user:",
       user.email
+    );
+
+    console.log(
+      "Authenticated UID:",
+      user.uid
     );
 
 
     loadingText.textContent =
-      "Checking admin access...";
+      "Checking administrator permission...";
 
 
     /*
-      Get the user's Firestore document.
+      Find users/{UID}
     */
 
     const userRef =
@@ -838,9 +882,12 @@ async function startDashboard(){
 
     if(!userSnap.exists()){
 
-      throw new Error(
-        "Admin user document not found in Firestore."
+      showAdminDocumentProblem(
+        user.uid,
+        user.email
       );
+
+      return;
 
     }
 
@@ -850,45 +897,42 @@ async function startDashboard(){
 
 
     console.log(
-      "User data:",
+      "Admin user document:",
       userData
     );
 
 
     /*
-      Check admin role.
+      Check role.
     */
 
     if(userData.role !== "admin"){
 
-      await signOut(auth);
-
-      throw new Error(
-        "This account does not have admin permission."
+      showRoleProblem(
+        user.uid,
+        user.email,
+        userData.role
       );
+
+      return;
 
     }
 
 
     /*
-      ADMIN VERIFIED
+      EVERYTHING IS OK
     */
 
     loadingText.textContent =
       "Admin verified ✓";
 
 
-    /*
-      Hide loading screen.
-    */
-
-    document.getElementById(
-      "loadingScreen"
-    ).style.display="none";
+    loadingScreen.style.display =
+      "none";
 
 
     /*
-      Load initial data.
+      Load students.
     */
 
     await loadStudents();
@@ -898,40 +942,12 @@ async function startDashboard(){
   catch(error){
 
     console.error(
-      "Dashboard Error:",
+      "Dashboard authentication error:",
       error
     );
 
 
-    document.getElementById(
-      "loadingScreen"
-    ).innerHTML = `
-
-      <div class="loadingBox">
-
-        <h2>SAFA HIFZ CLASS</h2>
-
-        <div class="errorBox">
-
-          <p>
-            Dashboard തുറക്കാൻ കഴിഞ്ഞില്ല.
-          </p>
-
-          <p>
-            ${error.message}
-          </p>
-
-        </div>
-
-        <button
-          onclick="window.location.replace('index.html')"
-        >
-          Back to Login
-        </button>
-
-      </div>
-
-    `;
+    showGeneralProblem(error);
 
   }
 
@@ -939,7 +955,200 @@ async function startDashboard(){
 
 
 /* =====================================================
-   START
+   AUTH PROBLEM
+===================================================== */
+
+function showAuthProblem(title,details){
+
+  loadingScreen.innerHTML = `
+
+    <div class="loadingBox">
+
+      <h2>SAFA HIFZ CLASS</h2>
+
+      <div class="errorBox">
+
+        <h3>${title}</h3>
+
+        <p>${details}</p>
+
+      </div>
+
+      <div class="infoBox">
+
+        <p>
+        Please return to Login and try again.
+        </p>
+
+      </div>
+
+      <button
+        onclick="window.location.replace('index.html')"
+      >
+        Back to Login
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+   ADMIN DOCUMENT PROBLEM
+===================================================== */
+
+function showAdminDocumentProblem(uid,email){
+
+  loadingScreen.innerHTML = `
+
+    <div class="loadingBox">
+
+      <h2>SAFA HIFZ CLASS</h2>
+
+      <div class="errorBox">
+
+        <h3>Admin profile not found</h3>
+
+        <p>
+          Login successful ആണ്,
+          പക്ഷേ Firestore-ലെ users collection-ൽ
+          ഈ account-ന്റെ admin document കണ്ടെത്താനായില്ല.
+        </p>
+
+      </div>
+
+      <div class="uidBox">
+
+        <strong>Email:</strong><br>
+        ${email || "-"}
+
+        <br><br>
+
+        <strong>UID:</strong><br>
+        ${uid}
+
+      </div>
+
+      <p class="small">
+        Firebase Console → Firestore → users
+        എന്നതിൽ document ID ഈ UID ആയിരിക്കണം.
+      </p>
+
+      <button
+        onclick="window.location.replace('index.html')"
+      >
+        Back to Login
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+   ROLE PROBLEM
+===================================================== */
+
+function showRoleProblem(uid,email,role){
+
+  loadingScreen.innerHTML = `
+
+    <div class="loadingBox">
+
+      <h2>SAFA HIFZ CLASS</h2>
+
+      <div class="errorBox">
+
+        <h3>Admin permission ഇല്ല</h3>
+
+        <p>
+          Login account കണ്ടെത്തി,
+          പക്ഷേ role = <strong>${role || "not set"}</strong>
+          ആണ്.
+        </p>
+
+        <p>
+          Admin account-ന്റെ role
+          <strong>admin</strong> ആയിരിക്കണം.
+        </p>
+
+      </div>
+
+      <div class="uidBox">
+
+        <strong>Email:</strong><br>
+        ${email || "-"}
+
+        <br><br>
+
+        <strong>UID:</strong><br>
+        ${uid}
+
+      </div>
+
+      <button
+        onclick="window.location.replace('index.html')"
+      >
+        Back to Login
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+   GENERAL PROBLEM
+===================================================== */
+
+function showGeneralProblem(error){
+
+  loadingScreen.innerHTML = `
+
+    <div class="loadingBox">
+
+      <h2>SAFA HIFZ CLASS</h2>
+
+      <div class="errorBox">
+
+        <h3>Dashboard തുറക്കാൻ കഴിഞ്ഞില്ല</h3>
+
+        <p>
+          ${error?.message || "Unknown error"}
+        </p>
+
+      </div>
+
+      <div class="infoBox">
+
+        <p>
+          Browser console-ൽ കൂടുതൽ വിവരങ്ങൾ
+          കാണാം.
+        </p>
+
+      </div>
+
+      <button
+        onclick="window.location.replace('index.html')"
+      >
+        Back to Login
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+   START DASHBOARD
 ===================================================== */
 
 startDashboard();
@@ -1069,7 +1278,8 @@ window.logout=async function(){
     console.error(error);
 
     alert(
-      "Logout ചെയ്യാൻ കഴിഞ്ഞില്ല."
+      "Logout ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
+      error.message
     );
 
   }
@@ -1101,7 +1311,7 @@ function showMessage(text){
 
 
 /* =====================================================
-   STUDENTS
+   STUDENTS - ADD
 ===================================================== */
 
 window.addStudent=async function(){
@@ -1205,6 +1415,10 @@ window.addStudent=async function(){
 };
 
 
+/* =====================================================
+   LOAD STUDENTS
+===================================================== */
+
 async function loadStudents(){
 
   const list =
@@ -1298,7 +1512,9 @@ async function loadStudents(){
     console.error(error);
 
     list.innerHTML=
-      "<p>Students load ചെയ്യാൻ കഴിഞ്ഞില്ല.</p>";
+      "<p>Students load ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
+      error.message +
+      "</p>";
 
   }
 
@@ -1400,7 +1616,7 @@ async function loadStudentsForDropdown(){
 
 
 /* =====================================================
-   ATTENDANCE
+   ATTENDANCE - SAVE
 ===================================================== */
 
 window.saveAttendance=async function(){
@@ -1493,6 +1709,10 @@ window.saveAttendance=async function(){
 };
 
 
+/* =====================================================
+   ATTENDANCE - LOAD
+===================================================== */
+
 async function loadAttendance(){
 
   const list =
@@ -1541,17 +1761,17 @@ async function loadAttendance(){
       div.innerHTML=`
 
         <strong>
-          Student: ${a.studentNumber}
+          Student: ${a.studentNumber || "-"}
         </strong>
 
         <br>
 
-        Date: ${a.date}
+        Date: ${a.date || "-"}
 
         <br>
 
         Status:
-        <strong>${a.status}</strong>
+        <strong>${a.status || "-"}</strong>
 
       `;
 
@@ -1567,7 +1787,9 @@ async function loadAttendance(){
     console.error(error);
 
     list.innerHTML=
-      "<p>Attendance load ചെയ്യാൻ കഴിഞ്ഞില്ല.</p>";
+      "<p>Attendance load ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
+      error.message +
+      "</p>";
 
   }
 
@@ -1575,7 +1797,7 @@ async function loadAttendance(){
 
 
 /* =====================================================
-   STUDY PROGRESS
+   STUDY PROGRESS - SAVE
 ===================================================== */
 
 window.saveStudyProgress=async function(){
@@ -1720,6 +1942,10 @@ window.saveStudyProgress=async function(){
 };
 
 
+/* =====================================================
+   STUDY PROGRESS - LOAD
+===================================================== */
+
 async function loadStudyProgress(){
 
   const list =
@@ -1768,12 +1994,12 @@ async function loadStudyProgress(){
       div.innerHTML=`
 
         <strong>
-          Student: ${p.studentNumber}
+          Student: ${p.studentNumber || "-"}
         </strong>
 
         <br>
 
-        Date: ${p.date}
+        Date: ${p.date || "-"}
 
         <br>
 
@@ -1814,7 +2040,9 @@ async function loadStudyProgress(){
     console.error(error);
 
     list.innerHTML=
-      "<p>Study Progress load ചെയ്യാൻ കഴിഞ്ഞില്ല.</p>";
+      "<p>Study Progress load ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
+      error.message +
+      "</p>";
 
   }
 
@@ -1822,7 +2050,7 @@ async function loadStudyProgress(){
 
 
 /* =====================================================
-   RESULTS
+   RESULTS - ADD
 ===================================================== */
 
 window.addResult=async function(){
@@ -1929,6 +2157,10 @@ window.addResult=async function(){
 };
 
 
+/* =====================================================
+   RESULTS - LOAD
+===================================================== */
+
 async function loadResults(){
 
   const list =
@@ -1977,23 +2209,23 @@ async function loadResults(){
       div.innerHTML=`
 
         <strong>
-          ${r.title}
+          ${r.title || "-"}
         </strong>
 
         <br>
 
         Student:
-        ${r.studentNumber}
+        ${r.studentNumber || "-"}
 
         <br>
 
         Mark:
-        ${r.mark}
+        ${r.mark || "-"}
 
         <br>
 
         Status:
-        ${r.status}
+        ${r.status || "-"}
 
       `;
 
@@ -2009,7 +2241,9 @@ async function loadResults(){
     console.error(error);
 
     list.innerHTML=
-      "<p>Results load ചെയ്യാൻ കഴിഞ്ഞില്ല.</p>";
+      "<p>Results load ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
+      error.message +
+      "</p>";
 
   }
 
@@ -2017,7 +2251,7 @@ async function loadResults(){
 
 
 /* =====================================================
-   NOTICES
+   NOTICES - ADD
 ===================================================== */
 
 window.addNotice=async function(){
@@ -2106,6 +2340,10 @@ window.addNotice=async function(){
 };
 
 
+/* =====================================================
+   NOTICES - LOAD
+===================================================== */
+
 async function loadNotices(){
 
   const list =
@@ -2154,17 +2392,17 @@ async function loadNotices(){
       div.innerHTML=`
 
         <strong>
-          ${n.title}
+          ${n.title || "-"}
         </strong>
 
         <br><br>
 
-        ${n.text}
+        ${n.text || "-"}
 
         <br><br>
 
         Status:
-        ${n.status}
+        ${n.status || "-"}
 
       `;
 
@@ -2180,7 +2418,9 @@ async function loadNotices(){
     console.error(error);
 
     list.innerHTML=
-      "<p>Notices load ചെയ്യാൻ കഴിഞ്ഞില്ല.</p>";
+      "<p>Notices load ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
+      error.message +
+      "</p>";
 
   }
 
