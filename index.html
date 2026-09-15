@@ -1,153 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAFA HIFZ CLASS - Login</title>
 
-<title>SAFA HIFZ CLASS - Login</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-<style>
-*{
-  box-sizing:border-box;
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f766e, #164e63);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
 
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f4f7f6;
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+    .login-box {
+      width: 100%;
+      max-width: 420px;
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    }
 
-.loginBox{
-  width:92%;
-  max-width:450px;
-  background:white;
-  padding:30px 25px;
-  border-radius:16px;
-  box-shadow:0 5px 20px rgba(0,0,0,.12);
-}
+    h1 {
+      text-align: center;
+      color: #0f766e;
+      margin-bottom: 8px;
+    }
 
-h1{
-  text-align:center;
-  color:#075e54;
-  margin:0 0 8px;
-}
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
+    }
 
-.subtitle{
-  text-align:center;
-  color:#666;
-  margin-bottom:25px;
-}
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
 
-label{
-  display:block;
-  margin-top:15px;
-  font-weight:bold;
-}
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
 
-input{
-  width:100%;
-  padding:13px;
-  margin-top:7px;
-  border:1px solid #ccc;
-  border-radius:8px;
-  font-size:15px;
-}
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 14px;
+      border: 0;
+      border-radius: 10px;
+      background: #0f766e;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-button{
-  width:100%;
-  padding:13px;
-  margin-top:20px;
-  border:0;
-  border-radius:8px;
-  background:#075e54;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-}
+    button:disabled {
+      opacity: 0.6;
+    }
 
-button:disabled{
-  opacity:.6;
-}
+    #message {
+      margin-top: 18px;
+      padding: 12px;
+      border-radius: 10px;
+      display: none;
+      text-align: center;
+      font-size: 14px;
+    }
 
-#message{
-  margin-top:15px;
-  text-align:center;
-  font-weight:bold;
-  min-height:22px;
-  line-height:1.5;
-}
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+    }
 
-.success{
-  color:#166534;
-}
-
-.error{
-  color:#b3261e;
-}
-
-.loading{
-  color:#075e54;
-}
-
-#debug{
-  margin-top:18px;
-  padding:12px;
-  background:#f1f5f4;
-  border-radius:8px;
-  font-size:13px;
-  word-break:break-word;
-  display:none;
-}
-
-.debugTitle{
-  font-weight:bold;
-  margin-bottom:8px;
-}
-</style>
-
+    .success {
+      background: #dcfce7;
+      color: #166534;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="loginBox">
+<div class="login-box">
 
   <h1>SAFA HIFZ CLASS</h1>
-
-  <div class="subtitle">
-    Login to continue
-  </div>
+  <div class="subtitle">Usthad / Parent Login</div>
 
   <form id="loginForm">
 
     <label>Email</label>
-
     <input
-      id="email"
       type="email"
+      id="email"
       placeholder="Enter email"
-      autocomplete="username"
       required
     >
 
     <label>Password</label>
-
     <input
-      id="password"
       type="password"
+      id="password"
       placeholder="Enter password"
-      autocomplete="current-password"
       required
     >
 
-    <button
-      id="loginButton"
-      type="submit"
-    >
+    <button type="submit" id="loginBtn">
       Login
     </button>
 
@@ -155,383 +128,170 @@ button:disabled{
 
   <div id="message"></div>
 
-  <div id="debug">
-    <div class="debugTitle">
-      Firebase Profile Information
-    </div>
-
-    <div id="debugContent"></div>
-  </div>
-
 </div>
 
 
 <script type="module">
 
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 import {
   getAuth,
   signInWithEmailAndPassword,
   setPersistence,
   browserLocalPersistence
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 import {
   getFirestore,
   doc,
   getDoc
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-
-/* =========================
-   FIREBASE CONFIG
-========================= */
 
 const firebaseConfig = {
-
-  apiKey:
-  "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
-
-  authDomain:
-  "safa-hifz-class-7e84b.firebaseapp.com",
-
-  projectId:
-  "safa-hifz-class-7e84b",
-
-  storageBucket:
-  "safa-hifz-class-7e84b.firebasestorage.app",
-
-  messagingSenderId:
-  "476801753196",
-
-  appId:
-  "1:476801753196:web:d4c8a8b0c1a4203606f849",
-
-  measurementId:
-  "G-ZTBTJCB5SR"
-
+  apiKey: "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
+  authDomain: "safa-hifz-class-7e84b.firebaseapp.com",
+  projectId: "safa-hifz-class-7e84b",
+  storageBucket: "safa-hifz-class-7e84b.firebasestorage.app",
+  messagingSenderId: "476801753196",
+  appId: "1:476801753196:web:d4c8a8b0c1a4203606f849",
+  measurementId: "G-ZTBTJCB5SR"
 };
 
 
-/* =========================
-   FIREBASE
-========================= */
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-const app =
-initializeApp(firebaseConfig);
-
-const auth =
-getAuth(app);
-
-const db =
-getFirestore(app);
+const form = document.getElementById("loginForm");
+const loginBtn = document.getElementById("loginBtn");
+const message = document.getElementById("message");
 
 
-/* =========================
-   ELEMENTS
-========================= */
-
-const loginForm =
-document.getElementById("loginForm");
-
-const emailInput =
-document.getElementById("email");
-
-const passwordInput =
-document.getElementById("password");
-
-const loginButton =
-document.getElementById("loginButton");
-
-const message =
-document.getElementById("message");
-
-const debug =
-document.getElementById("debug");
-
-const debugContent =
-document.getElementById("debugContent");
-
-
-/* =========================
-   MESSAGE
-========================= */
-
-function showMessage(text,type){
-
+function showMessage(text, type = "error") {
+  message.style.display = "block";
+  message.className = type;
   message.textContent = text;
-
-  message.className = type || "";
-
 }
 
 
-/* =========================
-   DEBUG INFORMATION
-========================= */
+form.addEventListener("submit", async (e) => {
 
-function showDebug(user, userData){
+  e.preventDefault();
 
-  debug.style.display = "block";
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
 
-  debugContent.innerHTML =
+  loginBtn.disabled = true;
+  loginBtn.textContent = "Logging in...";
 
-    "<b>Auth UID:</b><br>" +
-    user.uid +
+  try {
 
-    "<br><br>" +
+    await setPersistence(auth, browserLocalPersistence);
 
-    "<b>Firestore path:</b><br>" +
-    "users/" + user.uid +
+    const result = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-    "<br><br>" +
+    const uid = result.user.uid;
 
-    "<b>Role:</b><br>" +
-    String(userData.role) +
+    const userRef = doc(db, "users", uid);
+    const userSnap = await getDoc(userRef);
 
-    "<br><br>" +
-
-    "<b>Student Number:</b><br>" +
-    String(userData.studentNumber) +
-
-    "<br><br>" +
-
-    "<b>All Firestore Data:</b><br>" +
-    JSON.stringify(userData);
-
-}
-
-
-/* =========================
-   LOGIN
-========================= */
-
-loginForm.addEventListener(
-  "submit",
-  async function(event){
-
-    event.preventDefault();
-
-    debug.style.display = "none";
-
-    const email =
-    emailInput.value.trim();
-
-    const password =
-    passwordInput.value;
-
-
-    if(!email || !password){
+    if (!userSnap.exists()) {
 
       showMessage(
-        "Email and password നൽകണം.",
-        "error"
+        "ഈ account-ന് Firestore users profile ഇല്ല."
       );
+
+      await auth.signOut();
+
+      return;
+    }
+
+    const userData = userSnap.data();
+
+    const role = String(
+      userData.role || ""
+    ).trim().toLowerCase();
+
+
+    if (role === "admin") {
+
+      showMessage(
+        "Login successful. Admin dashboard തുറക്കുന്നു...",
+        "success"
+      );
+
+      setTimeout(() => {
+        window.location.href = "dashboard.html";
+      }, 500);
 
       return;
     }
 
 
-    loginButton.disabled = true;
-
-    showMessage(
-      "Logging in...",
-      "loading"
-    );
-
-
-    try{
-
-      await setPersistence(
-        auth,
-        browserLocalPersistence
-      );
-
-
-      const credential =
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-
-      const user =
-      credential.user;
-
-
-      const userRef =
-      doc(
-        db,
-        "users",
-        user.uid
-      );
-
-
-      const userSnap =
-      await getDoc(userRef);
-
-
-      if(!userSnap.exists()){
-
-        showMessage(
-          "User profile കണ്ടെത്താനായില്ല.",
-          "error"
-        );
-
-        loginButton.disabled = false;
-
-        return;
-      }
-
-
-      const userData =
-      userSnap.data();
-
-
-      /* Show exactly what Firebase returned */
-
-      showDebug(
-        user,
-        userData
-      );
-
-
-      const role =
-      String(
-        userData.role ?? ""
-      )
-      .trim()
-      .toLowerCase();
-
-
-      const studentNumber =
-      String(
-        userData.studentNumber ?? ""
-      )
-      .trim();
-
-
-      console.log(
-        "FULL FIRESTORE DATA:",
-        userData
-      );
-
-      console.log(
-        "ROLE:",
-        role
-      );
-
-      console.log(
-        "STUDENT NUMBER:",
-        studentNumber
-      );
-
-
-      /* =========================
-         ADMIN
-      ========================= */
-
-      if(role === "admin"){
-
-        showMessage(
-          "Admin Dashboard തുറക്കുന്നു...",
-          "success"
-        );
-
-        setTimeout(
-          () => {
-            window.location.href =
-            "dashboard.html";
-          },
-          700
-        );
-
-        return;
-      }
-
-
-      /* =========================
-         PARENT
-      ========================= */
-
-      if(role === "parent"){
-
-        if(!studentNumber){
-
-          showMessage(
-            "Firebase-ൽ studentNumber ലഭിച്ചില്ല.",
-            "error"
-          );
-
-          loginButton.disabled = false;
-
-          return;
-        }
-
-
-        showMessage(
-          "Parent Dashboard തുറക്കുന്നു...",
-          "success"
-        );
-
-
-        setTimeout(
-          () => {
-
-            window.location.href =
-            "parent.html";
-
-          },
-          700
-        );
-
-        return;
-      }
-
-
-      /* =========================
-         UNKNOWN ROLE
-      ========================= */
+    if (role === "parent") {
 
       showMessage(
-        "ഈ account-ന് valid role ഇല്ല. Role = [" +
-        role +
-        "]",
-        "error"
+        "Login successful. Parent dashboard തുറക്കുന്നു...",
+        "success"
       );
 
+      setTimeout(() => {
+        window.location.href = "parent.html";
+      }, 500);
 
-      loginButton.disabled = false;
-
-
-    }catch(error){
-
-      console.error(
-        "LOGIN ERROR:",
-        error
-      );
-
-
-      showMessage(
-        error.message ||
-        "Login ചെയ്യാൻ കഴിഞ്ഞില്ല.",
-        "error"
-      );
-
-
-      loginButton.disabled = false;
-
+      return;
     }
 
+
+    showMessage(
+      "ഈ account-ന് valid role ഇല്ല."
+    );
+
+    await auth.signOut();
+
+  } catch (error) {
+
+    console.error(error);
+
+    let text = error.message || "Login failed.";
+
+    if (error.code === "auth/invalid-credential") {
+      text = "Email അല്ലെങ്കിൽ password തെറ്റാണ്.";
+    }
+
+    if (error.code === "auth/user-not-found") {
+      text = "ഈ email ഉപയോഗിച്ച് account കണ്ടെത്തിയില്ല.";
+    }
+
+    if (error.code === "auth/wrong-password") {
+      text = "Password തെറ്റാണ്.";
+    }
+
+    if (error.code === "auth/invalid-api-key") {
+      text = "Firebase API configuration പരിശോധിക്കണം.";
+    }
+
+    showMessage(text);
+
+  } finally {
+
+    loginBtn.disabled = false;
+    loginBtn.textContent = "Login";
+
   }
-);
+
+});
 
 </script>
 
 </body>
-
 </html>
