@@ -48,11 +48,12 @@ body{
 
 .card{
   background:white;
-  padding:22px 10px;
+  padding:20px 10px;
   text-align:center;
   border-radius:12px;
   box-shadow:0 3px 12px rgba(0,0,0,.08);
   cursor:pointer;
+  transition:.2s;
 }
 
 .card:hover{
@@ -65,6 +66,13 @@ body{
 
 .card h3{
   margin:8px 0 4px;
+}
+
+.card .count{
+  font-size:26px;
+  font-weight:bold;
+  color:#075e54;
+  margin-top:8px;
 }
 
 .section{
@@ -114,6 +122,14 @@ button{
   border-radius:10px;
 }
 
+.record{
+  border:1px solid #ddd;
+  padding:15px;
+  margin-top:10px;
+  border-radius:10px;
+  background:#fafafa;
+}
+
 .logout{
   width:100%;
   margin-top:25px;
@@ -124,6 +140,17 @@ button{
   padding:10px;
   text-align:center;
   font-weight:bold;
+  min-height:20px;
+}
+
+.empty{
+  color:#777;
+  padding:10px 0;
+}
+
+.small{
+  color:#666;
+  font-size:13px;
 }
 </style>
 </head>
@@ -144,7 +171,8 @@ button{
 
 <div id="message"></div>
 
-<!-- DASHBOARD -->
+
+<!-- ================= DASHBOARD ================= -->
 
 <div id="home">
 
@@ -153,8 +181,10 @@ button{
 <div class="card" onclick="showSection('students')">
 <div class="icon">👨‍🎓</div>
 <h3>Students</h3>
+<div class="count" id="studentCount">0</div>
 <p>Add / Manage</p>
 </div>
+
 
 <div class="card" onclick="showSection('attendance')">
 <div class="icon">📅</div>
@@ -162,11 +192,13 @@ button{
 <p>Manage</p>
 </div>
 
+
 <div class="card" onclick="showSection('study')">
 <div class="icon">📖</div>
 <h3>Study Progress</h3>
 <p>Update</p>
 </div>
+
 
 <div class="card" onclick="showSection('results')">
 <div class="icon">📊</div>
@@ -174,17 +206,20 @@ button{
 <p>Add / Publish</p>
 </div>
 
+
 <div class="card" onclick="showSection('notices')">
 <div class="icon">📢</div>
 <h3>Notices</h3>
 <p>Publish</p>
 </div>
 
+
 <div class="card" onclick="showSection('leave')">
 <div class="icon">📝</div>
 <h3>Leave</h3>
 <p>Approve / Reply</p>
 </div>
+
 
 <div class="card" onclick="showSection('messages')">
 <div class="icon">💬</div>
@@ -199,7 +234,7 @@ button{
 </div>
 
 
-<!-- STUDENTS -->
+<!-- ================= STUDENTS ================= -->
 
 <div id="students" class="section">
 
@@ -228,20 +263,43 @@ Loading...
 </div>
 
 
-<!-- ATTENDANCE -->
+<!-- ================= ATTENDANCE ================= -->
 
 <div id="attendance" class="section">
 
-<h2>📅 Attendance</h2>
+<h2>📅 Attendance Management</h2>
 
 <button class="back" onclick="goHome()">← Back</button>
 
-<p>Attendance management will be connected to students next.</p>
+<h3>Mark Attendance</h3>
+
+<select id="attendanceStudent">
+<option value="">Select Student</option>
+</select>
+
+<input type="date" id="attendanceDate">
+
+<select id="attendanceStatus">
+<option value="">Select Status</option>
+<option value="Present">Present</option>
+<option value="Absent">Absent</option>
+<option value="Leave">Leave</option>
+</select>
+
+<button onclick="saveAttendance()">💾 Save Attendance</button>
+
+<hr>
+
+<h3>Attendance Records</h3>
+
+<div id="attendanceList">
+Loading...
+</div>
 
 </div>
 
 
-<!-- STUDY -->
+<!-- ================= STUDY PROGRESS ================= -->
 
 <div id="study" class="section">
 
@@ -249,12 +307,45 @@ Loading...
 
 <button class="back" onclick="goHome()">← Back</button>
 
-<p>Study progress management will be connected next.</p>
+<h3>Update Study Progress</h3>
+
+<select id="studyStudent">
+<option value="">Select Student</option>
+</select>
+
+<input type="date" id="studyDate">
+
+<input id="studySurah" placeholder="Surah / Juz">
+
+<input id="studyNewLesson" placeholder="New Lesson">
+
+<input id="studyRevision" placeholder="Revision">
+
+<select id="studyPerformance">
+<option value="">Performance</option>
+<option value="Excellent">Excellent</option>
+<option value="Very Good">Very Good</option>
+<option value="Good">Good</option>
+<option value="Needs Improvement">Needs Improvement</option>
+</select>
+
+<textarea id="studyNote" rows="4"
+placeholder="Teacher Note"></textarea>
+
+<button onclick="saveStudyProgress()">💾 Save Progress</button>
+
+<hr>
+
+<h3>Study Progress Records</h3>
+
+<div id="studyList">
+Loading...
+</div>
 
 </div>
 
 
-<!-- RESULTS -->
+<!-- ================= RESULTS ================= -->
 
 <div id="results" class="section">
 
@@ -280,7 +371,7 @@ Loading...
 </div>
 
 
-<!-- NOTICES -->
+<!-- ================= NOTICES ================= -->
 
 <div id="notices" class="section">
 
@@ -305,7 +396,7 @@ placeholder="Notice message"></textarea>
 </div>
 
 
-<!-- LEAVE -->
+<!-- ================= LEAVE ================= -->
 
 <div id="leave" class="section">
 
@@ -320,7 +411,7 @@ No leave applications yet.
 </div>
 
 
-<!-- MESSAGES -->
+<!-- ================= MESSAGES ================= -->
 
 <div id="messages" class="section">
 
@@ -354,14 +445,14 @@ import {
   collection,
   addDoc,
   getDocs,
-  query,
-  orderBy,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
+/* ================= FIREBASE CONFIG ================= */
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCR-A17PO3zeiY2a1eH9cvxSmv4Upxqe-4",
+  apiKey: "AIzaSyCR-A17PO3zeiY2a1eH9cvsmv4Upxqe4",
   authDomain: "safa-hifz-class-7e84b.firebaseapp.com",
   projectId: "safa-hifz-class-7e84b",
   storageBucket: "safa-hifz-class-7e84b.firebasestorage.app",
@@ -378,14 +469,24 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 
+/* ================= AUTH ================= */
+
 onAuthStateChanged(auth,(user)=>{
 
   if(!user){
+
     window.location.href="index.html";
+
+    return;
+
   }
+
+  loadStudents();
 
 });
 
+
+/* ================= SECTION CONTROL ================= */
 
 window.showSection=function(id){
 
@@ -398,16 +499,43 @@ window.showSection=function(id){
 
   document.getElementById(id).classList.add("active");
 
+
   if(id==="students"){
+
     loadStudents();
+
   }
+
+
+  if(id==="attendance"){
+
+    loadStudentsForDropdown();
+
+    loadAttendance();
+
+  }
+
+
+  if(id==="study"){
+
+    loadStudentsForDropdown();
+
+    loadStudyProgress();
+
+  }
+
 
   if(id==="results"){
+
     loadResults();
+
   }
 
+
   if(id==="notices"){
+
     loadNotices();
+
   }
 
 };
@@ -422,8 +550,12 @@ window.goHome=function(){
 
   document.getElementById("home").style.display="block";
 
+  loadStudents();
+
 };
 
+
+/* ================= LOGOUT ================= */
 
 window.logout=async function(){
 
@@ -434,15 +566,24 @@ window.logout=async function(){
 };
 
 
+/* ================= MESSAGE ================= */
+
 function showMessage(text){
 
   document.getElementById("message").textContent=text;
 
   setTimeout(()=>{
+
     document.getElementById("message").textContent="";
+
   },3000);
 
 }
+
+
+/* =====================================================
+   STUDENTS
+===================================================== */
 
 
 /* ADD STUDENT */
@@ -467,6 +608,7 @@ window.addStudent=async function(){
     alert("Student Number and Name നൽകണം.");
 
     return;
+
   }
 
 
@@ -497,7 +639,9 @@ window.addStudent=async function(){
 
     loadStudents();
 
-  }catch(error){
+  }
+
+  catch(error){
 
     console.error(error);
 
@@ -524,12 +668,19 @@ async function loadStudents(){
       await getDocs(collection(db,"students"));
 
 
+    /* TOTAL COUNT */
+
+    document.getElementById("studentCount").textContent=
+      snapshot.size;
+
+
     list.innerHTML="";
 
 
     if(snapshot.empty){
 
-      list.innerHTML="<p>No students added yet.</p>";
+      list.innerHTML=
+        "<p class='empty'>No students added yet.</p>";
 
       return;
 
@@ -561,7 +712,9 @@ async function loadStudents(){
     });
 
 
-  }catch(error){
+  }
+
+  catch(error){
 
     console.error(error);
 
@@ -571,6 +724,364 @@ async function loadStudents(){
   }
 
 }
+
+
+/* STUDENT DROPDOWNS */
+
+async function loadStudentsForDropdown(){
+
+  try{
+
+    const snapshot=
+      await getDocs(collection(db,"students"));
+
+
+    const attendanceSelect=
+      document.getElementById("attendanceStudent");
+
+    const studySelect=
+      document.getElementById("studyStudent");
+
+
+    attendanceSelect.innerHTML=
+      '<option value="">Select Student</option>';
+
+    studySelect.innerHTML=
+      '<option value="">Select Student</option>';
+
+
+    snapshot.forEach(doc=>{
+
+      const student=doc.data();
+
+      const option1=document.createElement("option");
+
+      option1.value=student.studentNumber;
+
+      option1.textContent=
+        student.studentNumber+" - "+student.name;
+
+      attendanceSelect.appendChild(option1);
+
+
+      const option2=document.createElement("option");
+
+      option2.value=student.studentNumber;
+
+      option2.textContent=
+        student.studentNumber+" - "+student.name;
+
+      studySelect.appendChild(option2);
+
+    });
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+/* =====================================================
+   ATTENDANCE
+===================================================== */
+
+
+/* SAVE ATTENDANCE */
+
+window.saveAttendance=async function(){
+
+  const studentNumber=
+    document.getElementById("attendanceStudent").value;
+
+  const date=
+    document.getElementById("attendanceDate").value;
+
+  const status=
+    document.getElementById("attendanceStatus").value;
+
+
+  if(!studentNumber || !date || !status){
+
+    alert("Student, Date, Status എന്നിവ നൽകണം.");
+
+    return;
+
+  }
+
+
+  try{
+
+    await addDoc(collection(db,"attendance"),{
+
+      studentNumber:studentNumber,
+
+      date:date,
+
+      status:status,
+
+      createdAt:serverTimestamp()
+
+    });
+
+
+    showMessage("Attendance saved successfully ✅");
+
+
+    document.getElementById("attendanceDate").value="";
+
+    document.getElementById("attendanceStatus").value="";
+
+
+    loadAttendance();
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    alert("Attendance save ചെയ്യാൻ കഴിഞ്ഞില്ല.");
+
+  }
+
+};
+
+
+/* LOAD ATTENDANCE */
+
+async function loadAttendance(){
+
+  const list=
+    document.getElementById("attendanceList");
+
+  list.innerHTML="Loading...";
+
+
+  try{
+
+    const snapshot=
+      await getDocs(collection(db,"attendance"));
+
+
+    list.innerHTML="";
+
+
+    if(snapshot.empty){
+
+      list.innerHTML=
+        "<p class='empty'>No attendance records yet.</p>";
+
+      return;
+
+    }
+
+
+    snapshot.forEach(doc=>{
+
+      const a=doc.data();
+
+      const div=document.createElement("div");
+
+      div.className="record";
+
+      div.innerHTML=`
+
+        <strong>Student: ${a.studentNumber}</strong><br>
+
+        Date: ${a.date}<br>
+
+        Status: <strong>${a.status}</strong>
+
+      `;
+
+      list.appendChild(div);
+
+    });
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    list.innerHTML=
+      "<p>Attendance load ചെയ്യാൻ കഴിഞ്ഞില്ല.</p>";
+
+  }
+
+}
+
+
+/* =====================================================
+   STUDY PROGRESS
+===================================================== */
+
+
+/* SAVE STUDY PROGRESS */
+
+window.saveStudyProgress=async function(){
+
+  const studentNumber=
+    document.getElementById("studyStudent").value;
+
+  const date=
+    document.getElementById("studyDate").value;
+
+  const surah=
+    document.getElementById("studySurah").value.trim();
+
+  const newLesson=
+    document.getElementById("studyNewLesson").value.trim();
+
+  const revision=
+    document.getElementById("studyRevision").value.trim();
+
+  const performance=
+    document.getElementById("studyPerformance").value;
+
+  const note=
+    document.getElementById("studyNote").value.trim();
+
+
+  if(!studentNumber || !date){
+
+    alert("Student and Date നൽകണം.");
+
+    return;
+
+  }
+
+
+  try{
+
+    await addDoc(collection(db,"studyProgress"),{
+
+      studentNumber:studentNumber,
+
+      date:date,
+
+      surah:surah,
+
+      newLesson:newLesson,
+
+      revision:revision,
+
+      performance:performance,
+
+      note:note,
+
+      createdAt:serverTimestamp()
+
+    });
+
+
+    showMessage("Study Progress saved successfully ✅");
+
+
+    document.getElementById("studyDate").value="";
+    document.getElementById("studySurah").value="";
+    document.getElementById("studyNewLesson").value="";
+    document.getElementById("studyRevision").value="";
+    document.getElementById("studyPerformance").value="";
+    document.getElementById("studyNote").value="";
+
+
+    loadStudyProgress();
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    alert("Study Progress save ചെയ്യാൻ കഴിഞ്ഞില്ല.");
+
+  }
+
+};
+
+
+/* LOAD STUDY PROGRESS */
+
+async function loadStudyProgress(){
+
+  const list=
+    document.getElementById("studyList");
+
+  list.innerHTML="Loading...";
+
+
+  try{
+
+    const snapshot=
+      await getDocs(collection(db,"studyProgress"));
+
+
+    list.innerHTML="";
+
+
+    if(snapshot.empty){
+
+      list.innerHTML=
+        "<p class='empty'>No study progress records yet.</p>";
+
+      return;
+
+    }
+
+
+    snapshot.forEach(doc=>{
+
+      const p=doc.data();
+
+      const div=document.createElement("div");
+
+      div.className="record";
+
+      div.innerHTML=`
+
+        <strong>Student: ${p.studentNumber}</strong><br>
+
+        Date: ${p.date}<br>
+
+        Surah / Juz: ${p.surah || "-"}<br>
+
+        New Lesson: ${p.newLesson || "-"}<br>
+
+        Revision: ${p.revision || "-"}<br>
+
+        Performance: ${p.performance || "-"}<br>
+
+        Teacher Note: ${p.note || "-"}
+
+      `;
+
+      list.appendChild(div);
+
+    });
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    list.innerHTML=
+      "<p>Study Progress load ചെയ്യാൻ കഴിഞ്ഞില്ല.</p>";
+
+  }
+
+}
+
+
+/* =====================================================
+   RESULTS
+===================================================== */
 
 
 /* ADD RESULT */
@@ -599,28 +1110,42 @@ window.addResult=async function(){
   }
 
 
-  await addDoc(collection(db,"results"),{
+  try{
 
-    studentNumber:studentNumber,
+    await addDoc(collection(db,"results"),{
 
-    title:title,
+      studentNumber:studentNumber,
 
-    mark:mark,
+      title:title,
 
-    status:status,
+      mark:mark,
 
-    createdAt:serverTimestamp()
+      status:status,
 
-  });
+      createdAt:serverTimestamp()
+
+    });
 
 
-  showMessage("Result saved successfully ✅");
+    showMessage("Result saved successfully ✅");
 
-  document.getElementById("resultStudent").value="";
-  document.getElementById("resultTitle").value="";
-  document.getElementById("resultMark").value="";
 
-  loadResults();
+    document.getElementById("resultStudent").value="";
+    document.getElementById("resultTitle").value="";
+    document.getElementById("resultMark").value="";
+
+
+    loadResults();
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    alert("Result save ചെയ്യാൻ കഴിഞ്ഞില്ല.");
+
+  }
 
 };
 
@@ -629,40 +1154,72 @@ window.addResult=async function(){
 
 async function loadResults(){
 
-  const list=document.getElementById("resultList");
+  const list=
+    document.getElementById("resultList");
 
-  list.innerHTML="";
-
-
-  const snapshot=
-    await getDocs(collection(db,"results"));
+  list.innerHTML="Loading...";
 
 
-  snapshot.forEach(doc=>{
+  try{
 
-    const r=doc.data();
+    const snapshot=
+      await getDocs(collection(db,"results"));
 
-    const div=document.createElement("div");
 
-    div.className="student";
+    list.innerHTML="";
 
-    div.innerHTML=`
 
-      <strong>${r.title}</strong><br>
+    if(snapshot.empty){
 
-      Student: ${r.studentNumber}<br>
+      list.innerHTML=
+        "<p class='empty'>No results yet.</p>";
 
-      Mark: ${r.mark}<br>
+      return;
 
-      Status: ${r.status}
+    }
 
-    `;
 
-    list.appendChild(div);
+    snapshot.forEach(doc=>{
 
-  });
+      const r=doc.data();
+
+      const div=document.createElement("div");
+
+      div.className="student";
+
+      div.innerHTML=`
+
+        <strong>${r.title}</strong><br>
+
+        Student: ${r.studentNumber}<br>
+
+        Mark: ${r.mark}<br>
+
+        Status: ${r.status}
+
+      `;
+
+      list.appendChild(div);
+
+    });
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    list.innerHTML=
+      "<p>Results load ചെയ്യാൻ കഴിഞ്ഞില്ല.</p>";
+
+  }
 
 }
+
+
+/* =====================================================
+   NOTICES
+===================================================== */
 
 
 /* ADD NOTICE */
@@ -688,25 +1245,39 @@ window.addNotice=async function(){
   }
 
 
-  await addDoc(collection(db,"notices"),{
+  try{
 
-    title:title,
+    await addDoc(collection(db,"notices"),{
 
-    text:text,
+      title:title,
 
-    status:status,
+      text:text,
 
-    createdAt:serverTimestamp()
+      status:status,
 
-  });
+      createdAt:serverTimestamp()
+
+    });
 
 
-  showMessage("Notice saved successfully ✅");
+    showMessage("Notice saved successfully ✅");
 
-  document.getElementById("noticeTitle").value="";
-  document.getElementById("noticeText").value="";
 
-  loadNotices();
+    document.getElementById("noticeTitle").value="";
+    document.getElementById("noticeText").value="";
+
+
+    loadNotices();
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    alert("Notice save ചെയ്യാൻ കഴിഞ്ഞില്ല.");
+
+  }
 
 };
 
@@ -715,36 +1286,63 @@ window.addNotice=async function(){
 
 async function loadNotices(){
 
-  const list=document.getElementById("noticeList");
+  const list=
+    document.getElementById("noticeList");
 
-  list.innerHTML="";
-
-
-  const snapshot=
-    await getDocs(collection(db,"notices"));
+  list.innerHTML="Loading...";
 
 
-  snapshot.forEach(doc=>{
+  try{
 
-    const n=doc.data();
+    const snapshot=
+      await getDocs(collection(db,"notices"));
 
-    const div=document.createElement("div");
 
-    div.className="student";
+    list.innerHTML="";
 
-    div.innerHTML=`
 
-      <strong>${n.title}</strong><br>
+    if(snapshot.empty){
 
-      ${n.text}<br>
+      list.innerHTML=
+        "<p class='empty'>No notices yet.</p>";
 
-      Status: ${n.status}
+      return;
 
-    `;
+    }
 
-    list.appendChild(div);
 
-  });
+    snapshot.forEach(doc=>{
+
+      const n=doc.data();
+
+      const div=document.createElement("div");
+
+      div.className="student";
+
+      div.innerHTML=`
+
+        <strong>${n.title}</strong><br>
+
+        ${n.text}<br>
+
+        Status: ${n.status}
+
+      `;
+
+      list.appendChild(div);
+
+    });
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    list.innerHTML=
+      "<p>Notices load ചെയ്യാൻ കഴിഞ്ഞില്ല.</p>";
+
+  }
 
 }
 
