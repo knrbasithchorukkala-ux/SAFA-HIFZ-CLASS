@@ -50,6 +50,83 @@ body{
   box-shadow:0 3px 12px rgba(0,0,0,.08);
 }
 
+/* =========================
+   NOTIFICATIONS
+========================= */
+
+.notificationArea{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:12px;
+  margin:20px 0;
+}
+
+.notification{
+  background:white;
+  padding:16px;
+  border-radius:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+  cursor:pointer;
+  border-left:5px solid #075e54;
+  transition:.2s;
+}
+
+.notification:hover{
+  transform:translateY(-2px);
+}
+
+.notification.leave{
+  border-left-color:#f57c00;
+}
+
+.notification.message{
+  border-left-color:#1976d2;
+}
+
+.notificationTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.notificationTitle{
+  font-weight:bold;
+  font-size:16px;
+}
+
+.notificationText{
+  margin-top:7px;
+  color:#666;
+  font-size:14px;
+}
+
+.badge{
+  min-width:30px;
+  height:30px;
+  padding:0 9px;
+  border-radius:20px;
+  background:#b3261e;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  font-size:14px;
+}
+
+.notification.message .badge{
+  background:#1976d2;
+}
+
+.noNotification{
+  background:#e8f5e9;
+  color:#2e7d32;
+  padding:15px;
+  border-radius:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.05);
+}
+
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
@@ -238,6 +315,22 @@ button:hover{
     <p id="adminWelcome">
       Welcome Usthad
     </p>
+
+  </div>
+
+
+  <!-- =========================
+       NOTIFICATIONS
+  ========================= -->
+
+  <div id="notificationArea"
+       class="notificationArea">
+
+    <div class="noNotification">
+
+      🔄 Checking new notifications...
+
+    </div>
 
   </div>
 
@@ -755,6 +848,7 @@ import {
   updateDoc,
   query,
   where,
+  onSnapshot,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
@@ -800,6 +894,14 @@ getAuth(app);
 
 const db =
 getFirestore(app);
+
+
+/* =========================
+   NOTIFICATION LISTENERS
+========================= */
+
+let leaveUnsubscribe = null;
+let messageUnsubscribe = null;
 
 
 /* =========================
@@ -897,6 +999,12 @@ async function startAdmin(){
 
     await loadStudents();
 
+
+    /* Start real-time notifications */
+
+    startNotificationListeners();
+
+
   }catch(error){
 
     console.error(error);
@@ -905,6 +1013,278 @@ async function startAdmin(){
       "Dashboard തുറക്കാൻ കഴിഞ്ഞില്ല.",
       error.message
     );
+
+  }
+
+}
+
+
+/* =========================
+   REAL-TIME NOTIFICATIONS
+========================= */
+
+function startNotificationListeners(){
+
+  /* LEAVE LISTENER */
+
+  const leaveQuery =
+  query(
+    collection(db,"leaveRequests"),
+    where("status","==","pending")
+  );
+
+
+  leaveUnsubscribe =
+  onSnapshot(
+    leaveQuery,
+    snapshot => {
+
+      updateNotificationArea();
+
+    },
+    error => {
+
+      console.error(
+        "Leave notification error:",
+        error
+      );
+
+    }
+  );
+
+
+  /* MESSAGE LISTENER */
+
+  const messageQuery =
+  query(
+    collection(db,"messages"),
+    where("status","==","unread")
+  );
+
+
+  messageUnsubscribe =
+  onSnapshot(
+    messageQuery,
+    snapshot => {
+
+      updateNotificationArea();
+
+    },
+    error => {
+
+      console.error(
+        "Message notification error:",
+        error
+      );
+
+    }
+  );
+
+
+  updateNotificationArea();
+
+}
+
+
+/* =========================
+   UPDATE NOTIFICATION AREA
+========================= */
+
+async function updateNotificationArea(){
+
+  const area =
+  document.getElementById(
+    "notificationArea"
+  );
+
+
+  if(!area)
+    return;
+
+
+  try{
+
+    const leaveSnapshot =
+    await getDocs(
+      query(
+        collection(db,"leaveRequests"),
+        where("status","==","pending")
+      )
+    );
+
+
+    const messageSnapshot =
+    await getDocs(
+      query(
+        collection(db,"messages"),
+        where("status","==","unread")
+      )
+    );
+
+
+    const leaveCount =
+    leaveSnapshot.size;
+
+
+    const messageCount =
+    messageSnapshot.size;
+
+
+    area.innerHTML = "";
+
+
+    if(
+      leaveCount === 0 &&
+      messageCount === 0
+    ){
+
+      area.innerHTML = `
+
+        <div class="noNotification">
+
+          ✅ No new leave requests or parent messages.
+
+        </div>
+
+      `;
+
+      return;
+    }
+
+
+    if(leaveCount > 0){
+
+      const leaveBox =
+      document.createElement("div");
+
+
+      leaveBox.className =
+      "notification leave";
+
+
+      leaveBox.onclick =
+      function(){
+
+        showSection("leave");
+
+      };
+
+
+      leaveBox.innerHTML = `
+
+        <div class="notificationTop">
+
+          <div class="notificationTitle">
+
+            🔔 New Leave Request
+
+          </div>
+
+          <div class="badge">
+
+            ${leaveCount}
+
+          </div>
+
+        </div>
+
+        <div class="notificationText">
+
+          ${leaveCount === 1
+            ? "A parent has submitted a leave application."
+            : leaveCount + " parents have submitted leave applications."
+          }
+
+          <br>
+
+          Tap to view.
+
+        </div>
+
+      `;
+
+
+      area.appendChild(
+        leaveBox
+      );
+
+    }
+
+
+    if(messageCount > 0){
+
+      const messageBox =
+      document.createElement("div");
+
+
+      messageBox.className =
+      "notification message";
+
+
+      messageBox.onclick =
+      function(){
+
+        showSection("messages");
+
+      };
+
+
+      messageBox.innerHTML = `
+
+        <div class="notificationTop">
+
+          <div class="notificationTitle">
+
+            💬 New Parent Message
+
+          </div>
+
+          <div class="badge">
+
+            ${messageCount}
+
+          </div>
+
+        </div>
+
+        <div class="notificationText">
+
+          ${messageCount === 1
+            ? "A parent has sent a new message."
+            : messageCount + " new parent messages."
+          }
+
+          <br>
+
+          Tap to view.
+
+        </div>
+
+      `;
+
+
+      area.appendChild(
+        messageBox
+      );
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Notification update error:",
+      error
+    );
+
+    area.innerHTML = `
+
+      <div class="noNotification">
+
+        ⚠️ Notifications temporarily unavailable.
+
+      </div>
+
+    `;
 
   }
 
@@ -975,26 +1355,38 @@ async function(id){
   if(id === "students")
     await loadStudents();
 
+
   if(id === "attendance"){
+
     await loadStudentDropdowns();
     await loadAttendance();
+
   }
+
 
   if(id === "study"){
+
     await loadStudentDropdowns();
     await loadStudy();
+
   }
 
+
   if(id === "results"){
+
     await loadStudentDropdowns();
     await loadResults();
+
   }
+
 
   if(id === "notices")
     await loadNotices();
 
+
   if(id === "leave")
     await loadLeaves();
+
 
   if(id === "messages")
     await loadMessages();
@@ -1018,6 +1410,9 @@ function(){
   ).style.display =
   "block";
 
+
+  updateNotificationArea();
+
 };
 
 
@@ -1027,6 +1422,14 @@ function(){
 
 window.logout =
 async function(){
+
+  if(leaveUnsubscribe)
+    leaveUnsubscribe();
+
+
+  if(messageUnsubscribe)
+    messageUnsubscribe();
+
 
   await signOut(auth);
 
@@ -2072,6 +2475,8 @@ async function loadLeaves(){
       list.innerHTML =
       "<p class='empty'>No leave applications yet.</p>";
 
+      updateNotificationArea();
+
       return;
     }
 
@@ -2158,6 +2563,9 @@ async function loadLeaves(){
 
     });
 
+
+    updateNotificationArea();
+
   }catch(error){
 
     list.innerHTML =
@@ -2217,6 +2625,8 @@ async function(id,status){
 
     await loadLeaves();
 
+    updateNotificationArea();
+
   }catch(error){
 
     alert(
@@ -2261,6 +2671,8 @@ async function loadMessages(){
       list.innerHTML =
       "<p class='empty'>No parent messages yet.</p>";
 
+      updateNotificationArea();
+
       return;
     }
 
@@ -2301,6 +2713,13 @@ async function loadMessages(){
 
         ${m.text || "-"}
 
+        <br><br>
+
+        Status:
+        <strong>
+          ${m.status || "unread"}
+        </strong>
+
 
         <div class="replyBox">
 
@@ -2333,6 +2752,9 @@ async function loadMessages(){
       list.appendChild(div);
 
     });
+
+
+    updateNotificationArea();
 
   }catch(error){
 
@@ -2400,6 +2822,8 @@ async function(id){
 
 
     await loadMessages();
+
+    updateNotificationArea();
 
   }catch(error){
 
