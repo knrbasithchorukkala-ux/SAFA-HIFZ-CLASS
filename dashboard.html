@@ -1,217 +1,754 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>SAFA HIFZ CLASS - Admin Dashboard</title>
+<title>SAFA HIFZ CLASS - Admin</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+*{box-sizing:border-box}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f7f6;
-    }
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f7f6;
+  color:#222;
+}
 
-    .header {
-      background: #075e54;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
+.header{
+  background:#075e54;
+  color:white;
+  padding:20px;
+  text-align:center;
+}
 
-    .header h1 {
-      margin: 0;
-      font-size: 24px;
-    }
+.header h1{margin:0}
+.header p{margin:7px 0 0}
 
-    .header p {
-      margin: 6px 0 0;
-    }
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:15px;
+}
 
-    .container {
-      max-width: 1000px;
-      margin: 25px auto;
-      padding: 15px;
-    }
+.welcome{
+  background:white;
+  padding:20px;
+  margin:20px 0;
+  border-radius:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
 
-    .welcome {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:14px;
+}
 
-    .welcome h2 {
-      margin-top: 0;
-    }
+.card{
+  background:white;
+  padding:22px 10px;
+  text-align:center;
+  border-radius:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+  cursor:pointer;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
-    }
+.card:hover{
+  transform:translateY(-2px);
+}
 
-    .card {
-      background: white;
-      padding: 25px 15px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-      cursor: pointer;
-      transition: 0.2s;
-    }
+.icon{
+  font-size:32px;
+}
 
-    .card:hover {
-      transform: translateY(-3px);
-    }
+.card h3{
+  margin:8px 0 4px;
+}
 
-    .icon {
-      font-size: 35px;
-      margin-bottom: 10px;
-    }
+.section{
+  display:none;
+  background:white;
+  margin-top:20px;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
 
-    .card h3 {
-      margin: 5px 0;
-    }
+.section.active{
+  display:block;
+}
 
-    .logout {
-      margin-top: 25px;
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 8px;
-      background: #b3261e;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  </style>
+input,textarea,select{
+  width:100%;
+  padding:12px;
+  margin:7px 0;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:15px;
+}
+
+button{
+  border:0;
+  border-radius:8px;
+  padding:12px 16px;
+  margin:5px 3px;
+  background:#075e54;
+  color:white;
+  cursor:pointer;
+}
+
+.back{
+  background:#777;
+}
+
+.danger{
+  background:#b3261e;
+}
+
+.student{
+  border:1px solid #ddd;
+  padding:15px;
+  margin-top:10px;
+  border-radius:10px;
+}
+
+.logout{
+  width:100%;
+  margin-top:25px;
+  background:#b3261e;
+}
+
+#message{
+  padding:10px;
+  text-align:center;
+  font-weight:bold;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="header">
-    <h1>SAFA HIFZ CLASS</h1>
-    <p>Admin Dashboard</p>
-  </div>
+<div class="header">
+  <h1>SAFA HIFZ CLASS</h1>
+  <p>Admin Dashboard</p>
+</div>
 
-  <div class="container">
+<div class="container">
 
-    <div class="welcome">
-      <h2>Assalamu Alaikum, Usthad 👋</h2>
-      <p>Welcome to the Admin Dashboard.</p>
-    </div>
+<div class="welcome">
+  <h2>Assalamu Alaikum, Usthad 👋</h2>
+  <p>SAFA HIFZ CLASS Management System</p>
+</div>
 
-    <div class="grid">
+<div id="message"></div>
 
-      <div class="card" onclick="openSection('students')">
-        <div class="icon">👨‍🎓</div>
-        <h3>Students</h3>
-        <p>Manage students</p>
-      </div>
+<!-- DASHBOARD -->
 
-      <div class="card" onclick="openSection('attendance')">
-        <div class="icon">📅</div>
-        <h3>Attendance</h3>
-        <p>Manage attendance</p>
-      </div>
+<div id="home">
 
-      <div class="card" onclick="openSection('study')">
-        <div class="icon">📖</div>
-        <h3>Study Progress</h3>
-        <p>Update progress</p>
-      </div>
+<div class="grid">
 
-      <div class="card" onclick="openSection('results')">
-        <div class="icon">📊</div>
-        <h3>Results</h3>
-        <p>Publish results</p>
-      </div>
+<div class="card" onclick="showSection('students')">
+<div class="icon">👨‍🎓</div>
+<h3>Students</h3>
+<p>Add / Manage</p>
+</div>
 
-      <div class="card" onclick="openSection('notices')">
-        <div class="icon">📢</div>
-        <h3>Notices</h3>
-        <p>Publish notices</p>
-      </div>
+<div class="card" onclick="showSection('attendance')">
+<div class="icon">📅</div>
+<h3>Attendance</h3>
+<p>Manage</p>
+</div>
 
-      <div class="card" onclick="openSection('leave')">
-        <div class="icon">📝</div>
-        <h3>Leave Applications</h3>
-        <p>Approve / Reject / Reply</p>
-      </div>
+<div class="card" onclick="showSection('study')">
+<div class="icon">📖</div>
+<h3>Study Progress</h3>
+<p>Update</p>
+</div>
 
-      <div class="card" onclick="openSection('messages')">
-        <div class="icon">💬</div>
-        <h3>Parent Messages</h3>
-        <p>View and reply</p>
-      </div>
+<div class="card" onclick="showSection('results')">
+<div class="icon">📊</div>
+<h3>Results</h3>
+<p>Add / Publish</p>
+</div>
 
-    </div>
+<div class="card" onclick="showSection('notices')">
+<div class="icon">📢</div>
+<h3>Notices</h3>
+<p>Publish</p>
+</div>
 
-    <button class="logout" onclick="logout()">
-      Logout
-    </button>
+<div class="card" onclick="showSection('leave')">
+<div class="icon">📝</div>
+<h3>Leave</h3>
+<p>Approve / Reply</p>
+</div>
 
-  </div>
+<div class="card" onclick="showSection('messages')">
+<div class="icon">💬</div>
+<h3>Messages</h3>
+<p>Parent Messages</p>
+</div>
 
-  <script type="module">
+</div>
 
-    import {
-      getAuth,
-      onAuthStateChanged,
-      signOut
-    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+<button class="logout" onclick="logout()">Logout</button>
 
-    import {
-      initializeApp
-    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+</div>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCR-A17PO3zeiY2a1eH9cvxSmv4Upxqe-4",
-      authDomain: "safa-hifz-class-7e84b.firebaseapp.com",
-      projectId: "safa-hifz-class-7e84b",
-      storageBucket: "safa-hifz-class-7e84b.firebasestorage.app",
-      messagingSenderId: "476801753196",
-      appId: "1:476801753196:web:b7f86a1f02eabec706f849",
-      measurementId: "G-MR45L2B8PL"
-    };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+<!-- STUDENTS -->
 
-    onAuthStateChanged(auth, (user) => {
+<div id="students" class="section">
 
-      if (!user) {
-        window.location.href = "index.html";
-      }
+<h2>👨‍🎓 Students</h2>
+
+<button class="back" onclick="goHome()">← Back</button>
+
+<h3>Add New Student</h3>
+
+<input id="studentNumber" placeholder="Student Number">
+
+<input id="studentName" placeholder="Student Name">
+
+<input id="studentClass" placeholder="Class">
+
+<input id="parentEmail" placeholder="Parent Email">
+
+<button onclick="addStudent()">➕ Add Student</button>
+
+<h3>Student List</h3>
+
+<div id="studentList">
+Loading...
+</div>
+
+</div>
+
+
+<!-- ATTENDANCE -->
+
+<div id="attendance" class="section">
+
+<h2>📅 Attendance</h2>
+
+<button class="back" onclick="goHome()">← Back</button>
+
+<p>Attendance management will be connected to students next.</p>
+
+</div>
+
+
+<!-- STUDY -->
+
+<div id="study" class="section">
+
+<h2>📖 Study Progress</h2>
+
+<button class="back" onclick="goHome()">← Back</button>
+
+<p>Study progress management will be connected next.</p>
+
+</div>
+
+
+<!-- RESULTS -->
+
+<div id="results" class="section">
+
+<h2>📊 Results</h2>
+
+<button class="back" onclick="goHome()">← Back</button>
+
+<input id="resultStudent" placeholder="Student Number">
+
+<input id="resultTitle" placeholder="Exam / Result Title">
+
+<input id="resultMark" placeholder="Mark / Grade">
+
+<select id="resultStatus">
+<option value="draft">Draft</option>
+<option value="published">Publish</option>
+</select>
+
+<button onclick="addResult()">Save Result</button>
+
+<div id="resultList"></div>
+
+</div>
+
+
+<!-- NOTICES -->
+
+<div id="notices" class="section">
+
+<h2>📢 Notices</h2>
+
+<button class="back" onclick="goHome()">← Back</button>
+
+<input id="noticeTitle" placeholder="Notice Title">
+
+<textarea id="noticeText" rows="5"
+placeholder="Notice message"></textarea>
+
+<select id="noticeStatus">
+<option value="draft">Draft</option>
+<option value="published">Publish</option>
+</select>
+
+<button onclick="addNotice()">Publish / Save Notice</button>
+
+<div id="noticeList"></div>
+
+</div>
+
+
+<!-- LEAVE -->
+
+<div id="leave" class="section">
+
+<h2>📝 Leave Applications</h2>
+
+<button class="back" onclick="goHome()">← Back</button>
+
+<div id="leaveList">
+No leave applications yet.
+</div>
+
+</div>
+
+
+<!-- MESSAGES -->
+
+<div id="messages" class="section">
+
+<h2>💬 Parent Messages</h2>
+
+<button class="back" onclick="goHome()">← Back</button>
+
+<div id="messageList">
+No messages yet.
+</div>
+
+</div>
+
+</div>
+
+
+<script type="module">
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  orderBy,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCR-A17PO3zeiY2a1eH9cvxSmv4Upxqe-4",
+  authDomain: "safa-hifz-class-7e84b.firebaseapp.com",
+  projectId: "safa-hifz-class-7e84b",
+  storageBucket: "safa-hifz-class-7e84b.firebasestorage.app",
+  messagingSenderId: "476801753196",
+  appId: "1:476801753196:web:b7f86a1f02eabec706f849",
+  measurementId: "G-MR45L2B8PL"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+onAuthStateChanged(auth,(user)=>{
+
+  if(!user){
+    window.location.href="index.html";
+  }
+
+});
+
+
+window.showSection=function(id){
+
+  document.getElementById("home").style.display="none";
+
+  document.querySelectorAll(".section")
+  .forEach(section=>{
+    section.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+
+  if(id==="students"){
+    loadStudents();
+  }
+
+  if(id==="results"){
+    loadResults();
+  }
+
+  if(id==="notices"){
+    loadNotices();
+  }
+
+};
+
+
+window.goHome=function(){
+
+  document.querySelectorAll(".section")
+  .forEach(section=>{
+    section.classList.remove("active");
+  });
+
+  document.getElementById("home").style.display="block";
+
+};
+
+
+window.logout=async function(){
+
+  await signOut(auth);
+
+  window.location.href="index.html";
+
+};
+
+
+function showMessage(text){
+
+  document.getElementById("message").textContent=text;
+
+  setTimeout(()=>{
+    document.getElementById("message").textContent="";
+  },3000);
+
+}
+
+
+/* ADD STUDENT */
+
+window.addStudent=async function(){
+
+  const number=
+    document.getElementById("studentNumber").value.trim();
+
+  const name=
+    document.getElementById("studentName").value.trim();
+
+  const className=
+    document.getElementById("studentClass").value.trim();
+
+  const parentEmail=
+    document.getElementById("parentEmail").value.trim();
+
+
+  if(!number || !name){
+
+    alert("Student Number and Name നൽകണം.");
+
+    return;
+  }
+
+
+  try{
+
+    await addDoc(collection(db,"students"),{
+
+      studentNumber:number,
+
+      name:name,
+
+      className:className,
+
+      parentEmail:parentEmail,
+
+      createdAt:serverTimestamp()
 
     });
 
-    window.logout = async function () {
 
-      await signOut(auth);
+    document.getElementById("studentNumber").value="";
+    document.getElementById("studentName").value="";
+    document.getElementById("studentClass").value="";
+    document.getElementById("parentEmail").value="";
 
-      window.location.href = "index.html";
 
-    };
+    showMessage("Student added successfully ✅");
 
-    window.openSection = function(section) {
+    loadStudents();
 
-      alert(
-        section.charAt(0).toUpperCase() +
-        section.slice(1) +
-        " section will be added next."
-      );
+  }catch(error){
 
-    };
+    console.error(error);
 
-  </script>
+    alert("Student add ചെയ്യാൻ കഴിഞ്ഞില്ല.");
+
+  }
+
+};
+
+
+/* LOAD STUDENTS */
+
+async function loadStudents(){
+
+  const list=
+    document.getElementById("studentList");
+
+  list.innerHTML="Loading...";
+
+
+  try{
+
+    const snapshot=
+      await getDocs(collection(db,"students"));
+
+
+    list.innerHTML="";
+
+
+    if(snapshot.empty){
+
+      list.innerHTML="<p>No students added yet.</p>";
+
+      return;
+
+    }
+
+
+    snapshot.forEach(doc=>{
+
+      const student=doc.data();
+
+      const div=document.createElement("div");
+
+      div.className="student";
+
+      div.innerHTML=`
+
+        <strong>${student.name}</strong><br>
+
+        Student No: ${student.studentNumber}<br>
+
+        Class: ${student.className || "-"}<br>
+
+        Parent: ${student.parentEmail || "-"}
+
+      `;
+
+      list.appendChild(div);
+
+    });
+
+
+  }catch(error){
+
+    console.error(error);
+
+    list.innerHTML=
+      "<p>Students load ചെയ്യാൻ കഴിഞ്ഞില്ല.</p>";
+
+  }
+
+}
+
+
+/* ADD RESULT */
+
+window.addResult=async function(){
+
+  const studentNumber=
+    document.getElementById("resultStudent").value.trim();
+
+  const title=
+    document.getElementById("resultTitle").value.trim();
+
+  const mark=
+    document.getElementById("resultMark").value.trim();
+
+  const status=
+    document.getElementById("resultStatus").value;
+
+
+  if(!studentNumber || !title || !mark){
+
+    alert("എല്ലാ വിവരങ്ങളും നൽകുക.");
+
+    return;
+
+  }
+
+
+  await addDoc(collection(db,"results"),{
+
+    studentNumber:studentNumber,
+
+    title:title,
+
+    mark:mark,
+
+    status:status,
+
+    createdAt:serverTimestamp()
+
+  });
+
+
+  showMessage("Result saved successfully ✅");
+
+  document.getElementById("resultStudent").value="";
+  document.getElementById("resultTitle").value="";
+  document.getElementById("resultMark").value="";
+
+  loadResults();
+
+};
+
+
+/* LOAD RESULTS */
+
+async function loadResults(){
+
+  const list=document.getElementById("resultList");
+
+  list.innerHTML="";
+
+
+  const snapshot=
+    await getDocs(collection(db,"results"));
+
+
+  snapshot.forEach(doc=>{
+
+    const r=doc.data();
+
+    const div=document.createElement("div");
+
+    div.className="student";
+
+    div.innerHTML=`
+
+      <strong>${r.title}</strong><br>
+
+      Student: ${r.studentNumber}<br>
+
+      Mark: ${r.mark}<br>
+
+      Status: ${r.status}
+
+    `;
+
+    list.appendChild(div);
+
+  });
+
+}
+
+
+/* ADD NOTICE */
+
+window.addNotice=async function(){
+
+  const title=
+    document.getElementById("noticeTitle").value.trim();
+
+  const text=
+    document.getElementById("noticeText").value.trim();
+
+  const status=
+    document.getElementById("noticeStatus").value;
+
+
+  if(!title || !text){
+
+    alert("Notice title and message നൽകുക.");
+
+    return;
+
+  }
+
+
+  await addDoc(collection(db,"notices"),{
+
+    title:title,
+
+    text:text,
+
+    status:status,
+
+    createdAt:serverTimestamp()
+
+  });
+
+
+  showMessage("Notice saved successfully ✅");
+
+  document.getElementById("noticeTitle").value="";
+  document.getElementById("noticeText").value="";
+
+  loadNotices();
+
+};
+
+
+/* LOAD NOTICES */
+
+async function loadNotices(){
+
+  const list=document.getElementById("noticeList");
+
+  list.innerHTML="";
+
+
+  const snapshot=
+    await getDocs(collection(db,"notices"));
+
+
+  snapshot.forEach(doc=>{
+
+    const n=doc.data();
+
+    const div=document.createElement("div");
+
+    div.className="student";
+
+    div.innerHTML=`
+
+      <strong>${n.title}</strong><br>
+
+      ${n.text}<br>
+
+      Status: ${n.status}
+
+    `;
+
+    list.appendChild(div);
+
+  });
+
+}
+
+</script>
 
 </body>
 </html>
