@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>SAFA HIFZ CLASS</title>
 
   <style>
@@ -14,117 +15,146 @@
       margin: 0;
       font-family: Arial, sans-serif;
       background: #f4f7f6;
-      color: #222;
-    }
-
-    .header {
-      background: #075e54;
-      color: white;
-      padding: 25px 20px;
-      text-align: center;
-    }
-
-    .header h1 {
-      margin: 0;
-      font-size: 26px;
-    }
-
-    .header p {
-      margin: 8px 0 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .login-box {
+      width: 92%;
       max-width: 420px;
-      margin: 45px auto;
       background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      padding: 30px 24px;
+      border-radius: 18px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
     }
 
-    .login-box h2 {
+    h1 {
       text-align: center;
+      margin: 0 0 8px;
+      color: #14532d;
+      font-size: 28px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
       margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin: 14px 0 7px;
+      font-weight: bold;
+      color: #333;
     }
 
     input {
       width: 100%;
       padding: 14px;
-      margin: 8px 0;
       border: 1px solid #ccc;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 16px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #14532d;
     }
 
     button {
       width: 100%;
+      margin-top: 22px;
       padding: 14px;
-      margin-top: 15px;
       border: none;
-      border-radius: 8px;
-      background: #075e54;
+      border-radius: 10px;
+      background: #14532d;
       color: white;
-      font-size: 16px;
+      font-size: 17px;
+      font-weight: bold;
       cursor: pointer;
     }
 
     button:disabled {
-      background: #999;
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     #message {
+      margin-top: 18px;
+      padding: 12px;
+      border-radius: 8px;
+      display: none;
       text-align: center;
-      margin-top: 15px;
+      font-size: 14px;
       line-height: 1.5;
     }
 
-    #debug {
-      margin-top: 15px;
-      padding: 10px;
-      background: #f1f1f1;
-      border-radius: 8px;
-      font-size: 12px;
-      word-break: break-word;
-      color: #444;
+    .success {
+      display: block !important;
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .error {
+      display: block !important;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .firebase-status {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 13px;
+      color: #555;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="header">
-    <h1>SAFA HIFZ CLASS</h1>
-    <p>Student & Parent Management System</p>
-  </div>
-
   <div class="login-box">
 
-    <h2>Login</h2>
+    <h1>SAFA HIFZ CLASS</h1>
+    <div class="subtitle">Login to continue</div>
 
-    <input
-      type="email"
-      id="email"
-      placeholder="Email"
-      autocomplete="email"
-    >
+    <form id="loginForm">
 
-    <input
-      type="password"
-      id="password"
-      placeholder="Password"
-      autocomplete="current-password"
-    >
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="Enter email"
+        autocomplete="username"
+        required
+      >
 
-    <button id="loginButton">Login</button>
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter password"
+        autocomplete="current-password"
+        required
+      >
+
+      <button type="submit" id="loginButton">
+        Login
+      </button>
+
+    </form>
 
     <div id="message"></div>
 
-    <div id="debug">
-      Firebase starting...
+    <div class="firebase-status" id="firebaseStatus">
+      Connecting to Firebase...
     </div>
 
   </div>
 
+
+  <!-- Firebase -->
   <script type="module">
 
     import { initializeApp }
@@ -135,137 +165,154 @@
       signInWithEmailAndPassword,
       setPersistence,
       browserLocalPersistence
-    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+    }
+      from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 
+    // Firebase configuration
     const firebaseConfig = {
-      apiKey: "AIzaSyCR-A17PO3zeiY2a1eH9cvsmv4Upxqe4",
+      apiKey: "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
       authDomain: "safa-hifz-class-7e84b.firebaseapp.com",
       projectId: "safa-hifz-class-7e84b",
       storageBucket: "safa-hifz-class-7e84b.firebasestorage.app",
       messagingSenderId: "476801753196",
-      appId: "1:476801753196:web:b7f86a1f02eabec706f849",
-      measurementId: "G-MR45L2B8PL"
+      appId: "1:476801753196:web:d4c8a8b0c1a4203606f849",
+      measurementId: "G-ZTBTJCB5SR"
     };
 
 
-    const message = document.getElementById("message");
-    const debug = document.getElementById("debug");
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+
+
+    // Elements
+    const loginForm = document.getElementById("loginForm");
     const loginButton = document.getElementById("loginButton");
+    const message = document.getElementById("message");
+    const firebaseStatus = document.getElementById("firebaseStatus");
 
 
-    try {
-
-      debug.textContent = "Firebase initializing...";
-
-      const app = initializeApp(firebaseConfig);
-
-      const auth = getAuth(app);
-
-      debug.textContent = "Firebase ready ✓";
+    // Firebase connection status
+    firebaseStatus.textContent = "Firebase ready ✓";
 
 
-      loginButton.addEventListener("click", async () => {
-
-        const email =
-          document.getElementById("email").value.trim();
-
-        const password =
-          document.getElementById("password").value;
-
-
-        message.textContent = "";
-        debug.textContent = "Login ശ്രമിക്കുന്നു...";
-
-
-        if (!email || !password) {
-
-          message.style.color = "red";
-          message.textContent =
-            "Email and password നൽകുക.";
-
-          debug.textContent =
-            "Email അല്ലെങ്കിൽ password missing.";
-
-          return;
-        }
-
-
-        loginButton.disabled = true;
-        loginButton.textContent = "Logging in...";
-
-
-        try {
-
-          await setPersistence(
-            auth,
-            browserLocalPersistence
-          );
-
-
-          const userCredential =
-            await signInWithEmailAndPassword(
-              auth,
-              email,
-              password
-            );
-
-
-          message.style.color = "green";
-          message.textContent = "Login successful!";
-
-          debug.textContent =
-            "Logged in as: " +
-            userCredential.user.email;
-
-
-          setTimeout(() => {
-
-            window.location.href = "dashboard.html";
-
-          }, 800);
-
-
-        } catch (error) {
-
-          console.error(error);
-
-          message.style.color = "red";
-          message.textContent = "Login failed";
-
-
-          debug.innerHTML =
-            "<b>Firebase Error</b><br><br>" +
-            "Code: " +
-            (error.code || "unknown") +
-            "<br><br>" +
-            "Message: " +
-            (error.message || "No message");
-
-
-          loginButton.disabled = false;
-          loginButton.textContent = "Login";
-        }
-
-      });
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      message.style.color = "red";
-      message.textContent =
-        "Firebase load ചെയ്യാൻ കഴിഞ്ഞില്ല.";
-
-      debug.innerHTML =
-        "<b>Startup Error</b><br><br>" +
-        "Code: " +
-        (error.code || "unknown") +
-        "<br><br>" +
-        "Message: " +
-        (error.message || "No message");
+    // Show message
+    function showMessage(text, type) {
+      message.textContent = text;
+      message.className = type;
     }
+
+
+    // Keep login session
+    try {
+      await setPersistence(auth, browserLocalPersistence);
+    } catch (error) {
+      console.error("Persistence error:", error);
+    }
+
+
+    // Login
+    loginForm.addEventListener("submit", async (event) => {
+
+      event.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      if (!email || !password) {
+        showMessage("Email and password enter ചെയ്യുക.", "error");
+        return;
+      }
+
+      loginButton.disabled = true;
+      loginButton.textContent = "Logging in...";
+
+      message.className = "";
+      message.textContent = "";
+
+
+      try {
+
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+        showMessage(
+          "Login successful ✓ Dashboard തുറക്കുന്നു...",
+          "success"
+        );
+
+        setTimeout(() => {
+          window.location.href = "dashboard.html";
+        }, 800);
+
+      }
+
+      catch (error) {
+
+        console.error("Firebase Login Error:", error);
+
+        let errorMessage = "Login failed.";
+
+        switch (error.code) {
+
+          case "auth/invalid-credential":
+            errorMessage =
+              "Email അല്ലെങ്കിൽ password തെറ്റാണ്.";
+            break;
+
+          case "auth/user-not-found":
+            errorMessage =
+              "ഈ email ഉപയോഗിച്ച് user കണ്ടെത്താനായില്ല.";
+            break;
+
+          case "auth/wrong-password":
+            errorMessage =
+              "Password തെറ്റാണ്.";
+            break;
+
+          case "auth/invalid-api-key":
+            errorMessage =
+              "Firebase API key പ്രശ്നമുണ്ട്. Firebase configuration പരിശോധിക്കുക.";
+            break;
+
+          case "auth/api-key-not-valid":
+            errorMessage =
+              "Firebase API key valid അല്ല. Firebase Console configuration പരിശോധിക്കുക.";
+            break;
+
+          case "auth/network-request-failed":
+            errorMessage =
+              "Internet connection പരിശോധിക്കുക.";
+            break;
+
+          case "auth/too-many-requests":
+            errorMessage =
+              "കൂടുതൽ login attempts. കുറച്ച് കഴിഞ്ഞ് വീണ്ടും ശ്രമിക്കുക.";
+            break;
+
+          case "auth/operation-not-allowed":
+            errorMessage =
+              "Firebase Authentication-ൽ Email/Password enable ചെയ്തിട്ടില്ല.";
+            break;
+
+          default:
+            errorMessage =
+              "Code: " + error.code +
+              "\nMessage: " + error.message;
+        }
+
+        showMessage(errorMessage, "error");
+
+        loginButton.disabled = false;
+        loginButton.textContent = "Login";
+      }
+
+    });
 
   </script>
 
