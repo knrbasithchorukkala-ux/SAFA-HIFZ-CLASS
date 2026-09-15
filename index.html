@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>SAFA HIFZ CLASS</title>
 
   <style>
@@ -69,13 +68,8 @@
       cursor: pointer;
     }
 
-    button:hover {
-      background: #064e47;
-    }
-
     button:disabled {
       background: #999;
-      cursor: not-allowed;
     }
 
     #message {
@@ -85,10 +79,14 @@
       word-break: break-word;
     }
 
-    .error-code {
-      margin-top: 8px;
-      font-size: 13px;
-      color: #777;
+    #debug {
+      margin-top: 15px;
+      padding: 10px;
+      background: #f1f1f1;
+      border-radius: 8px;
+      font-size: 12px;
+      word-break: break-word;
+      color: #444;
     }
   </style>
 </head>
@@ -124,200 +122,217 @@
 
     <div id="message"></div>
 
-    <div id="errorCode" class="error-code"></div>
+    <div id="debug">
+      Firebase starting...
+    </div>
 
   </div>
 
 
   <script type="module">
 
-    // Firebase App
-    import {
-      initializeApp
-    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+    const message =
+      document.getElementById("message");
 
-
-    // Firebase Authentication
-    import {
-      getAuth,
-      signInWithEmailAndPassword,
-      setPersistence,
-      browserLocalPersistence
-    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-
-
-    // Firebase Configuration
-    const firebaseConfig = {
-
-      apiKey:
-        "AIzaSyCR-A17PO3zeiY2a1eH9cvsmv4Upxqe4",
-
-      authDomain:
-        "safa-hifz-class-7e84b.firebaseapp.com",
-
-      projectId:
-        "safa-hifz-class-7e84b",
-
-      storageBucket:
-        "safa-hifz-class-7e84b.firebasestorage.app",
-
-      messagingSenderId:
-        "476801753196",
-
-      appId:
-        "1:476801753196:web:b7f86a1f02eabec706f849",
-
-      measurementId:
-        "G-MR45L2B8PL"
-    };
-
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-
-    const auth = getAuth(app);
-
-
-    // Elements
-    const emailInput =
-      document.getElementById("email");
-
-    const passwordInput =
-      document.getElementById("password");
+    const debug =
+      document.getElementById("debug");
 
     const loginButton =
       document.getElementById("loginButton");
 
-    const message =
-      document.getElementById("message");
 
-    const errorCode =
-      document.getElementById("errorCode");
+    try {
 
-
-    // Login
-    async function login() {
-
-      const email =
-        emailInput.value.trim();
-
-      const password =
-        passwordInput.value;
+      debug.textContent =
+        "Firebase SDK loading...";
 
 
-      // Clear old messages
-      message.textContent = "";
-      errorCode.textContent = "";
+      const {
+        initializeApp
+      } = await import(
+        "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js"
+      );
 
 
-      // Empty fields
-      if (!email || !password) {
-
-        message.style.color = "red";
-
-        message.textContent =
-          "Email and password നൽകുക.";
-
-        return;
-      }
+      const {
+        getAuth,
+        signInWithEmailAndPassword,
+        setPersistence,
+        browserLocalPersistence
+      } = await import(
+        "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js"
+      );
 
 
-      // Disable button
-      loginButton.disabled = true;
+      const firebaseConfig = {
 
-      loginButton.textContent =
-        "Logging in...";
+        apiKey:
+          "AIzaSyCR-A17PO3zeiY2a1eH9cvsmv4Upxqe4",
 
+        authDomain:
+          "safa-hifz-class-7e84b.firebaseapp.com",
 
-      try {
+        projectId:
+          "safa-hifz-class-7e84b",
 
-        // Save login session
-        await setPersistence(
-          auth,
-          browserLocalPersistence
-        );
+        storageBucket:
+          "safa-hifz-class-7e84b.firebasestorage.app",
 
+        messagingSenderId:
+          "476801753196",
 
-        // Firebase Login
-        const userCredential =
-          await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-          );
+        appId:
+          "1:476801753196:web:b7f86a1f02eabec706f849",
 
-
-        console.log(
-          "Login successful:",
-          userCredential.user
-        );
+        measurementId:
+          "G-MR45L2B8PL"
+      };
 
 
-        message.style.color = "green";
-
-        message.textContent =
-          "Login successful! Dashboard തുറക്കുന്നു...";
+      const app =
+        initializeApp(firebaseConfig);
 
 
-        // Open dashboard
-        setTimeout(function () {
-
-          window.location.replace(
-            "dashboard.html"
-          );
-
-        }, 700);
+      const auth =
+        getAuth(app);
 
 
-      } catch (error) {
-
-        console.error(
-          "FIREBASE LOGIN ERROR:",
-          error
-        );
+      debug.textContent =
+        "Firebase ready ✓";
 
 
-        message.style.color = "red";
+      loginButton.addEventListener(
+        "click",
+        async function () {
 
-        message.textContent =
-          "Login failed. വീണ്ടും ശ്രമിക്കുക.";
+          const email =
+            document
+              .getElementById("email")
+              .value
+              .trim();
 
-
-        // SHOW EXACT FIREBASE ERROR
-        errorCode.textContent =
-          "Error code: " +
-          (error.code || "unknown");
-
-
-        // Enable button
-        loginButton.disabled = false;
-
-        loginButton.textContent =
-          "Login";
-      }
-
-    }
+          const password =
+            document
+              .getElementById("password")
+              .value;
 
 
-    // Button click
-    loginButton.addEventListener(
-      "click",
-      login
-    );
+          message.textContent = "";
+
+          debug.textContent =
+            "Login ശ്രമിക്കുന്നു...";
 
 
-    // Enter key login
-    passwordInput.addEventListener(
-      "keydown",
-      function(event) {
+          if (!email || !password) {
 
-        if (event.key === "Enter") {
-          login();
+            message.style.color = "red";
+
+            message.textContent =
+              "Email and password നൽകുക.";
+
+            debug.textContent =
+              "Email അല്ലെങ്കിൽ password missing.";
+
+            return;
+          }
+
+
+          loginButton.disabled = true;
+
+          loginButton.textContent =
+            "Logging in...";
+
+
+          try {
+
+            await setPersistence(
+              auth,
+              browserLocalPersistence
+            );
+
+
+            const result =
+              await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+              );
+
+
+            message.style.color =
+              "green";
+
+            message.textContent =
+              "Login successful!";
+
+
+            debug.textContent =
+              "Firebase User: " +
+              result.user.email;
+
+
+            setTimeout(function () {
+
+              window.location.href =
+                "dashboard.html";
+
+            }, 1000);
+
+
+          } catch (error) {
+
+            console.error(error);
+
+
+            message.style.color =
+              "red";
+
+            message.textContent =
+              "Login failed";
+
+
+            debug.innerHTML =
+              "<b>Firebase Error:</b><br>" +
+              "Code: " +
+              (error.code || "unknown") +
+              "<br>" +
+              "Message: " +
+              (error.message || "No message");
+
+
+            loginButton.disabled = false;
+
+            loginButton.textContent =
+              "Login";
+          }
+
         }
+      );
 
-      }
-    );
 
+    } catch (error) {
+
+      console.error(
+        "Firebase startup error:",
+        error
+      );
+
+
+      message.style.color =
+        "red";
+
+      message.textContent =
+        "Firebase load ചെയ്യാൻ കഴിഞ്ഞില്ല.";
+
+
+      debug.innerHTML =
+        "<b>Startup Error:</b><br>" +
+        "Code: " +
+        (error.code || "unknown") +
+        "<br>" +
+        "Message: " +
+        (error.message || "No message");
+    }
 
   </script>
 
