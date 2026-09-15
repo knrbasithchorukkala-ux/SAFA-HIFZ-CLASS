@@ -191,6 +191,11 @@ button:disabled{
   box-shadow:0 3px 15px rgba(0,0,0,.12);
 }
 
+.errorBox{
+  color:#b3261e;
+  line-height:1.6;
+}
+
 </style>
 
 </head>
@@ -206,7 +211,9 @@ button:disabled{
 
     <h2>SAFA HIFZ CLASS</h2>
 
-    <p>Checking login...</p>
+    <p id="loadingText">
+      Checking login...
+    </p>
 
   </div>
 
@@ -678,24 +685,24 @@ No messages yet.
 <script type="module">
 
 
+/* =====================================================
+   FIREBASE IMPORTS
+===================================================== */
+
 import {
 
   initializeApp
 
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 
 import {
 
   getAuth,
 
-  signOut,
+  signOut
 
-  setPersistence,
-
-  browserLocalPersistence
-
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 
 import {
@@ -714,15 +721,17 @@ import {
 
   serverTimestamp
 
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
-/* ================= FIREBASE CONFIG ================= */
+/* =====================================================
+   NEW FIREBASE CONFIG
+===================================================== */
 
 const firebaseConfig = {
 
   apiKey:
-    "AIzaSyCR-A17PO3zeiY2a1eH9cvsmv4Upxqe4",
+    "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
 
   authDomain:
     "safa-hifz-class-7e84b.firebaseapp.com",
@@ -737,15 +746,17 @@ const firebaseConfig = {
     "476801753196",
 
   appId:
-    "1:476801753196:web:b7f86a1f02eabec706f849",
+    "1:476801753196:web:d4c8a8b0c1a4203606f849",
 
   measurementId:
-    "G-MR45L2B8PL"
+    "G-ZTBTJCB5SR"
 
 };
 
 
-/* ================= INITIALIZE ================= */
+/* =====================================================
+   INITIALIZE FIREBASE
+===================================================== */
 
 const app =
   initializeApp(firebaseConfig);
@@ -758,31 +769,23 @@ const db =
 
 
 /* =====================================================
-   AUTHENTICATION
+   AUTHENTICATION CHECK
 ===================================================== */
-
 
 async function startDashboard(){
 
+  const loadingText =
+    document.getElementById("loadingText");
+
   try{
 
-
-    /*
-      IMPORTANT
-
-      Keep Firebase authentication
-      saved in browser.
-    */
-
-    await setPersistence(
-      auth,
-      browserLocalPersistence
-    );
+    loadingText.textContent =
+      "Checking Firebase login...";
 
 
     /*
-      Wait until Firebase has completely
-      restored the previous login session.
+      Wait until Firebase finishes restoring
+      the saved login session.
     */
 
     await auth.authStateReady();
@@ -793,13 +796,14 @@ async function startDashboard(){
 
 
     /*
-      If there is no logged-in user,
-      go back to login page.
+      No user = return to login.
     */
 
     if(!user){
 
-      window.location.replace("index.html");
+      window.location.replace(
+        "index.html"
+      );
 
       return;
 
@@ -807,17 +811,26 @@ async function startDashboard(){
 
 
     console.log(
-      "Firebase user:",
+      "Logged in user:",
       user.email
     );
 
 
+    loadingText.textContent =
+      "Checking admin access...";
+
+
     /*
-      Check admin account
+      Get the user's Firestore document.
     */
 
     const userRef =
-      doc(db,"users",user.uid);
+      doc(
+        db,
+        "users",
+        user.uid
+      );
+
 
     const userSnap =
       await getDoc(userRef);
@@ -825,15 +838,9 @@ async function startDashboard(){
 
     if(!userSnap.exists()){
 
-      alert(
-        "Admin account information not found."
+      throw new Error(
+        "Admin user document not found in Firestore."
       );
-
-      await signOut(auth);
-
-      window.location.replace("index.html");
-
-      return;
 
     }
 
@@ -842,24 +849,37 @@ async function startDashboard(){
       userSnap.data();
 
 
-    if(userData.role !== "admin"){
+    console.log(
+      "User data:",
+      userData
+    );
 
-      alert(
-        "You are not authorized to access Admin Dashboard."
-      );
+
+    /*
+      Check admin role.
+    */
+
+    if(userData.role !== "admin"){
 
       await signOut(auth);
 
-      window.location.replace("index.html");
-
-      return;
+      throw new Error(
+        "This account does not have admin permission."
+      );
 
     }
 
 
     /*
-      Admin verified.
-      Remove loading screen.
+      ADMIN VERIFIED
+    */
+
+    loadingText.textContent =
+      "Admin verified ✓";
+
+
+    /*
+      Hide loading screen.
     */
 
     document.getElementById(
@@ -868,38 +888,45 @@ async function startDashboard(){
 
 
     /*
-      Load students
+      Load initial data.
     */
 
-    loadStudents();
-
+    await loadStudents();
 
   }
 
   catch(error){
 
     console.error(
-      "Dashboard authentication error:",
+      "Dashboard Error:",
       error
     );
 
 
     document.getElementById(
       "loadingScreen"
-    ).innerHTML=`
+    ).innerHTML = `
 
       <div class="loadingBox">
 
         <h2>SAFA HIFZ CLASS</h2>
 
-        <p>
-        Login session പരിശോധിക്കാൻ കഴിഞ്ഞില്ല.
-        </p>
+        <div class="errorBox">
+
+          <p>
+            Dashboard തുറക്കാൻ കഴിഞ്ഞില്ല.
+          </p>
+
+          <p>
+            ${error.message}
+          </p>
+
+        </div>
 
         <button
-          onclick="window.location.href='index.html'"
+          onclick="window.location.replace('index.html')"
         >
-        Back to Login
+          Back to Login
         </button>
 
       </div>
@@ -911,9 +938,9 @@ async function startDashboard(){
 }
 
 
-/*
-  Start dashboard authentication.
-*/
+/* =====================================================
+   START
+===================================================== */
 
 startDashboard();
 
@@ -940,9 +967,17 @@ window.showSection=function(id){
   });
 
 
-  document.getElementById(
-    id
-  ).classList.add("active");
+  const selected =
+    document.getElementById(id);
+
+
+  if(selected){
+
+    selected.classList.add(
+      "active"
+    );
+
+  }
 
 
   if(id==="students"){
@@ -1069,9 +1104,6 @@ function showMessage(text){
    STUDENTS
 ===================================================== */
 
-
-/* ADD STUDENT */
-
 window.addStudent=async function(){
 
   const number =
@@ -1164,15 +1196,14 @@ window.addStudent=async function(){
     console.error(error);
 
     alert(
-      "Student add ചെയ്യാൻ കഴിഞ്ഞില്ല."
+      "Student add ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
+      error.message
     );
 
   }
 
 };
 
-
-/* LOAD STUDENTS */
 
 async function loadStudents(){
 
@@ -1414,19 +1445,15 @@ window.saveAttendance=async function(){
       {
 
         studentNumber:
-
           studentNumber,
 
         date:
-
           date,
 
         status:
-
           status,
 
         createdAt:
-
           serverTimestamp()
 
       }
@@ -1457,7 +1484,8 @@ window.saveAttendance=async function(){
     console.error(error);
 
     alert(
-      "Attendance save ചെയ്യാൻ കഴിഞ്ഞില്ല."
+      "Attendance save ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
+      error.message
     );
 
   }
@@ -1683,7 +1711,8 @@ window.saveStudyProgress=async function(){
     console.error(error);
 
     alert(
-      "Study Progress save ചെയ്യാൻ കഴിഞ്ഞില്ല."
+      "Study Progress save ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
+      error.message
     );
 
   }
@@ -1891,7 +1920,8 @@ window.addResult=async function(){
     console.error(error);
 
     alert(
-      "Result save ചെയ്യാൻ കഴിഞ്ഞില്ല."
+      "Result save ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
+      error.message
     );
 
   }
@@ -2067,7 +2097,8 @@ window.addNotice=async function(){
     console.error(error);
 
     alert(
-      "Notice save ചെയ്യാൻ കഴിഞ്ഞില്ല."
+      "Notice save ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
+      error.message
     );
 
   }
