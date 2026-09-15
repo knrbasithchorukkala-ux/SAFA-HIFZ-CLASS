@@ -1,183 +1,1222 @@
-async function loadMessages(){
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAFA HIFZ CLASS - Parent</title>
 
-  const list =
-  document.getElementById(
-    "messageList"
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#222;
+}
+
+header{
+  background:#075e54;
+  color:white;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+header h2{
+  margin:0;
+  font-size:19px;
+}
+
+button{
+  border:0;
+  border-radius:8px;
+  padding:10px 14px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.logout{
+  background:#d32f2f;
+  color:white;
+}
+
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:15px;
+}
+
+.notification{
+  background:#fff3cd;
+  border:1px solid #ffe69c;
+  border-radius:10px;
+  padding:12px;
+  margin-bottom:15px;
+}
+
+.notification button{
+  background:#075e54;
+  color:white;
+  margin:4px;
+}
+
+.menu{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(135px,1fr));
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.menu button{
+  background:white;
+  border:1px solid #ddd;
+  color:#075e54;
+  font-weight:bold;
+}
+
+.section{
+  display:none;
+  background:white;
+  padding:18px;
+  border-radius:12px;
+  margin-bottom:20px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.section.active{
+  display:block;
+}
+
+h3{
+  margin-top:0;
+  color:#075e54;
+}
+
+.card{
+  border:1px solid #ddd;
+  border-radius:10px;
+  padding:14px;
+  margin:10px 0;
+  background:#fafafa;
+}
+
+.card p{
+  margin:7px 0;
+}
+
+input,textarea{
+  width:100%;
+  padding:10px;
+  margin:6px 0 12px;
+  border:1px solid #ccc;
+  border-radius:7px;
+  font-size:14px;
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+.send{
+  background:#075e54;
+  color:white;
+}
+
+.delete{
+  background:#d32f2f;
+  color:white;
+}
+
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:15px;
+  background:#e0f2f1;
+  color:#075e54;
+  font-size:12px;
+}
+
+.small{
+  color:#666;
+  font-size:13px;
+}
+
+.empty{
+  color:#777;
+  padding:10px 0;
+}
+
+hr{
+  border:0;
+  border-top:1px solid #ddd;
+  margin:15px 0;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>SAFA HIFZ CLASS - Parent</h2>
+  <button class="logout" onclick="logout()">Logout</button>
+</header>
+
+<div class="container">
+
+  <div id="notificationArea" class="notification">
+    Loading notifications...
+  </div>
+
+  <div class="menu">
+    <button onclick="showSection('home')">🏠 Home</button>
+    <button onclick="showSection('child')">👨‍🎓 My Child</button>
+    <button onclick="showSection('attendance')">📅 Attendance</button>
+    <button onclick="showSection('study')">📖 Study</button>
+    <button onclick="showSection('results')">🏆 Results</button>
+    <button onclick="showSection('notices')">📢 Notices</button>
+    <button onclick="showSection('leave')">📝 Leave</button>
+    <button onclick="showSection('messages')">💬 Messages</button>
+  </div>
+
+  <!-- HOME -->
+  <div id="home" class="section active">
+    <h3>Parent Dashboard</h3>
+    <p id="welcomeText">Welcome.</p>
+
+    <div id="homeChild"></div>
+  </div>
+
+  <!-- CHILD -->
+  <div id="child" class="section">
+    <h3>My Child</h3>
+    <div id="childData">Loading...</div>
+  </div>
+
+  <!-- ATTENDANCE -->
+  <div id="attendance" class="section">
+    <h3>Attendance</h3>
+    <div id="attendanceData">Loading...</div>
+  </div>
+
+  <!-- STUDY -->
+  <div id="study" class="section">
+    <h3>Study Progress</h3>
+    <div id="studyData">Loading...</div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results" class="section">
+    <h3>Results</h3>
+    <div id="resultsData">Loading...</div>
+  </div>
+
+  <!-- NOTICES -->
+  <div id="notices" class="section">
+    <h3>Notices</h3>
+    <div id="noticesData">Loading...</div>
+  </div>
+
+  <!-- LEAVE -->
+  <div id="leave" class="section">
+    <h3>Leave Application</h3>
+
+    <input id="leaveDate" type="date">
+
+    <textarea
+      id="leaveReason"
+      placeholder="Reason for leave"></textarea>
+
+    <button class="send" onclick="sendLeave()">
+      Submit Leave
+    </button>
+
+    <hr>
+
+    <div id="leaveData">Loading...</div>
+  </div>
+
+  <!-- MESSAGES -->
+  <div id="messages" class="section">
+
+    <h3>Message to Usthad</h3>
+
+    <textarea
+      id="messageText"
+      placeholder="Write your message"></textarea>
+
+    <button class="send" onclick="sendMessage()">
+      Send Message
+    </button>
+
+    <hr>
+
+    <div id="messagesData">Loading...</div>
+
+  </div>
+
+</div>
+
+<script type="module">
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+  getAuth,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+  addDoc,
+  deleteDoc,
+  serverTimestamp,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPV0",
+  authDomain: "safa-hifz-class-7e84b.firebaseapp.com",
+  projectId: "safa-hifz-class-7e84b",
+  storageBucket: "safa-hifz-class-7e84b.firebasestorage.app",
+  messagingSenderId: "476801753196",
+  appId: "1:476801753196:web:d4c8a8b0c1a4203606f849",
+  measurementId: "G-ZTBTJCB5SR"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+let currentUser=null;
+let studentNumber=null;
+let parentData=null;
+
+
+/* LAST SEEN */
+
+const lastSeenKeys={
+  attendance:"safa_parent_last_seen_attendance",
+  study:"safa_parent_last_seen_study",
+  results:"safa_parent_last_seen_results",
+  notices:"safa_parent_last_seen_notices",
+  leave:"safa_parent_last_seen_leave",
+  messages:"safa_parent_last_seen_messages"
+};
+
+
+function getLastSeen(type){
+
+  return Number(
+    localStorage.getItem(lastSeenKeys[type]) || 0
   );
 
-  list.innerHTML =
-  "Loading...";
+}
+
+
+function setLastSeen(type){
+
+  localStorage.setItem(
+    lastSeenKeys[type],
+    Date.now().toString()
+  );
+
+}
+
+
+/* AUTH */
+
+auth.authStateReady().then(async()=>{
+
+  currentUser=auth.currentUser;
+
+  if(!currentUser){
+
+    window.location.href="index.html";
+    return;
+
+  }
 
   try{
 
-    const q =
-    query(
-      collection(db,"messages"),
-      where(
-        "parentUid",
-        "==",
-        currentUser.uid
-      )
+    const userSnap=await getDoc(
+      doc(db,"users",currentUser.uid)
     );
 
-    const snapshot =
-    await getDocs(q);
+    if(!userSnap.exists()){
 
-    list.innerHTML = "";
+      alert("Parent profile not found.");
 
-    if(snapshot.empty){
+      await signOut(auth);
 
-      list.innerHTML =
-      "<p class='empty'>No messages yet.</p>";
+      window.location.href="index.html";
 
       return;
 
     }
 
-    snapshot.forEach(item => {
+    parentData=userSnap.data();
 
-      const m =
-      item.data();
+    if(parentData.role!=="parent"){
 
-      const div =
-      document.createElement("div");
+      alert("Parent access only.");
 
-      div.className =
-      "record";
+      await signOut(auth);
 
-      let sentTime = "";
+      window.location.href="index.html";
 
-      if(m.createdAt){
+      return;
 
-        try{
+    }
 
-          sentTime =
-          m.createdAt
-          .toDate()
-          .toLocaleString();
+    studentNumber=String(
+      parentData.studentNumber
+    );
 
-        }catch(error){
+    document.getElementById("welcomeText").textContent=
+      "Welcome " + (parentData.name || "Parent");
 
-          sentTime = "";
+    await loadStudent();
+    await loadAttendance();
+    await loadStudy();
+    await loadResults();
+    await loadNotices();
+    await loadLeaves();
+    await loadMessages();
 
-        }
+    startRealtimeListeners();
 
-      }
+  }catch(error){
 
-      let repliedTime = "";
+    console.error(error);
 
-      if(m.repliedAt){
+    alert(
+      "Parent dashboard loading error: " +
+      error.message
+    );
 
-        try{
+    await signOut(auth);
 
-          repliedTime =
-          m.repliedAt
-          .toDate()
-          .toLocaleString();
+    window.location.href="index.html";
 
-        }catch(error){
+  }
 
-          repliedTime = "";
+});
 
-        }
 
-      }
+/* NAVIGATION */
 
-      div.innerHTML = `
+window.showSection=function(id){
 
-        <strong>
-          💬 Your Message
-        </strong>
+  document.querySelectorAll(".section")
+    .forEach(section=>{
+      section.classList.remove("active");
+    });
 
-        <br><br>
+  const section=document.getElementById(id);
 
-        ${m.text || "-"}
+  if(section){
+    section.classList.add("active");
+  }
 
-        ${
-          sentTime
-          ? `
-            <br><br>
+  if(id==="attendance") setLastSeen("attendance");
+  if(id==="study") setLastSeen("study");
+  if(id==="results") setLastSeen("results");
+  if(id==="notices") setLastSeen("notices");
+  if(id==="leave") setLastSeen("leave");
+  if(id==="messages") setLastSeen("messages");
 
-            🕐 Sent:
-            ${sentTime}
-          `
-          : ""
-        }
+  updateNotificationArea();
 
-        <br><br>
+};
 
-        <strong>
-          👨‍🏫 Usthad Reply
-        </strong>
 
-        <br>
+/* LOGOUT */
 
-        ${m.reply || "No reply yet"}
+window.logout=async function(){
 
-        ${
-          repliedTime
-          ? `
-            <br><br>
+  await signOut(auth);
 
-            🕐 Replied:
-            ${repliedTime}
-          `
-          : ""
-        }
+  window.location.href="index.html";
 
-        <br><br>
+};
 
-        <button
-          class="deleteBtn"
-          onclick="deleteMyMessage('${item.id}')"
-        >
-          🗑️ Delete Message
-        </button>
 
+/* CHILD */
+
+async function loadStudent(){
+
+  const childBox=document.getElementById("childData");
+  const homeBox=document.getElementById("homeChild");
+
+  try{
+
+    const snap=await getDocs(
+      query(
+        collection(db,"students"),
+        where("studentNumber","==",studentNumber)
+      )
+    );
+
+    if(snap.empty){
+
+      childBox.innerHTML=
+        "<div class='empty'>Student not found.</div>";
+
+      homeBox.innerHTML="";
+
+      return;
+
+    }
+
+    const d=snap.docs[0].data();
+
+    const html=`
+      <div class="card">
+        <p><b>Student Number:</b>
+          ${escapeHtml(d.studentNumber || "")}
+        </p>
+
+        <p><b>Name:</b>
+          ${escapeHtml(d.name || "")}
+        </p>
+
+        <p><b>Class:</b>
+          ${escapeHtml(d.className || "")}
+        </p>
+      </div>
+    `;
+
+    childBox.innerHTML=html;
+    homeBox.innerHTML=html;
+
+  }catch(error){
+
+    console.error(error);
+
+    childBox.innerHTML=
+      "<div class='empty'>Unable to load student.</div>";
+
+  }
+
+}
+
+
+/* ATTENDANCE */
+
+async function loadAttendance(){
+
+  const box=document.getElementById("attendanceData");
+
+  try{
+
+    const snap=await getDocs(
+      query(
+        collection(db,"attendance"),
+        where(
+          "studentNumber",
+          "==",
+          studentNumber
+        )
+      )
+    );
+
+    box.innerHTML="";
+
+    if(snap.empty){
+
+      box.innerHTML=
+        "<div class='empty'>No attendance records.</div>";
+
+      return;
+
+    }
+
+    const records=[];
+
+    snap.forEach(item=>{
+      records.push({
+        id:item.id,
+        ...item.data()
+      });
+    });
+
+    records.sort((a,b)=>
+      String(b.date || "").localeCompare(
+        String(a.date || "")
+      )
+    );
+
+    records.forEach(d=>{
+
+      box.innerHTML+=`
+        <div class="card">
+          <p><b>Date:</b>
+            ${escapeHtml(d.date || "")}
+          </p>
+
+          <p><b>Status:</b>
+            <span class="badge">
+              ${escapeHtml(d.status || "")}
+            </span>
+          </p>
+        </div>
       `;
-
-      list.appendChild(div);
 
     });
 
   }catch(error){
 
-    list.innerHTML =
-    "<p>" +
-    error.message +
-    "</p>";
+    console.error(error);
+
+    box.innerHTML=
+      "<div class='empty'>Unable to load attendance.</div>";
 
   }
 
 }
-/* =====================================================
-   DELETE MY MESSAGE
-===================================================== */
 
-window.deleteMyMessage =
-async function(id){
 
-  const confirmed =
-  confirm(
-    "ഈ message പൂർണ്ണമായി delete ചെയ്യണോ?\n\nDelete ചെയ്താൽ messageയും Usthad replyയും തിരിച്ചെടുക്കാൻ കഴിയില്ല."
+/* STUDY */
+
+async function loadStudy(){
+
+  const box=document.getElementById("studyData");
+
+  try{
+
+    const snap=await getDocs(
+      query(
+        collection(db,"studyProgress"),
+        where(
+          "studentNumber",
+          "==",
+          studentNumber
+        )
+      )
+    );
+
+    box.innerHTML="";
+
+    if(snap.empty){
+
+      box.innerHTML=
+        "<div class='empty'>No study records.</div>";
+
+      return;
+
+    }
+
+    const records=[];
+
+    snap.forEach(item=>{
+      records.push({
+        id:item.id,
+        ...item.data()
+      });
+    });
+
+    records.sort((a,b)=>
+      String(b.date || "").localeCompare(
+        String(a.date || "")
+      )
+    );
+
+    records.forEach(d=>{
+
+      box.innerHTML+=`
+        <div class="card">
+
+          <p><b>Date:</b>
+            ${escapeHtml(d.date || "")}
+          </p>
+
+          <p><b>Surah:</b>
+            ${escapeHtml(d.surah || "")}
+          </p>
+
+          <p><b>New Lesson:</b>
+            ${escapeHtml(d.newLesson || "")}
+          </p>
+
+          <p><b>Revision:</b>
+            ${escapeHtml(d.revision || "")}
+          </p>
+
+          <p><b>Performance:</b>
+            ${escapeHtml(d.performance || "")}
+          </p>
+
+          <p><b>Note:</b>
+            ${escapeHtml(d.note || "")}
+          </p>
+
+        </div>
+      `;
+
+    });
+
+  }catch(error){
+
+    console.error(error);
+
+    box.innerHTML=
+      "<div class='empty'>Unable to load study progress.</div>";
+
+  }
+
+}
+
+
+/* RESULTS */
+
+async function loadResults(){
+
+  const box=document.getElementById("resultsData");
+
+  try{
+
+    const snap=await getDocs(
+      query(
+        collection(db,"results"),
+        where(
+          "studentNumber",
+          "==",
+          studentNumber
+        ),
+        where(
+          "status",
+          "==",
+          "published"
+        )
+      )
+    );
+
+    box.innerHTML="";
+
+    if(snap.empty){
+
+      box.innerHTML=
+        "<div class='empty'>No published results.</div>";
+
+      return;
+
+    }
+
+    snap.forEach(item=>{
+
+      const d=item.data();
+
+      box.innerHTML+=`
+        <div class="card">
+
+          <p><b>Result:</b>
+            ${escapeHtml(d.title || "")}
+          </p>
+
+          <p><b>Mark:</b>
+            ${escapeHtml(d.mark || "")}
+          </p>
+
+        </div>
+      `;
+
+    });
+
+  }catch(error){
+
+    console.error(error);
+
+    box.innerHTML=
+      "<div class='empty'>Unable to load results.</div>";
+
+  }
+
+}
+
+
+/* NOTICES */
+
+async function loadNotices(){
+
+  const box=document.getElementById("noticesData");
+
+  try{
+
+    const snap=await getDocs(
+      query(
+        collection(db,"notices"),
+        where(
+          "status",
+          "==",
+          "published"
+        )
+      )
+    );
+
+    box.innerHTML="";
+
+    if(snap.empty){
+
+      box.innerHTML=
+        "<div class='empty'>No notices.</div>";
+
+      return;
+
+    }
+
+    const records=[];
+
+    snap.forEach(item=>{
+      records.push(item.data());
+    });
+
+    records.sort((a,b)=>{
+
+      const ta=a.createdAt?.toMillis
+        ? a.createdAt.toMillis()
+        : 0;
+
+      const tb=b.createdAt?.toMillis
+        ? b.createdAt.toMillis()
+        : 0;
+
+      return tb-ta;
+
+    });
+
+    records.forEach(d=>{
+
+      const time=d.createdAt?.toDate
+        ? d.createdAt.toDate().toLocaleString()
+        : "";
+
+      box.innerHTML+=`
+        <div class="card">
+
+          <p><b>${escapeHtml(d.title || "")}</b></p>
+
+          <p>${escapeHtml(d.text || "")}</p>
+
+          ${
+            time
+            ?
+            `<p class="small">
+              🕐 ${escapeHtml(time)}
+            </p>`
+            :
+            ""
+          }
+
+        </div>
+      `;
+
+    });
+
+  }catch(error){
+
+    console.error(error);
+
+    box.innerHTML=
+      "<div class='empty'>Unable to load notices.</div>";
+
+  }
+
+}
+
+
+/* LEAVE */
+
+window.sendLeave=async function(){
+
+  const leaveDate=
+    document.getElementById("leaveDate").value;
+
+  const reason=
+    document.getElementById("leaveReason")
+      .value.trim();
+
+  if(!leaveDate || !reason){
+
+    alert("Leave date and reason are required.");
+
+    return;
+
+  }
+
+  try{
+
+    await addDoc(
+      collection(db,"leaveRequests"),
+      {
+        parentUid:currentUser.uid,
+        parentEmail:currentUser.email || "",
+        studentNumber:studentNumber,
+        leaveDate,
+        reason,
+        reply:"",
+        status:"pending",
+        createdAt:serverTimestamp()
+      }
+    );
+
+    alert("Leave request submitted.");
+
+    document.getElementById("leaveDate").value="";
+    document.getElementById("leaveReason").value="";
+
+    await loadLeaves();
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Leave submit failed: " +
+      error.message
+    );
+
+  }
+
+};
+
+
+async function loadLeaves(){
+
+  const box=document.getElementById("leaveData");
+
+  try{
+
+    const snap=await getDocs(
+      query(
+        collection(db,"leaveRequests"),
+        where(
+          "parentUid",
+          "==",
+          currentUser.uid
+        )
+      )
+    );
+
+    box.innerHTML="";
+
+    if(snap.empty){
+
+      box.innerHTML=
+        "<div class='empty'>No leave requests.</div>";
+
+      return;
+
+    }
+
+    const records=[];
+
+    snap.forEach(item=>{
+      records.push({
+        id:item.id,
+        ...item.data()
+      });
+    });
+
+    records.sort((a,b)=>{
+
+      const ta=a.createdAt?.toMillis
+        ? a.createdAt.toMillis()
+        : 0;
+
+      const tb=b.createdAt?.toMillis
+        ? b.createdAt.toMillis()
+        : 0;
+
+      return tb-ta;
+
+    });
+
+    records.forEach(d=>{
+
+      const sentTime=d.createdAt?.toDate
+        ? d.createdAt.toDate().toLocaleString()
+        : "";
+
+      const replyTime=d.repliedAt?.toDate
+        ? d.repliedAt.toDate().toLocaleString()
+        : "";
+
+      box.innerHTML+=`
+        <div class="card">
+
+          <p><b>Leave Date:</b>
+            ${escapeHtml(d.leaveDate || "")}
+          </p>
+
+          <p><b>Reason:</b>
+            ${escapeHtml(d.reason || "")}
+          </p>
+
+          <p>
+            <b>Status:</b>
+            <span class="badge">
+              ${escapeHtml(d.status || "pending")}
+            </span>
+          </p>
+
+          ${
+            sentTime
+            ?
+            `<p class="small">
+              🕐 Sent: ${escapeHtml(sentTime)}
+            </p>`
+            :
+            ""
+          }
+
+          ${
+            d.reply
+            ?
+            `<hr>
+             <p><b>Usthad Reply:</b></p>
+             <p>${escapeHtml(d.reply)}</p>`
+            :
+            ""
+          }
+
+          ${
+            replyTime
+            ?
+            `<p class="small">
+              🕐 Replied: ${escapeHtml(replyTime)}
+            </p>`
+            :
+            ""
+          }
+
+        </div>
+      `;
+
+    });
+
+  }catch(error){
+
+    console.error(error);
+
+    box.innerHTML=
+      "<div class='empty'>Unable to load leave requests.</div>";
+
+  }
+
+}
+
+
+/* MESSAGES */
+
+window.sendMessage=async function(){
+
+  const text=
+    document.getElementById("messageText")
+      .value.trim();
+
+  if(!text){
+
+    alert("Please write a message.");
+
+    return;
+
+  }
+
+  try{
+
+    await addDoc(
+      collection(db,"messages"),
+      {
+        parentUid:currentUser.uid,
+        parentEmail:currentUser.email || "",
+        studentNumber:studentNumber,
+        text,
+        reply:"",
+        status:"unread",
+        createdAt:serverTimestamp()
+      }
+    );
+
+    alert("Message sent successfully.");
+
+    document.getElementById("messageText").value="";
+
+    await loadMessages();
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Message send failed: " +
+      error.message
+    );
+
+  }
+
+};
+
+
+async function loadMessages(){
+
+  const box=document.getElementById("messagesData");
+
+  try{
+
+    const snap=await getDocs(
+      query(
+        collection(db,"messages"),
+        where(
+          "parentUid",
+          "==",
+          currentUser.uid
+        )
+      )
+    );
+
+    box.innerHTML="";
+
+    if(snap.empty){
+
+      box.innerHTML=
+        "<div class='empty'>No messages.</div>";
+
+      return;
+
+    }
+
+    const records=[];
+
+    snap.forEach(item=>{
+
+      records.push({
+        id:item.id,
+        ...item.data()
+      });
+
+    });
+
+    records.sort((a,b)=>{
+
+      const ta=a.createdAt?.toMillis
+        ? a.createdAt.toMillis()
+        : 0;
+
+      const tb=b.createdAt?.toMillis
+        ? b.createdAt.toMillis()
+        : 0;
+
+      return tb-ta;
+
+    });
+
+    records.forEach(d=>{
+
+      const sentTime=d.createdAt?.toDate
+        ? d.createdAt.toDate().toLocaleString()
+        : "Time unavailable";
+
+      const replyTime=d.repliedAt?.toDate
+        ? d.repliedAt.toDate().toLocaleString()
+        : "";
+
+      box.innerHTML+=`
+        <div class="card">
+
+          <p><b>💬 Your Message:</b></p>
+
+          <p>
+            ${escapeHtml(d.text || "")}
+          </p>
+
+          <p class="small">
+            🕐 Sent: ${escapeHtml(sentTime)}
+          </p>
+
+          <p>
+            <b>Status:</b>
+            <span class="badge">
+              ${escapeHtml(d.status || "unread")}
+            </span>
+          </p>
+
+          ${
+            d.reply
+            ?
+            `<hr>
+             <p><b>👨‍🏫 Usthad Reply:</b></p>
+             <p>${escapeHtml(d.reply)}</p>`
+            :
+            ""
+          }
+
+          ${
+            replyTime
+            ?
+            `<p class="small">
+              🕐 Replied: ${escapeHtml(replyTime)}
+            </p>`
+            :
+            ""
+          }
+
+          <br>
+
+          <button
+            class="delete"
+            onclick="deleteMyMessage('${d.id}')">
+            🗑️ Delete Message
+          </button>
+
+        </div>
+      `;
+
+    });
+
+  }catch(error){
+
+    console.error(error);
+
+    box.innerHTML=
+      "<div class='empty'>Unable to load messages.</div>";
+
+  }
+
+}
+
+
+window.deleteMyMessage=async function(id){
+
+  const confirmed=confirm(
+    "ഈ message പൂർണ്ണമായി delete ചെയ്യണോ?\n\n" +
+    "Delete ചെയ്താൽ messageയും Usthad replyയും " +
+    "തിരിച്ചെടുക്കാൻ കഴിയില്ല."
   );
 
-  if(!confirmed)
-    return;
+  if(!confirmed) return;
 
   try{
 
     await deleteDoc(
-      doc(
-        db,
-        "messages",
-        id
-      )
+      doc(db,"messages",id)
     );
 
-    alert(
-      "Message deleted successfully 🗑️"
-    );
+    alert("Message deleted successfully.");
 
     await loadMessages();
 
@@ -195,3 +1234,395 @@ async function(id){
   }
 
 };
+
+
+/* REAL-TIME NOTIFICATIONS */
+
+function startRealtimeListeners(){
+
+  onSnapshot(
+    query(
+      collection(db,"attendance"),
+      where(
+        "studentNumber",
+        "==",
+        studentNumber
+      )
+    ),
+    ()=>{
+      updateNotificationArea();
+    },
+    error=>console.error(error)
+  );
+
+
+  onSnapshot(
+    query(
+      collection(db,"studyProgress"),
+      where(
+        "studentNumber",
+        "==",
+        studentNumber
+      )
+    ),
+    ()=>{
+      updateNotificationArea();
+    },
+    error=>console.error(error)
+  );
+
+
+  onSnapshot(
+    query(
+      collection(db,"results"),
+      where(
+        "studentNumber",
+        "==",
+        studentNumber
+      ),
+      where(
+        "status",
+        "==",
+        "published"
+      )
+    ),
+    ()=>{
+      updateNotificationArea();
+    },
+    error=>console.error(error)
+  );
+
+
+  onSnapshot(
+    query(
+      collection(db,"notices"),
+      where(
+        "status",
+        "==",
+        "published"
+      )
+    ),
+    ()=>{
+      updateNotificationArea();
+    },
+    error=>console.error(error)
+  );
+
+
+  onSnapshot(
+    query(
+      collection(db,"leaveRequests"),
+      where(
+        "parentUid",
+        "==",
+        currentUser.uid
+      )
+    ),
+    ()=>{
+      updateNotificationArea();
+    },
+    error=>console.error(error)
+  );
+
+
+  onSnapshot(
+    query(
+      collection(db,"messages"),
+      where(
+        "parentUid",
+        "==",
+        currentUser.uid
+      )
+    ),
+    ()=>{
+      updateNotificationArea();
+    },
+    error=>console.error(error)
+  );
+
+}
+
+
+async function updateNotificationArea(){
+
+  const box=
+    document.getElementById("notificationArea");
+
+  try{
+
+    let notifications=[];
+
+
+    /* ATTENDANCE */
+
+    const attendanceSnap=await getDocs(
+      query(
+        collection(db,"attendance"),
+        where(
+          "studentNumber",
+          "==",
+          studentNumber
+        )
+      )
+    );
+
+    attendanceSnap.forEach(item=>{
+
+      const d=item.data();
+
+      if(d.createdAt?.toMillis){
+
+        if(
+          d.createdAt.toMillis()
+          >
+          getLastSeen("attendance")
+        ){
+
+          notifications.push(
+            "📅 New attendance update"
+          );
+
+        }
+
+      }
+
+    });
+
+
+    /* STUDY */
+
+    const studySnap=await getDocs(
+      query(
+        collection(db,"studyProgress"),
+        where(
+          "studentNumber",
+          "==",
+          studentNumber
+        )
+      )
+    );
+
+    studySnap.forEach(item=>{
+
+      const d=item.data();
+
+      if(d.createdAt?.toMillis){
+
+        if(
+          d.createdAt.toMillis()
+          >
+          getLastSeen("study")
+        ){
+
+          notifications.push(
+            "📖 New study progress"
+          );
+
+        }
+
+      }
+
+    });
+
+
+    /* RESULTS */
+
+    const resultSnap=await getDocs(
+      query(
+        collection(db,"results"),
+        where(
+          "studentNumber",
+          "==",
+          studentNumber
+        ),
+        where(
+          "status",
+          "==",
+          "published"
+        )
+      )
+    );
+
+    resultSnap.forEach(item=>{
+
+      const d=item.data();
+
+      if(d.createdAt?.toMillis){
+
+        if(
+          d.createdAt.toMillis()
+          >
+          getLastSeen("results")
+        ){
+
+          notifications.push(
+            "🏆 New result published"
+          );
+
+        }
+
+      }
+
+    });
+
+
+    /* NOTICES */
+
+    const noticeSnap=await getDocs(
+      query(
+        collection(db,"notices"),
+        where(
+          "status",
+          "==",
+          "published"
+        )
+      )
+    );
+
+    noticeSnap.forEach(item=>{
+
+      const d=item.data();
+
+      if(d.createdAt?.toMillis){
+
+        if(
+          d.createdAt.toMillis()
+          >
+          getLastSeen("notices")
+        ){
+
+          notifications.push(
+            "📢 New notice"
+          );
+
+        }
+
+      }
+
+    });
+
+
+    /* LEAVE REPLIES */
+
+    const leaveSnap=await getDocs(
+      query(
+        collection(db,"leaveRequests"),
+        where(
+          "parentUid",
+          "==",
+          currentUser.uid
+        )
+      )
+    );
+
+    leaveSnap.forEach(item=>{
+
+      const d=item.data();
+
+      if(d.repliedAt?.toMillis){
+
+        if(
+          d.repliedAt.toMillis()
+          >
+          getLastSeen("leave")
+        ){
+
+          notifications.push(
+            "📝 Usthad replied to leave request"
+          );
+
+        }
+
+      }
+
+    });
+
+
+    /* MESSAGE REPLIES */
+
+    const messageSnap=await getDocs(
+      query(
+        collection(db,"messages"),
+        where(
+          "parentUid",
+          "==",
+          currentUser.uid
+        )
+      )
+    );
+
+    messageSnap.forEach(item=>{
+
+      const d=item.data();
+
+      if(d.repliedAt?.toMillis){
+
+        if(
+          d.repliedAt.toMillis()
+          >
+          getLastSeen("messages")
+        ){
+
+          notifications.push(
+            "💬 Usthad replied to your message"
+          );
+
+        }
+
+      }
+
+    });
+
+
+    if(notifications.length===0){
+
+      box.innerHTML=
+        "🔔 No new notifications.";
+
+      return;
+
+    }
+
+    const unique=[
+      ...new Set(notifications)
+    ];
+
+    box.innerHTML=`
+      <b>🔔 New Updates</b><br><br>
+
+      ${unique.map(item=>`
+        <div style="margin:5px 0;">
+          ${escapeHtml(item)}
+        </div>
+      `).join("")}
+    `;
+
+  }catch(error){
+
+    console.error(error);
+
+    box.innerHTML=
+      "🔔 Notifications unavailable.";
+
+  }
+
+}
+
+
+/* HTML SAFETY */
+
+function escapeHtml(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+</script>
+
+</body>
+</html>
