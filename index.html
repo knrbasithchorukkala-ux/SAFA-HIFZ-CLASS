@@ -3,7 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>SAFA HIFZ CLASS - Login</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#0f766e">
 
   <style>
     * {
@@ -291,6 +296,22 @@ form.addEventListener("submit", async (e) => {
 
 });
 
+</script>
+
+
+<!-- PWA Service Worker -->
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./service-worker.js")
+        .then(() => {
+          console.log("PWA service worker registered");
+        })
+        .catch((error) => {
+          console.error("PWA service worker error:", error);
+        });
+    });
+  }
 </script>
 
 </body>
