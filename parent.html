@@ -49,6 +49,127 @@ body{
   box-shadow:0 3px 12px rgba(0,0,0,.08);
 }
 
+
+/* =========================
+   PARENT NOTIFICATIONS
+========================= */
+
+.notificationArea{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:12px;
+  margin:20px 0;
+}
+
+.notification{
+  background:white;
+  padding:16px;
+  border-radius:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+  cursor:pointer;
+  border-left:5px solid #075e54;
+  transition:.2s;
+}
+
+.notification:hover{
+  transform:translateY(-2px);
+}
+
+.notification.notice{
+  border-left-color:#8e24aa;
+}
+
+.notification.attendance{
+  border-left-color:#1976d2;
+}
+
+.notification.study{
+  border-left-color:#2e7d32;
+}
+
+.notification.result{
+  border-left-color:#ef6c00;
+}
+
+.notification.leave{
+  border-left-color:#f57c00;
+}
+
+.notification.message{
+  border-left-color:#1565c0;
+}
+
+.notificationTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.notificationTitle{
+  font-weight:bold;
+  font-size:16px;
+}
+
+.notificationText{
+  margin-top:7px;
+  color:#666;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.badge{
+  min-width:30px;
+  height:30px;
+  padding:0 9px;
+  border-radius:20px;
+  background:#b3261e;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  font-size:14px;
+}
+
+.notification.notice .badge{
+  background:#8e24aa;
+}
+
+.notification.attendance .badge{
+  background:#1976d2;
+}
+
+.notification.study .badge{
+  background:#2e7d32;
+}
+
+.notification.result .badge{
+  background:#ef6c00;
+}
+
+.notification.leave .badge{
+  background:#f57c00;
+}
+
+.notification.message .badge{
+  background:#1565c0;
+}
+
+.noNotification{
+  background:#e8f5e9;
+  color:#2e7d32;
+  padding:15px;
+  border-radius:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.05);
+  line-height:1.6;
+}
+
+
+/* =========================
+   HOME CARDS
+========================= */
+
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
@@ -77,6 +198,11 @@ body{
   margin:8px 0 4px;
 }
 
+
+/* =========================
+   SECTIONS
+========================= */
+
 .section{
   display:none;
   background:white;
@@ -90,6 +216,11 @@ body{
   display:block;
 }
 
+
+/* =========================
+   BUTTONS
+========================= */
+
 button{
   border:0;
   border-radius:8px;
@@ -98,6 +229,10 @@ button{
   background:#075e54;
   color:white;
   cursor:pointer;
+}
+
+button:hover{
+  opacity:.9;
 }
 
 .back{
@@ -109,6 +244,11 @@ button{
   margin-top:25px;
   background:#b3261e;
 }
+
+
+/* =========================
+   RECORDS
+========================= */
 
 .record{
   border:1px solid #ddd;
@@ -131,6 +271,11 @@ button{
   background:#e8f5e9;
 }
 
+
+/* =========================
+   PROFILE
+========================= */
+
 .studentProfile{
   background:#f4f7f6;
   padding:18px;
@@ -138,6 +283,11 @@ button{
   margin-top:15px;
   line-height:1.8;
 }
+
+
+/* =========================
+   INPUTS
+========================= */
 
 textarea,
 input[type="date"]{
@@ -147,6 +297,11 @@ input[type="date"]{
 textarea{
   resize:vertical;
 }
+
+
+/* =========================
+   LOADING
+========================= */
 
 #loadingScreen{
   position:fixed;
@@ -184,6 +339,11 @@ textarea{
 
 <body>
 
+
+<!-- =========================
+     LOADING SCREEN
+========================= -->
+
 <div id="loadingScreen">
 
   <div class="loadingBox">
@@ -199,6 +359,10 @@ textarea{
 </div>
 
 
+<!-- =========================
+     HEADER
+========================= -->
+
 <div class="header">
 
   <h1>SAFA HIFZ CLASS</h1>
@@ -210,9 +374,16 @@ textarea{
 
 <div class="container">
 
+
+  <!-- =========================
+       WELCOME
+  ========================= -->
+
   <div class="welcome">
 
-    <h2>Assalamu Alaikum 👋</h2>
+    <h2>
+      Assalamu Alaikum 👋
+    </h2>
 
     <p id="parentWelcome">
       Welcome Parent
@@ -221,20 +392,45 @@ textarea{
   </div>
 
 
-  <!-- HOME -->
+  <!-- =========================
+       NOTIFICATIONS
+  ========================= -->
+
+  <div id="notificationArea"
+       class="notificationArea">
+
+    <div class="noNotification">
+
+      🔄 Checking new updates...
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       HOME
+  ========================= -->
 
   <div id="home">
 
     <div class="grid">
 
+
       <div class="card"
            onclick="showSection('profile')">
 
-        <div class="icon">👦</div>
+        <div class="icon">
+          👦
+        </div>
 
-        <h3>My Child</h3>
+        <h3>
+          My Child
+        </h3>
 
-        <p>Profile</p>
+        <p>
+          Profile
+        </p>
 
       </div>
 
@@ -242,11 +438,17 @@ textarea{
       <div class="card"
            onclick="showSection('attendance')">
 
-        <div class="icon">📅</div>
+        <div class="icon">
+          📅
+        </div>
 
-        <h3>Attendance</h3>
+        <h3>
+          Attendance
+        </h3>
 
-        <p>View</p>
+        <p>
+          View
+        </p>
 
       </div>
 
@@ -254,11 +456,17 @@ textarea{
       <div class="card"
            onclick="showSection('study')">
 
-        <div class="icon">📖</div>
+        <div class="icon">
+          📖
+        </div>
 
-        <h3>Study Progress</h3>
+        <h3>
+          Study Progress
+        </h3>
 
-        <p>View</p>
+        <p>
+          View
+        </p>
 
       </div>
 
@@ -266,11 +474,17 @@ textarea{
       <div class="card"
            onclick="showSection('results')">
 
-        <div class="icon">📊</div>
+        <div class="icon">
+          📊
+        </div>
 
-        <h3>Results</h3>
+        <h3>
+          Results
+        </h3>
 
-        <p>View</p>
+        <p>
+          View
+        </p>
 
       </div>
 
@@ -278,11 +492,17 @@ textarea{
       <div class="card"
            onclick="showSection('notices')">
 
-        <div class="icon">📢</div>
+        <div class="icon">
+          📢
+        </div>
 
-        <h3>Notices</h3>
+        <h3>
+          Notices
+        </h3>
 
-        <p>View</p>
+        <p>
+          View
+        </p>
 
       </div>
 
@@ -290,11 +510,17 @@ textarea{
       <div class="card"
            onclick="showSection('leave')">
 
-        <div class="icon">📝</div>
+        <div class="icon">
+          📝
+        </div>
 
-        <h3>Leave</h3>
+        <h3>
+          Leave
+        </h3>
 
-        <p>Apply</p>
+        <p>
+          Apply
+        </p>
 
       </div>
 
@@ -302,13 +528,20 @@ textarea{
       <div class="card"
            onclick="showSection('messages')">
 
-        <div class="icon">💬</div>
+        <div class="icon">
+          💬
+        </div>
 
-        <h3>Messages</h3>
+        <h3>
+          Messages
+        </h3>
 
-        <p>Usthad</p>
+        <p>
+          Usthad
+        </p>
 
       </div>
+
 
     </div>
 
@@ -323,11 +556,16 @@ textarea{
   </div>
 
 
-  <!-- PROFILE -->
+  <!-- =========================
+       PROFILE
+  ========================= -->
 
-  <div id="profile" class="section">
+  <div id="profile"
+       class="section">
 
-    <h2>👦 My Child</h2>
+    <h2>
+      👦 My Child
+    </h2>
 
     <button class="back"
             onclick="goHome()">
@@ -343,11 +581,16 @@ textarea{
   </div>
 
 
-  <!-- ATTENDANCE -->
+  <!-- =========================
+       ATTENDANCE
+  ========================= -->
 
-  <div id="attendance" class="section">
+  <div id="attendance"
+       class="section">
 
-    <h2>📅 Attendance</h2>
+    <h2>
+      📅 Attendance
+    </h2>
 
     <button class="back"
             onclick="goHome()">
@@ -363,11 +606,16 @@ textarea{
   </div>
 
 
-  <!-- STUDY -->
+  <!-- =========================
+       STUDY
+  ========================= -->
 
-  <div id="study" class="section">
+  <div id="study"
+       class="section">
 
-    <h2>📖 Study Progress</h2>
+    <h2>
+      📖 Study Progress
+    </h2>
 
     <button class="back"
             onclick="goHome()">
@@ -383,11 +631,16 @@ textarea{
   </div>
 
 
-  <!-- RESULTS -->
+  <!-- =========================
+       RESULTS
+  ========================= -->
 
-  <div id="results" class="section">
+  <div id="results"
+       class="section">
 
-    <h2>📊 Results</h2>
+    <h2>
+      📊 Results
+    </h2>
 
     <button class="back"
             onclick="goHome()">
@@ -403,11 +656,16 @@ textarea{
   </div>
 
 
-  <!-- NOTICES -->
+  <!-- =========================
+       NOTICES
+  ========================= -->
 
-  <div id="notices" class="section">
+  <div id="notices"
+       class="section">
 
-    <h2>📢 Notices</h2>
+    <h2>
+      📢 Notices
+    </h2>
 
     <button class="back"
             onclick="goHome()">
@@ -423,11 +681,16 @@ textarea{
   </div>
 
 
-  <!-- LEAVE -->
+  <!-- =========================
+       LEAVE
+  ========================= -->
 
-  <div id="leave" class="section">
+  <div id="leave"
+       class="section">
 
-    <h2>📝 Leave Application</h2>
+    <h2>
+      📝 Leave Application
+    </h2>
 
     <button class="back"
             onclick="goHome()">
@@ -435,6 +698,7 @@ textarea{
       ← Back
 
     </button>
+
 
     <input
       id="leaveDate"
@@ -447,6 +711,7 @@ textarea{
         border-radius:8px;
       "
     >
+
 
     <textarea
       id="leaveReason"
@@ -461,17 +726,21 @@ textarea{
       "
     ></textarea>
 
+
     <button onclick="submitLeave()">
 
       📝 Submit Leave
 
     </button>
 
+
     <hr>
+
 
     <h3>
       My Leave Applications
     </h3>
+
 
     <div id="leaveList">
       Loading...
@@ -480,11 +749,16 @@ textarea{
   </div>
 
 
-  <!-- MESSAGES -->
+  <!-- =========================
+       MESSAGES
+  ========================= -->
 
-  <div id="messages" class="section">
+  <div id="messages"
+       class="section">
 
-    <h2>💬 Message Usthad</h2>
+    <h2>
+      💬 Message Usthad
+    </h2>
 
     <button class="back"
             onclick="goHome()">
@@ -492,6 +766,7 @@ textarea{
       ← Back
 
     </button>
+
 
     <textarea
       id="messageText"
@@ -506,17 +781,21 @@ textarea{
       "
     ></textarea>
 
+
     <button onclick="sendMessage()">
 
       💬 Send Message
 
     </button>
 
+
     <hr>
+
 
     <h3>
       My Messages
     </h3>
+
 
     <div id="messageList">
       Loading...
@@ -524,14 +803,22 @@ textarea{
 
   </div>
 
+
 </div>
 
 
 <script type="module">
 
+
+/* =========================
+   FIREBASE IMPORTS
+========================= */
+
 import {
   initializeApp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 
 import {
@@ -539,7 +826,9 @@ import {
   signOut,
   setPersistence,
   browserLocalPersistence
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 
 import {
@@ -551,8 +840,11 @@ import {
   where,
   getDocs,
   addDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+  serverTimestamp,
+  onSnapshot
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
 /* =========================
@@ -581,6 +873,7 @@ const firebaseConfig = {
 
   measurementId:
   "G-ZTBTJCB5SR"
+
 };
 
 
@@ -603,8 +896,27 @@ getFirestore(app);
 ========================= */
 
 let currentUser = null;
+
 let studentNumber = null;
+
 let studentData = null;
+
+
+/* =========================
+   REAL-TIME LISTENERS
+========================= */
+
+let attendanceUnsubscribe = null;
+
+let studyUnsubscribe = null;
+
+let resultUnsubscribe = null;
+
+let noticeUnsubscribe = null;
+
+let leaveUnsubscribe = null;
+
+let messageUnsubscribe = null;
 
 
 /* =========================
@@ -622,9 +934,75 @@ document.getElementById(
 );
 
 
-/* =========================
-   START
-========================= */
+/* =====================================================
+   LOCAL STORAGE - LAST SEEN TIMES
+===================================================== */
+
+function getLastSeen(type){
+
+  const value =
+  localStorage.getItem(
+    "safa_parent_last_seen_" + type
+  );
+
+  if(!value)
+    return null;
+
+  const number =
+  Number(value);
+
+  return isNaN(number)
+    ? null
+    : number;
+
+}
+
+
+function setLastSeen(type){
+
+  localStorage.setItem(
+    "safa_parent_last_seen_" + type,
+    String(Date.now())
+  );
+
+}
+
+
+/* =====================================================
+   FIRESTORE TIMESTAMP → MILLISECONDS
+===================================================== */
+
+function timestampMillis(timestamp){
+
+  if(!timestamp)
+    return 0;
+
+  if(
+    typeof timestamp.toMillis === "function"
+  ){
+
+    return timestamp.toMillis();
+
+  }
+
+  if(
+    timestamp.seconds !== undefined
+  ){
+
+    return (
+      Number(timestamp.seconds) * 1000
+    );
+
+  }
+
+  return 0;
+
+}
+
+
+/* =====================================================
+   START PARENT DASHBOARD
+===================================================== */
 
 async function startParentDashboard(){
 
@@ -655,6 +1033,7 @@ async function startParentDashboard(){
       );
 
       return;
+
     }
 
 
@@ -680,6 +1059,7 @@ async function startParentDashboard(){
       );
 
       return;
+
     }
 
 
@@ -703,6 +1083,7 @@ async function startParentDashboard(){
       );
 
       return;
+
     }
 
 
@@ -720,6 +1101,7 @@ async function startParentDashboard(){
       );
 
       return;
+
     }
 
 
@@ -742,6 +1124,11 @@ async function startParentDashboard(){
     "none";
 
 
+    /* Start real-time updates */
+
+    startRealtimeListeners();
+
+
   }catch(error){
 
     console.error(
@@ -760,9 +1147,9 @@ async function startParentDashboard(){
 }
 
 
-/* =========================
+/* =====================================================
    ERROR
-========================= */
+===================================================== */
 
 function showError(
   title,
@@ -804,9 +1191,9 @@ function showError(
 }
 
 
-/* =========================
+/* =====================================================
    LOAD STUDENT
-========================= */
+===================================================== */
 
 async function loadStudent(){
 
@@ -845,9 +1232,9 @@ async function loadStudent(){
 }
 
 
-/* =========================
-   PROFILE
-========================= */
+/* =====================================================
+   STUDENT PROFILE
+===================================================== */
 
 function showStudentProfile(){
 
@@ -882,12 +1269,12 @@ function showStudentProfile(){
 }
 
 
-/* =========================
+/* =====================================================
    SECTIONS
-========================= */
+===================================================== */
 
 window.showSection =
-function(id){
+async function(id){
 
   document.getElementById(
     "home"
@@ -914,26 +1301,77 @@ function(id){
   }
 
 
-  if(id === "attendance")
-    loadAttendance();
+  if(id === "attendance"){
 
-  if(id === "study")
-    loadStudy();
+    await loadAttendance();
 
-  if(id === "results")
-    loadResults();
+    setLastSeen("attendance");
 
-  if(id === "notices")
-    loadNotices();
+    updateNotificationArea();
 
-  if(id === "leave")
-    loadLeaves();
+  }
 
-  if(id === "messages")
-    loadMessages();
+
+  if(id === "study"){
+
+    await loadStudy();
+
+    setLastSeen("study");
+
+    updateNotificationArea();
+
+  }
+
+
+  if(id === "results"){
+
+    await loadResults();
+
+    setLastSeen("results");
+
+    updateNotificationArea();
+
+  }
+
+
+  if(id === "notices"){
+
+    await loadNotices();
+
+    setLastSeen("notices");
+
+    updateNotificationArea();
+
+  }
+
+
+  if(id === "leave"){
+
+    await loadLeaves();
+
+    setLastSeen("leave");
+
+    updateNotificationArea();
+
+  }
+
+
+  if(id === "messages"){
+
+    await loadMessages();
+
+    setLastSeen("messages");
+
+    updateNotificationArea();
+
+  }
 
 };
 
+
+/* =====================================================
+   HOME
+===================================================== */
 
 window.goHome =
 function(){
@@ -951,23 +1389,31 @@ function(){
   ).style.display =
   "block";
 
+
+  updateNotificationArea();
+
 };
 
 
-/* =========================
+/* =====================================================
    LOGOUT
-========================= */
+===================================================== */
 
 window.logout =
 async function(){
 
   try{
 
+    stopRealtimeListeners();
+
+
     await signOut(auth);
+
 
     window.location.replace(
       "index.html"
     );
+
 
   }catch(error){
 
@@ -981,9 +1427,853 @@ async function(){
 };
 
 
-/* =========================
+/* =====================================================
+   REAL-TIME LISTENERS
+===================================================== */
+
+function startRealtimeListeners(){
+
+  stopRealtimeListeners();
+
+
+  /* =========================
+     ATTENDANCE
+  ========================= */
+
+  const attendanceQuery =
+  query(
+    collection(db,"attendance"),
+    where(
+      "studentNumber",
+      "==",
+      studentNumber
+    )
+  );
+
+
+  attendanceUnsubscribe =
+  onSnapshot(
+    attendanceQuery,
+    snapshot => {
+
+      updateNotificationArea();
+
+    },
+    error => {
+
+      console.error(
+        "Attendance listener:",
+        error
+      );
+
+    }
+  );
+
+
+  /* =========================
+     STUDY PROGRESS
+  ========================= */
+
+  const studyQuery =
+  query(
+    collection(db,"studyProgress"),
+    where(
+      "studentNumber",
+      "==",
+      studentNumber
+    )
+  );
+
+
+  studyUnsubscribe =
+  onSnapshot(
+    studyQuery,
+    snapshot => {
+
+      updateNotificationArea();
+
+    },
+    error => {
+
+      console.error(
+        "Study listener:",
+        error
+      );
+
+    }
+  );
+
+
+  /* =========================
+     PUBLISHED RESULTS
+  ========================= */
+
+  const resultQuery =
+  query(
+    collection(db,"results"),
+
+    where(
+      "studentNumber",
+      "==",
+      studentNumber
+    ),
+
+    where(
+      "status",
+      "==",
+      "published"
+    )
+  );
+
+
+  resultUnsubscribe =
+  onSnapshot(
+    resultQuery,
+    snapshot => {
+
+      updateNotificationArea();
+
+    },
+    error => {
+
+      console.error(
+        "Result listener:",
+        error
+      );
+
+    }
+  );
+
+
+  /* =========================
+     PUBLISHED NOTICES
+  ========================= */
+
+  const noticeQuery =
+  query(
+    collection(db,"notices"),
+    where(
+      "status",
+      "==",
+      "published"
+    )
+  );
+
+
+  noticeUnsubscribe =
+  onSnapshot(
+    noticeQuery,
+    snapshot => {
+
+      updateNotificationArea();
+
+    },
+    error => {
+
+      console.error(
+        "Notice listener:",
+        error
+      );
+
+    }
+  );
+
+
+  /* =========================
+     LEAVE
+  ========================= */
+
+  const leaveQuery =
+  query(
+    collection(db,"leaveRequests"),
+    where(
+      "parentUid",
+      "==",
+      currentUser.uid
+    )
+  );
+
+
+  leaveUnsubscribe =
+  onSnapshot(
+    leaveQuery,
+    snapshot => {
+
+      updateNotificationArea();
+
+    },
+    error => {
+
+      console.error(
+        "Leave listener:",
+        error
+      );
+
+    }
+  );
+
+
+  /* =========================
+     MESSAGES
+  ========================= */
+
+  const messageQuery =
+  query(
+    collection(db,"messages"),
+    where(
+      "parentUid",
+      "==",
+      currentUser.uid
+    )
+  );
+
+
+  messageUnsubscribe =
+  onSnapshot(
+    messageQuery,
+    snapshot => {
+
+      updateNotificationArea();
+
+    },
+    error => {
+
+      console.error(
+        "Message listener:",
+        error
+      );
+
+    }
+  );
+
+
+  updateNotificationArea();
+
+}
+
+
+/* =====================================================
+   STOP LISTENERS
+===================================================== */
+
+function stopRealtimeListeners(){
+
+  if(attendanceUnsubscribe)
+    attendanceUnsubscribe();
+
+  if(studyUnsubscribe)
+    studyUnsubscribe();
+
+  if(resultUnsubscribe)
+    resultUnsubscribe();
+
+  if(noticeUnsubscribe)
+    noticeUnsubscribe();
+
+  if(leaveUnsubscribe)
+    leaveUnsubscribe();
+
+  if(messageUnsubscribe)
+    messageUnsubscribe();
+
+
+  attendanceUnsubscribe = null;
+
+  studyUnsubscribe = null;
+
+  resultUnsubscribe = null;
+
+  noticeUnsubscribe = null;
+
+  leaveUnsubscribe = null;
+
+  messageUnsubscribe = null;
+
+}
+
+
+/* =====================================================
+   UPDATE NOTIFICATION AREA
+===================================================== */
+
+async function updateNotificationArea(){
+
+  const area =
+  document.getElementById(
+    "notificationArea"
+  );
+
+
+  if(!area)
+    return;
+
+
+  try{
+
+    const notifications = [];
+
+
+    /* =========================
+       ATTENDANCE
+    ========================= */
+
+    const attendanceSnap =
+    await getDocs(
+      query(
+        collection(db,"attendance"),
+        where(
+          "studentNumber",
+          "==",
+          studentNumber
+        )
+      )
+    );
+
+
+    const attendanceLastSeen =
+    getLastSeen("attendance");
+
+
+    let attendanceCount = 0;
+
+
+    attendanceSnap.forEach(item => {
+
+      const data =
+      item.data();
+
+
+      const time =
+      timestampMillis(
+        data.createdAt
+      );
+
+
+      if(
+        time > 0 &&
+        (
+          attendanceLastSeen === null ||
+          time > attendanceLastSeen
+        )
+      ){
+
+        attendanceCount++;
+
+      }
+
+    });
+
+
+    if(attendanceCount > 0){
+
+      notifications.push({
+
+        type:"attendance",
+
+        title:"📅 New Attendance Update",
+
+        text:
+        attendanceCount === 1
+        ? "Your child's attendance has been updated."
+        : attendanceCount +
+          " new attendance updates are available.",
+
+        section:"attendance",
+
+        count:attendanceCount
+
+      });
+
+    }
+
+
+    /* =========================
+       STUDY
+    ========================= */
+
+    const studySnap =
+    await getDocs(
+      query(
+        collection(db,"studyProgress"),
+        where(
+          "studentNumber",
+          "==",
+          studentNumber
+        )
+      )
+    );
+
+
+    const studyLastSeen =
+    getLastSeen("study");
+
+
+    let studyCount = 0;
+
+
+    studySnap.forEach(item => {
+
+      const data =
+      item.data();
+
+
+      const time =
+      timestampMillis(
+        data.createdAt
+      );
+
+
+      if(
+        time > 0 &&
+        (
+          studyLastSeen === null ||
+          time > studyLastSeen
+        )
+      ){
+
+        studyCount++;
+
+      }
+
+    });
+
+
+    if(studyCount > 0){
+
+      notifications.push({
+
+        type:"study",
+
+        title:"📖 New Study Progress",
+
+        text:
+        studyCount === 1
+        ? "New study progress has been added."
+        : studyCount +
+          " new study progress updates are available.",
+
+        section:"study",
+
+        count:studyCount
+
+      });
+
+    }
+
+
+    /* =========================
+       RESULTS
+    ========================= */
+
+    const resultSnap =
+    await getDocs(
+      query(
+        collection(db,"results"),
+
+        where(
+          "studentNumber",
+          "==",
+          studentNumber
+        ),
+
+        where(
+          "status",
+          "==",
+          "published"
+        )
+      )
+    );
+
+
+    const resultLastSeen =
+    getLastSeen("results");
+
+
+    let resultCount = 0;
+
+
+    resultSnap.forEach(item => {
+
+      const data =
+      item.data();
+
+
+      const time =
+      timestampMillis(
+        data.createdAt
+      );
+
+
+      if(
+        time > 0 &&
+        (
+          resultLastSeen === null ||
+          time > resultLastSeen
+        )
+      ){
+
+        resultCount++;
+
+      }
+
+    });
+
+
+    if(resultCount > 0){
+
+      notifications.push({
+
+        type:"result",
+
+        title:"📊 New Result Published",
+
+        text:
+        resultCount === 1
+        ? "A new result has been published."
+        : resultCount +
+          " new results have been published.",
+
+        section:"results",
+
+        count:resultCount
+
+      });
+
+    }
+
+
+    /* =========================
+       NOTICES
+    ========================= */
+
+    const noticeSnap =
+    await getDocs(
+      query(
+        collection(db,"notices"),
+        where(
+          "status",
+          "==",
+          "published"
+        )
+      )
+    );
+
+
+    const noticeLastSeen =
+    getLastSeen("notices");
+
+
+    let noticeCount = 0;
+
+
+    noticeSnap.forEach(item => {
+
+      const data =
+      item.data();
+
+
+      const time =
+      timestampMillis(
+        data.createdAt
+      );
+
+
+      if(
+        time > 0 &&
+        (
+          noticeLastSeen === null ||
+          time > noticeLastSeen
+        )
+      ){
+
+        noticeCount++;
+
+      }
+
+    });
+
+
+    if(noticeCount > 0){
+
+      notifications.push({
+
+        type:"notice",
+
+        title:"📢 New Notice",
+
+        text:
+        noticeCount === 1
+        ? "A new notice has been published."
+        : noticeCount +
+          " new notices have been published.",
+
+        section:"notices",
+
+        count:noticeCount
+
+      });
+
+    }
+
+
+    /* =========================
+       LEAVE REPLIES
+    ========================= */
+
+    const leaveSnap =
+    await getDocs(
+      query(
+        collection(db,"leaveRequests"),
+        where(
+          "parentUid",
+          "==",
+          currentUser.uid
+        )
+      )
+    );
+
+
+    const leaveLastSeen =
+    getLastSeen("leave");
+
+
+    let leaveCount = 0;
+
+
+    leaveSnap.forEach(item => {
+
+      const data =
+      item.data();
+
+
+      const time =
+      timestampMillis(
+        data.repliedAt
+      );
+
+
+      if(
+        data.status &&
+        data.status !== "pending" &&
+        time > 0 &&
+        (
+          leaveLastSeen === null ||
+          time > leaveLastSeen
+        )
+      ){
+
+        leaveCount++;
+
+      }
+
+    });
+
+
+    if(leaveCount > 0){
+
+      notifications.push({
+
+        type:"leave",
+
+        title:"📝 Leave Application Update",
+
+        text:
+        leaveCount === 1
+        ? "Your leave application has been updated."
+        : leaveCount +
+          " leave applications have been updated.",
+
+        section:"leave",
+
+        count:leaveCount
+
+      });
+
+    }
+
+
+    /* =========================
+       USTHAD REPLIES
+    ========================= */
+
+    const messageSnap =
+    await getDocs(
+      query(
+        collection(db,"messages"),
+        where(
+          "parentUid",
+          "==",
+          currentUser.uid
+        )
+      )
+    );
+
+
+    const messageLastSeen =
+    getLastSeen("messages");
+
+
+    let messageCount = 0;
+
+
+    messageSnap.forEach(item => {
+
+      const data =
+      item.data();
+
+
+      const time =
+      timestampMillis(
+        data.repliedAt
+      );
+
+
+      if(
+        data.status === "replied" &&
+        time > 0 &&
+        (
+          messageLastSeen === null ||
+          time > messageLastSeen
+        )
+      ){
+
+        messageCount++;
+
+      }
+
+    });
+
+
+    if(messageCount > 0){
+
+      notifications.push({
+
+        type:"message",
+
+        title:"💬 New Usthad Reply",
+
+        text:
+        messageCount === 1
+        ? "Usthad has replied to your message."
+        : messageCount +
+          " new replies from Usthad.",
+
+        section:"messages",
+
+        count:messageCount
+
+      });
+
+    }
+
+
+    /* =========================
+       SHOW NOTIFICATIONS
+    ========================= */
+
+    area.innerHTML = "";
+
+
+    if(notifications.length === 0){
+
+      area.innerHTML = `
+
+        <div class="noNotification">
+
+          ✅ No new updates.
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    notifications.forEach(notification => {
+
+      const box =
+      document.createElement("div");
+
+
+      box.className =
+      "notification " +
+      notification.type;
+
+
+      box.onclick =
+      function(){
+
+        window.showSection(
+          notification.section
+        );
+
+      };
+
+
+      box.innerHTML = `
+
+        <div class="notificationTop">
+
+          <div class="notificationTitle">
+
+            ${notification.title}
+
+          </div>
+
+          <div class="badge">
+
+            ${notification.count}
+
+          </div>
+
+        </div>
+
+        <div class="notificationText">
+
+          ${notification.text}
+
+          <br>
+
+          Tap to view.
+
+        </div>
+
+      `;
+
+
+      area.appendChild(box);
+
+    });
+
+
+  }catch(error){
+
+    console.error(
+      "Parent notification error:",
+      error
+    );
+
+
+    area.innerHTML = `
+
+      <div class="noNotification">
+
+        ⚠️ Updates temporarily unavailable.
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/* =====================================================
    ATTENDANCE
-========================= */
+===================================================== */
 
 async function loadAttendance(){
 
@@ -991,6 +2281,7 @@ async function loadAttendance(){
   document.getElementById(
     "attendanceList"
   );
+
 
   list.innerHTML =
   "Loading...";
@@ -1022,6 +2313,7 @@ async function loadAttendance(){
       "<p class='empty'>No attendance records yet.</p>";
 
       return;
+
     }
 
 
@@ -1072,9 +2364,9 @@ async function loadAttendance(){
 }
 
 
-/* =========================
+/* =====================================================
    STUDY
-========================= */
+===================================================== */
 
 async function loadStudy(){
 
@@ -1082,6 +2374,7 @@ async function loadStudy(){
   document.getElementById(
     "studyList"
   );
+
 
   list.innerHTML =
   "Loading...";
@@ -1113,6 +2406,7 @@ async function loadStudy(){
       "<p class='empty'>No study progress records yet.</p>";
 
       return;
+
     }
 
 
@@ -1181,9 +2475,9 @@ async function loadStudy(){
 }
 
 
-/* =========================
+/* =====================================================
    RESULTS
-========================= */
+===================================================== */
 
 async function loadResults(){
 
@@ -1191,6 +2485,7 @@ async function loadResults(){
   document.getElementById(
     "resultList"
   );
+
 
   list.innerHTML =
   "Loading...";
@@ -1229,6 +2524,7 @@ async function loadResults(){
       "<p class='empty'>No published results yet.</p>";
 
       return;
+
     }
 
 
@@ -1279,9 +2575,9 @@ async function loadResults(){
 }
 
 
-/* =========================
+/* =====================================================
    NOTICES
-========================= */
+===================================================== */
 
 async function loadNotices(){
 
@@ -1289,6 +2585,7 @@ async function loadNotices(){
   document.getElementById(
     "noticeList"
   );
+
 
   list.innerHTML =
   "Loading...";
@@ -1320,6 +2617,7 @@ async function loadNotices(){
       "<p class='empty'>No published notices yet.</p>";
 
       return;
+
     }
 
 
@@ -1367,9 +2665,9 @@ async function loadNotices(){
 }
 
 
-/* =========================
+/* =====================================================
    SUBMIT LEAVE
-========================= */
+===================================================== */
 
 window.submitLeave =
 async function(){
@@ -1393,6 +2691,7 @@ async function(){
     );
 
     return;
+
   }
 
 
@@ -1463,9 +2762,9 @@ async function(){
 };
 
 
-/* =========================
+/* =====================================================
    LOAD LEAVES
-========================= */
+===================================================== */
 
 async function loadLeaves(){
 
@@ -1473,6 +2772,7 @@ async function loadLeaves(){
   document.getElementById(
     "leaveList"
   );
+
 
   list.innerHTML =
   "Loading...";
@@ -1504,6 +2804,7 @@ async function loadLeaves(){
       "<p class='empty'>No leave applications yet.</p>";
 
       return;
+
     }
 
 
@@ -1535,15 +2836,21 @@ async function loadLeaves(){
         <br>
 
         Status:
+
         <span class="status">
+
           ${l.status || "pending"}
+
         </span>
 
         <br>
 
         Usthad Reply:
+
         <strong>
+
           ${l.reply || "No reply yet"}
+
         </strong>
 
       `;
@@ -1566,9 +2873,9 @@ async function loadLeaves(){
 }
 
 
-/* =========================
+/* =====================================================
    SEND MESSAGE
-========================= */
+===================================================== */
 
 window.sendMessage =
 async function(){
@@ -1586,6 +2893,7 @@ async function(){
     );
 
     return;
+
   }
 
 
@@ -1648,9 +2956,9 @@ async function(){
 };
 
 
-/* =========================
+/* =====================================================
    LOAD MESSAGES
-========================= */
+===================================================== */
 
 async function loadMessages(){
 
@@ -1658,6 +2966,7 @@ async function loadMessages(){
   document.getElementById(
     "messageList"
   );
+
 
   list.innerHTML =
   "Loading...";
@@ -1689,6 +2998,7 @@ async function loadMessages(){
       "<p class='empty'>No messages yet.</p>";
 
       return;
+
     }
 
 
@@ -1746,9 +3056,9 @@ async function loadMessages(){
 }
 
 
-/* =========================
+/* =====================================================
    START
-========================= */
+===================================================== */
 
 startParentDashboard();
 
