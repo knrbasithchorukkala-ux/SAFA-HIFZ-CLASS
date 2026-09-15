@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAFA HIFZ CLASS - Parent</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f7f6;
+  color:#222;
+}
+
+.header{
+  background:#075e54;
+  color:white;
+  padding:20px;
+  text-align:center;
+}
+
+.header h1{margin:0}
+.header p{margin:7px 0 0}
+
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:15px;
+}
+
+.welcome{
+  background:white;
+  padding:20px;
+  margin:20px 0;
+  border-radius:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:14px;
+}
+
+.card{
+  background:white;
+  padding:20px 10px;
+  text-align:center;
+  border-radius:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+  cursor:pointer;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+}
+
+.icon{font-size:32px}
+
+.card h3{
+  margin:8px 0 4px;
+}
+
+.section{
+  display:none;
+  background:white;
+  margin-top:20px;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.section.active{
+  display:block;
+}
+
+button{
+  border:0;
+  border-radius:8px;
+  padding:12px 16px;
+  margin:5px 3px;
+  background:#075e54;
+  color:white;
+  cursor:pointer;
+}
+
+.back{
+  background:#777;
+}
+
+.logout{
+  width:100%;
+  margin-top:25px;
+  background:#b3261e;
+}
+
+.record{
+  border:1px solid #ddd;
+  padding:15px;
+  margin-top:10px;
+  border-radius:10px;
+  background:#fafafa;
+}
+
+.empty{
+  color:#777;
+  padding:10px 0;
+}
+
+#loadingScreen{
+  position:fixed;
+  inset:0;
+  background:#f4f7f6;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.loadingBox{
+  width:90%;
+  max-width:430px;
+  background:white;
+  padding:30px;
+  border-radius:15px;
+  text-align:center;
+  box-shadow:0 3px 15px rgba(0,0,0,.12);
+}
+
+.errorBox{
+  color:#b3261e;
+  line-height:1.6;
+}
+
+.infoBox{
+  color:#555;
+  line-height:1.6;
+}
+
+.studentProfile{
+  background:#f4f7f6;
+  padding:18px;
+  border-radius:10px;
+  margin-top:15px;
+}
+
+.uidBox{
+  background:#f4f7f6;
+  padding:10px;
+  border-radius:8px;
+  font-size:12px;
+  word-break:break-all;
+  text-align:left;
+  margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="loadingScreen">
+  <div class="loadingBox">
+    <h2>SAFA HIFZ CLASS</h2>
+    <p id="loadingText">Checking parent login...</p>
+  </div>
+</div>
+
+<div class="header">
+  <h1>SAFA HIFZ CLASS</h1>
+  <p>Parent Dashboard</p>
+</div>
+
+<div class="container">
+
+  <div class="welcome">
+    <h2>Assalamu Alaikum 👋</h2>
+    <p id="parentWelcome">Welcome Parent</p>
+  </div>
+
+  <div id="home">
+
+    <div class="grid">
+
+      <div class="card" onclick="showSection('profile')">
+        <div class="icon">👦</div>
+        <h3>My Child</h3>
+        <p>Profile</p>
+      </div>
+
+      <div class="card" onclick="showSection('attendance')">
+        <div class="icon">📅</div>
+        <h3>Attendance</h3>
+        <p>View</p>
+      </div>
+
+      <div class="card" onclick="showSection('study')">
+        <div class="icon">📖</div>
+        <h3>Study Progress</h3>
+        <p>View</p>
+      </div>
+
+      <div class="card" onclick="showSection('results')">
+        <div class="icon">📊</div>
+        <h3>Results</h3>
+        <p>View</p>
+      </div>
+
+      <div class="card" onclick="showSection('notices')">
+        <div class="icon">📢</div>
+        <h3>Notices</h3>
+        <p>View</p>
+      </div>
+
+      <div class="card" onclick="showSection('leave')">
+        <div class="icon">📝</div>
+        <h3>Leave</h3>
+        <p>Apply</p>
+      </div>
+
+      <div class="card" onclick="showSection('messages')">
+        <div class="icon">💬</div>
+        <h3>Messages</h3>
+        <p>Usthad</p>
+      </div>
+
+    </div>
+
+    <button class="logout" onclick="logout()">Logout</button>
+
+  </div>
+
+
+  <!-- PROFILE -->
+
+  <div id="profile" class="section">
+
+    <h2>👦 My Child</h2>
+
+    <button class="back" onclick="goHome()">← Back</button>
+
+    <div id="studentProfile">
+      Loading...
+    </div>
+
+  </div>
+
+
+  <!-- ATTENDANCE -->
+
+  <div id="attendance" class="section">
+
+    <h2>📅 Attendance</h2>
+
+    <button class="back" onclick="goHome()">← Back</button>
+
+    <div id="attendanceList">
+      Loading...
+    </div>
+
+  </div>
+
+
+  <!-- STUDY -->
+
+  <div id="study" class="section">
+
+    <h2>📖 Study Progress</h2>
+
+    <button class="back" onclick="goHome()">← Back</button>
+
+    <div id="studyList">
+      Loading...
+    </div>
+
+  </div>
+
+
+  <!-- RESULTS -->
+
+  <div id="results" class="section">
+
+    <h2>📊 Results</h2>
+
+    <button class="back" onclick="goHome()">← Back</button>
+
+    <div id="resultList">
+      Loading...
+    </div>
+
+  </div>
+
+
+  <!-- NOTICES -->
+
+  <div id="notices" class="section">
+
+    <h2>📢 Notices</h2>
+
+    <button class="back" onclick="goHome()">← Back</button>
+
+    <div id="noticeList">
+      Loading...
+    </div>
+
+  </div>
+
+
+  <!-- LEAVE -->
+
+  <div id="leave" class="section">
+
+    <h2>📝 Leave Application</h2>
+
+    <button class="back" onclick="goHome()">← Back</button>
+
+    <input
+      id="leaveDate"
+      type="date"
+      style="width:100%;padding:12px;margin:7px 0;border:1px solid #ccc;border-radius:8px;"
+    >
+
+    <textarea
+      id="leaveReason"
+      rows="5"
+      placeholder="Reason for leave"
+      style="width:100%;padding:12px;margin:7px 0;border:1px solid #ccc;border-radius:8px;"
+    ></textarea>
+
+    <button onclick="submitLeave()">
+      📝 Submit Leave
+    </button>
+
+    <hr>
+
+    <h3>My Leave Applications</h3>
+
+    <div id="leaveList">
+      Loading...
+    </div>
+
+  </div>
+
+
+  <!-- MESSAGES -->
+
+  <div id="messages" class="section">
+
+    <h2>💬 Message Usthad</h2>
+
+    <button class="back" onclick="goHome()">← Back</button>
+
+    <textarea
+      id="messageText"
+      rows="6"
+      placeholder="Write your message..."
+      style="width:100%;padding:12px;margin:7px 0;border:1px solid #ccc;border-radius:8px;"
+    ></textarea>
+
+    <button onclick="sendMessage()">
+      💬 Send Message
+    </button>
+
+    <hr>
+
+    <h3>My Messages</h3>
+
+    <div id="messageList">
+      Loading...
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="module">
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+  getAuth,
+  signOut,
+  setPersistence,
+  browserLocalPersistence
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
+
+  authDomain:
+  "safa-hifz-class-7e84b.firebaseapp.com",
+
+  projectId:
+  "safa-hifz-class-7e84b",
+
+  storageBucket:
+  "safa-hifz-class-7e84b.firebasestorage.app",
+
+  messagingSenderId:
+  "476801753196",
+
+  appId:
+  "1:476801753196:web:d4c8a8b0c1a4203606f849",
+
+  measurementId:
+  "G-ZTBTJCB5SR"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+let currentUser = null;
+let studentNumber = null;
+let studentData = null;
+
+
+const loadingScreen =
+document.getElementById("loadingScreen");
+
+const loadingText =
+document.getElementById("loadingText");
+
+
+async function startParentDashboard(){
+
+  try{
+
+    loadingText.textContent =
+    "Restoring secure login session...";
+
+    await setPersistence(
+      auth,
+      browserLocalPersistence
+    );
+
+    await auth.authStateReady();
+
+    currentUser = auth.currentUser;
+
+
+    if(!currentUser){
+
+      showError(
+        "Parent login session കണ്ടെത്താനായില്ല.",
+        "Login page-ൽ നിന്ന് വീണ്ടും login ചെയ്യുക."
+      );
+
+      return;
+    }
+
+
+    loadingText.textContent =
+    "Checking parent profile...";
+
+
+    /*
+      Parent profile is searched by
+      the authenticated user's UID.
+
+      The document must contain:
+
+      role = parent
+      studentNumber = 131
+    */
+
+
+    const usersQuery =
+    query(
+      collection(db,"users"),
+      where("__name__","==",currentUser.uid)
+    );
+
+
+    const userSnapshot =
+    await getDocs(usersQuery);
+
+
+    if(userSnapshot.empty){
+
+      showError(
+        "Parent profile കണ്ടെത്താനായില്ല.",
+        "Firestore users collection-ൽ ഈ account-ന്റെ document ഇല്ല."
+      );
+
+      return;
+    }
+
+
+    const parentDoc =
+    userSnapshot.docs[0].data();
+
+
+    if(parentDoc.role !== "parent"){
+
+      showError(
+        "Parent permission ഇല്ല.",
+        "ഈ account-ന്റെ role parent ആയി set ചെയ്തിട്ടില്ല."
+      );
+
+      return;
+    }
+
+
+    studentNumber =
+    String(parentDoc.studentNumber || "").trim();
+
+
+    if(!studentNumber){
+
+      showError(
+        "Student link കണ്ടെത്താനായില്ല.",
+        "Parent account-ൽ studentNumber നൽകിയിട്ടില്ല."
+      );
+
+      return;
+    }
+
+
+    loadingText.textContent =
+    "Loading your child's information...";
+
+
+    await loadStudent();
+
+
+    loadingScreen.style.display =
+    "none";
+
+
+    document.getElementById(
+      "parentWelcome"
+    ).textContent =
+    "Welcome " +
+    (parentDoc.name || "Parent") +
+    " 👋";
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showError(
+      "Dashboard തുറക്കാൻ കഴിഞ്ഞില്ല.",
+      error.message
+    );
+
+  }
+
+}
+
+
+function showError(title,details){
+
+  loadingScreen.innerHTML = `
+
+    <div class="loadingBox">
+
+      <h2>SAFA HIFZ CLASS</h2>
+
+      <div class="errorBox">
+
+        <h3>${title}</h3>
+
+        <p>${details}</p>
+
+      </div>
+
+      <div class="infoBox">
+
+        <p>
+        Please return to Login and try again.
+        </p>
+
+      </div>
+
+      <button
+        onclick="window.location.replace('index.html')"
+      >
+        Back to Login
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+async function loadStudent(){
+
+  const studentQuery =
+  query(
+    collection(db,"students"),
+    where(
+      "studentNumber",
+      "==",
+      studentNumber
+    )
+  );
+
+
+  const snapshot =
+  await getDocs(studentQuery);
+
+
+  if(snapshot.empty){
+
+    throw new Error(
+      "Student number " +
+      studentNumber +
+      " ഉള്ള student കണ്ടെത്താനായില്ല."
+    );
+
+  }
+
+
+  studentData =
+  snapshot.docs[0].data();
+
+
+  showStudentProfile();
+
+}
+
+
+function showStudentProfile(){
+
+  const box =
+  document.getElementById(
+    "studentProfile"
+  );
+
+
+  box.innerHTML = `
+
+    <div class="studentProfile">
+
+      <h2>
+        👦 ${studentData.name || "-"}
+      </h2>
+
+      <p>
+        <strong>Student Number:</strong>
+        ${studentData.studentNumber || "-"}
+      </p>
+
+      <p>
+        <strong>Class:</strong>
+        ${studentData.className || "-"}
+      </p>
+
+      <p>
+        <strong>Parent Email:</strong>
+        ${studentData.parentEmail || "-"}
+      </p>
+
+    </div>
+
+  `;
+
+}
+
+
+window.showSection =
+function(id){
+
+  document.getElementById(
+    "home"
+  ).style.display = "none";
+
+
+  document
+  .querySelectorAll(".section")
+  .forEach(
+    section =>
+    section.classList.remove("active")
+  );
+
+
+  const selected =
+  document.getElementById(id);
+
+
+  if(selected)
+  selected.classList.add("active");
+
+
+  if(id === "attendance")
+  loadAttendance();
+
+
+  if(id === "study")
+  loadStudy();
+
+
+  if(id === "results")
+  loadResults();
+
+
+  if(id === "notices")
+  loadNotices();
+
+
+  if(id === "leave")
+  loadLeaves();
+
+
+  if(id === "messages")
+  loadMessages();
+
+};
+
+
+window.goHome =
+function(){
+
+  document
+  .querySelectorAll(".section")
+  .forEach(
+    section =>
+    section.classList.remove("active")
+  );
+
+
+  document.getElementById(
+    "home"
+  ).style.display = "block";
+
+};
+
+
+window.logout =
+async function(){
+
+  try{
+
+    await signOut(auth);
+
+    window.location.replace(
+      "index.html"
+    );
+
+  }catch(error){
+
+    alert(
+      "Logout ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
+      error.message
+    );
+
+  }
+
+};
+
+
+async function loadAttendance(){
+
+  const list =
+  document.getElementById(
+    "attendanceList"
+  );
+
+  list.innerHTML =
+  "Loading...";
+
+
+  try{
+
+    const q =
+    query(
+      collection(db,"attendance"),
+      where(
+        "studentNumber",
+        "==",
+        studentNumber
+      )
+    );
+
+
+    const snapshot =
+    await getDocs(q);
+
+
+    list.innerHTML = "";
+
+
+    if(snapshot.empty){
+
+      list.innerHTML =
+      "<p class='empty'>No attendance records yet.</p>";
+
+      return;
+
+    }
+
+
+    snapshot.forEach(item => {
+
+      const a =
+      item.data();
+
+
+      const div =
+      document.createElement("div");
+
+
+      div.className =
+      "record";
+
+
+      div.innerHTML = `
+
+        <strong>
+          Date: ${a.date || "-"}
+        </strong>
+
+        <br>
+
+        Status:
+        <strong>
+          ${a.status || "-"}
+        </strong>
+
+      `;
+
+
+      list.appendChild(div);
+
+    });
+
+
+  }catch(error){
+
+    list.innerHTML =
+    "<p>" +
+    error.message +
+    "</p>";
+
+  }
+
+}
+
+
+async function loadStudy(){
+
+  const list =
+  document.getElementById(
+    "studyList"
+  );
+
+  list.innerHTML =
+  "Loading...";
+
+
+  try{
+
+    const q =
+    query(
+      collection(db,"studyProgress"),
+      where(
+        "studentNumber",
+        "==",
+        studentNumber
+      )
+    );
+
+
+    const snapshot =
+    await getDocs(q);
+
+
+    list.innerHTML = "";
+
+
+    if(snapshot.empty){
+
+      list.innerHTML =
+      "<p class='empty'>No study progress records yet.</p>";
+
+      return;
+
+    }
+
+
+    snapshot.forEach(item => {
+
+      const p =
+      item.data();
+
+
+      const div =
+      document.createElement("div");
+
+
+      div.className =
+      "record";
+
+
+      div.innerHTML = `
+
+        <strong>
+          Date: ${p.date || "-"}
+        </strong>
+
+        <br>
+        Surah / Juz:
+        ${p.surah || "-"}
+
+        <br>
+        New Lesson:
+        ${p.newLesson || "-"}
+
+        <br>
+        Revision:
+        ${p.revision || "-"}
+
+        <br>
+        Performance:
+        ${p.performance || "-"}
+
+        <br>
+        Teacher Note:
+        ${p.note || "-"}
+
+      `;
+
+
+      list.appendChild(div);
+
+    });
+
+
+  }catch(error){
+
+    list.innerHTML =
+    "<p>" +
+    error.message +
+    "</p>";
+
+  }
+
+}
+
+
+async function loadResults(){
+
+  const list =
+  document.getElementById(
+    "resultList"
+  );
+
+  list.innerHTML =
+  "Loading...";
+
+
+  try{
+
+    const q =
+    query(
+      collection(db,"results"),
+      where(
+        "studentNumber",
+        "==",
+        studentNumber
+      )
+    );
+
+
+    const snapshot =
+    await getDocs(q);
+
+
+    list.innerHTML = "";
+
+
+    if(snapshot.empty){
+
+      list.innerHTML =
+      "<p class='empty'>No results yet.</p>";
+
+      return;
+
+    }
+
+
+    snapshot.forEach(item => {
+
+      const r =
+      item.data();
+
+
+      if(r.status !== "published")
+      return;
+
+
+      const div =
+      document.createElement("div");
+
+
+      div.className =
+      "record";
+
+
+      div.innerHTML = `
+
+        <strong>
+          ${r.title || "-"}
+        </strong>
+
+        <br>
+
+        Mark / Grade:
+        <strong>
+          ${r.mark || "-"}
+        </strong>
+
+      `;
+
+
+      list.appendChild(div);
+
+    });
+
+  }catch(error){
+
+    list.innerHTML =
+    "<p>" +
+    error.message +
+    "</p>";
+
+  }
+
+}
+
+
+async function loadNotices(){
+
+  const list =
+  document.getElementById(
+    "noticeList"
+  );
+
+  list.innerHTML =
+  "Loading...";
+
+
+  try{
+
+    const snapshot =
+    await getDocs(
+      collection(db,"notices")
+    );
+
+
+    list.innerHTML = "";
+
+
+    if(snapshot.empty){
+
+      list.innerHTML =
+      "<p class='empty'>No notices yet.</p>";
+
+      return;
+
+    }
+
+
+    snapshot.forEach(item => {
+
+      const n =
+      item.data();
+
+
+      if(n.status !== "published")
+      return;
+
+
+      const div =
+      document.createElement("div");
+
+
+      div.className =
+      "record";
+
+
+      div.innerHTML = `
+
+        <strong>
+          ${n.title || "-"}
+        </strong>
+
+        <br><br>
+
+        ${n.text || "-"}
+
+      `;
+
+
+      list.appendChild(div);
+
+    });
+
+
+  }catch(error){
+
+    list.innerHTML =
+    "<p>" +
+    error.message +
+    "</p>";
+
+  }
+
+}
+
+
+window.submitLeave =
+async function(){
+
+  const date =
+  document.getElementById(
+    "leaveDate"
+  ).value;
+
+
+  const reason =
+  document.getElementById(
+    "leaveReason"
+  ).value.trim();
+
+
+  if(!date || !reason){
+
+    alert(
+      "Date and reason നൽകണം."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await addDoc(
+      collection(
+        db,
+        "leaveRequests"
+      ),
+      {
+
+        studentNumber:
+        studentNumber,
+
+        parentUid:
+        currentUser.uid,
+
+        parentEmail:
+        currentUser.email,
+
+        date:
+        date,
+
+        reason:
+        reason,
+
+        status:
+        "pending",
+
+        reply:
+        "",
+
+        createdAt:
+        serverTimestamp()
+
+      }
+    );
+
+
+    document.getElementById(
+      "leaveDate"
+    ).value = "";
+
+
+    document.getElementById(
+      "leaveReason"
+    ).value = "";
+
+
+    alert(
+      "Leave application submitted ✅"
+    );
+
+
+    loadLeaves();
+
+
+  }catch(error){
+
+    alert(
+      "Leave submit ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
+      error.message
+    );
+
+  }
+
+};
+
+
+async function loadLeaves(){
+
+  const list =
+  document.getElementById(
+    "leaveList"
+  );
+
+  list.innerHTML =
+  "Loading...";
+
+
+  try{
+
+    const q =
+    query(
+      collection(db,"leaveRequests"),
+      where(
+        "parentUid",
+        "==",
+        currentUser.uid
+      )
+    );
+
+
+    const snapshot =
+    await getDocs(q);
+
+
+    list.innerHTML = "";
+
+
+    if(snapshot.empty){
+
+      list.innerHTML =
+      "<p class='empty'>No leave applications yet.</p>";
+
+      return;
+
+    }
+
+
+    snapshot.forEach(item => {
+
+      const l =
+      item.data();
+
+
+      const div =
+      document.createElement("div");
+
+
+      div.className =
+      "record";
+
+
+      div.innerHTML = `
+
+        <strong>
+          Date: ${l.date || "-"}
+        </strong>
+
+        <br>
+
+        Reason:
+        ${l.reason || "-"}
+
+        <br>
+
+        Status:
+        <strong>
+          ${l.status || "pending"}
+        </strong>
+
+        <br>
+
+        Usthad Reply:
+        ${l.reply || "No reply yet"}
+
+      `;
+
+
+      list.appendChild(div);
+
+    });
+
+
+  }catch(error){
+
+    list.innerHTML =
+    "<p>" +
+    error.message +
+    "</p>";
+
+  }
+
+}
+
+
+window.sendMessage =
+async function(){
+
+  const text =
+  document.getElementById(
+    "messageText"
+  ).value.trim();
+
+
+  if(!text){
+
+    alert(
+      "Message എഴുതുക."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await addDoc(
+      collection(
+        db,
+        "messages"
+      ),
+      {
+
+        parentUid:
+        currentUser.uid,
+
+        parentEmail:
+        currentUser.email,
+
+        studentNumber:
+        studentNumber,
+
+        text:
+        text,
+
+        reply:
+        "",
+
+        status:
+        "unread",
+
+        createdAt:
+        serverTimestamp()
+
+      }
+    );
+
+
+    document.getElementById(
+      "messageText"
+    ).value = "";
+
+
+    alert(
+      "Message sent successfully ✅"
+    );
+
+
+    loadMessages();
+
+
+  }catch(error){
+
+    alert(
+      "Message send ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
+      error.message
+    );
+
+  }
+
+};
+
+
+async function loadMessages(){
+
+  const list =
+  document.getElementById(
+    "messageList"
+  );
+
+  list.innerHTML =
+  "Loading...";
+
+
+  try{
+
+    const q =
+    query(
+      collection(db,"messages"),
+      where(
+        "parentUid",
+        "==",
+        currentUser.uid
+      )
+    );
+
+
+    const snapshot =
+    await getDocs(q);
+
+
+    list.innerHTML = "";
+
+
+    if(snapshot.empty){
+
+      list.innerHTML =
+      "<p class='empty'>No messages yet.</p>";
+
+      return;
+
+    }
+
+
+    snapshot.forEach(item => {
+
+      const m =
+      item.data();
+
+
+      const div =
+      document.createElement("div");
+
+
+      div.className =
+      "record";
+
+
+      div.innerHTML = `
+
+        <strong>
+          Your Message
+        </strong>
+
+        <br>
+
+        ${m.text || "-"}
+
+        <br><br>
+
+        <strong>
+          Usthad Reply
+        </strong>
+
+        <br>
+
+        ${m.reply || "No reply yet"}
+
+      `;
+
+
+      list.appendChild(div);
+
+    });
+
+
+  }catch(error){
+
+    list.innerHTML =
+    "<p>" +
+    error.message +
+    "</p>";
+
+  }
+
+}
+
+
+startParentDashboard();
+
+</script>
+
+</body>
+</html>
