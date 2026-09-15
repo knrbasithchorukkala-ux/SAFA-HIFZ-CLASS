@@ -5,152 +5,667 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SAFA HIFZ CLASS - Usthad</title>
+<title>SAFA HIFZ CLASS | Admin Dashboard</title>
 
 <style>
 
-* {
-  box-sizing: border-box;
+:root{
+  --primary:#0f766e;
+  --primary-dark:#115e59;
+  --secondary:#134e4a;
+  --accent:#d4af37;
+  --bg:#f4f7f8;
+  --card:#ffffff;
+  --text:#172033;
+  --muted:#64748b;
+  --border:#e2e8f0;
+  --danger:#dc2626;
+  --warning:#d97706;
+  --success:#15803d;
+  --info:#2563eb;
+  --sidebar:260px;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f1f5f9;
-  color: #172033;
+*{
+  box-sizing:border-box;
 }
 
-header {
-  background: #0f766e;
-  color: white;
-  padding: 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
+body{
+  margin:0;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
 
-header h2 {
-  margin: 0;
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:var(--sidebar);
+  background:
+    linear-gradient(
+      180deg,
+      #0b4f4a 0%,
+      #0f766e 55%,
+      #115e59 100%
+    );
+  color:white;
+  z-index:1000;
+  display:flex;
+  flex-direction:column;
+  transition:.3s;
 }
 
-.logout {
-  background: #dc2626;
-  color: white;
-  border: 0;
-  padding: 10px 15px;
-  border-radius: 8px;
+.brand{
+  padding:25px 20px;
+  border-bottom:1px solid rgba(255,255,255,.15);
 }
 
-nav {
-  background: white;
-  padding: 10px;
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  border-bottom: 1px solid #ddd;
+.brand-title{
+  font-size:21px;
+  font-weight:800;
+  letter-spacing:.5px;
 }
 
-nav button {
-  white-space: nowrap;
-  border: 0;
-  padding: 11px 15px;
-  border-radius: 8px;
-  background: #e2e8f0;
-  cursor: pointer;
+.brand-subtitle{
+  margin-top:5px;
+  font-size:12px;
+  opacity:.75;
 }
 
-nav button.active {
-  background: #0f766e;
-  color: white;
+.menu{
+  padding:18px 12px;
+  flex:1;
+  overflow-y:auto;
 }
 
-main {
-  padding: 18px;
-  max-width: 1200px;
-  margin: auto;
+.menu button{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:rgba(255,255,255,.78);
+  text-align:left;
+  padding:13px 15px;
+  margin-bottom:5px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:14px;
+  transition:.2s;
 }
 
-.section {
-  display: none;
+.menu button:hover{
+  background:rgba(255,255,255,.10);
+  color:white;
 }
 
-.section.active {
-  display: block;
+.menu button.active{
+  background:white;
+  color:var(--primary);
+  font-weight:700;
 }
 
-.card {
-  background: white;
-  padding: 18px;
-  border-radius: 14px;
-  margin-bottom: 18px;
-  box-shadow: 0 3px 12px rgba(0,0,0,.08);
+.menu-icon{
+  display:inline-block;
+  width:28px;
+  font-size:16px;
+}
+
+.sidebar-footer{
+  padding:15px;
+  border-top:1px solid rgba(255,255,255,.15);
+  font-size:12px;
+  opacity:.7;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+  margin-left:var(--sidebar);
+  min-height:100vh;
+}
+
+.topbar{
+  height:76px;
+  background:white;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 28px;
+  position:sticky;
+  top:0;
+  z-index:900;
+}
+
+.page-title{
+  font-size:20px;
+  font-weight:800;
+}
+
+.page-subtitle{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:3px;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.admin-profile{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.avatar{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#dff5f2;
+  color:var(--primary);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+}
+
+.admin-name{
+  font-size:13px;
+  font-weight:700;
+}
+
+.admin-role{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.logout-btn{
+  border:0;
+  background:#fee2e2;
+  color:#991b1b;
+  padding:9px 13px;
+  border-radius:9px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+  padding:28px;
+  max-width:1500px;
+  margin:auto;
+}
+
+.section{
+  display:none;
+}
+
+.section.active{
+  display:block;
+}
+
+.section-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.section-heading h2{
+  margin:0;
+  font-size:22px;
+}
+
+.section-heading p{
+  margin:5px 0 0;
+  color:var(--muted);
+  font-size:13px;
+}
+
+
+/* =========================
+   STAT CARDS
+========================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:
+    repeat(4,minmax(0,1fr));
+  gap:18px;
+  margin-bottom:25px;
+}
+
+.stat-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 4px 15px rgba(15,23,42,.04);
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:600;
+}
+
+.stat-number{
+  font-size:28px;
+  font-weight:800;
+  margin-top:5px;
+}
+
+.stat-icon{
+  width:48px;
+  height:48px;
+  border-radius:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  background:#e6f6f4;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:22px;
+  margin-bottom:20px;
+  box-shadow:0 4px 15px rgba(15,23,42,.035);
+}
+
+.card-title{
+  font-size:17px;
+  font-weight:800;
+  margin:0 0 17px;
+}
+
+.grid-2{
+  display:grid;
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+  gap:20px;
+}
+
+
+/* =========================
+   FORMS
+========================= */
+
+.form-grid{
+  display:grid;
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+  gap:15px;
+}
+
+.form-group{
+  margin-bottom:4px;
+}
+
+.form-group.full{
+  grid-column:1/-1;
+}
+
+label{
+  display:block;
+  font-size:12px;
+  font-weight:700;
+  color:#475569;
+  margin-bottom:7px;
 }
 
 input,
 select,
-textarea {
-  width: 100%;
-  padding: 11px;
-  margin-top: 7px;
-  margin-bottom: 12px;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
-  font-size: 15px;
+textarea{
+  width:100%;
+  border:1px solid #cbd5e1;
+  border-radius:9px;
+  padding:11px 12px;
+  font-size:14px;
+  background:white;
+  color:var(--text);
+  outline:none;
+  transition:.2s;
 }
 
-textarea {
-  min-height: 90px;
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(15,118,110,.10);
 }
 
-.save {
-  background: #0f766e;
-  color: white;
-  border: 0;
-  padding: 11px 18px;
-  border-radius: 8px;
+textarea{
+  min-height:100px;
+  resize:vertical;
 }
 
-.delete {
-  background: #dc2626;
-  color: white;
-  border: 0;
-  padding: 8px 12px;
-  border-radius: 7px;
+.primary-btn{
+  background:var(--primary);
+  color:white;
+  border:0;
+  padding:11px 18px;
+  border-radius:9px;
+  font-weight:700;
+  cursor:pointer;
 }
 
-.reply {
-  background: #2563eb;
-  color: white;
-  border: 0;
-  padding: 8px 12px;
-  border-radius: 7px;
+.primary-btn:hover{
+  background:var(--primary-dark);
 }
 
-.item {
-  border: 1px solid #e2e8f0;
-  padding: 14px;
-  border-radius: 10px;
-  margin-top: 10px;
+.secondary-btn{
+  background:#e2e8f0;
+  color:#334155;
+  border:0;
+  padding:10px 15px;
+  border-radius:9px;
+  font-weight:700;
+  cursor:pointer;
 }
 
-.small {
-  color: #64748b;
-  font-size: 13px;
+.danger-btn{
+  background:#fee2e2;
+  color:#991b1b;
+  border:0;
+  padding:8px 12px;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
 }
 
-.badge {
-  display: inline-block;
-  padding: 5px 9px;
-  border-radius: 20px;
-  background: #dcfce7;
-  color: #166534;
-  font-size: 12px;
+.blue-btn{
+  background:#dbeafe;
+  color:#1d4ed8;
+  border:0;
+  padding:8px 12px;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
 }
 
-.empty {
-  color: #64748b;
-  padding: 15px;
+.green-btn{
+  background:#dcfce7;
+  color:#166534;
+  border:0;
+  padding:8px 12px;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap{
+  width:100%;
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:650px;
+}
+
+th{
+  background:#f8fafc;
+  color:#475569;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  text-align:left;
+  padding:13px;
+  border-bottom:1px solid var(--border);
+}
+
+td{
+  padding:13px;
+  border-bottom:1px solid #eef2f7;
+  font-size:13px;
+}
+
+tr:hover td{
+  background:#fafdfd;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.badge-success{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.badge-warning{
+  background:#fef3c7;
+  color:#92400e;
+}
+
+.badge-danger{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.badge-info{
+  background:#dbeafe;
+  color:#1d4ed8;
+}
+
+.badge-neutral{
+  background:#f1f5f9;
+  color:#475569;
+}
+
+
+/* =========================
+   REQUEST / MESSAGE
+========================= */
+
+.request-card{
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:17px;
+  margin-bottom:12px;
+}
+
+.request-head{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.request-name{
+  font-weight:800;
+}
+
+.meta{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.8;
+}
+
+.message-box{
+  background:#f8fafc;
+  padding:12px;
+  border-radius:10px;
+  margin:10px 0;
+  line-height:1.6;
+  font-size:13px;
+}
+
+.reply-box{
+  background:#ecfdf5;
+  border-left:3px solid var(--primary);
+  padding:10px 12px;
+  border-radius:7px;
+  margin-top:10px;
+  font-size:13px;
+}
+
+
+/* =========================
+   EMPTY / LOADING
+========================= */
+
+.empty{
+  padding:30px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.loading{
+  padding:25px;
+  text-align:center;
+  color:var(--muted);
+}
+
+.notification-dot{
+  display:inline-flex;
+  min-width:19px;
+  height:19px;
+  align-items:center;
+  justify-content:center;
+  padding:0 5px;
+  border-radius:20px;
+  background:#ef4444;
+  color:white;
+  font-size:10px;
+  margin-left:6px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+.mobile-menu{
+  display:none;
+  border:0;
+  background:#e6f6f4;
+  color:var(--primary);
+  width:40px;
+  height:40px;
+  border-radius:9px;
+  font-size:20px;
+}
+
+.overlay{
+  display:none;
+}
+
+@media(max-width:1000px){
+
+  .stats{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+}
+
+@media(max-width:760px){
+
+  :root{
+    --sidebar:250px;
+  }
+
+  .sidebar{
+    transform:translateX(-100%);
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .mobile-menu{
+    display:block;
+  }
+
+  .topbar{
+    padding:0 15px;
+  }
+
+  .content{
+    padding:17px;
+  }
+
+  .admin-profile{
+    display:none;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .grid-2,
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .overlay.show{
+    display:block;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.35);
+    z-index:999;
+  }
+
 }
 
 </style>
@@ -159,321 +674,956 @@ textarea {
 
 <body>
 
-<header>
 
-<h2>SAFA HIFZ CLASS - Usthad</h2>
+<!-- SIDEBAR -->
 
-<button class="logout" id="logoutBtn">
-Logout
-</button>
+<aside class="sidebar" id="sidebar">
 
-</header>
+  <div class="brand">
 
+    <div class="brand-title">
+      SAFA HIFZ CLASS
+    </div>
 
-<nav>
+    <div class="brand-subtitle">
+      Hifz & Islamic Education Management
+    </div>
 
-<button data-section="home" class="active">Home</button>
-<button data-section="students">Students</button>
-<button data-section="attendance">Attendance</button>
-<button data-section="study">Study</button>
-<button data-section="results">Results</button>
-<button data-section="notices">Notices</button>
-<button data-section="leave">Leave</button>
-<button data-section="messages">Messages</button>
-
-</nav>
+  </div>
 
 
-<main>
+  <div class="menu">
+
+    <button class="active" data-section="home">
+      <span class="menu-icon">⌂</span>
+      Dashboard
+    </button>
+
+    <button data-section="students">
+      <span class="menu-icon">👨‍🎓</span>
+      Students
+    </button>
+
+    <button data-section="attendance">
+      <span class="menu-icon">✓</span>
+      Attendance
+    </button>
+
+    <button data-section="study">
+      <span class="menu-icon">📖</span>
+      Hifz Progress
+    </button>
+
+    <button data-section="results">
+      <span class="menu-icon">🏆</span>
+      Results
+    </button>
+
+    <button data-section="notices">
+      <span class="menu-icon">📢</span>
+      Notices
+    </button>
+
+    <button data-section="leave">
+      <span class="menu-icon">📅</span>
+      Leave Requests
+      <span id="leaveBadge"></span>
+    </button>
+
+    <button data-section="messages">
+      <span class="menu-icon">💬</span>
+      Parent Messages
+      <span id="messageBadge"></span>
+    </button>
+
+  </div>
 
 
-<!-- HOME -->
+  <div class="sidebar-footer">
+    SAFA HIFZ CLASS<br>
+    Administration Panel
+  </div>
 
-<section id="home" class="section active">
+</aside>
 
-<div class="card">
 
-<h2>Assalamu Alaikum</h2>
+<div class="overlay" id="overlay"></div>
 
-<p>
-SAFA HIFZ CLASS Admin Dashboard
-</p>
 
-<p>
-Students, attendance, study progress, results,
-notices, leave requests and parent messages
-ഇവിടെ നിന്ന് manage ചെയ്യാം.
-</p>
+<!-- MAIN -->
+
+<div class="main">
+
+
+  <!-- TOPBAR -->
+
+  <header class="topbar">
+
+    <div style="display:flex;align-items:center;gap:12px;">
+
+      <button
+        class="mobile-menu"
+        id="mobileMenu">
+        ☰
+      </button>
+
+      <div>
+
+        <div class="page-title"
+             id="pageTitle">
+          Dashboard
+        </div>
+
+        <div class="page-subtitle">
+          SAFA HIFZ CLASS · Administration
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="top-actions">
+
+      <div class="admin-profile">
+
+        <div class="avatar">
+          U
+        </div>
+
+        <div>
+
+          <div class="admin-name">
+            Usthad
+          </div>
+
+          <div class="admin-role">
+            Administrator
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="logout-btn"
+        id="logoutBtn">
+        Logout
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <main class="content">
+
+
+    <!-- HOME -->
+
+    <section
+      id="home"
+      class="section active">
+
+      <div class="section-heading">
+
+        <div>
+
+          <h2>
+            Welcome, Usthad
+          </h2>
+
+          <p>
+            Manage your Hifz class from one place.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="stats">
+
+        <div class="stat-card">
+
+          <div>
+            <div class="stat-label">
+              TOTAL STUDENTS
+            </div>
+
+            <div
+              class="stat-number"
+              id="totalStudents">
+              0
+            </div>
+          </div>
+
+          <div class="stat-icon">
+            👨‍🎓
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div>
+            <div class="stat-label">
+              ATTENDANCE RECORDS
+            </div>
+
+            <div
+              class="stat-number"
+              id="totalAttendance">
+              0
+            </div>
+          </div>
+
+          <div class="stat-icon">
+            ✓
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div>
+            <div class="stat-label">
+              PENDING LEAVE
+            </div>
+
+            <div
+              class="stat-number"
+              id="pendingLeaves">
+              0
+            </div>
+          </div>
+
+          <div class="stat-icon">
+            📅
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div>
+            <div class="stat-label">
+              PARENT MESSAGES
+            </div>
+
+            <div
+              class="stat-number"
+              id="totalMessages">
+              0
+            </div>
+          </div>
+
+          <div class="stat-icon">
+            💬
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="grid-2">
+
+        <div class="card">
+
+          <h3 class="card-title">
+            Quick Overview
+          </h3>
+
+          <p style="color:#64748b;line-height:1.8;font-size:14px;">
+            Welcome to the official
+            SAFA HIFZ CLASS administration
+            portal. Use the menu to manage
+            students, attendance, Hifz progress,
+            results, notices and parent communication.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3 class="card-title">
+            Administration
+          </h3>
+
+          <p style="color:#64748b;line-height:1.8;font-size:14px;">
+            All parent accounts are securely
+            connected to their respective
+            students through Firebase Authentication
+            and Firestore security rules.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- STUDENTS -->
+
+    <section
+      id="students"
+      class="section">
+
+      <div class="section-heading">
+
+        <div>
+          <h2>Students</h2>
+          <p>Manage student records.</p>
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3 class="card-title">
+          Add New Student
+        </h3>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label>
+              Student Number
+            </label>
+
+            <input
+              id="studentNumber"
+              placeholder="Example: 131">
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Student Name
+            </label>
+
+            <input
+              id="studentName"
+              placeholder="Student full name">
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Class
+            </label>
+
+            <input
+              id="className"
+              placeholder="Example: HIFZ A">
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Parent Email
+            </label>
+
+            <input
+              id="parentEmail"
+              type="email"
+              placeholder="Parent email">
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="primary-btn"
+          id="saveStudent">
+
+          + Add Student
+
+        </button>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3 class="card-title">
+          Student Directory
+        </h3>
+
+        <div
+          class="table-wrap"
+          id="studentList">
+
+          <div class="loading">
+            Loading students...
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ATTENDANCE -->
+
+    <section
+      id="attendance"
+      class="section">
+
+      <div class="section-heading">
+
+        <div>
+          <h2>Attendance</h2>
+          <p>Record daily attendance.</p>
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3 class="card-title">
+          Record Attendance
+        </h3>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label>
+              Student Number
+            </label>
+
+            <input
+              id="attendanceStudent">
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Date
+            </label>
+
+            <input
+              type="date"
+              id="attendanceDate">
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Status
+            </label>
+
+            <select
+              id="attendanceStatus">
+
+              <option value="Present">
+                Present
+              </option>
+
+              <option value="Absent">
+                Absent
+              </option>
+
+              <option value="Leave">
+                Leave
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="primary-btn"
+          id="saveAttendance">
+
+          Save Attendance
+
+        </button>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3 class="card-title">
+          Attendance Records
+        </h3>
+
+        <div
+          class="table-wrap"
+          id="attendanceList">
+
+          <div class="loading">
+            Loading...
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- STUDY -->
+
+    <section
+      id="study"
+      class="section">
+
+      <div class="section-heading">
+
+        <div>
+          <h2>Hifz Progress</h2>
+          <p>Track daily Qur'an memorisation progress.</p>
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3 class="card-title">
+          Add Study Progress
+        </h3>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label>
+              Student Number
+            </label>
+
+            <input id="studyStudent">
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Date
+            </label>
+
+            <input
+              type="date"
+              id="studyDate">
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Surah
+            </label>
+
+            <input id="studySurah">
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              New Lesson
+            </label>
+
+            <input id="newLesson">
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Revision
+            </label>
+
+            <input id="revision">
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Performance
+            </label>
+
+            <select id="performance">
+
+              <option>
+                Excellent
+              </option>
+
+              <option>
+                Very Good
+              </option>
+
+              <option>
+                Good
+              </option>
+
+              <option>
+                Needs Improvement
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group full">
+
+            <label>
+              Teacher's Note
+            </label>
+
+            <textarea
+              id="studyNote"></textarea>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="primary-btn"
+          id="saveStudy">
+
+          Save Progress
+
+        </button>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3 class="card-title">
+          Hifz Progress Records
+        </h3>
+
+        <div
+          class="table-wrap"
+          id="studyList">
+
+          <div class="loading">
+            Loading...
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- RESULTS -->
+
+    <section
+      id="results"
+      class="section">
+
+      <div class="section-heading">
+
+        <div>
+          <h2>Results</h2>
+          <p>Manage student examination results.</p>
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3 class="card-title">
+          Add Result
+        </h3>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label>
+              Student Number
+            </label>
+
+            <input id="resultStudent">
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Result Title
+            </label>
+
+            <input
+              id="resultTitle"
+              placeholder="Monthly Exam">
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Mark
+            </label>
+
+            <input id="resultMark">
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Status
+            </label>
+
+            <select id="resultStatus">
+
+              <option value="published">
+                Published
+              </option>
+
+              <option value="draft">
+                Draft
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="primary-btn"
+          id="saveResult">
+
+          Save Result
+
+        </button>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3 class="card-title">
+          Result Records
+        </h3>
+
+        <div
+          class="table-wrap"
+          id="resultList">
+
+          <div class="loading">
+            Loading...
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- NOTICES -->
+
+    <section
+      id="notices"
+      class="section">
+
+      <div class="section-heading">
+
+        <div>
+          <h2>Notices</h2>
+          <p>Publish announcements to parents.</p>
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3 class="card-title">
+          Create Notice
+        </h3>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label>
+              Title
+            </label>
+
+            <input id="noticeTitle">
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Status
+            </label>
+
+            <select id="noticeStatus">
+
+              <option value="published">
+                Published
+              </option>
+
+              <option value="draft">
+                Draft
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group full">
+
+            <label>
+              Notice
+            </label>
+
+            <textarea id="noticeText"></textarea>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="primary-btn"
+          id="saveNotice">
+
+          Publish Notice
+
+        </button>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3 class="card-title">
+          Notice Archive
+        </h3>
+
+        <div id="noticeList">
+
+          <div class="loading">
+            Loading...
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- LEAVE -->
+
+    <section
+      id="leave"
+      class="section">
+
+      <div class="section-heading">
+
+        <div>
+          <h2>Leave Requests</h2>
+          <p>Review and respond to parent leave applications.</p>
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div id="leaveList">
+
+          <div class="loading">
+            Loading...
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- MESSAGES -->
+
+    <section
+      id="messages"
+      class="section">
+
+      <div class="section-heading">
+
+        <div>
+          <h2>Parent Messages</h2>
+          <p>Communicate directly with parents.</p>
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div id="messageList">
+
+          <div class="loading">
+            Loading...
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </main>
 
 </div>
-
-</section>
-
-
-<!-- STUDENTS -->
-
-<section id="students" class="section">
-
-<div class="card">
-
-<h2>Add Student</h2>
-
-<label>Student Number</label>
-<input id="studentNumber" placeholder="Example: 131">
-
-<label>Student Name</label>
-<input id="studentName" placeholder="Student name">
-
-<label>Class</label>
-<input id="className" placeholder="Example: HIFZ A">
-
-<label>Parent Email</label>
-<input id="parentEmail" placeholder="Parent email">
-
-<button class="save" id="saveStudent">
-Save Student
-</button>
-
-</div>
-
-
-<div class="card">
-
-<h2>Students</h2>
-
-<div id="studentList">
-Loading...
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ATTENDANCE -->
-
-<section id="attendance" class="section">
-
-<div class="card">
-
-<h2>Attendance</h2>
-
-<label>Student Number</label>
-<input id="attendanceStudent">
-
-<label>Date</label>
-<input type="date" id="attendanceDate">
-
-<label>Status</label>
-
-<select id="attendanceStatus">
-
-<option value="Present">Present</option>
-<option value="Absent">Absent</option>
-<option value="Leave">Leave</option>
-
-</select>
-
-<button class="save" id="saveAttendance">
-Save Attendance
-</button>
-
-</div>
-
-
-<div class="card">
-
-<h2>Attendance Records</h2>
-
-<div id="attendanceList">
-Loading...
-</div>
-
-</div>
-
-</section>
-
-
-<!-- STUDY -->
-
-<section id="study" class="section">
-
-<div class="card">
-
-<h2>Study Progress</h2>
-
-<label>Student Number</label>
-<input id="studyStudent">
-
-<label>Date</label>
-<input type="date" id="studyDate">
-
-<label>Surah</label>
-<input id="studySurah">
-
-<label>New Lesson</label>
-<input id="newLesson">
-
-<label>Revision</label>
-<input id="revision">
-
-<label>Performance</label>
-<select id="performance">
-
-<option>Excellent</option>
-<option>Very Good</option>
-<option>Good</option>
-<option>Needs Improvement</option>
-
-</select>
-
-<label>Note</label>
-<textarea id="studyNote"></textarea>
-
-<button class="save" id="saveStudy">
-Save Study
-</button>
-
-</div>
-
-
-<div class="card">
-
-<h2>Study Records</h2>
-
-<div id="studyList">
-Loading...
-</div>
-
-</div>
-
-</section>
-
-
-<!-- RESULTS -->
-
-<section id="results" class="section">
-
-<div class="card">
-
-<h2>Publish Result</h2>
-
-<label>Student Number</label>
-<input id="resultStudent">
-
-<label>Result Title</label>
-<input id="resultTitle" placeholder="Monthly Exam">
-
-<label>Mark</label>
-<input id="resultMark">
-
-<label>Status</label>
-
-<select id="resultStatus">
-
-<option value="published">Published</option>
-<option value="draft">Draft</option>
-
-</select>
-
-<button class="save" id="saveResult">
-Save Result
-</button>
-
-</div>
-
-
-<div class="card">
-
-<h2>Results</h2>
-
-<div id="resultList">
-Loading...
-</div>
-
-</div>
-
-</section>
-
-
-<!-- NOTICES -->
-
-<section id="notices" class="section">
-
-<div class="card">
-
-<h2>Notice</h2>
-
-<label>Title</label>
-<input id="noticeTitle">
-
-<label>Notice</label>
-<textarea id="noticeText"></textarea>
-
-<label>Status</label>
-
-<select id="noticeStatus">
-
-<option value="published">Published</option>
-<option value="draft">Draft</option>
-
-</select>
-
-<button class="save" id="saveNotice">
-Publish Notice
-</button>
-
-</div>
-
-
-<div class="card">
-
-<h2>Notices</h2>
-
-<div id="noticeList">
-Loading...
-</div>
-
-</div>
-
-</section>
-
-
-<!-- LEAVE -->
-
-<section id="leave" class="section">
-
-<div class="card">
-
-<h2>Leave Requests</h2>
-
-<div id="leaveList">
-Loading...
-</div>
-
-</div>
-
-</section>
-
-
-<!-- MESSAGES -->
-
-<section id="messages" class="section">
-
-<div class="card">
-
-<h2>Parent Messages</h2>
-
-<div id="messageList">
-Loading...
-</div>
-
-</div>
-
-</section>
-
-
-</main>
 
 
 <script type="module">
@@ -506,375 +1656,669 @@ from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
-  authDomain: "safa-hifz-class-7e84b.firebaseapp.com",
-  projectId: "safa-hifz-class-7e84b",
-  storageBucket: "safa-hifz-class-7e84b.firebasestorage.app",
-  messagingSenderId: "476801753196",
-  appId: "1:476801753196:web:d4c8a8b0c1a4203606f849",
-  measurementId: "G-ZTBTJCB5SR"
+
+  apiKey:
+    "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
+
+  authDomain:
+    "safa-hifz-class-7e84b.firebaseapp.com",
+
+  projectId:
+    "safa-hifz-class-7e84b",
+
+  storageBucket:
+    "safa-hifz-class-7e84b.firebasestorage.app",
+
+  messagingSenderId:
+    "476801753196",
+
+  appId:
+    "1:476801753196:web:d4c8a8b0c1a4203606f849",
+
+  measurementId:
+    "G-ZTBTJCB5SR"
+
 };
 
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+const app =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(app);
+
+const db =
+  getFirestore(app);
 
 
-function escapeHtml(value) {
+/* =========================
+   HELPERS
+========================= */
+
+function escapeHtml(value){
 
   return String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
 
-function formatDate(timestamp) {
+function statusBadge(status){
 
-  if (!timestamp) return "";
+  const value =
+    String(status || "")
+      .toLowerCase();
 
-  try {
-    return timestamp.toDate().toLocaleString();
-  } catch {
-    return "";
+  let cls="badge-neutral";
+
+  if(
+    value==="present" ||
+    value==="published" ||
+    value==="approved" ||
+    value==="replied"
+  ){
+    cls="badge-success";
   }
+
+  if(
+    value==="pending" ||
+    value==="draft"
+  ){
+    cls="badge-warning";
+  }
+
+  if(
+    value==="absent" ||
+    value==="rejected"
+  ){
+    cls="badge-danger";
+  }
+
+  return `
+    <span class="badge ${cls}">
+      ${escapeHtml(status)}
+    </span>
+  `;
 
 }
 
 
-/* AUTH */
+/* =========================
+   AUTH
+========================= */
 
-onAuthStateChanged(auth, async (user) => {
+onAuthStateChanged(
+  auth,
+  async user=>{
 
-  if (!user) {
+    if(!user){
 
-    window.location.href = "index.html";
-    return;
-
-  }
-
-  try {
-
-    const userSnap =
-      await getDoc(doc(db, "users", user.uid));
-
-    if (!userSnap.exists()) {
-
-      alert("User profile not found.");
-      await signOut(auth);
+      window.location.href="index.html";
       return;
 
     }
 
-    const data = userSnap.data();
 
-    if (
-      String(data.role || "")
-        .trim()
-        .toLowerCase() !== "admin"
-    ) {
+    try{
 
-      alert("Admin access only.");
-      await signOut(auth);
-      return;
+      const snap=
+        await getDoc(
+          doc(db,"users",user.uid)
+        );
+
+
+      if(!snap.exists()){
+
+        alert("User profile not found.");
+        await signOut(auth);
+        return;
+
+      }
+
+
+      const data=snap.data();
+
+
+      if(
+        String(data.role||"")
+          .trim()
+          .toLowerCase()!=="admin"
+      ){
+
+        alert("Admin access only.");
+        await signOut(auth);
+        return;
+
+      }
+
+
+      loadStudents();
+      loadAttendance();
+      loadStudy();
+      loadResults();
+      loadNotices();
+      listenLeaves();
+      listenMessages();
+
+    }catch(error){
+
+      console.error(error);
+      alert(error.message);
 
     }
 
-    loadStudents();
-    loadAttendance();
-    loadStudy();
-    loadResults();
-    loadNotices();
-    listenLeaves();
-    listenMessages();
-
-  } catch (error) {
-
-    console.error(error);
-    alert(error.message);
-
   }
+);
 
-});
+
+/* =========================
+   NAVIGATION
+========================= */
+
+const titles={
+  home:"Dashboard",
+  students:"Students",
+  attendance:"Attendance",
+  study:"Hifz Progress",
+  results:"Results",
+  notices:"Notices",
+  leave:"Leave Requests",
+  messages:"Parent Messages"
+};
 
 
-/* NAVIGATION */
+document
+  .querySelectorAll(".menu button")
+  .forEach(button=>{
 
-document.querySelectorAll("nav button").forEach(button => {
+    button.addEventListener(
+      "click",
+      ()=>{
 
-  button.addEventListener("click", () => {
+        document
+          .querySelectorAll(".menu button")
+          .forEach(b=>
+            b.classList.remove("active")
+          );
 
-    document
-      .querySelectorAll("nav button")
-      .forEach(b => b.classList.remove("active"));
 
-    button.classList.add("active");
+        button.classList.add("active");
 
-    document
-      .querySelectorAll(".section")
-      .forEach(section => section.classList.remove("active"));
 
-    document
-      .getElementById(button.dataset.section)
-      .classList.add("active");
+        document
+          .querySelectorAll(".section")
+          .forEach(s=>
+            s.classList.remove("active")
+          );
+
+
+        const id=
+          button.dataset.section;
+
+
+        document
+          .getElementById(id)
+          .classList.add("active");
+
+
+        document
+          .getElementById("pageTitle")
+          .textContent=titles[id];
+
+
+        document
+          .getElementById("sidebar")
+          .classList.remove("open");
+
+        document
+          .getElementById("overlay")
+          .classList.remove("show");
+
+      }
+    );
 
   });
 
-});
+
+/* MOBILE MENU */
+
+document
+  .getElementById("mobileMenu")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      document
+        .getElementById("sidebar")
+        .classList.add("open");
+
+      document
+        .getElementById("overlay")
+        .classList.add("show");
+
+    }
+  );
+
+
+document
+  .getElementById("overlay")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      document
+        .getElementById("sidebar")
+        .classList.remove("open");
+
+      document
+        .getElementById("overlay")
+        .classList.remove("show");
+
+    }
+  );
 
 
 /* LOGOUT */
 
 document
   .getElementById("logoutBtn")
-  .addEventListener("click", async () => {
+  .addEventListener(
+    "click",
+    async()=>{
 
-    await signOut(auth);
-    window.location.href = "index.html";
+      await signOut(auth);
+
+      window.location.href=
+        "index.html";
+
+    }
+  );
+
+
+/* =========================
+   STUDENTS
+========================= */
+
+async function loadStudents(){
+
+  const box=
+    document.getElementById("studentList");
+
+
+  const snap=
+    await getDocs(
+      collection(db,"students")
+    );
+
+
+  document
+    .getElementById("totalStudents")
+    .textContent=snap.size;
+
+
+  if(snap.empty){
+
+    box.innerHTML=
+      `<div class="empty">
+        No students found.
+      </div>`;
+
+    return;
+
+  }
+
+
+  let html=`
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>No.</th>
+          <th>Student</th>
+          <th>Class</th>
+          <th>Parent</th>
+          <th>Action</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+  `;
+
+
+  snap.forEach(item=>{
+
+    const d=item.data();
+
+
+    html+=`
+
+      <tr>
+
+        <td>
+          <b>
+            ${escapeHtml(d.studentNumber)}
+          </b>
+        </td>
+
+        <td>
+          ${escapeHtml(d.name)}
+        </td>
+
+        <td>
+          ${escapeHtml(d.className)}
+        </td>
+
+        <td>
+          ${escapeHtml(d.parentEmail)}
+        </td>
+
+        <td>
+
+          <button
+            class="danger-btn"
+            onclick="deleteStudent('${item.id}')">
+
+            Delete
+
+          </button>
+
+        </td>
+
+      </tr>
+
+    `;
 
   });
 
 
-/* STUDENTS */
+  html+=`
 
-async function loadStudents() {
+      </tbody>
+    </table>
 
-  const box = document.getElementById("studentList");
+  `;
 
-  try {
 
-    const snap =
-      await getDocs(collection(db, "students"));
-
-    if (snap.empty) {
-
-      box.innerHTML = '<div class="empty">No students.</div>';
-      return;
-
-    }
-
-    box.innerHTML = "";
-
-    snap.forEach(item => {
-
-      const data = item.data();
-
-      box.innerHTML += `
-
-        <div class="item">
-
-          <b>${escapeHtml(data.name)}</b>
-
-          <br>
-
-          Student No:
-          ${escapeHtml(data.studentNumber)}
-
-          <br>
-
-          Class:
-          ${escapeHtml(data.className)}
-
-          <br>
-
-          Parent:
-          ${escapeHtml(data.parentEmail)}
-
-          <br><br>
-
-          <button
-            class="delete"
-            onclick="deleteStudent('${item.id}')">
-            Delete
-          </button>
-
-        </div>
-
-      `;
-
-    });
-
-  } catch (error) {
-
-    box.innerHTML = escapeHtml(error.message);
-
-  }
+  box.innerHTML=html;
 
 }
 
 
 document
   .getElementById("saveStudent")
-  .addEventListener("click", async () => {
+  .addEventListener(
+    "click",
+    async()=>{
 
-    const studentNumber =
-      document.getElementById("studentNumber")
-        .value.trim();
-
-    const name =
-      document.getElementById("studentName")
-        .value.trim();
-
-    const className =
-      document.getElementById("className")
-        .value.trim();
-
-    const parentEmail =
-      document.getElementById("parentEmail")
-        .value.trim();
+      const studentNumber=
+        document
+          .getElementById("studentNumber")
+          .value.trim();
 
 
-    if (!studentNumber || !name) {
+      const name=
+        document
+          .getElementById("studentName")
+          .value.trim();
 
-      alert("Student number and name required.");
-      return;
+
+      const className=
+        document
+          .getElementById("className")
+          .value.trim();
+
+
+      const parentEmail=
+        document
+          .getElementById("parentEmail")
+          .value.trim();
+
+
+      if(!studentNumber||!name){
+
+        alert(
+          "Student number and name are required."
+        );
+
+        return;
+
+      }
+
+
+      await addDoc(
+        collection(db,"students"),
+        {
+          studentNumber:String(studentNumber),
+          name,
+          className,
+          parentEmail,
+          createdAt:serverTimestamp()
+        }
+      );
+
+
+      alert("Student added successfully.");
+
+
+      document
+        .getElementById("studentNumber")
+        .value="";
+
+
+      document
+        .getElementById("studentName")
+        .value="";
+
+
+      document
+        .getElementById("className")
+        .value="";
+
+
+      document
+        .getElementById("parentEmail")
+        .value="";
+
+
+      loadStudents();
 
     }
+  );
 
 
-    await addDoc(
-      collection(db, "students"),
-      {
-        studentNumber: String(studentNumber),
-        name,
-        className,
-        parentEmail,
-        createdAt: serverTimestamp()
-      }
-    );
+window.deleteStudent=
+async function(id){
 
+  if(
+    !confirm(
+      "Delete this student?"
+    )
+  ) return;
 
-    alert("Student saved.");
-
-    document.getElementById("studentNumber").value = "";
-    document.getElementById("studentName").value = "";
-    document.getElementById("className").value = "";
-    document.getElementById("parentEmail").value = "";
-
-    loadStudents();
-
-  });
-
-
-window.deleteStudent = async function(id) {
-
-  if (!confirm("Delete this student?")) return;
 
   await deleteDoc(
-    doc(db, "students", id)
+    doc(db,"students",id)
   );
+
 
   loadStudents();
 
 };
 
 
-/* ATTENDANCE */
+/* =========================
+   ATTENDANCE
+========================= */
 
 document
   .getElementById("saveAttendance")
-  .addEventListener("click", async () => {
+  .addEventListener(
+    "click",
+    async()=>{
 
-    const studentNumber =
-      document.getElementById("attendanceStudent")
-        .value.trim();
-
-    const date =
-      document.getElementById("attendanceDate").value;
-
-    const status =
-      document.getElementById("attendanceStatus").value;
+      const studentNumber=
+        document
+          .getElementById("attendanceStudent")
+          .value.trim();
 
 
-    if (!studentNumber || !date) {
+      const date=
+        document
+          .getElementById("attendanceDate")
+          .value;
 
-      alert("Student number and date required.");
-      return;
+
+      const status=
+        document
+          .getElementById("attendanceStatus")
+          .value;
+
+
+      if(!studentNumber||!date){
+
+        alert(
+          "Student number and date are required."
+        );
+
+        return;
+
+      }
+
+
+      await addDoc(
+        collection(db,"attendance"),
+        {
+          studentNumber:String(studentNumber),
+          date,
+          status,
+          createdAt:serverTimestamp()
+        }
+      );
+
+
+      alert(
+        "Attendance saved successfully."
+      );
+
+
+      loadAttendance();
 
     }
+  );
 
 
-    await addDoc(
-      collection(db, "attendance"),
-      {
-        studentNumber: String(studentNumber),
-        date,
-        status,
-        createdAt: serverTimestamp()
-      }
+async function loadAttendance(){
+
+  const box=
+    document.getElementById(
+      "attendanceList"
     );
 
 
-    alert("Attendance saved.");
+  const snap=
+    await getDocs(
+      collection(db,"attendance")
+    );
 
-    loadAttendance();
 
-  });
+  document
+    .getElementById("totalAttendance")
+    .textContent=snap.size;
 
 
-async function loadAttendance() {
+  if(snap.empty){
 
-  const box =
-    document.getElementById("attendanceList");
-
-  const snap =
-    await getDocs(collection(db, "attendance"));
-
-  if (snap.empty) {
-
-    box.innerHTML =
-      '<div class="empty">No attendance records.</div>';
+    box.innerHTML=
+      `<div class="empty">
+        No attendance records.
+      </div>`;
 
     return;
 
   }
 
-  box.innerHTML = "";
 
-  snap.forEach(item => {
+  let html=`
 
-    const d = item.data();
+    <table>
 
-    box.innerHTML += `
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
 
-      <div class="item">
+      <tbody>
+  `;
 
-        <b>${escapeHtml(d.studentNumber)}</b>
 
-        <br>
-        Date: ${escapeHtml(d.date)}
+  snap.forEach(item=>{
 
-        <br>
-        Status:
-        <span class="badge">
-          ${escapeHtml(d.status)}
-        </span>
+    const d=item.data();
 
-        <br><br>
 
-        <button
-          class="delete"
-          onclick="deleteAttendance('${item.id}')">
-          Delete
-        </button>
+    html+=`
 
-      </div>
+      <tr>
+
+        <td>
+          <b>${escapeHtml(d.studentNumber)}</b>
+        </td>
+
+        <td>
+          ${escapeHtml(d.date)}
+        </td>
+
+        <td>
+          ${statusBadge(d.status)}
+        </td>
+
+        <td>
+
+          <button
+            class="danger-btn"
+            onclick="deleteAttendance('${item.id}')">
+            Delete
+          </button>
+
+        </td>
+
+      </tr>
 
     `;
 
   });
 
+
+  html+=`
+
+      </tbody>
+    </table>
+
+  `;
+
+
+  box.innerHTML=html;
+
 }
 
 
-window.deleteAttendance = async function(id) {
+window.deleteAttendance=
+async function(id){
 
   await deleteDoc(
-    doc(db, "attendance", id)
+    doc(db,"attendance",id)
   );
 
   loadAttendance();
@@ -882,136 +2326,211 @@ window.deleteAttendance = async function(id) {
 };
 
 
-/* STUDY */
+/* =========================
+   STUDY
+========================= */
 
 document
   .getElementById("saveStudy")
-  .addEventListener("click", async () => {
+  .addEventListener(
+    "click",
+    async()=>{
 
-    const studentNumber =
-      document.getElementById("studyStudent")
-        .value.trim();
-
-    const date =
-      document.getElementById("studyDate").value;
-
-    const surah =
-      document.getElementById("studySurah").value.trim();
-
-    const newLesson =
-      document.getElementById("newLesson").value.trim();
-
-    const revision =
-      document.getElementById("revision").value.trim();
-
-    const performance =
-      document.getElementById("performance").value;
-
-    const note =
-      document.getElementById("studyNote").value.trim();
+      const studentNumber=
+        document
+          .getElementById("studyStudent")
+          .value.trim();
 
 
-    if (!studentNumber || !date) {
+      const date=
+        document
+          .getElementById("studyDate")
+          .value;
 
-      alert("Student number and date required.");
-      return;
+
+      const surah=
+        document
+          .getElementById("studySurah")
+          .value.trim();
+
+
+      const newLesson=
+        document
+          .getElementById("newLesson")
+          .value.trim();
+
+
+      const revision=
+        document
+          .getElementById("revision")
+          .value.trim();
+
+
+      const performance=
+        document
+          .getElementById("performance")
+          .value;
+
+
+      const note=
+        document
+          .getElementById("studyNote")
+          .value.trim();
+
+
+      if(!studentNumber||!date){
+
+        alert(
+          "Student number and date are required."
+        );
+
+        return;
+
+      }
+
+
+      await addDoc(
+        collection(db,"studyProgress"),
+        {
+          studentNumber:String(studentNumber),
+          date,
+          surah,
+          newLesson,
+          revision,
+          performance,
+          note,
+          createdAt:serverTimestamp()
+        }
+      );
+
+
+      alert(
+        "Study progress saved."
+      );
+
+
+      loadStudy();
 
     }
+  );
 
 
-    await addDoc(
-      collection(db, "studyProgress"),
-      {
-        studentNumber: String(studentNumber),
-        date,
-        surah,
-        newLesson,
-        revision,
-        performance,
-        note,
-        createdAt: serverTimestamp()
-      }
+async function loadStudy(){
+
+  const box=
+    document.getElementById(
+      "studyList"
     );
 
 
-    alert("Study progress saved.");
+  const snap=
+    await getDocs(
+      collection(db,"studyProgress")
+    );
 
-    loadStudy();
 
-  });
+  if(snap.empty){
 
-
-async function loadStudy() {
-
-  const box =
-    document.getElementById("studyList");
-
-  const snap =
-    await getDocs(collection(db, "studyProgress"));
-
-  if (snap.empty) {
-
-    box.innerHTML =
-      '<div class="empty">No study records.</div>';
+    box.innerHTML=
+      `<div class="empty">
+        No study records.
+      </div>`;
 
     return;
 
   }
 
-  box.innerHTML = "";
 
-  snap.forEach(item => {
+  let html=`
 
-    const d = item.data();
+    <table>
 
-    box.innerHTML += `
+      <thead>
 
-      <div class="item">
+        <tr>
+          <th>Student</th>
+          <th>Date</th>
+          <th>Surah</th>
+          <th>New Lesson</th>
+          <th>Revision</th>
+          <th>Performance</th>
+          <th>Action</th>
+        </tr>
 
-        <b>Student:
+      </thead>
+
+      <tbody>
+  `;
+
+
+  snap.forEach(item=>{
+
+    const d=item.data();
+
+
+    html+=`
+
+      <tr>
+
+        <td>
           ${escapeHtml(d.studentNumber)}
-        </b>
+        </td>
 
-        <br>
-        Date: ${escapeHtml(d.date)}
+        <td>
+          ${escapeHtml(d.date)}
+        </td>
 
-        <br>
-        Surah: ${escapeHtml(d.surah)}
+        <td>
+          ${escapeHtml(d.surah)}
+        </td>
 
-        <br>
-        New Lesson: ${escapeHtml(d.newLesson)}
+        <td>
+          ${escapeHtml(d.newLesson)}
+        </td>
 
-        <br>
-        Revision: ${escapeHtml(d.revision)}
+        <td>
+          ${escapeHtml(d.revision)}
+        </td>
 
-        <br>
-        Performance:
-        ${escapeHtml(d.performance)}
+        <td>
+          ${escapeHtml(d.performance)}
+        </td>
 
-        <br>
-        Note: ${escapeHtml(d.note)}
+        <td>
 
-        <br><br>
+          <button
+            class="danger-btn"
+            onclick="deleteStudy('${item.id}')">
+            Delete
+          </button>
 
-        <button
-          class="delete"
-          onclick="deleteStudy('${item.id}')">
-          Delete
-        </button>
+        </td>
 
-      </div>
+      </tr>
 
     `;
 
   });
 
+
+  html+=`
+
+      </tbody>
+    </table>
+
+  `;
+
+
+  box.innerHTML=html;
+
 }
 
 
-window.deleteStudy = async function(id) {
+window.deleteStudy=
+async function(id){
 
   await deleteDoc(
-    doc(db, "studyProgress", id)
+    doc(db,"studyProgress",id)
   );
 
   loadStudy();
@@ -1019,119 +2538,180 @@ window.deleteStudy = async function(id) {
 };
 
 
-/* RESULTS */
+/* =========================
+   RESULTS
+========================= */
 
 document
   .getElementById("saveResult")
-  .addEventListener("click", async () => {
+  .addEventListener(
+    "click",
+    async()=>{
 
-    const studentNumber =
-      document.getElementById("resultStudent")
-        .value.trim();
-
-    const title =
-      document.getElementById("resultTitle")
-        .value.trim();
-
-    const mark =
-      document.getElementById("resultMark")
-        .value.trim();
-
-    const status =
-      document.getElementById("resultStatus").value;
+      const studentNumber=
+        document
+          .getElementById("resultStudent")
+          .value.trim();
 
 
-    if (!studentNumber || !title) {
+      const title=
+        document
+          .getElementById("resultTitle")
+          .value.trim();
 
-      alert("Student number and title required.");
-      return;
+
+      const mark=
+        document
+          .getElementById("resultMark")
+          .value.trim();
+
+
+      const status=
+        document
+          .getElementById("resultStatus")
+          .value;
+
+
+      if(!studentNumber||!title){
+
+        alert(
+          "Student number and title are required."
+        );
+
+        return;
+
+      }
+
+
+      await addDoc(
+        collection(db,"results"),
+        {
+          studentNumber:String(studentNumber),
+          title,
+          mark,
+          status,
+          createdAt:serverTimestamp()
+        }
+      );
+
+
+      alert(
+        "Result saved successfully."
+      );
+
+
+      loadResults();
 
     }
+  );
 
 
-    await addDoc(
-      collection(db, "results"),
-      {
-        studentNumber: String(studentNumber),
-        title,
-        mark,
-        status,
-        createdAt: serverTimestamp()
-      }
+async function loadResults(){
+
+  const box=
+    document.getElementById(
+      "resultList"
     );
 
 
-    alert("Result saved.");
+  const snap=
+    await getDocs(
+      collection(db,"results")
+    );
 
-    loadResults();
 
-  });
+  if(snap.empty){
 
-
-async function loadResults() {
-
-  const box =
-    document.getElementById("resultList");
-
-  const snap =
-    await getDocs(collection(db, "results"));
-
-  if (snap.empty) {
-
-    box.innerHTML =
-      '<div class="empty">No results.</div>';
+    box.innerHTML=
+      `<div class="empty">
+        No results.
+      </div>`;
 
     return;
 
   }
 
-  box.innerHTML = "";
 
-  snap.forEach(item => {
+  let html=`
 
-    const d = item.data();
+    <table>
 
-    box.innerHTML += `
+      <thead>
 
-      <div class="item">
+        <tr>
+          <th>Student</th>
+          <th>Title</th>
+          <th>Mark</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
 
-        <b>
-          ${escapeHtml(d.title)}
-        </b>
+      </thead>
 
-        <br>
-        Student:
-        ${escapeHtml(d.studentNumber)}
+      <tbody>
+  `;
 
-        <br>
-        Mark:
-        ${escapeHtml(d.mark)}
 
-        <br>
-        Status:
-        ${escapeHtml(d.status)}
+  snap.forEach(item=>{
 
-        <br><br>
+    const d=item.data();
 
-        <button
-          class="delete"
-          onclick="deleteResult('${item.id}')">
-          Delete
-        </button>
 
-      </div>
+    html+=`
+
+      <tr>
+
+        <td>
+          ${escapeHtml(d.studentNumber)}
+        </td>
+
+        <td>
+          <b>${escapeHtml(d.title)}</b>
+        </td>
+
+        <td>
+          ${escapeHtml(d.mark)}
+        </td>
+
+        <td>
+          ${statusBadge(d.status)}
+        </td>
+
+        <td>
+
+          <button
+            class="danger-btn"
+            onclick="deleteResult('${item.id}')">
+            Delete
+          </button>
+
+        </td>
+
+      </tr>
 
     `;
 
   });
 
+
+  html+=`
+
+      </tbody>
+    </table>
+
+  `;
+
+
+  box.innerHTML=html;
+
 }
 
 
-window.deleteResult = async function(id) {
+window.deleteResult=
+async function(id){
 
   await deleteDoc(
-    doc(db, "results", id)
+    doc(db,"results",id)
   );
 
   loadResults();
@@ -1139,94 +2719,129 @@ window.deleteResult = async function(id) {
 };
 
 
-/* NOTICES */
+/* =========================
+   NOTICES
+========================= */
 
 document
   .getElementById("saveNotice")
-  .addEventListener("click", async () => {
+  .addEventListener(
+    "click",
+    async()=>{
 
-    const title =
-      document.getElementById("noticeTitle")
-        .value.trim();
-
-    const text =
-      document.getElementById("noticeText")
-        .value.trim();
-
-    const status =
-      document.getElementById("noticeStatus").value;
+      const title=
+        document
+          .getElementById("noticeTitle")
+          .value.trim();
 
 
-    if (!title || !text) {
+      const text=
+        document
+          .getElementById("noticeText")
+          .value.trim();
 
-      alert("Title and notice required.");
-      return;
+
+      const status=
+        document
+          .getElementById("noticeStatus")
+          .value;
+
+
+      if(!title||!text){
+
+        alert(
+          "Title and notice are required."
+        );
+
+        return;
+
+      }
+
+
+      await addDoc(
+        collection(db,"notices"),
+        {
+          title,
+          text,
+          status,
+          createdAt:serverTimestamp()
+        }
+      );
+
+
+      alert(
+        "Notice saved successfully."
+      );
+
+
+      loadNotices();
 
     }
+  );
 
 
-    await addDoc(
-      collection(db, "notices"),
-      {
-        title,
-        text,
-        status,
-        createdAt: serverTimestamp()
-      }
+async function loadNotices(){
+
+  const box=
+    document.getElementById(
+      "noticeList"
     );
 
 
-    alert("Notice saved.");
+  const snap=
+    await getDocs(
+      collection(db,"notices")
+    );
 
-    loadNotices();
 
-  });
+  if(snap.empty){
 
-
-async function loadNotices() {
-
-  const box =
-    document.getElementById("noticeList");
-
-  const snap =
-    await getDocs(collection(db, "notices"));
-
-  if (snap.empty) {
-
-    box.innerHTML =
-      '<div class="empty">No notices.</div>';
+    box.innerHTML=
+      `<div class="empty">
+        No notices.
+      </div>`;
 
     return;
 
   }
 
-  box.innerHTML = "";
 
-  snap.forEach(item => {
+  box.innerHTML="";
 
-    const d = item.data();
 
-    box.innerHTML += `
+  snap.forEach(item=>{
 
-      <div class="item">
+    const d=item.data();
 
-        <b>${escapeHtml(d.title)}</b>
 
-        <br><br>
+    box.innerHTML+=`
 
-        ${escapeHtml(d.text)}
+      <div class="request-card">
 
-        <br><br>
+        <div class="request-head">
 
-        Status:
-        ${escapeHtml(d.status)}
+          <div class="request-name">
+            ${escapeHtml(d.title)}
+          </div>
 
-        <br><br>
+          ${statusBadge(d.status)}
+
+        </div>
+
+
+        <div class="message-box">
+
+          ${escapeHtml(d.text)}
+
+        </div>
+
 
         <button
-          class="delete"
+          class="danger-btn"
           onclick="deleteNotice('${item.id}')">
+
           Delete
+
         </button>
 
       </div>
@@ -1238,252 +2853,5 @@ async function loadNotices() {
 }
 
 
-window.deleteNotice = async function(id) {
-
-  await deleteDoc(
-    doc(db, "notices", id)
-  );
-
-  loadNotices();
-
-};
-
-
-/* LEAVE REQUESTS */
-
-function listenLeaves() {
-
-  const box =
-    document.getElementById("leaveList");
-
-  onSnapshot(
-    query(
-      collection(db, "leaveRequests"),
-      orderBy("createdAt", "desc")
-    ),
-    snap => {
-
-      if (snap.empty) {
-
-        box.innerHTML =
-          '<div class="empty">No leave requests.</div>';
-
-        return;
-
-      }
-
-      box.innerHTML = "";
-
-      snap.forEach(item => {
-
-        const d = item.data();
-
-        box.innerHTML += `
-
-          <div class="item">
-
-            <b>
-              Student:
-              ${escapeHtml(d.studentNumber)}
-            </b>
-
-            <br>
-            Parent:
-            ${escapeHtml(d.parentEmail)}
-
-            <br>
-            Leave Date:
-            ${escapeHtml(d.leaveDate)}
-
-            <br>
-            Reason:
-            ${escapeHtml(d.reason)}
-
-            <br>
-            Status:
-            <b>${escapeHtml(d.status || "pending")}</b>
-
-            <br>
-
-            Reply:
-            ${escapeHtml(d.reply || "No reply")}
-
-            <br><br>
-
-            <button
-              class="reply"
-              onclick="replyLeave('${item.id}','approved')">
-              Approve
-            </button>
-
-            <button
-              class="delete"
-              onclick="replyLeave('${item.id}','rejected')">
-              Reject
-            </button>
-
-            <button
-              class="delete"
-              onclick="deleteLeave('${item.id}')">
-              Delete
-            </button>
-
-          </div>
-
-        `;
-
-      });
-
-    }
-  );
-
-}
-
-
-window.replyLeave = async function(id, status) {
-
-  const reply =
-    prompt(
-      "Parent-ന് അയക്കേണ്ട reply:",
-      status === "approved"
-        ? "Leave approved."
-        : "Leave rejected."
-    );
-
-  if (reply === null) return;
-
-  await updateDoc(
-    doc(db, "leaveRequests", id),
-    {
-      status,
-      reply,
-      repliedAt: serverTimestamp()
-    }
-  );
-
-};
-
-
-window.deleteLeave = async function(id) {
-
-  if (!confirm("Delete leave request?")) return;
-
-  await deleteDoc(
-    doc(db, "leaveRequests", id)
-  );
-
-};
-
-
-/* MESSAGES */
-
-function listenMessages() {
-
-  const box =
-    document.getElementById("messageList");
-
-  onSnapshot(
-    query(
-      collection(db, "messages"),
-      orderBy("createdAt", "desc")
-    ),
-    snap => {
-
-      if (snap.empty) {
-
-        box.innerHTML =
-          '<div class="empty">No messages.</div>';
-
-        return;
-
-      }
-
-      box.innerHTML = "";
-
-      snap.forEach(item => {
-
-        const d = item.data();
-
-        box.innerHTML += `
-
-          <div class="item">
-
-            <b>
-              Student:
-              ${escapeHtml(d.studentNumber)}
-            </b>
-
-            <br>
-
-            Parent:
-            ${escapeHtml(d.parentEmail)}
-
-            <br><br>
-
-            Message:
-            ${escapeHtml(d.text)}
-
-            <br><br>
-
-            Reply:
-            ${escapeHtml(d.reply || "No reply")}
-
-            <br><br>
-
-            <button
-              class="reply"
-              onclick="replyMessage('${item.id}')">
-              Reply
-            </button>
-
-            <button
-              class="delete"
-              onclick="deleteMessage('${item.id}')">
-              Delete
-            </button>
-
-          </div>
-
-        `;
-
-      });
-
-    }
-  );
-
-}
-
-
-window.replyMessage = async function(id) {
-
-  const reply =
-    prompt("Parent-ന് reply:");
-
-  if (reply === null) return;
-
-  await updateDoc(
-    doc(db, "messages", id),
-    {
-      reply,
-      status: "replied",
-      repliedAt: serverTimestamp()
-    }
-  );
-
-};
-
-
-window.deleteMessage = async function(id) {
-
-  if (!confirm("Delete message?")) return;
-
-  await deleteDoc(
-    doc(db, "messages", id)
-  );
-
-};
-
-</script>
-
-</body>
-</html>
+window.deleteNotice=
+async function(id){
