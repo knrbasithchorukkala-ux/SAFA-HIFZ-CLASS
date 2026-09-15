@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>SAFA HIFZ CLASS - Parent</title>
 
 <style>
@@ -147,15 +149,11 @@ button{
   margin-top:15px;
 }
 
-.uidBox{
-  background:#f4f7f6;
-  padding:10px;
-  border-radius:8px;
-  font-size:12px;
-  word-break:break-all;
-  text-align:left;
-  margin-top:10px;
+textarea,
+input[type="date"]{
+  font-family:Arial,sans-serif;
 }
+
 </style>
 </head>
 
@@ -168,10 +166,12 @@ button{
   </div>
 </div>
 
+
 <div class="header">
   <h1>SAFA HIFZ CLASS</h1>
   <p>Parent Dashboard</p>
 </div>
+
 
 <div class="container">
 
@@ -179,6 +179,7 @@ button{
     <h2>Assalamu Alaikum 👋</h2>
     <p id="parentWelcome">Welcome Parent</p>
   </div>
+
 
   <div id="home">
 
@@ -228,7 +229,9 @@ button{
 
     </div>
 
-    <button class="logout" onclick="logout()">Logout</button>
+    <button class="logout" onclick="logout()">
+      Logout
+    </button>
 
   </div>
 
@@ -239,7 +242,9 @@ button{
 
     <h2>👦 My Child</h2>
 
-    <button class="back" onclick="goHome()">← Back</button>
+    <button class="back" onclick="goHome()">
+      ← Back
+    </button>
 
     <div id="studentProfile">
       Loading...
@@ -254,7 +259,9 @@ button{
 
     <h2>📅 Attendance</h2>
 
-    <button class="back" onclick="goHome()">← Back</button>
+    <button class="back" onclick="goHome()">
+      ← Back
+    </button>
 
     <div id="attendanceList">
       Loading...
@@ -269,7 +276,9 @@ button{
 
     <h2>📖 Study Progress</h2>
 
-    <button class="back" onclick="goHome()">← Back</button>
+    <button class="back" onclick="goHome()">
+      ← Back
+    </button>
 
     <div id="studyList">
       Loading...
@@ -284,7 +293,9 @@ button{
 
     <h2>📊 Results</h2>
 
-    <button class="back" onclick="goHome()">← Back</button>
+    <button class="back" onclick="goHome()">
+      ← Back
+    </button>
 
     <div id="resultList">
       Loading...
@@ -299,7 +310,9 @@ button{
 
     <h2>📢 Notices</h2>
 
-    <button class="back" onclick="goHome()">← Back</button>
+    <button class="back" onclick="goHome()">
+      ← Back
+    </button>
 
     <div id="noticeList">
       Loading...
@@ -314,7 +327,9 @@ button{
 
     <h2>📝 Leave Application</h2>
 
-    <button class="back" onclick="goHome()">← Back</button>
+    <button class="back" onclick="goHome()">
+      ← Back
+    </button>
 
     <input
       id="leaveDate"
@@ -350,7 +365,9 @@ button{
 
     <h2>💬 Message Usthad</h2>
 
-    <button class="back" onclick="goHome()">← Back</button>
+    <button class="back" onclick="goHome()">
+      ← Back
+    </button>
 
     <textarea
       id="messageText"
@@ -391,6 +408,8 @@ import {
 
 import {
   getFirestore,
+  doc,
+  getDoc,
   collection,
   query,
   where,
@@ -400,9 +419,14 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
 const firebaseConfig = {
 
-  apiKey: "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
+  apiKey:
+  "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
 
   authDomain:
   "safa-hifz-class-7e84b.firebaseapp.com",
@@ -424,17 +448,32 @@ const firebaseConfig = {
 };
 
 
-const app = initializeApp(firebaseConfig);
+/* =========================
+   FIREBASE
+========================= */
 
-const auth = getAuth(app);
+const app =
+initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+const auth =
+getAuth(app);
 
+const db =
+getFirestore(app);
+
+
+/* =========================
+   VARIABLES
+========================= */
 
 let currentUser = null;
 let studentNumber = null;
 let studentData = null;
 
+
+/* =========================
+   ELEMENTS
+========================= */
 
 const loadingScreen =
 document.getElementById("loadingScreen");
@@ -442,6 +481,10 @@ document.getElementById("loadingScreen");
 const loadingText =
 document.getElementById("loadingText");
 
+
+/* =========================
+   START
+========================= */
 
 async function startParentDashboard(){
 
@@ -457,8 +500,13 @@ async function startParentDashboard(){
 
     await auth.authStateReady();
 
-    currentUser = auth.currentUser;
+    currentUser =
+    auth.currentUser;
 
+
+    /* =========================
+       CHECK LOGIN
+    ========================= */
 
     if(!currentUser){
 
@@ -475,33 +523,26 @@ async function startParentDashboard(){
     "Checking parent profile...";
 
 
-    /*
-      Parent profile is searched by
-      the authenticated user's UID.
+    /* =========================
+       GET OWN USER DOCUMENT
+    ========================= */
 
-      The document must contain:
-
-      role = parent
-      studentNumber = 131
-    */
-
-
-    const usersQuery =
-    query(
-      collection(db,"users"),
-      where("__name__","==",currentUser.uid)
+    const userRef =
+    doc(
+      db,
+      "users",
+      currentUser.uid
     );
 
+    const userSnap =
+    await getDoc(userRef);
 
-    const userSnapshot =
-    await getDocs(usersQuery);
 
-
-    if(userSnapshot.empty){
+    if(!userSnap.exists()){
 
       showError(
         "Parent profile കണ്ടെത്താനായില്ല.",
-        "Firestore users collection-ൽ ഈ account-ന്റെ document ഇല്ല."
+        "Firestore users collection-ൽ ഈ account-ന്റെ profile ഇല്ല."
       );
 
       return;
@@ -509,10 +550,20 @@ async function startParentDashboard(){
 
 
     const parentDoc =
-    userSnapshot.docs[0].data();
+    userSnap.data();
 
 
-    if(parentDoc.role !== "parent"){
+    /* =========================
+       CHECK ROLE
+    ========================= */
+
+    const role =
+    String(
+      parentDoc.role || ""
+    ).trim().toLowerCase();
+
+
+    if(role !== "parent"){
 
       showError(
         "Parent permission ഇല്ല.",
@@ -523,8 +574,14 @@ async function startParentDashboard(){
     }
 
 
+    /* =========================
+       GET STUDENT NUMBER
+    ========================= */
+
     studentNumber =
-    String(parentDoc.studentNumber || "").trim();
+    String(
+      parentDoc.studentNumber || ""
+    ).trim();
 
 
     if(!studentNumber){
@@ -542,8 +599,16 @@ async function startParentDashboard(){
     "Loading your child's information...";
 
 
+    /* =========================
+       LOAD CHILD
+    ========================= */
+
     await loadStudent();
 
+
+    /* =========================
+       DASHBOARD READY
+    ========================= */
 
     loadingScreen.style.display =
     "none";
@@ -559,7 +624,10 @@ async function startParentDashboard(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "Parent dashboard error:",
+      error
+    );
 
     showError(
       "Dashboard തുറക്കാൻ കഴിഞ്ഞില്ല.",
@@ -571,7 +639,14 @@ async function startParentDashboard(){
 }
 
 
-function showError(title,details){
+/* =========================
+   ERROR
+========================= */
+
+function showError(
+  title,
+  details
+){
 
   loadingScreen.innerHTML = `
 
@@ -590,7 +665,7 @@ function showError(title,details){
       <div class="infoBox">
 
         <p>
-        Please return to Login and try again.
+          Please return to Login and try again.
         </p>
 
       </div>
@@ -607,6 +682,10 @@ function showError(title,details){
 
 }
 
+
+/* =========================
+   LOAD CHILD
+========================= */
 
 async function loadStudent(){
 
@@ -645,6 +724,10 @@ async function loadStudent(){
 }
 
 
+/* =========================
+   CHILD PROFILE
+========================= */
+
 function showStudentProfile(){
 
   const box =
@@ -671,11 +754,6 @@ function showStudentProfile(){
         ${studentData.className || "-"}
       </p>
 
-      <p>
-        <strong>Parent Email:</strong>
-        ${studentData.parentEmail || "-"}
-      </p>
-
     </div>
 
   `;
@@ -683,12 +761,17 @@ function showStudentProfile(){
 }
 
 
+/* =========================
+   SECTIONS
+========================= */
+
 window.showSection =
 function(id){
 
   document.getElementById(
     "home"
-  ).style.display = "none";
+  ).style.display =
+  "none";
 
 
   document
@@ -703,29 +786,27 @@ function(id){
   document.getElementById(id);
 
 
-  if(selected)
-  selected.classList.add("active");
+  if(selected){
+
+    selected.classList.add("active");
+
+  }
 
 
   if(id === "attendance")
   loadAttendance();
 
-
   if(id === "study")
   loadStudy();
-
 
   if(id === "results")
   loadResults();
 
-
   if(id === "notices")
   loadNotices();
 
-
   if(id === "leave")
   loadLeaves();
-
 
   if(id === "messages")
   loadMessages();
@@ -746,10 +827,15 @@ function(){
 
   document.getElementById(
     "home"
-  ).style.display = "block";
+  ).style.display =
+  "block";
 
 };
 
+
+/* =========================
+   LOGOUT
+========================= */
 
 window.logout =
 async function(){
@@ -773,6 +859,10 @@ async function(){
 
 };
 
+
+/* =========================
+   ATTENDANCE
+========================= */
 
 async function loadAttendance(){
 
@@ -824,7 +914,6 @@ async function loadAttendance(){
       const div =
       document.createElement("div");
 
-
       div.className =
       "record";
 
@@ -835,7 +924,7 @@ async function loadAttendance(){
           Date: ${a.date || "-"}
         </strong>
 
-        <br>
+        <br><br>
 
         Status:
         <strong>
@@ -861,6 +950,10 @@ async function loadAttendance(){
 
 }
 
+
+/* =========================
+   STUDY
+========================= */
 
 async function loadStudy(){
 
@@ -912,7 +1005,6 @@ async function loadStudy(){
       const div =
       document.createElement("div");
 
-
       div.className =
       "record";
 
@@ -924,22 +1016,27 @@ async function loadStudy(){
         </strong>
 
         <br>
+
         Surah / Juz:
         ${p.surah || "-"}
 
         <br>
+
         New Lesson:
         ${p.newLesson || "-"}
 
         <br>
+
         Revision:
         ${p.revision || "-"}
 
         <br>
+
         Performance:
         ${p.performance || "-"}
 
         <br>
+
         Teacher Note:
         ${p.note || "-"}
 
@@ -963,6 +1060,10 @@ async function loadStudy(){
 }
 
 
+/* =========================
+   RESULTS
+========================= */
+
 async function loadResults(){
 
   const list =
@@ -979,10 +1080,17 @@ async function loadResults(){
     const q =
     query(
       collection(db,"results"),
+
       where(
         "studentNumber",
         "==",
         studentNumber
+      ),
+
+      where(
+        "status",
+        "==",
+        "published"
       )
     );
 
@@ -997,7 +1105,7 @@ async function loadResults(){
     if(snapshot.empty){
 
       list.innerHTML =
-      "<p class='empty'>No results yet.</p>";
+      "<p class='empty'>No published results yet.</p>";
 
       return;
 
@@ -1010,13 +1118,8 @@ async function loadResults(){
       item.data();
 
 
-      if(r.status !== "published")
-      return;
-
-
       const div =
       document.createElement("div");
-
 
       div.className =
       "record";
@@ -1042,6 +1145,7 @@ async function loadResults(){
 
     });
 
+
   }catch(error){
 
     list.innerHTML =
@@ -1053,6 +1157,10 @@ async function loadResults(){
 
 }
 
+
+/* =========================
+   NOTICES
+========================= */
 
 async function loadNotices(){
 
@@ -1067,10 +1175,20 @@ async function loadNotices(){
 
   try{
 
-    const snapshot =
-    await getDocs(
-      collection(db,"notices")
+    const q =
+    query(
+      collection(db,"notices"),
+
+      where(
+        "status",
+        "==",
+        "published"
+      )
     );
+
+
+    const snapshot =
+    await getDocs(q);
 
 
     list.innerHTML = "";
@@ -1079,7 +1197,7 @@ async function loadNotices(){
     if(snapshot.empty){
 
       list.innerHTML =
-      "<p class='empty'>No notices yet.</p>";
+      "<p class='empty'>No published notices yet.</p>";
 
       return;
 
@@ -1092,13 +1210,8 @@ async function loadNotices(){
       item.data();
 
 
-      if(n.status !== "published")
-      return;
-
-
       const div =
       document.createElement("div");
-
 
       div.className =
       "record";
@@ -1133,6 +1246,10 @@ async function loadNotices(){
 
 }
 
+
+/* =========================
+   SUBMIT LEAVE
+========================= */
 
 window.submitLeave =
 async function(){
@@ -1227,6 +1344,10 @@ async function(){
 };
 
 
+/* =========================
+   LOAD LEAVES
+========================= */
+
 async function loadLeaves(){
 
   const list =
@@ -1277,7 +1398,6 @@ async function loadLeaves(){
       const div =
       document.createElement("div");
 
-
       div.className =
       "record";
 
@@ -1324,6 +1444,10 @@ async function loadLeaves(){
 
 }
 
+
+/* =========================
+   SEND MESSAGE
+========================= */
 
 window.sendMessage =
 async function(){
@@ -1404,6 +1528,10 @@ async function(){
 };
 
 
+/* =========================
+   LOAD MESSAGES
+========================= */
+
 async function loadMessages(){
 
   const list =
@@ -1454,7 +1582,6 @@ async function loadMessages(){
       const div =
       document.createElement("div");
 
-
       div.className =
       "record";
 
@@ -1498,6 +1625,10 @@ async function loadMessages(){
 
 }
 
+
+/* =========================
+   START DASHBOARD
+========================= */
 
 startParentDashboard();
 
