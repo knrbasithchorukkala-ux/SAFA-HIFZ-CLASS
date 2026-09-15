@@ -8,136 +8,488 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>SAFA HIFZ CLASS - Parent</title>
+<title>SAFA HIFZ CLASS | Parent Portal</title>
+
 
 <style>
 
-* {
-  box-sizing: border-box;
+:root{
+  --primary:#0f766e;
+  --primary-dark:#115e59;
+  --accent:#d4af37;
+  --bg:#f4f7f8;
+  --card:#ffffff;
+  --text:#172033;
+  --muted:#64748b;
+  --border:#e2e8f0;
+  --success:#15803d;
+  --danger:#dc2626;
+  --warning:#d97706;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f1f5f9;
-  color: #172033;
+*{
+  box-sizing:border-box;
 }
 
-header {
-  background: #0f766e;
-  color: white;
-  padding: 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
+body{
+  margin:0;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
 
-header h2 {
-  margin: 0;
-  font-size: 20px;
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+  background:
+    linear-gradient(
+      135deg,
+      #0b4f4a,
+      #0f766e
+    );
+  color:white;
+  padding:18px 25px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
 }
 
-.logout {
-  background: #dc2626;
-  border: 0;
-  color: white;
-  padding: 9px 13px;
-  border-radius: 8px;
+.brand-title{
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:.4px;
 }
 
-nav {
-  background: white;
-  padding: 10px;
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  border-bottom: 1px solid #ddd;
+.brand-subtitle{
+  font-size:11px;
+  opacity:.75;
+  margin-top:3px;
 }
 
-nav button {
-  border: 0;
-  padding: 10px 14px;
-  border-radius: 8px;
-  background: #e2e8f0;
-  white-space: nowrap;
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
 
-nav button.active {
-  background: #0f766e;
-  color: white;
+.parent-profile{
+  display:flex;
+  align-items:center;
+  gap:9px;
 }
 
-main {
-  max-width: 1000px;
-  margin: auto;
-  padding: 16px;
+.avatar{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:rgba(255,255,255,.16);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
 }
 
-.section {
-  display: none;
+.parent-label{
+  font-size:12px;
+  font-weight:700;
 }
 
-.section.active {
-  display: block;
+.parent-role{
+  font-size:10px;
+  opacity:.7;
 }
 
-.card {
-  background: white;
-  padding: 18px;
-  border-radius: 14px;
-  margin-bottom: 18px;
-  box-shadow: 0 3px 12px rgba(0,0,0,.08);
+.logout{
+  border:0;
+  background:rgba(255,255,255,.13);
+  color:white;
+  padding:9px 13px;
+  border-radius:8px;
+  cursor:pointer;
 }
 
-.item {
-  border: 1px solid #e2e8f0;
-  padding: 14px;
-  margin-top: 10px;
-  border-radius: 10px;
+
+/* =========================
+   NAV
+========================= */
+
+.nav{
+  background:white;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  gap:7px;
+  padding:10px 18px;
+  overflow-x:auto;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.nav button{
+  border:0;
+  background:transparent;
+  color:#64748b;
+  padding:10px 14px;
+  border-radius:9px;
+  white-space:nowrap;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.nav button:hover{
+  background:#f1f5f9;
+}
+
+.nav button.active{
+  background:#e6f6f4;
+  color:var(--primary);
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main{
+  max-width:1250px;
+  margin:auto;
+  padding:25px;
+}
+
+.section{
+  display:none;
+}
+
+.section.active{
+  display:block;
+}
+
+
+/* =========================
+   WELCOME
+========================= */
+
+.welcome{
+  background:
+    linear-gradient(
+      135deg,
+      #0f766e,
+      #134e4a
+    );
+  color:white;
+  border-radius:18px;
+  padding:28px;
+  margin-bottom:20px;
+  position:relative;
+  overflow:hidden;
+}
+
+.welcome:after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background:rgba(255,255,255,.06);
+  right:-50px;
+  top:-60px;
+}
+
+.welcome h1{
+  margin:0;
+  font-size:25px;
+}
+
+.welcome p{
+  margin:8px 0 0;
+  opacity:.8;
+  font-size:13px;
+}
+
+
+/* =========================
+   STUDENT CARD
+========================= */
+
+.student-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:20px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  box-shadow:0 4px 15px rgba(15,23,42,.04);
+}
+
+.student-avatar{
+  width:62px;
+  height:62px;
+  border-radius:15px;
+  background:#e6f6f4;
+  color:var(--primary);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:27px;
+}
+
+.student-name{
+  font-size:20px;
+  font-weight:800;
+}
+
+.student-meta{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:5px;
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+  gap:16px;
+  margin-bottom:20px;
+}
+
+.stat{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:18px;
+}
+
+.stat-title{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:700;
+}
+
+.stat-number{
+  font-size:25px;
+  font-weight:800;
+  margin-top:6px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:21px;
+  margin-bottom:20px;
+  box-shadow:0 4px 15px rgba(15,23,42,.035);
+}
+
+.card-title{
+  margin:0 0 17px;
+  font-size:17px;
+  font-weight:800;
+}
+
+
+/* =========================
+   DATA ITEM
+========================= */
+
+.data-item{
+  border:1px solid #e8eef2;
+  border-radius:12px;
+  padding:15px;
+  margin-top:10px;
+  background:#fff;
+}
+
+.data-item:hover{
+  border-color:#cbdedc;
+}
+
+.item-title{
+  font-weight:800;
+  margin-bottom:7px;
+}
+
+.item-meta{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.9;
+}
+
+.item-content{
+  font-size:13px;
+  line-height:1.7;
+  margin-top:8px;
+}
+
+
+/* =========================
+   BADGE
+========================= */
+
+.badge{
+  display:inline-flex;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.success{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.warning{
+  background:#fef3c7;
+  color:#92400e;
+}
+
+.danger{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.neutral{
+  background:#f1f5f9;
+  color:#475569;
+}
+
+
+/* =========================
+   FORMS
+========================= */
+
+label{
+  display:block;
+  color:#475569;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:7px;
 }
 
 input,
-textarea {
-  width: 100%;
-  padding: 12px;
-  margin-top: 7px;
-  margin-bottom: 12px;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
+textarea{
+  width:100%;
+  border:1px solid #cbd5e1;
+  border-radius:9px;
+  padding:12px;
+  margin-bottom:15px;
+  font-size:14px;
+  outline:none;
 }
 
-textarea {
-  min-height: 100px;
+input:focus,
+textarea:focus{
+  border-color:var(--primary);
+  box-shadow:
+    0 0 0 3px
+    rgba(15,118,110,.10);
 }
 
-.send {
-  background: #0f766e;
-  color: white;
-  border: 0;
-  padding: 12px 18px;
-  border-radius: 8px;
+textarea{
+  min-height:110px;
+  resize:vertical;
 }
 
-.delete {
-  background: #dc2626;
-  color: white;
-  border: 0;
-  padding: 8px 12px;
-  border-radius: 7px;
+.primary-btn{
+  border:0;
+  background:var(--primary);
+  color:white;
+  padding:12px 18px;
+  border-radius:9px;
+  font-weight:700;
+  cursor:pointer;
 }
 
-.badge {
-  display: inline-block;
-  padding: 5px 9px;
-  border-radius: 20px;
-  background: #dcfce7;
-  color: #166534;
+.primary-btn:hover{
+  background:var(--primary-dark);
 }
 
-.small {
-  color: #64748b;
-  font-size: 13px;
+.delete-btn{
+  border:0;
+  background:#fee2e2;
+  color:#991b1b;
+  padding:8px 11px;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:30px 15px;
+  font-size:13px;
+}
+
+.loading{
+  text-align:center;
+  color:var(--muted);
+  padding:25px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:750px){
+
+  .header{
+    padding:15px;
+  }
+
+  .parent-profile{
+    display:none;
+  }
+
+  main{
+    padding:15px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .student-card{
+    align-items:flex-start;
+  }
+
+  .welcome{
+    padding:22px;
+  }
+
+  .welcome h1{
+    font-size:21px;
+  }
+
 }
 
 </style>
@@ -148,49 +500,118 @@ textarea {
 <body>
 
 
-<header>
+<!-- HEADER -->
 
-<h2>SAFA HIFZ CLASS</h2>
+<header class="header">
 
-<button
-  class="logout"
-  id="logoutBtn">
-  Logout
-</button>
+  <div>
+
+    <div class="brand-title">
+      SAFA HIFZ CLASS
+    </div>
+
+    <div class="brand-subtitle">
+      Parent Portal · Hifz & Islamic Education
+    </div>
+
+  </div>
+
+
+  <div class="header-right">
+
+    <div class="parent-profile">
+
+      <div class="avatar">
+        P
+      </div>
+
+      <div>
+
+        <div class="parent-label">
+          Parent
+        </div>
+
+        <div class="parent-role">
+          Student Guardian
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="logout"
+      id="logoutBtn">
+
+      Logout
+
+    </button>
+
+  </div>
 
 </header>
 
 
-<nav>
+<!-- NAVIGATION -->
 
-<button data-section="home"
-        class="active">
-Home
-</button>
+<nav class="nav">
 
-<button data-section="attendance">
-Attendance
-</button>
+  <button
+    class="active"
+    data-section="home">
 
-<button data-section="study">
-Study
-</button>
+    🏠 Home
 
-<button data-section="results">
-Results
-</button>
+  </button>
 
-<button data-section="notices">
-Notices
-</button>
 
-<button data-section="leave">
-Leave
-</button>
+  <button
+    data-section="attendance">
 
-<button data-section="messages">
-Messages
-</button>
+    ✓ Attendance
+
+  </button>
+
+
+  <button
+    data-section="study">
+
+    📖 Hifz Progress
+
+  </button>
+
+
+  <button
+    data-section="results">
+
+    🏆 Results
+
+  </button>
+
+
+  <button
+    data-section="notices">
+
+    📢 Notices
+
+  </button>
+
+
+  <button
+    data-section="leave">
+
+    📅 Leave
+
+  </button>
+
+
+  <button
+    data-section="messages">
+
+    💬 Messages
+
+  </button>
 
 </nav>
 
@@ -200,170 +621,323 @@ Messages
 
 <!-- HOME -->
 
-<section id="home"
-         class="section active">
+<section
+  id="home"
+  class="section active">
 
-<div class="card">
 
-<h2>Parent Dashboard</h2>
+  <div class="welcome">
 
-<div id="studentInfo">
-Loading...
-</div>
+    <h1>
+      Assalamu Alaikum
+    </h1>
 
-</div>
+    <p>
+      Welcome to the SAFA HIFZ CLASS Parent Portal.
+    </p>
+
+  </div>
+
+
+  <div
+    id="studentInfo">
+
+    <div class="loading">
+      Loading student...
+    </div>
+
+  </div>
+
+
+  <div class="stats">
+
+    <div class="stat">
+
+      <div class="stat-title">
+        ATTENDANCE RECORDS
+      </div>
+
+      <div
+        class="stat-number"
+        id="attendanceCount">
+
+        0
+
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-title">
+        HIFZ PROGRESS
+      </div>
+
+      <div
+        class="stat-number"
+        id="studyCount">
+
+        0
+
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-title">
+        PUBLISHED RESULTS
+      </div>
+
+      <div
+        class="stat-number"
+        id="resultCount">
+
+        0
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3 class="card-title">
+      Important Information
+    </h3>
+
+    <p style="
+      color:#64748b;
+      line-height:1.8;
+      font-size:13px;
+    ">
+
+      ഇവിടെ നിങ്ങളുടെ കുട്ടിയുടെ
+      attendance, Hifz progress, results,
+      notices, leave applications,
+      Usthad messages എന്നിവ കാണാം.
+
+    </p>
+
+  </div>
+
 
 </section>
 
 
 <!-- ATTENDANCE -->
 
-<section id="attendance"
-         class="section">
+<section
+  id="attendance"
+  class="section">
 
-<div class="card">
+  <div class="card">
 
-<h2>Attendance</h2>
+    <h2 class="card-title">
+      Attendance
+    </h2>
 
-<div id="attendanceList">
-Loading...
-</div>
+    <div id="attendanceList">
 
-</div>
+      <div class="loading">
+        Loading...
+      </div>
+
+    </div>
+
+  </div>
 
 </section>
 
 
 <!-- STUDY -->
 
-<section id="study"
-         class="section">
+<section
+  id="study"
+  class="section">
 
-<div class="card">
+  <div class="card">
 
-<h2>Study Progress</h2>
+    <h2 class="card-title">
+      Hifz Progress
+    </h2>
 
-<div id="studyList">
-Loading...
-</div>
+    <div id="studyList">
 
-</div>
+      <div class="loading">
+        Loading...
+      </div>
+
+    </div>
+
+  </div>
 
 </section>
 
 
 <!-- RESULTS -->
 
-<section id="results"
-         class="section">
+<section
+  id="results"
+  class="section">
 
-<div class="card">
+  <div class="card">
 
-<h2>Results</h2>
+    <h2 class="card-title">
+      Examination Results
+    </h2>
 
-<div id="resultList">
-Loading...
-</div>
+    <div id="resultList">
 
-</div>
+      <div class="loading">
+        Loading...
+      </div>
+
+    </div>
+
+  </div>
 
 </section>
 
 
 <!-- NOTICES -->
 
-<section id="notices"
-         class="section">
+<section
+  id="notices"
+  class="section">
 
-<div class="card">
+  <div class="card">
 
-<h2>Notices</h2>
+    <h2 class="card-title">
+      Official Notices
+    </h2>
 
-<div id="noticeList">
-Loading...
-</div>
+    <div id="noticeList">
 
-</div>
+      <div class="loading">
+        Loading...
+      </div>
+
+    </div>
+
+  </div>
 
 </section>
 
 
 <!-- LEAVE -->
 
-<section id="leave"
-         class="section">
-
-<div class="card">
-
-<h2>Apply Leave</h2>
-
-<label>Leave Date</label>
-
-<input
-  type="date"
-  id="leaveDate">
-
-<label>Reason</label>
-
-<textarea
-  id="leaveReason"
-  placeholder="Leave reason">
-</textarea>
-
-<button
-  class="send"
-  id="sendLeave">
-  Send Leave Request
-</button>
-
-</div>
+<section
+  id="leave"
+  class="section">
 
 
-<div class="card">
+  <div class="card">
 
-<h2>My Leave Requests</h2>
+    <h2 class="card-title">
+      Apply for Leave
+    </h2>
 
-<div id="leaveList">
-Loading...
-</div>
 
-</div>
+    <label>
+      Leave Date
+    </label>
+
+    <input
+      type="date"
+      id="leaveDate">
+
+
+    <label>
+      Reason
+    </label>
+
+    <textarea
+      id="leaveReason"
+      placeholder="Write the reason for leave...">
+    </textarea>
+
+
+    <button
+      class="primary-btn"
+      id="sendLeave">
+
+      Submit Leave Request
+
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2 class="card-title">
+      My Leave Requests
+    </h2>
+
+    <div id="leaveList">
+
+      <div class="loading">
+        Loading...
+      </div>
+
+    </div>
+
+  </div>
 
 </section>
 
 
 <!-- MESSAGES -->
 
-<section id="messages"
-         class="section">
-
-<div class="card">
-
-<h2>Send Message to Usthad</h2>
-
-<textarea
-  id="messageText"
-  placeholder="Write your message">
-</textarea>
-
-<button
-  class="send"
-  id="sendMessage">
-  Send Message
-</button>
-
-</div>
+<section
+  id="messages"
+  class="section">
 
 
-<div class="card">
+  <div class="card">
 
-<h2>My Messages</h2>
+    <h2 class="card-title">
+      Contact Usthad
+    </h2>
 
-<div id="messageList">
-Loading...
-</div>
 
-</div>
+    <textarea
+      id="messageText"
+      placeholder="Write your message to Usthad...">
+    </textarea>
+
+
+    <button
+      class="primary-btn"
+      id="sendMessage">
+
+      Send Message
+
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2 class="card-title">
+      Message History
+    </h2>
+
+    <div id="messageList">
+
+      <div class="loading">
+        Loading...
+      </div>
+
+    </div>
+
+  </div>
 
 </section>
 
@@ -395,14 +969,12 @@ import {
   getDoc,
   query,
   where,
-  orderBy,
-  serverTimestamp,
-  onSnapshot
+  serverTimestamp
 }
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
-const firebaseConfig = {
+const firebaseConfig={
 
   apiKey:
     "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
@@ -428,55 +1000,100 @@ const firebaseConfig = {
 };
 
 
-const app =
+const app=
   initializeApp(firebaseConfig);
 
-const auth =
+const auth=
   getAuth(app);
 
-const db =
+const db=
   getFirestore(app);
 
 
-let currentUser = null;
-let studentNumber = "";
-let studentData = null;
+let currentUser=null;
+let studentNumber="";
 
 
-function escapeHtml(value) {
+/* =========================
+   HELPERS
+========================= */
+
+function escapeHtml(value){
 
   return String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
 
-function formatDate(timestamp) {
+function statusBadge(status){
 
-  if (!timestamp) return "";
+  const value=
+    String(status||"")
+      .toLowerCase();
 
-  try {
-    return timestamp.toDate().toLocaleString();
-  } catch {
-    return "";
+
+  let cls="neutral";
+
+
+  if(
+    value==="present"||
+    value==="published"||
+    value==="approved"||
+    value==="replied"
+  ){
+
+    cls="success";
+
   }
 
+
+  if(
+    value==="pending"||
+    value==="draft"
+  ){
+
+    cls="warning";
+
+  }
+
+
+  if(
+    value==="absent"||
+    value==="rejected"
+  ){
+
+    cls="danger";
+
+  }
+
+
+  return`
+
+    <span class="badge ${cls}">
+      ${escapeHtml(status)}
+    </span>
+
+  `;
+
 }
 
 
-/* AUTH */
+/* =========================
+   AUTH
+========================= */
 
 onAuthStateChanged(
   auth,
-  async user => {
+  async user=>{
 
-    if (!user) {
+    if(!user){
 
-      window.location.href =
+      window.location.href=
         "index.html";
 
       return;
@@ -484,24 +1101,22 @@ onAuthStateChanged(
     }
 
 
-    currentUser = user;
+    currentUser=user;
 
 
-    try {
+    try{
 
-      const userRef =
-        doc(
-          db,
-          "users",
-          user.uid
+      const snap=
+        await getDoc(
+          doc(
+            db,
+            "users",
+            user.uid
+          )
         );
 
 
-      const userSnap =
-        await getDoc(userRef);
-
-
-      if (!userSnap.exists()) {
+      if(!snap.exists()){
 
         alert(
           "Parent profile not found."
@@ -514,19 +1129,15 @@ onAuthStateChanged(
       }
 
 
-      const parentData =
-        userSnap.data();
+      const data=
+        snap.data();
 
 
-      const role =
-        String(
-          parentData.role || ""
-        )
-        .trim()
-        .toLowerCase();
-
-
-      if (role !== "parent") {
+      if(
+        String(data.role||"")
+          .trim()
+          .toLowerCase()!=="parent"
+      ){
 
         alert(
           "Parent access only."
@@ -539,38 +1150,29 @@ onAuthStateChanged(
       }
 
 
-      /*
-        IMPORTANT:
-        studentNumber is always converted
-        to String here.
-      */
-
-      studentNumber =
+      studentNumber=
         String(
-          parentData.studentNumber ?? ""
+          data.studentNumber ?? ""
         ).trim();
 
 
-      if (!studentNumber) {
+      if(!studentNumber){
 
-        document.body.innerHTML = `
+        document.body.innerHTML=`
 
           <div style="
-            padding:30px;
-            font-family:Arial;
+            padding:40px;
             text-align:center;
+            font-family:Arial;
           ">
 
-            <h2>Student link missing</h2>
+            <h2>
+              Student Link Missing
+            </h2>
 
             <p>
-              Firebase users document-ൽ
-              studentNumber ഇല്ല.
-            </p>
-
-            <p>
-              Parent UID:
-              ${escapeHtml(user.uid)}
+              Parent account-ന് student number
+              link ചെയ്തിട്ടില്ല.
             </p>
 
           </div>
@@ -584,8 +1186,7 @@ onAuthStateChanged(
 
       await loadAll();
 
-
-    } catch (error) {
+    }catch(error){
 
       console.error(error);
 
@@ -597,20 +1198,22 @@ onAuthStateChanged(
 );
 
 
-/* NAV */
+/* =========================
+   NAVIGATION
+========================= */
 
 document
-  .querySelectorAll("nav button")
-  .forEach(button => {
+  .querySelectorAll(".nav button")
+  .forEach(button=>{
 
     button.addEventListener(
       "click",
-      () => {
+      ()=>{
 
         document
-          .querySelectorAll("nav button")
+          .querySelectorAll(".nav button")
           .forEach(
-            b =>
+            b=>
               b.classList.remove("active")
           );
 
@@ -621,8 +1224,8 @@ document
         document
           .querySelectorAll(".section")
           .forEach(
-            section =>
-              section.classList.remove("active")
+            s=>
+              s.classList.remove("active")
           );
 
 
@@ -644,20 +1247,22 @@ document
   .getElementById("logoutBtn")
   .addEventListener(
     "click",
-    async () => {
+    async()=>{
 
       await signOut(auth);
 
-      window.location.href =
+      window.location.href=
         "index.html";
 
     }
   );
 
 
-/* LOAD ALL */
+/* =========================
+   LOAD ALL
+========================= */
 
-async function loadAll() {
+async function loadAll(){
 
   await loadStudent();
 
@@ -676,19 +1281,21 @@ async function loadAll() {
 }
 
 
-/* STUDENT */
+/* =========================
+   STUDENT
+========================= */
 
-async function loadStudent() {
+async function loadStudent(){
 
-  const box =
+  const box=
     document.getElementById(
       "studentInfo"
     );
 
 
-  const q =
+  const q=
     query(
-      collection(db, "students"),
+      collection(db,"students"),
       where(
         "studentNumber",
         "==",
@@ -697,22 +1304,34 @@ async function loadStudent() {
     );
 
 
-  const snap =
+  const snap=
     await getDocs(q);
 
 
-  if (snap.empty) {
+  if(snap.empty){
 
-    box.innerHTML = `
+    box.innerHTML=`
 
-      <p>
-        Student record കണ്ടെത്തിയില്ല.
-      </p>
+      <div class="student-card">
 
-      <p>
-        Student Number:
-        <b>${escapeHtml(studentNumber)}</b>
-      </p>
+        <div class="student-avatar">
+          👨‍🎓
+        </div>
+
+        <div>
+
+          <div class="student-name">
+            Student not found
+          </div>
+
+          <div class="student-meta">
+            Student Number:
+            ${escapeHtml(studentNumber)}
+          </div>
+
+        </div>
+
+      </div>
 
     `;
 
@@ -721,31 +1340,41 @@ async function loadStudent() {
   }
 
 
-  const first =
-    snap.docs[0];
+  const d=
+    snap.docs[0].data();
 
 
-  studentData =
-    first.data();
+  box.innerHTML=`
 
+    <div class="student-card">
 
-  box.innerHTML = `
+      <div class="student-avatar">
+        👨‍🎓
+      </div>
 
-    <div class="item">
+      <div>
 
-      <h2>
-        ${escapeHtml(studentData.name)}
-      </h2>
+        <div class="student-name">
+          ${escapeHtml(d.name)}
+        </div>
 
-      <p>
-        Student Number:
-        <b>${escapeHtml(studentNumber)}</b>
-      </p>
+        <div class="student-meta">
 
-      <p>
-        Class:
-        ${escapeHtml(studentData.className)}
-      </p>
+          Student No:
+          <b>
+            ${escapeHtml(studentNumber)}
+          </b>
+
+          &nbsp; · &nbsp;
+
+          Class:
+          <b>
+            ${escapeHtml(d.className)}
+          </b>
+
+        </div>
+
+      </div>
 
     </div>
 
@@ -754,19 +1383,21 @@ async function loadStudent() {
 }
 
 
-/* ATTENDANCE */
+/* =========================
+   ATTENDANCE
+========================= */
 
-async function loadAttendance() {
+async function loadAttendance(){
 
-  const box =
+  const box=
     document.getElementById(
       "attendanceList"
     );
 
 
-  const q =
+  const q=
     query(
-      collection(db, "attendance"),
+      collection(db,"attendance"),
       where(
         "studentNumber",
         "==",
@@ -775,43 +1406,54 @@ async function loadAttendance() {
     );
 
 
-  const snap =
+  const snap=
     await getDocs(q);
 
 
-  if (snap.empty) {
+  document
+    .getElementById(
+      "attendanceCount"
+    )
+    .textContent=snap.size;
 
-    box.innerHTML =
-      "<p>No attendance records.</p>";
+
+  if(snap.empty){
+
+    box.innerHTML=
+      `<div class="empty">
+        No attendance records.
+      </div>`;
 
     return;
 
   }
 
 
-  box.innerHTML = "";
+  box.innerHTML="";
 
 
-  snap.forEach(item => {
+  snap.forEach(item=>{
 
-    const d =
-      item.data();
+    const d=item.data();
 
 
-    box.innerHTML += `
+    box.innerHTML+=`
 
-      <div class="item">
+      <div class="data-item">
 
-        <b>
+        <div class="item-title">
+
           ${escapeHtml(d.date)}
-        </b>
 
-        <br><br>
+        </div>
 
-        Status:
-        <span class="badge">
-          ${escapeHtml(d.status)}
-        </span>
+
+        <div class="item-meta">
+
+          Status:
+          ${statusBadge(d.status)}
+
+        </div>
 
       </div>
 
@@ -822,19 +1464,21 @@ async function loadAttendance() {
 }
 
 
-/* STUDY */
+/* =========================
+   STUDY
+========================= */
 
-async function loadStudy() {
+async function loadStudy(){
 
-  const box =
+  const box=
     document.getElementById(
       "studyList"
     );
 
 
-  const q =
+  const q=
     query(
-      collection(db, "studyProgress"),
+      collection(db,"studyProgress"),
       where(
         "studentNumber",
         "==",
@@ -843,61 +1487,86 @@ async function loadStudy() {
     );
 
 
-  const snap =
+  const snap=
     await getDocs(q);
 
 
-  if (snap.empty) {
+  document
+    .getElementById(
+      "studyCount"
+    )
+    .textContent=snap.size;
 
-    box.innerHTML =
-      "<p>No study records.</p>";
+
+  if(snap.empty){
+
+    box.innerHTML=
+      `<div class="empty">
+        No Hifz progress records.
+      </div>`;
 
     return;
 
   }
 
 
-  box.innerHTML = "";
+  box.innerHTML="";
 
 
-  snap.forEach(item => {
+  snap.forEach(item=>{
 
-    const d =
-      item.data();
+    const d=item.data();
 
 
-    box.innerHTML += `
+    box.innerHTML+=`
 
-      <div class="item">
+      <div class="data-item">
 
-        <b>
+        <div class="item-title">
+
           ${escapeHtml(d.date)}
-        </b>
 
-        <br>
+        </div>
 
-        Surah:
-        ${escapeHtml(d.surah)}
 
-        <br>
+        <div class="item-meta">
 
-        New Lesson:
-        ${escapeHtml(d.newLesson)}
+          Surah:
+          <b>${escapeHtml(d.surah)}</b>
 
-        <br>
+          <br>
 
-        Revision:
-        ${escapeHtml(d.revision)}
+          New Lesson:
+          ${escapeHtml(d.newLesson)}
 
-        <br>
+          <br>
 
-        Performance:
-        ${escapeHtml(d.performance)}
+          Revision:
+          ${escapeHtml(d.revision)}
 
-        <br>
+          <br>
 
-        Note:
-        ${escapeHtml(d.note)}
+          Performance:
+          ${escapeHtml(d.performance)}
+
+        </div>
+
+
+        ${
+          d.note
+          ?
+          `
+          <div class="item-content">
+
+            <b>Usthad's Note:</b><br>
+
+            ${escapeHtml(d.note)}
+
+          </div>
+          `
+          :
+          ""
+        }
 
       </div>
 
@@ -908,19 +1577,21 @@ async function loadStudy() {
 }
 
 
-/* RESULTS */
+/* =========================
+   RESULTS
+========================= */
 
-async function loadResults() {
+async function loadResults(){
 
-  const box =
+  const box=
     document.getElementById(
       "resultList"
     );
 
 
-  const q =
+  const q=
     query(
-      collection(db, "results"),
+      collection(db,"results"),
       where(
         "studentNumber",
         "==",
@@ -934,41 +1605,60 @@ async function loadResults() {
     );
 
 
-  const snap =
+  const snap=
     await getDocs(q);
 
 
-  if (snap.empty) {
+  document
+    .getElementById(
+      "resultCount"
+    )
+    .textContent=snap.size;
 
-    box.innerHTML =
-      "<p>No published results.</p>";
+
+  if(snap.empty){
+
+    box.innerHTML=
+      `<div class="empty">
+        No published results.
+      </div>`;
 
     return;
 
   }
 
 
-  box.innerHTML = "";
+  box.innerHTML="";
 
 
-  snap.forEach(item => {
+  snap.forEach(item=>{
 
-    const d =
-      item.data();
+    const d=item.data();
 
 
-    box.innerHTML += `
+    box.innerHTML+=`
 
-      <div class="item">
+      <div class="data-item">
 
-        <h3>
+        <div class="item-title">
+
           ${escapeHtml(d.title)}
-        </h3>
 
-        <p>
-          Mark:
-          <b>${escapeHtml(d.mark)}</b>
-        </p>
+        </div>
+
+
+        <div class="item-meta">
+
+          Result:
+          <b>
+            ${escapeHtml(d.mark)}
+          </b>
+
+          &nbsp;
+
+          ${statusBadge(d.status)}
+
+        </div>
 
       </div>
 
@@ -979,19 +1669,21 @@ async function loadResults() {
 }
 
 
-/* NOTICES */
+/* =========================
+   NOTICES
+========================= */
 
-async function loadNotices() {
+async function loadNotices(){
 
-  const box =
+  const box=
     document.getElementById(
       "noticeList"
     );
 
 
-  const q =
+  const q=
     query(
-      collection(db, "notices"),
+      collection(db,"notices"),
       where(
         "status",
         "==",
@@ -1000,40 +1692,54 @@ async function loadNotices() {
     );
 
 
-  const snap =
+  const snap=
     await getDocs(q);
 
 
-  if (snap.empty) {
+  if(snap.empty){
 
-    box.innerHTML =
-      "<p>No notices.</p>";
+    box.innerHTML=
+      `<div class="empty">
+        No official notices.
+      </div>`;
 
     return;
 
   }
 
 
-  box.innerHTML = "";
+  box.innerHTML="";
 
 
-  snap.forEach(item => {
+  snap.forEach(item=>{
 
-    const d =
-      item.data();
+    const d=item.data();
 
 
-    box.innerHTML += `
+    box.innerHTML+=`
 
-      <div class="item">
+      <div class="data-item">
 
-        <h3>
+        <div class="item-title">
+
+          📢
           ${escapeHtml(d.title)}
-        </h3>
 
-        <p>
+        </div>
+
+
+        <div class="item-content">
+
           ${escapeHtml(d.text)}
-        </p>
+
+        </div>
+
+
+        <div class="item-meta">
+
+          Official Notice
+
+        </div>
 
       </div>
 
@@ -1044,19 +1750,21 @@ async function loadNotices() {
 }
 
 
-/* LEAVE */
+/* =========================
+   LEAVES
+========================= */
 
-async function loadLeaves() {
+async function loadLeaves(){
 
-  const box =
+  const box=
     document.getElementById(
       "leaveList"
     );
 
 
-  const q =
+  const q=
     query(
-      collection(db, "leaveRequests"),
+      collection(db,"leaveRequests"),
       where(
         "parentUid",
         "==",
@@ -1065,57 +1773,85 @@ async function loadLeaves() {
     );
 
 
-  const snap =
+  const snap=
     await getDocs(q);
 
 
-  if (snap.empty) {
+  if(snap.empty){
 
-    box.innerHTML =
-      "<p>No leave requests.</p>";
+    box.innerHTML=
+      `<div class="empty">
+        No leave requests.
+      </div>`;
 
     return;
 
   }
 
 
-  box.innerHTML = "";
+  box.innerHTML="";
 
 
-  snap.forEach(item => {
+  snap.forEach(item=>{
 
-    const d =
-      item.data();
+    const d=item.data();
 
 
-    box.innerHTML += `
+    box.innerHTML+=`
 
-      <div class="item">
+      <div class="data-item">
 
-        <b>
+        <div class="item-title">
+
+          Leave Date:
           ${escapeHtml(d.leaveDate)}
-        </b>
 
-        <br>
+        </div>
 
-        Reason:
-        ${escapeHtml(d.reason)}
 
-        <br>
+        <div class="item-meta">
 
-        Status:
-        <b>
-          ${escapeHtml(
-            d.status || "pending"
+          Status:
+          ${statusBadge(
+            d.status||"pending"
           )}
-        </b>
 
-        <br>
+        </div>
 
-        Usthad Reply:
-        ${escapeHtml(
-          d.reply || "No reply yet"
-        )}
+
+        <div class="item-content">
+
+          <b>Reason</b><br>
+
+          ${escapeHtml(d.reason)}
+
+        </div>
+
+
+        ${
+          d.reply
+          ?
+          `
+          <div class="item-content"
+               style="
+                 background:#ecfdf5;
+                 padding:12px;
+                 border-radius:8px;
+               ">
+
+            <b>Usthad Reply</b><br>
+
+            ${escapeHtml(d.reply)}
+
+          </div>
+          `
+          :
+          `
+          <div class="item-meta">
+            Waiting for Usthad's reply.
+          </div>
+          `
+        }
 
       </div>
 
@@ -1126,30 +1862,32 @@ async function loadLeaves() {
 }
 
 
-/* SEND LEAVE */
+/* =========================
+   SEND LEAVE
+========================= */
 
 document
   .getElementById("sendLeave")
   .addEventListener(
     "click",
-    async () => {
+    async()=>{
 
-      const leaveDate =
-        document.getElementById(
-          "leaveDate"
-        ).value;
-
-
-      const reason =
-        document.getElementById(
-          "leaveReason"
-        ).value.trim();
+      const leaveDate=
+        document
+          .getElementById("leaveDate")
+          .value;
 
 
-      if (!leaveDate || !reason) {
+      const reason=
+        document
+          .getElementById("leaveReason")
+          .value.trim();
+
+
+      if(!leaveDate||!reason){
 
         alert(
-          "Date and reason required."
+          "Leave date and reason are required."
         );
 
         return;
@@ -1157,22 +1895,15 @@ document
       }
 
 
-      const email =
-        currentUser.email || "";
-
-
       await addDoc(
-        collection(
-          db,
-          "leaveRequests"
-        ),
+        collection(db,"leaveRequests"),
         {
 
           parentUid:
             currentUser.uid,
 
           parentEmail:
-            email,
+            currentUser.email||"",
 
           studentNumber:
             String(studentNumber),
@@ -1181,11 +1912,9 @@ document
 
           reason,
 
-          status:
-            "pending",
+          status:"pending",
 
-          reply:
-            "",
+          reply:"",
 
           createdAt:
             serverTimestamp()
@@ -1195,18 +1924,18 @@ document
 
 
       alert(
-        "Leave request sent."
+        "Leave request submitted successfully."
       );
 
 
-      document.getElementById(
-        "leaveDate"
-      ).value = "";
+      document
+        .getElementById("leaveDate")
+        .value="";
 
 
-      document.getElementById(
-        "leaveReason"
-      ).value = "";
+      document
+        .getElementById("leaveReason")
+        .value="";
 
 
       loadLeaves();
@@ -1215,19 +1944,21 @@ document
   );
 
 
-/* MESSAGES */
+/* =========================
+   MESSAGES
+========================= */
 
-async function loadMessages() {
+async function loadMessages(){
 
-  const box =
+  const box=
     document.getElementById(
       "messageList"
     );
 
 
-  const q =
+  const q=
     query(
-      collection(db, "messages"),
+      collection(db,"messages"),
       where(
         "parentUid",
         "==",
@@ -1236,53 +1967,97 @@ async function loadMessages() {
     );
 
 
-  const snap =
+  const snap=
     await getDocs(q);
 
 
-  if (snap.empty) {
+  if(snap.empty){
 
-    box.innerHTML =
-      "<p>No messages.</p>";
+    box.innerHTML=
+      `<div class="empty">
+        No messages yet.
+      </div>`;
 
     return;
 
   }
 
 
-  box.innerHTML = "";
+  box.innerHTML="";
 
 
-  snap.forEach(item => {
+  snap.forEach(item=>{
 
-    const d =
-      item.data();
+    const d=item.data();
 
 
-    box.innerHTML += `
+    box.innerHTML+=`
 
-      <div class="item">
+      <div class="data-item">
 
-        <b>Your message</b>
+        <div class="item-title">
 
-        <p>
+          Your Message
+
+        </div>
+
+
+        <div class="item-content">
+
           ${escapeHtml(d.text)}
-        </p>
 
-        <hr>
+        </div>
 
-        <b>Usthad reply</b>
 
-        <p>
-          ${escapeHtml(
-            d.reply || "No reply yet"
+        <div class="item-meta">
+
+          Status:
+          ${statusBadge(
+            d.status||"unread"
           )}
-        </p>
+
+        </div>
+
+
+        ${
+          d.reply
+          ?
+          `
+          <div class="item-content"
+               style="
+                 background:#ecfdf5;
+                 padding:12px;
+                 border-radius:8px;
+               ">
+
+            <b>Usthad Reply</b><br>
+
+            ${escapeHtml(d.reply)}
+
+          </div>
+          `
+          :
+          `
+          <div class="item-meta">
+
+            Waiting for Usthad's reply.
+
+          </div>
+          `
+        }
+
+
+        <br>
+
 
         <button
-          class="delete"
-          onclick="deleteMessage('${item.id}')">
+          class="delete-btn"
+          onclick="deleteMessage(
+            '${item.id}'
+          )">
+
           Delete
+
         </button>
 
       </div>
@@ -1294,24 +2069,26 @@ async function loadMessages() {
 }
 
 
-/* SEND MESSAGE */
+/* =========================
+   SEND MESSAGE
+========================= */
 
 document
   .getElementById("sendMessage")
   .addEventListener(
     "click",
-    async () => {
+    async()=>{
 
-      const text =
-        document.getElementById(
-          "messageText"
-        ).value.trim();
+      const text=
+        document
+          .getElementById("messageText")
+          .value.trim();
 
 
-      if (!text) {
+      if(!text){
 
         alert(
-          "Message എഴുതുക."
+          "Please write your message."
         );
 
         return;
@@ -1320,28 +2097,23 @@ document
 
 
       await addDoc(
-        collection(
-          db,
-          "messages"
-        ),
+        collection(db,"messages"),
         {
 
           parentUid:
             currentUser.uid,
 
           parentEmail:
-            currentUser.email || "",
+            currentUser.email||"",
 
           studentNumber:
             String(studentNumber),
 
           text,
 
-          status:
-            "unread",
+          status:"unread",
 
-          reply:
-            "",
+          reply:"",
 
           createdAt:
             serverTimestamp()
@@ -1351,13 +2123,13 @@ document
 
 
       alert(
-        "Message sent."
+        "Message sent successfully."
       );
 
 
-      document.getElementById(
-        "messageText"
-      ).value = "";
+      document
+        .getElementById("messageText")
+        .value="";
 
 
       loadMessages();
@@ -1366,33 +2138,30 @@ document
   );
 
 
-/* DELETE MESSAGE */
+/* =========================
+   DELETE MESSAGE
+========================= */
 
-window.deleteMessage =
-  async function(id) {
+window.deleteMessage=
+async function(id){
 
-    if (
-      !confirm(
-        "Delete this message?"
-      )
-    ) return;
-
-
-    await deleteDoc(
-      doc(
-        db,
-        "messages",
-        id
-      )
-    );
+  if(
+    !confirm(
+      "Delete this message?"
+    )
+  ) return;
 
 
-    loadMessages();
+  await deleteDoc(
+    doc(db,"messages",id)
+  );
 
-  };
+
+  loadMessages();
+
+};
 
 </script>
 
 </body>
-
 </html>
