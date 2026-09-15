@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>SAFA HIFZ CLASS - Admin</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
@@ -23,8 +27,13 @@ body{
   text-align:center;
 }
 
-.header h1{margin:0}
-.header p{margin:7px 0 0}
+.header h1{
+  margin:0;
+}
+
+.header p{
+  margin:7px 0 0;
+}
 
 .container{
   max-width:1000px;
@@ -88,7 +97,9 @@ body{
   display:block;
 }
 
-input,textarea,select{
+input,
+textarea,
+select{
   width:100%;
   padding:12px;
   margin:7px 0;
@@ -105,6 +116,15 @@ button{
   background:#075e54;
   color:white;
   cursor:pointer;
+}
+
+button:hover{
+  opacity:.9;
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
 }
 
 .back{
@@ -152,84 +172,168 @@ button{
   color:#666;
   font-size:13px;
 }
+
+#loadingScreen{
+  position:fixed;
+  inset:0;
+  background:#f4f7f6;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.loadingBox{
+  background:white;
+  padding:30px;
+  border-radius:15px;
+  text-align:center;
+  box-shadow:0 3px 15px rgba(0,0,0,.12);
+}
+
 </style>
+
 </head>
 
 <body>
 
-<div class="header">
-  <h1>SAFA HIFZ CLASS</h1>
-  <p>Admin Dashboard</p>
+
+<!-- ================= LOADING ================= -->
+
+<div id="loadingScreen">
+
+  <div class="loadingBox">
+
+    <h2>SAFA HIFZ CLASS</h2>
+
+    <p>Checking login...</p>
+
+  </div>
+
 </div>
+
+
+<!-- ================= HEADER ================= -->
+
+<div class="header">
+
+  <h1>SAFA HIFZ CLASS</h1>
+
+  <p>Admin Dashboard</p>
+
+</div>
+
 
 <div class="container">
 
+
 <div class="welcome">
+
   <h2>Assalamu Alaikum, Usthad 👋</h2>
+
   <p>SAFA HIFZ CLASS Management System</p>
+
 </div>
+
 
 <div id="message"></div>
 
 
-<!-- ================= DASHBOARD ================= -->
+<!-- ================= HOME ================= -->
 
 <div id="home">
 
 <div class="grid">
 
+
 <div class="card" onclick="showSection('students')">
-<div class="icon">👨‍🎓</div>
-<h3>Students</h3>
-<div class="count" id="studentCount">0</div>
-<p>Add / Manage</p>
+
+  <div class="icon">👨‍🎓</div>
+
+  <h3>Students</h3>
+
+  <div class="count" id="studentCount">0</div>
+
+  <p>Add / Manage</p>
+
 </div>
 
 
 <div class="card" onclick="showSection('attendance')">
-<div class="icon">📅</div>
-<h3>Attendance</h3>
-<p>Manage</p>
+
+  <div class="icon">📅</div>
+
+  <h3>Attendance</h3>
+
+  <p>Manage</p>
+
 </div>
 
 
 <div class="card" onclick="showSection('study')">
-<div class="icon">📖</div>
-<h3>Study Progress</h3>
-<p>Update</p>
+
+  <div class="icon">📖</div>
+
+  <h3>Study Progress</h3>
+
+  <p>Update</p>
+
 </div>
 
 
 <div class="card" onclick="showSection('results')">
-<div class="icon">📊</div>
-<h3>Results</h3>
-<p>Add / Publish</p>
+
+  <div class="icon">📊</div>
+
+  <h3>Results</h3>
+
+  <p>Add / Publish</p>
+
 </div>
 
 
 <div class="card" onclick="showSection('notices')">
-<div class="icon">📢</div>
-<h3>Notices</h3>
-<p>Publish</p>
+
+  <div class="icon">📢</div>
+
+  <h3>Notices</h3>
+
+  <p>Publish</p>
+
 </div>
 
 
 <div class="card" onclick="showSection('leave')">
-<div class="icon">📝</div>
-<h3>Leave</h3>
-<p>Approve / Reply</p>
+
+  <div class="icon">📝</div>
+
+  <h3>Leave</h3>
+
+  <p>Approve / Reply</p>
+
 </div>
 
 
 <div class="card" onclick="showSection('messages')">
-<div class="icon">💬</div>
-<h3>Messages</h3>
-<p>Parent Messages</p>
-</div>
+
+  <div class="icon">💬</div>
+
+  <h3>Messages</h3>
+
+  <p>Parent Messages</p>
 
 </div>
 
-<button class="logout" onclick="logout()">Logout</button>
+
+</div>
+
+
+<button class="logout" onclick="logout()">
+
+Logout
+
+</button>
+
 
 </div>
 
@@ -244,15 +348,31 @@ button{
 
 <h3>Add New Student</h3>
 
-<input id="studentNumber" placeholder="Student Number">
+<input
+  id="studentNumber"
+  placeholder="Student Number"
+>
 
-<input id="studentName" placeholder="Student Name">
+<input
+  id="studentName"
+  placeholder="Student Name"
+>
 
-<input id="studentClass" placeholder="Class">
+<input
+  id="studentClass"
+  placeholder="Class"
+>
 
-<input id="parentEmail" placeholder="Parent Email">
+<input
+  id="parentEmail"
+  type="email"
+  placeholder="Parent Email"
+>
 
-<button onclick="addStudent()">➕ Add Student</button>
+<button onclick="addStudent()">
+➕ Add Student
+</button>
+
 
 <h3>Student List</h3>
 
@@ -274,19 +394,45 @@ Loading...
 <h3>Mark Attendance</h3>
 
 <select id="attendanceStudent">
-<option value="">Select Student</option>
+
+<option value="">
+Select Student
+</option>
+
 </select>
 
-<input type="date" id="attendanceDate">
+
+<input
+  type="date"
+  id="attendanceDate"
+>
+
 
 <select id="attendanceStatus">
-<option value="">Select Status</option>
-<option value="Present">Present</option>
-<option value="Absent">Absent</option>
-<option value="Leave">Leave</option>
+
+<option value="">
+Select Status
+</option>
+
+<option value="Present">
+Present
+</option>
+
+<option value="Absent">
+Absent
+</option>
+
+<option value="Leave">
+Leave
+</option>
+
 </select>
 
-<button onclick="saveAttendance()">💾 Save Attendance</button>
+
+<button onclick="saveAttendance()">
+💾 Save Attendance
+</button>
+
 
 <hr>
 
@@ -299,7 +445,7 @@ Loading...
 </div>
 
 
-<!-- ================= STUDY PROGRESS ================= -->
+<!-- ================= STUDY ================= -->
 
 <div id="study" class="section">
 
@@ -309,30 +455,76 @@ Loading...
 
 <h3>Update Study Progress</h3>
 
+
 <select id="studyStudent">
-<option value="">Select Student</option>
+
+<option value="">
+Select Student
+</option>
+
 </select>
 
-<input type="date" id="studyDate">
 
-<input id="studySurah" placeholder="Surah / Juz">
+<input
+  type="date"
+  id="studyDate"
+>
 
-<input id="studyNewLesson" placeholder="New Lesson">
 
-<input id="studyRevision" placeholder="Revision">
+<input
+  id="studySurah"
+  placeholder="Surah / Juz"
+>
+
+
+<input
+  id="studyNewLesson"
+  placeholder="New Lesson"
+>
+
+
+<input
+  id="studyRevision"
+  placeholder="Revision"
+>
+
 
 <select id="studyPerformance">
-<option value="">Performance</option>
-<option value="Excellent">Excellent</option>
-<option value="Very Good">Very Good</option>
-<option value="Good">Good</option>
-<option value="Needs Improvement">Needs Improvement</option>
+
+<option value="">
+Performance
+</option>
+
+<option value="Excellent">
+Excellent
+</option>
+
+<option value="Very Good">
+Very Good
+</option>
+
+<option value="Good">
+Good
+</option>
+
+<option value="Needs Improvement">
+Needs Improvement
+</option>
+
 </select>
 
-<textarea id="studyNote" rows="4"
-placeholder="Teacher Note"></textarea>
 
-<button onclick="saveStudyProgress()">💾 Save Progress</button>
+<textarea
+  id="studyNote"
+  rows="4"
+  placeholder="Teacher Note"
+></textarea>
+
+
+<button onclick="saveStudyProgress()">
+💾 Save Progress
+</button>
+
 
 <hr>
 
@@ -353,18 +545,42 @@ Loading...
 
 <button class="back" onclick="goHome()">← Back</button>
 
-<input id="resultStudent" placeholder="Student Number">
 
-<input id="resultTitle" placeholder="Exam / Result Title">
+<input
+  id="resultStudent"
+  placeholder="Student Number"
+>
 
-<input id="resultMark" placeholder="Mark / Grade">
+
+<input
+  id="resultTitle"
+  placeholder="Exam / Result Title"
+>
+
+
+<input
+  id="resultMark"
+  placeholder="Mark / Grade"
+>
+
 
 <select id="resultStatus">
-<option value="draft">Draft</option>
-<option value="published">Publish</option>
+
+<option value="draft">
+Draft
+</option>
+
+<option value="published">
+Publish
+</option>
+
 </select>
 
-<button onclick="addResult()">Save Result</button>
+
+<button onclick="addResult()">
+Save Result
+</button>
+
 
 <div id="resultList"></div>
 
@@ -379,17 +595,37 @@ Loading...
 
 <button class="back" onclick="goHome()">← Back</button>
 
-<input id="noticeTitle" placeholder="Notice Title">
 
-<textarea id="noticeText" rows="5"
-placeholder="Notice message"></textarea>
+<input
+  id="noticeTitle"
+  placeholder="Notice Title"
+>
+
+
+<textarea
+  id="noticeText"
+  rows="5"
+  placeholder="Notice message"
+></textarea>
+
 
 <select id="noticeStatus">
-<option value="draft">Draft</option>
-<option value="published">Publish</option>
+
+<option value="draft">
+Draft
+</option>
+
+<option value="published">
+Publish
+</option>
+
 </select>
 
-<button onclick="addNotice()">Publish / Save Notice</button>
+
+<button onclick="addNotice()">
+Publish / Save Notice
+</button>
+
 
 <div id="noticeList"></div>
 
@@ -405,7 +641,11 @@ placeholder="Notice message"></textarea>
 <button class="back" onclick="goHome()">← Back</button>
 
 <div id="leaveList">
+
+<p class="empty">
 No leave applications yet.
+</p>
+
 </div>
 
 </div>
@@ -420,84 +660,289 @@ No leave applications yet.
 <button class="back" onclick="goHome()">← Back</button>
 
 <div id="messageList">
+
+<p class="empty">
 No messages yet.
-</div>
+</p>
 
 </div>
 
 </div>
 
+
+</div>
+
+
+<!-- ================= FIREBASE ================= -->
 
 <script type="module">
 
+
 import {
+
   initializeApp
+
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-import {
-  getAuth,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
+
+  getAuth,
+
+  signOut,
+
+  setPersistence,
+
+  browserLocalPersistence
+
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+
   getFirestore,
+
   collection,
+
   addDoc,
+
   getDocs,
+
+  getDoc,
+
+  doc,
+
   serverTimestamp
+
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
 /* ================= FIREBASE CONFIG ================= */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCR-A17PO3zeiY2a1eH9cvsmv4Upxqe4",
-  authDomain: "safa-hifz-class-7e84b.firebaseapp.com",
-  projectId: "safa-hifz-class-7e84b",
-  storageBucket: "safa-hifz-class-7e84b.firebasestorage.app",
-  messagingSenderId: "476801753196",
-  appId: "1:476801753196:web:b7f86a1f02eabec706f849",
-  measurementId: "G-MR45L2B8PL"
+
+  apiKey:
+    "AIzaSyCR-A17PO3zeiY2a1eH9cvsmv4Upxqe4",
+
+  authDomain:
+    "safa-hifz-class-7e84b.firebaseapp.com",
+
+  projectId:
+    "safa-hifz-class-7e84b",
+
+  storageBucket:
+    "safa-hifz-class-7e84b.firebasestorage.app",
+
+  messagingSenderId:
+    "476801753196",
+
+  appId:
+    "1:476801753196:web:b7f86a1f02eabec706f849",
+
+  measurementId:
+    "G-MR45L2B8PL"
+
 };
 
 
-const app = initializeApp(firebaseConfig);
+/* ================= INITIALIZE ================= */
 
-const auth = getAuth(app);
+const app =
+  initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+const auth =
+  getAuth(app);
+
+const db =
+  getFirestore(app);
 
 
-/* ================= AUTH ================= */
+/* =====================================================
+   AUTHENTICATION
+===================================================== */
 
-onAuthStateChanged(auth,(user)=>{
 
-  if(!user){
+async function startDashboard(){
 
-    window.location.href="index.html";
+  try{
 
-    return;
+
+    /*
+      IMPORTANT
+
+      Keep Firebase authentication
+      saved in browser.
+    */
+
+    await setPersistence(
+      auth,
+      browserLocalPersistence
+    );
+
+
+    /*
+      Wait until Firebase has completely
+      restored the previous login session.
+    */
+
+    await auth.authStateReady();
+
+
+    const user =
+      auth.currentUser;
+
+
+    /*
+      If there is no logged-in user,
+      go back to login page.
+    */
+
+    if(!user){
+
+      window.location.replace("index.html");
+
+      return;
+
+    }
+
+
+    console.log(
+      "Firebase user:",
+      user.email
+    );
+
+
+    /*
+      Check admin account
+    */
+
+    const userRef =
+      doc(db,"users",user.uid);
+
+    const userSnap =
+      await getDoc(userRef);
+
+
+    if(!userSnap.exists()){
+
+      alert(
+        "Admin account information not found."
+      );
+
+      await signOut(auth);
+
+      window.location.replace("index.html");
+
+      return;
+
+    }
+
+
+    const userData =
+      userSnap.data();
+
+
+    if(userData.role !== "admin"){
+
+      alert(
+        "You are not authorized to access Admin Dashboard."
+      );
+
+      await signOut(auth);
+
+      window.location.replace("index.html");
+
+      return;
+
+    }
+
+
+    /*
+      Admin verified.
+      Remove loading screen.
+    */
+
+    document.getElementById(
+      "loadingScreen"
+    ).style.display="none";
+
+
+    /*
+      Load students
+    */
+
+    loadStudents();
+
 
   }
 
-  loadStudents();
+  catch(error){
 
-});
+    console.error(
+      "Dashboard authentication error:",
+      error
+    );
 
 
-/* ================= SECTION CONTROL ================= */
+    document.getElementById(
+      "loadingScreen"
+    ).innerHTML=`
+
+      <div class="loadingBox">
+
+        <h2>SAFA HIFZ CLASS</h2>
+
+        <p>
+        Login session പരിശോധിക്കാൻ കഴിഞ്ഞില്ല.
+        </p>
+
+        <button
+          onclick="window.location.href='index.html'"
+        >
+        Back to Login
+        </button>
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/*
+  Start dashboard authentication.
+*/
+
+startDashboard();
+
+
+/* =====================================================
+   SECTION CONTROL
+===================================================== */
 
 window.showSection=function(id){
 
-  document.getElementById("home").style.display="none";
+  document.getElementById(
+    "home"
+  ).style.display="none";
 
-  document.querySelectorAll(".section")
-  .forEach(section=>{
-    section.classList.remove("active");
+
+  document.querySelectorAll(
+    ".section"
+  ).forEach(section=>{
+
+    section.classList.remove(
+      "active"
+    );
+
   });
 
-  document.getElementById(id).classList.add("active");
+
+  document.getElementById(
+    id
+  ).classList.add("active");
 
 
   if(id==="students"){
@@ -541,40 +986,79 @@ window.showSection=function(id){
 };
 
 
+/* =====================================================
+   GO HOME
+===================================================== */
+
 window.goHome=function(){
 
-  document.querySelectorAll(".section")
-  .forEach(section=>{
-    section.classList.remove("active");
+  document.querySelectorAll(
+    ".section"
+  ).forEach(section=>{
+
+    section.classList.remove(
+      "active"
+    );
+
   });
 
-  document.getElementById("home").style.display="block";
+
+  document.getElementById(
+    "home"
+  ).style.display="block";
+
 
   loadStudents();
 
 };
 
 
-/* ================= LOGOUT ================= */
+/* =====================================================
+   LOGOUT
+===================================================== */
 
 window.logout=async function(){
 
-  await signOut(auth);
+  try{
 
-  window.location.href="index.html";
+    await signOut(auth);
+
+    window.location.replace(
+      "index.html"
+    );
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    alert(
+      "Logout ചെയ്യാൻ കഴിഞ്ഞില്ല."
+    );
+
+  }
 
 };
 
 
-/* ================= MESSAGE ================= */
+/* =====================================================
+   MESSAGE
+===================================================== */
 
 function showMessage(text){
 
-  document.getElementById("message").textContent=text;
+  const message =
+    document.getElementById("message");
+
+  message.style.color="#075e54";
+
+  message.textContent=text;
+
 
   setTimeout(()=>{
 
-    document.getElementById("message").textContent="";
+    message.textContent="";
 
   },3000);
 
@@ -590,22 +1074,35 @@ function showMessage(text){
 
 window.addStudent=async function(){
 
-  const number=
-    document.getElementById("studentNumber").value.trim();
+  const number =
+    document.getElementById(
+      "studentNumber"
+    ).value.trim();
 
-  const name=
-    document.getElementById("studentName").value.trim();
 
-  const className=
-    document.getElementById("studentClass").value.trim();
+  const name =
+    document.getElementById(
+      "studentName"
+    ).value.trim();
 
-  const parentEmail=
-    document.getElementById("parentEmail").value.trim();
+
+  const className =
+    document.getElementById(
+      "studentClass"
+    ).value.trim();
+
+
+  const parentEmail =
+    document.getElementById(
+      "parentEmail"
+    ).value.trim();
 
 
   if(!number || !name){
 
-    alert("Student Number and Name നൽകണം.");
+    alert(
+      "Student Number and Name നൽകണം."
+    );
 
     return;
 
@@ -614,28 +1111,49 @@ window.addStudent=async function(){
 
   try{
 
-    await addDoc(collection(db,"students"),{
+    await addDoc(
+      collection(db,"students"),
+      {
 
-      studentNumber:number,
+        studentNumber:number,
 
-      name:name,
+        name:name,
 
-      className:className,
+        className:className,
 
-      parentEmail:parentEmail,
+        parentEmail:parentEmail,
 
-      createdAt:serverTimestamp()
+        createdAt:
+          serverTimestamp()
 
-    });
-
-
-    document.getElementById("studentNumber").value="";
-    document.getElementById("studentName").value="";
-    document.getElementById("studentClass").value="";
-    document.getElementById("parentEmail").value="";
+      }
+    );
 
 
-    showMessage("Student added successfully ✅");
+    document.getElementById(
+      "studentNumber"
+    ).value="";
+
+
+    document.getElementById(
+      "studentName"
+    ).value="";
+
+
+    document.getElementById(
+      "studentClass"
+    ).value="";
+
+
+    document.getElementById(
+      "parentEmail"
+    ).value="";
+
+
+    showMessage(
+      "Student added successfully ✅"
+    );
+
 
     loadStudents();
 
@@ -645,7 +1163,9 @@ window.addStudent=async function(){
 
     console.error(error);
 
-    alert("Student add ചെയ്യാൻ കഴിഞ്ഞില്ല.");
+    alert(
+      "Student add ചെയ്യാൻ കഴിഞ്ഞില്ല."
+    );
 
   }
 
@@ -656,21 +1176,33 @@ window.addStudent=async function(){
 
 async function loadStudents(){
 
-  const list=
-    document.getElementById("studentList");
+  const list =
+    document.getElementById(
+      "studentList"
+    );
+
+
+  if(!list){
+
+    return;
+
+  }
+
 
   list.innerHTML="Loading...";
 
 
   try{
 
-    const snapshot=
-      await getDocs(collection(db,"students"));
+    const snapshot =
+      await getDocs(
+        collection(db,"students")
+      );
 
 
-    /* TOTAL COUNT */
-
-    document.getElementById("studentCount").textContent=
+    document.getElementById(
+      "studentCount"
+    ).textContent =
       snapshot.size;
 
 
@@ -687,30 +1219,46 @@ async function loadStudents(){
     }
 
 
-    snapshot.forEach(doc=>{
+    snapshot.forEach(item=>{
 
-      const student=doc.data();
+      const student =
+        item.data();
 
-      const div=document.createElement("div");
+
+      const div =
+        document.createElement("div");
+
 
       div.className="student";
 
+
       div.innerHTML=`
 
-        <strong>${student.name}</strong><br>
+        <strong>
+          ${student.name || "-"}
+        </strong>
 
-        Student No: ${student.studentNumber}<br>
+        <br>
 
-        Class: ${student.className || "-"}<br>
+        Student No:
+        ${student.studentNumber || "-"}
 
-        Parent: ${student.parentEmail || "-"}
+        <br>
+
+        Class:
+        ${student.className || "-"}
+
+        <br>
+
+        Parent:
+        ${student.parentEmail || "-"}
 
       `;
+
 
       list.appendChild(div);
 
     });
-
 
   }
 
@@ -726,52 +1274,86 @@ async function loadStudents(){
 }
 
 
-/* STUDENT DROPDOWNS */
+/* =====================================================
+   STUDENT DROPDOWNS
+===================================================== */
 
 async function loadStudentsForDropdown(){
 
   try{
 
-    const snapshot=
-      await getDocs(collection(db,"students"));
+    const snapshot =
+      await getDocs(
+        collection(db,"students")
+      );
 
 
-    const attendanceSelect=
-      document.getElementById("attendanceStudent");
+    const attendanceSelect =
+      document.getElementById(
+        "attendanceStudent"
+      );
 
-    const studySelect=
-      document.getElementById("studyStudent");
+
+    const studySelect =
+      document.getElementById(
+        "studyStudent"
+      );
 
 
     attendanceSelect.innerHTML=
       '<option value="">Select Student</option>';
 
+
     studySelect.innerHTML=
       '<option value="">Select Student</option>';
 
 
-    snapshot.forEach(doc=>{
+    snapshot.forEach(item=>{
 
-      const student=doc.data();
-
-      const option1=document.createElement("option");
-
-      option1.value=student.studentNumber;
-
-      option1.textContent=
-        student.studentNumber+" - "+student.name;
-
-      attendanceSelect.appendChild(option1);
+      const student =
+        item.data();
 
 
-      const option2=document.createElement("option");
+      const option1 =
+        document.createElement(
+          "option"
+        );
 
-      option2.value=student.studentNumber;
 
-      option2.textContent=
-        student.studentNumber+" - "+student.name;
+      option1.value =
+        student.studentNumber;
 
-      studySelect.appendChild(option2);
+
+      option1.textContent =
+        student.studentNumber +
+        " - " +
+        student.name;
+
+
+      attendanceSelect.appendChild(
+        option1
+      );
+
+
+      const option2 =
+        document.createElement(
+          "option"
+        );
+
+
+      option2.value =
+        student.studentNumber;
+
+
+      option2.textContent =
+        student.studentNumber +
+        " - " +
+        student.name;
+
+
+      studySelect.appendChild(
+        option2
+      );
 
     });
 
@@ -790,24 +1372,35 @@ async function loadStudentsForDropdown(){
    ATTENDANCE
 ===================================================== */
 
-
-/* SAVE ATTENDANCE */
-
 window.saveAttendance=async function(){
 
-  const studentNumber=
-    document.getElementById("attendanceStudent").value;
-
-  const date=
-    document.getElementById("attendanceDate").value;
-
-  const status=
-    document.getElementById("attendanceStatus").value;
+  const studentNumber =
+    document.getElementById(
+      "attendanceStudent"
+    ).value;
 
 
-  if(!studentNumber || !date || !status){
+  const date =
+    document.getElementById(
+      "attendanceDate"
+    ).value;
 
-    alert("Student, Date, Status എന്നിവ നൽകണം.");
+
+  const status =
+    document.getElementById(
+      "attendanceStatus"
+    ).value;
+
+
+  if(
+    !studentNumber ||
+    !date ||
+    !status
+  ){
+
+    alert(
+      "Student, Date, Status എന്നിവ നൽകണം."
+    );
 
     return;
 
@@ -816,25 +1409,43 @@ window.saveAttendance=async function(){
 
   try{
 
-    await addDoc(collection(db,"attendance"),{
+    await addDoc(
+      collection(db,"attendance"),
+      {
 
-      studentNumber:studentNumber,
+        studentNumber:
 
-      date:date,
+          studentNumber,
 
-      status:status,
+        date:
 
-      createdAt:serverTimestamp()
+          date,
 
-    });
+        status:
+
+          status,
+
+        createdAt:
+
+          serverTimestamp()
+
+      }
+    );
 
 
-    showMessage("Attendance saved successfully ✅");
+    showMessage(
+      "Attendance saved successfully ✅"
+    );
 
 
-    document.getElementById("attendanceDate").value="";
+    document.getElementById(
+      "attendanceDate"
+    ).value="";
 
-    document.getElementById("attendanceStatus").value="";
+
+    document.getElementById(
+      "attendanceStatus"
+    ).value="";
 
 
     loadAttendance();
@@ -845,27 +1456,32 @@ window.saveAttendance=async function(){
 
     console.error(error);
 
-    alert("Attendance save ചെയ്യാൻ കഴിഞ്ഞില്ല.");
+    alert(
+      "Attendance save ചെയ്യാൻ കഴിഞ്ഞില്ല."
+    );
 
   }
 
 };
 
 
-/* LOAD ATTENDANCE */
-
 async function loadAttendance(){
 
-  const list=
-    document.getElementById("attendanceList");
+  const list =
+    document.getElementById(
+      "attendanceList"
+    );
+
 
   list.innerHTML="Loading...";
 
 
   try{
 
-    const snapshot=
-      await getDocs(collection(db,"attendance"));
+    const snapshot =
+      await getDocs(
+        collection(db,"attendance")
+      );
 
 
     list.innerHTML="";
@@ -881,23 +1497,36 @@ async function loadAttendance(){
     }
 
 
-    snapshot.forEach(doc=>{
+    snapshot.forEach(item=>{
 
-      const a=doc.data();
+      const a =
+        item.data();
 
-      const div=document.createElement("div");
+
+      const div =
+        document.createElement("div");
+
 
       div.className="record";
 
+
       div.innerHTML=`
 
-        <strong>Student: ${a.studentNumber}</strong><br>
+        <strong>
+          Student: ${a.studentNumber}
+        </strong>
 
-        Date: ${a.date}<br>
+        <br>
 
-        Status: <strong>${a.status}</strong>
+        Date: ${a.date}
+
+        <br>
+
+        Status:
+        <strong>${a.status}</strong>
 
       `;
+
 
       list.appendChild(div);
 
@@ -921,36 +1550,55 @@ async function loadAttendance(){
    STUDY PROGRESS
 ===================================================== */
 
-
-/* SAVE STUDY PROGRESS */
-
 window.saveStudyProgress=async function(){
 
-  const studentNumber=
-    document.getElementById("studyStudent").value;
+  const studentNumber =
+    document.getElementById(
+      "studyStudent"
+    ).value;
 
-  const date=
-    document.getElementById("studyDate").value;
 
-  const surah=
-    document.getElementById("studySurah").value.trim();
+  const date =
+    document.getElementById(
+      "studyDate"
+    ).value;
 
-  const newLesson=
-    document.getElementById("studyNewLesson").value.trim();
 
-  const revision=
-    document.getElementById("studyRevision").value.trim();
+  const surah =
+    document.getElementById(
+      "studySurah"
+    ).value.trim();
 
-  const performance=
-    document.getElementById("studyPerformance").value;
 
-  const note=
-    document.getElementById("studyNote").value.trim();
+  const newLesson =
+    document.getElementById(
+      "studyNewLesson"
+    ).value.trim();
+
+
+  const revision =
+    document.getElementById(
+      "studyRevision"
+    ).value.trim();
+
+
+  const performance =
+    document.getElementById(
+      "studyPerformance"
+    ).value;
+
+
+  const note =
+    document.getElementById(
+      "studyNote"
+    ).value.trim();
 
 
   if(!studentNumber || !date){
 
-    alert("Student and Date നൽകണം.");
+    alert(
+      "Student and Date നൽകണം."
+    );
 
     return;
 
@@ -959,36 +1607,71 @@ window.saveStudyProgress=async function(){
 
   try{
 
-    await addDoc(collection(db,"studyProgress"),{
+    await addDoc(
+      collection(db,"studyProgress"),
+      {
 
-      studentNumber:studentNumber,
+        studentNumber:
+          studentNumber,
 
-      date:date,
+        date:
+          date,
 
-      surah:surah,
+        surah:
+          surah,
 
-      newLesson:newLesson,
+        newLesson:
+          newLesson,
 
-      revision:revision,
+        revision:
+          revision,
 
-      performance:performance,
+        performance:
+          performance,
 
-      note:note,
+        note:
+          note,
 
-      createdAt:serverTimestamp()
+        createdAt:
+          serverTimestamp()
 
-    });
+      }
+    );
 
 
-    showMessage("Study Progress saved successfully ✅");
+    showMessage(
+      "Study Progress saved successfully ✅"
+    );
 
 
-    document.getElementById("studyDate").value="";
-    document.getElementById("studySurah").value="";
-    document.getElementById("studyNewLesson").value="";
-    document.getElementById("studyRevision").value="";
-    document.getElementById("studyPerformance").value="";
-    document.getElementById("studyNote").value="";
+    document.getElementById(
+      "studyDate"
+    ).value="";
+
+
+    document.getElementById(
+      "studySurah"
+    ).value="";
+
+
+    document.getElementById(
+      "studyNewLesson"
+    ).value="";
+
+
+    document.getElementById(
+      "studyRevision"
+    ).value="";
+
+
+    document.getElementById(
+      "studyPerformance"
+    ).value="";
+
+
+    document.getElementById(
+      "studyNote"
+    ).value="";
 
 
     loadStudyProgress();
@@ -999,27 +1682,32 @@ window.saveStudyProgress=async function(){
 
     console.error(error);
 
-    alert("Study Progress save ചെയ്യാൻ കഴിഞ്ഞില്ല.");
+    alert(
+      "Study Progress save ചെയ്യാൻ കഴിഞ്ഞില്ല."
+    );
 
   }
 
 };
 
 
-/* LOAD STUDY PROGRESS */
-
 async function loadStudyProgress(){
 
-  const list=
-    document.getElementById("studyList");
+  const list =
+    document.getElementById(
+      "studyList"
+    );
+
 
   list.innerHTML="Loading...";
 
 
   try{
 
-    const snapshot=
-      await getDocs(collection(db,"studyProgress"));
+    const snapshot =
+      await getDocs(
+        collection(db,"studyProgress")
+      );
 
 
     list.innerHTML="";
@@ -1035,31 +1723,56 @@ async function loadStudyProgress(){
     }
 
 
-    snapshot.forEach(doc=>{
+    snapshot.forEach(item=>{
 
-      const p=doc.data();
+      const p =
+        item.data();
 
-      const div=document.createElement("div");
+
+      const div =
+        document.createElement("div");
+
 
       div.className="record";
 
+
       div.innerHTML=`
 
-        <strong>Student: ${p.studentNumber}</strong><br>
+        <strong>
+          Student: ${p.studentNumber}
+        </strong>
 
-        Date: ${p.date}<br>
+        <br>
 
-        Surah / Juz: ${p.surah || "-"}<br>
+        Date: ${p.date}
 
-        New Lesson: ${p.newLesson || "-"}<br>
+        <br>
 
-        Revision: ${p.revision || "-"}<br>
+        Surah / Juz:
+        ${p.surah || "-"}
 
-        Performance: ${p.performance || "-"}<br>
+        <br>
 
-        Teacher Note: ${p.note || "-"}
+        New Lesson:
+        ${p.newLesson || "-"}
+
+        <br>
+
+        Revision:
+        ${p.revision || "-"}
+
+        <br>
+
+        Performance:
+        ${p.performance || "-"}
+
+        <br>
+
+        Teacher Note:
+        ${p.note || "-"}
 
       `;
+
 
       list.appendChild(div);
 
@@ -1083,27 +1796,41 @@ async function loadStudyProgress(){
    RESULTS
 ===================================================== */
 
-
-/* ADD RESULT */
-
 window.addResult=async function(){
 
-  const studentNumber=
-    document.getElementById("resultStudent").value.trim();
-
-  const title=
-    document.getElementById("resultTitle").value.trim();
-
-  const mark=
-    document.getElementById("resultMark").value.trim();
-
-  const status=
-    document.getElementById("resultStatus").value;
+  const studentNumber =
+    document.getElementById(
+      "resultStudent"
+    ).value.trim();
 
 
-  if(!studentNumber || !title || !mark){
+  const title =
+    document.getElementById(
+      "resultTitle"
+    ).value.trim();
 
-    alert("എല്ലാ വിവരങ്ങളും നൽകുക.");
+
+  const mark =
+    document.getElementById(
+      "resultMark"
+    ).value.trim();
+
+
+  const status =
+    document.getElementById(
+      "resultStatus"
+    ).value;
+
+
+  if(
+    !studentNumber ||
+    !title ||
+    !mark
+  ){
+
+    alert(
+      "എല്ലാ വിവരങ്ങളും നൽകുക."
+    );
 
     return;
 
@@ -1112,27 +1839,47 @@ window.addResult=async function(){
 
   try{
 
-    await addDoc(collection(db,"results"),{
+    await addDoc(
+      collection(db,"results"),
+      {
 
-      studentNumber:studentNumber,
+        studentNumber:
+          studentNumber,
 
-      title:title,
+        title:
+          title,
 
-      mark:mark,
+        mark:
+          mark,
 
-      status:status,
+        status:
+          status,
 
-      createdAt:serverTimestamp()
+        createdAt:
+          serverTimestamp()
 
-    });
+      }
+    );
 
 
-    showMessage("Result saved successfully ✅");
+    showMessage(
+      "Result saved successfully ✅"
+    );
 
 
-    document.getElementById("resultStudent").value="";
-    document.getElementById("resultTitle").value="";
-    document.getElementById("resultMark").value="";
+    document.getElementById(
+      "resultStudent"
+    ).value="";
+
+
+    document.getElementById(
+      "resultTitle"
+    ).value="";
+
+
+    document.getElementById(
+      "resultMark"
+    ).value="";
 
 
     loadResults();
@@ -1143,27 +1890,32 @@ window.addResult=async function(){
 
     console.error(error);
 
-    alert("Result save ചെയ്യാൻ കഴിഞ്ഞില്ല.");
+    alert(
+      "Result save ചെയ്യാൻ കഴിഞ്ഞില്ല."
+    );
 
   }
 
 };
 
 
-/* LOAD RESULTS */
-
 async function loadResults(){
 
-  const list=
-    document.getElementById("resultList");
+  const list =
+    document.getElementById(
+      "resultList"
+    );
+
 
   list.innerHTML="Loading...";
 
 
   try{
 
-    const snapshot=
-      await getDocs(collection(db,"results"));
+    const snapshot =
+      await getDocs(
+        collection(db,"results")
+      );
 
 
     list.innerHTML="";
@@ -1179,25 +1931,42 @@ async function loadResults(){
     }
 
 
-    snapshot.forEach(doc=>{
+    snapshot.forEach(item=>{
 
-      const r=doc.data();
+      const r =
+        item.data();
 
-      const div=document.createElement("div");
+
+      const div =
+        document.createElement("div");
+
 
       div.className="student";
 
+
       div.innerHTML=`
 
-        <strong>${r.title}</strong><br>
+        <strong>
+          ${r.title}
+        </strong>
 
-        Student: ${r.studentNumber}<br>
+        <br>
 
-        Mark: ${r.mark}<br>
+        Student:
+        ${r.studentNumber}
 
-        Status: ${r.status}
+        <br>
+
+        Mark:
+        ${r.mark}
+
+        <br>
+
+        Status:
+        ${r.status}
 
       `;
+
 
       list.appendChild(div);
 
@@ -1221,24 +1990,31 @@ async function loadResults(){
    NOTICES
 ===================================================== */
 
-
-/* ADD NOTICE */
-
 window.addNotice=async function(){
 
-  const title=
-    document.getElementById("noticeTitle").value.trim();
+  const title =
+    document.getElementById(
+      "noticeTitle"
+    ).value.trim();
 
-  const text=
-    document.getElementById("noticeText").value.trim();
 
-  const status=
-    document.getElementById("noticeStatus").value;
+  const text =
+    document.getElementById(
+      "noticeText"
+    ).value.trim();
+
+
+  const status =
+    document.getElementById(
+      "noticeStatus"
+    ).value;
 
 
   if(!title || !text){
 
-    alert("Notice title and message നൽകുക.");
+    alert(
+      "Notice title and message നൽകുക."
+    );
 
     return;
 
@@ -1247,24 +2023,39 @@ window.addNotice=async function(){
 
   try{
 
-    await addDoc(collection(db,"notices"),{
+    await addDoc(
+      collection(db,"notices"),
+      {
 
-      title:title,
+        title:
+          title,
 
-      text:text,
+        text:
+          text,
 
-      status:status,
+        status:
+          status,
 
-      createdAt:serverTimestamp()
+        createdAt:
+          serverTimestamp()
 
-    });
+      }
+    );
 
 
-    showMessage("Notice saved successfully ✅");
+    showMessage(
+      "Notice saved successfully ✅"
+    );
 
 
-    document.getElementById("noticeTitle").value="";
-    document.getElementById("noticeText").value="";
+    document.getElementById(
+      "noticeTitle"
+    ).value="";
+
+
+    document.getElementById(
+      "noticeText"
+    ).value="";
 
 
     loadNotices();
@@ -1275,27 +2066,32 @@ window.addNotice=async function(){
 
     console.error(error);
 
-    alert("Notice save ചെയ്യാൻ കഴിഞ്ഞില്ല.");
+    alert(
+      "Notice save ചെയ്യാൻ കഴിഞ്ഞില്ല."
+    );
 
   }
 
 };
 
 
-/* LOAD NOTICES */
-
 async function loadNotices(){
 
-  const list=
-    document.getElementById("noticeList");
+  const list =
+    document.getElementById(
+      "noticeList"
+    );
+
 
   list.innerHTML="Loading...";
 
 
   try{
 
-    const snapshot=
-      await getDocs(collection(db,"notices"));
+    const snapshot =
+      await getDocs(
+        collection(db,"notices")
+      );
 
 
     list.innerHTML="";
@@ -1311,23 +2107,36 @@ async function loadNotices(){
     }
 
 
-    snapshot.forEach(doc=>{
+    snapshot.forEach(item=>{
 
-      const n=doc.data();
+      const n =
+        item.data();
 
-      const div=document.createElement("div");
+
+      const div =
+        document.createElement("div");
+
 
       div.className="student";
 
+
       div.innerHTML=`
 
-        <strong>${n.title}</strong><br>
+        <strong>
+          ${n.title}
+        </strong>
 
-        ${n.text}<br>
+        <br><br>
 
-        Status: ${n.status}
+        ${n.text}
+
+        <br><br>
+
+        Status:
+        ${n.status}
 
       `;
+
 
       list.appendChild(div);
 
