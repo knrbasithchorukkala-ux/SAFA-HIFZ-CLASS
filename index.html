@@ -23,8 +23,8 @@ body{
 }
 
 .loginBox{
-  width:90%;
-  max-width:420px;
+  width:92%;
+  max-width:450px;
   background:white;
   padding:30px 25px;
   border-radius:16px;
@@ -72,7 +72,6 @@ button{
 
 button:disabled{
   opacity:.6;
-  cursor:not-allowed;
 }
 
 #message{
@@ -94,6 +93,21 @@ button:disabled{
 .loading{
   color:#075e54;
 }
+
+#debug{
+  margin-top:18px;
+  padding:12px;
+  background:#f1f5f4;
+  border-radius:8px;
+  font-size:13px;
+  word-break:break-word;
+  display:none;
+}
+
+.debugTitle{
+  font-weight:bold;
+  margin-bottom:8px;
+}
 </style>
 
 </head>
@@ -110,9 +124,7 @@ button:disabled{
 
   <form id="loginForm">
 
-    <label for="email">
-      Email
-    </label>
+    <label>Email</label>
 
     <input
       id="email"
@@ -122,9 +134,7 @@ button:disabled{
       required
     >
 
-    <label for="password">
-      Password
-    </label>
+    <label>Password</label>
 
     <input
       id="password"
@@ -144,6 +154,14 @@ button:disabled{
   </form>
 
   <div id="message"></div>
+
+  <div id="debug">
+    <div class="debugTitle">
+      Firebase Profile Information
+    </div>
+
+    <div id="debugContent"></div>
+  </div>
 
 </div>
 
@@ -231,6 +249,12 @@ document.getElementById("loginButton");
 const message =
 document.getElementById("message");
 
+const debug =
+document.getElementById("debug");
+
+const debugContent =
+document.getElementById("debugContent");
+
 
 /* =========================
    MESSAGE
@@ -246,6 +270,42 @@ function showMessage(text,type){
 
 
 /* =========================
+   DEBUG INFORMATION
+========================= */
+
+function showDebug(user, userData){
+
+  debug.style.display = "block";
+
+  debugContent.innerHTML =
+
+    "<b>Auth UID:</b><br>" +
+    user.uid +
+
+    "<br><br>" +
+
+    "<b>Firestore path:</b><br>" +
+    "users/" + user.uid +
+
+    "<br><br>" +
+
+    "<b>Role:</b><br>" +
+    String(userData.role) +
+
+    "<br><br>" +
+
+    "<b>Student Number:</b><br>" +
+    String(userData.studentNumber) +
+
+    "<br><br>" +
+
+    "<b>All Firestore Data:</b><br>" +
+    JSON.stringify(userData);
+
+}
+
+
+/* =========================
    LOGIN
 ========================= */
 
@@ -254,6 +314,8 @@ loginForm.addEventListener(
   async function(event){
 
     event.preventDefault();
+
+    debug.style.display = "none";
 
     const email =
     emailInput.value.trim();
@@ -283,15 +345,11 @@ loginForm.addEventListener(
 
     try{
 
-      /* Login persistence */
-
       await setPersistence(
         auth,
         browserLocalPersistence
       );
 
-
-      /* Firebase Authentication */
 
       const credential =
       await signInWithEmailAndPassword(
@@ -305,22 +363,6 @@ loginForm.addEventListener(
       credential.user;
 
 
-      console.log(
-        "AUTH UID:",
-        user.uid
-      );
-
-
-      showMessage(
-        "Login successful ✓ Profile പരിശോധിക്കുന്നു...",
-        "success"
-      );
-
-
-      /* =========================
-         FIRESTORE USER PROFILE
-      ========================= */
-
       const userRef =
       doc(
         db,
@@ -329,23 +371,11 @@ loginForm.addEventListener(
       );
 
 
-      console.log(
-        "Checking Firestore document:",
-        "users/" + user.uid
-      );
-
-
       const userSnap =
       await getDoc(userRef);
 
 
-      /* DOCUMENT NOT FOUND */
-
       if(!userSnap.exists()){
-
-        console.error(
-          "USER DOCUMENT NOT FOUND"
-        );
 
         showMessage(
           "User profile കണ്ടെത്താനായില്ല.",
@@ -358,40 +388,46 @@ loginForm.addEventListener(
       }
 
 
-      /* =========================
-         USER DATA
-      ========================= */
-
       const userData =
       userSnap.data();
 
 
-      console.log(
-        "USER DATA:",
+      /* Show exactly what Firebase returned */
+
+      showDebug(
+        user,
         userData
       );
 
 
-      const rawRole =
-      userData.role;
-
-
       const role =
       String(
-        rawRole ?? ""
+        userData.role ?? ""
       )
       .trim()
       .toLowerCase();
 
 
+      const studentNumber =
+      String(
+        userData.studentNumber ?? ""
+      )
+      .trim();
+
+
       console.log(
-        "RAW ROLE:",
-        rawRole
+        "FULL FIRESTORE DATA:",
+        userData
       );
 
       console.log(
-        "FINAL ROLE:",
+        "ROLE:",
         role
+      );
+
+      console.log(
+        "STUDENT NUMBER:",
+        studentNumber
       );
 
 
@@ -406,17 +442,13 @@ loginForm.addEventListener(
           "success"
         );
 
-
         setTimeout(
           () => {
-
             window.location.href =
             "dashboard.html";
-
           },
-          500
+          700
         );
-
 
         return;
       }
@@ -428,22 +460,10 @@ loginForm.addEventListener(
 
       if(role === "parent"){
 
-        const studentNumber =
-        String(
-          userData.studentNumber ?? ""
-        ).trim();
-
-
-        console.log(
-          "PARENT STUDENT NUMBER:",
-          studentNumber
-        );
-
-
         if(!studentNumber){
 
           showMessage(
-            "Parent account-ന് student link ഇല്ല.",
+            "Firebase-ൽ studentNumber ലഭിച്ചില്ല.",
             "error"
           );
 
@@ -466,9 +486,8 @@ loginForm.addEventListener(
             "parent.html";
 
           },
-          500
+          700
         );
-
 
         return;
       }
@@ -478,15 +497,9 @@ loginForm.addEventListener(
          UNKNOWN ROLE
       ========================= */
 
-      console.error(
-        "INVALID ROLE:",
-        rawRole
-      );
-
-
       showMessage(
         "ഈ account-ന് valid role ഇല്ല. Role = [" +
-        String(rawRole) +
+        role +
         "]",
         "error"
       );
@@ -503,101 +516,9 @@ loginForm.addEventListener(
       );
 
 
-      let errorMessage =
-      "Login ചെയ്യാൻ കഴിഞ്ഞില്ല.";
-
-
-      if(
-        error.code ===
-        "auth/invalid-credential"
-      ){
-
-        errorMessage =
-        "Email അല്ലെങ്കിൽ password തെറ്റാണ്.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/invalid-email"
-      ){
-
-        errorMessage =
-        "Email ശരിയല്ല.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/user-not-found"
-      ){
-
-        errorMessage =
-        "ഈ email-ൽ account കണ്ടെത്താനായില്ല.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/wrong-password"
-      ){
-
-        errorMessage =
-        "Password തെറ്റാണ്.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/too-many-requests"
-      ){
-
-        errorMessage =
-        "വളരെ അധികം ശ്രമങ്ങൾ. കുറച്ച് സമയം കഴിഞ്ഞ് ശ്രമിക്കുക.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/network-request-failed"
-      ){
-
-        errorMessage =
-        "Internet connection പരിശോധിക്കുക.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/operation-not-allowed"
-      ){
-
-        errorMessage =
-        "Email/Password login Firebase-ൽ enable ചെയ്തിട്ടില്ല.";
-
-      }
-
-      else if(
-        error.code ===
-        "auth/api-key-not-valid"
-      ){
-
-        errorMessage =
-        "Firebase API key configuration പരിശോധിക്കണം.";
-
-      }
-
-      else{
-
-        errorMessage =
-        error.message ||
-        errorMessage;
-
-      }
-
-
       showMessage(
-        errorMessage,
+        error.message ||
+        "Login ചെയ്യാൻ കഴിഞ്ഞില്ല.",
         "error"
       );
 
