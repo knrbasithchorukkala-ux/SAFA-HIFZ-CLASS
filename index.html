@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>SAFA HIFZ CLASS</title>
 
   <style>
@@ -72,10 +73,22 @@
       background: #064e47;
     }
 
+    button:disabled {
+      background: #999;
+      cursor: not-allowed;
+    }
+
     #message {
       text-align: center;
       margin-top: 15px;
-      color: #d00;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .error-code {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #777;
     }
   </style>
 </head>
@@ -88,6 +101,7 @@
   </div>
 
   <div class="login-box">
+
     <h2>Login</h2>
 
     <input
@@ -104,131 +118,206 @@
       autocomplete="current-password"
     >
 
-    <button id="loginButton" onclick="login()">Login</button>
+    <button id="loginButton">
+      Login
+    </button>
 
     <div id="message"></div>
+
+    <div id="errorCode" class="error-code"></div>
+
   </div>
+
 
   <script type="module">
 
+    // Firebase App
     import {
       initializeApp
-    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
+
+    // Firebase Authentication
     import {
       getAuth,
       signInWithEmailAndPassword,
       setPersistence,
       browserLocalPersistence
-    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 
     // Firebase Configuration
     const firebaseConfig = {
-      apiKey: "AIzaSyCR-A17PO3zeiY2a1eH9cvxSmv4Upxqe4",
-      authDomain: "safa-hifz-class-7e84b.firebaseapp.com",
-      projectId: "safa-hifz-class-7e84b",
-      storageBucket: "safa-hifz-class-7e84b.firebasestorage.app",
-      messagingSenderId: "476801753196",
-      appId: "1:476801753196:web:b7f86a1f02eabec706f849",
-      measurementId: "G-MR45L2B8PL"
+
+      apiKey:
+        "AIzaSyCR-A17PO3zeiY2a1eH9cvsmv4Upxqe4",
+
+      authDomain:
+        "safa-hifz-class-7e84b.firebaseapp.com",
+
+      projectId:
+        "safa-hifz-class-7e84b",
+
+      storageBucket:
+        "safa-hifz-class-7e84b.firebasestorage.app",
+
+      messagingSenderId:
+        "476801753196",
+
+      appId:
+        "1:476801753196:web:b7f86a1f02eabec706f849",
+
+      measurementId:
+        "G-MR45L2B8PL"
     };
 
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
+
     const auth = getAuth(app);
 
 
-    // Login Function
-    window.login = async function () {
+    // Elements
+    const emailInput =
+      document.getElementById("email");
+
+    const passwordInput =
+      document.getElementById("password");
+
+    const loginButton =
+      document.getElementById("loginButton");
+
+    const message =
+      document.getElementById("message");
+
+    const errorCode =
+      document.getElementById("errorCode");
+
+
+    // Login
+    async function login() {
 
       const email =
-        document.getElementById("email").value.trim();
+        emailInput.value.trim();
 
       const password =
-        document.getElementById("password").value;
-
-      const message =
-        document.getElementById("message");
-
-      const loginButton =
-        document.getElementById("loginButton");
+        passwordInput.value;
 
 
-      // Check empty fields
+      // Clear old messages
+      message.textContent = "";
+      errorCode.textContent = "";
+
+
+      // Empty fields
       if (!email || !password) {
+
         message.style.color = "red";
+
         message.textContent =
           "Email and password നൽകുക.";
+
         return;
       }
 
 
       // Disable button
       loginButton.disabled = true;
-      loginButton.textContent = "Logging in...";
+
+      loginButton.textContent =
+        "Logging in...";
 
 
       try {
 
-        // IMPORTANT:
-        // Keep login session in browser
+        // Save login session
         await setPersistence(
           auth,
           browserLocalPersistence
         );
 
 
-        // Sign in
-        await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
+        // Firebase Login
+        const userCredential =
+          await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+
+        console.log(
+          "Login successful:",
+          userCredential.user
         );
 
 
         message.style.color = "green";
+
         message.textContent =
-          "Login successful!";
+          "Login successful! Dashboard തുറക്കുന്നു...";
 
 
-        // Go to dashboard
-        setTimeout(() => {
-          window.location.href = "dashboard.html";
-        }, 500);
+        // Open dashboard
+        setTimeout(function () {
+
+          window.location.replace(
+            "dashboard.html"
+          );
+
+        }, 700);
 
 
       } catch (error) {
 
-        console.log("Firebase Login Error:", error);
+        console.error(
+          "FIREBASE LOGIN ERROR:",
+          error
+        );
+
 
         message.style.color = "red";
 
-        if (error.code === "auth/invalid-credential") {
-          message.textContent =
-            "Email അല്ലെങ്കിൽ password തെറ്റാണ്.";
-        }
-        else if (error.code === "auth/invalid-email") {
-          message.textContent =
-            "ശരിയായ email നൽകുക.";
-        }
-        else if (error.code === "auth/too-many-requests") {
-          message.textContent =
-            "കൂടുതൽ login ശ്രമങ്ങൾ ഉണ്ടായിട്ടുണ്ട്. കുറച്ച് സമയം കഴിഞ്ഞ് വീണ്ടും ശ്രമിക്കുക.";
-        }
-        else {
-          message.textContent =
-            "Login failed. വീണ്ടും ശ്രമിക്കുക.";
-        }
+        message.textContent =
+          "Login failed. വീണ്ടും ശ്രമിക്കുക.";
+
+
+        // SHOW EXACT FIREBASE ERROR
+        errorCode.textContent =
+          "Error code: " +
+          (error.code || "unknown");
 
 
         // Enable button
         loginButton.disabled = false;
-        loginButton.textContent = "Login";
+
+        loginButton.textContent =
+          "Login";
       }
 
-    };
+    }
+
+
+    // Button click
+    loginButton.addEventListener(
+      "click",
+      login
+    );
+
+
+    // Enter key login
+    passwordInput.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key === "Enter") {
+          login();
+        }
+
+      }
+    );
+
 
   </script>
 
