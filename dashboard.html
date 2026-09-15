@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -36,7 +37,7 @@ body{
 }
 
 .container{
-  max-width:1000px;
+  max-width:1100px;
   margin:auto;
   padding:15px;
 }
@@ -77,13 +78,6 @@ body{
   margin:8px 0 4px;
 }
 
-.card .count{
-  font-size:26px;
-  font-weight:bold;
-  color:#075e54;
-  margin-top:8px;
-}
-
 .section{
   display:none;
   background:white;
@@ -98,14 +92,18 @@ body{
 }
 
 input,
-textarea,
-select{
+select,
+textarea{
   width:100%;
   padding:12px;
   margin:7px 0;
   border:1px solid #ccc;
   border-radius:8px;
-  font-size:15px;
+  font-family:Arial,sans-serif;
+}
+
+textarea{
+  resize:vertical;
 }
 
 button{
@@ -122,17 +120,8 @@ button:hover{
   opacity:.9;
 }
 
-button:disabled{
-  opacity:.6;
-  cursor:not-allowed;
-}
-
 .back{
   background:#777;
-}
-
-.danger{
-  background:#b3261e;
 }
 
 .logout{
@@ -141,11 +130,13 @@ button:disabled{
   background:#b3261e;
 }
 
-#message{
-  padding:10px;
-  text-align:center;
-  font-weight:bold;
-  min-height:20px;
+.record{
+  border:1px solid #ddd;
+  padding:15px;
+  margin-top:10px;
+  border-radius:10px;
+  background:#fafafa;
+  line-height:1.7;
 }
 
 .empty{
@@ -153,24 +144,23 @@ button:disabled{
   padding:10px 0;
 }
 
-.small{
-  color:#666;
-  font-size:13px;
+.deleteBtn{
+  background:#b3261e;
 }
 
-.student{
-  border:1px solid #ddd;
-  padding:15px;
-  margin-top:10px;
-  border-radius:10px;
+.approveBtn{
+  background:#2e7d32;
 }
 
-.record{
-  border:1px solid #ddd;
-  padding:15px;
+.rejectBtn{
+  background:#b3261e;
+}
+
+.replyBox{
   margin-top:10px;
-  border-radius:10px;
-  background:#fafafa;
+  padding:10px;
+  background:#f4f7f6;
+  border-radius:8px;
 }
 
 #loadingScreen{
@@ -195,38 +185,22 @@ button:disabled{
 
 .errorBox{
   color:#b3261e;
-  line-height:1.6;
-  word-break:break-word;
 }
 
-.successBox{
-  color:#166534;
-  line-height:1.6;
-}
-
-.infoBox{
-  color:#555;
-  line-height:1.6;
-}
-
-.uidBox{
-  background:#f4f7f6;
-  padding:10px;
+.info{
+  background:#e8f5e9;
+  padding:12px;
   border-radius:8px;
-  font-size:12px;
-  word-break:break-all;
-  text-align:left;
-  margin-top:10px;
+  margin:10px 0;
 }
 
 </style>
 
 </head>
 
+
 <body>
 
-
-<!-- ================= LOADING SCREEN ================= -->
 
 <div id="loadingScreen">
 
@@ -235,7 +209,7 @@ button:disabled{
     <h2>SAFA HIFZ CLASS</h2>
 
     <p id="loadingText">
-      Checking login...
+      Checking admin login...
     </p>
 
   </div>
@@ -243,13 +217,11 @@ button:disabled{
 </div>
 
 
-<!-- ================= HEADER ================= -->
-
 <div class="header">
 
   <h1>SAFA HIFZ CLASS</h1>
 
-  <p>Admin Dashboard</p>
+  <p>Admin / Usthad Dashboard</p>
 
 </div>
 
@@ -257,462 +229,511 @@ button:disabled{
 <div class="container">
 
 
-<div class="welcome">
+  <div class="welcome">
 
-  <h2>Assalamu Alaikum, Usthad 👋</h2>
+    <h2>
+      Assalamu Alaikum Usthad 👋
+    </h2>
 
-  <p>SAFA HIFZ CLASS Management System</p>
+    <p id="adminWelcome">
+      Welcome Usthad
+    </p>
+
+  </div>
+
+
+  <!-- HOME -->
+
+  <div id="home">
+
+    <div class="grid">
+
+
+      <div class="card"
+           onclick="showSection('students')">
+
+        <div class="icon">👨‍🎓</div>
+
+        <h3>Students</h3>
+
+        <p>Manage</p>
+
+      </div>
+
+
+      <div class="card"
+           onclick="showSection('attendance')">
+
+        <div class="icon">📅</div>
+
+        <h3>Attendance</h3>
+
+        <p>Manage</p>
+
+      </div>
+
+
+      <div class="card"
+           onclick="showSection('study')">
+
+        <div class="icon">📖</div>
+
+        <h3>Study Progress</h3>
+
+        <p>Manage</p>
+
+      </div>
+
+
+      <div class="card"
+           onclick="showSection('results')">
+
+        <div class="icon">📊</div>
+
+        <h3>Results</h3>
+
+        <p>Publish</p>
+
+      </div>
+
+
+      <div class="card"
+           onclick="showSection('notices')">
+
+        <div class="icon">📢</div>
+
+        <h3>Notices</h3>
+
+        <p>Publish</p>
+
+      </div>
+
+
+      <div class="card"
+           onclick="showSection('leave')">
+
+        <div class="icon">📝</div>
+
+        <h3>Leave</h3>
+
+        <p>Applications</p>
+
+      </div>
+
+
+      <div class="card"
+           onclick="showSection('messages')">
+
+        <div class="icon">💬</div>
+
+        <h3>Messages</h3>
+
+        <p>Parents</p>
+
+      </div>
+
+    </div>
+
+
+    <button class="logout"
+            onclick="logout()">
+
+      Logout
+
+    </button>
+
+  </div>
+
+
+  <!-- STUDENTS -->
+
+  <div id="students"
+       class="section">
+
+    <h2>👨‍🎓 Students</h2>
+
+    <button class="back"
+            onclick="goHome()">
+
+      ← Back
+
+    </button>
+
+
+    <input
+      id="studentNumber"
+      type="text"
+      placeholder="Student Number"
+    >
+
+
+    <input
+      id="studentName"
+      type="text"
+      placeholder="Student Name"
+    >
+
+
+    <input
+      id="className"
+      type="text"
+      placeholder="Class"
+    >
+
+
+    <input
+      id="parentEmail"
+      type="email"
+      placeholder="Parent Email"
+    >
+
+
+    <button onclick="addStudent()">
+
+      ➕ Add Student
+
+    </button>
+
+
+    <hr>
+
+
+    <h3>
+      Student List
+    </h3>
+
+
+    <div id="studentList">
+      Loading...
+    </div>
+
+  </div>
+
+
+  <!-- ATTENDANCE -->
+
+  <div id="attendance"
+       class="section">
+
+    <h2>📅 Attendance</h2>
+
+    <button class="back"
+            onclick="goHome()">
+
+      ← Back
+
+    </button>
+
+
+    <select id="attendanceStudent">
+
+      <option value="">
+        Select Student
+      </option>
+
+    </select>
+
+
+    <input
+      id="attendanceDate"
+      type="date"
+    >
+
+
+    <select id="attendanceStatus">
+
+      <option value="Present">
+        Present
+      </option>
+
+      <option value="Absent">
+        Absent
+      </option>
+
+      <option value="Leave">
+        Leave
+      </option>
+
+    </select>
+
+
+    <button onclick="saveAttendance()">
+
+      💾 Save Attendance
+
+    </button>
+
+
+    <hr>
+
+
+    <div id="attendanceList">
+      Loading...
+    </div>
+
+  </div>
+
+
+  <!-- STUDY -->
+
+  <div id="study"
+       class="section">
+
+    <h2>📖 Study Progress</h2>
+
+    <button class="back"
+            onclick="goHome()">
+
+      ← Back
+
+    </button>
+
+
+    <select id="studyStudent">
+
+      <option value="">
+        Select Student
+      </option>
+
+    </select>
+
+
+    <input
+      id="studyDate"
+      type="date"
+    >
+
+
+    <input
+      id="studySurah"
+      type="text"
+      placeholder="Surah / Juz"
+    >
+
+
+    <input
+      id="studyNewLesson"
+      type="text"
+      placeholder="New Lesson"
+    >
+
+
+    <input
+      id="studyRevision"
+      type="text"
+      placeholder="Revision"
+    >
+
+
+    <input
+      id="studyPerformance"
+      type="text"
+      placeholder="Performance"
+    >
+
+
+    <textarea
+      id="studyNote"
+      rows="4"
+      placeholder="Teacher Note"
+    ></textarea>
+
+
+    <button onclick="saveStudy()">
+
+      💾 Save Study Progress
+
+    </button>
+
+
+    <hr>
+
+
+    <div id="studyList">
+      Loading...
+    </div>
+
+  </div>
+
+
+  <!-- RESULTS -->
+
+  <div id="results"
+       class="section">
+
+    <h2>📊 Results</h2>
+
+    <button class="back"
+            onclick="goHome()">
+
+      ← Back
+
+    </button>
+
+
+    <select id="resultStudent">
+
+      <option value="">
+        Select Student
+      </option>
+
+    </select>
+
+
+    <input
+      id="resultTitle"
+      type="text"
+      placeholder="Result Title"
+    >
+
+
+    <input
+      id="resultMark"
+      type="text"
+      placeholder="Mark / Grade"
+    >
+
+
+    <select id="resultStatus">
+
+      <option value="draft">
+        Draft
+      </option>
+
+      <option value="published">
+        Published
+      </option>
+
+    </select>
+
+
+    <button onclick="saveResult()">
+
+      💾 Save Result
+
+    </button>
+
+
+    <hr>
+
+
+    <div id="resultList">
+      Loading...
+    </div>
+
+  </div>
+
+
+  <!-- NOTICES -->
+
+  <div id="notices"
+       class="section">
+
+    <h2>📢 Notices</h2>
+
+    <button class="back"
+            onclick="goHome()">
+
+      ← Back
+
+    </button>
+
+
+    <input
+      id="noticeTitle"
+      type="text"
+      placeholder="Notice Title"
+    >
+
+
+    <textarea
+      id="noticeText"
+      rows="5"
+      placeholder="Notice"
+    ></textarea>
+
+
+    <select id="noticeStatus">
+
+      <option value="draft">
+        Draft
+      </option>
+
+      <option value="published">
+        Published
+      </option>
+
+    </select>
+
+
+    <button onclick="saveNotice()">
+
+      📢 Save Notice
+
+    </button>
+
+
+    <hr>
+
+
+    <div id="noticeList">
+      Loading...
+    </div>
+
+  </div>
+
+
+  <!-- LEAVE -->
+
+  <div id="leave"
+       class="section">
+
+    <h2>📝 Leave Applications</h2>
+
+    <button class="back"
+            onclick="goHome()">
+
+      ← Back
+
+    </button>
+
+
+    <div id="leaveList">
+      Loading...
+    </div>
+
+  </div>
+
+
+  <!-- MESSAGES -->
+
+  <div id="messages"
+       class="section">
+
+    <h2>💬 Parent Messages</h2>
+
+    <button class="back"
+            onclick="goHome()">
+
+      ← Back
+
+    </button>
+
+
+    <div id="messageList">
+      Loading...
+    </div>
+
+  </div>
 
 </div>
 
-
-<div id="message"></div>
-
-
-<!-- ================= HOME ================= -->
-
-<div id="home">
-
-<div class="grid">
-
-
-<div class="card" onclick="showSection('students')">
-
-  <div class="icon">👨‍🎓</div>
-
-  <h3>Students</h3>
-
-  <div class="count" id="studentCount">0</div>
-
-  <p>Add / Manage</p>
-
-</div>
-
-
-<div class="card" onclick="showSection('attendance')">
-
-  <div class="icon">📅</div>
-
-  <h3>Attendance</h3>
-
-  <p>Manage</p>
-
-</div>
-
-
-<div class="card" onclick="showSection('study')">
-
-  <div class="icon">📖</div>
-
-  <h3>Study Progress</h3>
-
-  <p>Update</p>
-
-</div>
-
-
-<div class="card" onclick="showSection('results')">
-
-  <div class="icon">📊</div>
-
-  <h3>Results</h3>
-
-  <p>Add / Publish</p>
-
-</div>
-
-
-<div class="card" onclick="showSection('notices')">
-
-  <div class="icon">📢</div>
-
-  <h3>Notices</h3>
-
-  <p>Publish</p>
-
-</div>
-
-
-<div class="card" onclick="showSection('leave')">
-
-  <div class="icon">📝</div>
-
-  <h3>Leave</h3>
-
-  <p>Approve / Reply</p>
-
-</div>
-
-
-<div class="card" onclick="showSection('messages')">
-
-  <div class="icon">💬</div>
-
-  <h3>Messages</h3>
-
-  <p>Parent Messages</p>
-
-</div>
-
-
-</div>
-
-
-<button class="logout" onclick="logout()">
-Logout
-</button>
-
-
-</div>
-
-
-<!-- ================= STUDENTS ================= -->
-
-<div id="students" class="section">
-
-<h2>👨‍🎓 Students</h2>
-
-<button class="back" onclick="goHome()">← Back</button>
-
-<h3>Add New Student</h3>
-
-<input
-  id="studentNumber"
-  placeholder="Student Number"
->
-
-<input
-  id="studentName"
-  placeholder="Student Name"
->
-
-<input
-  id="studentClass"
-  placeholder="Class"
->
-
-<input
-  id="parentEmail"
-  type="email"
-  placeholder="Parent Email"
->
-
-<button onclick="addStudent()">
-➕ Add Student
-</button>
-
-
-<h3>Student List</h3>
-
-<div id="studentList">
-Loading...
-</div>
-
-</div>
-
-
-<!-- ================= ATTENDANCE ================= -->
-
-<div id="attendance" class="section">
-
-<h2>📅 Attendance Management</h2>
-
-<button class="back" onclick="goHome()">← Back</button>
-
-<h3>Mark Attendance</h3>
-
-<select id="attendanceStudent">
-
-<option value="">
-Select Student
-</option>
-
-</select>
-
-
-<input
-  type="date"
-  id="attendanceDate"
->
-
-
-<select id="attendanceStatus">
-
-<option value="">
-Select Status
-</option>
-
-<option value="Present">
-Present
-</option>
-
-<option value="Absent">
-Absent
-</option>
-
-<option value="Leave">
-Leave
-</option>
-
-</select>
-
-
-<button onclick="saveAttendance()">
-💾 Save Attendance
-</button>
-
-
-<hr>
-
-<h3>Attendance Records</h3>
-
-<div id="attendanceList">
-Loading...
-</div>
-
-</div>
-
-
-<!-- ================= STUDY ================= -->
-
-<div id="study" class="section">
-
-<h2>📖 Study Progress</h2>
-
-<button class="back" onclick="goHome()">← Back</button>
-
-<h3>Update Study Progress</h3>
-
-<select id="studyStudent">
-
-<option value="">
-Select Student
-</option>
-
-</select>
-
-
-<input
-  type="date"
-  id="studyDate"
->
-
-
-<input
-  id="studySurah"
-  placeholder="Surah / Juz"
->
-
-
-<input
-  id="studyNewLesson"
-  placeholder="New Lesson"
->
-
-
-<input
-  id="studyRevision"
-  placeholder="Revision"
->
-
-
-<select id="studyPerformance">
-
-<option value="">
-Performance
-</option>
-
-<option value="Excellent">
-Excellent
-</option>
-
-<option value="Very Good">
-Very Good
-</option>
-
-<option value="Good">
-Good
-</option>
-
-<option value="Needs Improvement">
-Needs Improvement
-</option>
-
-</select>
-
-
-<textarea
-  id="studyNote"
-  rows="4"
-  placeholder="Teacher Note"
-></textarea>
-
-
-<button onclick="saveStudyProgress()">
-💾 Save Progress
-</button>
-
-
-<hr>
-
-<h3>Study Progress Records</h3>
-
-<div id="studyList">
-Loading...
-</div>
-
-</div>
-
-
-<!-- ================= RESULTS ================= -->
-
-<div id="results" class="section">
-
-<h2>📊 Results</h2>
-
-<button class="back" onclick="goHome()">← Back</button>
-
-
-<input
-  id="resultStudent"
-  placeholder="Student Number"
->
-
-
-<input
-  id="resultTitle"
-  placeholder="Exam / Result Title"
->
-
-
-<input
-  id="resultMark"
-  placeholder="Mark / Grade"
->
-
-
-<select id="resultStatus">
-
-<option value="draft">
-Draft
-</option>
-
-<option value="published">
-Publish
-</option>
-
-</select>
-
-
-<button onclick="addResult()">
-Save Result
-</button>
-
-
-<div id="resultList"></div>
-
-</div>
-
-
-<!-- ================= NOTICES ================= -->
-
-<div id="notices" class="section">
-
-<h2>📢 Notices</h2>
-
-<button class="back" onclick="goHome()">← Back</button>
-
-
-<input
-  id="noticeTitle"
-  placeholder="Notice Title"
->
-
-
-<textarea
-  id="noticeText"
-  rows="5"
-  placeholder="Notice message"
-></textarea>
-
-
-<select id="noticeStatus">
-
-<option value="draft">
-Draft
-</option>
-
-<option value="published">
-Publish
-</option>
-
-</select>
-
-
-<button onclick="addNotice()">
-Publish / Save Notice
-</button>
-
-
-<div id="noticeList"></div>
-
-</div>
-
-
-<!-- ================= LEAVE ================= -->
-
-<div id="leave" class="section">
-
-<h2>📝 Leave Applications</h2>
-
-<button class="back" onclick="goHome()">← Back</button>
-
-<div id="leaveList">
-
-<p class="empty">
-No leave applications yet.
-</p>
-
-</div>
-
-</div>
-
-
-<!-- ================= MESSAGES ================= -->
-
-<div id="messages" class="section">
-
-<h2>💬 Parent Messages</h2>
-
-<button class="back" onclick="goHome()">← Back</button>
-
-<div id="messageList">
-
-<p class="empty">
-No messages yet.
-</p>
-
-</div>
-
-</div>
-
-
-</div>
-
-
-<!-- ================= FIREBASE ================= -->
 
 <script type="module">
 
-
-/* =====================================================
-   FIREBASE IMPORTS
-===================================================== */
-
 import {
   initializeApp
-}
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 
 import {
@@ -720,8 +741,7 @@ import {
   signOut,
   setPersistence,
   browserLocalPersistence
-}
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 
 import {
@@ -731,83 +751,70 @@ import {
   getDocs,
   getDoc,
   doc,
+  deleteDoc,
+  updateDoc,
+  query,
+  where,
   serverTimestamp
-}
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
-/* =====================================================
+/* =========================
    FIREBASE CONFIG
-   USE ONLY THIS CONFIG
-===================================================== */
+========================= */
 
 const firebaseConfig = {
 
   apiKey:
-    "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
+  "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
 
   authDomain:
-    "safa-hifz-class-7e84b.firebaseapp.com",
+  "safa-hifz-class-7e84b.firebaseapp.com",
 
   projectId:
-    "safa-hifz-class-7e84b",
+  "safa-hifz-class-7e84b",
 
   storageBucket:
-    "safa-hifz-class-7e84b.firebasestorage.app",
+  "safa-hifz-class-7e84b.firebasestorage.app",
 
   messagingSenderId:
-    "476801753196",
+  "476801753196",
 
   appId:
-    "1:476801753196:web:d4c8a8b0c1a4203606f849",
+  "1:476801753196:web:d4c8a8b0c1a4203606f849",
 
   measurementId:
-    "G-ZTBTJCB5SR"
-
+  "G-ZTBTJCB5SR"
 };
 
 
-/* =====================================================
-   INITIALIZE
-===================================================== */
+/* =========================
+   FIREBASE
+========================= */
 
 const app =
-  initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 const auth =
-  getAuth(app);
+getAuth(app);
 
 const db =
-  getFirestore(app);
+getFirestore(app);
 
 
-/* =====================================================
-   ELEMENTS
-===================================================== */
+/* =========================
+   START
+========================= */
 
-const loadingScreen =
-  document.getElementById("loadingScreen");
-
-const loadingText =
-  document.getElementById("loadingText");
-
-
-/* =====================================================
-   AUTHENTICATION
-===================================================== */
-
-async function startDashboard(){
+async function startAdmin(){
 
   try{
 
-    loadingText.textContent =
-      "Restoring secure login session...";
+    document.getElementById(
+      "loadingText"
+    ).textContent =
+    "Restoring secure login...";
 
-
-    /*
-      Make dashboard use the same local
-      persistence as the login page.
-    */
 
     await setPersistence(
       auth,
@@ -815,152 +822,104 @@ async function startDashboard(){
     );
 
 
-    loadingText.textContent =
-      "Checking your account...";
-
-
-    /*
-      Wait until Firebase restores the
-      existing authentication session.
-    */
-
     await auth.authStateReady();
 
 
     const user =
-      auth.currentUser;
+    auth.currentUser;
 
-
-    /*
-      IMPORTANT:
-      Do not immediately redirect.
-      Show the actual reason instead.
-    */
 
     if(!user){
 
-      showAuthProblem(
-        "Login session കണ്ടെത്താനായില്ല.",
-        "Login page-ൽ login successful ആയതിന് ശേഷം Firebase session dashboard-ലേക്ക് എത്തുന്നില്ല."
+      showError(
+        "Admin login session ഇല്ല.",
+        "Login page-ൽ നിന്ന് വീണ്ടും login ചെയ്യുക."
       );
 
       return;
-
     }
 
 
-    console.log(
-      "Authenticated user:",
-      user.email
-    );
-
-    console.log(
-      "Authenticated UID:",
-      user.uid
-    );
-
-
-    loadingText.textContent =
-      "Checking administrator permission...";
-
-
-    /*
-      Find users/{UID}
-    */
-
-    const userRef =
+    const userSnap =
+    await getDoc(
       doc(
         db,
         "users",
         user.uid
-      );
-
-
-    const userSnap =
-      await getDoc(userRef);
+      )
+    );
 
 
     if(!userSnap.exists()){
 
-      showAdminDocumentProblem(
-        user.uid,
-        user.email
+      showError(
+        "Admin profile കണ്ടെത്താനായില്ല.",
+        "users collection പരിശോധിക്കുക."
       );
 
       return;
-
     }
 
 
-    const userData =
-      userSnap.data();
+    const data =
+    userSnap.data();
 
 
-    console.log(
-      "Admin user document:",
-      userData
-    );
+    if(
+      String(data.role || "")
+      .trim()
+      .toLowerCase()
+      !== "admin"
+    ){
 
-
-    /*
-      Check role.
-    */
-
-    if(userData.role !== "admin"){
-
-      showRoleProblem(
-        user.uid,
-        user.email,
-        userData.role
+      showError(
+        "Admin permission ഇല്ല.",
+        "ഈ account admin അല്ല."
       );
 
       return;
-
     }
 
 
-    /*
-      EVERYTHING IS OK
-    */
-
-    loadingText.textContent =
-      "Admin verified ✓";
-
-
-    loadingScreen.style.display =
-      "none";
+    document.getElementById(
+      "adminWelcome"
+    ).textContent =
+    "Welcome " +
+    (data.name || "Usthad") +
+    " 👋";
 
 
-    /*
-      Load students.
-    */
+    document.getElementById(
+      "loadingScreen"
+    ).style.display =
+    "none";
+
 
     await loadStudents();
 
-  }
+  }catch(error){
 
-  catch(error){
+    console.error(error);
 
-    console.error(
-      "Dashboard authentication error:",
-      error
+    showError(
+      "Dashboard തുറക്കാൻ കഴിഞ്ഞില്ല.",
+      error.message
     );
-
-
-    showGeneralProblem(error);
 
   }
 
 }
 
 
-/* =====================================================
-   AUTH PROBLEM
-===================================================== */
+/* =========================
+   ERROR
+========================= */
 
-function showAuthProblem(title,details){
+function showError(title,details){
 
-  loadingScreen.innerHTML = `
+  document.getElementById(
+    "loadingScreen"
+  ).innerHTML = `
 
     <div class="loadingBox">
 
@@ -974,14 +933,6 @@ function showAuthProblem(title,details){
 
       </div>
 
-      <div class="infoBox">
-
-        <p>
-        Please return to Login and try again.
-        </p>
-
-      </div>
-
       <button
         onclick="window.location.replace('index.html')"
       >
@@ -995,359 +946,138 @@ function showAuthProblem(title,details){
 }
 
 
-/* =====================================================
-   ADMIN DOCUMENT PROBLEM
-===================================================== */
+/* =========================
+   SECTIONS
+========================= */
 
-function showAdminDocumentProblem(uid,email){
-
-  loadingScreen.innerHTML = `
-
-    <div class="loadingBox">
-
-      <h2>SAFA HIFZ CLASS</h2>
-
-      <div class="errorBox">
-
-        <h3>Admin profile not found</h3>
-
-        <p>
-          Login successful ആണ്,
-          പക്ഷേ Firestore-ലെ users collection-ൽ
-          ഈ account-ന്റെ admin document കണ്ടെത്താനായില്ല.
-        </p>
-
-      </div>
-
-      <div class="uidBox">
-
-        <strong>Email:</strong><br>
-        ${email || "-"}
-
-        <br><br>
-
-        <strong>UID:</strong><br>
-        ${uid}
-
-      </div>
-
-      <p class="small">
-        Firebase Console → Firestore → users
-        എന്നതിൽ document ID ഈ UID ആയിരിക്കണം.
-      </p>
-
-      <button
-        onclick="window.location.replace('index.html')"
-      >
-        Back to Login
-      </button>
-
-    </div>
-
-  `;
-
-}
-
-
-/* =====================================================
-   ROLE PROBLEM
-===================================================== */
-
-function showRoleProblem(uid,email,role){
-
-  loadingScreen.innerHTML = `
-
-    <div class="loadingBox">
-
-      <h2>SAFA HIFZ CLASS</h2>
-
-      <div class="errorBox">
-
-        <h3>Admin permission ഇല്ല</h3>
-
-        <p>
-          Login account കണ്ടെത്തി,
-          പക്ഷേ role = <strong>${role || "not set"}</strong>
-          ആണ്.
-        </p>
-
-        <p>
-          Admin account-ന്റെ role
-          <strong>admin</strong> ആയിരിക്കണം.
-        </p>
-
-      </div>
-
-      <div class="uidBox">
-
-        <strong>Email:</strong><br>
-        ${email || "-"}
-
-        <br><br>
-
-        <strong>UID:</strong><br>
-        ${uid}
-
-      </div>
-
-      <button
-        onclick="window.location.replace('index.html')"
-      >
-        Back to Login
-      </button>
-
-    </div>
-
-  `;
-
-}
-
-
-/* =====================================================
-   GENERAL PROBLEM
-===================================================== */
-
-function showGeneralProblem(error){
-
-  loadingScreen.innerHTML = `
-
-    <div class="loadingBox">
-
-      <h2>SAFA HIFZ CLASS</h2>
-
-      <div class="errorBox">
-
-        <h3>Dashboard തുറക്കാൻ കഴിഞ്ഞില്ല</h3>
-
-        <p>
-          ${error?.message || "Unknown error"}
-        </p>
-
-      </div>
-
-      <div class="infoBox">
-
-        <p>
-          Browser console-ൽ കൂടുതൽ വിവരങ്ങൾ
-          കാണാം.
-        </p>
-
-      </div>
-
-      <button
-        onclick="window.location.replace('index.html')"
-      >
-        Back to Login
-      </button>
-
-    </div>
-
-  `;
-
-}
-
-
-/* =====================================================
-   START DASHBOARD
-===================================================== */
-
-startDashboard();
-
-
-/* =====================================================
-   SECTION CONTROL
-===================================================== */
-
-window.showSection=function(id){
+window.showSection =
+async function(id){
 
   document.getElementById(
     "home"
-  ).style.display="none";
+  ).style.display =
+  "none";
 
 
-  document.querySelectorAll(
-    ".section"
-  ).forEach(section=>{
-
-    section.classList.remove(
-      "active"
-    );
-
-  });
+  document
+  .querySelectorAll(".section")
+  .forEach(
+    section =>
+    section.classList.remove("active")
+  );
 
 
-  const selected =
-    document.getElementById(id);
+  document.getElementById(
+    id
+  ).classList.add("active");
 
 
-  if(selected){
+  if(id === "students")
+    await loadStudents();
 
-    selected.classList.add(
-      "active"
-    );
-
+  if(id === "attendance"){
+    await loadStudentDropdowns();
+    await loadAttendance();
   }
 
-
-  if(id==="students"){
-
-    loadStudents();
-
+  if(id === "study"){
+    await loadStudentDropdowns();
+    await loadStudy();
   }
 
-
-  if(id==="attendance"){
-
-    loadStudentsForDropdown();
-
-    loadAttendance();
-
+  if(id === "results"){
+    await loadStudentDropdowns();
+    await loadResults();
   }
 
+  if(id === "notices")
+    await loadNotices();
 
-  if(id==="study"){
+  if(id === "leave")
+    await loadLeaves();
 
-    loadStudentsForDropdown();
-
-    loadStudyProgress();
-
-  }
-
-
-  if(id==="results"){
-
-    loadResults();
-
-  }
-
-
-  if(id==="notices"){
-
-    loadNotices();
-
-  }
+  if(id === "messages")
+    await loadMessages();
 
 };
 
 
-/* =====================================================
-   GO HOME
-===================================================== */
+window.goHome =
+function(){
 
-window.goHome=function(){
-
-  document.querySelectorAll(
-    ".section"
-  ).forEach(section=>{
-
-    section.classList.remove(
-      "active"
-    );
-
-  });
+  document
+  .querySelectorAll(".section")
+  .forEach(
+    section =>
+    section.classList.remove("active")
+  );
 
 
   document.getElementById(
     "home"
-  ).style.display="block";
-
-
-  loadStudents();
+  ).style.display =
+  "block";
 
 };
 
 
-/* =====================================================
+/* =========================
    LOGOUT
-===================================================== */
+========================= */
 
-window.logout=async function(){
+window.logout =
+async function(){
 
-  try{
+  await signOut(auth);
 
-    await signOut(auth);
-
-    window.location.replace(
-      "index.html"
-    );
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    alert(
-      "Logout ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
-      error.message
-    );
-
-  }
+  window.location.replace(
+    "index.html"
+  );
 
 };
 
 
-/* =====================================================
-   MESSAGE
-===================================================== */
+/* =========================
+   STUDENTS
+========================= */
 
-function showMessage(text){
+window.addStudent =
+async function(){
 
-  const message =
-    document.getElementById("message");
-
-  message.style.color="#075e54";
-
-  message.textContent=text;
-
-
-  setTimeout(()=>{
-
-    message.textContent="";
-
-  },3000);
-
-}
-
-
-/* =====================================================
-   STUDENTS - ADD
-===================================================== */
-
-window.addStudent=async function(){
-
-  const number =
-    document.getElementById(
-      "studentNumber"
-    ).value.trim();
+  const studentNumber =
+  document.getElementById(
+    "studentNumber"
+  ).value.trim();
 
 
   const name =
-    document.getElementById(
-      "studentName"
-    ).value.trim();
+  document.getElementById(
+    "studentName"
+  ).value.trim();
 
 
   const className =
-    document.getElementById(
-      "studentClass"
-    ).value.trim();
+  document.getElementById(
+    "className"
+  ).value.trim();
 
 
   const parentEmail =
-    document.getElementById(
-      "parentEmail"
-    ).value.trim();
+  document.getElementById(
+    "parentEmail"
+  ).value.trim();
 
 
-  if(!number || !name){
+  if(
+    !studentNumber ||
+    !name
+  ){
 
     alert(
       "Student Number and Name നൽകണം."
     );
 
     return;
-
   }
 
 
@@ -1357,53 +1087,53 @@ window.addStudent=async function(){
       collection(db,"students"),
       {
 
-        studentNumber:number,
+        studentNumber:
+        studentNumber,
 
-        name:name,
+        name:
+        name,
 
-        className:className,
+        className:
+        className,
 
-        parentEmail:parentEmail,
+        parentEmail:
+        parentEmail,
 
         createdAt:
-          serverTimestamp()
+        serverTimestamp()
 
       }
     );
 
 
-    document.getElementById(
-      "studentNumber"
-    ).value="";
-
-
-    document.getElementById(
-      "studentName"
-    ).value="";
-
-
-    document.getElementById(
-      "studentClass"
-    ).value="";
-
-
-    document.getElementById(
-      "parentEmail"
-    ).value="";
-
-
-    showMessage(
+    alert(
       "Student added successfully ✅"
     );
 
 
-    loadStudents();
+    document.getElementById(
+      "studentNumber"
+    ).value = "";
 
-  }
 
-  catch(error){
+    document.getElementById(
+      "studentName"
+    ).value = "";
 
-    console.error(error);
+
+    document.getElementById(
+      "className"
+    ).value = "";
+
+
+    document.getElementById(
+      "parentEmail"
+    ).value = "";
+
+
+    await loadStudents();
+
+  }catch(error){
 
     alert(
       "Student add ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
@@ -1415,88 +1145,85 @@ window.addStudent=async function(){
 };
 
 
-/* =====================================================
-   LOAD STUDENTS
-===================================================== */
-
 async function loadStudents(){
 
   const list =
-    document.getElementById(
-      "studentList"
-    );
+  document.getElementById(
+    "studentList"
+  );
 
 
-  if(!list){
-
+  if(!list)
     return;
 
-  }
 
-
-  list.innerHTML="Loading...";
+  list.innerHTML =
+  "Loading...";
 
 
   try{
 
     const snapshot =
-      await getDocs(
-        collection(db,"students")
-      );
+    await getDocs(
+      collection(db,"students")
+    );
 
 
-    document.getElementById(
-      "studentCount"
-    ).textContent =
-      snapshot.size;
-
-
-    list.innerHTML="";
+    list.innerHTML = "";
 
 
     if(snapshot.empty){
 
-      list.innerHTML=
-        "<p class='empty'>No students added yet.</p>";
+      list.innerHTML =
+      "<p class='empty'>No students yet.</p>";
 
       return;
-
     }
 
 
-    snapshot.forEach(item=>{
+    snapshot.forEach(item => {
 
-      const student =
-        item.data();
+      const s =
+      item.data();
 
 
       const div =
-        document.createElement("div");
+      document.createElement("div");
 
 
-      div.className="student";
+      div.className =
+      "record";
 
 
-      div.innerHTML=`
+      div.innerHTML = `
 
         <strong>
-          ${student.name || "-"}
+          👨‍🎓 ${s.name || "-"}
         </strong>
 
         <br>
 
-        Student No:
-        ${student.studentNumber || "-"}
+        Student Number:
+        ${s.studentNumber || "-"}
 
         <br>
 
         Class:
-        ${student.className || "-"}
+        ${s.className || "-"}
 
         <br>
 
-        Parent:
-        ${student.parentEmail || "-"}
+        Parent Email:
+        ${s.parentEmail || "-"}
+
+        <br>
+
+        <button
+          class="deleteBtn"
+          onclick="deleteStudent('${item.id}')"
+        >
+          🗑 Delete
+        </button>
 
       `;
 
@@ -1505,152 +1232,161 @@ async function loadStudents(){
 
     });
 
-  }
+  }catch(error){
 
-  catch(error){
-
-    console.error(error);
-
-    list.innerHTML=
-      "<p>Students load ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
-      error.message +
-      "</p>";
+    list.innerHTML =
+    "<p>" +
+    error.message +
+    "</p>";
 
   }
 
 }
 
 
-/* =====================================================
-   STUDENT DROPDOWNS
-===================================================== */
+window.deleteStudent =
+async function(id){
 
-async function loadStudentsForDropdown(){
+  if(
+    !confirm(
+      "ഈ student delete ചെയ്യണോ?"
+    )
+  )
+    return;
+
 
   try{
 
-    const snapshot =
-      await getDocs(
-        collection(db,"students")
+    await deleteDoc(
+      doc(
+        db,
+        "students",
+        id
+      )
+    );
+
+
+    alert(
+      "Student deleted."
+    );
+
+
+    await loadStudents();
+
+  }catch(error){
+
+    alert(
+      "Delete ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
+      error.message
+    );
+
+  }
+
+};
+
+
+/* =========================
+   DROPDOWNS
+========================= */
+
+async function loadStudentDropdowns(){
+
+  const snapshot =
+  await getDocs(
+    collection(db,"students")
+  );
+
+
+  const ids = [
+    "attendanceStudent",
+    "studyStudent",
+    "resultStudent"
+  ];
+
+
+  ids.forEach(id => {
+
+    const select =
+    document.getElementById(id);
+
+
+    if(!select)
+      return;
+
+
+    select.innerHTML =
+    `<option value="">
+      Select Student
+    </option>`;
+
+
+    snapshot.forEach(item => {
+
+      const s =
+      item.data();
+
+
+      const option =
+      document.createElement("option");
+
+
+      option.value =
+      String(
+        s.studentNumber || ""
       );
 
 
-    const attendanceSelect =
-      document.getElementById(
-        "attendanceStudent"
+      option.textContent =
+      String(
+        s.studentNumber || ""
+      ) +
+      " - " +
+      String(
+        s.name || ""
       );
 
 
-    const studySelect =
-      document.getElementById(
-        "studyStudent"
-      );
-
-
-    attendanceSelect.innerHTML=
-      '<option value="">Select Student</option>';
-
-
-    studySelect.innerHTML=
-      '<option value="">Select Student</option>';
-
-
-    snapshot.forEach(item=>{
-
-      const student =
-        item.data();
-
-
-      const option1 =
-        document.createElement(
-          "option"
-        );
-
-
-      option1.value =
-        student.studentNumber;
-
-
-      option1.textContent =
-        student.studentNumber +
-        " - " +
-        student.name;
-
-
-      attendanceSelect.appendChild(
-        option1
-      );
-
-
-      const option2 =
-        document.createElement(
-          "option"
-        );
-
-
-      option2.value =
-        student.studentNumber;
-
-
-      option2.textContent =
-        student.studentNumber +
-        " - " +
-        student.name;
-
-
-      studySelect.appendChild(
-        option2
-      );
+      select.appendChild(option);
 
     });
 
-  }
-
-  catch(error){
-
-    console.error(error);
-
-  }
+  });
 
 }
 
 
-/* =====================================================
-   ATTENDANCE - SAVE
-===================================================== */
+/* =========================
+   ATTENDANCE
+========================= */
 
-window.saveAttendance=async function(){
+window.saveAttendance =
+async function(){
 
   const studentNumber =
-    document.getElementById(
-      "attendanceStudent"
-    ).value;
+  document.getElementById(
+    "attendanceStudent"
+  ).value;
 
 
   const date =
-    document.getElementById(
-      "attendanceDate"
-    ).value;
+  document.getElementById(
+    "attendanceDate"
+  ).value;
 
 
   const status =
-    document.getElementById(
-      "attendanceStatus"
-    ).value;
+  document.getElementById(
+    "attendanceStatus"
+  ).value;
 
 
-  if(
-    !studentNumber ||
-    !date ||
-    !status
-  ){
+  if(!studentNumber || !date){
 
     alert(
-      "Student, Date, Status എന്നിവ നൽകണം."
+      "Student and Date നൽകണം."
     );
 
     return;
-
   }
 
 
@@ -1661,43 +1397,29 @@ window.saveAttendance=async function(){
       {
 
         studentNumber:
-          studentNumber,
+        studentNumber,
 
         date:
-          date,
+        date,
 
         status:
-          status,
+        status,
 
         createdAt:
-          serverTimestamp()
+        serverTimestamp()
 
       }
     );
 
 
-    showMessage(
-      "Attendance saved successfully ✅"
+    alert(
+      "Attendance saved ✅"
     );
 
 
-    document.getElementById(
-      "attendanceDate"
-    ).value="";
+    await loadAttendance();
 
-
-    document.getElementById(
-      "attendanceStatus"
-    ).value="";
-
-
-    loadAttendance();
-
-  }
-
-  catch(error){
-
-    console.error(error);
+  }catch(error){
 
     alert(
       "Attendance save ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
@@ -1709,56 +1431,53 @@ window.saveAttendance=async function(){
 };
 
 
-/* =====================================================
-   ATTENDANCE - LOAD
-===================================================== */
-
 async function loadAttendance(){
 
   const list =
-    document.getElementById(
-      "attendanceList"
-    );
+  document.getElementById(
+    "attendanceList"
+  );
 
 
-  list.innerHTML="Loading...";
+  list.innerHTML =
+  "Loading...";
 
 
   try{
 
     const snapshot =
-      await getDocs(
-        collection(db,"attendance")
-      );
+    await getDocs(
+      collection(db,"attendance")
+    );
 
 
-    list.innerHTML="";
+    list.innerHTML = "";
 
 
     if(snapshot.empty){
 
-      list.innerHTML=
-        "<p class='empty'>No attendance records yet.</p>";
+      list.innerHTML =
+      "<p class='empty'>No attendance records yet.</p>";
 
       return;
-
     }
 
 
-    snapshot.forEach(item=>{
+    snapshot.forEach(item => {
 
       const a =
-        item.data();
+      item.data();
 
 
       const div =
-        document.createElement("div");
+      document.createElement("div");
 
 
-      div.className="record";
+      div.className =
+      "record";
 
 
-      div.innerHTML=`
+      div.innerHTML = `
 
         <strong>
           Student: ${a.studentNumber || "-"}
@@ -1766,12 +1485,15 @@ async function loadAttendance(){
 
         <br>
 
-        Date: ${a.date || "-"}
+        Date:
+        ${a.date || "-"}
 
         <br>
 
         Status:
-        <strong>${a.status || "-"}</strong>
+        <strong>
+          ${a.status || "-"}
+        </strong>
 
       `;
 
@@ -1780,68 +1502,65 @@ async function loadAttendance(){
 
     });
 
-  }
+  }catch(error){
 
-  catch(error){
-
-    console.error(error);
-
-    list.innerHTML=
-      "<p>Attendance load ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
-      error.message +
-      "</p>";
+    list.innerHTML =
+    "<p>" +
+    error.message +
+    "</p>";
 
   }
 
 }
 
 
-/* =====================================================
-   STUDY PROGRESS - SAVE
-===================================================== */
+/* =========================
+   STUDY
+========================= */
 
-window.saveStudyProgress=async function(){
+window.saveStudy =
+async function(){
 
   const studentNumber =
-    document.getElementById(
-      "studyStudent"
-    ).value;
+  document.getElementById(
+    "studyStudent"
+  ).value;
 
 
   const date =
-    document.getElementById(
-      "studyDate"
-    ).value;
+  document.getElementById(
+    "studyDate"
+  ).value;
 
 
   const surah =
-    document.getElementById(
-      "studySurah"
-    ).value.trim();
+  document.getElementById(
+    "studySurah"
+  ).value.trim();
 
 
   const newLesson =
-    document.getElementById(
-      "studyNewLesson"
-    ).value.trim();
+  document.getElementById(
+    "studyNewLesson"
+  ).value.trim();
 
 
   const revision =
-    document.getElementById(
-      "studyRevision"
-    ).value.trim();
+  document.getElementById(
+    "studyRevision"
+  ).value.trim();
 
 
   const performance =
-    document.getElementById(
-      "studyPerformance"
-    ).value;
+  document.getElementById(
+    "studyPerformance"
+  ).value.trim();
 
 
   const note =
-    document.getElementById(
-      "studyNote"
-    ).value.trim();
+  document.getElementById(
+    "studyNote"
+  ).value.trim();
 
 
   if(!studentNumber || !date){
@@ -1851,7 +1570,6 @@ window.saveStudyProgress=async function(){
     );
 
     return;
-
   }
 
 
@@ -1861,79 +1579,32 @@ window.saveStudyProgress=async function(){
       collection(db,"studyProgress"),
       {
 
-        studentNumber:
-          studentNumber,
-
-        date:
-          date,
-
-        surah:
-          surah,
-
-        newLesson:
-          newLesson,
-
-        revision:
-          revision,
-
-        performance:
-          performance,
-
-        note:
-          note,
+        studentNumber,
+        date,
+        surah,
+        newLesson,
+        revision,
+        performance,
+        note,
 
         createdAt:
-          serverTimestamp()
+        serverTimestamp()
 
       }
     );
 
 
-    showMessage(
-      "Study Progress saved successfully ✅"
+    alert(
+      "Study progress saved ✅"
     );
 
 
-    document.getElementById(
-      "studyDate"
-    ).value="";
+    await loadStudy();
 
-
-    document.getElementById(
-      "studySurah"
-    ).value="";
-
-
-    document.getElementById(
-      "studyNewLesson"
-    ).value="";
-
-
-    document.getElementById(
-      "studyRevision"
-    ).value="";
-
-
-    document.getElementById(
-      "studyPerformance"
-    ).value="";
-
-
-    document.getElementById(
-      "studyNote"
-    ).value="";
-
-
-    loadStudyProgress();
-
-  }
-
-  catch(error){
-
-    console.error(error);
+  }catch(error){
 
     alert(
-      "Study Progress save ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
+      "Study save ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
       error.message
     );
 
@@ -1942,56 +1613,53 @@ window.saveStudyProgress=async function(){
 };
 
 
-/* =====================================================
-   STUDY PROGRESS - LOAD
-===================================================== */
-
-async function loadStudyProgress(){
+async function loadStudy(){
 
   const list =
-    document.getElementById(
-      "studyList"
-    );
+  document.getElementById(
+    "studyList"
+  );
 
 
-  list.innerHTML="Loading...";
+  list.innerHTML =
+  "Loading...";
 
 
   try{
 
     const snapshot =
-      await getDocs(
-        collection(db,"studyProgress")
-      );
+    await getDocs(
+      collection(db,"studyProgress")
+    );
 
 
-    list.innerHTML="";
+    list.innerHTML = "";
 
 
     if(snapshot.empty){
 
-      list.innerHTML=
-        "<p class='empty'>No study progress records yet.</p>";
+      list.innerHTML =
+      "<p class='empty'>No study records yet.</p>";
 
       return;
-
     }
 
 
-    snapshot.forEach(item=>{
+    snapshot.forEach(item => {
 
       const p =
-        item.data();
+      item.data();
 
 
       const div =
-        document.createElement("div");
+      document.createElement("div");
 
 
-      div.className="record";
+      div.className =
+      "record";
 
 
-      div.innerHTML=`
+      div.innerHTML = `
 
         <strong>
           Student: ${p.studentNumber || "-"}
@@ -1999,7 +1667,8 @@ async function loadStudyProgress(){
 
         <br>
 
-        Date: ${p.date || "-"}
+        Date:
+        ${p.date || "-"}
 
         <br>
 
@@ -2033,50 +1702,47 @@ async function loadStudyProgress(){
 
     });
 
-  }
+  }catch(error){
 
-  catch(error){
-
-    console.error(error);
-
-    list.innerHTML=
-      "<p>Study Progress load ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
-      error.message +
-      "</p>";
+    list.innerHTML =
+    "<p>" +
+    error.message +
+    "</p>";
 
   }
 
 }
 
 
-/* =====================================================
-   RESULTS - ADD
-===================================================== */
+/* =========================
+   RESULTS
+========================= */
 
-window.addResult=async function(){
+window.saveResult =
+async function(){
 
   const studentNumber =
-    document.getElementById(
-      "resultStudent"
-    ).value.trim();
+  document.getElementById(
+    "resultStudent"
+  ).value;
 
 
   const title =
-    document.getElementById(
-      "resultTitle"
-    ).value.trim();
+  document.getElementById(
+    "resultTitle"
+  ).value.trim();
 
 
   const mark =
-    document.getElementById(
-      "resultMark"
-    ).value.trim();
+  document.getElementById(
+    "resultMark"
+  ).value.trim();
 
 
   const status =
-    document.getElementById(
-      "resultStatus"
-    ).value;
+  document.getElementById(
+    "resultStatus"
+  ).value;
 
 
   if(
@@ -2086,11 +1752,10 @@ window.addResult=async function(){
   ){
 
     alert(
-      "എല്ലാ വിവരങ്ങളും നൽകുക."
+      "Student, Title, Mark നൽകണം."
     );
 
     return;
-
   }
 
 
@@ -2100,52 +1765,28 @@ window.addResult=async function(){
       collection(db,"results"),
       {
 
-        studentNumber:
-          studentNumber,
-
-        title:
-          title,
-
-        mark:
-          mark,
-
-        status:
-          status,
+        studentNumber,
+        title,
+        mark,
+        status,
 
         createdAt:
-          serverTimestamp()
+        serverTimestamp()
 
       }
     );
 
 
-    showMessage(
-      "Result saved successfully ✅"
+    alert(
+      status === "published"
+      ? "Result published ✅"
+      : "Result saved as draft ✅"
     );
 
 
-    document.getElementById(
-      "resultStudent"
-    ).value="";
+    await loadResults();
 
-
-    document.getElementById(
-      "resultTitle"
-    ).value="";
-
-
-    document.getElementById(
-      "resultMark"
-    ).value="";
-
-
-    loadResults();
-
-  }
-
-  catch(error){
-
-    console.error(error);
+  }catch(error){
 
     alert(
       "Result save ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
@@ -2157,70 +1798,68 @@ window.addResult=async function(){
 };
 
 
-/* =====================================================
-   RESULTS - LOAD
-===================================================== */
-
 async function loadResults(){
 
   const list =
-    document.getElementById(
-      "resultList"
-    );
+  document.getElementById(
+    "resultList"
+  );
 
 
-  list.innerHTML="Loading...";
+  list.innerHTML =
+  "Loading...";
 
 
   try{
 
     const snapshot =
-      await getDocs(
-        collection(db,"results")
-      );
+    await getDocs(
+      collection(db,"results")
+    );
 
 
-    list.innerHTML="";
+    list.innerHTML = "";
 
 
     if(snapshot.empty){
 
-      list.innerHTML=
-        "<p class='empty'>No results yet.</p>";
+      list.innerHTML =
+      "<p class='empty'>No results yet.</p>";
 
       return;
-
     }
 
 
-    snapshot.forEach(item=>{
+    snapshot.forEach(item => {
 
       const r =
-        item.data();
+      item.data();
 
 
       const div =
-        document.createElement("div");
+      document.createElement("div");
 
 
-      div.className="student";
+      div.className =
+      "record";
 
 
-      div.innerHTML=`
+      div.innerHTML = `
 
         <strong>
-          ${r.title || "-"}
+          Student: ${r.studentNumber || "-"}
         </strong>
 
         <br>
 
-        Student:
-        ${r.studentNumber || "-"}
+        ${r.title || "-"}
 
         <br>
 
         Mark:
-        ${r.mark || "-"}
+        <strong>
+          ${r.mark || "-"}
+        </strong>
 
         <br>
 
@@ -2234,54 +1873,50 @@ async function loadResults(){
 
     });
 
-  }
+  }catch(error){
 
-  catch(error){
-
-    console.error(error);
-
-    list.innerHTML=
-      "<p>Results load ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
-      error.message +
-      "</p>";
+    list.innerHTML =
+    "<p>" +
+    error.message +
+    "</p>";
 
   }
 
 }
 
 
-/* =====================================================
-   NOTICES - ADD
-===================================================== */
+/* =========================
+   NOTICES
+========================= */
 
-window.addNotice=async function(){
+window.saveNotice =
+async function(){
 
   const title =
-    document.getElementById(
-      "noticeTitle"
-    ).value.trim();
+  document.getElementById(
+    "noticeTitle"
+  ).value.trim();
 
 
   const text =
-    document.getElementById(
-      "noticeText"
-    ).value.trim();
+  document.getElementById(
+    "noticeText"
+  ).value.trim();
 
 
   const status =
-    document.getElementById(
-      "noticeStatus"
-    ).value;
+  document.getElementById(
+    "noticeStatus"
+  ).value;
 
 
   if(!title || !text){
 
     alert(
-      "Notice title and message നൽകുക."
+      "Title and Notice നൽകണം."
     );
 
     return;
-
   }
 
 
@@ -2291,44 +1926,27 @@ window.addNotice=async function(){
       collection(db,"notices"),
       {
 
-        title:
-          title,
-
-        text:
-          text,
-
-        status:
-          status,
+        title,
+        text,
+        status,
 
         createdAt:
-          serverTimestamp()
+        serverTimestamp()
 
       }
     );
 
 
-    showMessage(
-      "Notice saved successfully ✅"
+    alert(
+      status === "published"
+      ? "Notice published ✅"
+      : "Notice saved as draft ✅"
     );
 
 
-    document.getElementById(
-      "noticeTitle"
-    ).value="";
+    await loadNotices();
 
-
-    document.getElementById(
-      "noticeText"
-    ).value="";
-
-
-    loadNotices();
-
-  }
-
-  catch(error){
-
-    console.error(error);
+  }catch(error){
 
     alert(
       "Notice save ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
@@ -2340,59 +1958,56 @@ window.addNotice=async function(){
 };
 
 
-/* =====================================================
-   NOTICES - LOAD
-===================================================== */
-
 async function loadNotices(){
 
   const list =
-    document.getElementById(
-      "noticeList"
-    );
+  document.getElementById(
+    "noticeList"
+  );
 
 
-  list.innerHTML="Loading...";
+  list.innerHTML =
+  "Loading...";
 
 
   try{
 
     const snapshot =
-      await getDocs(
-        collection(db,"notices")
-      );
+    await getDocs(
+      collection(db,"notices")
+    );
 
 
-    list.innerHTML="";
+    list.innerHTML = "";
 
 
     if(snapshot.empty){
 
-      list.innerHTML=
-        "<p class='empty'>No notices yet.</p>";
+      list.innerHTML =
+      "<p class='empty'>No notices yet.</p>";
 
       return;
-
     }
 
 
-    snapshot.forEach(item=>{
+    snapshot.forEach(item => {
 
       const n =
-        item.data();
+      item.data();
 
 
       const div =
-        document.createElement("div");
+      document.createElement("div");
 
 
-      div.className="student";
+      div.className =
+      "record";
 
 
-      div.innerHTML=`
+      div.innerHTML = `
 
         <strong>
-          ${n.title || "-"}
+          📢 ${n.title || "-"}
         </strong>
 
         <br><br>
@@ -2402,7 +2017,9 @@ async function loadNotices(){
         <br><br>
 
         Status:
-        ${n.status || "-"}
+        <strong>
+          ${n.status || "-"}
+        </strong>
 
       `;
 
@@ -2411,20 +2028,396 @@ async function loadNotices(){
 
     });
 
-  }
+  }catch(error){
 
-  catch(error){
-
-    console.error(error);
-
-    list.innerHTML=
-      "<p>Notices load ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
-      error.message +
-      "</p>";
+    list.innerHTML =
+    "<p>" +
+    error.message +
+    "</p>";
 
   }
 
 }
+
+
+/* =========================
+   LEAVES
+========================= */
+
+async function loadLeaves(){
+
+  const list =
+  document.getElementById(
+    "leaveList"
+  );
+
+
+  list.innerHTML =
+  "Loading...";
+
+
+  try{
+
+    const snapshot =
+    await getDocs(
+      collection(db,"leaveRequests")
+    );
+
+
+    list.innerHTML = "";
+
+
+    if(snapshot.empty){
+
+      list.innerHTML =
+      "<p class='empty'>No leave applications yet.</p>";
+
+      return;
+    }
+
+
+    snapshot.forEach(item => {
+
+      const l =
+      item.data();
+
+
+      const div =
+      document.createElement("div");
+
+
+      div.className =
+      "record";
+
+
+      div.innerHTML = `
+
+        <strong>
+          📝 Student:
+          ${l.studentNumber || "-"}
+        </strong>
+
+        <br>
+
+        Parent:
+        ${l.parentEmail || "-"}
+
+        <br>
+
+        Date:
+        ${l.date || "-"}
+
+        <br>
+
+        Reason:
+        ${l.reason || "-"}
+
+        <br>
+
+        Status:
+        <strong>
+          ${l.status || "pending"}
+        </strong>
+
+        <div class="replyBox">
+
+          <strong>
+            Reply:
+          </strong>
+
+          <br>
+
+          <textarea
+            id="leaveReply-${item.id}"
+            rows="3"
+            placeholder="Write reply..."
+          >${l.reply || ""}</textarea>
+
+
+          <button
+            class="approveBtn"
+            onclick="replyLeave('${item.id}','approved')"
+          >
+            ✅ Approve
+          </button>
+
+
+          <button
+            class="rejectBtn"
+            onclick="replyLeave('${item.id}','rejected')"
+          >
+            ❌ Reject
+          </button>
+
+        </div>
+
+      `;
+
+
+      list.appendChild(div);
+
+    });
+
+  }catch(error){
+
+    list.innerHTML =
+    "<p>" +
+    error.message +
+    "</p>";
+
+  }
+
+}
+
+
+window.replyLeave =
+async function(id,status){
+
+  const textarea =
+  document.getElementById(
+    "leaveReply-" + id
+  );
+
+
+  const reply =
+  textarea
+  ? textarea.value.trim()
+  : "";
+
+
+  try{
+
+    await updateDoc(
+      doc(
+        db,
+        "leaveRequests",
+        id
+      ),
+      {
+
+        status:
+        status,
+
+        reply:
+        reply,
+
+        repliedAt:
+        serverTimestamp()
+
+      }
+    );
+
+
+    alert(
+      status === "approved"
+      ? "Leave approved ✅"
+      : "Leave rejected ❌"
+    );
+
+
+    await loadLeaves();
+
+  }catch(error){
+
+    alert(
+      "Reply save ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
+      error.message
+    );
+
+  }
+
+};
+
+
+/* =========================
+   MESSAGES
+========================= */
+
+async function loadMessages(){
+
+  const list =
+  document.getElementById(
+    "messageList"
+  );
+
+
+  list.innerHTML =
+  "Loading...";
+
+
+  try{
+
+    const snapshot =
+    await getDocs(
+      collection(db,"messages")
+    );
+
+
+    list.innerHTML = "";
+
+
+    if(snapshot.empty){
+
+      list.innerHTML =
+      "<p class='empty'>No parent messages yet.</p>";
+
+      return;
+    }
+
+
+    snapshot.forEach(item => {
+
+      const m =
+      item.data();
+
+
+      const div =
+      document.createElement("div");
+
+
+      div.className =
+      "record";
+
+
+      div.innerHTML = `
+
+        <strong>
+          💬 Student:
+          ${m.studentNumber || "-"}
+        </strong>
+
+        <br>
+
+        Parent:
+        ${m.parentEmail || "-"}
+
+        <br><br>
+
+        <strong>
+          Parent Message:
+        </strong>
+
+        <br>
+
+        ${m.text || "-"}
+
+
+        <div class="replyBox">
+
+          <strong>
+            Usthad Reply:
+          </strong>
+
+          <br>
+
+          <textarea
+            id="messageReply-${item.id}"
+            rows="3"
+            placeholder="Write reply..."
+          >${m.reply || ""}</textarea>
+
+
+          <button
+            onclick="replyMessage('${item.id}')"
+          >
+
+            💬 Send Reply
+
+          </button>
+
+        </div>
+
+      `;
+
+
+      list.appendChild(div);
+
+    });
+
+  }catch(error){
+
+    list.innerHTML =
+    "<p>" +
+    error.message +
+    "</p>";
+
+  }
+
+}
+
+
+window.replyMessage =
+async function(id){
+
+  const textarea =
+  document.getElementById(
+    "messageReply-" + id
+  );
+
+
+  const reply =
+  textarea
+  ? textarea.value.trim()
+  : "";
+
+
+  if(!reply){
+
+    alert(
+      "Reply എഴുതുക."
+    );
+
+    return;
+  }
+
+
+  try{
+
+    await updateDoc(
+      doc(
+        db,
+        "messages",
+        id
+      ),
+      {
+
+        reply:
+        reply,
+
+        status:
+        "replied",
+
+        repliedAt:
+        serverTimestamp()
+
+      }
+    );
+
+
+    alert(
+      "Reply sent successfully ✅"
+    );
+
+
+    await loadMessages();
+
+  }catch(error){
+
+    alert(
+      "Reply send ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
+      error.message
+    );
+
+  }
+
+};
+
+
+/* =========================
+   START
+========================= */
+
+startAdmin();
 
 </script>
 
