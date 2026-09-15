@@ -1,222 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>SAFA HIFZ CLASS | Admin Dashboard</title>
 
 <style>
-
-:root{
-  --primary:#0f766e;
-  --primary-dark:#115e59;
-  --secondary:#134e4a;
-  --accent:#d4af37;
-  --bg:#f4f7f8;
-  --card:#ffffff;
-  --text:#172033;
-  --muted:#64748b;
-  --border:#e2e8f0;
-  --danger:#dc2626;
-  --warning:#d97706;
-  --success:#15803d;
-  --info:#2563eb;
-  --sidebar:260px;
-}
-
 *{
   box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-  margin:0;
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Arial,
-    sans-serif;
-  background:var(--bg);
-  color:var(--text);
+  font-family:Inter,Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
 }
 
+button,input,select,textarea{
+  font:inherit;
+}
 
-/* =========================
-   SIDEBAR
-========================= */
+button{
+  cursor:pointer;
+}
 
+.app{
+  min-height:100vh;
+  display:flex;
+}
+
+/* SIDEBAR */
 .sidebar{
+  width:250px;
+  background:#102a43;
+  color:white;
   position:fixed;
   left:0;
   top:0;
   bottom:0;
-  width:var(--sidebar);
-  background:
-    linear-gradient(
-      180deg,
-      #0b4f4a 0%,
-      #0f766e 55%,
-      #115e59 100%
-    );
-  color:white;
-  z-index:1000;
-  display:flex;
-  flex-direction:column;
-  transition:.3s;
+  z-index:100;
+  overflow-y:auto;
 }
 
 .brand{
-  padding:25px 20px;
-  border-bottom:1px solid rgba(255,255,255,.15);
+  padding:24px 20px;
+  border-bottom:1px solid rgba(255,255,255,.1);
 }
 
-.brand-title{
-  font-size:21px;
-  font-weight:800;
+.brand h1{
+  font-size:20px;
   letter-spacing:.5px;
 }
 
-.brand-subtitle{
-  margin-top:5px;
+.brand p{
   font-size:12px;
-  opacity:.75;
+  opacity:.7;
+  margin-top:5px;
 }
 
 .menu{
-  padding:18px 12px;
-  flex:1;
-  overflow-y:auto;
+  padding:15px 10px;
 }
 
 .menu button{
   width:100%;
   border:0;
   background:transparent;
-  color:rgba(255,255,255,.78);
+  color:#dbe8f5;
   text-align:left;
   padding:13px 15px;
+  border-radius:9px;
   margin-bottom:5px;
-  border-radius:10px;
-  cursor:pointer;
-  font-size:14px;
   transition:.2s;
 }
 
-.menu button:hover{
-  background:rgba(255,255,255,.10);
+.menu button:hover,
+.menu button.active{
+  background:#1d4d73;
   color:white;
 }
 
-.menu button.active{
-  background:white;
-  color:var(--primary);
-  font-weight:700;
-}
-
-.menu-icon{
+.menu button span{
   display:inline-block;
   width:28px;
-  font-size:16px;
 }
 
-.sidebar-footer{
-  padding:15px;
-  border-top:1px solid rgba(255,255,255,.15);
-  font-size:12px;
-  opacity:.7;
-}
-
-
-/* =========================
-   MAIN
-========================= */
-
+/* MAIN */
 .main{
-  margin-left:var(--sidebar);
+  margin-left:250px;
+  width:calc(100% - 250px);
   min-height:100vh;
 }
 
 .topbar{
-  height:76px;
+  height:72px;
   background:white;
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid #e4e9f0;
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:0 28px;
   position:sticky;
   top:0;
-  z-index:900;
+  z-index:50;
 }
 
-.page-title{
+.top-title{
   font-size:20px;
-  font-weight:800;
+  font-weight:700;
 }
 
-.page-subtitle{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:3px;
-}
-
-.top-actions{
+.top-right{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:15px;
 }
 
-.admin-profile{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.avatar{
-  width:38px;
-  height:38px;
-  border-radius:50%;
-  background:#dff5f2;
-  color:var(--primary);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:800;
-}
-
-.admin-name{
+.admin-badge{
+  background:#eaf3ff;
+  color:#185a9d;
+  padding:8px 13px;
+  border-radius:20px;
   font-size:13px;
-  font-weight:700;
+  font-weight:600;
 }
 
-.admin-role{
-  color:var(--muted);
-  font-size:11px;
-}
-
-.logout-btn{
+.logout{
   border:0;
-  background:#fee2e2;
-  color:#991b1b;
-  padding:9px 13px;
-  border-radius:9px;
-  cursor:pointer;
-  font-weight:700;
+  background:#e74c3c;
+  color:white;
+  padding:9px 14px;
+  border-radius:7px;
 }
-
-
-/* =========================
-   CONTENT
-========================= */
 
 .content{
   padding:28px;
-  max-width:1500px;
-  margin:auto;
 }
 
 .section{
@@ -227,398 +147,247 @@ body{
   display:block;
 }
 
-.section-heading{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:20px;
+.section-head{
+  margin-bottom:22px;
 }
 
-.section-heading h2{
-  margin:0;
-  font-size:22px;
+.section-head h2{
+  font-size:24px;
+  margin-bottom:5px;
 }
 
-.section-heading p{
-  margin:5px 0 0;
-  color:var(--muted);
-  font-size:13px;
+.section-head p{
+  color:#718096;
+  font-size:14px;
 }
 
-
-/* =========================
-   STAT CARDS
-========================= */
-
+/* CARDS */
 .stats{
   display:grid;
-  grid-template-columns:
-    repeat(4,minmax(0,1fr));
+  grid-template-columns:repeat(4,1fr);
   gap:18px;
   margin-bottom:25px;
 }
 
-.stat-card{
+.stat{
   background:white;
-  border:1px solid var(--border);
-  border-radius:16px;
+  border:1px solid #e6ebf1;
+  border-radius:14px;
   padding:20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  box-shadow:0 4px 15px rgba(15,23,42,.04);
+  box-shadow:0 4px 14px rgba(20,40,70,.04);
 }
 
-.stat-label{
-  color:var(--muted);
-  font-size:12px;
-  font-weight:600;
+.stat small{
+  color:#718096;
 }
 
-.stat-number{
-  font-size:28px;
-  font-weight:800;
-  margin-top:5px;
+.stat strong{
+  display:block;
+  font-size:30px;
+  margin-top:8px;
 }
 
-.stat-icon{
-  width:48px;
-  height:48px;
-  border-radius:13px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-  background:#e6f6f4;
-}
-
-
-/* =========================
-   CARDS
-========================= */
-
-.card{
+/* PANEL */
+.panel{
   background:white;
-  border:1px solid var(--border);
-  border-radius:16px;
+  border:1px solid #e5eaf0;
+  border-radius:14px;
   padding:22px;
-  margin-bottom:20px;
-  box-shadow:0 4px 15px rgba(15,23,42,.035);
+  margin-bottom:22px;
+  box-shadow:0 4px 14px rgba(20,40,70,.035);
 }
 
-.card-title{
-  font-size:17px;
-  font-weight:800;
-  margin:0 0 17px;
+.panel h3{
+  margin-bottom:18px;
 }
 
-.grid-2{
-  display:grid;
-  grid-template-columns:
-    repeat(2,minmax(0,1fr));
-  gap:20px;
-}
-
-
-/* =========================
-   FORMS
-========================= */
-
+/* FORM */
 .form-grid{
   display:grid;
-  grid-template-columns:
-    repeat(2,minmax(0,1fr));
+  grid-template-columns:repeat(2,1fr);
   gap:15px;
 }
 
-.form-group{
-  margin-bottom:4px;
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
 }
 
-.form-group.full{
+.field.full{
   grid-column:1/-1;
 }
 
-label{
-  display:block;
-  font-size:12px;
-  font-weight:700;
-  color:#475569;
-  margin-bottom:7px;
+.field label{
+  font-size:13px;
+  font-weight:600;
+  color:#43546a;
 }
 
-input,
-select,
-textarea{
+.field input,
+.field select,
+.field textarea{
   width:100%;
-  border:1px solid #cbd5e1;
-  border-radius:9px;
+  border:1px solid #d7dee8;
+  border-radius:8px;
   padding:11px 12px;
-  font-size:14px;
-  background:white;
-  color:var(--text);
   outline:none;
-  transition:.2s;
+  background:white;
 }
 
-input:focus,
-select:focus,
-textarea:focus{
-  border-color:var(--primary);
-  box-shadow:0 0 0 3px rgba(15,118,110,.10);
-}
-
-textarea{
-  min-height:100px;
+.field textarea{
+  min-height:90px;
   resize:vertical;
 }
 
-.primary-btn{
-  background:var(--primary);
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:#2878b5;
+  box-shadow:0 0 0 3px rgba(40,120,181,.1);
+}
+
+.primary{
+  border:0;
+  background:#176b87;
   color:white;
-  border:0;
   padding:11px 18px;
-  border-radius:9px;
-  font-weight:700;
-  cursor:pointer;
-}
-
-.primary-btn:hover{
-  background:var(--primary-dark);
-}
-
-.secondary-btn{
-  background:#e2e8f0;
-  color:#334155;
-  border:0;
-  padding:10px 15px;
-  border-radius:9px;
-  font-weight:700;
-  cursor:pointer;
-}
-
-.danger-btn{
-  background:#fee2e2;
-  color:#991b1b;
-  border:0;
-  padding:8px 12px;
   border-radius:8px;
-  font-weight:700;
-  cursor:pointer;
+  font-weight:600;
 }
 
-.blue-btn{
-  background:#dbeafe;
-  color:#1d4ed8;
+.primary:hover{
+  background:#12586f;
+}
+
+.danger{
   border:0;
+  background:#e74c3c;
+  color:white;
   padding:8px 12px;
-  border-radius:8px;
-  font-weight:700;
-  cursor:pointer;
+  border-radius:6px;
 }
 
-.green-btn{
-  background:#dcfce7;
-  color:#166534;
+.success{
   border:0;
+  background:#24936e;
+  color:white;
   padding:8px 12px;
-  border-radius:8px;
-  font-weight:700;
-  cursor:pointer;
+  border-radius:6px;
 }
 
+.warning{
+  border:0;
+  background:#e5a323;
+  color:white;
+  padding:8px 12px;
+  border-radius:6px;
+}
 
-/* =========================
-   TABLE
-========================= */
-
+/* TABLE */
 .table-wrap{
-  width:100%;
   overflow-x:auto;
 }
 
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:650px;
+  min-width:700px;
+}
+
+th,td{
+  padding:12px 10px;
+  border-bottom:1px solid #edf0f4;
+  text-align:left;
+  font-size:13px;
 }
 
 th{
-  background:#f8fafc;
-  color:#475569;
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.5px;
-  text-align:left;
-  padding:13px;
-  border-bottom:1px solid var(--border);
-}
-
-td{
-  padding:13px;
-  border-bottom:1px solid #eef2f7;
-  font-size:13px;
+  background:#f7f9fc;
+  color:#4a5b70;
+  font-weight:700;
 }
 
 tr:hover td{
-  background:#fafdfd;
+  background:#fbfcfe;
 }
 
-
-/* =========================
-   STATUS
-========================= */
-
+/* BADGE */
 .badge{
-  display:inline-flex;
-  align-items:center;
+  display:inline-block;
   padding:5px 9px;
-  border-radius:20px;
+  border-radius:15px;
   font-size:11px;
-  font-weight:800;
+  font-weight:700;
 }
 
-.badge-success{
-  background:#dcfce7;
-  color:#166534;
+.badge-green{
+  background:#e7f7ef;
+  color:#18794e;
 }
 
-.badge-warning{
-  background:#fef3c7;
-  color:#92400e;
+.badge-red{
+  background:#fdeaea;
+  color:#b42318;
 }
 
-.badge-danger{
-  background:#fee2e2;
-  color:#991b1b;
+.badge-blue{
+  background:#eaf3ff;
+  color:#185a9d;
 }
 
-.badge-info{
-  background:#dbeafe;
-  color:#1d4ed8;
+.badge-yellow{
+  background:#fff4d8;
+  color:#916300;
 }
 
-.badge-neutral{
-  background:#f1f5f9;
-  color:#475569;
-}
-
-
-/* =========================
-   REQUEST / MESSAGE
-========================= */
-
-.request-card{
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:17px;
-  margin-bottom:12px;
-}
-
-.request-head{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:10px;
-}
-
-.request-name{
-  font-weight:800;
-}
-
-.meta{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.8;
-}
-
-.message-box{
-  background:#f8fafc;
-  padding:12px;
-  border-radius:10px;
-  margin:10px 0;
-  line-height:1.6;
-  font-size:13px;
-}
-
-.reply-box{
-  background:#ecfdf5;
-  border-left:3px solid var(--primary);
-  padding:10px 12px;
-  border-radius:7px;
-  margin-top:10px;
-  font-size:13px;
-}
-
-
-/* =========================
-   EMPTY / LOADING
-========================= */
-
-.empty{
-  padding:30px;
-  text-align:center;
-  color:var(--muted);
-  font-size:13px;
-}
-
-.loading{
-  padding:25px;
-  text-align:center;
-  color:var(--muted);
-}
-
-.notification-dot{
-  display:inline-flex;
-  min-width:19px;
-  height:19px;
-  align-items:center;
-  justify-content:center;
-  padding:0 5px;
-  border-radius:20px;
-  background:#ef4444;
+/* HOME */
+.welcome{
+  background:linear-gradient(135deg,#123b5d,#176b87);
   color:white;
-  font-size:10px;
-  margin-left:6px;
+  border-radius:16px;
+  padding:30px;
+  margin-bottom:22px;
 }
 
+.welcome h2{
+  margin-bottom:7px;
+}
 
-/* =========================
-   MOBILE
-========================= */
+.quick{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
 
+.quick button{
+  background:white;
+  border:1px solid #e2e8f0;
+  border-radius:12px;
+  padding:18px;
+  text-align:left;
+}
+
+.quick button strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+/* MOBILE */
 .mobile-menu{
   display:none;
   border:0;
-  background:#e6f6f4;
-  color:var(--primary);
-  width:40px;
-  height:40px;
-  border-radius:9px;
-  font-size:20px;
+  background:#102a43;
+  color:white;
+  font-size:22px;
+  padding:7px 11px;
+  border-radius:6px;
 }
 
-.overlay{
-  display:none;
-}
-
-@media(max-width:1000px){
-
-  .stats{
-    grid-template-columns:
-      repeat(2,minmax(0,1fr));
-  }
-
-}
-
-@media(max-width:760px){
-
-  :root{
-    --sidebar:250px;
-  }
-
+@media(max-width:900px){
   .sidebar{
     transform:translateX(-100%);
+    transition:.25s;
   }
 
   .sidebar.open{
@@ -627,6 +396,7 @@ tr:hover td{
 
   .main{
     margin-left:0;
+    width:100%;
   }
 
   .mobile-menu{
@@ -638,330 +408,213 @@ tr:hover td{
   }
 
   .content{
-    padding:17px;
+    padding:18px;
   }
 
-  .admin-profile{
-    display:none;
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .quick{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:600px){
+  .form-grid{
+    grid-template-columns:1fr;
   }
 
   .stats{
     grid-template-columns:1fr;
   }
 
-  .grid-2,
-  .form-grid{
-    grid-template-columns:1fr;
+  .admin-badge{
+    display:none;
   }
 
-  .form-group.full{
-    grid-column:auto;
+  .top-title{
+    font-size:16px;
   }
-
-  .overlay.show{
-    display:block;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.35);
-    z-index:999;
-  }
-
 }
 
-</style>
+/* LOADING */
+#loading{
+  position:fixed;
+  inset:0;
+  background:rgba(255,255,255,.95);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  font-size:16px;
+  font-weight:600;
+  color:#174b68;
+}
 
+#message{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  max-width:360px;
+  padding:14px 18px;
+  border-radius:9px;
+  color:white;
+  display:none;
+  z-index:9999;
+  box-shadow:0 8px 25px rgba(0,0,0,.15);
+}
+
+#message.success-msg{
+  background:#198754;
+}
+
+#message.error-msg{
+  background:#dc3545;
+}
+</style>
 </head>
 
 <body>
 
+<div id="loading">SAFA HIFZ CLASS loading...</div>
+<div id="message"></div>
+
+<div class="app">
 
 <!-- SIDEBAR -->
-
 <aside class="sidebar" id="sidebar">
 
   <div class="brand">
-
-    <div class="brand-title">
-      SAFA HIFZ CLASS
-    </div>
-
-    <div class="brand-subtitle">
-      Hifz & Islamic Education Management
-    </div>
-
+    <h1>SAFA HIFZ CLASS</h1>
+    <p>Administration Panel</p>
   </div>
-
 
   <div class="menu">
 
-    <button class="active" data-section="home">
-      <span class="menu-icon">⌂</span>
-      Dashboard
+    <button class="menu-btn active" data-section="home">
+      <span>⌂</span> Dashboard
     </button>
 
-    <button data-section="students">
-      <span class="menu-icon">👨‍🎓</span>
-      Students
+    <button class="menu-btn" data-section="students">
+      <span>👨‍🎓</span> Students
     </button>
 
-    <button data-section="attendance">
-      <span class="menu-icon">✓</span>
-      Attendance
+    <button class="menu-btn" data-section="attendance">
+      <span>✓</span> Attendance
     </button>
 
-    <button data-section="study">
-      <span class="menu-icon">📖</span>
-      Hifz Progress
+    <button class="menu-btn" data-section="study">
+      <span>📖</span> Study Progress
     </button>
 
-    <button data-section="results">
-      <span class="menu-icon">🏆</span>
-      Results
+    <button class="menu-btn" data-section="results">
+      <span>🏆</span> Results
     </button>
 
-    <button data-section="notices">
-      <span class="menu-icon">📢</span>
-      Notices
+    <button class="menu-btn" data-section="notices">
+      <span>📢</span> Notices
     </button>
 
-    <button data-section="leave">
-      <span class="menu-icon">📅</span>
-      Leave Requests
-      <span id="leaveBadge"></span>
+    <button class="menu-btn" data-section="leave">
+      <span>📝</span> Leave Requests
     </button>
 
-    <button data-section="messages">
-      <span class="menu-icon">💬</span>
-      Parent Messages
-      <span id="messageBadge"></span>
+    <button class="menu-btn" data-section="messages">
+      <span>💬</span> Parent Messages
     </button>
 
   </div>
-
-
-  <div class="sidebar-footer">
-    SAFA HIFZ CLASS<br>
-    Administration Panel
-  </div>
-
 </aside>
 
 
-<div class="overlay" id="overlay"></div>
-
-
 <!-- MAIN -->
-
-<div class="main">
-
-
-  <!-- TOPBAR -->
+<main class="main">
 
   <header class="topbar">
 
     <div style="display:flex;align-items:center;gap:12px;">
-
-      <button
-        class="mobile-menu"
-        id="mobileMenu">
-        ☰
-      </button>
-
-      <div>
-
-        <div class="page-title"
-             id="pageTitle">
-          Dashboard
-        </div>
-
-        <div class="page-subtitle">
-          SAFA HIFZ CLASS · Administration
-        </div>
-
-      </div>
-
+      <button class="mobile-menu" id="mobileMenu">☰</button>
+      <div class="top-title">Usthad Dashboard</div>
     </div>
 
-
-    <div class="top-actions">
-
-      <div class="admin-profile">
-
-        <div class="avatar">
-          U
-        </div>
-
-        <div>
-
-          <div class="admin-name">
-            Usthad
-          </div>
-
-          <div class="admin-role">
-            Administrator
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <button
-        class="logout-btn"
-        id="logoutBtn">
-        Logout
-      </button>
-
+    <div class="top-right">
+      <div class="admin-badge">ADMINISTRATOR</div>
+      <button class="logout" id="logoutBtn">Logout</button>
     </div>
 
   </header>
 
 
-  <main class="content">
-
+  <div class="content">
 
     <!-- HOME -->
+    <section class="section active" id="home">
 
-    <section
-      id="home"
-      class="section active">
-
-      <div class="section-heading">
-
-        <div>
-
-          <h2>
-            Welcome, Usthad
-          </h2>
-
-          <p>
-            Manage your Hifz class from one place.
-          </p>
-
-        </div>
-
+      <div class="welcome">
+        <h2>Assalamu Alaikum, Usthad</h2>
+        <p>Welcome to the SAFA HIFZ CLASS administration system.</p>
       </div>
-
 
       <div class="stats">
 
-        <div class="stat-card">
-
-          <div>
-            <div class="stat-label">
-              TOTAL STUDENTS
-            </div>
-
-            <div
-              class="stat-number"
-              id="totalStudents">
-              0
-            </div>
-          </div>
-
-          <div class="stat-icon">
-            👨‍🎓
-          </div>
-
+        <div class="stat">
+          <small>Total Students</small>
+          <strong id="studentCount">0</strong>
         </div>
 
-
-        <div class="stat-card">
-
-          <div>
-            <div class="stat-label">
-              ATTENDANCE RECORDS
-            </div>
-
-            <div
-              class="stat-number"
-              id="totalAttendance">
-              0
-            </div>
-          </div>
-
-          <div class="stat-icon">
-            ✓
-          </div>
-
+        <div class="stat">
+          <small>Attendance Records</small>
+          <strong id="attendanceCount">0</strong>
         </div>
 
-
-        <div class="stat-card">
-
-          <div>
-            <div class="stat-label">
-              PENDING LEAVE
-            </div>
-
-            <div
-              class="stat-number"
-              id="pendingLeaves">
-              0
-            </div>
-          </div>
-
-          <div class="stat-icon">
-            📅
-          </div>
-
+        <div class="stat">
+          <small>Leave Requests</small>
+          <strong id="leaveCount">0</strong>
         </div>
 
-
-        <div class="stat-card">
-
-          <div>
-            <div class="stat-label">
-              PARENT MESSAGES
-            </div>
-
-            <div
-              class="stat-number"
-              id="totalMessages">
-              0
-            </div>
-          </div>
-
-          <div class="stat-icon">
-            💬
-          </div>
-
+        <div class="stat">
+          <small>Parent Messages</small>
+          <strong id="messageCount">0</strong>
         </div>
 
       </div>
 
+      <div class="panel">
 
-      <div class="grid-2">
+        <h3>Quick Access</h3>
 
-        <div class="card">
+        <div class="quick">
 
-          <h3 class="card-title">
-            Quick Overview
-          </h3>
+          <button class="quick-btn" data-go="students">
+            <strong>👨‍🎓 Students</strong>
+            <small>Add and manage students</small>
+          </button>
 
-          <p style="color:#64748b;line-height:1.8;font-size:14px;">
-            Welcome to the official
-            SAFA HIFZ CLASS administration
-            portal. Use the menu to manage
-            students, attendance, Hifz progress,
-            results, notices and parent communication.
-          </p>
+          <button class="quick-btn" data-go="attendance">
+            <strong>✓ Attendance</strong>
+            <small>Record daily attendance</small>
+          </button>
 
-        </div>
+          <button class="quick-btn" data-go="study">
+            <strong>📖 Study Progress</strong>
+            <small>Update Hifz progress</small>
+          </button>
 
+          <button class="quick-btn" data-go="results">
+            <strong>🏆 Results</strong>
+            <small>Publish student results</small>
+          </button>
 
-        <div class="card">
+          <button class="quick-btn" data-go="notices">
+            <strong>📢 Notices</strong>
+            <small>Publish important notices</small>
+          </button>
 
-          <h3 class="card-title">
-            Administration
-          </h3>
-
-          <p style="color:#64748b;line-height:1.8;font-size:14px;">
-            All parent accounts are securely
-            connected to their respective
-            students through Firebase Authentication
-            and Firestore security rules.
-          </p>
+          <button class="quick-btn" data-go="leave">
+            <strong>📝 Leave Requests</strong>
+            <small>Manage parent requests</small>
+          </button>
 
         </div>
 
@@ -971,108 +624,73 @@ tr:hover td{
 
 
     <!-- STUDENTS -->
+    <section class="section" id="students">
 
-    <section
-      id="students"
-      class="section">
+      <div class="section-head">
+        <h2>Students</h2>
+        <p>Add and manage Hifz students.</p>
+      </div>
 
-      <div class="section-heading">
+      <div class="panel">
 
-        <div>
-          <h2>Students</h2>
-          <p>Manage student records.</p>
-        </div>
+        <h3>Add Student</h3>
+
+        <form id="studentForm">
+
+          <div class="form-grid">
+
+            <div class="field">
+              <label>Student Number</label>
+              <input id="studentNumber" required placeholder="Example: 131">
+            </div>
+
+            <div class="field">
+              <label>Student Name</label>
+              <input id="studentName" required placeholder="Student full name">
+            </div>
+
+            <div class="field">
+              <label>Class</label>
+              <input id="className" placeholder="Example: HIFZ A">
+            </div>
+
+            <div class="field">
+              <label>Parent Email</label>
+              <input id="parentEmail" type="email" placeholder="Parent email">
+            </div>
+
+          </div>
+
+          <br>
+
+          <button class="primary" type="submit">+ Add Student</button>
+
+        </form>
 
       </div>
 
 
-      <div class="card">
+      <div class="panel">
 
-        <h3 class="card-title">
-          Add New Student
-        </h3>
+        <h3>Student List</h3>
 
-        <div class="form-grid">
+        <div class="table-wrap">
 
-          <div class="form-group">
+          <table>
 
-            <label>
-              Student Number
-            </label>
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Class</th>
+                <th>Parent Email</th>
+                <th>Action</th>
+              </tr>
+            </thead>
 
-            <input
-              id="studentNumber"
-              placeholder="Example: 131">
+            <tbody id="studentsTable"></tbody>
 
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Student Name
-            </label>
-
-            <input
-              id="studentName"
-              placeholder="Student full name">
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Class
-            </label>
-
-            <input
-              id="className"
-              placeholder="Example: HIFZ A">
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Parent Email
-            </label>
-
-            <input
-              id="parentEmail"
-              type="email"
-              placeholder="Parent email">
-
-          </div>
-
-        </div>
-
-
-        <button
-          class="primary-btn"
-          id="saveStudent">
-
-          + Add Student
-
-        </button>
-
-      </div>
-
-
-      <div class="card">
-
-        <h3 class="card-title">
-          Student Directory
-        </h3>
-
-        <div
-          class="table-wrap"
-          id="studentList">
-
-          <div class="loading">
-            Loading students...
-          </div>
+          </table>
 
         </div>
 
@@ -1082,106 +700,73 @@ tr:hover td{
 
 
     <!-- ATTENDANCE -->
+    <section class="section" id="attendance">
 
-    <section
-      id="attendance"
-      class="section">
+      <div class="section-head">
+        <h2>Attendance</h2>
+        <p>Record student attendance.</p>
+      </div>
 
-      <div class="section-heading">
+      <div class="panel">
 
-        <div>
-          <h2>Attendance</h2>
-          <p>Record daily attendance.</p>
-        </div>
+        <h3>New Attendance Record</h3>
+
+        <form id="attendanceForm">
+
+          <div class="form-grid">
+
+            <div class="field">
+              <label>Student</label>
+              <select id="attendanceStudent" required>
+                <option value="">Select student</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Date</label>
+              <input type="date" id="attendanceDate" required>
+            </div>
+
+            <div class="field">
+              <label>Status</label>
+              <select id="attendanceStatus" required>
+                <option value="">Select status</option>
+                <option value="Present">Present</option>
+                <option value="Absent">Absent</option>
+                <option value="Leave">Leave</option>
+              </select>
+            </div>
+
+          </div>
+
+          <br>
+
+          <button class="primary" type="submit">Save Attendance</button>
+
+        </form>
 
       </div>
 
+      <div class="panel">
 
-      <div class="card">
+        <h3>Attendance Records</h3>
 
-        <h3 class="card-title">
-          Record Attendance
-        </h3>
+        <div class="table-wrap">
 
-        <div class="form-grid">
+          <table>
 
-          <div class="form-group">
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
 
-            <label>
-              Student Number
-            </label>
+            <tbody id="attendanceTable"></tbody>
 
-            <input
-              id="attendanceStudent">
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Date
-            </label>
-
-            <input
-              type="date"
-              id="attendanceDate">
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Status
-            </label>
-
-            <select
-              id="attendanceStatus">
-
-              <option value="Present">
-                Present
-              </option>
-
-              <option value="Absent">
-                Absent
-              </option>
-
-              <option value="Leave">
-                Leave
-              </option>
-
-            </select>
-
-          </div>
-
-        </div>
-
-
-        <button
-          class="primary-btn"
-          id="saveAttendance">
-
-          Save Attendance
-
-        </button>
-
-      </div>
-
-
-      <div class="card">
-
-        <h3 class="card-title">
-          Attendance Records
-        </h3>
-
-        <div
-          class="table-wrap"
-          id="attendanceList">
-
-          <div class="loading">
-            Loading...
-          </div>
+          </table>
 
         </div>
 
@@ -1191,153 +776,97 @@ tr:hover td{
 
 
     <!-- STUDY -->
+    <section class="section" id="study">
 
-    <section
-      id="study"
-      class="section">
+      <div class="section-head">
+        <h2>Study Progress</h2>
+        <p>Manage daily Hifz study progress.</p>
+      </div>
 
-      <div class="section-heading">
+      <div class="panel">
 
-        <div>
-          <h2>Hifz Progress</h2>
-          <p>Track daily Qur'an memorisation progress.</p>
-        </div>
+        <h3>Add Study Progress</h3>
+
+        <form id="studyForm">
+
+          <div class="form-grid">
+
+            <div class="field">
+              <label>Student</label>
+              <select id="studyStudent" required>
+                <option value="">Select student</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Date</label>
+              <input type="date" id="studyDate" required>
+            </div>
+
+            <div class="field">
+              <label>Surah / Portion</label>
+              <input id="studySurah" placeholder="Example: Surah Al-Baqarah">
+            </div>
+
+            <div class="field">
+              <label>New Lesson</label>
+              <input id="newLesson" placeholder="Example: 1 page">
+            </div>
+
+            <div class="field">
+              <label>Revision</label>
+              <input id="revision" placeholder="Revision details">
+            </div>
+
+            <div class="field">
+              <label>Performance</label>
+              <select id="performance">
+                <option value="">Select</option>
+                <option value="Excellent">Excellent</option>
+                <option value="Very Good">Very Good</option>
+                <option value="Good">Good</option>
+                <option value="Needs Improvement">Needs Improvement</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label>Teacher Note</label>
+              <textarea id="studyNote" placeholder="Teacher's note"></textarea>
+            </div>
+
+          </div>
+
+          <br>
+
+          <button class="primary" type="submit">Save Progress</button>
+
+        </form>
 
       </div>
 
+      <div class="panel">
 
-      <div class="card">
+        <h3>Study Records</h3>
 
-        <h3 class="card-title">
-          Add Study Progress
-        </h3>
+        <div class="table-wrap">
 
-        <div class="form-grid">
+          <table>
 
-          <div class="form-group">
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Date</th>
+                <th>Surah</th>
+                <th>New Lesson</th>
+                <th>Revision</th>
+                <th>Performance</th>
+                <th>Action</th>
+              </tr>
+            </thead>
 
-            <label>
-              Student Number
-            </label>
+            <tbody id="studyTable"></tbody>
 
-            <input id="studyStudent">
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Date
-            </label>
-
-            <input
-              type="date"
-              id="studyDate">
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Surah
-            </label>
-
-            <input id="studySurah">
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              New Lesson
-            </label>
-
-            <input id="newLesson">
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Revision
-            </label>
-
-            <input id="revision">
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Performance
-            </label>
-
-            <select id="performance">
-
-              <option>
-                Excellent
-              </option>
-
-              <option>
-                Very Good
-              </option>
-
-              <option>
-                Good
-              </option>
-
-              <option>
-                Needs Improvement
-              </option>
-
-            </select>
-
-          </div>
-
-
-          <div class="form-group full">
-
-            <label>
-              Teacher's Note
-            </label>
-
-            <textarea
-              id="studyNote"></textarea>
-
-          </div>
-
-        </div>
-
-
-        <button
-          class="primary-btn"
-          id="saveStudy">
-
-          Save Progress
-
-        </button>
-
-      </div>
-
-
-      <div class="card">
-
-        <h3 class="card-title">
-          Hifz Progress Records
-        </h3>
-
-        <div
-          class="table-wrap"
-          id="studyList">
-
-          <div class="loading">
-            Loading...
-          </div>
+          </table>
 
         </div>
 
@@ -1347,111 +876,77 @@ tr:hover td{
 
 
     <!-- RESULTS -->
+    <section class="section" id="results">
 
-    <section
-      id="results"
-      class="section">
+      <div class="section-head">
+        <h2>Results</h2>
+        <p>Create and publish student results.</p>
+      </div>
 
-      <div class="section-heading">
+      <div class="panel">
 
-        <div>
-          <h2>Results</h2>
-          <p>Manage student examination results.</p>
-        </div>
+        <h3>Add Result</h3>
+
+        <form id="resultForm">
+
+          <div class="form-grid">
+
+            <div class="field">
+              <label>Student</label>
+              <select id="resultStudent" required>
+                <option value="">Select student</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Result Title</label>
+              <input id="resultTitle" required placeholder="Example: Monthly Hifz Exam">
+            </div>
+
+            <div class="field">
+              <label>Mark / Grade</label>
+              <input id="resultMark" required placeholder="Example: 95%">
+            </div>
+
+            <div class="field">
+              <label>Status</label>
+              <select id="resultStatus">
+                <option value="draft">Draft</option>
+                <option value="published">Published</option>
+              </select>
+            </div>
+
+          </div>
+
+          <br>
+
+          <button class="primary" type="submit">Save Result</button>
+
+        </form>
 
       </div>
 
+      <div class="panel">
 
-      <div class="card">
+        <h3>Results</h3>
 
-        <h3 class="card-title">
-          Add Result
-        </h3>
+        <div class="table-wrap">
 
-        <div class="form-grid">
+          <table>
 
-          <div class="form-group">
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Title</th>
+                <th>Mark</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
 
-            <label>
-              Student Number
-            </label>
+            <tbody id="resultsTable"></tbody>
 
-            <input id="resultStudent">
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Result Title
-            </label>
-
-            <input
-              id="resultTitle"
-              placeholder="Monthly Exam">
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Mark
-            </label>
-
-            <input id="resultMark">
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Status
-            </label>
-
-            <select id="resultStatus">
-
-              <option value="published">
-                Published
-              </option>
-
-              <option value="draft">
-                Draft
-              </option>
-
-            </select>
-
-          </div>
-
-        </div>
-
-
-        <button
-          class="primary-btn"
-          id="saveResult">
-
-          Save Result
-
-        </button>
-
-      </div>
-
-
-      <div class="card">
-
-        <h3 class="card-title">
-          Result Records
-        </h3>
-
-        <div
-          class="table-wrap"
-          id="resultList">
-
-          <div class="loading">
-            Loading...
-          </div>
+          </table>
 
         </div>
 
@@ -1461,96 +956,69 @@ tr:hover td{
 
 
     <!-- NOTICES -->
+    <section class="section" id="notices">
 
-    <section
-      id="notices"
-      class="section">
+      <div class="section-head">
+        <h2>Notices</h2>
+        <p>Publish announcements for parents.</p>
+      </div>
 
-      <div class="section-heading">
+      <div class="panel">
 
-        <div>
-          <h2>Notices</h2>
-          <p>Publish announcements to parents.</p>
-        </div>
+        <h3>Create Notice</h3>
+
+        <form id="noticeForm">
+
+          <div class="form-grid">
+
+            <div class="field full">
+              <label>Notice Title</label>
+              <input id="noticeTitle" required placeholder="Notice title">
+            </div>
+
+            <div class="field full">
+              <label>Notice</label>
+              <textarea id="noticeText" required placeholder="Write notice here"></textarea>
+            </div>
+
+            <div class="field">
+              <label>Status</label>
+              <select id="noticeStatus">
+                <option value="draft">Draft</option>
+                <option value="published">Published</option>
+              </select>
+            </div>
+
+          </div>
+
+          <br>
+
+          <button class="primary" type="submit">Save Notice</button>
+
+        </form>
 
       </div>
 
+      <div class="panel">
 
-      <div class="card">
+        <h3>Published / Draft Notices</h3>
 
-        <h3 class="card-title">
-          Create Notice
-        </h3>
+        <div class="table-wrap">
 
-        <div class="form-grid">
+          <table>
 
-          <div class="form-group">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Notice</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
 
-            <label>
-              Title
-            </label>
+            <tbody id="noticesTable"></tbody>
 
-            <input id="noticeTitle">
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Status
-            </label>
-
-            <select id="noticeStatus">
-
-              <option value="published">
-                Published
-              </option>
-
-              <option value="draft">
-                Draft
-              </option>
-
-            </select>
-
-          </div>
-
-
-          <div class="form-group full">
-
-            <label>
-              Notice
-            </label>
-
-            <textarea id="noticeText"></textarea>
-
-          </div>
-
-        </div>
-
-
-        <button
-          class="primary-btn"
-          id="saveNotice">
-
-          Publish Notice
-
-        </button>
-
-      </div>
-
-
-      <div class="card">
-
-        <h3 class="card-title">
-          Notice Archive
-        </h3>
-
-        <div id="noticeList">
-
-          <div class="loading">
-            Loading...
-          </div>
+          </table>
 
         </div>
 
@@ -1560,28 +1028,34 @@ tr:hover td{
 
 
     <!-- LEAVE -->
+    <section class="section" id="leave">
 
-    <section
-      id="leave"
-      class="section">
-
-      <div class="section-heading">
-
-        <div>
-          <h2>Leave Requests</h2>
-          <p>Review and respond to parent leave applications.</p>
-        </div>
-
+      <div class="section-head">
+        <h2>Leave Requests</h2>
+        <p>Manage leave applications from parents.</p>
       </div>
 
+      <div class="panel">
 
-      <div class="card">
+        <div class="table-wrap">
 
-        <div id="leaveList">
+          <table>
 
-          <div class="loading">
-            Loading...
-          </div>
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Parent</th>
+                <th>Date</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Reply</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody id="leaveTable"></tbody>
+
+          </table>
 
         </div>
 
@@ -1591,28 +1065,33 @@ tr:hover td{
 
 
     <!-- MESSAGES -->
+    <section class="section" id="messages">
 
-    <section
-      id="messages"
-      class="section">
-
-      <div class="section-heading">
-
-        <div>
-          <h2>Parent Messages</h2>
-          <p>Communicate directly with parents.</p>
-        </div>
-
+      <div class="section-head">
+        <h2>Parent Messages</h2>
+        <p>View and reply to parent messages.</p>
       </div>
 
+      <div class="panel">
 
-      <div class="card">
+        <div class="table-wrap">
 
-        <div id="messageList">
+          <table>
 
-          <div class="loading">
-            Loading...
-          </div>
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Parent</th>
+                <th>Message</th>
+                <th>Status</th>
+                <th>Reply</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody id="messagesTable"></tbody>
+
+          </table>
 
         </div>
 
@@ -1620,1238 +1099,1405 @@ tr:hover td{
 
     </section>
 
-
-  </main>
+  </div>
+</main>
 
 </div>
 
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+/* =========================================================
+   FIREBASE
+========================================================= */
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 import {
   getAuth,
   onAuthStateChanged,
   signOut
-}
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 import {
   getFirestore,
   collection,
   addDoc,
   getDocs,
+  getDoc,
+  doc,
   deleteDoc,
   updateDoc,
-  doc,
-  getDoc,
   query,
   orderBy,
-  serverTimestamp,
-  onSnapshot
-}
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
 const firebaseConfig = {
-
-  apiKey:
-    "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
-
-  authDomain:
-    "safa-hifz-class-7e84b.firebaseapp.com",
-
-  projectId:
-    "safa-hifz-class-7e84b",
-
-  storageBucket:
-    "safa-hifz-class-7e84b.firebasestorage.app",
-
-  messagingSenderId:
-    "476801753196",
-
-  appId:
-    "1:476801753196:web:d4c8a8b0c1a4203606f849",
-
-  measurementId:
-    "G-ZTBTJCB5SR"
-
+  apiKey: "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
+  authDomain: "safa-hifz-class-7e84b.firebaseapp.com",
+  projectId: "safa-hifz-class-7e84b",
+  storageBucket: "safa-hifz-class-7e84b.firebasestorage.app",
+  messagingSenderId: "476801753196",
+  appId: "1:476801753196:web:d4c8a8b0c1a4203606f849",
+  measurementId: "G-ZTBTJCB5SR"
 };
 
-
-const app =
-  initializeApp(firebaseConfig);
-
-const auth =
-  getAuth(app);
-
-const db =
-  getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 
-/* =========================
+/* =========================================================
    HELPERS
-========================= */
+========================================================= */
+
+const $ = id => document.getElementById(id);
 
 function escapeHtml(value){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  if(value === null || value === undefined){
+    return "";
+  }
 
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 }
 
 
-function statusBadge(status){
+function showMessage(text,type="success"){
 
-  const value =
-    String(status || "")
-      .toLowerCase();
+  const box = $("message");
 
-  let cls="badge-neutral";
+  box.textContent = text;
 
-  if(
-    value==="present" ||
-    value==="published" ||
-    value==="approved" ||
-    value==="replied"
-  ){
-    cls="badge-success";
-  }
+  box.className =
+    type === "error"
+    ? "error-msg"
+    : "success-msg";
 
-  if(
-    value==="pending" ||
-    value==="draft"
-  ){
-    cls="badge-warning";
-  }
+  box.style.display = "block";
 
-  if(
-    value==="absent" ||
-    value==="rejected"
-  ){
-    cls="badge-danger";
-  }
-
-  return `
-    <span class="badge ${cls}">
-      ${escapeHtml(status)}
-    </span>
-  `;
-
+  setTimeout(()=>{
+    box.style.display = "none";
+  },3500);
 }
 
 
-/* =========================
+function dateValue(timestamp){
+
+  if(!timestamp){
+    return "";
+  }
+
+  if(timestamp.seconds){
+    return new Date(timestamp.seconds * 1000)
+      .toLocaleDateString("en-IN");
+  }
+
+  return String(timestamp);
+}
+
+
+function studentNameByNumber(number){
+
+  const found = window.students.find(
+    s => String(s.studentNumber) === String(number)
+  );
+
+  if(found){
+    return found.name;
+  }
+
+  return String(number || "-");
+}
+
+
+/* =========================================================
    AUTH
-========================= */
+========================================================= */
 
-onAuthStateChanged(
-  auth,
-  async user=>{
+onAuthStateChanged(auth, async user => {
 
-    if(!user){
+  if(!user){
 
-      window.location.href="index.html";
+    location.href = "index.html";
+    return;
+  }
+
+  try{
+
+    const userRef = doc(db,"users",user.uid);
+    const userSnap = await getDoc(userRef);
+
+    if(!userSnap.exists()){
+
+      alert("Admin profile not found.");
+      await signOut(auth);
       return;
-
     }
 
+    const data = userSnap.data();
 
-    try{
+    if(String(data.role || "").toLowerCase() !== "admin"){
 
-      const snap=
-        await getDoc(
-          doc(db,"users",user.uid)
-        );
-
-
-      if(!snap.exists()){
-
-        alert("User profile not found.");
-        await signOut(auth);
-        return;
-
-      }
-
-
-      const data=snap.data();
-
-
-      if(
-        String(data.role||"")
-          .trim()
-          .toLowerCase()!=="admin"
-      ){
-
-        alert("Admin access only.");
-        await signOut(auth);
-        return;
-
-      }
-
-
-      loadStudents();
-      loadAttendance();
-      loadStudy();
-      loadResults();
-      loadNotices();
-      listenLeaves();
-      listenMessages();
-
-    }catch(error){
-
-      console.error(error);
-      alert(error.message);
-
+      alert("You do not have administrator access.");
+      await signOut(auth);
+      return;
     }
+
+    $("loading").style.display = "none";
+
+    await loadEverything();
+
+  }catch(error){
+
+    console.error(error);
+
+    $("loading").innerHTML =
+      "Dashboard loading error.<br><br>" +
+      escapeHtml(error.message);
 
   }
-);
+
+});
 
 
-/* =========================
-   NAVIGATION
-========================= */
+/* =========================================================
+   GLOBAL DATA
+========================================================= */
 
-const titles={
-  home:"Dashboard",
-  students:"Students",
-  attendance:"Attendance",
-  study:"Hifz Progress",
-  results:"Results",
-  notices:"Notices",
-  leave:"Leave Requests",
-  messages:"Parent Messages"
-};
+window.students = [];
 
 
-document
-  .querySelectorAll(".menu button")
-  .forEach(button=>{
+/* =========================================================
+   SIDEBAR NAVIGATION
+========================================================= */
 
-    button.addEventListener(
-      "click",
-      ()=>{
+document.querySelectorAll(".menu-btn").forEach(button => {
 
-        document
-          .querySelectorAll(".menu button")
-          .forEach(b=>
-            b.classList.remove("active")
-          );
+  button.addEventListener("click",()=>{
 
+    const target = button.dataset.section;
 
-        button.classList.add("active");
+    openSection(target);
 
-
-        document
-          .querySelectorAll(".section")
-          .forEach(s=>
-            s.classList.remove("active")
-          );
-
-
-        const id=
-          button.dataset.section;
-
-
-        document
-          .getElementById(id)
-          .classList.add("active");
-
-
-        document
-          .getElementById("pageTitle")
-          .textContent=titles[id];
-
-
-        document
-          .getElementById("sidebar")
-          .classList.remove("open");
-
-        document
-          .getElementById("overlay")
-          .classList.remove("show");
-
-      }
-    );
+    $("sidebar").classList.remove("open");
 
   });
+
+});
+
+
+document.querySelectorAll(".quick-btn").forEach(button => {
+
+  button.addEventListener("click",()=>{
+
+    openSection(button.dataset.go);
+
+  });
+
+});
+
+
+function openSection(sectionId){
+
+  document.querySelectorAll(".section")
+    .forEach(section=>{
+      section.classList.remove("active");
+    });
+
+  document.querySelectorAll(".menu-btn")
+    .forEach(button=>{
+      button.classList.remove("active");
+    });
+
+  const section = $(sectionId);
+
+  if(section){
+    section.classList.add("active");
+  }
+
+  const menuButton =
+    document.querySelector(
+      `.menu-btn[data-section="${sectionId}"]`
+    );
+
+  if(menuButton){
+    menuButton.classList.add("active");
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
 
 
 /* MOBILE MENU */
 
-document
-  .getElementById("mobileMenu")
-  .addEventListener(
-    "click",
-    ()=>{
+$("mobileMenu").addEventListener("click",()=>{
 
-      document
-        .getElementById("sidebar")
-        .classList.add("open");
+  $("sidebar").classList.toggle("open");
 
-      document
-        .getElementById("overlay")
-        .classList.add("show");
-
-    }
-  );
-
-
-document
-  .getElementById("overlay")
-  .addEventListener(
-    "click",
-    ()=>{
-
-      document
-        .getElementById("sidebar")
-        .classList.remove("open");
-
-      document
-        .getElementById("overlay")
-        .classList.remove("show");
-
-    }
-  );
+});
 
 
 /* LOGOUT */
 
-document
-  .getElementById("logoutBtn")
-  .addEventListener(
-    "click",
-    async()=>{
+$("logoutBtn").addEventListener("click",async()=>{
 
-      await signOut(auth);
+  if(confirm("Logout from admin dashboard?")){
 
-      window.location.href=
-        "index.html";
+    await signOut(auth);
 
-    }
-  );
-
-
-/* =========================
-   STUDENTS
-========================= */
-
-async function loadStudents(){
-
-  const box=
-    document.getElementById("studentList");
-
-
-  const snap=
-    await getDocs(
-      collection(db,"students")
-    );
-
-
-  document
-    .getElementById("totalStudents")
-    .textContent=snap.size;
-
-
-  if(snap.empty){
-
-    box.innerHTML=
-      `<div class="empty">
-        No students found.
-      </div>`;
-
-    return;
+    location.href = "index.html";
 
   }
 
-
-  let html=`
-
-    <table>
-
-      <thead>
-
-        <tr>
-          <th>No.</th>
-          <th>Student</th>
-          <th>Class</th>
-          <th>Parent</th>
-          <th>Action</th>
-        </tr>
-
-      </thead>
-
-      <tbody>
-
-  `;
+});
 
 
-  snap.forEach(item=>{
+/* =========================================================
+   LOAD EVERYTHING
+========================================================= */
 
-    const d=item.data();
+async function loadEverything(){
 
+  await loadStudents();
 
-    html+=`
-
-      <tr>
-
-        <td>
-          <b>
-            ${escapeHtml(d.studentNumber)}
-          </b>
-        </td>
-
-        <td>
-          ${escapeHtml(d.name)}
-        </td>
-
-        <td>
-          ${escapeHtml(d.className)}
-        </td>
-
-        <td>
-          ${escapeHtml(d.parentEmail)}
-        </td>
-
-        <td>
-
-          <button
-            class="danger-btn"
-            onclick="deleteStudent('${item.id}')">
-
-            Delete
-
-          </button>
-
-        </td>
-
-      </tr>
-
-    `;
-
-  });
-
-
-  html+=`
-
-      </tbody>
-    </table>
-
-  `;
-
-
-  box.innerHTML=html;
+  await Promise.all([
+    loadAttendance(),
+    loadStudy(),
+    loadResults(),
+    loadNotices(),
+    loadLeaves(),
+    loadMessages()
+  ]);
 
 }
 
 
-document
-  .getElementById("saveStudent")
-  .addEventListener(
-    "click",
-    async()=>{
+/* =========================================================
+   STUDENTS
+========================================================= */
 
-      const studentNumber=
-        document
-          .getElementById("studentNumber")
-          .value.trim();
+async function loadStudents(){
+
+  const snap = await getDocs(
+    collection(db,"students")
+  );
+
+  window.students = [];
+
+  $("studentsTable").innerHTML = "";
+
+  snap.forEach(item => {
+
+    const data = item.data();
+
+    const student = {
+      id:item.id,
+      ...data
+    };
+
+    window.students.push(student);
+
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+      <td>${escapeHtml(data.studentNumber)}</td>
+
+      <td>
+        <strong>${escapeHtml(data.name)}</strong>
+      </td>
+
+      <td>${escapeHtml(data.className || "-")}</td>
+
+      <td>${escapeHtml(data.parentEmail || "-")}</td>
+
+      <td>
+        <button class="danger delete-student"
+          data-id="${item.id}">
+          Delete
+        </button>
+      </td>
+    `;
+
+    $("studentsTable").appendChild(tr);
+
+  });
 
 
-      const name=
-        document
-          .getElementById("studentName")
-          .value.trim();
+  $("studentCount").textContent =
+    window.students.length;
 
 
-      const className=
-        document
-          .getElementById("className")
-          .value.trim();
+  populateStudentSelects();
 
 
-      const parentEmail=
-        document
-          .getElementById("parentEmail")
-          .value.trim();
+  document.querySelectorAll(".delete-student")
+    .forEach(button=>{
 
+      button.addEventListener("click",async()=>{
 
-      if(!studentNumber||!name){
-
-        alert(
-          "Student number and name are required."
-        );
-
-        return;
-
-      }
-
-
-      await addDoc(
-        collection(db,"students"),
-        {
-          studentNumber:String(studentNumber),
-          name,
-          className,
-          parentEmail,
-          createdAt:serverTimestamp()
+        if(!confirm("Delete this student?")){
+          return;
         }
+
+        try{
+
+          await deleteDoc(
+            doc(db,"students",button.dataset.id)
+          );
+
+          showMessage("Student deleted.");
+
+          await loadStudents();
+
+        }catch(error){
+
+          showMessage(error.message,"error");
+
+        }
+
+      });
+
+    });
+
+}
+
+
+function populateStudentSelects(){
+
+  const ids = [
+    "attendanceStudent",
+    "studyStudent",
+    "resultStudent"
+  ];
+
+  ids.forEach(id=>{
+
+    const select = $(id);
+
+    if(!select){
+      return;
+    }
+
+    select.innerHTML =
+      `<option value="">Select student</option>`;
+
+    window.students.forEach(student=>{
+
+      const option =
+        document.createElement("option");
+
+      option.value = String(student.studentNumber);
+
+      option.textContent =
+        `${student.studentNumber} - ${student.name}`;
+
+      select.appendChild(option);
+
+    });
+
+  });
+
+}
+
+
+/* ADD STUDENT */
+
+$("studentForm").addEventListener("submit",async e=>{
+
+  e.preventDefault();
+
+  try{
+
+    const studentNumber =
+      $("studentNumber").value.trim();
+
+    const name =
+      $("studentName").value.trim();
+
+    if(!studentNumber || !name){
+
+      showMessage(
+        "Student number and name are required.",
+        "error"
       );
 
-
-      alert("Student added successfully.");
-
-
-      document
-        .getElementById("studentNumber")
-        .value="";
-
-
-      document
-        .getElementById("studentName")
-        .value="";
-
-
-      document
-        .getElementById("className")
-        .value="";
-
-
-      document
-        .getElementById("parentEmail")
-        .value="";
-
-
-      loadStudents();
-
+      return;
     }
-  );
 
 
-window.deleteStudent=
-async function(id){
-
-  if(
-    !confirm(
-      "Delete this student?"
-    )
-  ) return;
-
-
-  await deleteDoc(
-    doc(db,"students",id)
-  );
+    await addDoc(
+      collection(db,"students"),
+      {
+        studentNumber:studentNumber,
+        name:name,
+        className:$("className").value.trim(),
+        parentEmail:$("parentEmail").value.trim(),
+        createdAt:serverTimestamp()
+      }
+    );
 
 
-  loadStudents();
+    $("studentForm").reset();
 
-};
+    showMessage("Student added successfully.");
+
+    await loadStudents();
+
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(error.message,"error");
+
+  }
+
+});
 
 
-/* =========================
+/* =========================================================
    ATTENDANCE
-========================= */
+========================================================= */
 
-document
-  .getElementById("saveAttendance")
-  .addEventListener(
-    "click",
-    async()=>{
+$("attendanceForm").addEventListener("submit",async e=>{
 
-      const studentNumber=
-        document
-          .getElementById("attendanceStudent")
-          .value.trim();
+  e.preventDefault();
 
+  try{
 
-      const date=
-        document
-          .getElementById("attendanceDate")
-          .value;
-
-
-      const status=
-        document
-          .getElementById("attendanceStatus")
-          .value;
-
-
-      if(!studentNumber||!date){
-
-        alert(
-          "Student number and date are required."
-        );
-
-        return;
-
+    await addDoc(
+      collection(db,"attendance"),
+      {
+        studentNumber:$("attendanceStudent").value,
+        date:$("attendanceDate").value,
+        status:$("attendanceStatus").value,
+        createdAt:serverTimestamp()
       }
+    );
 
+    $("attendanceForm").reset();
 
-      await addDoc(
-        collection(db,"attendance"),
-        {
-          studentNumber:String(studentNumber),
-          date,
-          status,
-          createdAt:serverTimestamp()
-        }
-      );
+    showMessage("Attendance saved.");
 
+    await loadAttendance();
 
-      alert(
-        "Attendance saved successfully."
-      );
+  }catch(error){
 
+    showMessage(error.message,"error");
 
-      loadAttendance();
+  }
 
-    }
-  );
+});
 
 
 async function loadAttendance(){
 
-  const box=
-    document.getElementById(
-      "attendanceList"
-    );
+  const snap = await getDocs(
+    collection(db,"attendance")
+  );
 
-
-  const snap=
-    await getDocs(
-      collection(db,"attendance")
-    );
-
-
-  document
-    .getElementById("totalAttendance")
-    .textContent=snap.size;
-
-
-  if(snap.empty){
-
-    box.innerHTML=
-      `<div class="empty">
-        No attendance records.
-      </div>`;
-
-    return;
-
-  }
-
-
-  let html=`
-
-    <table>
-
-      <thead>
-        <tr>
-          <th>Student</th>
-          <th>Date</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-
-      <tbody>
-  `;
-
+  const rows = [];
 
   snap.forEach(item=>{
 
-    const d=item.data();
+    rows.push({
+      id:item.id,
+      ...item.data()
+    });
+
+  });
+
+  rows.sort((a,b)=>
+    String(b.date || "")
+      .localeCompare(String(a.date || ""))
+  );
 
 
-    html+=`
+  $("attendanceTable").innerHTML = "";
 
-      <tr>
+  rows.forEach(data=>{
 
-        <td>
-          <b>${escapeHtml(d.studentNumber)}</b>
-        </td>
+    const statusClass =
+      data.status === "Present"
+      ? "badge-green"
+      : data.status === "Absent"
+      ? "badge-red"
+      : "badge-yellow";
 
-        <td>
-          ${escapeHtml(d.date)}
-        </td>
+    const tr = document.createElement("tr");
 
-        <td>
-          ${statusBadge(d.status)}
-        </td>
+    tr.innerHTML = `
 
-        <td>
+      <td>
+        <strong>
+          ${escapeHtml(
+            studentNameByNumber(data.studentNumber)
+          )}
+        </strong>
+        <br>
+        <small>${escapeHtml(data.studentNumber)}</small>
+      </td>
 
-          <button
-            class="danger-btn"
-            onclick="deleteAttendance('${item.id}')">
-            Delete
-          </button>
+      <td>${escapeHtml(data.date)}</td>
 
-        </td>
+      <td>
+        <span class="badge ${statusClass}">
+          ${escapeHtml(data.status)}
+        </span>
+      </td>
 
-      </tr>
+      <td>
+        <button class="danger delete-attendance"
+          data-id="${data.id}">
+          Delete
+        </button>
+      </td>
 
     `;
+
+    $("attendanceTable").appendChild(tr);
 
   });
 
 
-  html+=`
-
-      </tbody>
-    </table>
-
-  `;
+  $("attendanceCount").textContent = rows.length;
 
 
-  box.innerHTML=html;
+  document.querySelectorAll(".delete-attendance")
+    .forEach(button=>{
+
+      button.addEventListener("click",async()=>{
+
+        if(!confirm("Delete this attendance record?")){
+          return;
+        }
+
+        await deleteDoc(
+          doc(db,"attendance",button.dataset.id)
+        );
+
+        showMessage("Attendance deleted.");
+
+        await loadAttendance();
+
+      });
+
+    });
 
 }
 
 
-window.deleteAttendance=
-async function(id){
+/* =========================================================
+   STUDY PROGRESS
+========================================================= */
 
-  await deleteDoc(
-    doc(db,"attendance",id)
-  );
+$("studyForm").addEventListener("submit",async e=>{
 
-  loadAttendance();
+  e.preventDefault();
 
-};
+  try{
 
-
-/* =========================
-   STUDY
-========================= */
-
-document
-  .getElementById("saveStudy")
-  .addEventListener(
-    "click",
-    async()=>{
-
-      const studentNumber=
-        document
-          .getElementById("studyStudent")
-          .value.trim();
-
-
-      const date=
-        document
-          .getElementById("studyDate")
-          .value;
-
-
-      const surah=
-        document
-          .getElementById("studySurah")
-          .value.trim();
-
-
-      const newLesson=
-        document
-          .getElementById("newLesson")
-          .value.trim();
-
-
-      const revision=
-        document
-          .getElementById("revision")
-          .value.trim();
-
-
-      const performance=
-        document
-          .getElementById("performance")
-          .value;
-
-
-      const note=
-        document
-          .getElementById("studyNote")
-          .value.trim();
-
-
-      if(!studentNumber||!date){
-
-        alert(
-          "Student number and date are required."
-        );
-
-        return;
-
+    await addDoc(
+      collection(db,"studyProgress"),
+      {
+        studentNumber:$("studyStudent").value,
+        date:$("studyDate").value,
+        surah:$("studySurah").value.trim(),
+        newLesson:$("newLesson").value.trim(),
+        revision:$("revision").value.trim(),
+        performance:$("performance").value,
+        note:$("studyNote").value.trim(),
+        createdAt:serverTimestamp()
       }
+    );
 
+    $("studyForm").reset();
 
-      await addDoc(
-        collection(db,"studyProgress"),
-        {
-          studentNumber:String(studentNumber),
-          date,
-          surah,
-          newLesson,
-          revision,
-          performance,
-          note,
-          createdAt:serverTimestamp()
-        }
-      );
+    showMessage("Study progress saved.");
 
+    await loadStudy();
 
-      alert(
-        "Study progress saved."
-      );
+  }catch(error){
 
+    showMessage(error.message,"error");
 
-      loadStudy();
+  }
 
-    }
-  );
+});
 
 
 async function loadStudy(){
 
-  const box=
-    document.getElementById(
-      "studyList"
-    );
+  const snap = await getDocs(
+    collection(db,"studyProgress")
+  );
 
-
-  const snap=
-    await getDocs(
-      collection(db,"studyProgress")
-    );
-
-
-  if(snap.empty){
-
-    box.innerHTML=
-      `<div class="empty">
-        No study records.
-      </div>`;
-
-    return;
-
-  }
-
-
-  let html=`
-
-    <table>
-
-      <thead>
-
-        <tr>
-          <th>Student</th>
-          <th>Date</th>
-          <th>Surah</th>
-          <th>New Lesson</th>
-          <th>Revision</th>
-          <th>Performance</th>
-          <th>Action</th>
-        </tr>
-
-      </thead>
-
-      <tbody>
-  `;
-
+  const rows = [];
 
   snap.forEach(item=>{
 
-    const d=item.data();
-
-
-    html+=`
-
-      <tr>
-
-        <td>
-          ${escapeHtml(d.studentNumber)}
-        </td>
-
-        <td>
-          ${escapeHtml(d.date)}
-        </td>
-
-        <td>
-          ${escapeHtml(d.surah)}
-        </td>
-
-        <td>
-          ${escapeHtml(d.newLesson)}
-        </td>
-
-        <td>
-          ${escapeHtml(d.revision)}
-        </td>
-
-        <td>
-          ${escapeHtml(d.performance)}
-        </td>
-
-        <td>
-
-          <button
-            class="danger-btn"
-            onclick="deleteStudy('${item.id}')">
-            Delete
-          </button>
-
-        </td>
-
-      </tr>
-
-    `;
+    rows.push({
+      id:item.id,
+      ...item.data()
+    });
 
   });
 
 
-  html+=`
-
-      </tbody>
-    </table>
-
-  `;
+  rows.sort((a,b)=>
+    String(b.date || "")
+      .localeCompare(String(a.date || ""))
+  );
 
 
-  box.innerHTML=html;
+  $("studyTable").innerHTML = "";
+
+  rows.forEach(data=>{
+
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+
+      <td>
+        <strong>
+          ${escapeHtml(
+            studentNameByNumber(data.studentNumber)
+          )}
+        </strong>
+      </td>
+
+      <td>${escapeHtml(data.date)}</td>
+
+      <td>${escapeHtml(data.surah || "-")}</td>
+
+      <td>${escapeHtml(data.newLesson || "-")}</td>
+
+      <td>${escapeHtml(data.revision || "-")}</td>
+
+      <td>
+        <span class="badge badge-blue">
+          ${escapeHtml(data.performance || "-")}
+        </span>
+      </td>
+
+      <td>
+        <button class="danger delete-study"
+          data-id="${data.id}">
+          Delete
+        </button>
+      </td>
+
+    `;
+
+    $("studyTable").appendChild(tr);
+
+  });
+
+
+  document.querySelectorAll(".delete-study")
+    .forEach(button=>{
+
+      button.addEventListener("click",async()=>{
+
+        if(!confirm("Delete this study record?")){
+          return;
+        }
+
+        await deleteDoc(
+          doc(db,"studyProgress",button.dataset.id)
+        );
+
+        showMessage("Study record deleted.");
+
+        await loadStudy();
+
+      });
+
+    });
 
 }
 
 
-window.deleteStudy=
-async function(id){
-
-  await deleteDoc(
-    doc(db,"studyProgress",id)
-  );
-
-  loadStudy();
-
-};
-
-
-/* =========================
+/* =========================================================
    RESULTS
-========================= */
+========================================================= */
 
-document
-  .getElementById("saveResult")
-  .addEventListener(
-    "click",
-    async()=>{
+$("resultForm").addEventListener("submit",async e=>{
 
-      const studentNumber=
-        document
-          .getElementById("resultStudent")
-          .value.trim();
+  e.preventDefault();
 
+  try{
 
-      const title=
-        document
-          .getElementById("resultTitle")
-          .value.trim();
-
-
-      const mark=
-        document
-          .getElementById("resultMark")
-          .value.trim();
-
-
-      const status=
-        document
-          .getElementById("resultStatus")
-          .value;
-
-
-      if(!studentNumber||!title){
-
-        alert(
-          "Student number and title are required."
-        );
-
-        return;
-
+    await addDoc(
+      collection(db,"results"),
+      {
+        studentNumber:$("resultStudent").value,
+        title:$("resultTitle").value.trim(),
+        mark:$("resultMark").value.trim(),
+        status:$("resultStatus").value,
+        createdAt:serverTimestamp()
       }
+    );
 
+    $("resultForm").reset();
 
-      await addDoc(
-        collection(db,"results"),
-        {
-          studentNumber:String(studentNumber),
-          title,
-          mark,
-          status,
-          createdAt:serverTimestamp()
-        }
-      );
+    showMessage("Result saved.");
 
+    await loadResults();
 
-      alert(
-        "Result saved successfully."
-      );
+  }catch(error){
 
+    showMessage(error.message,"error");
 
-      loadResults();
+  }
 
-    }
-  );
+});
 
 
 async function loadResults(){
 
-  const box=
-    document.getElementById(
-      "resultList"
-    );
+  const snap = await getDocs(
+    collection(db,"results")
+  );
 
-
-  const snap=
-    await getDocs(
-      collection(db,"results")
-    );
-
-
-  if(snap.empty){
-
-    box.innerHTML=
-      `<div class="empty">
-        No results.
-      </div>`;
-
-    return;
-
-  }
-
-
-  let html=`
-
-    <table>
-
-      <thead>
-
-        <tr>
-          <th>Student</th>
-          <th>Title</th>
-          <th>Mark</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-
-      </thead>
-
-      <tbody>
-  `;
-
+  $("resultsTable").innerHTML = "";
 
   snap.forEach(item=>{
 
-    const d=item.data();
+    const data = item.data();
 
+    const tr = document.createElement("tr");
 
-    html+=`
+    const published =
+      data.status === "published";
 
-      <tr>
+    tr.innerHTML = `
 
-        <td>
-          ${escapeHtml(d.studentNumber)}
-        </td>
+      <td>
+        <strong>
+          ${escapeHtml(
+            studentNameByNumber(data.studentNumber)
+          )}
+        </strong>
+      </td>
 
-        <td>
-          <b>${escapeHtml(d.title)}</b>
-        </td>
+      <td>${escapeHtml(data.title)}</td>
 
-        <td>
-          ${escapeHtml(d.mark)}
-        </td>
+      <td>${escapeHtml(data.mark)}</td>
 
-        <td>
-          ${statusBadge(d.status)}
-        </td>
+      <td>
+        <span class="badge ${
+          published
+          ? "badge-green"
+          : "badge-yellow"
+        }">
+          ${escapeHtml(data.status)}
+        </span>
+      </td>
 
-        <td>
+      <td>
 
-          <button
-            class="danger-btn"
-            onclick="deleteResult('${item.id}')">
-            Delete
-          </button>
+        <button class="warning toggle-result"
+          data-id="${item.id}"
+          data-status="${published ? "draft" : "published"}">
 
-        </td>
+          ${published ? "Unpublish" : "Publish"}
 
-      </tr>
+        </button>
+
+        <button class="danger delete-result"
+          data-id="${item.id}">
+          Delete
+        </button>
+
+      </td>
 
     `;
+
+    $("resultsTable").appendChild(tr);
 
   });
 
 
-  html+=`
+  document.querySelectorAll(".toggle-result")
+    .forEach(button=>{
 
-      </tbody>
-    </table>
+      button.addEventListener("click",async()=>{
 
-  `;
+        await updateDoc(
+          doc(db,"results",button.dataset.id),
+          {
+            status:button.dataset.status
+          }
+        );
+
+        showMessage("Result status updated.");
+
+        await loadResults();
+
+      });
+
+    });
 
 
-  box.innerHTML=html;
+  document.querySelectorAll(".delete-result")
+    .forEach(button=>{
+
+      button.addEventListener("click",async()=>{
+
+        if(!confirm("Delete this result?")){
+          return;
+        }
+
+        await deleteDoc(
+          doc(db,"results",button.dataset.id)
+        );
+
+        showMessage("Result deleted.");
+
+        await loadResults();
+
+      });
+
+    });
 
 }
 
 
-window.deleteResult=
-async function(id){
-
-  await deleteDoc(
-    doc(db,"results",id)
-  );
-
-  loadResults();
-
-};
-
-
-/* =========================
+/* =========================================================
    NOTICES
-========================= */
+========================================================= */
 
-document
-  .getElementById("saveNotice")
-  .addEventListener(
-    "click",
-    async()=>{
+$("noticeForm").addEventListener("submit",async e=>{
 
-      const title=
-        document
-          .getElementById("noticeTitle")
-          .value.trim();
+  e.preventDefault();
 
+  try{
 
-      const text=
-        document
-          .getElementById("noticeText")
-          .value.trim();
-
-
-      const status=
-        document
-          .getElementById("noticeStatus")
-          .value;
-
-
-      if(!title||!text){
-
-        alert(
-          "Title and notice are required."
-        );
-
-        return;
-
+    await addDoc(
+      collection(db,"notices"),
+      {
+        title:$("noticeTitle").value.trim(),
+        text:$("noticeText").value.trim(),
+        status:$("noticeStatus").value,
+        createdAt:serverTimestamp()
       }
+    );
 
+    $("noticeForm").reset();
 
-      await addDoc(
-        collection(db,"notices"),
-        {
-          title,
-          text,
-          status,
-          createdAt:serverTimestamp()
-        }
-      );
+    showMessage("Notice saved.");
 
+    await loadNotices();
 
-      alert(
-        "Notice saved successfully."
-      );
+  }catch(error){
 
+    showMessage(error.message,"error");
 
-      loadNotices();
+  }
 
-    }
-  );
+});
 
 
 async function loadNotices(){
 
-  const box=
-    document.getElementById(
-      "noticeList"
-    );
+  const snap = await getDocs(
+    collection(db,"notices")
+  );
 
-
-  const snap=
-    await getDocs(
-      collection(db,"notices")
-    );
-
-
-  if(snap.empty){
-
-    box.innerHTML=
-      `<div class="empty">
-        No notices.
-      </div>`;
-
-    return;
-
-  }
-
-
-  box.innerHTML="";
-
+  $("noticesTable").innerHTML = "";
 
   snap.forEach(item=>{
 
-    const d=item.data();
+    const data = item.data();
 
+    const published =
+      data.status === "published";
 
-    box.innerHTML+=`
+    const tr = document.createElement("tr");
 
-      <div class="request-card">
+    tr.innerHTML = `
 
-        <div class="request-head">
+      <td>
+        <strong>${escapeHtml(data.title)}</strong>
+      </td>
 
-          <div class="request-name">
-            ${escapeHtml(d.title)}
-          </div>
+      <td>${escapeHtml(data.text)}</td>
 
-          ${statusBadge(d.status)}
+      <td>
+        <span class="badge ${
+          published
+          ? "badge-green"
+          : "badge-yellow"
+        }">
+          ${escapeHtml(data.status)}
+        </span>
+      </td>
 
-        </div>
+      <td>
 
+        <button class="warning toggle-notice"
+          data-id="${item.id}"
+          data-status="${published ? "draft" : "published"}">
 
-        <div class="message-box">
-
-          ${escapeHtml(d.text)}
-
-        </div>
-
-
-        <button
-          class="danger-btn"
-          onclick="deleteNotice('${item.id}')">
-
-          Delete
+          ${published ? "Unpublish" : "Publish"}
 
         </button>
 
-      </div>
+        <button class="danger delete-notice"
+          data-id="${item.id}">
+          Delete
+        </button>
+
+      </td>
 
     `;
 
+    $("noticesTable").appendChild(tr);
+
   });
+
+
+  document.querySelectorAll(".toggle-notice")
+    .forEach(button=>{
+
+      button.addEventListener("click",async()=>{
+
+        await updateDoc(
+          doc(db,"notices",button.dataset.id),
+          {
+            status:button.dataset.status
+          }
+        );
+
+        showMessage("Notice status updated.");
+
+        await loadNotices();
+
+      });
+
+    });
+
+
+  document.querySelectorAll(".delete-notice")
+    .forEach(button=>{
+
+      button.addEventListener("click",async()=>{
+
+        if(!confirm("Delete this notice?")){
+          return;
+        }
+
+        await deleteDoc(
+          doc(db,"notices",button.dataset.id)
+        );
+
+        showMessage("Notice deleted.");
+
+        await loadNotices();
+
+      });
+
+    });
 
 }
 
 
-window.deleteNotice=
-async function(id){
+/* =========================================================
+   LEAVE REQUESTS
+========================================================= */
+
+async function loadLeaves(){
+
+  const snap = await getDocs(
+    collection(db,"leaveRequests")
+  );
+
+  const rows = [];
+
+  snap.forEach(item=>{
+
+    rows.push({
+      id:item.id,
+      ...item.data()
+    });
+
+  });
+
+
+  rows.sort((a,b)=>{
+
+    const aa =
+      a.createdAt?.seconds || 0;
+
+    const bb =
+      b.createdAt?.seconds || 0;
+
+    return bb-aa;
+
+  });
+
+
+  $("leaveTable").innerHTML = "";
+
+  rows.forEach(data=>{
+
+    const status =
+      data.status || "pending";
+
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+
+      <td>
+        <strong>
+          ${escapeHtml(
+            studentNameByNumber(data.studentNumber)
+          )}
+        </strong>
+        <br>
+        <small>${escapeHtml(data.studentNumber)}</small>
+      </td>
+
+      <td>${escapeHtml(data.parentEmail || "-")}</td>
+
+      <td>${escapeHtml(data.leaveDate || "-")}</td>
+
+      <td>${escapeHtml(data.reason || "-")}</td>
+
+      <td>
+        <span class="badge ${
+          status === "approved"
+          ? "badge-green"
+          : status === "rejected"
+          ? "badge-red"
+          : "badge-yellow"
+        }">
+          ${escapeHtml(status)}
+        </span>
+      </td>
+
+      <td>
+        ${escapeHtml(data.reply || "-")}
+      </td>
+
+      <td>
+
+        <button class="success approve-leave"
+          data-id="${data.id}">
+          Approve
+        </button>
+
+        <button class="warning reject-leave"
+          data-id="${data.id}">
+          Reject
+        </button>
+
+        <button class="primary reply-leave"
+          data-id="${data.id}">
+          Reply
+        </button>
+
+        <button class="danger delete-leave"
+          data-id="${data.id}">
+          Delete
+        </button>
+
+      </td>
+
+    `;
+
+    $("leaveTable").appendChild(tr);
+
+  });
+
+
+  $("leaveCount").textContent = rows.length;
+
+
+  document.querySelectorAll(".approve-leave")
+    .forEach(button=>{
+
+      button.addEventListener("click",async()=>{
+
+        await updateDoc(
+          doc(db,"leaveRequests",button.dataset.id),
+          {
+            status:"approved",
+            repliedAt:serverTimestamp()
+          }
+        );
+
+        showMessage("Leave approved.");
+
+        await loadLeaves();
+
+      });
+
+    });
+
+
+  document.querySelectorAll(".reject-leave")
+    .forEach(button=>{
+
+      button.addEventListener("click",async()=>{
+
+        await updateDoc(
+          doc(db,"leaveRequests",button.dataset.id),
+          {
+            status:"rejected",
+            repliedAt:serverTimestamp()
+          }
+        );
+
+        showMessage("Leave rejected.");
+
+        await loadLeaves();
+
+      });
+
+    });
+
+
+  document.querySelectorAll(".reply-leave")
+    .forEach(button=>{
+
+      button.addEventListener("click",async()=>{
+
+        const reply =
+          prompt("Enter reply to parent:");
+
+        if(reply === null){
+          return;
+        }
+
+        if(!reply.trim()){
+          showMessage("Reply cannot be empty.","error");
+          return;
+        }
+
+        await updateDoc(
+          doc(db,"leaveRequests",button.dataset.id),
+          {
+            reply:reply.trim(),
+            repliedAt:serverTimestamp()
+          }
+        );
+
+        showMessage("Reply sent.");
+
+        await loadLeaves();
+
+      });
+
+    });
+
+
+  document.querySelectorAll(".delete-leave")
+    .forEach(button=>{
+
+      button.addEventListener("click",async()=>{
+
+        if(!confirm("Delete this leave request?")){
+          return;
+        }
+
+        await deleteDoc(
+          doc(db,"leaveRequests",button.dataset.id)
+        );
+
+        showMessage("Leave request deleted.");
+
+        await loadLeaves();
+
+      });
+
+    });
+
+}
+
+
+/* =========================================================
+   PARENT MESSAGES
+========================================================= */
+
+async function loadMessages(){
+
+  const snap = await getDocs(
+    collection(db,"messages")
+  );
+
+  const rows = [];
+
+  snap.forEach(item=>{
+
+    rows.push({
+      id:item.id,
+      ...item.data()
+    });
+
+  });
+
+
+  rows.sort((a,b)=>{
+
+    const aa =
+      a.createdAt?.seconds || 0;
+
+    const bb =
+      b.createdAt?.seconds || 0;
+
+    return bb-aa;
+
+  });
+
+
+  $("messagesTable").innerHTML = "";
+
+  rows.forEach(data=>{
+
+    const status =
+      data.status || "unread";
+
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+
+      <td>
+        <strong>
+          ${escapeHtml(
+            studentNameByNumber(data.studentNumber)
+          )}
+        </strong>
+        <br>
+        <small>${escapeHtml(data.studentNumber)}</small>
+      </td>
+
+      <td>${escapeHtml(data.parentEmail || "-")}</td>
+
+      <td>${escapeHtml(data.text || "-")}</td>
+
+      <td>
+        <span class="badge ${
+          status === "replied"
+          ? "badge-green"
+          : "badge-yellow"
+        }">
+          ${escapeHtml(status)}
+        </span>
+      </td>
+
+      <td>
+        ${escapeHtml(data.reply || "-")}
+      </td>
+
+      <td>
+
+        <button class="primary reply-message"
+          data-id="${data.id}">
+          Reply
+        </button>
+
+        <button class="danger delete-message"
+          data-id="${data.id}">
+          Delete
+        </button>
+
+      </td>
+
+    `;
+
+    $("messagesTable").appendChild(tr);
+
+  });
+
+
+  $("messageCount").textContent = rows.length;
+
+
+  document.querySelectorAll(".reply-message")
+    .forEach(button=>{
+
+      button.addEventListener("click",async()=>{
+
+        const reply =
+          prompt("Enter reply to parent:");
+
+        if(reply === null){
+          return;
+        }
+
+        if(!reply.trim()){
+          showMessage("Reply cannot be empty.","error");
+          return;
+        }
+
+        await updateDoc(
+          doc(db,"messages",button.dataset.id),
+          {
+            reply:reply.trim(),
+            status:"replied",
+            repliedAt:serverTimestamp()
+          }
+        );
+
+        showMessage("Parent reply sent.");
+
+        await loadMessages();
+
+      });
+
+    });
+
+
+  document.querySelectorAll(".delete-message")
+    .forEach(button=>{
+
+      button.addEventListener("click",async()=>{
+
+        if(!confirm("Delete this message?")){
+          return;
+        }
+
+        await deleteDoc(
+          doc(db,"messages",button.dataset.id)
+        );
+
+        showMessage("Message deleted.");
+
+        await loadMessages();
+
+      });
+
+    });
+
+}
+
+
+/* =========================================================
+   INITIAL DATE
+========================================================= */
+
+const today =
+  new Date().toISOString().split("T")[0];
+
+$("attendanceDate").value = today;
+$("studyDate").value = today;
+
+</script>
+
+</body>
+</html>
