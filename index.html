@@ -94,29 +94,38 @@
       type="email"
       id="email"
       placeholder="Email"
+      autocomplete="email"
     >
 
     <input
       type="password"
       id="password"
       placeholder="Password"
+      autocomplete="current-password"
     >
 
-    <button onclick="login()">Login</button>
+    <button id="loginButton" onclick="login()">Login</button>
 
     <div id="message"></div>
   </div>
 
   <script type="module">
 
-    import { initializeApp } 
-      from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+    import {
+      initializeApp
+    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-    import { getAuth, signInWithEmailAndPassword } 
-      from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      setPersistence,
+      browserLocalPersistence
+    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
+
+    // Firebase Configuration
     const firebaseConfig = {
-      apiKey: "AIzaSyCR-A17PO3zeiY2a1eH9cvxSmv4Upxqe-4",
+      apiKey: "AIzaSyCR-A17PO3zeiY2a1eH9cvxSmv4Upxqe4",
       authDomain: "safa-hifz-class-7e84b.firebaseapp.com",
       projectId: "safa-hifz-class-7e84b",
       storageBucket: "safa-hifz-class-7e84b.firebasestorage.app",
@@ -125,43 +134,100 @@
       measurementId: "G-MR45L2B8PL"
     };
 
+
+    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
+
+    // Login Function
     window.login = async function () {
 
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const message = document.getElementById("message");
+      const email =
+        document.getElementById("email").value.trim();
 
+      const password =
+        document.getElementById("password").value;
+
+      const message =
+        document.getElementById("message");
+
+      const loginButton =
+        document.getElementById("loginButton");
+
+
+      // Check empty fields
       if (!email || !password) {
-        message.textContent = "Email and password നൽകുക.";
+        message.style.color = "red";
+        message.textContent =
+          "Email and password നൽകുക.";
         return;
       }
 
+
+      // Disable button
+      loginButton.disabled = true;
+      loginButton.textContent = "Logging in...";
+
+
       try {
 
+        // IMPORTANT:
+        // Keep login session in browser
+        await setPersistence(
+          auth,
+          browserLocalPersistence
+        );
+
+
+        // Sign in
         await signInWithEmailAndPassword(
           auth,
           email,
           password
         );
 
-        message.style.color = "green";
-        message.textContent = "Login successful!";
 
+        message.style.color = "green";
+        message.textContent =
+          "Login successful!";
+
+
+        // Go to dashboard
         setTimeout(() => {
           window.location.href = "dashboard.html";
-        }, 1000);
+        }, 500);
+
 
       } catch (error) {
 
+        console.log("Firebase Login Error:", error);
+
         message.style.color = "red";
-        message.textContent = "Login failed. Email അല്ലെങ്കിൽ password പരിശോധിക്കുക.";
 
-        console.log(error);
+        if (error.code === "auth/invalid-credential") {
+          message.textContent =
+            "Email അല്ലെങ്കിൽ password തെറ്റാണ്.";
+        }
+        else if (error.code === "auth/invalid-email") {
+          message.textContent =
+            "ശരിയായ email നൽകുക.";
+        }
+        else if (error.code === "auth/too-many-requests") {
+          message.textContent =
+            "കൂടുതൽ login ശ്രമങ്ങൾ ഉണ്ടായിട്ടുണ്ട്. കുറച്ച് സമയം കഴിഞ്ഞ് വീണ്ടും ശ്രമിക്കുക.";
+        }
+        else {
+          message.textContent =
+            "Login failed. വീണ്ടും ശ്രമിക്കുക.";
+        }
 
+
+        // Enable button
+        loginButton.disabled = false;
+        loginButton.textContent = "Login";
       }
+
     };
 
   </script>
