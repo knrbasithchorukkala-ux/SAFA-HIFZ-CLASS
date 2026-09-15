@@ -1,223 +1,1451 @@
-async function loadMessages(){
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAFA HIFZ CLASS - Admin</title>
 
-  const list =
-  document.getElementById(
-    "messageList"
-  );
+<style>
+*{
+  box-sizing:border-box;
+}
 
-  list.innerHTML =
-  "Loading...";
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#222;
+}
+
+header{
+  background:#075e54;
+  color:white;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+header h2{
+  margin:0;
+  font-size:20px;
+}
+
+button{
+  border:0;
+  border-radius:8px;
+  padding:10px 14px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.logout{
+  background:#d32f2f;
+  color:white;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:15px;
+}
+
+.notification{
+  background:#fff3cd;
+  border:1px solid #ffe69c;
+  border-radius:10px;
+  padding:12px;
+  margin-bottom:15px;
+}
+
+.notification button{
+  background:#075e54;
+  color:white;
+  margin:4px;
+}
+
+.menu{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.menu button{
+  background:white;
+  border:1px solid #ddd;
+  color:#075e54;
+  font-weight:bold;
+}
+
+.menu button:hover{
+  background:#e8f5f2;
+}
+
+.section{
+  display:none;
+  background:white;
+  padding:18px;
+  border-radius:12px;
+  margin-bottom:20px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.section.active{
+  display:block;
+}
+
+h3{
+  margin-top:0;
+  color:#075e54;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:10px;
+  margin:6px 0 12px;
+  border:1px solid #ccc;
+  border-radius:7px;
+  font-size:14px;
+}
+
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.save{
+  background:#075e54;
+  color:white;
+}
+
+.delete{
+  background:#d32f2f;
+  color:white;
+}
+
+.reply{
+  background:#1565c0;
+  color:white;
+}
+
+.card{
+  border:1px solid #ddd;
+  border-radius:10px;
+  padding:14px;
+  margin:10px 0;
+  background:#fafafa;
+}
+
+.card p{
+  margin:7px 0;
+}
+
+.small{
+  color:#666;
+  font-size:13px;
+}
+
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:15px;
+  background:#e0f2f1;
+  color:#075e54;
+  font-size:12px;
+}
+
+.danger-badge{
+  background:#ffebee;
+  color:#c62828;
+}
+
+.success-badge{
+  background:#e8f5e9;
+  color:#2e7d32;
+}
+
+.warning-badge{
+  background:#fff8e1;
+  color:#ef6c00;
+}
+
+hr{
+  border:0;
+  border-top:1px solid #ddd;
+  margin:15px 0;
+}
+
+.empty{
+  color:#777;
+  padding:10px 0;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>SAFA HIFZ CLASS - Usthad</h2>
+  <button class="logout" onclick="logout()">Logout</button>
+</header>
+
+<div class="container">
+
+  <div id="notificationArea" class="notification">
+    Loading notifications...
+  </div>
+
+  <div class="menu">
+    <button onclick="showSection('home')">🏠 Home</button>
+    <button onclick="showSection('students')">👨‍🎓 Students</button>
+    <button onclick="showSection('attendance')">📅 Attendance</button>
+    <button onclick="showSection('study')">📖 Study</button>
+    <button onclick="showSection('results')">🏆 Results</button>
+    <button onclick="showSection('notices')">📢 Notices</button>
+    <button onclick="showSection('leaves')">📝 Leave</button>
+    <button onclick="showSection('messages')">💬 Messages</button>
+  </div>
+
+  <!-- HOME -->
+  <div id="home" class="section active">
+    <h3>Admin Dashboard</h3>
+    <p>Welcome Usthad.</p>
+    <p class="small">
+      ഇവിടെ നിന്ന് students, attendance, study progress, results,
+      notices, leave requests, messages എന്നിവ manage ചെയ്യാം.
+    </p>
+  </div>
+
+  <!-- STUDENTS -->
+  <div id="students" class="section">
+    <h3>Students</h3>
+
+    <input id="studentNumber" placeholder="Student Number">
+    <input id="studentName" placeholder="Student Name">
+    <input id="className" placeholder="Class Name">
+    <input id="parentEmail" placeholder="Parent Email">
+
+    <button class="save" onclick="saveStudent()">Save Student</button>
+
+    <hr>
+
+    <div id="studentsList">Loading...</div>
+  </div>
+
+  <!-- ATTENDANCE -->
+  <div id="attendance" class="section">
+    <h3>Attendance</h3>
+
+    <input id="attendanceStudentNumber" placeholder="Student Number">
+    <input id="attendanceDate" type="date">
+
+    <select id="attendanceStatus">
+      <option value="Present">Present</option>
+      <option value="Absent">Absent</option>
+      <option value="Leave">Leave</option>
+    </select>
+
+    <button class="save" onclick="saveAttendance()">Save Attendance</button>
+
+    <hr>
+
+    <div id="attendanceList">Loading...</div>
+  </div>
+
+  <!-- STUDY -->
+  <div id="study" class="section">
+    <h3>Study Progress</h3>
+
+    <input id="studyStudentNumber" placeholder="Student Number">
+    <input id="studyDate" type="date">
+    <input id="studySurah" placeholder="Surah">
+
+    <input id="studyNewLesson" placeholder="New Lesson">
+    <input id="studyRevision" placeholder="Revision">
+    <input id="studyPerformance" placeholder="Performance">
+
+    <textarea id="studyNote" placeholder="Note"></textarea>
+
+    <button class="save" onclick="saveStudy()">Save Study Progress</button>
+
+    <hr>
+
+    <div id="studyList">Loading...</div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results" class="section">
+    <h3>Results</h3>
+
+    <input id="resultStudentNumber" placeholder="Student Number">
+    <input id="resultTitle" placeholder="Result Title">
+    <input id="resultMark" placeholder="Mark">
+
+    <select id="resultStatus">
+      <option value="published">Published</option>
+      <option value="draft">Draft</option>
+    </select>
+
+    <button class="save" onclick="saveResult()">Save Result</button>
+
+    <hr>
+
+    <div id="resultsList">Loading...</div>
+  </div>
+
+  <!-- NOTICES -->
+  <div id="notices" class="section">
+    <h3>Notices</h3>
+
+    <input id="noticeTitle" placeholder="Notice Title">
+
+    <textarea id="noticeText" placeholder="Notice"></textarea>
+
+    <select id="noticeStatus">
+      <option value="published">Published</option>
+      <option value="draft">Draft</option>
+    </select>
+
+    <button class="save" onclick="saveNotice()">Save Notice</button>
+
+    <hr>
+
+    <div id="noticesList">Loading...</div>
+  </div>
+
+  <!-- LEAVES -->
+  <div id="leaves" class="section">
+    <h3>Leave Requests</h3>
+
+    <div id="leaveList">Loading...</div>
+  </div>
+
+  <!-- MESSAGES -->
+  <div id="messages" class="section">
+    <h3>Parent Messages</h3>
+
+    <div id="messagesList">Loading...</div>
+  </div>
+
+</div>
+
+<script type="module">
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  query,
+  where,
+  orderBy,
+  serverTimestamp,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPV0",
+  authDomain: "safa-hifz-class-7e84b.firebaseapp.com",
+  projectId: "safa-hifz-class-7e84b",
+  storageBucket: "safa-hifz-class-7e84b.firebasestorage.app",
+  messagingSenderId: "476801753196",
+  appId: "1:476801753196:web:d4c8a8b0c1a4203606f849",
+  measurementId: "G-ZTBTJCB5SR"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let currentUser = null;
+
+
+/* AUTH */
+
+auth.authStateReady().then(async () => {
+
+  currentUser = auth.currentUser;
+
+  if(!currentUser){
+    window.location.href = "index.html";
+    return;
+  }
 
   try{
 
-    const snapshot =
-    await getDocs(
-      collection(db,"messages")
-    );
+    const userRef = doc(db,"users",currentUser.uid);
+    const userSnap = await getDoc(userRef);
 
-    list.innerHTML = "";
-
-    if(snapshot.empty){
-
-      list.innerHTML =
-      "<p class='empty'>No parent messages yet.</p>";
-
-      updateNotificationArea();
-
+    if(!userSnap.exists()){
+      alert("User profile not found.");
+      await signOut(auth);
+      window.location.href = "index.html";
       return;
     }
 
-    snapshot.forEach(item => {
+    const userData = userSnap.data();
 
-      const m =
-      item.data();
+    if(userData.role !== "admin"){
+      alert("Admin access only.");
+      await signOut(auth);
+      window.location.href = "index.html";
+      return;
+    }
 
-      const div =
-      document.createElement("div");
+    startNotificationListeners();
 
-      div.className =
-      "record";
-
-      let sentTime = "";
-
-      if(m.createdAt){
-
-        try{
-
-          sentTime =
-          m.createdAt
-          .toDate()
-          .toLocaleString();
-
-        }catch(error){
-
-          sentTime = "";
-
-        }
-
-      }
-
-      let repliedTime = "";
-
-      if(m.repliedAt){
-
-        try{
-
-          repliedTime =
-          m.repliedAt
-          .toDate()
-          .toLocaleString();
-
-        }catch(error){
-
-          repliedTime = "";
-
-        }
-
-      }
-
-      div.innerHTML = `
-
-        <strong>
-          💬 Student:
-          ${m.studentNumber || "-"}
-        </strong>
-
-        <br>
-
-        Parent:
-        ${m.parentEmail || "-"}
-
-        <br><br>
-
-        <strong>
-          Parent Message:
-        </strong>
-
-        <br>
-
-        ${m.text || "-"}
-
-        ${
-          sentTime
-          ? `
-            <br>
-
-            🕐 Sent:
-            ${sentTime}
-          `
-          : ""
-        }
-
-        <br><br>
-
-        Status:
-        <strong>
-          ${m.status || "unread"}
-        </strong>
-
-        <div class="replyBox">
-
-          <strong>
-            👨‍🏫 Usthad Reply:
-          </strong>
-
-          <br>
-
-          <textarea
-            id="messageReply-${item.id}"
-            rows="3"
-            placeholder="Write reply..."
-          >${m.reply || ""}</textarea>
-
-          ${
-            repliedTime
-            ? `
-              <br>
-
-              🕐 Replied:
-              ${repliedTime}
-            `
-            : ""
-          }
-
-          <br>
-
-          <button
-            onclick="replyMessage('${item.id}')"
-          >
-            💬 Send Reply
-          </button>
-
-          <button
-            class="deleteBtn"
-            onclick="deleteMessage('${item.id}')"
-          >
-            🗑️ Delete Message
-          </button>
-
-        </div>
-
-      `;
-
-      list.appendChild(div);
-
-    });
-
-    updateNotificationArea();
+    loadStudents();
+    loadAttendance();
+    loadStudy();
+    loadResults();
+    loadNotices();
+    loadLeaves();
+    loadMessages();
 
   }catch(error){
 
-    list.innerHTML =
-    "<p>" +
-    error.message +
-    "</p>";
+    console.error(error);
+    alert("Dashboard loading error: " + error.message);
+
+    await signOut(auth);
+    window.location.href = "index.html";
+  }
+
+});
+
+
+/* NAVIGATION */
+
+window.showSection = function(id){
+
+  document.querySelectorAll(".section").forEach(section=>{
+    section.classList.remove("active");
+  });
+
+  const section = document.getElementById(id);
+
+  if(section){
+    section.classList.add("active");
+  }
+
+  if(id === "students") loadStudents();
+  if(id === "attendance") loadAttendance();
+  if(id === "study") loadStudy();
+  if(id === "results") loadResults();
+  if(id === "notices") loadNotices();
+  if(id === "leaves") loadLeaves();
+  if(id === "messages") loadMessages();
+};
+
+
+/* LOGOUT */
+
+window.logout = async function(){
+
+  try{
+    await signOut(auth);
+    window.location.href = "index.html";
+  }catch(error){
+    alert(error.message);
+  }
+
+};
+
+
+/* STUDENTS */
+
+window.saveStudent = async function(){
+
+  const studentNumber =
+    document.getElementById("studentNumber").value.trim();
+
+  const studentName =
+    document.getElementById("studentName").value.trim();
+
+  const className =
+    document.getElementById("className").value.trim();
+
+  const parentEmail =
+    document.getElementById("parentEmail").value.trim();
+
+  if(!studentNumber || !studentName){
+    alert("Student Number and Student Name are required.");
+    return;
+  }
+
+  try{
+
+    await addDoc(collection(db,"students"),{
+      studentNumber,
+      name:studentName,
+      className,
+      parentEmail,
+      createdAt:serverTimestamp()
+    });
+
+    alert("Student saved successfully.");
+
+    document.getElementById("studentNumber").value="";
+    document.getElementById("studentName").value="";
+    document.getElementById("className").value="";
+    document.getElementById("parentEmail").value="";
+
+    loadStudents();
+
+  }catch(error){
+
+    console.error(error);
+    alert("Student save failed: " + error.message);
+
+  }
+
+};
+
+
+async function loadStudents(){
+
+  const box = document.getElementById("studentsList");
+
+  try{
+
+    const snap = await getDocs(collection(db,"students"));
+
+    if(snap.empty){
+      box.innerHTML="<div class='empty'>No students found.</div>";
+      return;
+    }
+
+    box.innerHTML="";
+
+    snap.forEach(item=>{
+
+      const data=item.data();
+
+      box.innerHTML += `
+        <div class="card">
+          <p><b>Student Number:</b> ${escapeHtml(data.studentNumber || "")}</p>
+          <p><b>Name:</b> ${escapeHtml(data.name || "")}</p>
+          <p><b>Class:</b> ${escapeHtml(data.className || "")}</p>
+          <p><b>Parent:</b> ${escapeHtml(data.parentEmail || "")}</p>
+
+          <button class="delete"
+            onclick="deleteStudent('${item.id}')">
+            Delete
+          </button>
+        </div>
+      `;
+
+    });
+
+  }catch(error){
+
+    console.error(error);
+    box.innerHTML="Unable to load students.";
 
   }
 
 }
-/* =========================
-   DELETE MESSAGE
-========================= */
 
-window.deleteMessage =
-async function(id){
 
-  const confirmed =
-  confirm(
-    "ഈ message പൂർണ്ണമായി delete ചെയ്യണോ?\n\nDelete ചെയ്താൽ messageയും replyയും തിരിച്ചെടുക്കാൻ കഴിയില്ല."
-  );
+window.deleteStudent = async function(id){
 
-  if(!confirmed)
+  if(!confirm("Delete this student?")){
     return;
+  }
 
   try{
 
-    await deleteDoc(
-      doc(
-        db,
-        "messages",
-        id
+    await deleteDoc(doc(db,"students",id));
+
+    alert("Student deleted.");
+
+    loadStudents();
+
+  }catch(error){
+
+    alert("Delete failed: " + error.message);
+
+  }
+
+};
+
+
+/* ATTENDANCE */
+
+window.saveAttendance = async function(){
+
+  const studentNumber =
+    document.getElementById("attendanceStudentNumber").value.trim();
+
+  const date =
+    document.getElementById("attendanceDate").value;
+
+  const status =
+    document.getElementById("attendanceStatus").value;
+
+  if(!studentNumber || !date){
+    alert("Student Number and Date are required.");
+    return;
+  }
+
+  try{
+
+    await addDoc(collection(db,"attendance"),{
+      studentNumber,
+      date,
+      status,
+      createdAt:serverTimestamp()
+    });
+
+    alert("Attendance saved.");
+
+    loadAttendance();
+
+  }catch(error){
+
+    alert("Attendance save failed: " + error.message);
+
+  }
+
+};
+
+
+async function loadAttendance(){
+
+  const box=document.getElementById("attendanceList");
+
+  try{
+
+    const snap=await getDocs(
+      query(
+        collection(db,"attendance"),
+        orderBy("createdAt","desc")
       )
     );
 
-    alert(
-      "Message deleted successfully 🗑️"
+    box.innerHTML="";
+
+    if(snap.empty){
+      box.innerHTML="<div class='empty'>No attendance records.</div>";
+      return;
+    }
+
+    snap.forEach(item=>{
+
+      const d=item.data();
+
+      box.innerHTML+=`
+        <div class="card">
+          <p><b>Student:</b> ${escapeHtml(d.studentNumber || "")}</p>
+          <p><b>Date:</b> ${escapeHtml(d.date || "")}</p>
+          <p><b>Status:</b> ${escapeHtml(d.status || "")}</p>
+
+          <button class="delete"
+            onclick="deleteAttendance('${item.id}')">
+            Delete
+          </button>
+        </div>
+      `;
+
+    });
+
+  }catch(error){
+
+    console.error(error);
+    box.innerHTML="Unable to load attendance.";
+
+  }
+
+}
+
+
+window.deleteAttendance=async function(id){
+
+  if(!confirm("Delete this attendance record?")) return;
+
+  try{
+
+    await deleteDoc(doc(db,"attendance",id));
+
+    loadAttendance();
+
+  }catch(error){
+
+    alert(error.message);
+
+  }
+
+};
+
+
+/* STUDY */
+
+window.saveStudy=async function(){
+
+  const studentNumber =
+    document.getElementById("studyStudentNumber").value.trim();
+
+  const date =
+    document.getElementById("studyDate").value;
+
+  const surah =
+    document.getElementById("studySurah").value.trim();
+
+  const newLesson =
+    document.getElementById("studyNewLesson").value.trim();
+
+  const revision =
+    document.getElementById("studyRevision").value.trim();
+
+  const performance =
+    document.getElementById("studyPerformance").value.trim();
+
+  const note =
+    document.getElementById("studyNote").value.trim();
+
+  if(!studentNumber || !date){
+    alert("Student Number and Date are required.");
+    return;
+  }
+
+  try{
+
+    await addDoc(collection(db,"studyProgress"),{
+      studentNumber,
+      date,
+      surah,
+      newLesson,
+      revision,
+      performance,
+      note,
+      createdAt:serverTimestamp()
+    });
+
+    alert("Study progress saved.");
+
+    loadStudy();
+
+  }catch(error){
+
+    alert("Study save failed: " + error.message);
+
+  }
+
+};
+
+
+async function loadStudy(){
+
+  const box=document.getElementById("studyList");
+
+  try{
+
+    const snap=await getDocs(
+      query(
+        collection(db,"studyProgress"),
+        orderBy("createdAt","desc")
+      )
     );
 
-    await loadMessages();
+    box.innerHTML="";
 
+    if(snap.empty){
+      box.innerHTML="<div class='empty'>No study records.</div>";
+      return;
+    }
+
+    snap.forEach(item=>{
+
+      const d=item.data();
+
+      box.innerHTML+=`
+        <div class="card">
+          <p><b>Student:</b> ${escapeHtml(d.studentNumber || "")}</p>
+          <p><b>Date:</b> ${escapeHtml(d.date || "")}</p>
+          <p><b>Surah:</b> ${escapeHtml(d.surah || "")}</p>
+          <p><b>New Lesson:</b> ${escapeHtml(d.newLesson || "")}</p>
+          <p><b>Revision:</b> ${escapeHtml(d.revision || "")}</p>
+          <p><b>Performance:</b> ${escapeHtml(d.performance || "")}</p>
+          <p><b>Note:</b> ${escapeHtml(d.note || "")}</p>
+
+          <button class="delete"
+            onclick="deleteStudy('${item.id}')">
+            Delete
+          </button>
+        </div>
+      `;
+
+    });
+
+  }catch(error){
+
+    console.error(error);
+    box.innerHTML="Unable to load study progress.";
+
+  }
+
+}
+
+
+window.deleteStudy=async function(id){
+
+  if(!confirm("Delete this study record?")) return;
+
+  try{
+
+    await deleteDoc(doc(db,"studyProgress",id));
+
+    loadStudy();
+
+  }catch(error){
+
+    alert(error.message);
+
+  }
+
+};
+
+
+/* RESULTS */
+
+window.saveResult=async function(){
+
+  const studentNumber =
+    document.getElementById("resultStudentNumber").value.trim();
+
+  const title =
+    document.getElementById("resultTitle").value.trim();
+
+  const mark =
+    document.getElementById("resultMark").value.trim();
+
+  const status =
+    document.getElementById("resultStatus").value;
+
+  if(!studentNumber || !title){
+    alert("Student Number and Result Title are required.");
+    return;
+  }
+
+  try{
+
+    await addDoc(collection(db,"results"),{
+      studentNumber,
+      title,
+      mark,
+      status,
+      createdAt:serverTimestamp()
+    });
+
+    alert("Result saved.");
+
+    loadResults();
+
+  }catch(error){
+
+    alert("Result save failed: " + error.message);
+
+  }
+
+};
+
+
+async function loadResults(){
+
+  const box=document.getElementById("resultsList");
+
+  try{
+
+    const snap=await getDocs(
+      query(
+        collection(db,"results"),
+        orderBy("createdAt","desc")
+      )
+    );
+
+    box.innerHTML="";
+
+    if(snap.empty){
+      box.innerHTML="<div class='empty'>No results.</div>";
+      return;
+    }
+
+    snap.forEach(item=>{
+
+      const d=item.data();
+
+      box.innerHTML+=`
+        <div class="card">
+          <p><b>Student:</b> ${escapeHtml(d.studentNumber || "")}</p>
+          <p><b>Title:</b> ${escapeHtml(d.title || "")}</p>
+          <p><b>Mark:</b> ${escapeHtml(d.mark || "")}</p>
+          <p><b>Status:</b> ${escapeHtml(d.status || "")}</p>
+
+          <button class="delete"
+            onclick="deleteResult('${item.id}')">
+            Delete
+          </button>
+        </div>
+      `;
+
+    });
+
+  }catch(error){
+
+    console.error(error);
+    box.innerHTML="Unable to load results.";
+
+  }
+
+}
+
+
+window.deleteResult=async function(id){
+
+  if(!confirm("Delete this result?")) return;
+
+  try{
+
+    await deleteDoc(doc(db,"results",id));
+
+    loadResults();
+
+  }catch(error){
+
+    alert(error.message);
+
+  }
+
+};
+
+
+/* NOTICES */
+
+window.saveNotice=async function(){
+
+  const title =
+    document.getElementById("noticeTitle").value.trim();
+
+  const text =
+    document.getElementById("noticeText").value.trim();
+
+  const status =
+    document.getElementById("noticeStatus").value;
+
+  if(!title || !text){
+    alert("Title and Notice are required.");
+    return;
+  }
+
+  try{
+
+    await addDoc(collection(db,"notices"),{
+      title,
+      text,
+      status,
+      createdAt:serverTimestamp()
+    });
+
+    alert("Notice saved.");
+
+    loadNotices();
+
+  }catch(error){
+
+    alert("Notice save failed: " + error.message);
+
+  }
+
+};
+
+
+async function loadNotices(){
+
+  const box=document.getElementById("noticesList");
+
+  try{
+
+    const snap=await getDocs(
+      query(
+        collection(db,"notices"),
+        orderBy("createdAt","desc")
+      )
+    );
+
+    box.innerHTML="";
+
+    if(snap.empty){
+      box.innerHTML="<div class='empty'>No notices.</div>";
+      return;
+    }
+
+    snap.forEach(item=>{
+
+      const d=item.data();
+
+      box.innerHTML+=`
+        <div class="card">
+          <p><b>Title:</b> ${escapeHtml(d.title || "")}</p>
+          <p>${escapeHtml(d.text || "")}</p>
+          <p><b>Status:</b> ${escapeHtml(d.status || "")}</p>
+
+          <button class="delete"
+            onclick="deleteNotice('${item.id}')">
+            Delete
+          </button>
+        </div>
+      `;
+
+    });
+
+  }catch(error){
+
+    console.error(error);
+    box.innerHTML="Unable to load notices.";
+
+  }
+
+}
+
+
+window.deleteNotice=async function(id){
+
+  if(!confirm("Delete this notice?")) return;
+
+  try{
+
+    await deleteDoc(doc(db,"notices",id));
+
+    loadNotices();
+
+  }catch(error){
+
+    alert(error.message);
+
+  }
+
+};
+
+
+/* LEAVES */
+
+async function loadLeaves(){
+
+  const box=document.getElementById("leaveList");
+
+  try{
+
+    const snap=await getDocs(
+      query(
+        collection(db,"leaveRequests"),
+        orderBy("createdAt","desc")
+      )
+    );
+
+    box.innerHTML="";
+
+    if(snap.empty){
+      box.innerHTML="<div class='empty'>No leave requests.</div>";
+      return;
+    }
+
+    snap.forEach(item=>{
+
+      const d=item.data();
+
+      const created =
+        d.createdAt?.toDate ?
+        d.createdAt.toDate().toLocaleString() : "";
+
+      const status=d.status || "pending";
+
+      box.innerHTML+=`
+        <div class="card">
+
+          <p><b>Student:</b> ${escapeHtml(d.studentNumber || "")}</p>
+
+          <p><b>Parent:</b> ${escapeHtml(d.parentEmail || "")}</p>
+
+          <p><b>Leave:</b> ${escapeHtml(d.leaveDate || "")}</p>
+
+          <p><b>Reason:</b> ${escapeHtml(d.reason || "")}</p>
+
+          <p><b>Sent:</b> ${escapeHtml(created)}</p>
+
+          <p>
+            <b>Status:</b>
+            <span class="badge">${escapeHtml(status)}</span>
+          </p>
+
+          <textarea
+            id="leaveReply_${item.id}"
+            placeholder="Reply to parent">${escapeHtml(d.reply || "")}</textarea>
+
+          <button class="reply"
+            onclick="replyLeave('${item.id}','approved')">
+            Approve
+          </button>
+
+          <button class="delete"
+            onclick="replyLeave('${item.id}','rejected')">
+            Reject
+          </button>
+
+          <button class="delete"
+            onclick="deleteLeave('${item.id}')">
+            Delete
+          </button>
+
+          ${
+            d.repliedAt
+            ?
+            `<p class="small">
+              Replied:
+              ${escapeHtml(d.repliedAt.toDate().toLocaleString())}
+            </p>`
+            :
+            ""
+          }
+
+        </div>
+      `;
+
+    });
+
+  }catch(error){
+
+    console.error(error);
+    box.innerHTML="Unable to load leave requests.";
+
+  }
+
+}
+
+
+window.replyLeave=async function(id,status){
+
+  const reply =
+    document.getElementById("leaveReply_"+id).value.trim();
+
+  try{
+
+    await updateDoc(
+      doc(db,"leaveRequests",id),
+      {
+        status,
+        reply,
+        repliedAt:serverTimestamp()
+      }
+    );
+
+    alert("Leave response saved.");
+
+    loadLeaves();
+    updateNotificationArea();
+
+  }catch(error){
+
+    alert("Reply failed: " + error.message);
+
+  }
+
+};
+
+
+window.deleteLeave=async function(id){
+
+  if(!confirm("Delete this leave request completely?")) return;
+
+  try{
+
+    await deleteDoc(doc(db,"leaveRequests",id));
+
+    loadLeaves();
+    updateNotificationArea();
+
+  }catch(error){
+
+    alert(error.message);
+
+  }
+
+};
+
+
+/* MESSAGES */
+
+async function loadMessages(){
+
+  const box=document.getElementById("messagesList");
+
+  try{
+
+    const snap=await getDocs(
+      query(
+        collection(db,"messages"),
+        orderBy("createdAt","desc")
+      )
+    );
+
+    box.innerHTML="";
+
+    if(snap.empty){
+      box.innerHTML="<div class='empty'>No messages.</div>";
+      return;
+    }
+
+    snap.forEach(item=>{
+
+      const d=item.data();
+
+      const sentTime =
+        d.createdAt?.toDate
+        ? d.createdAt.toDate().toLocaleString()
+        : "Time unavailable";
+
+      const replyTime =
+        d.repliedAt?.toDate
+        ? d.repliedAt.toDate().toLocaleString()
+        : "";
+
+      box.innerHTML+=`
+        <div class="card">
+
+          <p>
+            <b>Student:</b>
+            ${escapeHtml(d.studentNumber || "")}
+          </p>
+
+          <p>
+            <b>Parent:</b>
+            ${escapeHtml(d.parentEmail || "")}
+          </p>
+
+          <p>
+            <b>💬 Parent Message:</b><br>
+            ${escapeHtml(d.text || "")}
+          </p>
+
+          <p class="small">
+            🕐 Sent: ${escapeHtml(sentTime)}
+          </p>
+
+          <hr>
+
+          <textarea
+            id="messageReply_${item.id}"
+            placeholder="Write Usthad reply">${escapeHtml(d.reply || "")}</textarea>
+
+          <p>
+            <b>Status:</b>
+            <span class="badge">
+              ${escapeHtml(d.status || "unread")}
+            </span>
+          </p>
+
+          ${
+            replyTime
+            ?
+            `<p class="small">
+              🕐 Replied: ${escapeHtml(replyTime)}
+            </p>`
+            :
+            ""
+          }
+
+          <button class="reply"
+            onclick="replyMessage('${item.id}')">
+            Send Reply
+          </button>
+
+          <button class="delete"
+            onclick="deleteMessage('${item.id}')">
+            🗑️ Delete Message
+          </button>
+
+        </div>
+      `;
+
+    });
+
+  }catch(error){
+
+    console.error(error);
+    box.innerHTML="Unable to load messages.";
+
+  }
+
+}
+
+
+window.replyMessage=async function(id){
+
+  const reply =
+    document.getElementById("messageReply_"+id).value.trim();
+
+  if(!reply){
+    alert("Please write a reply.");
+    return;
+  }
+
+  try{
+
+    await updateDoc(
+      doc(db,"messages",id),
+      {
+        reply,
+        status:"replied",
+        repliedAt:serverTimestamp()
+      }
+    );
+
+    alert("Reply sent successfully.");
+
+    loadMessages();
+    updateNotificationArea();
+
+  }catch(error){
+
+    alert("Reply failed: " + error.message);
+
+  }
+
+};
+
+
+window.deleteMessage=async function(id){
+
+  const confirmed=confirm(
+    "ഈ message പൂർണ്ണമായി delete ചെയ്യണോ?\n\n" +
+    "Delete ചെയ്താൽ messageയും replyയും തിരിച്ചെടുക്കാൻ കഴിയില്ല."
+  );
+
+  if(!confirmed) return;
+
+  try{
+
+    await deleteDoc(doc(db,"messages",id));
+
+    alert("Message deleted successfully.");
+
+    loadMessages();
     updateNotificationArea();
 
   }catch(error){
 
     console.error(error);
-
-    alert(
-      "Message delete ചെയ്യാൻ കഴിഞ്ഞില്ല: " +
-      error.message
-    );
+    alert("Message delete ചെയ്യാൻ കഴിഞ്ഞില്ല: " + error.message);
 
   }
 
 };
+
+
+/* NOTIFICATIONS */
+
+let leaveCount=0;
+let messageCount=0;
+
+function startNotificationListeners(){
+
+  onSnapshot(
+    query(
+      collection(db,"leaveRequests"),
+      where("status","==","pending")
+    ),
+    snap=>{
+      leaveCount=snap.size;
+      updateNotificationArea();
+    },
+    error=>console.error(error)
+  );
+
+
+  onSnapshot(
+    query(
+      collection(db,"messages"),
+      where("status","==","unread")
+    ),
+    snap=>{
+      messageCount=snap.size;
+      updateNotificationArea();
+    },
+    error=>console.error(error)
+  );
+
+}
+
+
+window.updateNotificationArea=function(){
+
+  const box=document.getElementById("notificationArea");
+
+  if(leaveCount===0 && messageCount===0){
+
+    box.innerHTML=
+      "🔔 No new notifications.";
+
+    return;
+  }
+
+  box.innerHTML=`
+    <b>🔔 New Notifications</b><br><br>
+
+    ${
+      leaveCount>0
+      ?
+      `<button onclick="showSection('leaves')">
+        📝 ${leaveCount} Pending Leave Request(s)
+      </button>`
+      :
+      ""
+    }
+
+    ${
+      messageCount>0
+      ?
+      `<button onclick="showSection('messages')">
+        💬 ${messageCount} New Message(s)
+      </button>`
+      :
+      ""
+    }
+  `;
+
+};
+
+
+/* HTML SAFETY */
+
+function escapeHtml(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+</script>
+
+</body>
+</html>
