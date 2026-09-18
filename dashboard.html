@@ -55,10 +55,6 @@ button:disabled{
   cursor:not-allowed;
 }
 
-/* =========================
-   LOADING
-========================= */
-
 #loading{
   position:fixed;
   inset:0;
@@ -70,10 +66,6 @@ button:disabled{
   font-weight:700;
   color:var(--primary);
 }
-
-/* =========================
-   MESSAGE
-========================= */
 
 #message{
   position:fixed;
@@ -98,18 +90,10 @@ button:disabled{
   background:var(--red);
 }
 
-/* =========================
-   APP
-========================= */
-
 .app{
   min-height:100vh;
   display:flex;
 }
-
-/* =========================
-   SIDEBAR
-========================= */
 
 .sidebar{
   width:260px;
@@ -199,19 +183,11 @@ button:disabled{
   justify-content:center;
 }
 
-/* =========================
-   MAIN
-========================= */
-
 .main{
   margin-left:260px;
   width:calc(100% - 260px);
   min-height:100vh;
 }
-
-/* =========================
-   TOPBAR
-========================= */
 
 .topbar{
   height:74px;
@@ -282,10 +258,6 @@ button:disabled{
   border-radius:8px;
 }
 
-/* =========================
-   CONTENT
-========================= */
-
 .content{
   padding:30px;
 }
@@ -325,10 +297,6 @@ button:disabled{
   font-weight:800;
 }
 
-/* =========================
-   WELCOME
-========================= */
-
 .welcome{
   background:
     radial-gradient(circle at 85% 20%,rgba(255,255,255,.14),transparent 25%),
@@ -361,10 +329,6 @@ button:disabled{
   opacity:.82;
   font-size:13px;
 }
-
-/* =========================
-   STATS
-========================= */
 
 .stats{
   display:grid;
@@ -408,10 +372,6 @@ button:disabled{
   margin-top:6px;
 }
 
-/* =========================
-   PANEL
-========================= */
-
 .panel{
   background:var(--card);
   border:1px solid var(--border);
@@ -437,10 +397,6 @@ button:disabled{
   color:var(--muted);
   font-size:12px;
 }
-
-/* =========================
-   QUICK
-========================= */
 
 .quick{
   display:grid;
@@ -476,10 +432,6 @@ button:disabled{
 .quick small{
   color:var(--muted);
 }
-
-/* =========================
-   FORM
-========================= */
 
 .form-grid{
   display:grid;
@@ -576,10 +528,6 @@ button:disabled{
   font-weight:700;
 }
 
-/* =========================
-   TABLE
-========================= */
-
 .table-wrap{
   overflow-x:auto;
 }
@@ -616,10 +564,6 @@ td strong{
   font-size:13px;
 }
 
-/* =========================
-   BADGES
-========================= */
-
 .badge{
   display:inline-block;
   padding:5px 9px;
@@ -649,10 +593,6 @@ td strong{
   color:#916300;
 }
 
-/* =========================
-   EMPTY
-========================= */
-
 .empty{
   text-align:center;
   padding:35px 15px;
@@ -663,10 +603,6 @@ td strong{
   font-size:30px;
   margin-bottom:8px;
 }
-
-/* =========================
-   SEARCH
-========================= */
 
 .toolbar{
   display:flex;
@@ -688,19 +624,11 @@ td strong{
   border-color:var(--primary2);
 }
 
-/* =========================
-   ACTIONS
-========================= */
-
 .actions{
   display:flex;
   gap:6px;
   flex-wrap:wrap;
 }
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media(max-width:1100px){
 
@@ -815,10 +743,6 @@ td strong{
 
 <div class="app">
 
-<!-- =========================
-     SIDEBAR
-========================= -->
-
 <aside class="sidebar" id="sidebar">
 
   <div class="brand">
@@ -886,11 +810,6 @@ td strong{
 
 </aside>
 
-
-<!-- =========================
-     MAIN
-========================= -->
-
 <main class="main">
 
 <header class="topbar">
@@ -924,146 +843,88 @@ td strong{
 
 </header>
 
-
 <div class="content">
-
-
-<!-- =========================
-     HOME
-========================= -->
 
 <section class="section active" id="home">
 
   <div class="stats">
 
     <div class="stat">
-
       <div class="stat-icon">👨‍🎓</div>
-
       <small>Total Students</small>
-
       <strong id="studentCount">0</strong>
-
     </div>
 
-
     <div class="stat">
-
       <div class="stat-icon">✓</div>
-
       <small>Attendance Records</small>
-
       <strong id="attendanceCount">0</strong>
-
     </div>
 
-
     <div class="stat">
-
       <div class="stat-icon">📝</div>
-
       <small>Leave Requests</small>
-
       <strong id="leaveCount">0</strong>
-
     </div>
 
-
     <div class="stat">
-
       <div class="stat-icon">💬</div>
-
       <small>Parent Messages</small>
-
       <strong id="messageCount">0</strong>
-
     </div>
 
   </div>
-
 
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-
         <h3>Quick Access</h3>
 
         <div class="panel-desc">
           Frequently used management tools
         </div>
-
       </div>
 
     </div>
 
-
     <div class="quick">
 
       <button class="quick-btn" data-go="students">
-
         <div class="quick-icon">👨‍🎓</div>
-
         <strong>Students</strong>
-
         <small>Add and manage students</small>
-
       </button>
-
 
       <button class="quick-btn" data-go="attendance">
-
         <div class="quick-icon">✓</div>
-
         <strong>Attendance</strong>
-
         <small>Record daily attendance</small>
-
       </button>
-
 
       <button class="quick-btn" data-go="study">
-
         <div class="quick-icon">📖</div>
-
         <strong>Study Progress</strong>
-
         <small>Update Quran study progress</small>
-
       </button>
-
 
       <button class="quick-btn" data-go="results">
-
         <div class="quick-icon">🏆</div>
-
         <strong>Results</strong>
-
         <small>Publish student results</small>
-
       </button>
-
 
       <button class="quick-btn" data-go="notices">
-
         <div class="quick-icon">📢</div>
-
         <strong>Notices</strong>
-
         <small>Publish announcements</small>
-
       </button>
 
-
       <button class="quick-btn" data-go="publicResult">
-
         <div class="quick-icon">🌐</div>
-
         <strong>Public Result</strong>
-
         <small>Open public result system</small>
-
       </button>
 
     </div>
@@ -1071,11 +932,6 @@ td strong{
   </div>
 
 </section>
-
-
-<!-- =========================
-     STUDENTS
-========================= -->
 
 <section class="section" id="students">
 
@@ -1092,13 +948,13 @@ td strong{
 
   </div>
 
-
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
         <h3>Add Student</h3>
+
         <div class="panel-desc">
           Create a new student profile
         </div>
@@ -1106,13 +962,11 @@ td strong{
 
     </div>
 
-
     <form id="studentForm">
 
       <div class="form-grid">
 
         <div class="field">
-
           <label>Student Number</label>
 
           <input
@@ -1120,12 +974,9 @@ td strong{
             required
             placeholder="Example: 131"
           >
-
         </div>
 
-
         <div class="field">
-
           <label>Student Name</label>
 
           <input
@@ -1133,24 +984,18 @@ td strong{
             required
             placeholder="Student full name"
           >
-
         </div>
 
-
         <div class="field">
-
           <label>Class</label>
 
           <input
             id="className"
             placeholder="Example: HIFZ A"
           >
-
         </div>
 
-
         <div class="field">
-
           <label>Parent Email</label>
 
           <input
@@ -1158,7 +1003,6 @@ td strong{
             type="email"
             placeholder="Parent email"
           >
-
         </div>
 
       </div>
@@ -1173,23 +1017,19 @@ td strong{
 
   </div>
 
-
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-
         <h3>Student List</h3>
 
         <div class="panel-desc">
           All registered students
         </div>
-
       </div>
 
     </div>
-
 
     <div class="toolbar">
 
@@ -1200,7 +1040,6 @@ td strong{
       >
 
     </div>
-
 
     <div class="table-wrap">
 
@@ -1228,11 +1067,6 @@ td strong{
 
 </section>
 
-
-<!-- =========================
-     ATTENDANCE
-========================= -->
-
 <section class="section" id="attendance">
 
   <div class="section-head">
@@ -1248,20 +1082,19 @@ td strong{
 
   </div>
 
-
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
         <h3>New Attendance Record</h3>
+
         <div class="panel-desc">
           Record today's student attendance
         </div>
       </div>
 
     </div>
-
 
     <form id="attendanceForm">
 
@@ -1281,7 +1114,6 @@ td strong{
 
         </div>
 
-
         <div class="field">
 
           <label>Date</label>
@@ -1293,7 +1125,6 @@ td strong{
           >
 
         </div>
-
 
         <div class="field">
 
@@ -1333,20 +1164,19 @@ td strong{
 
   </div>
 
-
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
         <h3>Attendance Records</h3>
+
         <div class="panel-desc">
           Latest attendance records
         </div>
       </div>
 
     </div>
-
 
     <div class="table-wrap">
 
@@ -1373,9 +1203,8 @@ td strong{
 
 </section>
 
-
 <!-- =========================
-     STUDY
+     STUDY PROGRESS
 ========================= -->
 
 <section class="section" id="study">
@@ -1393,13 +1222,13 @@ td strong{
 
   </div>
 
-
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
         <h3>Add Study Progress</h3>
+
         <div class="panel-desc">
           Record lesson and revision details
         </div>
@@ -1407,10 +1236,11 @@ td strong{
 
     </div>
 
-
     <form id="studyForm">
 
       <div class="form-grid">
+
+        <!-- 1. STUDENT -->
 
         <div class="field">
 
@@ -1426,6 +1256,7 @@ td strong{
 
         </div>
 
+        <!-- 2. DATE -->
 
         <div class="field">
 
@@ -1439,6 +1270,7 @@ td strong{
 
         </div>
 
+        <!-- 3. SURAH / PORTION -->
 
         <div class="field">
 
@@ -1451,6 +1283,7 @@ td strong{
 
         </div>
 
+        <!-- 4. NEW LESSON -->
 
         <div class="field">
 
@@ -1463,6 +1296,7 @@ td strong{
 
         </div>
 
+        <!-- 5. REVISION -->
 
         <div class="field">
 
@@ -1475,6 +1309,7 @@ td strong{
 
         </div>
 
+        <!-- 6. PERFORMANCE -->
 
         <div class="field">
 
@@ -1506,6 +1341,47 @@ td strong{
 
         </div>
 
+        <!-- 7. DARS & STUDY STATUS -->
+
+        <div class="field">
+
+          <label>Dars &amp; Study Status</label>
+
+          <select id="studyStatus">
+
+            <option value="">
+              Select
+            </option>
+
+            <option value="Excellent">
+              Excellent
+            </option>
+
+            <option value="Very Good">
+              Very Good
+            </option>
+
+            <option value="Good">
+              Good
+            </option>
+
+            <option value="Average">
+              Average
+            </option>
+
+            <option value="Below Average">
+              Below Average
+            </option>
+
+            <option value="Needs Improvement">
+              Needs Improvement
+            </option>
+
+          </select>
+
+        </div>
+
+        <!-- 8. TEACHER NOTE -->
 
         <div class="field full">
 
@@ -1530,20 +1406,19 @@ td strong{
 
   </div>
 
-
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
         <h3>Study Records</h3>
+
         <div class="panel-desc">
           Latest Quran study progress
         </div>
       </div>
 
     </div>
-
 
     <div class="table-wrap">
 
@@ -1558,6 +1433,7 @@ td strong{
             <th>New Lesson</th>
             <th>Revision</th>
             <th>Performance</th>
+            <th>Dars &amp; Study Status</th>
             <th>Action</th>
           </tr>
 
@@ -1572,11 +1448,6 @@ td strong{
   </div>
 
 </section>
-
-
-<!-- =========================
-     RESULTS
-========================= -->
 
 <section class="section" id="results">
 
@@ -1593,20 +1464,19 @@ td strong{
 
   </div>
 
-
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
         <h3>Create Result</h3>
+
         <div class="panel-desc">
           Draft or publish a student result
         </div>
       </div>
 
     </div>
-
 
     <form id="resultForm">
 
@@ -1626,7 +1496,6 @@ td strong{
 
         </div>
 
-
         <div class="field">
 
           <label>Result Title</label>
@@ -1639,7 +1508,6 @@ td strong{
 
         </div>
 
-
         <div class="field">
 
           <label>Mark / Grade</label>
@@ -1651,7 +1519,6 @@ td strong{
           >
 
         </div>
-
 
         <div class="field">
 
@@ -1683,20 +1550,19 @@ td strong{
 
   </div>
 
-
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
         <h3>Results</h3>
+
         <div class="panel-desc">
           Manage draft and published results
         </div>
       </div>
 
     </div>
-
 
     <div class="table-wrap">
 
@@ -1724,11 +1590,6 @@ td strong{
 
 </section>
 
-
-<!-- =========================
-     NOTICES
-========================= -->
-
 <section class="section" id="notices">
 
   <div class="section-head">
@@ -1744,20 +1605,19 @@ td strong{
 
   </div>
 
-
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
         <h3>Create Notice</h3>
+
         <div class="panel-desc">
           Create an announcement
         </div>
       </div>
 
     </div>
-
 
     <form id="noticeForm">
 
@@ -1775,7 +1635,6 @@ td strong{
 
         </div>
 
-
         <div class="field full">
 
           <label>Notice</label>
@@ -1787,7 +1646,6 @@ td strong{
           ></textarea>
 
         </div>
-
 
         <div class="field">
 
@@ -1819,20 +1677,19 @@ td strong{
 
   </div>
 
-
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
         <h3>Notices</h3>
+
         <div class="panel-desc">
           Published and draft announcements
         </div>
       </div>
 
     </div>
-
 
     <div class="table-wrap">
 
@@ -1859,11 +1716,6 @@ td strong{
 
 </section>
 
-
-<!-- =========================
-     LEAVE
-========================= -->
-
 <section class="section" id="leave">
 
   <div class="section-head">
@@ -1878,7 +1730,6 @@ td strong{
     </div>
 
   </div>
-
 
   <div class="panel">
 
@@ -1910,11 +1761,6 @@ td strong{
 
 </section>
 
-
-<!-- =========================
-     MESSAGES
-========================= -->
-
 <section class="section" id="messages">
 
   <div class="section-head">
@@ -1929,7 +1775,6 @@ td strong{
     </div>
 
   </div>
-
 
   <div class="panel">
 
@@ -1960,11 +1805,6 @@ td strong{
 
 </section>
 
-
-<!-- =========================
-     PUBLIC RESULT
-========================= -->
-
 <section class="section" id="publicResult">
 
   <div class="section-head">
@@ -1983,7 +1823,6 @@ td strong{
     </div>
 
   </div>
-
 
   <div class="panel">
 
@@ -2011,7 +1850,6 @@ td strong{
 
   </div>
 
-
   <div class="panel">
 
     <div class="panel-head">
@@ -2027,7 +1865,6 @@ td strong{
       </div>
 
     </div>
-
 
     <div style="line-height:2;font-size:13px;color:#526174;">
 
@@ -2047,18 +1884,12 @@ td strong{
 
 </section>
 
-
 </div>
 </main>
 
 </div>
 
-
 <script type="module">
-
-/* =========================================================
-   FIREBASE
-========================================================= */
 
 import {
   initializeApp
@@ -2101,12 +1932,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 
-/* =========================================================
-   HELPERS
-========================================================= */
-
 const $ = id => document.getElementById(id);
-
 
 window.students = [];
 
@@ -2164,10 +1990,6 @@ function studentNameByNumber(number){
 }
 
 
-/* =========================================================
-   AUTH
-========================================================= */
-
 onAuthStateChanged(auth,async user=>{
 
   if(!user){
@@ -2177,14 +1999,12 @@ onAuthStateChanged(auth,async user=>{
     return;
   }
 
-
   try{
 
     const userSnap =
       await getDoc(
         doc(db,"users",user.uid)
       );
-
 
     if(!userSnap.exists()){
 
@@ -2196,9 +2016,7 @@ onAuthStateChanged(auth,async user=>{
 
     }
 
-
     const data = userSnap.data();
-
 
     if(
       String(data.role || "")
@@ -2214,12 +2032,9 @@ onAuthStateChanged(auth,async user=>{
 
     }
 
-
     $("loading").style.display = "none";
 
-
     await loadEverything();
-
 
   }catch(error){
 
@@ -2233,10 +2048,6 @@ onAuthStateChanged(auth,async user=>{
 
 });
 
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
 
 document.querySelectorAll(".menu-btn")
 .forEach(button=>{
@@ -2275,14 +2086,12 @@ function openSection(sectionId){
 
   });
 
-
   document.querySelectorAll(".menu-btn")
   .forEach(button=>{
 
     button.classList.remove("active");
 
   });
-
 
   const section = $(sectionId);
 
@@ -2292,19 +2101,16 @@ function openSection(sectionId){
 
   }
 
-
   const menuButton =
     document.querySelector(
       `.menu-btn[data-section="${sectionId}"]`
     );
-
 
   if(menuButton){
 
     menuButton.classList.add("active");
 
   }
-
 
   window.scrollTo({
     top:0,
@@ -2314,20 +2120,12 @@ function openSection(sectionId){
 }
 
 
-/* =========================================================
-   MOBILE
-========================================================= */
-
 $("mobileMenu").addEventListener("click",()=>{
 
   $("sidebar").classList.toggle("open");
 
 });
 
-
-/* =========================================================
-   LOGOUT
-========================================================= */
 
 $("logoutBtn").addEventListener("click",async()=>{
 
@@ -2337,7 +2135,6 @@ $("logoutBtn").addEventListener("click",async()=>{
 
   }
 
-
   await signOut(auth);
 
   location.href = "index.html";
@@ -2345,14 +2142,9 @@ $("logoutBtn").addEventListener("click",async()=>{
 });
 
 
-/* =========================================================
-   LOAD EVERYTHING
-========================================================= */
-
 async function loadEverything(){
 
   await loadStudents();
-
 
   await Promise.all([
 
@@ -2373,9 +2165,9 @@ async function loadEverything(){
 }
 
 
-/* =========================================================
+/* =========================
    STUDENTS
-========================================================= */
+========================= */
 
 async function loadStudents(){
 
@@ -2384,30 +2176,23 @@ async function loadStudents(){
       collection(db,"students")
     );
 
-
   window.students = [];
 
-
   $("studentsTable").innerHTML = "";
-
 
   snap.forEach(item=>{
 
     const data = item.data();
-
 
     const student = {
       id:item.id,
       ...data
     };
 
-
     window.students.push(student);
-
 
     const tr =
       document.createElement("tr");
-
 
     tr.dataset.search =
       `${data.studentNumber || ""}
@@ -2415,7 +2200,6 @@ async function loadStudents(){
        ${data.className || ""}
        ${data.parentEmail || ""}`
       .toLowerCase();
-
 
     tr.innerHTML = `
 
@@ -2452,34 +2236,25 @@ async function loadStudents(){
 
     `;
 
-
     $("studentsTable").appendChild(tr);
 
   });
 
-
   $("studentCount").textContent =
     window.students.length;
 
-
   populateStudentSelects();
-
 
   document.querySelectorAll(".delete-student")
   .forEach(button=>{
 
     button.addEventListener("click",async()=>{
 
-      if(
-        !confirm(
-          "Delete this student?"
-        )
-      ){
+      if(!confirm("Delete this student?")){
 
         return;
 
       }
-
 
       try{
 
@@ -2491,14 +2266,11 @@ async function loadStudents(){
           )
         );
 
-
         showMessage(
           "Student deleted successfully."
         );
 
-
         await loadStudents();
-
 
       }catch(error){
 
@@ -2519,20 +2291,14 @@ async function loadStudents(){
 function populateStudentSelects(){
 
   const ids = [
-
     "attendanceStudent",
-
     "studyStudent",
-
     "resultStudent"
-
   ];
-
 
   ids.forEach(id=>{
 
     const select = $(id);
-
 
     if(!select){
 
@@ -2540,12 +2306,10 @@ function populateStudentSelects(){
 
     }
 
-
     select.innerHTML =
       `<option value="">
         Select student
       </option>`;
-
 
     window.students
     .sort((a,b)=>
@@ -2561,14 +2325,11 @@ function populateStudentSelects(){
       const option =
         document.createElement("option");
 
-
       option.value =
         String(student.studentNumber);
 
-
       option.textContent =
         `${student.studentNumber} - ${student.name}`;
-
 
       select.appendChild(option);
 
@@ -2579,10 +2340,6 @@ function populateStudentSelects(){
 }
 
 
-/* =========================================================
-   STUDENT SEARCH
-========================================================= */
-
 $("studentSearch")
 .addEventListener("input",e=>{
 
@@ -2590,7 +2347,6 @@ $("studentSearch")
     e.target.value
       .trim()
       .toLowerCase();
-
 
   document.querySelectorAll(
     "#studentsTable tr"
@@ -2608,15 +2364,10 @@ $("studentSearch")
 });
 
 
-/* =========================================================
-   ADD STUDENT
-========================================================= */
-
 $("studentForm")
 .addEventListener("submit",async e=>{
 
   e.preventDefault();
-
 
   try{
 
@@ -2625,12 +2376,10 @@ $("studentForm")
         .value
         .trim();
 
-
     const name =
       $("studentName")
         .value
         .trim();
-
 
     if(!studentNumber || !name){
 
@@ -2643,14 +2392,12 @@ $("studentForm")
 
     }
 
-
     const duplicate =
       window.students.some(
         s =>
           String(s.studentNumber)
           === String(studentNumber)
       );
-
 
     if(duplicate){
 
@@ -2663,38 +2410,27 @@ $("studentForm")
 
     }
 
-
     await addDoc(
       collection(db,"students"),
       {
-
         studentNumber,
-
         name,
-
         className:
           $("className").value.trim(),
-
         parentEmail:
           $("parentEmail").value.trim(),
-
         createdAt:
           serverTimestamp()
-
       }
     );
 
-
     $("studentForm").reset();
-
 
     showMessage(
       "Student added successfully."
     );
 
-
     await loadStudents();
-
 
   }catch(error){
 
@@ -2708,22 +2444,20 @@ $("studentForm")
 });
 
 
-/* =========================================================
+/* =========================
    ATTENDANCE
-========================================================= */
+========================= */
 
 $("attendanceForm")
 .addEventListener("submit",async e=>{
 
   e.preventDefault();
 
-
   try{
 
     await addDoc(
       collection(db,"attendance"),
       {
-
         studentNumber:
           $("attendanceStudent").value,
 
@@ -2735,24 +2469,18 @@ $("attendanceForm")
 
         createdAt:
           serverTimestamp()
-
       }
     );
 
-
     $("attendanceForm").reset();
 
-
     setDefaultDates();
-
 
     showMessage(
       "Attendance saved successfully."
     );
 
-
     await loadAttendance();
-
 
   }catch(error){
 
@@ -2773,22 +2501,16 @@ async function loadAttendance(){
       collection(db,"attendance")
     );
 
-
   const rows = [];
-
 
   snap.forEach(item=>{
 
     rows.push({
-
       id:item.id,
-
       ...item.data()
-
     });
 
   });
-
 
   rows.sort((a,b)=>
     String(b.date || "")
@@ -2797,9 +2519,7 @@ async function loadAttendance(){
       )
   );
 
-
   $("attendanceTable").innerHTML = "";
-
 
   if(!rows.length){
 
@@ -2807,17 +2527,21 @@ async function loadAttendance(){
 
       <tr>
         <td colspan="4">
+
           <div class="empty">
+
             <div class="empty-icon">📅</div>
+
             No attendance records yet.
+
           </div>
+
         </td>
       </tr>
 
     `;
 
   }
-
 
   rows.forEach(data=>{
 
@@ -2828,10 +2552,8 @@ async function loadAttendance(){
         ? "badge-red"
         : "badge-yellow";
 
-
     const tr =
       document.createElement("tr");
-
 
     tr.innerHTML = `
 
@@ -2853,11 +2575,9 @@ async function loadAttendance(){
 
       </td>
 
-
       <td>
         ${escapeHtml(data.date)}
       </td>
-
 
       <td>
 
@@ -2866,7 +2586,6 @@ async function loadAttendance(){
         </span>
 
       </td>
-
 
       <td>
 
@@ -2881,16 +2600,13 @@ async function loadAttendance(){
 
     `;
 
-
     $("attendanceTable")
       .appendChild(tr);
 
   });
 
-
   $("attendanceCount").textContent =
     rows.length;
-
 
   document.querySelectorAll(
     ".delete-attendance"
@@ -2901,16 +2617,13 @@ async function loadAttendance(){
       "click",
       async()=>{
 
-        if(
-          !confirm(
-            "Delete this attendance record?"
-          )
-        ){
+        if(!confirm(
+          "Delete this attendance record?"
+        )){
 
           return;
 
         }
-
 
         await deleteDoc(
           doc(
@@ -2920,11 +2633,9 @@ async function loadAttendance(){
           )
         );
 
-
         showMessage(
           "Attendance deleted."
         );
-
 
         await loadAttendance();
 
@@ -2936,15 +2647,14 @@ async function loadAttendance(){
 }
 
 
-/* =========================================================
-   STUDY
-========================================================= */
+/* =========================
+   STUDY PROGRESS
+========================= */
 
 $("studyForm")
 .addEventListener("submit",async e=>{
 
   e.preventDefault();
-
 
   try{
 
@@ -2970,6 +2680,9 @@ $("studyForm")
         performance:
           $("performance").value,
 
+        studyStatus:
+          $("studyStatus").value,
+
         note:
           $("studyNote").value.trim(),
 
@@ -2979,20 +2692,15 @@ $("studyForm")
       }
     );
 
-
     $("studyForm").reset();
 
-
     setDefaultDates();
-
 
     showMessage(
       "Study progress saved."
     );
 
-
     await loadStudy();
-
 
   }catch(error){
 
@@ -3013,9 +2721,7 @@ async function loadStudy(){
       collection(db,"studyProgress")
     );
 
-
   const rows = [];
-
 
   snap.forEach(item=>{
 
@@ -3029,7 +2735,6 @@ async function loadStudy(){
 
   });
 
-
   rows.sort((a,b)=>
     String(b.date || "")
       .localeCompare(
@@ -3037,16 +2742,14 @@ async function loadStudy(){
       )
   );
 
-
   $("studyTable").innerHTML = "";
-
 
   if(!rows.length){
 
     $("studyTable").innerHTML = `
 
       <tr>
-        <td colspan="7">
+        <td colspan="8">
 
           <div class="empty">
 
@@ -3065,12 +2768,10 @@ async function loadStudy(){
 
   }
 
-
   rows.forEach(data=>{
 
     const tr =
       document.createElement("tr");
-
 
     tr.innerHTML = `
 
@@ -3086,26 +2787,21 @@ async function loadStudy(){
 
       </td>
 
-
       <td>
         ${escapeHtml(data.date)}
       </td>
-
 
       <td>
         ${escapeHtml(data.surah || "-")}
       </td>
 
-
       <td>
         ${escapeHtml(data.newLesson || "-")}
       </td>
 
-
       <td>
         ${escapeHtml(data.revision || "-")}
       </td>
-
 
       <td>
 
@@ -3117,6 +2813,15 @@ async function loadStudy(){
 
       </td>
 
+      <td>
+
+        <span class="badge badge-green">
+          ${escapeHtml(
+            data.studyStatus || "-"
+          )}
+        </span>
+
+      </td>
 
       <td>
 
@@ -3131,12 +2836,10 @@ async function loadStudy(){
 
     `;
 
-
     $("studyTable")
       .appendChild(tr);
 
   });
-
 
   document.querySelectorAll(
     ".delete-study"
@@ -3147,16 +2850,13 @@ async function loadStudy(){
       "click",
       async()=>{
 
-        if(
-          !confirm(
-            "Delete this study record?"
-          )
-        ){
+        if(!confirm(
+          "Delete this study record?"
+        )){
 
           return;
 
         }
-
 
         await deleteDoc(
           doc(
@@ -3166,11 +2866,9 @@ async function loadStudy(){
           )
         );
 
-
         showMessage(
           "Study record deleted."
         );
-
 
         await loadStudy();
 
@@ -3182,15 +2880,14 @@ async function loadStudy(){
 }
 
 
-/* =========================================================
+/* =========================
    RESULTS
-========================================================= */
+========================= */
 
 $("resultForm")
 .addEventListener("submit",async e=>{
 
   e.preventDefault();
-
 
   try{
 
@@ -3216,17 +2913,13 @@ $("resultForm")
       }
     );
 
-
     $("resultForm").reset();
-
 
     showMessage(
       "Result saved successfully."
     );
 
-
     await loadResults();
-
 
   }catch(error){
 
@@ -3247,12 +2940,9 @@ async function loadResults(){
       collection(db,"results")
     );
 
-
   $("resultsTable").innerHTML = "";
 
-
   const rows = [];
-
 
   snap.forEach(item=>{
 
@@ -3265,7 +2955,6 @@ async function loadResults(){
     });
 
   });
-
 
   if(!rows.length){
 
@@ -3291,16 +2980,13 @@ async function loadResults(){
 
   }
 
-
   rows.forEach(data=>{
 
     const published =
       data.status === "published";
 
-
     const tr =
       document.createElement("tr");
-
 
     tr.innerHTML = `
 
@@ -3316,18 +3002,15 @@ async function loadResults(){
 
       </td>
 
-
       <td>
         ${escapeHtml(data.title)}
       </td>
-
 
       <td>
         <strong>
           ${escapeHtml(data.mark)}
         </strong>
       </td>
-
 
       <td>
 
@@ -3342,7 +3025,6 @@ async function loadResults(){
         </span>
 
       </td>
-
 
       <td>
 
@@ -3366,7 +3048,6 @@ async function loadResults(){
 
           </button>
 
-
           <button
             class="danger delete-result"
             data-id="${data.id}"
@@ -3380,12 +3061,10 @@ async function loadResults(){
 
     `;
 
-
     $("resultsTable")
       .appendChild(tr);
 
   });
-
 
   document.querySelectorAll(
     ".toggle-result"
@@ -3408,11 +3087,9 @@ async function loadResults(){
           }
         );
 
-
         showMessage(
           "Result status updated."
         );
-
 
         await loadResults();
 
@@ -3420,7 +3097,6 @@ async function loadResults(){
     );
 
   });
-
 
   document.querySelectorAll(
     ".delete-result"
@@ -3431,16 +3107,13 @@ async function loadResults(){
       "click",
       async()=>{
 
-        if(
-          !confirm(
-            "Delete this result?"
-          )
-        ){
+        if(!confirm(
+          "Delete this result?"
+        )){
 
           return;
 
         }
-
 
         await deleteDoc(
           doc(
@@ -3450,11 +3123,9 @@ async function loadResults(){
           )
         );
 
-
         showMessage(
           "Result deleted."
         );
-
 
         await loadResults();
 
@@ -3466,15 +3137,14 @@ async function loadResults(){
 }
 
 
-/* =========================================================
+/* =========================
    NOTICES
-========================================================= */
+========================= */
 
 $("noticeForm")
 .addEventListener("submit",async e=>{
 
   e.preventDefault();
-
 
   try{
 
@@ -3497,17 +3167,13 @@ $("noticeForm")
       }
     );
 
-
     $("noticeForm").reset();
-
 
     showMessage(
       "Notice saved successfully."
     );
 
-
     await loadNotices();
-
 
   }catch(error){
 
@@ -3528,12 +3194,9 @@ async function loadNotices(){
       collection(db,"notices")
     );
 
-
   $("noticesTable").innerHTML = "";
 
-
   const rows = [];
-
 
   snap.forEach(item=>{
 
@@ -3547,7 +3210,6 @@ async function loadNotices(){
 
   });
 
-
   rows.sort((a,b)=>{
 
     const aa =
@@ -3559,7 +3221,6 @@ async function loadNotices(){
     return bb-aa;
 
   });
-
 
   if(!rows.length){
 
@@ -3585,16 +3246,13 @@ async function loadNotices(){
 
   }
 
-
   rows.forEach(data=>{
 
     const published =
       data.status === "published";
 
-
     const tr =
       document.createElement("tr");
-
 
     tr.innerHTML = `
 
@@ -3606,11 +3264,9 @@ async function loadNotices(){
 
       </td>
 
-
       <td>
         ${escapeHtml(data.text)}
       </td>
-
 
       <td>
 
@@ -3625,7 +3281,6 @@ async function loadNotices(){
         </span>
 
       </td>
-
 
       <td>
 
@@ -3649,7 +3304,6 @@ async function loadNotices(){
 
           </button>
 
-
           <button
             class="danger delete-notice"
             data-id="${data.id}"
@@ -3663,12 +3317,10 @@ async function loadNotices(){
 
     `;
 
-
     $("noticesTable")
       .appendChild(tr);
 
   });
-
 
   document.querySelectorAll(
     ".toggle-notice"
@@ -3691,11 +3343,9 @@ async function loadNotices(){
           }
         );
 
-
         showMessage(
           "Notice status updated."
         );
-
 
         await loadNotices();
 
@@ -3703,7 +3353,6 @@ async function loadNotices(){
     );
 
   });
-
 
   document.querySelectorAll(
     ".delete-notice"
@@ -3714,16 +3363,13 @@ async function loadNotices(){
       "click",
       async()=>{
 
-        if(
-          !confirm(
-            "Delete this notice?"
-          )
-        ){
+        if(!confirm(
+          "Delete this notice?"
+        )){
 
           return;
 
         }
-
 
         await deleteDoc(
           doc(
@@ -3733,11 +3379,9 @@ async function loadNotices(){
           )
         );
 
-
         showMessage(
           "Notice deleted."
         );
-
 
         await loadNotices();
 
@@ -3749,9 +3393,9 @@ async function loadNotices(){
 }
 
 
-/* =========================================================
+/* =========================
    LEAVE REQUESTS
-========================================================= */
+========================= */
 
 async function loadLeaves(){
 
@@ -3760,9 +3404,7 @@ async function loadLeaves(){
       collection(db,"leaveRequests")
     );
 
-
   const rows = [];
-
 
   snap.forEach(item=>{
 
@@ -3776,7 +3418,6 @@ async function loadLeaves(){
 
   });
 
-
   rows.sort((a,b)=>{
 
     const aa =
@@ -3789,9 +3430,7 @@ async function loadLeaves(){
 
   });
 
-
   $("leaveTable").innerHTML = "";
-
 
   if(!rows.length){
 
@@ -3817,16 +3456,13 @@ async function loadLeaves(){
 
   }
 
-
   rows.forEach(data=>{
 
     const status =
       data.status || "pending";
 
-
     const tr =
       document.createElement("tr");
-
 
     tr.innerHTML = `
 
@@ -3850,13 +3486,11 @@ async function loadLeaves(){
 
       </td>
 
-
       <td>
         ${escapeHtml(
           data.parentEmail || "-"
         )}
       </td>
-
 
       <td>
         ${escapeHtml(
@@ -3864,13 +3498,11 @@ async function loadLeaves(){
         )}
       </td>
 
-
       <td>
         ${escapeHtml(
           data.reason || "-"
         )}
       </td>
-
 
       <td>
 
@@ -3888,13 +3520,11 @@ async function loadLeaves(){
 
       </td>
 
-
       <td>
         ${escapeHtml(
           data.reply || "-"
         )}
       </td>
-
 
       <td>
 
@@ -3907,7 +3537,6 @@ async function loadLeaves(){
             Approve
           </button>
 
-
           <button
             class="warning reject-leave"
             data-id="${data.id}"
@@ -3915,14 +3544,12 @@ async function loadLeaves(){
             Reject
           </button>
 
-
           <button
             class="primary reply-leave"
             data-id="${data.id}"
           >
             Reply
           </button>
-
 
           <button
             class="danger delete-leave"
@@ -3937,16 +3564,13 @@ async function loadLeaves(){
 
     `;
 
-
     $("leaveTable")
       .appendChild(tr);
 
   });
 
-
   $("leaveCount").textContent =
     rows.length;
-
 
   document.querySelectorAll(
     ".approve-leave"
@@ -3970,11 +3594,9 @@ async function loadLeaves(){
           }
         );
 
-
         showMessage(
           "Leave approved."
         );
-
 
         await loadLeaves();
 
@@ -3982,7 +3604,6 @@ async function loadLeaves(){
     );
 
   });
-
 
   document.querySelectorAll(
     ".reject-leave"
@@ -4006,11 +3627,9 @@ async function loadLeaves(){
           }
         );
 
-
         showMessage(
           "Leave rejected."
         );
-
 
         await loadLeaves();
 
@@ -4018,7 +3637,6 @@ async function loadLeaves(){
     );
 
   });
-
 
   document.querySelectorAll(
     ".reply-leave"
@@ -4034,13 +3652,11 @@ async function loadLeaves(){
             "Enter reply to parent:"
           );
 
-
         if(reply === null){
 
           return;
 
         }
-
 
         if(!reply.trim()){
 
@@ -4052,7 +3668,6 @@ async function loadLeaves(){
           return;
 
         }
-
 
         await updateDoc(
           doc(
@@ -4071,11 +3686,9 @@ async function loadLeaves(){
           }
         );
 
-
         showMessage(
           "Reply sent."
         );
-
 
         await loadLeaves();
 
@@ -4083,7 +3696,6 @@ async function loadLeaves(){
     );
 
   });
-
 
   document.querySelectorAll(
     ".delete-leave"
@@ -4094,16 +3706,13 @@ async function loadLeaves(){
       "click",
       async()=>{
 
-        if(
-          !confirm(
-            "Delete this leave request?"
-          )
-        ){
+        if(!confirm(
+          "Delete this leave request?"
+        )){
 
           return;
 
         }
-
 
         await deleteDoc(
           doc(
@@ -4113,11 +3722,9 @@ async function loadLeaves(){
           )
         );
 
-
         showMessage(
           "Leave request deleted."
         );
-
 
         await loadLeaves();
 
@@ -4129,9 +3736,9 @@ async function loadLeaves(){
 }
 
 
-/* =========================================================
+/* =========================
    MESSAGES
-========================================================= */
+========================= */
 
 async function loadMessages(){
 
@@ -4140,9 +3747,7 @@ async function loadMessages(){
       collection(db,"messages")
     );
 
-
   const rows = [];
-
 
   snap.forEach(item=>{
 
@@ -4156,7 +3761,6 @@ async function loadMessages(){
 
   });
 
-
   rows.sort((a,b)=>{
 
     const aa =
@@ -4169,9 +3773,7 @@ async function loadMessages(){
 
   });
 
-
   $("messagesTable").innerHTML = "";
-
 
   if(!rows.length){
 
@@ -4197,16 +3799,13 @@ async function loadMessages(){
 
   }
 
-
   rows.forEach(data=>{
 
     const status =
       data.status || "unread";
 
-
     const tr =
       document.createElement("tr");
-
 
     tr.innerHTML = `
 
@@ -4230,20 +3829,17 @@ async function loadMessages(){
 
       </td>
 
-
       <td>
         ${escapeHtml(
           data.parentEmail || "-"
         )}
       </td>
 
-
       <td>
         ${escapeHtml(
           data.text || "-"
         )}
       </td>
-
 
       <td>
 
@@ -4259,13 +3855,11 @@ async function loadMessages(){
 
       </td>
 
-
       <td>
         ${escapeHtml(
           data.reply || "-"
         )}
       </td>
-
 
       <td>
 
@@ -4277,7 +3871,6 @@ async function loadMessages(){
           >
             Reply
           </button>
-
 
           <button
             class="danger delete-message"
@@ -4292,16 +3885,13 @@ async function loadMessages(){
 
     `;
 
-
     $("messagesTable")
       .appendChild(tr);
 
   });
 
-
   $("messageCount").textContent =
     rows.length;
-
 
   document.querySelectorAll(
     ".reply-message"
@@ -4317,13 +3907,11 @@ async function loadMessages(){
             "Enter reply to parent:"
           );
 
-
         if(reply === null){
 
           return;
 
         }
-
 
         if(!reply.trim()){
 
@@ -4335,7 +3923,6 @@ async function loadMessages(){
           return;
 
         }
-
 
         await updateDoc(
           doc(
@@ -4357,11 +3944,9 @@ async function loadMessages(){
           }
         );
 
-
         showMessage(
           "Parent reply sent."
         );
-
 
         await loadMessages();
 
@@ -4369,7 +3954,6 @@ async function loadMessages(){
     );
 
   });
-
 
   document.querySelectorAll(
     ".delete-message"
@@ -4380,16 +3964,13 @@ async function loadMessages(){
       "click",
       async()=>{
 
-        if(
-          !confirm(
-            "Delete this message?"
-          )
-        ){
+        if(!confirm(
+          "Delete this message?"
+        )){
 
           return;
 
         }
-
 
         await deleteDoc(
           doc(
@@ -4399,11 +3980,9 @@ async function loadMessages(){
           )
         );
 
-
         showMessage(
           "Message deleted."
         );
-
 
         await loadMessages();
 
@@ -4415,9 +3994,9 @@ async function loadMessages(){
 }
 
 
-/* =========================================================
-   PUBLIC RESULT BUTTON
-========================================================= */
+/* =========================
+   PUBLIC RESULT
+========================= */
 
 $("openPublicResult")
 .addEventListener("click",()=>{
@@ -4427,9 +4006,9 @@ $("openPublicResult")
 });
 
 
-/* =========================================================
+/* =========================
    DEFAULT DATE
-========================================================= */
+========================= */
 
 function setDefaultDates(){
 
@@ -4438,10 +4017,8 @@ function setDefaultDates(){
       .toISOString()
       .split("T")[0];
 
-
   $("attendanceDate").value =
     today;
-
 
   $("studyDate").value =
     today;
