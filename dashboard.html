@@ -297,39 +297,6 @@ button:disabled{
   font-weight:800;
 }
 
-.welcome{
-  background:
-    radial-gradient(circle at 85% 20%,rgba(255,255,255,.14),transparent 25%),
-    linear-gradient(135deg,#0b2944,#176b87);
-  color:white;
-  border-radius:20px;
-  padding:30px;
-  margin-bottom:22px;
-  position:relative;
-  overflow:hidden;
-}
-
-.welcome:after{
-  content:"";
-  position:absolute;
-  width:180px;
-  height:180px;
-  right:-70px;
-  bottom:-80px;
-  border-radius:50%;
-  background:rgba(255,255,255,.06);
-}
-
-.welcome h2{
-  font-size:25px;
-  margin-bottom:8px;
-}
-
-.welcome p{
-  opacity:.82;
-  font-size:13px;
-}
-
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -630,6 +597,62 @@ td strong{
   flex-wrap:wrap;
 }
 
+/* ATTENDANCE GROUP */
+
+.attendance-date{
+  font-size:16px;
+  font-weight:800;
+  color:var(--navy);
+  margin-bottom:12px;
+}
+
+.attendance-group{
+  margin-bottom:4px;
+}
+
+.attendance-line{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:8px;
+}
+
+.attendance-names{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  align-items:center;
+}
+
+.attendance-student{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  background:#f7f9fc;
+  border:1px solid #e5eaf0;
+  border-radius:9px;
+  padding:6px 8px 6px 10px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.attendance-delete{
+  border:0;
+  background:#fff0ef;
+  color:#c53030;
+  width:24px;
+  height:24px;
+  border-radius:6px;
+  font-size:13px;
+  font-weight:800;
+  padding:0;
+}
+
+.attendance-delete:hover{
+  background:#fde1df;
+}
+
 @media(max-width:1100px){
 
   .stats{
@@ -822,6 +845,7 @@ td strong{
 
     <div>
       <div class="top-title">SAFA QURAN COLLEGE</div>
+
       <div class="top-subtitle">
         ONLINE PORTAL Management System
       </div>
@@ -1185,10 +1209,7 @@ td strong{
         <thead>
 
           <tr>
-            <th>Student</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th>Action</th>
+            <th>Latest Attendance Records</th>
           </tr>
 
         </thead>
@@ -1202,10 +1223,6 @@ td strong{
   </div>
 
 </section>
-
-<!-- =========================
-     STUDY PROGRESS
-========================= -->
 
 <section class="section" id="study">
 
@@ -1240,8 +1257,6 @@ td strong{
 
       <div class="form-grid">
 
-        <!-- 1. STUDENT -->
-
         <div class="field">
 
           <label>Student</label>
@@ -1256,8 +1271,6 @@ td strong{
 
         </div>
 
-        <!-- 2. DATE -->
-
         <div class="field">
 
           <label>Date</label>
@@ -1270,8 +1283,6 @@ td strong{
 
         </div>
 
-        <!-- 3. SURAH / PORTION -->
-
         <div class="field">
 
           <label>Surah / Portion</label>
@@ -1282,8 +1293,6 @@ td strong{
           >
 
         </div>
-
-        <!-- 4. NEW LESSON -->
 
         <div class="field">
 
@@ -1296,8 +1305,6 @@ td strong{
 
         </div>
 
-        <!-- 5. REVISION -->
-
         <div class="field">
 
           <label>Revision</label>
@@ -1308,8 +1315,6 @@ td strong{
           >
 
         </div>
-
-        <!-- 6. PERFORMANCE -->
 
         <div class="field">
 
@@ -1340,8 +1345,6 @@ td strong{
           </select>
 
         </div>
-
-        <!-- 7. DARS & STUDY STATUS -->
 
         <div class="field">
 
@@ -1380,8 +1383,6 @@ td strong{
           </select>
 
         </div>
-
-        <!-- 8. TEACHER NOTE -->
 
         <div class="field full">
 
@@ -1949,6 +1950,7 @@ function escapeHtml(value){
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
+
 }
 
 
@@ -1997,6 +1999,7 @@ onAuthStateChanged(auth,async user=>{
     location.href = "index.html";
 
     return;
+
   }
 
   try{
@@ -2526,7 +2529,7 @@ async function loadAttendance(){
     $("attendanceTable").innerHTML = `
 
       <tr>
-        <td colspan="4">
+        <td>
 
           <div class="empty">
 
@@ -2541,69 +2544,211 @@ async function loadAttendance(){
 
     `;
 
+  }else{
+
+    const grouped = {};
+
+    rows.forEach(data=>{
+
+      const status =
+        String(data.status || "")
+          .trim()
+          .toLowerCase();
+
+      /*
+        Present records are intentionally hidden
+        from the Latest Attendance Records display.
+      */
+
+      if(
+        status !== "absent" &&
+        status !== "leave"
+      ){
+
+        return;
+
+      }
+
+      if(!grouped[data.date]){
+
+        grouped[data.date] = {
+          absent:[],
+          leave:[]
+        };
+
+      }
+
+      const studentName =
+        studentNameByNumber(
+          data.studentNumber
+        );
+
+      if(status === "absent"){
+
+        grouped[data.date].absent.push({
+          id:data.id,
+          name:studentName
+        });
+
+      }
+
+      if(status === "leave"){
+
+        grouped[data.date].leave.push({
+          id:data.id,
+          name:studentName
+        });
+
+      }
+
+    });
+
+    const dates =
+      Object.keys(grouped)
+        .sort((a,b)=>
+          String(b).localeCompare(String(a))
+        );
+
+    if(!dates.length){
+
+      $("attendanceTable").innerHTML = `
+
+        <tr>
+          <td>
+
+            <div class="empty">
+
+              <div class="empty-icon">✓</div>
+
+              No absent or leave records yet.
+
+            </div>
+
+          </td>
+        </tr>
+
+      `;
+
+    }else{
+
+      dates.forEach(date=>{
+
+        const data =
+          grouped[date];
+
+        const tr =
+          document.createElement("tr");
+
+        const absentHtml =
+          data.absent.length
+            ? data.absent.map(item=>`
+
+                <div class="attendance-student">
+
+                  <span>
+                    ${escapeHtml(item.name)}
+                  </span>
+
+                  <button
+                    class="attendance-delete delete-attendance"
+                    data-id="${item.id}"
+                    title="Delete attendance"
+                  >
+                    ×
+                  </button>
+
+                </div>
+
+              `).join("")
+            : "";
+
+        const leaveHtml =
+          data.leave.length
+            ? data.leave.map(item=>`
+
+                <div class="attendance-student">
+
+                  <span>
+                    ${escapeHtml(item.name)}
+                  </span>
+
+                  <button
+                    class="attendance-delete delete-attendance"
+                    data-id="${item.id}"
+                    title="Delete attendance"
+                  >
+                    ×
+                  </button>
+
+                </div>
+
+              `).join("")
+            : "";
+
+        tr.innerHTML = `
+
+          <td style="padding:18px 12px;">
+
+            <div class="attendance-date">
+              ${escapeHtml(date)}
+            </div>
+
+            ${
+              data.absent.length
+              ? `
+                <div class="attendance-group">
+
+                  <div class="attendance-line">
+
+                    <span class="badge badge-red">
+                      Absent
+                    </span>
+
+                    <div class="attendance-names">
+                      ${absentHtml}
+                    </div>
+
+                  </div>
+
+                </div>
+              `
+              : ""
+            }
+
+            ${
+              data.leave.length
+              ? `
+                <div class="attendance-group">
+
+                  <div class="attendance-line">
+
+                    <span class="badge badge-yellow">
+                      Leave
+                    </span>
+
+                    <div class="attendance-names">
+                      ${leaveHtml}
+                    </div>
+
+                  </div>
+
+                </div>
+              `
+              : ""
+            }
+
+          </td>
+
+        `;
+
+        $("attendanceTable")
+          .appendChild(tr);
+
+      });
+
+    }
+
   }
-
-  rows.forEach(data=>{
-
-    const statusClass =
-      data.status === "Present"
-        ? "badge-green"
-        : data.status === "Absent"
-        ? "badge-red"
-        : "badge-yellow";
-
-    const tr =
-      document.createElement("tr");
-
-    tr.innerHTML = `
-
-      <td>
-
-        <strong>
-          ${escapeHtml(
-            studentNameByNumber(
-              data.studentNumber
-            )
-          )}
-        </strong>
-
-        <br>
-
-        <small>
-          ${escapeHtml(data.studentNumber)}
-        </small>
-
-      </td>
-
-      <td>
-        ${escapeHtml(data.date)}
-      </td>
-
-      <td>
-
-        <span class="badge ${statusClass}">
-          ${escapeHtml(data.status)}
-        </span>
-
-      </td>
-
-      <td>
-
-        <button
-          class="danger delete-attendance"
-          data-id="${data.id}"
-        >
-          Delete
-        </button>
-
-      </td>
-
-    `;
-
-    $("attendanceTable")
-      .appendChild(tr);
-
-  });
 
   $("attendanceCount").textContent =
     rows.length;
@@ -2625,19 +2770,30 @@ async function loadAttendance(){
 
         }
 
-        await deleteDoc(
-          doc(
-            db,
-            "attendance",
-            button.dataset.id
-          )
-        );
+        try{
 
-        showMessage(
-          "Attendance deleted."
-        );
+          await deleteDoc(
+            doc(
+              db,
+              "attendance",
+              button.dataset.id
+            )
+          );
 
-        await loadAttendance();
+          showMessage(
+            "Attendance deleted."
+          );
+
+          await loadAttendance();
+
+        }catch(error){
+
+          showMessage(
+            error.message,
+            "error"
+          );
+
+        }
 
       }
     );
