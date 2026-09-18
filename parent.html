@@ -855,7 +855,7 @@ tr:hover td{
     </button>
 
     <button class="nav-btn" data-section="study">
-      <span>📖</span> Hifz Progress
+      <span>📖</span> Study Progress
     </button>
 
     <button class="nav-btn" data-section="results">
@@ -1009,7 +1009,7 @@ tr:hover td{
       </button>
 
       <button class="quick-btn" data-go="study">
-        <strong>📖 Hifz Progress</strong>
+        <strong>📖 Study Progress</strong>
         <small>View study progress</small>
       </button>
 
@@ -1146,8 +1146,8 @@ tr:hover td{
 <section class="section" id="study">
 
   <div class="section-head">
-    <h2>Hifz Progress</h2>
-    <p>View your child's Quran memorization progress.</p>
+    <h2>Study Progress</h2>
+    <p>View your child's Quran study progress.</p>
   </div>
 
   <div id="studyList"></div>
@@ -2204,7 +2204,7 @@ async function loadStudy(){
           <strong>
             ${escapeHtml(
               data.surah ||
-              "Hifz Study"
+              "Study Progress"
             )}
           </strong>
 
@@ -2386,7 +2386,7 @@ async function loadResults(){
           <div class="result-title">
             ${escapeHtml(
               data.title ||
-              "Hifz Result"
+              "Study Result"
             )}
           </div>
 
