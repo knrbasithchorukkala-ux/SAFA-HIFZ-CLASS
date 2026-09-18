@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -418,7 +419,7 @@ button{
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:650px;
+  min-width:500px;
 }
 
 th,
@@ -820,14 +821,23 @@ tr:hover td{
 <body>
 
 <div id="loading">
+
   <div class="loader"></div>
-  <div>SAFA QURAN COLLEGE ONLINE PORTAL</div>
-  <small>Loading Parent Dashboard...</small>
+
+  <div>
+    SAFA QURAN COLLEGE ONLINE PORTAL
+  </div>
+
+  <small>
+    Loading Parent Dashboard...
+  </small>
+
 </div>
 
 <div id="message"></div>
 
 <div class="app">
+
 
 <!-- =========================
      SIDEBAR
@@ -836,42 +846,97 @@ tr:hover td{
 <aside class="sidebar" id="sidebar">
 
   <div class="brand">
-    <h1>SAFA QURAN COLLEGE ONLINE PORTAL</h1>
-    <p>Parent Portal</p>
+
+    <h1>
+      SAFA QURAN COLLEGE ONLINE PORTAL
+    </h1>
+
+    <p>
+      Parent Portal
+    </p>
+
   </div>
+
 
   <div class="nav">
 
-    <button class="nav-btn active" data-section="home">
-      <span>🏠</span> Home
+    <button
+      class="nav-btn active"
+      data-section="home">
+
+      <span>🏠</span>
+      Home
+
     </button>
 
-    <button class="nav-btn" data-section="child">
-      <span>👦</span> My Child
+
+    <button
+      class="nav-btn"
+      data-section="child">
+
+      <span>👦</span>
+      My Child
+
     </button>
 
-    <button class="nav-btn" data-section="attendance">
-      <span>✓</span> Attendance
+
+    <button
+      class="nav-btn"
+      data-section="attendance">
+
+      <span>✓</span>
+      Attendance
+
     </button>
 
-    <button class="nav-btn" data-section="study">
-      <span>📖</span> Study Progress
+
+    <button
+      class="nav-btn"
+      data-section="study">
+
+      <span>📖</span>
+      Study Progress
+
     </button>
 
-    <button class="nav-btn" data-section="results">
-      <span>🏆</span> Results
+
+    <button
+      class="nav-btn"
+      data-section="results">
+
+      <span>🏆</span>
+      Results
+
     </button>
 
-    <button class="nav-btn" data-section="notices">
-      <span>📢</span> Notices
+
+    <button
+      class="nav-btn"
+      data-section="notices">
+
+      <span>📢</span>
+      Notices
+
     </button>
 
-    <button class="nav-btn" data-section="leave">
-      <span>📝</span> Leave
+
+    <button
+      class="nav-btn"
+      data-section="leave">
+
+      <span>📝</span>
+      Leave
+
     </button>
 
-    <button class="nav-btn" data-section="messages">
-      <span>💬</span> Messages
+
+    <button
+      class="nav-btn"
+      data-section="messages">
+
+      <span>💬</span>
+      Messages
+
     </button>
 
   </div>
@@ -889,9 +954,14 @@ tr:hover td{
 
   <div class="left-top">
 
-    <button class="mobile-menu" id="mobileMenu">
+    <button
+      class="mobile-menu"
+      id="mobileMenu">
+
       ☰
+
     </button>
+
 
     <div class="top-title">
       Parent Dashboard
@@ -899,14 +969,25 @@ tr:hover td{
 
   </div>
 
-  <div style="display:flex;align-items:center;gap:12px;">
+
+  <div
+    style="
+      display:flex;
+      align-items:center;
+      gap:12px;
+    ">
 
     <div class="parent-badge">
       PARENT PORTAL
     </div>
 
-    <button class="logout" id="logoutBtn">
+
+    <button
+      class="logout"
+      id="logoutBtn">
+
       Logout
+
     </button>
 
   </div>
@@ -921,15 +1002,22 @@ tr:hover td{
      HOME
 ========================= -->
 
-<section class="section active" id="home">
+<section
+  class="section active"
+  id="home">
 
   <div class="child-card">
 
     <div class="child-top">
 
-      <div class="avatar" id="avatar">
+      <div
+        class="avatar"
+        id="avatar">
+
         S
+
       </div>
+
 
       <div class="child-info">
 
@@ -938,7 +1026,10 @@ tr:hover td{
         </h3>
 
         <p>
-          Student No. <strong id="homeStudentNumber">-</strong>
+          Student No.
+          <strong id="homeStudentNumber">
+            -
+          </strong>
         </p>
 
       </div>
@@ -949,18 +1040,41 @@ tr:hover td{
     <div class="child-meta">
 
       <div class="meta-box">
-        <small>Student Number</small>
-        <strong id="homeNo">-</strong>
+
+        <small>
+          Student Number
+        </small>
+
+        <strong id="homeNo">
+          -
+        </strong>
+
       </div>
 
-      <div class="meta-box">
-        <small>Class</small>
-        <strong id="homeClass">-</strong>
-      </div>
 
       <div class="meta-box">
-        <small>Parent Account</small>
-        <strong id="homeParentEmail">-</strong>
+
+        <small>
+          Class
+        </small>
+
+        <strong id="homeClass">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Parent Account
+        </small>
+
+        <strong id="homeParentEmail">
+          -
+        </strong>
+
       </div>
 
     </div>
@@ -971,27 +1085,70 @@ tr:hover td{
   <div class="stats">
 
     <div class="stat">
-      <div class="stat-icon">✓</div>
-      <small>Attendance Records</small>
-      <strong id="attendanceTotal">0</strong>
+
+      <div class="stat-icon">
+        ✓
+      </div>
+
+      <small>
+        Attendance Records
+      </small>
+
+      <strong id="attendanceTotal">
+        0
+      </strong>
+
     </div>
 
-    <div class="stat">
-      <div class="stat-icon">📖</div>
-      <small>Study Records</small>
-      <strong id="studyTotal">0</strong>
-    </div>
 
     <div class="stat">
-      <div class="stat-icon">🏆</div>
-      <small>Published Results</small>
-      <strong id="resultTotal">0</strong>
+
+      <div class="stat-icon">
+        📖
+      </div>
+
+      <small>
+        Study Records
+      </small>
+
+      <strong id="studyTotal">
+        0
+      </strong>
+
     </div>
 
+
     <div class="stat">
-      <div class="stat-icon">📢</div>
-      <small>Notices</small>
-      <strong id="noticeTotal">0</strong>
+
+      <div class="stat-icon">
+        🏆
+      </div>
+
+      <small>
+        Published Results
+      </small>
+
+      <strong id="resultTotal">
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-icon">
+        📢
+      </div>
+
+      <small>
+        Notices
+      </small>
+
+      <strong id="noticeTotal">
+        0
+      </strong>
+
     </div>
 
   </div>
@@ -999,38 +1156,100 @@ tr:hover td{
 
   <div class="panel">
 
-    <h3>Quick Access</h3>
+    <h3>
+      Quick Access
+    </h3>
+
 
     <div class="quick-grid">
 
-      <button class="quick-btn" data-go="attendance">
-        <strong>✓ Attendance</strong>
-        <small>View attendance records</small>
+      <button
+        class="quick-btn"
+        data-go="attendance">
+
+        <strong>
+          ✓ Attendance
+        </strong>
+
+        <small>
+          View attendance records
+        </small>
+
       </button>
 
-      <button class="quick-btn" data-go="study">
-        <strong>📖 Study Progress</strong>
-        <small>View study progress</small>
+
+      <button
+        class="quick-btn"
+        data-go="study">
+
+        <strong>
+          📖 Study Progress
+        </strong>
+
+        <small>
+          View study progress
+        </small>
+
       </button>
 
-      <button class="quick-btn" data-go="results">
-        <strong>🏆 Results</strong>
-        <small>View published results</small>
+
+      <button
+        class="quick-btn"
+        data-go="results">
+
+        <strong>
+          🏆 Results
+        </strong>
+
+        <small>
+          View published results
+        </small>
+
       </button>
 
-      <button class="quick-btn" data-go="notices">
-        <strong>📢 Notices</strong>
-        <small>View class announcements</small>
+
+      <button
+        class="quick-btn"
+        data-go="notices">
+
+        <strong>
+          📢 Notices
+        </strong>
+
+        <small>
+          View class announcements
+        </small>
+
       </button>
 
-      <button class="quick-btn" data-go="leave">
-        <strong>📝 Apply Leave</strong>
-        <small>Send leave application</small>
+
+      <button
+        class="quick-btn"
+        data-go="leave">
+
+        <strong>
+          📝 Apply Leave
+        </strong>
+
+        <small>
+          Send leave application
+        </small>
+
       </button>
 
-      <button class="quick-btn" data-go="messages">
-        <strong>💬 Contact Usthad</strong>
-        <small>Send a message</small>
+
+      <button
+        class="quick-btn"
+        data-go="messages">
+
+        <strong>
+          💬 Contact Usthad
+        </strong>
+
+        <small>
+          Send a message
+        </small>
+
       </button>
 
     </div>
@@ -1044,20 +1263,35 @@ tr:hover td{
      CHILD
 ========================= -->
 
-<section class="section" id="child">
+<section
+  class="section"
+  id="child">
 
   <div class="section-head">
-    <h2>My Child</h2>
-    <p>Student information connected to this parent account.</p>
+
+    <h2>
+      My Child
+    </h2>
+
+    <p>
+      Student information connected to this parent account.
+    </p>
+
   </div>
+
 
   <div class="child-card">
 
     <div class="child-top">
 
-      <div class="avatar" id="childAvatar">
+      <div
+        class="avatar"
+        id="childAvatar">
+
         S
+
       </div>
+
 
       <div class="child-info">
 
@@ -1077,18 +1311,41 @@ tr:hover td{
     <div class="child-meta">
 
       <div class="meta-box">
-        <small>Student Number</small>
-        <strong id="childNumber">-</strong>
+
+        <small>
+          Student Number
+        </small>
+
+        <strong id="childNumber">
+          -
+        </strong>
+
       </div>
 
-      <div class="meta-box">
-        <small>Class</small>
-        <strong id="childClass">-</strong>
-      </div>
 
       <div class="meta-box">
-        <small>Parent Email</small>
-        <strong id="childParentEmail">-</strong>
+
+        <small>
+          Class
+        </small>
+
+        <strong id="childClass">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Parent Email
+        </small>
+
+        <strong id="childParentEmail">
+          -
+        </strong>
+
       </div>
 
     </div>
@@ -1102,12 +1359,22 @@ tr:hover td{
      ATTENDANCE
 ========================= -->
 
-<section class="section" id="attendance">
+<section
+  class="section"
+  id="attendance">
 
   <div class="section-head">
-    <h2>Attendance</h2>
-    <p>Your child's attendance records.</p>
+
+    <h2>
+      Attendance
+    </h2>
+
+    <p>
+      Your child's attendance records.
+    </p>
+
   </div>
+
 
   <div class="panel">
 
@@ -1118,20 +1385,36 @@ tr:hover td{
         <thead>
 
           <tr>
-            <th>Date</th>
-            <th>Status</th>
+
+            <th>
+              Date
+            </th>
+
+            <th>
+              Status
+            </th>
+
           </tr>
 
         </thead>
 
-        <tbody id="attendanceTable"></tbody>
+
+        <tbody
+          id="attendanceTable">
+        </tbody>
 
       </table>
 
     </div>
 
-    <div class="empty" id="attendanceEmpty" style="display:none;">
+
+    <div
+      class="empty"
+      id="attendanceEmpty"
+      style="display:none;">
+
       No attendance records available.
+
     </div>
 
   </div>
@@ -1143,17 +1426,33 @@ tr:hover td{
      STUDY
 ========================= -->
 
-<section class="section" id="study">
+<section
+  class="section"
+  id="study">
 
   <div class="section-head">
-    <h2>Study Progress</h2>
-    <p>View your child's Quran study progress.</p>
+
+    <h2>
+      Study Progress
+    </h2>
+
+    <p>
+      View your child's Quran study progress.
+    </p>
+
   </div>
+
 
   <div id="studyList"></div>
 
-  <div class="empty" id="studyEmpty" style="display:none;">
+
+  <div
+    class="empty"
+    id="studyEmpty"
+    style="display:none;">
+
     No study progress records available.
+
   </div>
 
 </section>
@@ -1163,17 +1462,33 @@ tr:hover td{
      RESULTS
 ========================= -->
 
-<section class="section" id="results">
+<section
+  class="section"
+  id="results">
 
   <div class="section-head">
-    <h2>Results</h2>
-    <p>Published examination results.</p>
+
+    <h2>
+      Results
+    </h2>
+
+    <p>
+      Published examination results.
+    </p>
+
   </div>
+
 
   <div id="resultList"></div>
 
-  <div class="empty" id="resultEmpty" style="display:none;">
+
+  <div
+    class="empty"
+    id="resultEmpty"
+    style="display:none;">
+
     No published results available.
+
   </div>
 
 </section>
@@ -1183,17 +1498,34 @@ tr:hover td{
      NOTICES
 ========================= -->
 
-<section class="section" id="notices">
+<section
+  class="section"
+  id="notices">
 
   <div class="section-head">
-    <h2>Notices</h2>
-    <p>Important announcements from SAFA QURAN COLLEGE ONLINE PORTAL.</p>
+
+    <h2>
+      Notices
+    </h2>
+
+    <p>
+      Important announcements from
+      SAFA QURAN COLLEGE ONLINE PORTAL.
+    </p>
+
   </div>
+
 
   <div id="noticeList"></div>
 
-  <div class="empty" id="noticeEmpty" style="display:none;">
+
+  <div
+    class="empty"
+    id="noticeEmpty"
+    style="display:none;">
+
     No notices available.
+
   </div>
 
 </section>
@@ -1203,17 +1535,29 @@ tr:hover td{
      LEAVE
 ========================= -->
 
-<section class="section" id="leave">
+<section
+  class="section"
+  id="leave">
 
   <div class="section-head">
-    <h2>Leave Application</h2>
-    <p>Apply for leave and check the response from Usthad.</p>
+
+    <h2>
+      Leave Application
+    </h2>
+
+    <p>
+      Apply for leave and check the response from Usthad.
+    </p>
+
   </div>
 
 
   <div class="panel">
 
-    <h3>New Leave Application</h3>
+    <h3>
+      New Leave Application
+    </h3>
+
 
     <form id="leaveForm">
 
@@ -1221,7 +1565,9 @@ tr:hover td{
 
         <div class="field">
 
-          <label>Leave Date</label>
+          <label>
+            Leave Date
+          </label>
 
           <input
             type="date"
@@ -1231,9 +1577,12 @@ tr:hover td{
 
         </div>
 
+
         <div class="field">
 
-          <label>Reason</label>
+          <label>
+            Reason
+          </label>
 
           <input
             id="leaveReason"
@@ -1243,9 +1592,12 @@ tr:hover td{
 
         </div>
 
+
         <div class="field full">
 
-          <label>Additional Details</label>
+          <label>
+            Additional Details
+          </label>
 
           <textarea
             id="leaveDetails"
@@ -1256,12 +1608,16 @@ tr:hover td{
 
       </div>
 
+
       <br>
+
 
       <button
         class="primary"
         type="submit">
+
         Submit Leave Application
+
       </button>
 
     </form>
@@ -1271,12 +1627,21 @@ tr:hover td{
 
   <div class="panel">
 
-    <h3>My Leave Applications</h3>
+    <h3>
+      My Leave Applications
+    </h3>
+
 
     <div id="leaveList"></div>
 
-    <div class="empty" id="leaveEmpty" style="display:none;">
+
+    <div
+      class="empty"
+      id="leaveEmpty"
+      style="display:none;">
+
       No leave applications yet.
+
     </div>
 
   </div>
@@ -1288,23 +1653,37 @@ tr:hover td{
      MESSAGES
 ========================= -->
 
-<section class="section" id="messages">
+<section
+  class="section"
+  id="messages">
 
   <div class="section-head">
-    <h2>Messages</h2>
-    <p>Contact Usthad regarding your child's studies.</p>
+
+    <h2>
+      Messages
+    </h2>
+
+    <p>
+      Contact Usthad regarding your child's studies.
+    </p>
+
   </div>
 
 
   <div class="panel">
 
-    <h3>Send Message</h3>
+    <h3>
+      Send Message
+    </h3>
+
 
     <form id="messageForm">
 
       <div class="field">
 
-        <label>Message</label>
+        <label>
+          Message
+        </label>
 
         <textarea
           id="messageText"
@@ -1314,12 +1693,16 @@ tr:hover td{
 
       </div>
 
+
       <br>
+
 
       <button
         class="primary"
         type="submit">
+
         Send Message
+
       </button>
 
     </form>
@@ -1329,12 +1712,21 @@ tr:hover td{
 
   <div class="panel">
 
-    <h3>Message History</h3>
+    <h3>
+      Message History
+    </h3>
+
 
     <div id="messageList"></div>
 
-    <div class="empty" id="messageEmpty" style="display:none;">
+
+    <div
+      class="empty"
+      id="messageEmpty"
+      style="display:none;">
+
       No messages yet.
+
     </div>
 
   </div>
@@ -1343,6 +1735,7 @@ tr:hover td{
 
 
 </div>
+
 </main>
 
 </div>
@@ -1373,7 +1766,6 @@ import {
   doc,
   query,
   where,
-  orderBy,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
@@ -1424,8 +1816,10 @@ const $ =
 
 function escapeHtml(value){
 
-  if(value === null ||
-     value === undefined){
+  if(
+    value === null ||
+    value === undefined
+  ){
 
     return "";
 
@@ -1749,12 +2143,19 @@ onAuthStateChanged(
 
 
       await Promise.all([
+
         loadAttendance(),
+
         loadStudy(),
+
         loadResults(),
+
         loadNotices(),
+
         loadLeaves(),
+
         loadMessages()
+
       ]);
 
 
@@ -1793,7 +2194,9 @@ onAuthStateChanged(
           <button
             id="errorLogout"
             class="primary">
+
             Back to Login
+
           </button>
 
         </div>`;
@@ -1857,8 +2260,11 @@ async function loadStudent(){
 
 
   studentData = {
+
     id:first.id,
+
     ...first.data()
+
   };
 
 
@@ -1884,17 +2290,21 @@ async function loadStudent(){
     .textContent =
     name;
 
+
   $("homeStudentNumber")
     .textContent =
     number;
+
 
   $("homeNo")
     .textContent =
     number;
 
+
   $("homeClass")
     .textContent =
     className;
+
 
   $("homeParentEmail")
     .textContent =
@@ -1905,13 +2315,16 @@ async function loadStudent(){
     .textContent =
     name;
 
+
   $("childNumber")
     .textContent =
     number;
 
+
   $("childClass")
     .textContent =
     className;
+
 
   $("childParentEmail")
     .textContent =
@@ -1926,6 +2339,7 @@ async function loadStudent(){
     .textContent =
     initial;
 
+
   $("childAvatar")
     .textContent =
     initial;
@@ -1935,6 +2349,22 @@ async function loadStudent(){
 
 /* =========================================================
    ATTENDANCE
+   IMPORTANT RULE:
+
+   1. Admin marks Absent
+      => Parent sees Absent
+
+   2. Admin marks Leave
+      => Parent sees Leave
+
+   3. No record for TODAY
+      => Parent sees Present
+
+   4. Existing historical attendance
+      => Display normally
+
+   Admin can therefore record only
+   exceptions: Absent / Leave.
 ========================================================= */
 
 async function loadAttendance(){
@@ -1954,27 +2384,126 @@ async function loadAttendance(){
     await getDocs(q);
 
 
-  const rows = [];
+  const records = [];
 
 
   snap.forEach(item=>{
 
-    rows.push({
+    records.push({
+
       id:item.id,
+
       ...item.data()
+
     });
 
   });
 
 
-  rows.sort((a,b)=>
-    String(
-      b.date || ""
-    ).localeCompare(
+  /*
+    Today in YYYY-MM-DD format.
+    Attendance dates in Admin are stored
+    in the same format.
+  */
+
+  const today =
+    new Date()
+      .toISOString()
+      .split("T")[0];
+
+
+  /*
+    Group attendance by date.
+
+    This also protects against accidental
+    duplicate records for the same student/date.
+  */
+
+  const dateMap = {};
+
+
+  records.forEach(data=>{
+
+    const date =
       String(
-        a.date || ""
+        data.date || ""
+      ).trim();
+
+
+    if(!date){
+      return;
+    }
+
+
+    const status =
+      String(
+        data.status || ""
+      ).trim();
+
+
+    /*
+      If more than one record exists
+      for the same date, Absent/Leave
+      takes priority over Present.
+    */
+
+    if(!dateMap[date]){
+
+      dateMap[date] = {
+
+        date:date,
+
+        status:
+          status || "Present"
+
+      };
+
+    }else{
+
+      if(
+        status === "Absent" ||
+        status === "Leave"
+      ){
+
+        dateMap[date].status =
+          status;
+
+      }
+
+    }
+
+  });
+
+
+  /*
+    TODAY:
+
+    If Admin has not created a record
+    for today, automatically add Present.
+  */
+
+  if(!dateMap[today]){
+
+    dateMap[today] = {
+
+      date:today,
+
+      status:"Present"
+
+    };
+
+  }
+
+
+  const rows =
+    Object.values(dateMap);
+
+
+  rows.sort((a,b)=>
+    String(b.date)
+      .localeCompare(
+        String(a.date)
       )
-    )
   );
 
 
@@ -2000,33 +2529,40 @@ async function loadAttendance(){
 
     rows.forEach(data=>{
 
-      const tr =
-        document.createElement(
-          "tr"
-        );
+      let status =
+        data.status ||
+        "Present";
 
 
       let badge =
-        "yellow";
+        "green";
 
 
-      if(
-        data.status ===
-        "Present"
-      ){
-
-        badge =
-          "green";
-
-      }else if(
-        data.status ===
-        "Absent"
-      ){
+      if(status === "Absent"){
 
         badge =
           "red";
 
+      }else if(status === "Leave"){
+
+        badge =
+          "yellow";
+
+      }else{
+
+        status =
+          "Present";
+
+        badge =
+          "green";
+
       }
+
+
+      const tr =
+        document.createElement(
+          "tr"
+        );
 
 
       tr.innerHTML = `
@@ -2038,11 +2574,11 @@ async function loadAttendance(){
         </td>
 
         <td>
+
           <span class="badge ${badge}">
-            ${escapeHtml(
-              data.status || "-"
-            )}
+            ${escapeHtml(status)}
           </span>
+
         </td>
 
       `;
@@ -2056,9 +2592,14 @@ async function loadAttendance(){
   }
 
 
+  /*
+    Keep the Home statistic based on
+    actual Firebase attendance records.
+  */
+
   $("attendanceTotal")
     .textContent =
-    rows.length;
+    records.length;
 
 }
 
@@ -2090,8 +2631,11 @@ async function loadStudy(){
   snap.forEach(item=>{
 
     rows.push({
+
       id:item.id,
+
       ...item.data()
+
     });
 
   });
@@ -2130,27 +2674,15 @@ async function loadStudy(){
 
     rows.forEach(data=>{
 
-      /* =========================
-         HIFZ PERFORMANCE
-      ========================= */
-
       let performance =
         data.performance ||
         "Not specified";
 
 
-      /* =========================
-         DARS & STUDY STATUS
-      ========================= */
-
       let studyStatus =
         data.studyStatus ||
         "Not specified";
 
-
-      /* =========================
-         HIFZ PERFORMANCE BAR
-      ========================= */
 
       let width =
         70;
@@ -2224,6 +2756,7 @@ async function loadStudy(){
         ">
 
           <b>New Lesson:</b>
+
           ${escapeHtml(
             data.newLesson || "-"
           )}
@@ -2231,14 +2764,13 @@ async function loadStudy(){
           &nbsp; | &nbsp;
 
           <b>Revision:</b>
+
           ${escapeHtml(
             data.revision || "-"
           )}
 
         </div>
 
-
-        <!-- HIFZ PERFORMANCE BAR -->
 
         <div class="progress-line">
 
@@ -2250,8 +2782,6 @@ async function loadStudy(){
         </div>
 
 
-        <!-- HIFZ PERFORMANCE + DARS STUDY -->
-
         <div style="
           margin-top:12px;
           display:flex;
@@ -2260,24 +2790,28 @@ async function loadStudy(){
         ">
 
           <span class="badge blue">
+
             Hifz Performance:
+
             ${escapeHtml(
               performance
             )}
+
           </span>
 
 
           <span class="badge green">
+
             Dars & Study Status:
+
             ${escapeHtml(
               studyStatus
             )}
+
           </span>
 
         </div>
 
-
-        <!-- TEACHER NOTE -->
 
         ${
           data.note
@@ -2287,10 +2821,13 @@ async function loadStudy(){
               color:#718096;
               font-size:12px;
             ">
+
               <b>Teacher Note:</b>
+
               ${escapeHtml(
                 data.note
               )}
+
             </div>
           `
           : ""
@@ -2346,8 +2883,11 @@ async function loadResults(){
   snap.forEach(item=>{
 
     rows.push({
+
       id:item.id,
+
       ...item.data()
+
     });
 
   });
@@ -2405,28 +2945,39 @@ async function loadResults(){
         <div>
 
           <div class="result-title">
+
             ${escapeHtml(
               data.title ||
               "Study Result"
             )}
+
           </div>
 
+
           <div class="result-date">
+
             Published result
+
           </div>
 
         </div>
 
+
         <div>
 
           <div class="result-mark">
+
             ${escapeHtml(
               data.mark || "-"
             )}
+
           </div>
 
+
           <span class="badge green">
+
             Published
+
           </span>
 
         </div>
@@ -2476,8 +3027,11 @@ async function loadNotices(){
   snap.forEach(item=>{
 
     rows.push({
+
       id:item.id,
+
       ...item.data()
+
     });
 
   });
@@ -2533,22 +3087,30 @@ async function loadNotices(){
       div.innerHTML = `
 
         <h4>
+
           ${escapeHtml(
             data.title ||
             "Notice"
           )}
+
         </h4>
 
+
         <p>
+
           ${escapeHtml(
             data.text || ""
           )}
+
         </p>
 
+
         <small>
+
           ${getDateText(
             data.createdAt
           )}
+
         </small>
 
       `;
@@ -2692,8 +3254,11 @@ async function loadLeaves(){
   snap.forEach(item=>{
 
     rows.push({
+
       id:item.id,
+
       ...item.data()
+
     });
 
   });
@@ -2786,40 +3351,58 @@ async function loadLeaves(){
           <small style="
             color:#718096;
           ">
+
             ${escapeHtml(
               data.leaveDate || "-"
             )}
+
           </small>
 
         </div>
 
+
         <span class="badge ${badge}">
+
           ${escapeHtml(
             status
           )}
+
         </span>
 
       </div>
 
+
       <p>
-        <strong>Reason:</strong>
+
+        <strong>
+          Reason:
+        </strong>
+
         ${escapeHtml(
           data.reason || "-"
         )}
+
       </p>
+
 
       ${
         data.details
         ? `
           <p>
-            <strong>Details:</strong>
+
+            <strong>
+              Details:
+            </strong>
+
             ${escapeHtml(
               data.details
             )}
+
           </p>
         `
         : ""
       }
+
 
       ${
         data.reply
@@ -2831,9 +3414,11 @@ async function loadLeaves(){
             </strong>
 
             <p>
+
               ${escapeHtml(
                 data.reply
               )}
+
             </p>
 
           </div>
@@ -2970,8 +3555,11 @@ async function loadMessages(){
   snap.forEach(item=>{
 
     rows.push({
+
       id:item.id,
+
       ...item.data()
+
     });
 
   });
@@ -3046,19 +3634,26 @@ async function loadMessages(){
           My Message
         </h4>
 
+
         <span class="badge ${badge}">
+
           ${escapeHtml(
             status
           )}
+
         </span>
 
       </div>
 
+
       <p>
+
         ${escapeHtml(
           data.text || "-"
         )}
+
       </p>
+
 
       ${
         data.reply
@@ -3070,9 +3665,11 @@ async function loadMessages(){
             </strong>
 
             <p>
+
               ${escapeHtml(
                 data.reply
               )}
+
             </p>
 
           </div>
@@ -3083,7 +3680,9 @@ async function loadMessages(){
             color:#718096;
             font-size:12px;
           ">
+
             Waiting for Usthad's reply...
+
           </div>
         `
       }
