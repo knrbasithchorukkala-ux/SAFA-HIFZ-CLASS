@@ -1686,11 +1686,6 @@ onAuthStateChanged(
 
     try{
 
-      /*
-        Parent profile:
-        users/{currentUser.uid}
-      */
-
       const userRef =
         doc(
           db,
@@ -1885,10 +1880,6 @@ async function loadStudent(){
     "-";
 
 
-  /*
-    HOME
-  */
-
   $("homeChildName")
     .textContent =
     name;
@@ -1910,10 +1901,6 @@ async function loadStudent(){
     parentEmail;
 
 
-  /*
-    CHILD PAGE
-  */
-
   $("childName")
     .textContent =
     name;
@@ -1930,10 +1917,6 @@ async function loadStudent(){
     .textContent =
     parentEmail;
 
-
-  /*
-    AVATARS
-  */
 
   const initial =
     getInitial(name);
@@ -2147,10 +2130,27 @@ async function loadStudy(){
 
     rows.forEach(data=>{
 
+      /* =========================
+         HIFZ PERFORMANCE
+      ========================= */
+
       let performance =
         data.performance ||
         "Not specified";
 
+
+      /* =========================
+         DARS & STUDY STATUS
+      ========================= */
+
+      let studyStatus =
+        data.studyStatus ||
+        "Not specified";
+
+
+      /* =========================
+         HIFZ PERFORMANCE BAR
+      ========================= */
 
       let width =
         70;
@@ -2216,6 +2216,7 @@ async function loadStudy(){
 
         </div>
 
+
         <div style="
           font-size:13px;
           color:#536477;
@@ -2236,6 +2237,9 @@ async function loadStudy(){
 
         </div>
 
+
+        <!-- HIFZ PERFORMANCE BAR -->
+
         <div class="progress-line">
 
           <div
@@ -2245,35 +2249,52 @@ async function loadStudy(){
 
         </div>
 
+
+        <!-- HIFZ PERFORMANCE + DARS STUDY -->
+
         <div style="
-          margin-top:9px;
+          margin-top:12px;
           display:flex;
-          justify-content:space-between;
-          gap:10px;
+          flex-wrap:wrap;
+          gap:8px;
         ">
 
           <span class="badge blue">
+            Hifz Performance:
             ${escapeHtml(
               performance
             )}
           </span>
 
-          ${
-            data.note
-            ? `
-              <span style="
-                color:#718096;
-                font-size:12px;
-              ">
-                ${escapeHtml(
-                  data.note
-                )}
-              </span>
-            `
-            : ""
-          }
+
+          <span class="badge green">
+            Dars & Study Status:
+            ${escapeHtml(
+              studyStatus
+            )}
+          </span>
 
         </div>
+
+
+        <!-- TEACHER NOTE -->
+
+        ${
+          data.note
+          ? `
+            <div style="
+              margin-top:10px;
+              color:#718096;
+              font-size:12px;
+            ">
+              <b>Teacher Note:</b>
+              ${escapeHtml(
+                data.note
+              )}
+            </div>
+          `
+          : ""
+        }
 
       `;
 
