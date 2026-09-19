@@ -262,17 +262,93 @@ button:disabled{
   padding:30px;
 }
 
-/* ONLY NEW GREETING */
 
-.greeting{
+/* =========================
+   ASSALAMU ALAIKUM BANNER
+========================= */
+
+.admin-welcome{
+  position:relative;
+  overflow:hidden;
   margin-bottom:22px;
-  font-size:25px;
-  font-weight:800;
-  color:var(--navy);
-  letter-spacing:.2px;
+  padding:30px;
+  border-radius:18px;
+  color:#fff;
+
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(255,255,255,.16),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 15% 90%,
+      rgba(45,212,191,.20),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #0b2942 0%,
+      #0f5f70 52%,
+      #0f766e 100%
+    );
+
+  box-shadow:
+    0 12px 30px rgba(15,55,75,.16);
 }
 
-/* END OF NEW GREETING */
+.admin-welcome::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.12;
+
+  background-image:
+    linear-gradient(
+      30deg,
+      transparent 12%,
+      rgba(255,255,255,.5) 13%,
+      transparent 14%
+    ),
+    linear-gradient(
+      150deg,
+      transparent 12%,
+      rgba(255,255,255,.5) 13%,
+      transparent 14%
+    );
+
+  background-size:42px 42px;
+  pointer-events:none;
+}
+
+.admin-welcome::after{
+  content:"✦  ◇  ✦  ◇  ✦";
+  position:absolute;
+  right:24px;
+  bottom:14px;
+  color:rgba(255,255,255,.12);
+  font-size:42px;
+  letter-spacing:14px;
+  pointer-events:none;
+}
+
+.welcome-content{
+  position:relative;
+  z-index:1;
+}
+
+.admin-welcome h2{
+  margin:0;
+  font-size:30px;
+  line-height:1.2;
+  font-weight:800;
+}
+
+
+/* =========================
+   END ASSALAMU ALAIKUM
+========================= */
+
 
 .section{
   display:none;
@@ -609,6 +685,7 @@ td strong{
   flex-wrap:wrap;
 }
 
+
 /* ATTENDANCE GROUP */
 
 .attendance-date{
@@ -665,6 +742,7 @@ td strong{
   background:#fde1df;
 }
 
+
 @media(max-width:1100px){
 
   .stats{
@@ -676,6 +754,7 @@ td strong{
   }
 
 }
+
 
 @media(max-width:900px){
 
@@ -710,6 +789,7 @@ td strong{
   }
 
 }
+
 
 @media(max-width:600px){
 
@@ -759,12 +839,16 @@ td strong{
     align-items:stretch;
   }
 
-  .greeting{
-    font-size:22px;
-    margin-bottom:18px;
+  .admin-welcome{
+    padding:24px 20px;
+  }
+
+  .admin-welcome h2{
+    font-size:24px;
   }
 
 }
+
 
 @media(max-width:400px){
 
@@ -850,6 +934,7 @@ td strong{
 
 </aside>
 
+
 <main class="main">
 
 <header class="topbar">
@@ -861,14 +946,19 @@ td strong{
     </button>
 
     <div>
-      <div class="top-title">SAFA QURAN COLLEGE</div>
+
+      <div class="top-title">
+        SAFA QURAN COLLEGE
+      </div>
 
       <div class="top-subtitle">
         ONLINE PORTAL Management System
       </div>
+
     </div>
 
   </div>
+
 
   <div class="top-right">
 
@@ -884,95 +974,240 @@ td strong{
 
 </header>
 
+
 <div class="content">
+
 
 <section class="section active" id="home">
 
-  <!-- ONLY NEW GREETING -->
+  <!-- ASSALAMU ALAIKUM BANNER -->
 
-  <div class="greeting">
-    Assalamu Alaikum 🌿
+  <div class="admin-welcome">
+
+    <div class="welcome-content">
+
+      <h2>
+        Assalamu Alaikum 🌿
+      </h2>
+
+    </div>
+
   </div>
+
 
   <div class="stats">
 
     <div class="stat">
-      <div class="stat-icon">👨‍🎓</div>
-      <small>Total Students</small>
-      <strong id="studentCount">0</strong>
+
+      <div class="stat-icon">
+        👨‍🎓
+      </div>
+
+      <small>
+        Total Students
+      </small>
+
+      <strong id="studentCount">
+        0
+      </strong>
+
     </div>
 
-    <div class="stat">
-      <div class="stat-icon">✓</div>
-      <small>Attendance Records</small>
-      <strong id="attendanceCount">0</strong>
-    </div>
 
     <div class="stat">
-      <div class="stat-icon">📝</div>
-      <small>Leave Requests</small>
-      <strong id="leaveCount">0</strong>
+
+      <div class="stat-icon">
+        ✓
+      </div>
+
+      <small>
+        Attendance Records
+      </small>
+
+      <strong id="attendanceCount">
+        0
+      </strong>
+
     </div>
 
+
     <div class="stat">
-      <div class="stat-icon">💬</div>
-      <small>Parent Messages</small>
-      <strong id="messageCount">0</strong>
+
+      <div class="stat-icon">
+        📝
+      </div>
+
+      <small>
+        Leave Requests
+      </small>
+
+      <strong id="leaveCount">
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-icon">
+        💬
+      </div>
+
+      <small>
+        Parent Messages
+      </small>
+
+      <strong id="messageCount">
+        0
+      </strong>
+
     </div>
 
   </div>
+
 
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>Quick Access</h3>
+
+        <h3>
+          Quick Access
+        </h3>
 
         <div class="panel-desc">
           Frequently used management tools
         </div>
+
       </div>
 
     </div>
 
+
     <div class="quick">
 
-      <button class="quick-btn" data-go="students">
-        <div class="quick-icon">👨‍🎓</div>
-        <strong>Students</strong>
-        <small>Add and manage students</small>
+
+      <button
+        class="quick-btn"
+        data-go="students"
+      >
+
+        <div class="quick-icon">
+          👨‍🎓
+        </div>
+
+        <strong>
+          Students
+        </strong>
+
+        <small>
+          Add and manage students
+        </small>
+
       </button>
 
-      <button class="quick-btn" data-go="attendance">
-        <div class="quick-icon">✓</div>
-        <strong>Attendance</strong>
-        <small>Record daily attendance</small>
+
+      <button
+        class="quick-btn"
+        data-go="attendance"
+      >
+
+        <div class="quick-icon">
+          ✓
+        </div>
+
+        <strong>
+          Attendance
+        </strong>
+
+        <small>
+          Record daily attendance
+        </small>
+
       </button>
 
-      <button class="quick-btn" data-go="study">
-        <div class="quick-icon">📖</div>
-        <strong>Study Progress</strong>
-        <small>Update Quran study progress</small>
+
+      <button
+        class="quick-btn"
+        data-go="study"
+      >
+
+        <div class="quick-icon">
+          📖
+        </div>
+
+        <strong>
+          Study Progress
+        </strong>
+
+        <small>
+          Update Quran study progress
+        </small>
+
       </button>
 
-      <button class="quick-btn" data-go="results">
-        <div class="quick-icon">🏆</div>
-        <strong>Results</strong>
-        <small>Publish student results</small>
+
+      <button
+        class="quick-btn"
+        data-go="results"
+      >
+
+        <div class="quick-icon">
+          🏆
+        </div>
+
+        <strong>
+          Results
+        </strong>
+
+        <small>
+          Publish student results
+        </small>
+
       </button>
 
-      <button class="quick-btn" data-go="notices">
-        <div class="quick-icon">📢</div>
-        <strong>Notices</strong>
-        <small>Publish announcements</small>
+
+      <button
+        class="quick-btn"
+        data-go="notices"
+      >
+
+        <div class="quick-icon">
+          📢
+        </div>
+
+        <strong>
+          Notices
+        </strong>
+
+        <small>
+          Publish announcements
+        </small>
+
       </button>
 
-      <button class="quick-btn" data-go="publicResult">
-        <div class="quick-icon">🌐</div>
-        <strong>Public Result</strong>
-        <small>Open public result system</small>
+
+      <button
+        class="quick-btn"
+        data-go="publicResult"
+      >
+
+        <div class="quick-icon">
+          🌐
+        </div>
+
+        <strong>
+          Public Result
+        </strong>
+
+        <small>
+          Open public result system
+        </small>
+
       </button>
+
 
     </div>
 
@@ -980,13 +1215,21 @@ td strong{
 
 </section>
 
+
 <section class="section" id="students">
 
   <div class="section-head">
 
     <div>
-      <h2>Students</h2>
-      <p>Manage Quran students and parent information.</p>
+
+      <h2>
+        Students
+      </h2>
+
+      <p>
+        Manage Quran students and parent information.
+      </p>
+
     </div>
 
     <div class="section-tag">
@@ -995,68 +1238,98 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>Add Student</h3>
+
+        <h3>
+          Add Student
+        </h3>
 
         <div class="panel-desc">
           Create a new student profile
         </div>
+
       </div>
 
     </div>
+
 
     <form id="studentForm">
 
       <div class="form-grid">
 
+
         <div class="field">
-          <label>Student Number</label>
+
+          <label>
+            Student Number
+          </label>
 
           <input
             id="studentNumber"
             required
             placeholder="Example: 131"
           >
+
         </div>
 
+
         <div class="field">
-          <label>Student Name</label>
+
+          <label>
+            Student Name
+          </label>
 
           <input
             id="studentName"
             required
             placeholder="Student full name"
           >
+
         </div>
 
+
         <div class="field">
-          <label>Class</label>
+
+          <label>
+            Class
+          </label>
 
           <input
             id="className"
             placeholder="Example: HIFZ A"
           >
+
         </div>
 
+
         <div class="field">
-          <label>Parent Email</label>
+
+          <label>
+            Parent Email
+          </label>
 
           <input
             id="parentEmail"
             type="email"
             placeholder="Parent email"
           >
+
         </div>
+
 
       </div>
 
       <br>
 
-      <button class="primary" type="submit">
+      <button
+        class="primary"
+        type="submit"
+      >
         + Add Student
       </button>
 
@@ -1064,19 +1337,25 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>Student List</h3>
+
+        <h3>
+          Student List
+        </h3>
 
         <div class="panel-desc">
           All registered students
         </div>
+
       </div>
 
     </div>
+
 
     <div class="toolbar">
 
@@ -1088,6 +1367,7 @@ td strong{
 
     </div>
 
+
     <div class="table-wrap">
 
       <table>
@@ -1095,11 +1375,27 @@ td strong{
         <thead>
 
           <tr>
-            <th>No.</th>
-            <th>Name</th>
-            <th>Class</th>
-            <th>Parent Email</th>
-            <th>Action</th>
+
+            <th>
+              No.
+            </th>
+
+            <th>
+              Name
+            </th>
+
+            <th>
+              Class
+            </th>
+
+            <th>
+              Parent Email
+            </th>
+
+            <th>
+              Action
+            </th>
+
           </tr>
 
         </thead>
@@ -1114,13 +1410,21 @@ td strong{
 
 </section>
 
+
 <section class="section" id="attendance">
 
   <div class="section-head">
 
     <div>
-      <h2>Attendance</h2>
-      <p>Record and manage daily student attendance.</p>
+
+      <h2>
+        Attendance
+      </h2>
+
+      <p>
+        Record and manage daily student attendance.
+      </p>
+
     </div>
 
     <div class="section-tag">
@@ -1129,29 +1433,41 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>New Attendance Record</h3>
+
+        <h3>
+          New Attendance Record
+        </h3>
 
         <div class="panel-desc">
           Record today's student attendance
         </div>
+
       </div>
 
     </div>
+
 
     <form id="attendanceForm">
 
       <div class="form-grid">
 
+
         <div class="field">
 
-          <label>Student</label>
+          <label>
+            Student
+          </label>
 
-          <select id="attendanceStudent" required>
+          <select
+            id="attendanceStudent"
+            required
+          >
 
             <option value="">
               Select student
@@ -1161,9 +1477,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Date</label>
+          <label>
+            Date
+          </label>
 
           <input
             type="date"
@@ -1173,11 +1492,17 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Status</label>
+          <label>
+            Status
+          </label>
 
-          <select id="attendanceStatus" required>
+          <select
+            id="attendanceStatus"
+            required
+          >
 
             <option value="">
               Select status
@@ -1199,11 +1524,15 @@ td strong{
 
         </div>
 
+
       </div>
 
       <br>
 
-      <button class="primary" type="submit">
+      <button
+        class="primary"
+        type="submit"
+      >
         Save Attendance
       </button>
 
@@ -1211,19 +1540,25 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>Attendance Records</h3>
+
+        <h3>
+          Attendance Records
+        </h3>
 
         <div class="panel-desc">
           Latest attendance records
         </div>
+
       </div>
 
     </div>
+
 
     <div class="table-wrap">
 
@@ -1232,7 +1567,11 @@ td strong{
         <thead>
 
           <tr>
-            <th>Latest Attendance Records</th>
+
+            <th>
+              Latest Attendance Records
+            </th>
+
           </tr>
 
         </thead>
@@ -1247,13 +1586,21 @@ td strong{
 
 </section>
 
+
 <section class="section" id="study">
 
   <div class="section-head">
 
     <div>
-      <h2>Study Progress</h2>
-      <p>Manage daily Quran study progress.</p>
+
+      <h2>
+        Study Progress
+      </h2>
+
+      <p>
+        Manage daily Quran study progress.
+      </p>
+
     </div>
 
     <div class="section-tag">
@@ -1262,29 +1609,41 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>Add Study Progress</h3>
+
+        <h3>
+          Add Study Progress
+        </h3>
 
         <div class="panel-desc">
           Record lesson and revision details
         </div>
+
       </div>
 
     </div>
+
 
     <form id="studyForm">
 
       <div class="form-grid">
 
+
         <div class="field">
 
-          <label>Student</label>
+          <label>
+            Student
+          </label>
 
-          <select id="studyStudent" required>
+          <select
+            id="studyStudent"
+            required
+          >
 
             <option value="">
               Select student
@@ -1294,9 +1653,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Date</label>
+          <label>
+            Date
+          </label>
 
           <input
             type="date"
@@ -1306,9 +1668,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Surah / Portion</label>
+          <label>
+            Surah / Portion
+          </label>
 
           <input
             id="studySurah"
@@ -1317,9 +1682,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>New Lesson</label>
+          <label>
+            New Lesson
+          </label>
 
           <input
             id="newLesson"
@@ -1328,9 +1696,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Revision</label>
+          <label>
+            Revision
+          </label>
 
           <input
             id="revision"
@@ -1339,9 +1710,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Performance</label>
+          <label>
+            Performance
+          </label>
 
           <select id="performance">
 
@@ -1369,9 +1743,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Dars &amp; Study Status</label>
+          <label>
+            Dars &amp; Study Status
+          </label>
 
           <select id="studyStatus">
 
@@ -1407,9 +1784,12 @@ td strong{
 
         </div>
 
+
         <div class="field full">
 
-          <label>Teacher Note</label>
+          <label>
+            Teacher Note
+          </label>
 
           <textarea
             id="studyNote"
@@ -1418,11 +1798,15 @@ td strong{
 
         </div>
 
+
       </div>
 
       <br>
 
-      <button class="primary" type="submit">
+      <button
+        class="primary"
+        type="submit"
+      >
         Save Progress
       </button>
 
@@ -1430,19 +1814,25 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>Study Records</h3>
+
+        <h3>
+          Study Records
+        </h3>
 
         <div class="panel-desc">
           Latest Quran study progress
         </div>
+
       </div>
 
     </div>
+
 
     <div class="table-wrap">
 
@@ -1451,14 +1841,39 @@ td strong{
         <thead>
 
           <tr>
-            <th>Student</th>
-            <th>Date</th>
-            <th>Surah</th>
-            <th>New Lesson</th>
-            <th>Revision</th>
-            <th>Performance</th>
-            <th>Dars &amp; Study Status</th>
-            <th>Action</th>
+
+            <th>
+              Student
+            </th>
+
+            <th>
+              Date
+            </th>
+
+            <th>
+              Surah
+            </th>
+
+            <th>
+              New Lesson
+            </th>
+
+            <th>
+              Revision
+            </th>
+
+            <th>
+              Performance
+            </th>
+
+            <th>
+              Dars &amp; Study Status
+            </th>
+
+            <th>
+              Action
+            </th>
+
           </tr>
 
         </thead>
@@ -1473,13 +1888,21 @@ td strong{
 
 </section>
 
+
 <section class="section" id="results">
 
   <div class="section-head">
 
     <div>
-      <h2>Results</h2>
-      <p>Create, publish and manage student results.</p>
+
+      <h2>
+        Results
+      </h2>
+
+      <p>
+        Create, publish and manage student results.
+      </p>
+
     </div>
 
     <div class="section-tag">
@@ -1488,29 +1911,41 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>Create Result</h3>
+
+        <h3>
+          Create Result
+        </h3>
 
         <div class="panel-desc">
           Draft or publish a student result
         </div>
+
       </div>
 
     </div>
+
 
     <form id="resultForm">
 
       <div class="form-grid">
 
+
         <div class="field">
 
-          <label>Student</label>
+          <label>
+            Student
+          </label>
 
-          <select id="resultStudent" required>
+          <select
+            id="resultStudent"
+            required
+          >
 
             <option value="">
               Select student
@@ -1520,9 +1955,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Result Title</label>
+          <label>
+            Result Title
+          </label>
 
           <input
             id="resultTitle"
@@ -1532,9 +1970,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Mark / Grade</label>
+          <label>
+            Mark / Grade
+          </label>
 
           <input
             id="resultMark"
@@ -1544,9 +1985,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Status</label>
+          <label>
+            Status
+          </label>
 
           <select id="resultStatus">
 
@@ -1562,11 +2006,15 @@ td strong{
 
         </div>
 
+
       </div>
 
       <br>
 
-      <button class="primary" type="submit">
+      <button
+        class="primary"
+        type="submit"
+      >
         Save Result
       </button>
 
@@ -1574,19 +2022,25 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>Results</h3>
+
+        <h3>
+          Results
+        </h3>
 
         <div class="panel-desc">
           Manage draft and published results
         </div>
+
       </div>
 
     </div>
+
 
     <div class="table-wrap">
 
@@ -1595,11 +2049,27 @@ td strong{
         <thead>
 
           <tr>
-            <th>Student</th>
-            <th>Title</th>
-            <th>Mark</th>
-            <th>Status</th>
-            <th>Action</th>
+
+            <th>
+              Student
+            </th>
+
+            <th>
+              Title
+            </th>
+
+            <th>
+              Mark
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Action
+            </th>
+
           </tr>
 
         </thead>
@@ -1614,13 +2084,21 @@ td strong{
 
 </section>
 
+
 <section class="section" id="notices">
 
   <div class="section-head">
 
     <div>
-      <h2>Notices</h2>
-      <p>Publish announcements for parents.</p>
+
+      <h2>
+        Notices
+      </h2>
+
+      <p>
+        Publish announcements for parents.
+      </p>
+
     </div>
 
     <div class="section-tag">
@@ -1629,27 +2107,36 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>Create Notice</h3>
+
+        <h3>
+          Create Notice
+        </h3>
 
         <div class="panel-desc">
           Create an announcement
         </div>
+
       </div>
 
     </div>
+
 
     <form id="noticeForm">
 
       <div class="form-grid">
 
+
         <div class="field full">
 
-          <label>Notice Title</label>
+          <label>
+            Notice Title
+          </label>
 
           <input
             id="noticeTitle"
@@ -1659,9 +2146,12 @@ td strong{
 
         </div>
 
+
         <div class="field full">
 
-          <label>Notice</label>
+          <label>
+            Notice
+          </label>
 
           <textarea
             id="noticeText"
@@ -1671,9 +2161,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Status</label>
+          <label>
+            Status
+          </label>
 
           <select id="noticeStatus">
 
@@ -1689,11 +2182,15 @@ td strong{
 
         </div>
 
+
       </div>
 
       <br>
 
-      <button class="primary" type="submit">
+      <button
+        class="primary"
+        type="submit"
+      >
         Save Notice
       </button>
 
@@ -1701,19 +2198,25 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>Notices</h3>
+
+        <h3>
+          Notices
+        </h3>
 
         <div class="panel-desc">
           Published and draft announcements
         </div>
+
       </div>
 
     </div>
+
 
     <div class="table-wrap">
 
@@ -1722,10 +2225,23 @@ td strong{
         <thead>
 
           <tr>
-            <th>Title</th>
-            <th>Notice</th>
-            <th>Status</th>
-            <th>Action</th>
+
+            <th>
+              Title
+            </th>
+
+            <th>
+              Notice
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Action
+            </th>
+
           </tr>
 
         </thead>
@@ -1740,13 +2256,21 @@ td strong{
 
 </section>
 
+
 <section class="section" id="leave">
 
   <div class="section-head">
 
     <div>
-      <h2>Leave Requests</h2>
-      <p>Manage applications received from parents.</p>
+
+      <h2>
+        Leave Requests
+      </h2>
+
+      <p>
+        Manage applications received from parents.
+      </p>
+
     </div>
 
     <div class="section-tag">
@@ -1754,6 +2278,7 @@ td strong{
     </div>
 
   </div>
+
 
   <div class="panel">
 
@@ -1764,13 +2289,35 @@ td strong{
         <thead>
 
           <tr>
-            <th>Student</th>
-            <th>Parent</th>
-            <th>Date</th>
-            <th>Reason</th>
-            <th>Status</th>
-            <th>Reply</th>
-            <th>Action</th>
+
+            <th>
+              Student
+            </th>
+
+            <th>
+              Parent
+            </th>
+
+            <th>
+              Date
+            </th>
+
+            <th>
+              Reason
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Reply
+            </th>
+
+            <th>
+              Action
+            </th>
+
           </tr>
 
         </thead>
@@ -1785,13 +2332,21 @@ td strong{
 
 </section>
 
+
 <section class="section" id="messages">
 
   <div class="section-head">
 
     <div>
-      <h2>Parent Messages</h2>
-      <p>View and reply to parent communication.</p>
+
+      <h2>
+        Parent Messages
+      </h2>
+
+      <p>
+        View and reply to parent communication.
+      </p>
+
     </div>
 
     <div class="section-tag">
@@ -1799,6 +2354,7 @@ td strong{
     </div>
 
   </div>
+
 
   <div class="panel">
 
@@ -1809,12 +2365,31 @@ td strong{
         <thead>
 
           <tr>
-            <th>Student</th>
-            <th>Parent</th>
-            <th>Message</th>
-            <th>Status</th>
-            <th>Reply</th>
-            <th>Action</th>
+
+            <th>
+              Student
+            </th>
+
+            <th>
+              Parent
+            </th>
+
+            <th>
+              Message
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Reply
+            </th>
+
+            <th>
+              Action
+            </th>
+
           </tr>
 
         </thead>
@@ -1829,12 +2404,16 @@ td strong{
 
 </section>
 
+
 <section class="section" id="publicResult">
 
   <div class="section-head">
 
     <div>
-      <h2>Public Result</h2>
+
+      <h2>
+        Public Result
+      </h2>
 
       <p>
         Manage the public result checking system.
@@ -1848,9 +2427,13 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
-    <div class="welcome" style="margin:0;">
+    <div
+      class="welcome"
+      style="margin:0;"
+    >
 
       <h2 style="font-size:21px;">
         🌐 Public Result System
@@ -1874,13 +2457,16 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
 
-        <h3>How it works</h3>
+        <h3>
+          How it works
+        </h3>
 
         <div class="panel-desc">
           Simple and secure result publishing
@@ -1890,17 +2476,34 @@ td strong{
 
     </div>
 
-    <div style="line-height:2;font-size:13px;color:#526174;">
 
-      <p>① Create a result for a student.</p>
+    <div
+      style="
+        line-height:2;
+        font-size:13px;
+        color:#526174;
+      "
+    >
 
-      <p>② Keep it as <strong>Draft</strong> while preparing it.</p>
+      <p>
+        ① Create a result for a student.
+      </p>
 
-      <p>③ Change the status to <strong>Published</strong>.</p>
+      <p>
+        ② Keep it as <strong>Draft</strong> while preparing it.
+      </p>
 
-      <p>④ The public result page will show published results.</p>
+      <p>
+        ③ Change the status to <strong>Published</strong>.
+      </p>
 
-      <p>⑤ Draft results remain hidden from parents/public users.</p>
+      <p>
+        ④ The public result page will show published results.
+      </p>
+
+      <p>
+        ⑤ Draft results remain hidden from parents/public users.
+      </p>
 
     </div>
 
@@ -1908,10 +2511,12 @@ td strong{
 
 </section>
 
+
 </div>
 </main>
 
 </div>
+
 
 <script type="module">
 
@@ -1939,7 +2544,7 @@ import {
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
+  apiKey: "AIzaSyC6WpY_AThyG49YPS92rnPG9zy0PYDPVt0",
   authDomain: "safa-hifz-class-7e84b.firebaseapp.com",
   projectId: "safa-hifz-class-7e84b",
   storageBucket: "safa-hifz-class-7e84b.firebasestorage.app",
@@ -2556,7 +3161,9 @@ async function loadAttendance(){
 
           <div class="empty">
 
-            <div class="empty-icon">📅</div>
+            <div class="empty-icon">
+              📅
+            </div>
 
             No attendance records yet.
 
@@ -2577,11 +3184,6 @@ async function loadAttendance(){
         String(data.status || "")
           .trim()
           .toLowerCase();
-
-      /*
-        Present records are intentionally hidden
-        from the Latest Attendance Records display.
-      */
 
       if(
         status !== "absent" &&
@@ -2641,7 +3243,9 @@ async function loadAttendance(){
 
             <div class="empty">
 
-              <div class="empty-icon">✓</div>
+              <div class="empty-icon">
+                ✓
+              </div>
 
               No absent or leave records yet.
 
@@ -3186,9 +3790,11 @@ async function loadResults(){
       </td>
 
       <td>
+
         <strong>
           ${escapeHtml(data.mark)}
         </strong>
+
       </td>
 
       <td>
