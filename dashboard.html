@@ -751,6 +751,105 @@ td strong{
   background:#fde1df;
 }
 
+
+/* =========================================
+   EDIT STUDENT MODAL
+========================================= */
+
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(5,20,35,.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:99990;
+  backdrop-filter:blur(4px);
+}
+
+.modal-overlay.show{
+  display:flex;
+}
+
+.edit-modal{
+  width:100%;
+  max-width:650px;
+  max-height:90vh;
+  overflow-y:auto;
+  background:white;
+  border-radius:18px;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+  padding:24px;
+}
+
+.edit-modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.edit-modal-head h3{
+  font-size:20px;
+}
+
+.edit-modal-head p{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+
+.close-modal{
+  border:0;
+  background:#f1f4f7;
+  color:#526174;
+  width:36px;
+  height:36px;
+  border-radius:9px;
+  font-size:20px;
+  font-weight:700;
+}
+
+.close-modal:hover{
+  background:#e5eaf0;
+}
+
+.edit-student-number{
+  background:#f5f7fa !important;
+  color:#718096 !important;
+}
+
+.modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:20px;
+}
+
+@media(max-width:600px){
+
+  .modal-overlay{
+    padding:10px;
+  }
+
+  .edit-modal{
+    padding:18px;
+    border-radius:15px;
+  }
+
+  .modal-actions{
+    flex-direction:column;
+  }
+
+  .modal-actions button{
+    width:100%;
+  }
+
+}
+
+
 @media(max-width:1100px){
 
   .stats{
@@ -874,6 +973,150 @@ td strong{
 
 <div id="loading">SAFA QURAN COLLEGE loading...</div>
 <div id="message"></div>
+
+
+<!-- =========================
+     EDIT STUDENT MODAL
+========================= -->
+
+<div class="modal-overlay" id="editStudentModal">
+
+  <div class="edit-modal">
+
+    <div class="edit-modal-head">
+
+      <div>
+        <h3>Edit Student</h3>
+
+        <p>
+          Update student information
+        </p>
+      </div>
+
+      <button
+        type="button"
+        class="close-modal"
+        id="closeEditStudent"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <form id="editStudentForm">
+
+      <input
+        type="hidden"
+        id="editStudentId"
+      >
+
+
+      <div class="form-grid">
+
+        <div class="field">
+
+          <label>Student Number</label>
+
+          <input
+            id="editStudentNumber"
+            class="edit-student-number"
+            readonly
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Student Name</label>
+
+          <input
+            id="editStudentName"
+            required
+            placeholder="Student full name"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Class</label>
+
+          <input
+            id="editClassName"
+            placeholder="Example: HIFZ A"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Parent Email</label>
+
+          <input
+            id="editParentEmail"
+            type="email"
+            placeholder="Parent email"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Phone Number</label>
+
+          <input
+            id="editPhoneNumber"
+            type="tel"
+            placeholder="Phone number"
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>Student Address</label>
+
+          <textarea
+            id="editStudentAddress"
+            placeholder="Student address"
+          ></textarea>
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-actions">
+
+        <button
+          type="button"
+          class="secondary"
+          id="cancelEditStudent"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="primary"
+        >
+          Save Changes
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
 
 <div class="app">
 
@@ -1082,6 +1325,7 @@ td strong{
 
 </section>
 
+
 <section class="section" id="students">
 
   <div class="section-head">
@@ -1185,6 +1429,7 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
@@ -1234,6 +1479,7 @@ td strong{
   </div>
 
 </section>
+
 
 <section class="section" id="attendance">
 
@@ -1367,6 +1613,7 @@ td strong{
   </div>
 
 </section>
+
 
 <section class="section" id="study">
 
@@ -1594,6 +1841,7 @@ td strong{
 
 </section>
 
+
 <section class="section" id="results">
 
   <div class="section-head">
@@ -1735,6 +1983,7 @@ td strong{
 
 </section>
 
+
 <section class="section" id="notices">
 
   <div class="section-head">
@@ -1861,6 +2110,7 @@ td strong{
 
 </section>
 
+
 <section class="section" id="leave">
 
   <div class="section-head">
@@ -1906,6 +2156,7 @@ td strong{
 
 </section>
 
+
 <section class="section" id="messages">
 
   <div class="section-head">
@@ -1949,6 +2200,7 @@ td strong{
   </div>
 
 </section>
+
 
 <section class="section" id="publicResult">
 
@@ -2033,6 +2285,7 @@ td strong{
 </main>
 
 </div>
+
 
 <script type="module">
 
@@ -2345,7 +2598,9 @@ async function loadStudents(){
       `${data.studentNumber || ""}
        ${data.name || ""}
        ${data.className || ""}
-       ${data.parentEmail || ""}`
+       ${data.parentEmail || ""}
+       ${data.studentAddress || ""}
+       ${data.phoneNumber || ""}`
       .toLowerCase();
 
     tr.innerHTML = `
@@ -2374,7 +2629,6 @@ async function loadStudents(){
 
         <div class="actions">
 
-          <!-- NEW: EDIT BUTTON -->
           <button
             class="primary edit-student"
             data-id="${item.id}"
@@ -2403,6 +2657,7 @@ async function loadStudents(){
     window.students.length;
 
   populateStudentSelects();
+
 
   /* =========================
      DELETE STUDENT
@@ -2448,149 +2703,213 @@ async function loadStudents(){
 
   });
 
-
-  /* =========================
-     EDIT STUDENT
-  ========================= */
-
-  document.querySelectorAll(".edit-student")
-  .forEach(button=>{
-
-    button.addEventListener("click",async()=>{
-
-      const student =
-        window.students.find(
-          s => s.id === button.dataset.id
-        );
-
-      if(!student){
-
-        showMessage(
-          "Student details not found.",
-          "error"
-        );
-
-        return;
-
-      }
+}
 
 
-      const name =
-        prompt(
-          "Student Name:",
-          student.name || ""
-        );
+/* =========================
+   EDIT STUDENT
+========================= */
 
-      if(name === null){
+document.addEventListener("click",e=>{
 
-        return;
+  const button =
+    e.target.closest(".edit-student");
 
-      }
+  if(!button){
+    return;
+  }
 
+  const student =
+    window.students.find(
+      s => s.id === button.dataset.id
+    );
 
-      const className =
-        prompt(
-          "Class:",
-          student.className || ""
-        );
+  if(!student){
 
-      if(className === null){
+    showMessage(
+      "Student details not found.",
+      "error"
+    );
 
-        return;
+    return;
 
-      }
-
-
-      const parentEmail =
-        prompt(
-          "Parent Email:",
-          student.parentEmail || ""
-        );
-
-      if(parentEmail === null){
-
-        return;
-
-      }
+  }
 
 
-      const studentAddress =
-        prompt(
-          "Student Address:",
-          student.studentAddress || ""
-        );
-
-      if(studentAddress === null){
-
-        return;
-
-      }
+  $("editStudentId").value =
+    student.id;
 
 
-      const phoneNumber =
-        prompt(
-          "Phone Number:",
-          student.phoneNumber || ""
-        );
-
-      if(phoneNumber === null){
-
-        return;
-
-      }
+  $("editStudentNumber").value =
+    student.studentNumber || "";
 
 
-      try{
-
-        await updateDoc(
-          doc(
-            db,
-            "students",
-            button.dataset.id
-          ),
-          {
-            name:
-              name.trim(),
-
-            className:
-              className.trim(),
-
-            parentEmail:
-              parentEmail.trim(),
-
-            studentAddress:
-              studentAddress.trim(),
-
-            phoneNumber:
-              phoneNumber.trim()
-          }
-        );
+  $("editStudentName").value =
+    student.name || "";
 
 
-        showMessage(
-          "Student details updated successfully."
-        );
+  $("editClassName").value =
+    student.className || "";
 
 
-        await loadStudents();
+  $("editParentEmail").value =
+    student.parentEmail || "";
 
 
-      }catch(error){
+  $("editStudentAddress").value =
+    student.studentAddress || "";
 
-        console.error(error);
 
-        showMessage(
-          error.message,
-          "error"
-        );
+  $("editPhoneNumber").value =
+    student.phoneNumber || "";
 
-      }
 
-    });
+  $("editStudentModal")
+    .classList.add("show");
 
-  });
+});
+
+
+/* =========================
+   CLOSE EDIT MODAL
+========================= */
+
+function closeEditStudentModal(){
+
+  $("editStudentModal")
+    .classList.remove("show");
 
 }
+
+
+$("closeEditStudent")
+.addEventListener(
+  "click",
+  closeEditStudentModal
+);
+
+
+$("cancelEditStudent")
+.addEventListener(
+  "click",
+  closeEditStudentModal
+);
+
+
+$("editStudentModal")
+.addEventListener("click",e=>{
+
+  if(
+    e.target === $("editStudentModal")
+  ){
+
+    closeEditStudentModal();
+
+  }
+
+});
+
+
+/* =========================
+   SAVE EDITED STUDENT
+========================= */
+
+$("editStudentForm")
+.addEventListener(
+  "submit",
+  async e=>{
+
+    e.preventDefault();
+
+
+    const studentId =
+      $("editStudentId").value;
+
+
+    const name =
+      $("editStudentName")
+        .value
+        .trim();
+
+
+    const className =
+      $("editClassName")
+        .value
+        .trim();
+
+
+    const parentEmail =
+      $("editParentEmail")
+        .value
+        .trim();
+
+
+    const studentAddress =
+      $("editStudentAddress")
+        .value
+        .trim();
+
+
+    const phoneNumber =
+      $("editPhoneNumber")
+        .value
+        .trim();
+
+
+    if(!name){
+
+      showMessage(
+        "Student name is required.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    try{
+
+      await updateDoc(
+        doc(
+          db,
+          "students",
+          studentId
+        ),
+        {
+          name:name,
+          className:className,
+          parentEmail:parentEmail,
+          studentAddress:studentAddress,
+          phoneNumber:phoneNumber
+        }
+      );
+
+
+      closeEditStudentModal();
+
+
+      showMessage(
+        "Student details updated successfully."
+      );
+
+
+      await loadStudents();
+
+
+    }catch(error){
+
+      console.error(error);
+
+      showMessage(
+        error.message,
+        "error"
+      );
+
+    }
+
+  }
+);
 
 
 function populateStudentSelects(){
