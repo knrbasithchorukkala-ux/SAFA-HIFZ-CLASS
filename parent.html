@@ -31,6 +31,7 @@ body{
   font-family:Inter,Arial,sans-serif;
   background:var(--bg);
   color:var(--text);
+  position:relative;
 }
 
 button,
@@ -42,6 +43,76 @@ textarea{
 button{
   cursor:pointer;
 }
+
+
+/* =========================
+   ISLAMIC BACKGROUND
+========================= */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  opacity:.035;
+
+  background-image:
+    linear-gradient(
+      30deg,
+      #123b5d 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #123b5d 87.5%,
+      #123b5d
+    ),
+    linear-gradient(
+      150deg,
+      #123b5d 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #123b5d 87.5%,
+      #123b5d
+    ),
+    linear-gradient(
+      30deg,
+      #123b5d 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #123b5d 87.5%,
+      #123b5d
+    ),
+    linear-gradient(
+      150deg,
+      #123b5d 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #123b5d 87.5%,
+      #123b5d
+    ),
+    linear-gradient(
+      60deg,
+      #123b5d 25%,
+      transparent 25.5%,
+      transparent 75%,
+      #123b5d 75%
+    );
+
+  background-size:
+    40px 70px,
+    40px 70px,
+    40px 70px,
+    40px 70px,
+    40px 70px;
+
+  background-position:
+    0 0,
+    0 0,
+    20px 35px,
+    20px 35px,
+    0 0;
+}
+
 
 /* =========================
    LOADING
@@ -76,6 +147,7 @@ button{
   }
 }
 
+
 /* =========================
    APP
 ========================= */
@@ -84,6 +156,7 @@ button{
   min-height:100vh;
   display:flex;
 }
+
 
 /* =========================
    SIDEBAR
@@ -145,6 +218,7 @@ button{
   width:30px;
 }
 
+
 /* =========================
    MAIN
 ========================= */
@@ -154,6 +228,7 @@ button{
   width:calc(100% - 255px);
   min-height:100vh;
 }
+
 
 /* =========================
    TOPBAR
@@ -210,6 +285,7 @@ button{
   border-radius:7px;
 }
 
+
 /* =========================
    CONTENT
 ========================= */
@@ -239,6 +315,140 @@ button{
   color:var(--muted);
   font-size:14px;
 }
+
+
+/* =========================
+   ISLAMIC ASSALAMU ALAIKUM
+========================= */
+
+.islamic-welcome{
+  position:relative;
+  overflow:hidden;
+
+  margin-bottom:22px;
+
+  padding:27px 30px;
+
+  border-radius:20px;
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(7,38,55,.98),
+      rgba(18,75,88,.96)
+    );
+
+  box-shadow:
+    0 12px 35px
+    rgba(11,31,51,.14);
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+}
+
+
+/* Decorative circle */
+
+.islamic-welcome::before{
+  content:"";
+
+  position:absolute;
+
+  width:220px;
+  height:220px;
+
+  right:-65px;
+  top:-90px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.10);
+
+  border-radius:50%;
+
+  box-shadow:
+    0 0 0 25px
+    rgba(255,255,255,.025),
+
+    0 0 0 50px
+    rgba(255,255,255,.02);
+}
+
+
+/* Decorative star */
+
+.islamic-welcome::after{
+  content:"✦";
+
+  position:absolute;
+
+  right:80px;
+  bottom:12px;
+
+  font-size:55px;
+
+  color:
+    rgba(255,255,255,.08);
+}
+
+
+/* Arabic */
+
+.welcome-arabic{
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:25px;
+
+  line-height:1.8;
+
+  color:#f4d58b;
+
+  margin-bottom:4px;
+
+  direction:rtl;
+
+  position:relative;
+  z-index:1;
+}
+
+
+/* English */
+
+.welcome-title{
+  font-size:22px;
+
+  font-weight:800;
+
+  margin-top:2px;
+
+  position:relative;
+  z-index:1;
+}
+
+
+/* Gold line */
+
+.islamic-line{
+  width:65px;
+
+  height:3px;
+
+  background:#d6ad55;
+
+  border-radius:10px;
+
+  margin-top:13px;
+
+  position:relative;
+  z-index:1;
+}
+
 
 /* =========================
    HERO
@@ -280,6 +490,7 @@ button{
   opacity:.85;
   font-size:14px;
 }
+
 
 /* =========================
    CHILD CARD
@@ -348,6 +559,7 @@ button{
   font-size:14px;
 }
 
+
 /* =========================
    STATS
 ========================= */
@@ -383,6 +595,7 @@ button{
   font-size:27px;
 }
 
+
 /* =========================
    PANELS
 ========================= */
@@ -407,6 +620,7 @@ button{
   background:#f8fafc;
   border-radius:10px;
 }
+
 
 /* =========================
    TABLE
@@ -440,6 +654,7 @@ tr:hover td{
   background:#fbfcfe;
 }
 
+
 /* =========================
    BADGES
 ========================= */
@@ -471,6 +686,7 @@ tr:hover td{
   background:#fff4d8;
   color:#916300;
 }
+
 
 /* =========================
    PROGRESS
@@ -513,6 +729,7 @@ tr:hover td{
   border-radius:10px;
 }
 
+
 /* =========================
    RESULT CARDS
 ========================= */
@@ -544,6 +761,7 @@ tr:hover td{
   color:var(--primary2);
 }
 
+
 /* =========================
    NOTICE
 ========================= */
@@ -572,6 +790,7 @@ tr:hover td{
   margin-top:10px;
   color:var(--muted);
 }
+
 
 /* =========================
    FORMS
@@ -631,6 +850,7 @@ tr:hover td{
   background:#12586f;
 }
 
+
 /* =========================
    LEAVE / MESSAGE CARDS
 ========================= */
@@ -675,6 +895,7 @@ tr:hover td{
   margin-top:5px;
 }
 
+
 /* =========================
    QUICK ACTIONS
 ========================= */
@@ -708,6 +929,7 @@ tr:hover td{
   color:var(--muted);
 }
 
+
 /* =========================
    MESSAGE
 ========================= */
@@ -732,6 +954,7 @@ tr:hover td{
 .error-msg{
   background:#dc3545;
 }
+
 
 /* =========================
    MOBILE
@@ -774,6 +997,7 @@ tr:hover td{
 
 }
 
+
 @media(max-width:600px){
 
   .form-grid{
@@ -811,6 +1035,22 @@ tr:hover td{
   .result-card{
     align-items:flex-start;
     flex-direction:column;
+  }
+
+
+  /* Islamic banner mobile */
+
+  .islamic-welcome{
+    padding:22px 20px;
+    border-radius:16px;
+  }
+
+  .welcome-arabic{
+    font-size:21px;
+  }
+
+  .welcome-title{
+    font-size:19px;
   }
 
 }
@@ -1005,6 +1245,26 @@ tr:hover td{
 <section
   class="section active"
   id="home">
+
+
+  <!-- =========================
+       ASSALAMU ALAIKUM
+  ========================= -->
+
+  <div class="islamic-welcome">
+
+    <div class="welcome-arabic">
+      السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
+    </div>
+
+    <div class="welcome-title">
+      Assalamu Alaikum
+    </div>
+
+    <div class="islamic-line"></div>
+
+  </div>
+
 
   <div class="child-card">
 
@@ -2349,22 +2609,6 @@ async function loadStudent(){
 
 /* =========================================================
    ATTENDANCE
-   IMPORTANT RULE:
-
-   1. Admin marks Absent
-      => Parent sees Absent
-
-   2. Admin marks Leave
-      => Parent sees Leave
-
-   3. No record for TODAY
-      => Parent sees Present
-
-   4. Existing historical attendance
-      => Display normally
-
-   Admin can therefore record only
-   exceptions: Absent / Leave.
 ========================================================= */
 
 async function loadAttendance(){
@@ -2400,24 +2644,11 @@ async function loadAttendance(){
   });
 
 
-  /*
-    Today in YYYY-MM-DD format.
-    Attendance dates in Admin are stored
-    in the same format.
-  */
-
   const today =
     new Date()
       .toISOString()
       .split("T")[0];
 
-
-  /*
-    Group attendance by date.
-
-    This also protects against accidental
-    duplicate records for the same student/date.
-  */
 
   const dateMap = {};
 
@@ -2440,12 +2671,6 @@ async function loadAttendance(){
         data.status || ""
       ).trim();
 
-
-    /*
-      If more than one record exists
-      for the same date, Absent/Leave
-      takes priority over Present.
-    */
 
     if(!dateMap[date]){
 
@@ -2474,13 +2699,6 @@ async function loadAttendance(){
 
   });
 
-
-  /*
-    TODAY:
-
-    If Admin has not created a record
-    for today, automatically add Present.
-  */
 
   if(!dateMap[today]){
 
@@ -2591,11 +2809,6 @@ async function loadAttendance(){
 
   }
 
-
-  /*
-    Keep the Home statistic based on
-    actual Firebase attendance records.
-  */
 
   $("attendanceTotal")
     .textContent =
