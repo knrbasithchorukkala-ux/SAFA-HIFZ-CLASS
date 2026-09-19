@@ -982,8 +982,6 @@ td strong{
 
 <section class="section active" id="home">
 
-  <!-- ISLAMIC WELCOME -->
-
   <div class="islamic-welcome">
 
     <div class="welcome-arabic">
@@ -1153,6 +1151,27 @@ td strong{
             id="parentEmail"
             type="email"
             placeholder="Parent email"
+          >
+        </div>
+
+        <!-- ONLY NEW FIELD -->
+        <div class="field">
+          <label>Student Address</label>
+
+          <input
+            id="studentAddress"
+            placeholder="Student address"
+          >
+        </div>
+
+        <!-- ONLY NEW FIELD -->
+        <div class="field">
+          <label>Phone Number</label>
+
+          <input
+            id="phoneNumber"
+            type="tel"
+            placeholder="Phone number"
           >
         </div>
 
@@ -2549,6 +2568,15 @@ $("studentForm")
           $("className").value.trim(),
         parentEmail:
           $("parentEmail").value.trim(),
+
+        /* ONLY NEW DATA */
+        studentAddress:
+          $("studentAddress").value.trim(),
+
+        /* ONLY NEW DATA */
+        phoneNumber:
+          $("phoneNumber").value.trim(),
+
         createdAt:
           serverTimestamp()
       }
