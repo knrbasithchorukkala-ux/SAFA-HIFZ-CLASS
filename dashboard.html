@@ -297,6 +297,106 @@ button:disabled{
   font-weight:800;
 }
 
+
+/* =========================================
+   ISLAMIC ASSALAMU ALAIKUM BANNER
+========================================= */
+
+.islamic-welcome{
+  position:relative;
+  overflow:hidden;
+  margin-bottom:25px;
+  padding:30px 25px;
+  border-radius:22px;
+  text-align:center;
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #063b35 0%,
+      #075e54 45%,
+      #0b3d4a 100%
+    );
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.15);
+
+  border:1px solid rgba(255,255,255,.10);
+}
+
+.islamic-welcome::before{
+  content:"";
+  position:absolute;
+  width:220px;
+  height:220px;
+  right:-70px;
+  top:-100px;
+
+  border:2px solid rgba(255,215,120,.18);
+  border-radius:50%;
+
+  box-shadow:
+    0 0 0 25px rgba(255,215,120,.04),
+    0 0 0 50px rgba(255,215,120,.025);
+}
+
+.islamic-welcome::after{
+  content:"✦";
+  position:absolute;
+  left:35px;
+  bottom:10px;
+  font-size:45px;
+  color:rgba(255,215,120,.18);
+}
+
+.welcome-arabic{
+  position:relative;
+  z-index:1;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:30px;
+  font-weight:bold;
+  line-height:1.9;
+
+  color:#f6d98b;
+
+  direction:rtl;
+
+  text-shadow:
+    0 2px 8px rgba(0,0,0,.25);
+}
+
+.welcome-title{
+  position:relative;
+  z-index:1;
+
+  margin-top:5px;
+
+  font-size:20px;
+  font-weight:700;
+
+  color:#ffffff;
+}
+
+.islamic-line{
+  position:relative;
+  z-index:1;
+
+  width:90px;
+  height:3px;
+
+  background:#e6c46a;
+
+  border-radius:10px;
+
+  margin:15px auto 0;
+}
+
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -597,8 +697,6 @@ td strong{
   flex-wrap:wrap;
 }
 
-/* ATTENDANCE GROUP */
-
 .attendance-date{
   font-size:16px;
   font-weight:800;
@@ -747,6 +845,19 @@ td strong{
     align-items:stretch;
   }
 
+  .islamic-welcome{
+    padding:25px 15px;
+    border-radius:18px;
+  }
+
+  .welcome-arabic{
+    font-size:24px;
+  }
+
+  .welcome-title{
+    font-size:17px;
+  }
+
 }
 
 @media(max-width:400px){
@@ -870,6 +981,22 @@ td strong{
 <div class="content">
 
 <section class="section active" id="home">
+
+  <!-- ISLAMIC WELCOME -->
+
+  <div class="islamic-welcome">
+
+    <div class="welcome-arabic">
+      السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
+    </div>
+
+    <div class="welcome-title">
+      Assalamu Alaikum
+    </div>
+
+    <div class="islamic-line"></div>
+
+  </div>
 
   <div class="stats">
 
@@ -2555,11 +2682,6 @@ async function loadAttendance(){
           .trim()
           .toLowerCase();
 
-      /*
-        Present records are intentionally hidden
-        from the Latest Attendance Records display.
-      */
-
       if(
         status !== "absent" &&
         status !== "leave"
@@ -3250,6 +3372,7 @@ async function loadResults(){
         await loadResults();
 
       }
+
     );
 
   });
@@ -3286,6 +3409,7 @@ async function loadResults(){
         await loadResults();
 
       }
+
     );
 
   });
@@ -3506,6 +3630,7 @@ async function loadNotices(){
         await loadNotices();
 
       }
+
     );
 
   });
@@ -3542,6 +3667,7 @@ async function loadNotices(){
         await loadNotices();
 
       }
+
     );
 
   });
@@ -3757,6 +3883,7 @@ async function loadLeaves(){
         await loadLeaves();
 
       }
+
     );
 
   });
@@ -3790,6 +3917,7 @@ async function loadLeaves(){
         await loadLeaves();
 
       }
+
     );
 
   });
@@ -3849,6 +3977,7 @@ async function loadLeaves(){
         await loadLeaves();
 
       }
+
     );
 
   });
@@ -3885,6 +4014,7 @@ async function loadLeaves(){
         await loadLeaves();
 
       }
+
     );
 
   });
@@ -4107,6 +4237,7 @@ async function loadMessages(){
         await loadMessages();
 
       }
+
     );
 
   });
@@ -4143,6 +4274,7 @@ async function loadMessages(){
         await loadMessages();
 
       }
+
     );
 
   });
