@@ -980,8 +980,6 @@ td strong{
 
 <section class="section active" id="home">
 
-  <!-- ASSALAMU ALAIKUM BANNER -->
-
   <div class="admin-welcome">
 
     <div class="welcome-content">
@@ -2620,11 +2618,15 @@ function studentNameByNumber(number){
 }
 
 
+/* =========================
+   AUTH CHECK
+========================= */
+
 onAuthStateChanged(auth,async user=>{
 
   if(!user){
 
-    location.href = "index.html";
+    location.replace("index.html");
 
     return;
 
@@ -2643,6 +2645,8 @@ onAuthStateChanged(auth,async user=>{
 
       await signOut(auth);
 
+      location.replace("index.html");
+
       return;
 
     }
@@ -2658,6 +2662,8 @@ onAuthStateChanged(auth,async user=>{
       alert("You do not have administrator access.");
 
       await signOut(auth);
+
+      location.replace("index.html");
 
       return;
 
@@ -2758,17 +2764,57 @@ $("mobileMenu").addEventListener("click",()=>{
 });
 
 
+/* =========================
+   FIXED ADMIN LOGOUT
+========================= */
+
 $("logoutBtn").addEventListener("click",async()=>{
 
-  if(!confirm("Logout from admin dashboard?")){
+  const logoutButton = $("logoutBtn");
+
+  const confirmed =
+    confirm("Logout from admin dashboard?");
+
+  if(!confirmed){
 
     return;
 
   }
 
-  await signOut(auth);
+  try{
 
-  location.href = "index.html";
+    logoutButton.disabled = true;
+
+    logoutButton.textContent =
+      "Logging out...";
+
+    await signOut(auth);
+
+    /*
+      Firebase authentication session
+      has now been cleared.
+    */
+
+    location.replace("index.html");
+
+  }catch(error){
+
+    console.error(
+      "Logout error:",
+      error
+    );
+
+    logoutButton.disabled = false;
+
+    logoutButton.textContent =
+      "Logout";
+
+    showMessage(
+      "Logout failed: " + error.message,
+      "error"
+    );
+
+  }
 
 });
 
