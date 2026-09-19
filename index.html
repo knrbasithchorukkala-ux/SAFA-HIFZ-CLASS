@@ -105,11 +105,15 @@
 <div class="login-box">
 
   <h1>SAFA QURAN COLLEGE ONLINE PORTAL</h1>
-  <div class="subtitle">Usthad / Parent Login</div>
+
+  <div class="subtitle">
+    Usthad / Parent Login
+  </div>
 
   <form id="loginForm">
 
     <label>Email</label>
+
     <input
       type="email"
       id="email"
@@ -118,6 +122,7 @@
     >
 
     <label>Password</label>
+
     <input
       type="password"
       id="password"
@@ -145,7 +150,8 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   setPersistence,
-  browserLocalPersistence
+  browserLocalPersistence,
+  signOut
 }
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
@@ -157,161 +163,401 @@ import {
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
 const firebaseConfig = {
-  apiKey: "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
-  authDomain: "safa-hifz-class-7e84b.firebaseapp.com",
-  projectId: "safa-hifz-class-7e84b",
-  storageBucket: "safa-hifz-class-7e84b.firebasestorage.app",
-  messagingSenderId: "476801753196",
-  appId: "1:476801753196:web:d4c8a8b0c1a4203606f849",
-  measurementId: "G-ZTBTJCB5SR"
+
+  apiKey:
+    "AIzaSyC6WpY_AThyG49YPS92rnPG9zy0PYDPVt0",
+
+  authDomain:
+    "safa-hifz-class-7e84b.firebaseapp.com",
+
+  projectId:
+    "safa-hifz-class-7e84b",
+
+  storageBucket:
+    "safa-hifz-class-7e84b.firebasestorage.app",
+
+  messagingSenderId:
+    "476801753196",
+
+  appId:
+    "1:476801753196:web:d4c8a8b0c1a4203606f849",
+
+  measurementId:
+    "G-ZTBTJCB5SR"
+
 };
 
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+/* =========================
+   FIREBASE INITIALIZE
+========================= */
 
-const form = document.getElementById("loginForm");
-const loginBtn = document.getElementById("loginBtn");
-const message = document.getElementById("message");
+const app =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(app);
+
+const db =
+  getFirestore(app);
 
 
-function showMessage(text, type = "error") {
+/* =========================
+   ELEMENTS
+========================= */
+
+const form =
+  document.getElementById("loginForm");
+
+const loginBtn =
+  document.getElementById("loginBtn");
+
+const message =
+  document.getElementById("message");
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function showMessage(
+  text,
+  type = "error"
+){
+
   message.style.display = "block";
+
   message.className = type;
+
   message.textContent = text;
+
 }
 
 
-form.addEventListener("submit", async (e) => {
+/* =========================
+   LOGIN
+========================= */
 
-  e.preventDefault();
+form.addEventListener(
+  "submit",
+  async (e) => {
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+    e.preventDefault();
 
-  loginBtn.disabled = true;
-  loginBtn.textContent = "Logging in...";
 
-  try {
+    const email =
+      document
+        .getElementById("email")
+        .value
+        .trim();
 
-    await setPersistence(auth, browserLocalPersistence);
+    const password =
+      document
+        .getElementById("password")
+        .value;
 
-    const result = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
 
-    const uid = result.user.uid;
-
-    const userRef = doc(db, "users", uid);
-    const userSnap = await getDoc(userRef);
-
-    if (!userSnap.exists()) {
+    if(!email || !password){
 
       showMessage(
-        "ഈ account-ന് Firestore users profile ഇല്ല."
+        "Email and password required."
       );
 
-      await auth.signOut();
-
       return;
+
     }
 
-    const userData = userSnap.data();
 
-    const role = String(
-      userData.role || ""
-    ).trim().toLowerCase();
+    loginBtn.disabled = true;
+
+    loginBtn.textContent =
+      "Logging in...";
 
 
-    if (role === "admin") {
+    try {
+
+      /* -------------------------
+         KEEP LOGIN SESSION
+      ------------------------- */
+
+      await setPersistence(
+        auth,
+        browserLocalPersistence
+      );
+
+
+      /* -------------------------
+         FIREBASE LOGIN
+      ------------------------- */
+
+      const result =
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+
+      const uid =
+        result.user.uid;
+
+
+      /* -------------------------
+         GET USER PROFILE
+      ------------------------- */
+
+      const userRef =
+        doc(
+          db,
+          "users",
+          uid
+        );
+
+
+      const userSnap =
+        await getDoc(userRef);
+
+
+      if(!userSnap.exists()){
+
+        showMessage(
+          "ഈ account-ന് Firestore users profile ഇല്ല."
+        );
+
+        await signOut(auth);
+
+        return;
+
+      }
+
+
+      const userData =
+        userSnap.data();
+
+
+      const role =
+        String(
+          userData.role || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+      /* =========================
+         ADMIN LOGIN
+      ========================= */
+
+      if(role === "admin"){
+
+        showMessage(
+          "Login successful. Admin dashboard തുറക്കുന്നു...",
+          "success"
+        );
+
+
+        setTimeout(
+          () => {
+
+            window.location.replace(
+              "admin.html"
+            );
+
+          },
+          500
+        );
+
+
+        return;
+
+      }
+
+
+      /* =========================
+         PARENT LOGIN
+      ========================= */
+
+      if(role === "parent"){
+
+        showMessage(
+          "Login successful. Parent dashboard തുറക്കുന്നു...",
+          "success"
+        );
+
+
+        setTimeout(
+          () => {
+
+            window.location.replace(
+              "parent.html"
+            );
+
+          },
+          500
+        );
+
+
+        return;
+
+      }
+
+
+      /* =========================
+         INVALID ROLE
+      ========================= */
 
       showMessage(
-        "Login successful. Admin dashboard തുറക്കുന്നു...",
-        "success"
+        "ഈ account-ന് valid role ഇല്ല."
       );
 
-      setTimeout(() => {
-        window.location.href = "dashboard.html";
-      }, 500);
 
-      return;
-    }
+      await signOut(auth);
 
 
-    if (role === "parent") {
+    } catch(error){
 
-      showMessage(
-        "Login successful. Parent dashboard തുറക്കുന്നു...",
-        "success"
+      console.error(
+        "LOGIN ERROR:",
+        error
       );
 
-      setTimeout(() => {
-        window.location.href = "parent.html";
-      }, 500);
 
-      return;
+      let text =
+        error.message ||
+        "Login failed.";
+
+
+      /* -------------------------
+         FIREBASE AUTH ERRORS
+      ------------------------- */
+
+      if(
+        error.code ===
+        "auth/invalid-credential"
+      ){
+
+        text =
+          "Email അല്ലെങ്കിൽ password തെറ്റാണ്.";
+
+      }
+
+
+      else if(
+        error.code ===
+        "auth/user-not-found"
+      ){
+
+        text =
+          "ഈ email ഉപയോഗിച്ച് account കണ്ടെത്തിയില്ല.";
+
+      }
+
+
+      else if(
+        error.code ===
+        "auth/wrong-password"
+      ){
+
+        text =
+          "Password തെറ്റാണ്.";
+
+      }
+
+
+      else if(
+        error.code ===
+        "auth/invalid-api-key"
+      ){
+
+        text =
+          "Firebase API configuration പരിശോധിക്കണം.";
+
+      }
+
+
+      else if(
+        error.code ===
+        "auth/network-request-failed"
+      ){
+
+        text =
+          "Internet connection പരിശോധിക്കുക.";
+
+      }
+
+
+      else if(
+        error.code ===
+        "permission-denied"
+      ){
+
+        text =
+          "Firebase Firestore permission denied.";
+
+      }
+
+
+      showMessage(text);
+
+
+    } finally {
+
+      loginBtn.disabled = false;
+
+      loginBtn.textContent =
+        "Login";
+
     }
-
-
-    showMessage(
-      "ഈ account-ന് valid role ഇല്ല."
-    );
-
-    await auth.signOut();
-
-  } catch (error) {
-
-    console.error(error);
-
-    let text = error.message || "Login failed.";
-
-    if (error.code === "auth/invalid-credential") {
-      text = "Email അല്ലെങ്കിൽ password തെറ്റാണ്.";
-    }
-
-    if (error.code === "auth/user-not-found") {
-      text = "ഈ email ഉപയോഗിച്ച് account കണ്ടെത്തിയില്ല.";
-    }
-
-    if (error.code === "auth/wrong-password") {
-      text = "Password തെറ്റാണ്.";
-    }
-
-    if (error.code === "auth/invalid-api-key") {
-      text = "Firebase API configuration പരിശോധിക്കണം.";
-    }
-
-    showMessage(text);
-
-  } finally {
-
-    loginBtn.disabled = false;
-    loginBtn.textContent = "Login";
 
   }
-
-});
+);
 
 </script>
 
 
-<!-- PWA Service Worker -->
+<!-- =========================
+     PWA SERVICE WORKER
+========================= -->
+
 <script>
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.register("./service-worker.js")
+
+if(
+  "serviceWorker" in navigator
+){
+
+  window.addEventListener(
+    "load",
+    () => {
+
+      navigator.serviceWorker
+        .register(
+          "./service-worker.js"
+        )
         .then(() => {
-          console.log("PWA service worker registered");
+
+          console.log(
+            "PWA service worker registered"
+          );
+
         })
         .catch((error) => {
-          console.error("PWA service worker error:", error);
+
+          console.error(
+            "PWA service worker error:",
+            error
+          );
+
         });
-    });
-  }
+
+    }
+  );
+
+}
+
 </script>
 
 </body>
