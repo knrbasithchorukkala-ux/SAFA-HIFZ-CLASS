@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>SAFA QURAN COLLEGE ONLINE PORTAL | Parent Dashboard</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -16,131 +18,150 @@
 :root{
   --primary:#123b5d;
   --primary2:#176b87;
-  --bg:#f4f7fa;
+  --accent:#24936e;
+  --bg:#f4f7fb;
   --card:#ffffff;
-  --text:#17212b;
-  --muted:#6b7785;
-  --border:#e2e8ee;
-  --success:#16845b;
-  --warning:#c98500;
-  --danger:#c43d3d;
-  --shadow:0 8px 25px rgba(20,45,65,.08);
+  --text:#172033;
+  --muted:#718096;
+  --border:#e5eaf0;
+  --shadow:0 8px 25px rgba(20,40,70,.06);
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:Inter,Arial,sans-serif;
   background:var(--bg);
   color:var(--text);
 }
 
 button,
 input,
-textarea,
-select{
-  font-family:inherit;
+textarea{
+  font:inherit;
 }
 
 button{
   cursor:pointer;
 }
 
-.loading{
+/* =========================
+   LOADING
+========================= */
+
+#loading{
   position:fixed;
   inset:0;
-  background:#fff;
-  z-index:9999;
+  background:white;
   display:flex;
   align-items:center;
   justify-content:center;
   flex-direction:column;
   gap:12px;
+  z-index:9999;
   color:var(--primary);
+  font-weight:700;
 }
 
-.spinner{
+.loader{
   width:38px;
   height:38px;
-  border:4px solid #dce7ee;
+  border:4px solid #e4edf3;
   border-top-color:var(--primary2);
   border-radius:50%;
   animation:spin .8s linear infinite;
 }
 
 @keyframes spin{
-  to{transform:rotate(360deg);}
+  to{
+    transform:rotate(360deg);
+  }
 }
+
+/* =========================
+   APP
+========================= */
 
 .app{
-  display:none;
   min-height:100vh;
+  display:flex;
 }
 
+/* =========================
+   SIDEBAR
+========================= */
+
 .sidebar{
+  width:255px;
   position:fixed;
   left:0;
   top:0;
   bottom:0;
-  width:250px;
-  background:var(--primary);
-  color:#fff;
+  background:linear-gradient(180deg,#102a43,#123b5d);
+  color:white;
   z-index:1000;
   overflow-y:auto;
+  transition:.25s;
 }
 
 .brand{
-  padding:24px 20px;
+  padding:25px 20px;
   border-bottom:1px solid rgba(255,255,255,.12);
 }
 
 .brand h1{
-  font-size:19px;
-  line-height:1.3;
+  font-size:20px;
+  letter-spacing:.5px;
 }
 
 .brand p{
-  margin-top:6px;
-  font-size:11px;
+  margin-top:5px;
+  font-size:12px;
   opacity:.7;
 }
 
 .nav{
-  padding:14px 10px;
-}
-
-.nav-title{
-  padding:14px 12px 7px;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  opacity:.55;
+  padding:16px 11px;
 }
 
 .nav button{
   width:100%;
   border:0;
   background:transparent;
-  color:#dce8ef;
-  padding:12px;
+  color:#dbe8f5;
   text-align:left;
-  border-radius:8px;
-  margin-bottom:3px;
-  font-size:13px;
+  padding:13px 15px;
+  border-radius:9px;
+  margin-bottom:5px;
+  transition:.2s;
 }
 
 .nav button:hover,
 .nav button.active{
-  background:rgba(255,255,255,.12);
-  color:#fff;
+  background:rgba(255,255,255,.13);
+  color:white;
 }
 
+.nav button span{
+  display:inline-block;
+  width:30px;
+}
+
+/* =========================
+   MAIN
+========================= */
+
 .main{
-  margin-left:250px;
+  margin-left:255px;
+  width:calc(100% - 255px);
   min-height:100vh;
 }
 
+/* =========================
+   TOPBAR
+========================= */
+
 .topbar{
   height:72px;
-  background:#fff;
+  background:white;
   border-bottom:1px solid var(--border);
   display:flex;
   align-items:center;
@@ -151,51 +172,50 @@ button{
   z-index:100;
 }
 
-.top-title h2{
-  font-size:20px;
-  color:var(--primary);
-}
-
-.top-title p{
-  font-size:12px;
-  color:var(--muted);
-  margin-top:4px;
-}
-
-.user-box{
+.left-top{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:13px;
 }
 
-.user-name{
-  font-size:13px;
-  font-weight:bold;
+.mobile-menu{
+  display:none;
+  border:0;
+  background:var(--primary);
+  color:white;
+  padding:8px 11px;
+  border-radius:7px;
+  font-size:20px;
+}
+
+.top-title{
+  font-size:20px;
+  font-weight:750;
+}
+
+.parent-badge{
+  background:#eaf3ff;
+  color:#185a9d;
+  padding:8px 13px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:700;
 }
 
 .logout{
   border:0;
-  background:#eef4f7;
-  color:var(--primary);
+  background:#e74c3c;
+  color:white;
   padding:9px 14px;
   border-radius:7px;
-  font-size:12px;
-  font-weight:bold;
 }
 
-.menu-btn{
-  display:none;
-  border:0;
-  background:var(--primary);
-  color:#fff;
-  padding:9px 12px;
-  border-radius:7px;
-}
+/* =========================
+   CONTENT
+========================= */
 
 .content{
   padding:28px;
-  max-width:1400px;
-  margin:auto;
 }
 
 .section{
@@ -206,195 +226,191 @@ button{
   display:block;
 }
 
-.hero{
-  background:linear-gradient(135deg,#123b5d,#176b87);
-  color:#fff;
-  border-radius:14px;
-  padding:28px;
-  margin-bottom:22px;
-  box-shadow:var(--shadow);
-}
-
-.hero h2{
-  font-size:25px;
-  margin-bottom:8px;
-}
-
-.hero p{
-  font-size:13px;
-  line-height:1.7;
-  opacity:.9;
-}
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-  margin-bottom:22px;
-}
-
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:20px;
-  box-shadow:var(--shadow);
-}
-
-.stat-title{
-  color:var(--muted);
-  font-size:12px;
-  margin-bottom:9px;
-}
-
-.stat-value{
-  color:var(--primary);
-  font-size:25px;
-  font-weight:bold;
-}
-
-.panel{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:22px;
-  margin-bottom:20px;
-  box-shadow:var(--shadow);
-}
-
-.panel-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:18px;
-}
-
-.panel-head h3{
-  font-size:17px;
-  color:var(--primary);
-}
-
-.panel-desc{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:5px;
-}
-
-.child-card{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-}
-
-.info{
-  background:#f7fafc;
-  border:1px solid var(--border);
-  border-radius:9px;
-  padding:15px;
-}
-
-.info span{
-  display:block;
-  font-size:11px;
-  color:var(--muted);
-  margin-bottom:5px;
-}
-
-.info strong{
-  font-size:14px;
-  color:var(--text);
-}
-
-.quick-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-
-.quick{
-  border:1px solid var(--border);
-  background:#f9fbfc;
-  padding:16px;
-  border-radius:9px;
-  color:var(--primary);
-  font-size:13px;
-  font-weight:bold;
-  text-align:left;
-}
-
-.quick:hover{
-  background:#eef5f8;
-}
-
 .section-head{
   margin-bottom:20px;
 }
 
 .section-head h2{
-  color:var(--primary);
-  font-size:22px;
+  font-size:25px;
+  margin-bottom:5px;
 }
 
 .section-head p{
   color:var(--muted);
-  font-size:13px;
-  margin-top:5px;
+  font-size:14px;
 }
 
-.form-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  background:linear-gradient(135deg,#123b5d,#176b87);
+  color:white;
+  border-radius:18px;
+  padding:30px;
+  margin-bottom:22px;
+  box-shadow:0 10px 30px rgba(18,59,93,.16);
+  position:relative;
+  overflow:hidden;
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background:rgba(255,255,255,.06);
+  right:-50px;
+  top:-60px;
+}
+
+.hero small{
+  opacity:.75;
+}
+
+.hero h2{
+  margin-top:7px;
+  font-size:27px;
+}
+
+.hero p{
+  margin-top:8px;
+  opacity:.85;
+  font-size:14px;
+}
+
+/* =========================
+   CHILD CARD
+========================= */
+
+.child-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:22px;
+  box-shadow:var(--shadow);
+  margin-bottom:22px;
+}
+
+.child-top{
+  display:flex;
+  align-items:center;
   gap:15px;
 }
 
-.field{
-  margin-bottom:14px;
+.avatar{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#176b87,#24936e);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+  font-weight:800;
 }
 
-.field label{
+.child-info h3{
+  font-size:20px;
+}
+
+.child-info p{
+  color:var(--muted);
+  margin-top:4px;
+  font-size:13px;
+}
+
+.child-meta{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:20px;
+}
+
+.meta-box{
+  background:#f7f9fc;
+  border-radius:10px;
+  padding:13px;
+}
+
+.meta-box small{
   display:block;
-  font-size:12px;
-  font-weight:bold;
-  color:#435263;
-  margin-bottom:7px;
+  color:var(--muted);
+  font-size:11px;
 }
 
-.field input,
-.field textarea,
-.field select{
-  width:100%;
-  border:1px solid #d7e0e7;
-  border-radius:8px;
-  padding:11px 12px;
-  outline:none;
-  background:#fff;
-  font-size:13px;
+.meta-box strong{
+  display:block;
+  margin-top:5px;
+  font-size:14px;
 }
 
-.field textarea{
-  min-height:110px;
-  resize:vertical;
+/* =========================
+   STATS
+========================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:22px;
 }
 
-.field input:focus,
-.field textarea:focus,
-.field select:focus{
-  border-color:var(--primary2);
+.stat{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:19px;
+  box-shadow:var(--shadow);
 }
 
-.primary{
-  border:0;
-  background:var(--primary2);
-  color:#fff;
-  padding:11px 17px;
-  border-radius:8px;
-  font-size:13px;
-  font-weight:bold;
+.stat-icon{
+  font-size:23px;
 }
 
-.primary:hover{
-  opacity:.92;
+.stat small{
+  display:block;
+  margin-top:10px;
+  color:var(--muted);
 }
+
+.stat strong{
+  display:block;
+  margin-top:5px;
+  font-size:27px;
+}
+
+/* =========================
+   PANELS
+========================= */
+
+.panel{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:22px;
+  margin-bottom:22px;
+  box-shadow:var(--shadow);
+}
+
+.panel h3{
+  margin-bottom:17px;
+}
+
+.empty{
+  padding:25px;
+  text-align:center;
+  color:var(--muted);
+  background:#f8fafc;
+  border-radius:10px;
+}
+
+/* =========================
+   TABLE
+========================= */
 
 .table-wrap{
   overflow-x:auto;
@@ -403,135 +419,328 @@ button{
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:600px;
+  min-width:500px;
 }
 
 th,
 td{
   padding:12px 10px;
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid #edf0f4;
   text-align:left;
-  font-size:12px;
+  font-size:13px;
 }
 
 th{
-  color:var(--muted);
-  background:#f8fafb;
+  background:#f7f9fc;
+  color:#4a5b70;
+  font-weight:700;
 }
+
+tr:hover td{
+  background:#fbfcfe;
+}
+
+/* =========================
+   BADGES
+========================= */
 
 .badge{
   display:inline-block;
-  padding:5px 9px;
+  padding:6px 10px;
   border-radius:20px;
-  font-size:10px;
-  font-weight:bold;
-}
-
-.present{
-  background:#e7f7ef;
-  color:var(--success);
-}
-
-.absent{
-  background:#fdeaea;
-  color:var(--danger);
-}
-
-.leave{
-  background:#fff4da;
-  color:var(--warning);
-}
-
-.published{
-  background:#e7f7ef;
-  color:var(--success);
-}
-
-.draft{
-  background:#edf0f3;
-  color:#65717d;
-}
-
-.result-item,
-.notice-item,
-.leave-item,
-.message-item,
-.progress-item{
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:17px;
-  margin-bottom:12px;
-  background:#fff;
-}
-
-.item-title{
-  color:var(--primary);
-  font-weight:bold;
-  font-size:14px;
-  margin-bottom:7px;
-}
-
-.item-meta{
-  color:var(--muted);
   font-size:11px;
-  margin-bottom:9px;
+  font-weight:700;
 }
 
-.item-text{
-  font-size:13px;
-  line-height:1.7;
-  color:#435263;
+.green{
+  background:#e7f7ef;
+  color:#18794e;
+}
+
+.red{
+  background:#fdeaea;
+  color:#b42318;
+}
+
+.blue{
+  background:#eaf3ff;
+  color:#185a9d;
+}
+
+.yellow{
+  background:#fff4d8;
+  color:#916300;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-card{
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:18px;
+  margin-bottom:12px;
+}
+
+.progress-head{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.progress-head strong{
+  font-size:14px;
+}
+
+.progress-head span{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.progress-line{
+  height:8px;
+  background:#edf2f6;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:70%;
+  background:linear-gradient(90deg,#176b87,#24936e);
+  border-radius:10px;
+}
+
+/* =========================
+   RESULT CARDS
+========================= */
+
+.result-card{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:19px;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.result-title{
+  font-weight:750;
+}
+
+.result-date{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:5px;
+}
+
+.result-mark{
+  font-size:24px;
+  font-weight:800;
+  color:var(--primary2);
+}
+
+/* =========================
+   NOTICE
+========================= */
+
+.notice{
+  border-left:4px solid var(--primary2);
+  background:#f7fafc;
+  padding:17px;
+  border-radius:8px;
+  margin-bottom:12px;
+}
+
+.notice h4{
+  font-size:15px;
+}
+
+.notice p{
+  margin-top:8px;
+  color:#536477;
+  line-height:1.6;
   white-space:pre-wrap;
 }
 
-.item-actions{
-  margin-top:12px;
-}
-
-.link-btn{
-  display:inline-block;
-  background:#eef5f8;
-  color:var(--primary2);
-  text-decoration:none;
-  padding:8px 12px;
-  border-radius:7px;
-  font-size:12px;
-  font-weight:bold;
-}
-
-.empty{
-  text-align:center;
-  padding:35px 15px;
+.notice small{
+  display:block;
+  margin-top:10px;
   color:var(--muted);
+}
+
+/* =========================
+   FORMS
+========================= */
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.field.full{
+  grid-column:1/-1;
+}
+
+.field label{
   font-size:13px;
+  font-weight:650;
+  color:#43546a;
 }
 
-.error{
-  background:#fdecec;
-  color:#a52e2e;
-  border:1px solid #f3caca;
-  border-radius:8px;
-  padding:12px;
-  font-size:12px;
-  margin-bottom:15px;
-  display:none;
+.field input,
+.field textarea{
+  border:1px solid #d7dee8;
+  border-radius:9px;
+  padding:11px 12px;
+  outline:none;
 }
 
-.success{
-  background:#e9f8f0;
-  color:#16704e;
-  border:1px solid #c5ead6;
-  border-radius:8px;
-  padding:12px;
-  font-size:12px;
-  margin-bottom:15px;
-  display:none;
+.field textarea{
+  min-height:105px;
+  resize:vertical;
 }
+
+.field input:focus,
+.field textarea:focus{
+  border-color:#2878b5;
+  box-shadow:0 0 0 3px rgba(40,120,181,.1);
+}
+
+.primary{
+  border:0;
+  background:#176b87;
+  color:white;
+  padding:11px 18px;
+  border-radius:8px;
+  font-weight:650;
+}
+
+.primary:hover{
+  background:#12586f;
+}
+
+/* =========================
+   LEAVE / MESSAGE CARDS
+========================= */
+
+.request-card{
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:17px;
+  margin-bottom:12px;
+}
+
+.request-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.request-card h4{
+  font-size:15px;
+}
+
+.request-card p{
+  color:#536477;
+  margin-top:8px;
+  line-height:1.5;
+}
+
+.reply-box{
+  margin-top:13px;
+  background:#eef8f4;
+  border-radius:9px;
+  padding:12px;
+}
+
+.reply-box strong{
+  font-size:12px;
+  color:#18794e;
+}
+
+.reply-box p{
+  color:#285c49;
+  margin-top:5px;
+}
+
+/* =========================
+   QUICK ACTIONS
+========================= */
+
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:13px;
+}
+
+.quick-btn{
+  border:1px solid var(--border);
+  background:white;
+  border-radius:12px;
+  padding:17px;
+  text-align:left;
+  transition:.2s;
+}
+
+.quick-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow);
+}
+
+.quick-btn strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+.quick-btn small{
+  color:var(--muted);
+}
+
+/* =========================
+   MESSAGE
+========================= */
+
+#message{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  max-width:360px;
+  padding:14px 18px;
+  border-radius:9px;
+  color:white;
+  display:none;
+  z-index:9999;
+  box-shadow:0 8px 25px rgba(0,0,0,.15);
+}
+
+.success-msg{
+  background:#198754;
+}
+
+.error-msg{
+  background:#dc3545;
+}
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:900px){
+
   .sidebar{
     transform:translateX(-100%);
-    transition:.25s;
   }
 
   .sidebar.open{
@@ -540,585 +749,1003 @@ th{
 
   .main{
     margin-left:0;
+    width:100%;
   }
 
-  .menu-btn{
+  .mobile-menu{
     display:block;
   }
 
   .topbar{
-    padding:0 16px;
-  }
-
-  .user-name{
-    display:none;
+    padding:0 15px;
   }
 
   .content{
     padding:18px;
   }
 
-  .cards{
+  .stats{
     grid-template-columns:repeat(2,1fr);
   }
 
   .quick-grid{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr;
   }
+
 }
 
 @media(max-width:600px){
-  .cards{
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  }
 
-  .card{
-    padding:15px;
-  }
-
-  .stat-value{
-    font-size:21px;
-  }
-
-  .child-card,
   .form-grid{
     grid-template-columns:1fr;
   }
 
-  .quick-grid{
+  .field.full{
+    grid-column:auto;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .child-meta{
     grid-template-columns:1fr;
   }
 
-  .hero{
-    padding:22px;
+  .parent-badge{
+    display:none;
   }
 
-  .hero h2{
-    font-size:21px;
-  }
-
-  .top-title h2{
+  .top-title{
     font-size:16px;
   }
 
-  .content{
-    padding:14px;
+  .hero{
+    padding:23px;
   }
+
+  .hero h2{
+    font-size:22px;
+  }
+
+  .result-card{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="loading" id="loading">
-  <div class="spinner"></div>
-  <strong>SAFA QURAN COLLEGE ONLINE PORTAL</strong>
-  <span style="font-size:12px;color:#6b7785;">Loading...</span>
+<div id="loading">
+
+  <div class="loader"></div>
+
+  <div>
+    SAFA QURAN COLLEGE ONLINE PORTAL
+  </div>
+
+  <small>
+    Loading Parent Dashboard...
+  </small>
+
 </div>
 
-<div class="app" id="app">
+<div id="message"></div>
 
-  <aside class="sidebar" id="sidebar">
+<div class="app">
 
-    <div class="brand">
-      <h1>SAFA QURAN COLLEGE</h1>
-      <p>ONLINE PARENT PORTAL</p>
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar" id="sidebar">
+
+  <div class="brand">
+
+    <h1>
+      SAFA QURAN COLLEGE ONLINE PORTAL
+    </h1>
+
+    <p>
+      Parent Portal
+    </p>
+
+  </div>
+
+
+  <div class="nav">
+
+    <button
+      class="nav-btn active"
+      data-section="home">
+
+      <span>🏠</span>
+      Home
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-section="child">
+
+      <span>👦</span>
+      My Child
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-section="attendance">
+
+      <span>✓</span>
+      Attendance
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-section="study">
+
+      <span>📖</span>
+      Study Progress
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-section="results">
+
+      <span>🏆</span>
+      Results
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-section="notices">
+
+      <span>📢</span>
+      Notices
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-section="leave">
+
+      <span>📝</span>
+      Leave
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-section="messages">
+
+      <span>💬</span>
+      Messages
+
+    </button>
+
+  </div>
+
+</aside>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+<header class="topbar">
+
+  <div class="left-top">
+
+    <button
+      class="mobile-menu"
+      id="mobileMenu">
+
+      ☰
+
+    </button>
+
+
+    <div class="top-title">
+      Parent Dashboard
     </div>
 
-    <nav class="nav">
+  </div>
 
-      <div class="nav-title">Main</div>
 
-      <button class="nav-btn active" data-section="home">
-        🏠 Home
+  <div
+    style="
+      display:flex;
+      align-items:center;
+      gap:12px;
+    ">
+
+    <div class="parent-badge">
+      PARENT PORTAL
+    </div>
+
+
+    <button
+      class="logout"
+      id="logoutBtn">
+
+      Logout
+
+    </button>
+
+  </div>
+
+</header>
+
+
+<div class="content">
+
+
+<!-- =========================
+     HOME
+========================= -->
+
+<section
+  class="section active"
+  id="home">
+
+  <div class="child-card">
+
+    <div class="child-top">
+
+      <div
+        class="avatar"
+        id="avatar">
+
+        S
+
+      </div>
+
+
+      <div class="child-info">
+
+        <h3 id="homeChildName">
+          Loading...
+        </h3>
+
+        <p>
+          Student No.
+          <strong id="homeStudentNumber">
+            -
+          </strong>
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="child-meta">
+
+      <div class="meta-box">
+
+        <small>
+          Student Number
+        </small>
+
+        <strong id="homeNo">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Class
+        </small>
+
+        <strong id="homeClass">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Parent Account
+        </small>
+
+        <strong id="homeParentEmail">
+          -
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="stats">
+
+    <div class="stat">
+
+      <div class="stat-icon">
+        ✓
+      </div>
+
+      <small>
+        Attendance Records
+      </small>
+
+      <strong id="attendanceTotal">
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-icon">
+        📖
+      </div>
+
+      <small>
+        Study Records
+      </small>
+
+      <strong id="studyTotal">
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-icon">
+        🏆
+      </div>
+
+      <small>
+        Published Results
+      </small>
+
+      <strong id="resultTotal">
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-icon">
+        📢
+      </div>
+
+      <small>
+        Notices
+      </small>
+
+      <strong id="noticeTotal">
+        0
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <div class="panel">
+
+    <h3>
+      Quick Access
+    </h3>
+
+
+    <div class="quick-grid">
+
+      <button
+        class="quick-btn"
+        data-go="attendance">
+
+        <strong>
+          ✓ Attendance
+        </strong>
+
+        <small>
+          View attendance records
+        </small>
+
       </button>
 
-      <button class="nav-btn" data-section="child">
-        👤 My Child
+
+      <button
+        class="quick-btn"
+        data-go="study">
+
+        <strong>
+          📖 Study Progress
+        </strong>
+
+        <small>
+          View study progress
+        </small>
+
       </button>
 
-      <div class="nav-title">Academic</div>
 
-      <button class="nav-btn" data-section="attendance">
-        📅 Attendance
+      <button
+        class="quick-btn"
+        data-go="results">
+
+        <strong>
+          🏆 Results
+        </strong>
+
+        <small>
+          View published results
+        </small>
+
       </button>
 
-      <button class="nav-btn" data-section="progress">
-        📖 Study Progress
+
+      <button
+        class="quick-btn"
+        data-go="notices">
+
+        <strong>
+          📢 Notices
+        </strong>
+
+        <small>
+          View class announcements
+        </small>
+
       </button>
 
-      <button class="nav-btn" data-section="results">
-        📊 Results
+
+      <button
+        class="quick-btn"
+        data-go="leave">
+
+        <strong>
+          📝 Apply Leave
+        </strong>
+
+        <small>
+          Send leave application
+        </small>
+
       </button>
 
-      <div class="nav-title">Communication</div>
 
-      <button class="nav-btn" data-section="notices">
-        📢 Notices
+      <button
+        class="quick-btn"
+        data-go="messages">
+
+        <strong>
+          💬 Contact Usthad
+        </strong>
+
+        <small>
+          Send a message
+        </small>
+
       </button>
 
-      <button class="nav-btn" data-section="leave">
-        📝 Leave
-      </button>
+    </div>
 
-      <button class="nav-btn" data-section="messages">
-        💬 Messages
-      </button>
+  </div>
 
-    </nav>
+</section>
 
-  </aside>
 
-  <main class="main">
+<!-- =========================
+     CHILD
+========================= -->
 
-    <header class="topbar">
+<section
+  class="section"
+  id="child">
 
-      <div style="display:flex;align-items:center;gap:12px;">
+  <div class="section-head">
 
-        <button class="menu-btn" id="menuBtn">
-          ☰
-        </button>
+    <h2>
+      My Child
+    </h2>
 
-        <div class="top-title">
-          <h2>Parent Dashboard</h2>
-          <p>SAFA QURAN COLLEGE ONLINE PORTAL</p>
+    <p>
+      Student information connected to this parent account.
+    </p>
+
+  </div>
+
+
+  <div class="child-card">
+
+    <div class="child-top">
+
+      <div
+        class="avatar"
+        id="childAvatar">
+
+        S
+
+      </div>
+
+
+      <div class="child-info">
+
+        <h3 id="childName">
+          -
+        </h3>
+
+        <p>
+          Hifz Student
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="child-meta">
+
+      <div class="meta-box">
+
+        <small>
+          Student Number
+        </small>
+
+        <strong id="childNumber">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Class
+        </small>
+
+        <strong id="childClass">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Parent Email
+        </small>
+
+        <strong id="childParentEmail">
+          -
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     ATTENDANCE
+========================= -->
+
+<section
+  class="section"
+  id="attendance">
+
+  <div class="section-head">
+
+    <h2>
+      Attendance
+    </h2>
+
+    <p>
+      Your child's attendance records.
+    </p>
+
+  </div>
+
+
+  <div class="panel">
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Date
+            </th>
+
+            <th>
+              Status
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody
+          id="attendanceTable">
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <div
+      class="empty"
+      id="attendanceEmpty"
+      style="display:none;">
+
+      No attendance records available.
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     STUDY
+========================= -->
+
+<section
+  class="section"
+  id="study">
+
+  <div class="section-head">
+
+    <h2>
+      Study Progress
+    </h2>
+
+    <p>
+      View your child's Quran study progress.
+    </p>
+
+  </div>
+
+
+  <div id="studyList"></div>
+
+
+  <div
+    class="empty"
+    id="studyEmpty"
+    style="display:none;">
+
+    No study progress records available.
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     RESULTS
+========================= -->
+
+<section
+  class="section"
+  id="results">
+
+  <div class="section-head">
+
+    <h2>
+      Results
+    </h2>
+
+    <p>
+      Published examination results.
+    </p>
+
+  </div>
+
+
+  <div id="resultList"></div>
+
+
+  <div
+    class="empty"
+    id="resultEmpty"
+    style="display:none;">
+
+    No published results available.
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     NOTICES
+========================= -->
+
+<section
+  class="section"
+  id="notices">
+
+  <div class="section-head">
+
+    <h2>
+      Notices
+    </h2>
+
+    <p>
+      Important announcements from
+      SAFA QURAN COLLEGE ONLINE PORTAL.
+    </p>
+
+  </div>
+
+
+  <div id="noticeList"></div>
+
+
+  <div
+    class="empty"
+    id="noticeEmpty"
+    style="display:none;">
+
+    No notices available.
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     LEAVE
+========================= -->
+
+<section
+  class="section"
+  id="leave">
+
+  <div class="section-head">
+
+    <h2>
+      Leave Application
+    </h2>
+
+    <p>
+      Apply for leave and check the response from Usthad.
+    </p>
+
+  </div>
+
+
+  <div class="panel">
+
+    <h3>
+      New Leave Application
+    </h3>
+
+
+    <form id="leaveForm">
+
+      <div class="form-grid">
+
+        <div class="field">
+
+          <label>
+            Leave Date
+          </label>
+
+          <input
+            type="date"
+            id="leaveDate"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Reason
+          </label>
+
+          <input
+            id="leaveReason"
+            required
+            placeholder="Reason for leave"
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>
+            Additional Details
+          </label>
+
+          <textarea
+            id="leaveDetails"
+            placeholder="Additional information (optional)"
+          ></textarea>
+
         </div>
 
       </div>
 
-      <div class="user-box">
 
-        <span class="user-name" id="parentName">
-          Parent
-        </span>
+      <br>
 
-        <button class="logout" id="logoutBtn">
-          Logout
-        </button>
 
-      </div>
+      <button
+        class="primary"
+        type="submit">
 
-    </header>
+        Submit Leave Application
 
-    <div class="content">
+      </button>
 
-      <!-- HOME -->
+    </form>
 
-      <section class="section active" id="home">
+  </div>
 
-        <div class="hero">
 
-          <h2>Assalamu Alaikum 👋</h2>
+  <div class="panel">
 
-          <p>
-            Welcome to SAFA QURAN COLLEGE ONLINE PORTAL.
-            Stay connected with your child's Quran learning and progress.
-          </p>
+    <h3>
+      My Leave Applications
+    </h3>
 
-        </div>
 
-        <div class="cards">
+    <div id="leaveList"></div>
 
-          <div class="card">
-            <div class="stat-title">Student Number</div>
-            <div class="stat-value" id="homeStudentNumber">—</div>
-          </div>
 
-          <div class="card">
-            <div class="stat-title">Attendance</div>
-            <div class="stat-value" id="homeAttendance">—</div>
-          </div>
+    <div
+      class="empty"
+      id="leaveEmpty"
+      style="display:none;">
 
-          <div class="card">
-            <div class="stat-title">Study Progress</div>
-            <div class="stat-value" id="homeProgress">—</div>
-          </div>
-
-          <div class="card">
-            <div class="stat-title">Published Results</div>
-            <div class="stat-value" id="homeResults">0</div>
-          </div>
-
-        </div>
-
-        <div class="panel">
-
-          <div class="panel-head">
-            <div>
-              <h3>My Child</h3>
-              <div class="panel-desc">
-                Your linked student information
-              </div>
-            </div>
-          </div>
-
-          <div class="child-card">
-
-            <div class="info">
-              <span>Student Name</span>
-              <strong id="homeStudentName">Loading...</strong>
-            </div>
-
-            <div class="info">
-              <span>Student Number</span>
-              <strong id="homeStudentNo">Loading...</strong>
-            </div>
-
-            <div class="info">
-              <span>Class</span>
-              <strong id="homeClass">—</strong>
-            </div>
-
-            <div class="info">
-              <span>Parent Email</span>
-              <strong id="homeParentEmail">—</strong>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="panel">
-
-          <div class="panel-head">
-            <div>
-              <h3>Quick Access</h3>
-              <div class="panel-desc">
-                Quickly open important sections
-              </div>
-            </div>
-          </div>
-
-          <div class="quick-grid">
-
-            <button class="quick" data-go="child">
-              👤 View My Child
-            </button>
-
-            <button class="quick" data-go="attendance">
-              📅 View Attendance
-            </button>
-
-            <button class="quick" data-go="progress">
-              📖 Study Progress
-            </button>
-
-            <button class="quick" data-go="results">
-              📊 View Results
-            </button>
-
-            <button class="quick" data-go="notices">
-              📢 View Notices
-            </button>
-
-            <button class="quick" data-go="leave">
-              📝 Apply for Leave
-            </button>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- MY CHILD -->
-
-      <section class="section" id="child">
-
-        <div class="section-head">
-          <h2>My Child</h2>
-          <p>View your child's basic information.</p>
-        </div>
-
-        <div class="panel">
-
-          <div class="child-card">
-
-            <div class="info">
-              <span>Student Name</span>
-              <strong id="childName">—</strong>
-            </div>
-
-            <div class="info">
-              <span>Student Number</span>
-              <strong id="childNumber">—</strong>
-            </div>
-
-            <div class="info">
-              <span>Class</span>
-              <strong id="childClass">—</strong>
-            </div>
-
-            <div class="info">
-              <span>Parent Email</span>
-              <strong id="childParentEmail">—</strong>
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ATTENDANCE -->
-
-      <section class="section" id="attendance">
-
-        <div class="section-head">
-          <h2>Attendance</h2>
-          <p>View your child's attendance records.</p>
-        </div>
-
-        <div class="cards">
-
-          <div class="card">
-            <div class="stat-title">Present</div>
-            <div class="stat-value" id="presentCount">0</div>
-          </div>
-
-          <div class="card">
-            <div class="stat-title">Absent</div>
-            <div class="stat-value" id="absentCount">0</div>
-          </div>
-
-          <div class="card">
-            <div class="stat-title">Leave</div>
-            <div class="stat-value" id="leaveCount">0</div>
-          </div>
-
-          <div class="card">
-            <div class="stat-title">Total Records</div>
-            <div class="stat-value" id="attendanceTotal">0</div>
-          </div>
-
-        </div>
-
-        <div class="panel">
-
-          <div class="panel-head">
-            <div>
-              <h3>Attendance History</h3>
-              <div class="panel-desc">
-                Attendance marked by Usthad
-              </div>
-            </div>
-          </div>
-
-          <div class="table-wrap">
-
-            <table>
-
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Status</th>
-                  <th>Note</th>
-                </tr>
-              </thead>
-
-              <tbody id="attendanceTable">
-              </tbody>
-
-            </table>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- STUDY PROGRESS -->
-
-      <section class="section" id="progress">
-
-        <div class="section-head">
-          <h2>Study Progress</h2>
-          <p>View your child's Hifz learning progress.</p>
-        </div>
-
-        <div class="panel">
-
-          <div id="progressList">
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- RESULTS -->
-
-      <section class="section" id="results">
-
-        <div class="section-head">
-          <h2>Results</h2>
-          <p>Published results for your child.</p>
-        </div>
-
-        <div class="panel">
-
-          <div id="resultsList">
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- NOTICES -->
-
-      <section class="section" id="notices">
-
-        <div class="section-head">
-          <h2>Notices</h2>
-          <p>Important announcements from the college.</p>
-        </div>
-
-        <div class="panel">
-
-          <div id="noticesList">
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- LEAVE -->
-
-      <section class="section" id="leave">
-
-        <div class="section-head">
-          <h2>Leave Application</h2>
-          <p>Submit a leave request to Usthad.</p>
-        </div>
-
-        <div id="leaveSuccess" class="success">
-          Leave application submitted successfully.
-        </div>
-
-        <div id="leaveError" class="error">
-        </div>
-
-        <div class="panel">
-
-          <div class="form-grid">
-
-            <div class="field">
-              <label>From Date</label>
-              <input type="date" id="leaveFrom">
-            </div>
-
-            <div class="field">
-              <label>To Date</label>
-              <input type="date" id="leaveTo">
-            </div>
-
-          </div>
-
-          <div class="field">
-
-            <label>Reason</label>
-
-            <textarea
-              id="leaveReason"
-              placeholder="Enter the reason for leave"></textarea>
-
-          </div>
-
-          <button class="primary" id="submitLeave">
-            Submit Leave Application
-          </button>
-
-        </div>
-
-        <div class="panel">
-
-          <div class="panel-head">
-
-            <div>
-              <h3>Leave History</h3>
-              <div class="panel-desc">
-                Previous leave applications and Usthad replies
-              </div>
-            </div>
-
-          </div>
-
-          <div id="leaveList">
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- MESSAGES -->
-
-      <section class="section" id="messages">
-
-        <div class="section-head">
-          <h2>Messages</h2>
-          <p>Send a message or comment to Usthad.</p>
-        </div>
-
-        <div id="messageSuccess" class="success">
-          Message sent successfully.
-        </div>
-
-        <div id="messageError" class="error">
-        </div>
-
-        <div class="panel">
-
-          <div class="field">
-
-            <label>Your Message</label>
-
-            <textarea
-              id="messageText"
-              placeholder="Write your message here"></textarea>
-
-          </div>
-
-          <button class="primary" id="sendMessage">
-            Send Message
-          </button>
-
-        </div>
-
-        <div class="panel">
-
-          <div class="panel-head">
-
-            <div>
-              <h3>Message History</h3>
-              <div class="panel-desc">
-                Messages and replies from Usthad
-              </div>
-            </div>
-
-          </div>
-
-          <div id="messagesList">
-          </div>
-
-        </div>
-
-      </section>
+      No leave applications yet.
 
     </div>
 
-  </main>
+  </div>
+
+</section>
+
+
+<!-- =========================
+     MESSAGES
+========================= -->
+
+<section
+  class="section"
+  id="messages">
+
+  <div class="section-head">
+
+    <h2>
+      Messages
+    </h2>
+
+    <p>
+      Contact Usthad regarding your child's studies.
+    </p>
+
+  </div>
+
+
+  <div class="panel">
+
+    <h3>
+      Send Message
+    </h3>
+
+
+    <form id="messageForm">
+
+      <div class="field">
+
+        <label>
+          Message
+        </label>
+
+        <textarea
+          id="messageText"
+          required
+          placeholder="Write your message here..."
+        ></textarea>
+
+      </div>
+
+
+      <br>
+
+
+      <button
+        class="primary"
+        type="submit">
+
+        Send Message
+
+      </button>
+
+    </form>
+
+  </div>
+
+
+  <div class="panel">
+
+    <h3>
+      Message History
+    </h3>
+
+
+    <div id="messageList"></div>
+
+
+    <div
+      class="empty"
+      id="messageEmpty"
+      style="display:none;">
+
+      No messages yet.
+
+    </div>
+
+  </div>
+
+</section>
+
+
+</div>
+
+</main>
 
 </div>
 
 
 <script type="module">
+
+/* =========================================================
+   FIREBASE
+========================================================= */
 
 import {
   initializeApp
@@ -1133,20 +1760,20 @@ import {
 import {
   getFirestore,
   collection,
+  addDoc,
   getDocs,
   getDoc,
   doc,
-  addDoc,
   query,
   where,
-  orderBy,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
+  apiKey:
+    "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
 
   authDomain:
     "safa-hifz-class-7e84b.firebaseapp.com",
@@ -1169,66 +1796,89 @@ const firebaseConfig = {
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+  initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+const auth =
+  getAuth(app);
 
-const db = getFirestore(app);
-
-
-let currentUser = null;
-let parentData = null;
-let studentNumber = null;
-let studentData = null;
+const db =
+  getFirestore(app);
 
 
-/* ------------------------------
+/* =========================================================
    HELPERS
------------------------------- */
+========================================================= */
 
-function $(id){
-  return document.getElementById(id);
-}
+const $ =
+  id => document.getElementById(id);
 
 
-function escapeHTML(value){
+function escapeHtml(value){
 
-  if(value === null || value === undefined){
+  if(
+    value === null ||
+    value === undefined
+  ){
+
     return "";
+
   }
 
   return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
 }
 
 
-function showLoading(show){
+function showMessage(
+  text,
+  type="success"
+){
 
-  $("loading").style.display =
-    show ? "flex" : "none";
+  const box =
+    $("message");
+
+  box.textContent =
+    text;
+
+  box.className =
+    type === "error"
+      ? "error-msg"
+      : "success-msg";
+
+  box.style.display =
+    "block";
+
+  setTimeout(()=>{
+
+    box.style.display =
+      "none";
+
+  },3500);
 
 }
 
 
-function formatDate(value){
+function getDateText(value){
 
   if(!value){
-    return "—";
+    return "-";
   }
 
-  if(typeof value === "string"){
-    return value;
-  }
+  if(
+    typeof value === "object" &&
+    value.seconds
+  ){
 
-  if(value.toDate){
-
-    return value.toDate()
-      .toLocaleDateString("en-IN");
+    return new Date(
+      value.seconds * 1000
+    ).toLocaleDateString("en-IN");
 
   }
 
@@ -1237,47 +1887,124 @@ function formatDate(value){
 }
 
 
-function timestampValue(value){
+function getInitial(name){
 
-  if(!value){
-    return 0;
+  if(!name){
+    return "S";
   }
 
-  if(value.toMillis){
-    return value.toMillis();
-  }
-
-  return new Date(value).getTime() || 0;
+  return String(name)
+    .trim()
+    .charAt(0)
+    .toUpperCase();
 
 }
 
 
-/* ------------------------------
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+let currentUser = null;
+
+let studentNumber = "";
+
+let studentData = null;
+
+
+/* =========================================================
    NAVIGATION
------------------------------- */
+========================================================= */
 
-function openSection(sectionId){
+document
+  .querySelectorAll(".nav-btn")
+  .forEach(button=>{
 
-  document.querySelectorAll(".section")
+    button.addEventListener(
+      "click",
+      ()=>{
+
+        openSection(
+          button.dataset.section
+        );
+
+        $("sidebar")
+          .classList
+          .remove("open");
+
+      }
+    );
+
+  });
+
+
+document
+  .querySelectorAll(".quick-btn")
+  .forEach(button=>{
+
+    button.addEventListener(
+      "click",
+      ()=>{
+
+        openSection(
+          button.dataset.go
+        );
+
+      }
+    );
+
+  });
+
+
+function openSection(id){
+
+  document
+    .querySelectorAll(".section")
     .forEach(section=>{
-      section.classList.remove("active");
+
+      section
+        .classList
+        .remove("active");
+
     });
 
-  const section = $(sectionId);
+
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(button=>{
+
+      button
+        .classList
+        .remove("active");
+
+    });
+
+
+  const section =
+    $(id);
 
   if(section){
-    section.classList.add("active");
+
+    section
+      .classList
+      .add("active");
+
   }
 
-  document.querySelectorAll(".nav-btn")
-    .forEach(btn=>{
-      btn.classList.toggle(
-        "active",
-        btn.dataset.section === sectionId
-      );
-    });
 
-  $("sidebar").classList.remove("open");
+  const nav =
+    document.querySelector(
+      `.nav-btn[data-section="${id}"]`
+    );
+
+  if(nav){
+
+    nav
+      .classList
+      .add("active");
+
+  }
+
 
   window.scrollTo({
     top:0,
@@ -1287,922 +2014,1413 @@ function openSection(sectionId){
 }
 
 
-document.querySelectorAll(".nav-btn")
-.forEach(btn=>{
+/* =========================================================
+   MOBILE MENU
+========================================================= */
 
-  btn.addEventListener("click",()=>{
+$("mobileMenu")
+  .addEventListener(
+    "click",
+    ()=>{
 
-    openSection(btn.dataset.section);
+      $("sidebar")
+        .classList
+        .toggle("open");
 
-  });
-
-});
-
-
-document.querySelectorAll("[data-go]")
-.forEach(btn=>{
-
-  btn.addEventListener("click",()=>{
-
-    openSection(btn.dataset.go);
-
-  });
-
-});
+    }
+  );
 
 
-$("menuBtn").addEventListener("click",()=>{
+/* =========================================================
+   LOGOUT
+========================================================= */
 
-  $("sidebar").classList.toggle("open");
+$("logoutBtn")
+  .addEventListener(
+    "click",
+    async ()=>{
 
-});
+      if(
+        confirm(
+          "Logout from Parent Dashboard?"
+        )
+      ){
+
+        await signOut(auth);
+
+        location.href =
+          "index.html";
+
+      }
+
+    }
+  );
 
 
-$("logoutBtn").addEventListener("click",async()=>{
-
-  await signOut(auth);
-
-  window.location.href = "index.html";
-
-});
-
-
-/* ------------------------------
+/* =========================================================
    AUTH
------------------------------- */
+========================================================= */
 
-onAuthStateChanged(auth,async(user)=>{
+onAuthStateChanged(
+  auth,
+  async user=>{
 
-  if(!user){
+    if(!user){
 
-    window.location.href = "index.html";
-
-    return;
-
-  }
-
-  currentUser = user;
-
-  try{
-
-    const userRef =
-      doc(db,"users",user.uid);
-
-    const userSnap =
-      await getDoc(userRef);
-
-    if(!userSnap.exists()){
-
-      alert("Parent account information not found.");
-
-      await signOut(auth);
-
-      window.location.href = "index.html";
+      location.href =
+        "index.html";
 
       return;
 
     }
 
-    parentData = userSnap.data();
+    currentUser =
+      user;
 
-    if(parentData.role !== "parent"){
 
-      alert("This page is only for parent accounts.");
+    try{
 
-      await signOut(auth);
+      const userRef =
+        doc(
+          db,
+          "users",
+          user.uid
+        );
 
-      window.location.href = "index.html";
 
-      return;
+      const userSnap =
+        await getDoc(
+          userRef
+        );
+
+
+      if(!userSnap.exists()){
+
+        throw new Error(
+          "Parent profile not found."
+        );
+
+      }
+
+
+      const userData =
+        userSnap.data();
+
+
+      const role =
+        String(
+          userData.role || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+      if(role !== "parent"){
+
+        throw new Error(
+          "This account is not a parent account."
+        );
+
+      }
+
+
+      studentNumber =
+        String(
+          userData.studentNumber || ""
+        ).trim();
+
+
+      if(!studentNumber){
+
+        throw new Error(
+          "Student number is not linked to this parent account."
+        );
+
+      }
+
+
+      await loadStudent();
+
+
+      await Promise.all([
+
+        loadAttendance(),
+
+        loadStudy(),
+
+        loadResults(),
+
+        loadNotices(),
+
+        loadLeaves(),
+
+        loadMessages()
+
+      ]);
+
+
+      $("loading")
+        .style
+        .display =
+        "none";
+
+
+    }catch(error){
+
+      console.error(error);
+
+      $("loading").innerHTML =
+
+        `<div style="
+          text-align:center;
+          padding:25px;
+          max-width:420px;
+        ">
+
+          <h3 style="margin-bottom:10px;">
+            Parent Dashboard Error
+          </h3>
+
+          <p style="
+            color:#718096;
+            font-weight:400;
+            line-height:1.6;
+          ">
+            ${escapeHtml(error.message)}
+          </p>
+
+          <br>
+
+          <button
+            id="errorLogout"
+            class="primary">
+
+            Back to Login
+
+          </button>
+
+        </div>`;
+
+
+      const errorLogout =
+        $("errorLogout");
+
+
+      if(errorLogout){
+
+        errorLogout.onclick =
+          async()=>{
+
+            await signOut(auth);
+
+            location.href =
+              "index.html";
+
+          };
+
+      }
 
     }
 
-    studentNumber =
-      String(parentData.studentNumber || "");
+  });
 
-    if(!studentNumber){
 
-      alert("Student number is not linked to this parent account.");
+/* =========================================================
+   LOAD STUDENT
+========================================================= */
 
-      return;
+async function loadStudent(){
 
-    }
+  const q =
+    query(
+      collection(db,"students"),
+      where(
+        "studentNumber",
+        "==",
+        studentNumber
+      )
+    );
 
-    $("parentName").textContent =
-      parentData.name || "Parent";
 
-    await loadEverything();
+  const snap =
+    await getDocs(q);
 
-    $("app").style.display = "block";
 
-    showLoading(false);
+  if(snap.empty){
 
-  }catch(error){
-
-    console.error(error);
-
-    alert(
-      "Unable to load parent dashboard. Please try again."
+    throw new Error(
+      "Linked student was not found."
     );
 
   }
 
-});
+
+  const first =
+    snap.docs[0];
 
 
-/* ------------------------------
-   LOAD EVERYTHING
------------------------------- */
+  studentData = {
 
-async function loadEverything(){
+    id:first.id,
 
-  await loadStudent();
+    ...first.data()
 
-  await loadAttendance();
-
-  await loadProgress();
-
-  await loadResults();
-
-  await loadNotices();
-
-  await loadLeaves();
-
-  await loadMessages();
-
-}
+  };
 
 
-/* ------------------------------
-   STUDENT
------------------------------- */
+  const name =
+    studentData.name || "-";
 
-async function loadStudent(){
 
-  const snap =
-    await getDocs(collection(db,"students"));
+  const number =
+    studentData.studentNumber || "-";
 
-  let found = null;
 
-  snap.forEach(item=>{
+  const className =
+    studentData.className || "-";
 
-    const data = item.data();
 
-    if(
-      String(data.studentNumber || "") ===
-      String(studentNumber)
-    ){
+  const parentEmail =
+    currentUser?.email ||
+    studentData.parentEmail ||
+    "-";
 
-      found = {
-        id:item.id,
-        ...data
-      };
 
-    }
+  $("homeChildName")
+    .textContent =
+    name;
 
-  });
 
-  studentData = found;
+  $("homeStudentNumber")
+    .textContent =
+    number;
 
-  if(!found){
 
-    $("homeStudentName").textContent =
-      "Student not found";
+  $("homeNo")
+    .textContent =
+    number;
 
-    $("homeStudentNo").textContent =
-      studentNumber;
 
-    $("childName").textContent =
-      "Student not found";
+  $("homeClass")
+    .textContent =
+    className;
 
-    $("childNumber").textContent =
-      studentNumber;
 
-    return;
+  $("homeParentEmail")
+    .textContent =
+    parentEmail;
 
-  }
 
-  $("homeStudentName").textContent =
-    found.studentName || "—";
+  $("childName")
+    .textContent =
+    name;
 
-  $("homeStudentNo").textContent =
-    found.studentNumber || "—";
 
-  $("homeClass").textContent =
-    found.className || found.studentClass || "—";
+  $("childNumber")
+    .textContent =
+    number;
 
-  $("homeParentEmail").textContent =
-    found.parentEmail || currentUser.email || "—";
 
-  $("childName").textContent =
-    found.studentName || "—";
+  $("childClass")
+    .textContent =
+    className;
 
-  $("childNumber").textContent =
-    found.studentNumber || "—";
 
-  $("childClass").textContent =
-    found.className || found.studentClass || "—";
+  $("childParentEmail")
+    .textContent =
+    parentEmail;
 
-  $("childParentEmail").textContent =
-    found.parentEmail || currentUser.email || "—";
 
-  $("homeStudentNumber").textContent =
-    found.studentNumber || studentNumber;
+  const initial =
+    getInitial(name);
+
+
+  $("avatar")
+    .textContent =
+    initial;
+
+
+  $("childAvatar")
+    .textContent =
+    initial;
 
 }
 
 
-/* ------------------------------
+/* =========================================================
    ATTENDANCE
------------------------------- */
+   IMPORTANT RULE:
+
+   1. Admin marks Absent
+      => Parent sees Absent
+
+   2. Admin marks Leave
+      => Parent sees Leave
+
+   3. No record for TODAY
+      => Parent sees Present
+
+   4. Existing historical attendance
+      => Display normally
+
+   Admin can therefore record only
+   exceptions: Absent / Leave.
+========================================================= */
 
 async function loadAttendance(){
 
+  const q =
+    query(
+      collection(db,"attendance"),
+      where(
+        "studentNumber",
+        "==",
+        studentNumber
+      )
+    );
+
+
   const snap =
-    await getDocs(collection(db,"attendance"));
+    await getDocs(q);
+
 
   const records = [];
 
+
   snap.forEach(item=>{
 
-    const data = item.data();
+    records.push({
 
-    if(
-      String(data.studentNumber || "") ===
-      String(studentNumber)
-    ){
+      id:item.id,
 
-      records.push({
-        id:item.id,
-        ...data
-      });
+      ...item.data()
 
-    }
+    });
 
   });
 
 
   /*
-    If there are duplicate attendance records
-    for the same date, priority is:
-
-    Absent > Leave > Present
+    Today in YYYY-MM-DD format.
+    Attendance dates in Admin are stored
+    in the same format.
   */
 
-  const byDate = {};
+  const today =
+    new Date()
+      .toISOString()
+      .split("T")[0];
 
-  records.forEach(record=>{
+
+  /*
+    Group attendance by date.
+
+    This also protects against accidental
+    duplicate records for the same student/date.
+  */
+
+  const dateMap = {};
+
+
+  records.forEach(data=>{
 
     const date =
-      record.date ||
-      formatDate(record.createdAt);
+      String(
+        data.date || ""
+      ).trim();
+
 
     if(!date){
       return;
     }
 
+
     const status =
-      String(record.status || "Present")
-      .toLowerCase();
+      String(
+        data.status || ""
+      ).trim();
 
-    const priority =
-      status === "absent" ? 3 :
-      status === "leave" ? 2 : 1;
 
-    if(
-      !byDate[date] ||
-      priority > byDate[date].priority
-    ){
+    /*
+      If more than one record exists
+      for the same date, Absent/Leave
+      takes priority over Present.
+    */
 
-      byDate[date] = {
-        record,
-        priority
+    if(!dateMap[date]){
+
+      dateMap[date] = {
+
+        date:date,
+
+        status:
+          status || "Present"
+
       };
 
-    }
-
-  });
-
-
-  const finalRecords =
-    Object.values(byDate)
-      .map(item=>item.record)
-      .sort((a,b)=>{
-
-        const da =
-          new Date(a.date || 0).getTime();
-
-        const dbb =
-          new Date(b.date || 0).getTime();
-
-        return dbb-da;
-
-      });
-
-
-  let present = 0;
-  let absent = 0;
-  let leave = 0;
-
-
-  finalRecords.forEach(record=>{
-
-    const status =
-      String(record.status || "Present")
-      .toLowerCase();
-
-    if(status === "absent"){
-      absent++;
-    }else if(status === "leave"){
-      leave++;
     }else{
-      present++;
+
+      if(
+        status === "Absent" ||
+        status === "Leave"
+      ){
+
+        dateMap[date].status =
+          status;
+
+      }
+
     }
 
   });
-
-
-  $("presentCount").textContent = present;
-  $("absentCount").textContent = absent;
-  $("leaveCount").textContent = leave;
-  $("attendanceTotal").textContent =
-    finalRecords.length;
 
 
   /*
-    Important rule:
-    If there is NO attendance record for today,
-    parent sees Present.
+    TODAY:
 
-    If Usthad marked Absent or Leave,
-    that status is shown.
+    If Admin has not created a record
+    for today, automatically add Present.
   */
 
-  const today =
-    new Date().toISOString().slice(0,10);
+  if(!dateMap[today]){
 
+    dateMap[today] = {
 
-  if(!byDate[today]){
-
-    const todayRecord = {
       date:today,
-      status:"Present",
-      note:"No attendance record added for today."
+
+      status:"Present"
+
     };
 
-    finalRecords.unshift(todayRecord);
-
-    present++;
-
-    $("presentCount").textContent = present;
-
-    $("attendanceTotal").textContent =
-      finalRecords.length;
-
   }
 
 
-  const tbody =
-    $("attendanceTable");
-
-  tbody.innerHTML = "";
+  const rows =
+    Object.values(dateMap);
 
 
-  if(!finalRecords.length){
+  rows.sort((a,b)=>
+    String(b.date)
+      .localeCompare(
+        String(a.date)
+      )
+  );
 
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="3">
-          <div class="empty">
-            No attendance records found.
-          </div>
+
+  $("attendanceTable")
+    .innerHTML =
+    "";
+
+
+  if(rows.length === 0){
+
+    $("attendanceEmpty")
+      .style
+      .display =
+      "block";
+
+  }else{
+
+    $("attendanceEmpty")
+      .style
+      .display =
+      "none";
+
+
+    rows.forEach(data=>{
+
+      let status =
+        data.status ||
+        "Present";
+
+
+      let badge =
+        "green";
+
+
+      if(status === "Absent"){
+
+        badge =
+          "red";
+
+      }else if(status === "Leave"){
+
+        badge =
+          "yellow";
+
+      }else{
+
+        status =
+          "Present";
+
+        badge =
+          "green";
+
+      }
+
+
+      const tr =
+        document.createElement(
+          "tr"
+        );
+
+
+      tr.innerHTML = `
+
+        <td>
+          ${escapeHtml(
+            data.date || "-"
+          )}
         </td>
-      </tr>
-    `;
 
-    $("homeAttendance").textContent =
-      "—";
+        <td>
 
-    return;
+          <span class="badge ${badge}">
+            ${escapeHtml(status)}
+          </span>
 
-  }
+        </td>
 
-
-  finalRecords.forEach(record=>{
-
-    const status =
-      String(record.status || "Present");
-
-    const lower =
-      status.toLowerCase();
-
-    const badgeClass =
-      lower === "absent"
-        ? "absent"
-        : lower === "leave"
-          ? "leave"
-          : "present";
+      `;
 
 
-    const tr =
-      document.createElement("tr");
+      $("attendanceTable")
+        .appendChild(tr);
 
-
-    tr.innerHTML = `
-
-      <td>
-        ${escapeHTML(record.date || "—")}
-      </td>
-
-      <td>
-        <span class="badge ${badgeClass}">
-          ${escapeHTML(status)}
-        </span>
-      </td>
-
-      <td>
-        ${escapeHTML(record.note || "—")}
-      </td>
-
-    `;
-
-
-    tbody.appendChild(tr);
-
-  });
-
-
-  const percentage =
-    finalRecords.length
-      ? Math.round(
-          (present / finalRecords.length) * 100
-        )
-      : 0;
-
-
-  $("homeAttendance").textContent =
-    percentage + "%";
-
-}
-
-
-/* ------------------------------
-   STUDY PROGRESS
------------------------------- */
-
-async function loadProgress(){
-
-  const snap =
-    await getDocs(
-      collection(db,"studyProgress")
-    );
-
-  const records = [];
-
-
-  snap.forEach(item=>{
-
-    const data = item.data();
-
-    if(
-      String(data.studentNumber || "") ===
-      String(studentNumber)
-    ){
-
-      records.push({
-        id:item.id,
-        ...data
-      });
-
-    }
-
-  });
-
-
-  records.sort((a,b)=>{
-
-    return timestampValue(b.createdAt) -
-           timestampValue(a.createdAt);
-
-  });
-
-
-  const container =
-    $("progressList");
-
-  container.innerHTML = "";
-
-
-  if(!records.length){
-
-    container.innerHTML = `
-      <div class="empty">
-        No study progress has been added yet.
-      </div>
-    `;
-
-    $("homeProgress").textContent =
-      "—";
-
-    return;
+    });
 
   }
 
 
-  records.forEach(record=>{
+  /*
+    Keep the Home statistic based on
+    actual Firebase attendance records.
+  */
 
-    const item =
-      document.createElement("div");
-
-    item.className =
-      "progress-item";
-
-
-    const title =
-      record.title ||
-      record.level ||
-      "Study Progress";
-
-
-    item.innerHTML = `
-
-      <div class="item-title">
-        ${escapeHTML(title)}
-      </div>
-
-      <div class="item-meta">
-        ${escapeHTML(
-          record.date ||
-          formatDate(record.createdAt)
-        )}
-      </div>
-
-      <div class="item-text">
-        ${escapeHTML(
-          record.description ||
-          record.progress ||
-          record.note ||
-          "No details available."
-        )}
-      </div>
-
-    `;
-
-
-    container.appendChild(item);
-
-  });
-
-
-  const latest =
-    records[0];
-
-  $("homeProgress").textContent =
-    latest.level ||
-    latest.progress ||
-    latest.title ||
-    "Updated";
-
-}
-
-
-/* ------------------------------
-   RESULTS
------------------------------- */
-
-async function loadResults(){
-
-  const snap =
-    await getDocs(
-      collection(db,"results")
-    );
-
-  const records = [];
-
-
-  snap.forEach(item=>{
-
-    const data = item.data();
-
-    if(
-      String(data.studentNumber || "") ===
-      String(studentNumber) &&
-      data.status === "published"
-    ){
-
-      records.push({
-        id:item.id,
-        ...data
-      });
-
-    }
-
-  });
-
-
-  records.sort((a,b)=>{
-
-    return timestampValue(b.createdAt) -
-           timestampValue(a.createdAt);
-
-  });
-
-
-  $("homeResults").textContent =
+  $("attendanceTotal")
+    .textContent =
     records.length;
 
-
-  const container =
-    $("resultsList");
-
-  container.innerHTML = "";
+}
 
 
-  if(!records.length){
+/* =========================================================
+   STUDY PROGRESS
+========================================================= */
 
-    container.innerHTML = `
-      <div class="empty">
-        No published results available.
-      </div>
-    `;
+async function loadStudy(){
 
-    return;
-
-  }
-
-
-  records.forEach(record=>{
-
-    const item =
-      document.createElement("div");
-
-    item.className =
-      "result-item";
+  const q =
+    query(
+      collection(db,"studyProgress"),
+      where(
+        "studentNumber",
+        "==",
+        studentNumber
+      )
+    );
 
 
-    item.innerHTML = `
+  const snap =
+    await getDocs(q);
 
-      <div class="item-title">
-        ${escapeHTML(
-          record.title ||
-          record.examName ||
-          "Result"
-        )}
-      </div>
 
-      <div class="item-meta">
-        ${escapeHTML(
-          record.date ||
-          record.resultDate ||
-          formatDate(record.createdAt)
-        )}
-      </div>
+  const rows = [];
 
-      <div class="item-text">
+
+  snap.forEach(item=>{
+
+    rows.push({
+
+      id:item.id,
+
+      ...item.data()
+
+    });
+
+  });
+
+
+  rows.sort((a,b)=>
+    String(
+      b.date || ""
+    ).localeCompare(
+      String(
+        a.date || ""
+      )
+    )
+  );
+
+
+  $("studyList")
+    .innerHTML =
+    "";
+
+
+  if(rows.length === 0){
+
+    $("studyEmpty")
+      .style
+      .display =
+      "block";
+
+  }else{
+
+    $("studyEmpty")
+      .style
+      .display =
+      "none";
+
+
+    rows.forEach(data=>{
+
+      let performance =
+        data.performance ||
+        "Not specified";
+
+
+      let studyStatus =
+        data.studyStatus ||
+        "Not specified";
+
+
+      let width =
+        70;
+
+
+      if(
+        performance ===
+        "Excellent"
+      ){
+
+        width = 100;
+
+      }else if(
+        performance ===
+        "Very Good"
+      ){
+
+        width = 85;
+
+      }else if(
+        performance ===
+        "Good"
+      ){
+
+        width = 70;
+
+      }else if(
+        performance ===
+        "Needs Improvement"
+      ){
+
+        width = 45;
+
+      }
+
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "progress-card";
+
+
+      div.innerHTML = `
+
+        <div class="progress-head">
+
+          <strong>
+            ${escapeHtml(
+              data.surah ||
+              "Study Progress"
+            )}
+          </strong>
+
+          <span>
+            ${escapeHtml(
+              data.date || "-"
+            )}
+          </span>
+
+        </div>
+
+
+        <div style="
+          font-size:13px;
+          color:#536477;
+          margin-bottom:10px;
+        ">
+
+          <b>New Lesson:</b>
+
+          ${escapeHtml(
+            data.newLesson || "-"
+          )}
+
+          &nbsp; | &nbsp;
+
+          <b>Revision:</b>
+
+          ${escapeHtml(
+            data.revision || "-"
+          )}
+
+        </div>
+
+
+        <div class="progress-line">
+
+          <div
+            class="progress-fill"
+            style="width:${width}%">
+          </div>
+
+        </div>
+
+
+        <div style="
+          margin-top:12px;
+          display:flex;
+          flex-wrap:wrap;
+          gap:8px;
+        ">
+
+          <span class="badge blue">
+
+            Hifz Performance:
+
+            ${escapeHtml(
+              performance
+            )}
+
+          </span>
+
+
+          <span class="badge green">
+
+            Dars & Study Status:
+
+            ${escapeHtml(
+              studyStatus
+            )}
+
+          </span>
+
+        </div>
+
+
         ${
-          record.mark !== undefined
-            ? "Mark: " +
-              escapeHTML(record.mark)
-            : ""
-        }
-      </div>
-
-    `;
-
-
-    container.appendChild(item);
-
-  });
-
-}
-
-
-/* ------------------------------
-   NOTICES
------------------------------- */
-
-async function loadNotices(){
-
-  const snap =
-    await getDocs(
-      collection(db,"notices")
-    );
-
-  const records = [];
-
-
-  snap.forEach(item=>{
-
-    const data = item.data();
-
-    if(data.status === "published"){
-
-      records.push({
-        id:item.id,
-        ...data
-      });
-
-    }
-
-  });
-
-
-  records.sort((a,b)=>{
-
-    return timestampValue(b.createdAt) -
-           timestampValue(a.createdAt);
-
-  });
-
-
-  const container =
-    $("noticesList");
-
-  container.innerHTML = "";
-
-
-  if(!records.length){
-
-    container.innerHTML = `
-      <div class="empty">
-        No published notices available.
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  records.forEach(record=>{
-
-    const item =
-      document.createElement("div");
-
-    item.className =
-      "notice-item";
-
-
-    item.innerHTML = `
-
-      <div class="item-title">
-        ${escapeHTML(
-          record.title ||
-          "Notice"
-        )}
-      </div>
-
-      <div class="item-meta">
-        ${escapeHTML(
-          record.date ||
-          formatDate(record.createdAt)
-        )}
-      </div>
-
-      <div class="item-text">
-        ${escapeHTML(
-          record.text ||
-          record.description ||
-          ""
-        )}
-      </div>
-
-    `;
-
-
-    container.appendChild(item);
-
-  });
-
-}
-
-
-/* ------------------------------
-   LEAVE APPLICATIONS
------------------------------- */
-
-async function loadLeaves(){
-
-  const snap =
-    await getDocs(
-      collection(db,"leaveRequests")
-    );
-
-  const records = [];
-
-
-  snap.forEach(item=>{
-
-    const data = item.data();
-
-    if(
-      data.parentUid === currentUser.uid
-    ){
-
-      records.push({
-        id:item.id,
-        ...data
-      });
-
-    }
-
-  });
-
-
-  records.sort((a,b)=>{
-
-    return timestampValue(b.createdAt) -
-           timestampValue(a.createdAt);
-
-  });
-
-
-  const container =
-    $("leaveList");
-
-  container.innerHTML = "";
-
-
-  if(!records.length){
-
-    container.innerHTML = `
-      <div class="empty">
-        No leave applications yet.
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  records.forEach(record=>{
-
-    const item =
-      document.createElement("div");
-
-    item.className =
-      "leave-item";
-
-
-    const status =
-      record.status ||
-      "pending";
-
-
-    item.innerHTML = `
-
-      <div class="item-title">
-        Leave Application
-      </div>
-
-      <div class="item-meta">
-
-        ${escapeHTML(
-          record.fromDate ||
-          record.date ||
-          "—"
-        )}
-
-        ${record.toDate
-          ? " → " + escapeHTML(record.toDate)
+          data.note
+          ? `
+            <div style="
+              margin-top:10px;
+              color:#718096;
+              font-size:12px;
+            ">
+
+              <b>Teacher Note:</b>
+
+              ${escapeHtml(
+                data.note
+              )}
+
+            </div>
+          `
           : ""
         }
 
-        &nbsp; | &nbsp;
+      `;
 
-        <span class="badge ${
-          status === "approved"
-            ? "present"
-            : status === "rejected"
-              ? "absent"
-              : "leave"
-        }">
-          ${escapeHTML(status)}
+
+      $("studyList")
+        .appendChild(div);
+
+    });
+
+  }
+
+
+  $("studyTotal")
+    .textContent =
+    rows.length;
+
+}
+
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+async function loadResults(){
+
+  const q =
+    query(
+      collection(db,"results"),
+      where(
+        "studentNumber",
+        "==",
+        studentNumber
+      ),
+      where(
+        "status",
+        "==",
+        "published"
+      )
+    );
+
+
+  const snap =
+    await getDocs(q);
+
+
+  const rows = [];
+
+
+  snap.forEach(item=>{
+
+    rows.push({
+
+      id:item.id,
+
+      ...item.data()
+
+    });
+
+  });
+
+
+  rows.sort((a,b)=>{
+
+    const aa =
+      a.createdAt?.seconds ||
+      0;
+
+    const bb =
+      b.createdAt?.seconds ||
+      0;
+
+    return bb-aa;
+
+  });
+
+
+  $("resultList")
+    .innerHTML =
+    "";
+
+
+  if(rows.length === 0){
+
+    $("resultEmpty")
+      .style
+      .display =
+      "block";
+
+  }else{
+
+    $("resultEmpty")
+      .style
+      .display =
+      "none";
+
+
+    rows.forEach(data=>{
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "result-card";
+
+
+      div.innerHTML = `
+
+        <div>
+
+          <div class="result-title">
+
+            ${escapeHtml(
+              data.title ||
+              "Study Result"
+            )}
+
+          </div>
+
+
+          <div class="result-date">
+
+            Published result
+
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <div class="result-mark">
+
+            ${escapeHtml(
+              data.mark || "-"
+            )}
+
+          </div>
+
+
+          <span class="badge green">
+
+            Published
+
+          </span>
+
+        </div>
+
+      `;
+
+
+      $("resultList")
+        .appendChild(div);
+
+    });
+
+  }
+
+
+  $("resultTotal")
+    .textContent =
+    rows.length;
+
+}
+
+
+/* =========================================================
+   NOTICES
+========================================================= */
+
+async function loadNotices(){
+
+  const q =
+    query(
+      collection(db,"notices"),
+      where(
+        "status",
+        "==",
+        "published"
+      )
+    );
+
+
+  const snap =
+    await getDocs(q);
+
+
+  const rows = [];
+
+
+  snap.forEach(item=>{
+
+    rows.push({
+
+      id:item.id,
+
+      ...item.data()
+
+    });
+
+  });
+
+
+  rows.sort((a,b)=>{
+
+    const aa =
+      a.createdAt?.seconds ||
+      0;
+
+    const bb =
+      b.createdAt?.seconds ||
+      0;
+
+    return bb-aa;
+
+  });
+
+
+  $("noticeList")
+    .innerHTML =
+    "";
+
+
+  if(rows.length === 0){
+
+    $("noticeEmpty")
+      .style
+      .display =
+      "block";
+
+  }else{
+
+    $("noticeEmpty")
+      .style
+      .display =
+      "none";
+
+
+    rows.forEach(data=>{
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "notice";
+
+
+      div.innerHTML = `
+
+        <h4>
+
+          ${escapeHtml(
+            data.title ||
+            "Notice"
+          )}
+
+        </h4>
+
+
+        <p>
+
+          ${escapeHtml(
+            data.text || ""
+          )}
+
+        </p>
+
+
+        <small>
+
+          ${getDateText(
+            data.createdAt
+          )}
+
+        </small>
+
+      `;
+
+
+      $("noticeList")
+        .appendChild(div);
+
+    });
+
+  }
+
+
+  $("noticeTotal")
+    .textContent =
+    rows.length;
+
+}
+
+
+/* =========================================================
+   LEAVE APPLICATION
+========================================================= */
+
+$("leaveForm")
+  .addEventListener(
+    "submit",
+    async e=>{
+
+      e.preventDefault();
+
+
+      if(!currentUser){
+
+        showMessage(
+          "Please login again.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      try{
+
+        await addDoc(
+          collection(
+            db,
+            "leaveRequests"
+          ),
+          {
+
+            parentUid:
+              currentUser.uid,
+
+            parentEmail:
+              currentUser.email || "",
+
+            studentNumber:
+              studentNumber,
+
+            leaveDate:
+              $("leaveDate")
+                .value,
+
+            reason:
+              $("leaveReason")
+                .value
+                .trim(),
+
+            details:
+              $("leaveDetails")
+                .value
+                .trim(),
+
+            status:
+              "pending",
+
+            reply:
+              "",
+
+            createdAt:
+              serverTimestamp()
+
+          }
+        );
+
+
+        $("leaveForm")
+          .reset();
+
+
+        showMessage(
+          "Leave application submitted successfully."
+        );
+
+
+        await loadLeaves();
+
+
+      }catch(error){
+
+        console.error(error);
+
+        showMessage(
+          error.message,
+          "error"
+        );
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   LOAD LEAVES
+========================================================= */
+
+async function loadLeaves(){
+
+  const q =
+    query(
+      collection(db,"leaveRequests"),
+      where(
+        "parentUid",
+        "==",
+        currentUser.uid
+      )
+    );
+
+
+  const snap =
+    await getDocs(q);
+
+
+  const rows = [];
+
+
+  snap.forEach(item=>{
+
+    rows.push({
+
+      id:item.id,
+
+      ...item.data()
+
+    });
+
+  });
+
+
+  rows.sort((a,b)=>{
+
+    const aa =
+      a.createdAt?.seconds ||
+      0;
+
+    const bb =
+      b.createdAt?.seconds ||
+      0;
+
+    return bb-aa;
+
+  });
+
+
+  $("leaveList")
+    .innerHTML =
+    "";
+
+
+  if(rows.length === 0){
+
+    $("leaveEmpty")
+      .style
+      .display =
+      "block";
+
+    return;
+
+  }
+
+
+  $("leaveEmpty")
+    .style
+    .display =
+    "none";
+
+
+  rows.forEach(data=>{
+
+    const status =
+      data.status ||
+      "pending";
+
+
+    let badge =
+      "yellow";
+
+
+    if(status === "approved"){
+
+      badge =
+        "green";
+
+    }else if(
+      status === "rejected"
+    ){
+
+      badge =
+        "red";
+
+    }
+
+
+    const div =
+      document.createElement(
+        "div"
+      );
+
+
+    div.className =
+      "request-card";
+
+
+    div.innerHTML = `
+
+      <div class="request-top">
+
+        <div>
+
+          <h4>
+            Leave Application
+          </h4>
+
+          <small style="
+            color:#718096;
+          ">
+
+            ${escapeHtml(
+              data.leaveDate || "-"
+            )}
+
+          </small>
+
+        </div>
+
+
+        <span class="badge ${badge}">
+
+          ${escapeHtml(
+            status
+          )}
+
         </span>
 
       </div>
 
-      <div class="item-text">
-        <strong>Reason:</strong><br>
-        ${escapeHTML(record.reason || "—")}
-      </div>
+
+      <p>
+
+        <strong>
+          Reason:
+        </strong>
+
+        ${escapeHtml(
+          data.reason || "-"
+        )}
+
+      </p>
+
 
       ${
-        record.reply
+        data.details
         ? `
-          <div
-            style="
-              margin-top:12px;
-              padding:12px;
-              background:#f5f8fa;
-              border-radius:8px;
-              font-size:12px;
-              color:#435263;
-            "
-          >
-            <strong>Usthad Reply:</strong><br>
-            ${escapeHTML(record.reply)}
+          <p>
+
+            <strong>
+              Details:
+            </strong>
+
+            ${escapeHtml(
+              data.details
+            )}
+
+          </p>
+        `
+        : ""
+      }
+
+
+      ${
+        data.reply
+        ? `
+          <div class="reply-box">
+
+            <strong>
+              USTHAD REPLY
+            </strong>
+
+            <p>
+
+              ${escapeHtml(
+                data.reply
+              )}
+
+            </p>
+
           </div>
         `
         : ""
@@ -2211,269 +3429,260 @@ async function loadLeaves(){
     `;
 
 
-    container.appendChild(item);
+    $("leaveList")
+      .appendChild(div);
 
   });
 
 }
 
 
-/* ------------------------------
-   SUBMIT LEAVE
------------------------------- */
+/* =========================================================
+   MESSAGE FORM
+========================================================= */
 
-$("submitLeave").addEventListener(
-  "click",
-  async()=>{
+$("messageForm")
+  .addEventListener(
+    "submit",
+    async e=>{
 
-    $("leaveError").style.display =
-      "none";
-
-    $("leaveSuccess").style.display =
-      "none";
+      e.preventDefault();
 
 
-    const fromDate =
-      $("leaveFrom").value;
-
-    const toDate =
-      $("leaveTo").value;
-
-    const reason =
-      $("leaveReason").value.trim();
+      const text =
+        $("messageText")
+          .value
+          .trim();
 
 
-    if(!fromDate){
+      if(!text){
 
-      $("leaveError").textContent =
-        "Please select the from date.";
+        showMessage(
+          "Please enter a message.",
+          "error"
+        );
 
-      $("leaveError").style.display =
-        "block";
+        return;
 
-      return;
-
-    }
-
-
-    if(!toDate){
-
-      $("leaveError").textContent =
-        "Please select the to date.";
-
-      $("leaveError").style.display =
-        "block";
-
-      return;
-
-    }
+      }
 
 
-    if(!reason){
+      try{
 
-      $("leaveError").textContent =
-        "Please enter the reason.";
+        await addDoc(
+          collection(
+            db,
+            "messages"
+          ),
+          {
 
-      $("leaveError").style.display =
-        "block";
+            parentUid:
+              currentUser.uid,
 
-      return;
+            parentEmail:
+              currentUser.email || "",
 
-    }
+            studentNumber:
+              studentNumber,
 
+            text:
+              text,
 
-    if(toDate < fromDate){
+            reply:
+              "",
 
-      $("leaveError").textContent =
-        "To date cannot be before from date.";
+            status:
+              "unread",
 
-      $("leaveError").style.display =
-        "block";
+            createdAt:
+              serverTimestamp()
 
-      return;
-
-    }
-
-
-    try{
-
-      await addDoc(
-        collection(db,"leaveRequests"),
-        {
-
-          parentUid:
-            currentUser.uid,
-
-          studentNumber:
-            String(studentNumber),
-
-          studentName:
-            studentData?.studentName || "",
-
-          fromDate:
-            fromDate,
-
-          toDate:
-            toDate,
-
-          reason:
-            reason,
-
-          status:
-            "pending",
-
-          reply:
-            "",
-
-          createdAt:
-            serverTimestamp()
-
-        }
-      );
+          }
+        );
 
 
-      $("leaveFrom").value = "";
-      $("leaveTo").value = "";
-      $("leaveReason").value = "";
+        $("messageForm")
+          .reset();
 
 
-      $("leaveSuccess").style.display =
-        "block";
+        showMessage(
+          "Message sent successfully."
+        );
 
 
-      await loadLeaves();
+        await loadMessages();
 
 
-    }catch(error){
+      }catch(error){
 
-      console.error(error);
+        console.error(error);
 
-      $("leaveError").textContent =
-        "Unable to submit leave application.";
+        showMessage(
+          error.message,
+          "error"
+        );
 
-      $("leaveError").style.display =
-        "block";
+      }
 
     }
-
-  }
-);
+  );
 
 
-/* ------------------------------
-   MESSAGES
------------------------------- */
+/* =========================================================
+   LOAD MESSAGES
+========================================================= */
 
 async function loadMessages(){
 
-  const snap =
-    await getDocs(
-      collection(db,"messages")
+  const q =
+    query(
+      collection(db,"messages"),
+      where(
+        "parentUid",
+        "==",
+        currentUser.uid
+      )
     );
 
-  const records = [];
+
+  const snap =
+    await getDocs(q);
+
+
+  const rows = [];
 
 
   snap.forEach(item=>{
 
-    const data = item.data();
+    rows.push({
 
-    if(
-      data.parentUid === currentUser.uid
-    ){
+      id:item.id,
 
-      records.push({
-        id:item.id,
-        ...data
-      });
+      ...item.data()
 
-    }
+    });
 
   });
 
 
-  records.sort((a,b)=>{
+  rows.sort((a,b)=>{
 
-    return timestampValue(b.createdAt) -
-           timestampValue(a.createdAt);
+    const aa =
+      a.createdAt?.seconds ||
+      0;
+
+    const bb =
+      b.createdAt?.seconds ||
+      0;
+
+    return bb-aa;
 
   });
 
 
-  const container =
-    $("messagesList");
+  $("messageList")
+    .innerHTML =
+    "";
 
-  container.innerHTML = "";
 
+  if(rows.length === 0){
 
-  if(!records.length){
-
-    container.innerHTML = `
-      <div class="empty">
-        No messages yet.
-      </div>
-    `;
+    $("messageEmpty")
+      .style
+      .display =
+      "block";
 
     return;
 
   }
 
 
-  records.forEach(record=>{
-
-    const item =
-      document.createElement("div");
-
-    item.className =
-      "message-item";
+  $("messageEmpty")
+    .style
+    .display =
+    "none";
 
 
-    item.innerHTML = `
+  rows.forEach(data=>{
 
-      <div class="item-title">
-        Your Message
+    const status =
+      data.status ||
+      "unread";
+
+
+    const badge =
+      status === "replied"
+        ? "green"
+        : "yellow";
+
+
+    const div =
+      document.createElement(
+        "div"
+      );
+
+
+    div.className =
+      "request-card";
+
+
+    div.innerHTML = `
+
+      <div class="request-top">
+
+        <h4>
+          My Message
+        </h4>
+
+
+        <span class="badge ${badge}">
+
+          ${escapeHtml(
+            status
+          )}
+
+        </span>
+
       </div>
 
-      <div class="item-meta">
-        ${escapeHTML(
-          formatDate(record.createdAt)
+
+      <p>
+
+        ${escapeHtml(
+          data.text || "-"
         )}
-      </div>
 
-      <div class="item-text">
-        ${escapeHTML(
-          record.message ||
-          record.text ||
-          ""
-        )}
-      </div>
+      </p>
+
 
       ${
-        record.reply
+        data.reply
         ? `
-          <div
-            style="
-              margin-top:12px;
-              padding:12px;
-              background:#eef7fa;
-              border-radius:8px;
-              font-size:12px;
-              color:#435263;
-            "
-          >
-            <strong>Usthad Reply:</strong><br>
-            ${escapeHTML(record.reply)}
+          <div class="reply-box">
+
+            <strong>
+              USTHAD REPLY
+            </strong>
+
+            <p>
+
+              ${escapeHtml(
+                data.reply
+              )}
+
+            </p>
+
           </div>
         `
         : `
-          <div
-            style="
-              margin-top:10px;
-              font-size:11px;
-              color:#8a96a3;
-            "
-          >
-            Waiting for Usthad reply.
+          <div style="
+            margin-top:12px;
+            color:#718096;
+            font-size:12px;
+          ">
+
+            Waiting for Usthad's reply...
+
           </div>
         `
       }
@@ -2481,109 +3690,27 @@ async function loadMessages(){
     `;
 
 
-    container.appendChild(item);
+    $("messageList")
+      .appendChild(div);
 
   });
 
 }
 
 
-/* ------------------------------
-   SEND MESSAGE
------------------------------- */
-
-$("sendMessage").addEventListener(
-  "click",
-  async()=>{
-
-    $("messageError").style.display =
-      "none";
-
-    $("messageSuccess").style.display =
-      "none";
-
-
-    const message =
-      $("messageText").value.trim();
-
-
-    if(!message){
-
-      $("messageError").textContent =
-        "Please enter a message.";
-
-      $("messageError").style.display =
-        "block";
-
-      return;
-
-    }
-
-
-    try{
-
-      await addDoc(
-        collection(db,"messages"),
-        {
-
-          parentUid:
-            currentUser.uid,
-
-          studentNumber:
-            String(studentNumber),
-
-          studentName:
-            studentData?.studentName || "",
-
-          message:
-            message,
-
-          reply:
-            "",
-
-          createdAt:
-            serverTimestamp()
-
-        }
-      );
-
-
-      $("messageText").value = "";
-
-
-      $("messageSuccess").style.display =
-        "block";
-
-
-      await loadMessages();
-
-
-    }catch(error){
-
-      console.error(error);
-
-      $("messageError").textContent =
-        "Unable to send message.";
-
-      $("messageError").style.display =
-        "block";
-
-    }
-
-  }
-);
-
-
-/* ------------------------------
-   DEFAULT LEAVE DATE
------------------------------- */
+/* =========================================================
+   INITIAL DATE
+========================================================= */
 
 const today =
-  new Date().toISOString().slice(0,10);
+  new Date()
+    .toISOString()
+    .split("T")[0];
 
-$("leaveFrom").value = today;
-$("leaveTo").value = today;
 
+$("leaveDate")
+  .value =
+  today;
 
 </script>
 
