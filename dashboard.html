@@ -1154,7 +1154,6 @@ td strong{
           >
         </div>
 
-        <!-- ONLY NEW FIELD -->
         <div class="field">
           <label>Student Address</label>
 
@@ -1164,7 +1163,6 @@ td strong{
           >
         </div>
 
-        <!-- ONLY NEW FIELD -->
         <div class="field">
           <label>Phone Number</label>
 
@@ -2374,12 +2372,24 @@ async function loadStudents(){
 
       <td>
 
-        <button
-          class="danger delete-student"
-          data-id="${item.id}"
-        >
-          Delete
-        </button>
+        <div class="actions">
+
+          <!-- NEW: EDIT BUTTON -->
+          <button
+            class="primary edit-student"
+            data-id="${item.id}"
+          >
+            Edit
+          </button>
+
+          <button
+            class="danger delete-student"
+            data-id="${item.id}"
+          >
+            Delete
+          </button>
+
+        </div>
 
       </td>
 
@@ -2393,6 +2403,10 @@ async function loadStudents(){
     window.students.length;
 
   populateStudentSelects();
+
+  /* =========================
+     DELETE STUDENT
+  ========================= */
 
   document.querySelectorAll(".delete-student")
   .forEach(button=>{
@@ -2422,6 +2436,148 @@ async function loadStudents(){
         await loadStudents();
 
       }catch(error){
+
+        showMessage(
+          error.message,
+          "error"
+        );
+
+      }
+
+    });
+
+  });
+
+
+  /* =========================
+     EDIT STUDENT
+  ========================= */
+
+  document.querySelectorAll(".edit-student")
+  .forEach(button=>{
+
+    button.addEventListener("click",async()=>{
+
+      const student =
+        window.students.find(
+          s => s.id === button.dataset.id
+        );
+
+      if(!student){
+
+        showMessage(
+          "Student details not found.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      const name =
+        prompt(
+          "Student Name:",
+          student.name || ""
+        );
+
+      if(name === null){
+
+        return;
+
+      }
+
+
+      const className =
+        prompt(
+          "Class:",
+          student.className || ""
+        );
+
+      if(className === null){
+
+        return;
+
+      }
+
+
+      const parentEmail =
+        prompt(
+          "Parent Email:",
+          student.parentEmail || ""
+        );
+
+      if(parentEmail === null){
+
+        return;
+
+      }
+
+
+      const studentAddress =
+        prompt(
+          "Student Address:",
+          student.studentAddress || ""
+        );
+
+      if(studentAddress === null){
+
+        return;
+
+      }
+
+
+      const phoneNumber =
+        prompt(
+          "Phone Number:",
+          student.phoneNumber || ""
+        );
+
+      if(phoneNumber === null){
+
+        return;
+
+      }
+
+
+      try{
+
+        await updateDoc(
+          doc(
+            db,
+            "students",
+            button.dataset.id
+          ),
+          {
+            name:
+              name.trim(),
+
+            className:
+              className.trim(),
+
+            parentEmail:
+              parentEmail.trim(),
+
+            studentAddress:
+              studentAddress.trim(),
+
+            phoneNumber:
+              phoneNumber.trim()
+          }
+        );
+
+
+        showMessage(
+          "Student details updated successfully."
+        );
+
+
+        await loadStudents();
+
+
+      }catch(error){
+
+        console.error(error);
 
         showMessage(
           error.message,
@@ -2569,11 +2725,9 @@ $("studentForm")
         parentEmail:
           $("parentEmail").value.trim(),
 
-        /* ONLY NEW DATA */
         studentAddress:
           $("studentAddress").value.trim(),
 
-        /* ONLY NEW DATA */
         phoneNumber:
           $("phoneNumber").value.trim(),
 
