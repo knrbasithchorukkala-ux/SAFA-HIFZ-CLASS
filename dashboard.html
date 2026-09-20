@@ -1042,6 +1042,18 @@ td strong{
 
         <div class="field">
 
+          <label>Guardian Name</label>
+
+          <input
+            id="editGuardianName"
+            placeholder="Guardian name"
+          >
+
+        </div>
+
+
+        <div class="field">
+
           <label>Class</label>
 
           <input
@@ -1380,6 +1392,15 @@ td strong{
         </div>
 
         <div class="field">
+          <label>Guardian Name</label>
+
+          <input
+            id="guardianName"
+            placeholder="Guardian name"
+          >
+        </div>
+
+        <div class="field">
           <label>Class</label>
 
           <input
@@ -1463,6 +1484,7 @@ td strong{
           <tr>
             <th>No.</th>
             <th>Name</th>
+            <th>Guardian Name</th>
             <th>Class</th>
             <th>Parent Email</th>
             <th>Phone Number</th>
@@ -2599,6 +2621,7 @@ async function loadStudents(){
     tr.dataset.search =
       `${data.studentNumber || ""}
        ${data.name || ""}
+       ${data.guardianName || ""}
        ${data.className || ""}
        ${data.parentEmail || ""}
        ${data.studentAddress || ""}
@@ -2617,6 +2640,10 @@ async function loadStudents(){
         <strong>
           ${escapeHtml(data.name)}
         </strong>
+      </td>
+
+      <td>
+        ${escapeHtml(data.guardianName || "-")}
       </td>
 
       <td>
@@ -2758,6 +2785,10 @@ document.addEventListener("click",e=>{
     student.name || "";
 
 
+  $("editGuardianName").value =
+    student.guardianName || "";
+
+
   $("editClassName").value =
     student.className || "";
 
@@ -2854,6 +2885,12 @@ $("editStudentForm")
         .trim();
 
 
+    const guardianName =
+      $("editGuardianName")
+        .value
+        .trim();
+
+
     const studentAddress =
       $("editStudentAddress")
         .value
@@ -2888,6 +2925,7 @@ $("editStudentForm")
         ),
         {
           name:name,
+          guardianName:guardianName,
           className:className,
           parentEmail:parentEmail,
           studentAddress:studentAddress,
@@ -3049,8 +3087,13 @@ $("studentForm")
       {
         studentNumber,
         name,
+
+        guardianName:
+          $("guardianName").value.trim(),
+
         className:
           $("className").value.trim(),
+
         parentEmail:
           $("parentEmail").value.trim(),
 
