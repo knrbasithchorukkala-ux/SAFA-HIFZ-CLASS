@@ -349,9 +349,6 @@ body::before{
     rgba(255,255,255,.08);
 }
 
-
-/* Decorative circle */
-
 .islamic-welcome::before{
   content:"";
 
@@ -377,9 +374,6 @@ body::before{
     rgba(255,255,255,.02);
 }
 
-
-/* Decorative star */
-
 .islamic-welcome::after{
   content:"✦";
 
@@ -393,9 +387,6 @@ body::before{
   color:
     rgba(255,255,255,.08);
 }
-
-
-/* Arabic — CENTER */
 
 .welcome-arabic{
   font-family:
@@ -419,9 +410,6 @@ body::before{
   z-index:1;
 }
 
-
-/* English — CENTER */
-
 .welcome-title{
   font-size:22px;
 
@@ -434,9 +422,6 @@ body::before{
   position:relative;
   z-index:1;
 }
-
-
-/* Gold line */
 
 .islamic-line{
   width:65px;
@@ -549,6 +534,7 @@ body::before{
   background:#f7f9fc;
   border-radius:10px;
   padding:13px;
+  overflow:hidden;
 }
 
 .meta-box small{
@@ -561,6 +547,7 @@ body::before{
   display:block;
   margin-top:5px;
   font-size:14px;
+  word-break:break-word;
 }
 
 
@@ -1041,9 +1028,6 @@ tr:hover td{
     flex-direction:column;
   }
 
-
-  /* Islamic banner mobile */
-
   .islamic-welcome{
     padding:22px 20px;
     border-radius:16px;
@@ -1253,10 +1237,6 @@ tr:hover td{
   id="home">
 
 
-  <!-- =========================
-       ASSALAMU ALAIKUM
-  ========================= -->
-
   <div class="islamic-welcome">
 
     <div class="welcome-arabic">
@@ -1334,10 +1314,49 @@ tr:hover td{
       <div class="meta-box">
 
         <small>
-          Parent Account
+          Email ID
         </small>
 
         <strong id="homeParentEmail">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Guardian Name
+        </small>
+
+        <strong id="homeGuardianName">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Phone Number
+        </small>
+
+        <strong id="homePhoneNumber">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Address / Place
+        </small>
+
+        <strong id="homeStudentAddress">
           -
         </strong>
 
@@ -1605,10 +1624,49 @@ tr:hover td{
       <div class="meta-box">
 
         <small>
-          Parent Email
+          Email ID
         </small>
 
         <strong id="childParentEmail">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Guardian Name
+        </small>
+
+        <strong id="childGuardianName">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Phone Number
+        </small>
+
+        <strong id="childPhoneNumber">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Address / Place
+        </small>
+
+        <strong id="childStudentAddress">
           -
         </strong>
 
@@ -2552,6 +2610,22 @@ async function loadStudent(){
     "-";
 
 
+  const guardianName =
+    studentData.guardianName || "-";
+
+
+  const phoneNumber =
+    studentData.phoneNumber || "-";
+
+
+  const studentAddress =
+    studentData.studentAddress || "-";
+
+
+  /* =========================
+     HOME DETAILS
+  ========================= */
+
   $("homeChildName")
     .textContent =
     name;
@@ -2577,6 +2651,25 @@ async function loadStudent(){
     parentEmail;
 
 
+  $("homeGuardianName")
+    .textContent =
+    guardianName;
+
+
+  $("homePhoneNumber")
+    .textContent =
+    phoneNumber;
+
+
+  $("homeStudentAddress")
+    .textContent =
+    studentAddress;
+
+
+  /* =========================
+     MY CHILD DETAILS
+  ========================= */
+
   $("childName")
     .textContent =
     name;
@@ -2595,6 +2688,21 @@ async function loadStudent(){
   $("childParentEmail")
     .textContent =
     parentEmail;
+
+
+  $("childGuardianName")
+    .textContent =
+    guardianName;
+
+
+  $("childPhoneNumber")
+    .textContent =
+    phoneNumber;
+
+
+  $("childStudentAddress")
+    .textContent =
+    studentAddress;
 
 
   const initial =
