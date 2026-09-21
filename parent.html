@@ -1763,7 +1763,10 @@ tr:hover td{
 
   <div class="left-top">
 
-    <button class="mobile-menu" id="mobileMenu">
+    <button
+      class="mobile-menu"
+      id="mobileMenu"
+      type="button">
       ☰
     </button>
 
@@ -1784,8 +1787,13 @@ tr:hover td{
       PARENT PORTAL
     </div>
 
-    <button class="logout" id="logoutBtn">
+    <button
+      class="logout"
+      id="logoutBtn"
+      type="button">
+
       Logout
+
     </button>
 
   </div>
@@ -1828,6 +1836,8 @@ tr:hover td{
         </p>
 
       </div>
+
+      <!-- FIXED DONATE BUTTON -->
 
       <button
         class="donation-now-btn"
@@ -1974,37 +1984,37 @@ tr:hover td{
 
     <div class="quick-grid">
 
-      <button class="quick-btn" data-go="attendance">
+      <button class="quick-btn" data-go="attendance" type="button">
         <strong>✓ Attendance</strong>
         <small>View attendance records</small>
       </button>
 
-      <button class="quick-btn" data-go="study">
+      <button class="quick-btn" data-go="study" type="button">
         <strong>📖 Study Progress</strong>
         <small>View study progress</small>
       </button>
 
-      <button class="quick-btn" data-go="results">
+      <button class="quick-btn" data-go="results" type="button">
         <strong>🏆 Results</strong>
         <small>View published results</small>
       </button>
 
-      <button class="quick-btn" data-go="notices">
+      <button class="quick-btn" data-go="notices" type="button">
         <strong>📢 Notices</strong>
         <small>View class announcements</small>
       </button>
 
-      <button class="quick-btn" data-go="leave">
+      <button class="quick-btn" data-go="leave" type="button">
         <strong>📝 Apply Leave</strong>
         <small>Send leave application</small>
       </button>
 
-      <button class="quick-btn" data-go="messages">
+      <button class="quick-btn" data-go="messages" type="button">
         <strong>💬 Contact Usthad</strong>
         <small>Send a message</small>
       </button>
 
-      <button class="quick-btn" data-go="donations">
+      <button class="quick-btn" data-go="donations" type="button">
         <strong>💰 MY DONATION TO SAFA</strong>
         <small>Donate and view payment status</small>
       </button>
@@ -2958,30 +2968,6 @@ function openSection(id){
 
 
 /* =========================================================
-   IMPORTANT DONATE BUTTON FIX
-========================================================= */
-
-window.openDonation = function(){
-
-  openSection("donations");
-
-  setTimeout(()=>{
-
-    const amount =
-      $("donationAmount");
-
-    if(amount){
-
-      amount.focus();
-
-    }
-
-  },300);
-
-};
-
-
-/* =========================================================
    NAV BUTTONS
 ========================================================= */
 
@@ -3009,6 +2995,7 @@ document
 
 /* =========================================================
    DONATE NOW
+   FIXED
 ========================================================= */
 
 const donateNowBtn =
@@ -3023,7 +3010,75 @@ if(donateNowBtn){
       event.preventDefault();
       event.stopPropagation();
 
-      window.openDonation();
+      /* Directly open Donations section */
+
+      document
+        .querySelectorAll(".section")
+        .forEach(section=>{
+
+          section
+            .classList
+            .remove("active");
+
+        });
+
+
+      const donationSection =
+        $("donations");
+
+      if(donationSection){
+
+        donationSection
+          .classList
+          .add("active");
+
+      }
+
+
+      document
+        .querySelectorAll(".nav-btn")
+        .forEach(button=>{
+
+          button
+            .classList
+            .remove("active");
+
+        });
+
+
+      const donationNav =
+        document.querySelector(
+          '.nav-btn[data-section="donations"]'
+        );
+
+
+      if(donationNav){
+
+        donationNav
+          .classList
+          .add("active");
+
+      }
+
+
+      window.scrollTo({
+        top:0,
+        behavior:"smooth"
+      });
+
+
+      setTimeout(()=>{
+
+        const amount =
+          $("donationAmount");
+
+        if(amount){
+
+          amount.focus();
+
+        }
+
+      },350);
 
     }
   );
@@ -3239,7 +3294,8 @@ onAuthStateChanged(
 
           <button
             id="errorLogout"
-            class="primary">
+            class="primary"
+            type="button">
 
             Back to Login
 
