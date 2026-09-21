@@ -24,7 +24,7 @@
   --text:#172033;
   --muted:#718096;
   --border:#e5eaf0;
-  --shadow:0 8px 25px rgba(20,40,70,.06);
+  --shadow:0 8px 25px rgba(20,40,70,.07);
 }
 
 body{
@@ -45,9 +45,9 @@ button{
 }
 
 
-/* =========================
+/* =====================================================
    ISLAMIC BACKGROUND
-========================= */
+===================================================== */
 
 body::before{
   content:"";
@@ -114,9 +114,9 @@ body::before{
 }
 
 
-/* =========================
+/* =====================================================
    LOADING
-========================= */
+===================================================== */
 
 #loading{
   position:fixed;
@@ -148,9 +148,9 @@ body::before{
 }
 
 
-/* =========================
+/* =====================================================
    APP
-========================= */
+===================================================== */
 
 .app{
   min-height:100vh;
@@ -158,9 +158,9 @@ body::before{
 }
 
 
-/* =========================
+/* =====================================================
    SIDEBAR
-========================= */
+===================================================== */
 
 .sidebar{
   width:255px;
@@ -219,9 +219,9 @@ body::before{
 }
 
 
-/* =========================
+/* =====================================================
    MAIN
-========================= */
+===================================================== */
 
 .main{
   margin-left:255px;
@@ -230,9 +230,9 @@ body::before{
 }
 
 
-/* =========================
+/* =====================================================
    TOPBAR
-========================= */
+===================================================== */
 
 .topbar{
   height:72px;
@@ -283,12 +283,13 @@ body::before{
   color:white;
   padding:9px 14px;
   border-radius:7px;
+  font-weight:700;
 }
 
 
-/* =========================
+/* =====================================================
    CONTENT
-========================= */
+===================================================== */
 
 .content{
   padding:28px;
@@ -317,9 +318,118 @@ body::before{
 }
 
 
-/* =========================
+/* =====================================================
+   TOP HOME DONATION BANNER
+===================================================== */
+
+.home-donation-banner{
+  position:relative;
+  overflow:hidden;
+  margin-bottom:22px;
+  border-radius:20px;
+  padding:20px;
+  background:
+    linear-gradient(
+      135deg,
+      #075e54 0%,
+      #087f5b 48%,
+      #c49a35 150%
+    );
+  box-shadow:
+    0 14px 35px rgba(7,94,84,.20);
+  color:white;
+}
+
+.home-donation-banner::before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  right:-60px;
+  top:-80px;
+  background:rgba(255,255,255,.10);
+}
+
+.home-donation-banner::after{
+  content:"";
+  position:absolute;
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  left:-45px;
+  bottom:-65px;
+  background:rgba(246,217,139,.10);
+}
+
+.donation-banner-content{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.donation-banner-icon{
+  width:62px;
+  height:62px;
+  flex:0 0 62px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.22);
+  font-size:31px;
+  box-shadow:0 8px 20px rgba(0,0,0,.10);
+}
+
+.donation-banner-text{
+  flex:1;
+}
+
+.donation-banner-text .small-title{
+  font-size:10px;
+  letter-spacing:2px;
+  font-weight:800;
+  opacity:.80;
+}
+
+.donation-banner-text h2{
+  margin-top:3px;
+  font-size:23px;
+  font-weight:900;
+}
+
+.donation-banner-text p{
+  margin-top:6px;
+  font-size:12px;
+  line-height:1.55;
+  opacity:.90;
+  max-width:720px;
+}
+
+.donation-now-btn{
+  flex:0 0 auto;
+  border:0;
+  background:#f6d98b;
+  color:#174b3e;
+  padding:13px 19px;
+  border-radius:11px;
+  font-weight:900;
+  box-shadow:0 7px 18px rgba(0,0,0,.14);
+  transition:.2s;
+}
+
+.donation-now-btn:hover{
+  transform:translateY(-2px);
+  background:#ffe5a5;
+}
+
+
+/* =====================================================
    COLLEGE PHOTO HEADER
-========================= */
+===================================================== */
 
 .college-header{
   position:relative;
@@ -402,9 +512,9 @@ body::before{
 }
 
 
-/* =========================
+/* =====================================================
    HERO
-========================= */
+===================================================== */
 
 .hero{
   background:linear-gradient(135deg,#123b5d,#176b87);
@@ -444,9 +554,9 @@ body::before{
 }
 
 
-/* =========================
+/* =====================================================
    CHILD CARD
-========================= */
+===================================================== */
 
 .child-card{
   background:white;
@@ -455,6 +565,23 @@ body::before{
   padding:22px;
   box-shadow:var(--shadow);
   margin-bottom:22px;
+  position:relative;
+  overflow:hidden;
+}
+
+.child-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:5px;
+  background:linear-gradient(
+    180deg,
+    #176b87,
+    #24936e,
+    #d5a83c
+  );
 }
 
 .child-top{
@@ -474,6 +601,7 @@ body::before{
   justify-content:center;
   font-size:23px;
   font-weight:800;
+  box-shadow:0 7px 18px rgba(23,107,135,.20);
 }
 
 .child-info h3{
@@ -498,6 +626,37 @@ body::before{
   border-radius:10px;
   padding:13px;
   overflow:hidden;
+  border-left:4px solid #176b87;
+  transition:.2s;
+}
+
+.meta-box:nth-child(2){
+  border-left-color:#24936e;
+  background:#f0faf6;
+}
+
+.meta-box:nth-child(3){
+  border-left-color:#d5a83c;
+  background:#fffaf0;
+}
+
+.meta-box:nth-child(4){
+  border-left-color:#7b61a8;
+  background:#f7f3fc;
+}
+
+.meta-box:nth-child(5){
+  border-left-color:#e06c75;
+  background:#fff5f5;
+}
+
+.meta-box:nth-child(6){
+  border-left-color:#3182ce;
+  background:#f2f8ff;
+}
+
+.meta-box:hover{
+  transform:translateY(-2px);
 }
 
 .meta-box small{
@@ -514,9 +673,9 @@ body::before{
 }
 
 
-/* =========================
+/* =====================================================
    STATS
-========================= */
+===================================================== */
 
 .stats{
   display:grid;
@@ -526,11 +685,45 @@ body::before{
 }
 
 .stat{
+  position:relative;
+  overflow:hidden;
   background:white;
-  border:1px solid var(--border);
-  border-radius:14px;
+  border:0;
+  border-radius:16px;
   padding:19px;
   box-shadow:var(--shadow);
+  min-height:125px;
+}
+
+.stat::after{
+  content:"";
+  position:absolute;
+  width:75px;
+  height:75px;
+  border-radius:50%;
+  right:-25px;
+  top:-25px;
+  background:rgba(255,255,255,.30);
+}
+
+.stat:nth-child(1){
+  background:linear-gradient(135deg,#e6f8ef,#c9f0dd);
+  color:#176b4d;
+}
+
+.stat:nth-child(2){
+  background:linear-gradient(135deg,#eaf4ff,#cfe6ff);
+  color:#185a9d;
+}
+
+.stat:nth-child(3){
+  background:linear-gradient(135deg,#fff8df,#ffe9a7);
+  color:#916300;
+}
+
+.stat:nth-child(4){
+  background:linear-gradient(135deg,#f3ecff,#e2d3ff);
+  color:#6c4ba3;
 }
 
 .stat-icon{
@@ -540,7 +733,8 @@ body::before{
 .stat small{
   display:block;
   margin-top:10px;
-  color:var(--muted);
+  color:inherit;
+  opacity:.75;
 }
 
 .stat strong{
@@ -550,9 +744,9 @@ body::before{
 }
 
 
-/* =========================
+/* =====================================================
    PANELS
-========================= */
+===================================================== */
 
 .panel{
   background:white;
@@ -567,6 +761,37 @@ body::before{
   margin-bottom:17px;
 }
 
+
+/* colorful panels */
+
+#attendance .panel{
+  border-top:5px solid #24936e;
+}
+
+#study .panel{
+  border-top:5px solid #3182ce;
+}
+
+#results .panel{
+  border-top:5px solid #d5a83c;
+}
+
+#notices .panel{
+  border-top:5px solid #7b61a8;
+}
+
+#leave .panel{
+  border-top:5px solid #e06c75;
+}
+
+#messages .panel{
+  border-top:5px solid #3182ce;
+}
+
+#donations .panel{
+  border-top:5px solid #24936e;
+}
+
 .empty{
   padding:25px;
   text-align:center;
@@ -576,9 +801,9 @@ body::before{
 }
 
 
-/* =========================
+/* =====================================================
    TABLE
-========================= */
+===================================================== */
 
 .table-wrap{
   overflow-x:auto;
@@ -599,19 +824,19 @@ td{
 }
 
 th{
-  background:#f7f9fc;
-  color:#4a5b70;
+  background:#edf9f4;
+  color:#176b4d;
   font-weight:700;
 }
 
 tr:hover td{
-  background:#fbfcfe;
+  background:#fbfffd;
 }
 
 
-/* =========================
+/* =====================================================
    BADGES
-========================= */
+===================================================== */
 
 .badge{
   display:inline-block;
@@ -642,15 +867,24 @@ tr:hover td{
 }
 
 
-/* =========================
+/* =====================================================
    PROGRESS
-========================= */
+===================================================== */
 
 .progress-card{
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:18px;
+  position:relative;
+  overflow:hidden;
+  border:0;
+  border-radius:15px;
+  padding:19px;
   margin-bottom:12px;
+  background:linear-gradient(
+    135deg,
+    #f1f8ff,
+    #e8f7ff
+  );
+  box-shadow:var(--shadow);
+  border-left:5px solid #3182ce;
 }
 
 .progress-head{
@@ -662,6 +896,7 @@ tr:hover td{
 
 .progress-head strong{
   font-size:14px;
+  color:#185a9d;
 }
 
 .progress-head span{
@@ -670,8 +905,8 @@ tr:hover td{
 }
 
 .progress-line{
-  height:8px;
-  background:#edf2f6;
+  height:9px;
+  background:#dbeaf8;
   border-radius:10px;
   overflow:hidden;
 }
@@ -679,28 +914,40 @@ tr:hover td{
 .progress-fill{
   height:100%;
   width:70%;
-  background:linear-gradient(90deg,#176b87,#24936e);
+  background:linear-gradient(
+    90deg,
+    #176b87,
+    #24936e
+  );
   border-radius:10px;
 }
 
 
-/* =========================
+/* =====================================================
    RESULT CARDS
-========================= */
+===================================================== */
 
 .result-card{
-  border:1px solid var(--border);
-  border-radius:14px;
+  border:0;
+  border-radius:15px;
   padding:19px;
   margin-bottom:12px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:15px;
+  background:linear-gradient(
+    135deg,
+    #fffdf4,
+    #fff6d9
+  );
+  box-shadow:var(--shadow);
+  border-left:5px solid #d5a83c;
 }
 
 .result-title{
   font-weight:750;
+  color:#745300;
 }
 
 .result-date{
@@ -712,24 +959,31 @@ tr:hover td{
 .result-mark{
   font-size:24px;
   font-weight:800;
-  color:var(--primary2);
+  color:#a57600;
 }
 
 
-/* =========================
+/* =====================================================
    NOTICE
-========================= */
+===================================================== */
 
 .notice{
-  border-left:4px solid var(--primary2);
-  background:#f7fafc;
+  border:0;
+  border-left:5px solid #7b61a8;
+  background:linear-gradient(
+    135deg,
+    #faf7ff,
+    #f0eaff
+  );
   padding:17px;
-  border-radius:8px;
+  border-radius:10px;
   margin-bottom:12px;
+  box-shadow:var(--shadow);
 }
 
 .notice h4{
   font-size:15px;
+  color:#5d438d;
 }
 
 .notice p{
@@ -746,9 +1000,9 @@ tr:hover td{
 }
 
 
-/* =========================
+/* =====================================================
    FORMS
-========================= */
+===================================================== */
 
 .form-grid{
   display:grid;
@@ -778,6 +1032,7 @@ tr:hover td{
   border-radius:9px;
   padding:11px 12px;
   outline:none;
+  background:#fbfdff;
 }
 
 .field textarea{
@@ -789,31 +1044,48 @@ tr:hover td{
 .field textarea:focus{
   border-color:#2878b5;
   box-shadow:0 0 0 3px rgba(40,120,181,.1);
+  background:white;
 }
 
 .primary{
   border:0;
-  background:#176b87;
+  background:linear-gradient(
+    135deg,
+    #176b87,
+    #24936e
+  );
   color:white;
   padding:11px 18px;
   border-radius:8px;
   font-weight:650;
+  box-shadow:0 6px 15px rgba(23,107,135,.18);
 }
 
 .primary:hover{
-  background:#12586f;
+  background:linear-gradient(
+    135deg,
+    #12586f,
+    #187a5a
+  );
 }
 
 
-/* =========================
+/* =====================================================
    LEAVE / MESSAGE CARDS
-========================= */
+===================================================== */
 
 .request-card{
-  border:1px solid var(--border);
+  border:0;
   border-radius:13px;
   padding:17px;
   margin-bottom:12px;
+  background:linear-gradient(
+    135deg,
+    #fff8f8,
+    #fff1f1
+  );
+  box-shadow:var(--shadow);
+  border-left:5px solid #e06c75;
 }
 
 .request-top{
@@ -850,9 +1122,9 @@ tr:hover td{
 }
 
 
-/* =========================
+/* =====================================================
    QUICK ACTIONS
-========================= */
+===================================================== */
 
 .quick-grid{
   display:grid;
@@ -861,44 +1133,95 @@ tr:hover td{
 }
 
 .quick-btn{
-  border:1px solid var(--border);
-  background:white;
-  border-radius:12px;
-  padding:17px;
+  position:relative;
+  overflow:hidden;
+  border:0;
+  border-radius:13px;
+  padding:18px;
   text-align:left;
   transition:.2s;
+  min-height:100px;
+  box-shadow:0 6px 18px rgba(20,40,70,.06);
+}
+
+.quick-btn:nth-child(1){
+  background:linear-gradient(135deg,#e7f8ef,#d0f1df);
+  border-left:5px solid #24936e;
+}
+
+.quick-btn:nth-child(2){
+  background:linear-gradient(135deg,#edf6ff,#dcecff);
+  border-left:5px solid #3182ce;
+}
+
+.quick-btn:nth-child(3){
+  background:linear-gradient(135deg,#fff9e7,#ffedbd);
+  border-left:5px solid #d5a83c;
+}
+
+.quick-btn:nth-child(4){
+  background:linear-gradient(135deg,#f5efff,#e9dcff);
+  border-left:5px solid #7b61a8;
+}
+
+.quick-btn:nth-child(5){
+  background:linear-gradient(135deg,#fff1f1,#ffdfe1);
+  border-left:5px solid #e06c75;
+}
+
+.quick-btn:nth-child(6){
+  background:linear-gradient(135deg,#edf6ff,#dcecff);
+  border-left:5px solid #2878b5;
+}
+
+.quick-btn:nth-child(7){
+  background:linear-gradient(135deg,#e8f8ef,#cdeedc);
+  border-left:5px solid #198754;
 }
 
 .quick-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:var(--shadow);
+  transform:translateY(-3px);
+  box-shadow:0 12px 25px rgba(20,40,70,.10);
 }
 
 .quick-btn strong{
   display:block;
-  margin-bottom:5px;
+  margin-bottom:7px;
 }
 
 .quick-btn small{
-  color:var(--muted);
+  color:#596b80;
 }
 
 
-/* =========================
+/* =====================================================
    DONATION
-========================= */
+===================================================== */
 
 .donation-hero{
-  background:linear-gradient(
-    135deg,
-    #123b5d,
-    #176b87
-  );
+  background:
+    linear-gradient(
+      135deg,
+      #075e54,
+      #087f5b,
+      #b68a28
+    );
   color:white;
-  border-radius:17px;
-  padding:25px;
+  border-radius:18px;
+  padding:27px;
   margin-bottom:20px;
-  box-shadow:0 10px 30px rgba(18,59,93,.15);
+  box-shadow:0 12px 30px rgba(7,94,84,.17);
+  position:relative;
+  overflow:hidden;
+}
+
+.donation-hero::after{
+  content:"💚";
+  position:absolute;
+  right:28px;
+  top:18px;
+  font-size:65px;
+  opacity:.12;
 }
 
 .donation-hero h3{
@@ -908,20 +1231,25 @@ tr:hover td{
 
 .donation-hero p{
   font-size:13px;
-  opacity:.88;
+  opacity:.90;
   line-height:1.6;
+  max-width:850px;
 }
 
 .bank-card{
-  background:#f8fafc;
-  border:1px solid var(--border);
+  background:linear-gradient(
+    135deg,
+    #f4fbf7,
+    #e8f7f0
+  );
+  border:1px solid #d5eee2;
   border-radius:13px;
   padding:18px;
   margin-bottom:20px;
 }
 
 .bank-card h3{
-  color:var(--primary);
+  color:#176b4d;
   margin-bottom:15px;
 }
 
@@ -930,7 +1258,7 @@ tr:hover td{
   justify-content:space-between;
   gap:15px;
   padding:11px 0;
-  border-bottom:1px solid #e9edf2;
+  border-bottom:1px solid #dcebe4;
   font-size:13px;
 }
 
@@ -945,11 +1273,14 @@ tr:hover td{
 .bank-row strong{
   text-align:right;
   word-break:break-word;
+  color:#174b3e;
 }
 
 .qr-wrap{
   text-align:center;
-  padding:10px;
+  padding:15px;
+  background:#fffaf0;
+  border-radius:14px;
 }
 
 .qr-wrap img{
@@ -957,9 +1288,10 @@ tr:hover td{
   max-width:100%;
   height:auto;
   border-radius:12px;
-  border:1px solid var(--border);
+  border:3px solid #e6c46a;
   padding:8px;
   background:white;
+  box-shadow:0 8px 20px rgba(0,0,0,.08);
 }
 
 .qr-caption{
@@ -993,11 +1325,17 @@ tr:hover td{
 }
 
 .donation-record{
-  border:1px solid var(--border);
+  border:0;
   border-radius:13px;
   padding:17px;
   margin-bottom:12px;
-  background:white;
+  background:linear-gradient(
+    135deg,
+    #f9fffc,
+    #edf9f3
+  );
+  box-shadow:var(--shadow);
+  border-left:5px solid #24936e;
 }
 
 .donation-record-top{
@@ -1010,7 +1348,7 @@ tr:hover td{
 .donation-amount{
   font-size:22px;
   font-weight:800;
-  color:var(--primary2);
+  color:#176b4d;
 }
 
 .donation-info{
@@ -1021,9 +1359,10 @@ tr:hover td{
 }
 
 .donation-info-box{
-  background:#f7f9fc;
+  background:rgba(255,255,255,.72);
   padding:10px;
   border-radius:8px;
+  border:1px solid #e0eee7;
 }
 
 .donation-info-box small{
@@ -1059,9 +1398,9 @@ tr:hover td{
 }
 
 
-/* =========================
+/* =====================================================
    MESSAGE
-========================= */
+===================================================== */
 
 #message{
   position:fixed;
@@ -1085,9 +1424,9 @@ tr:hover td{
 }
 
 
-/* =========================
+/* =====================================================
    MOBILE
-========================= */
+===================================================== */
 
 @media(max-width:900px){
 
@@ -1122,6 +1461,19 @@ tr:hover td{
 
   .quick-grid{
     grid-template-columns:1fr;
+  }
+
+  .donation-banner-content{
+    align-items:flex-start;
+    flex-wrap:wrap;
+  }
+
+  .donation-banner-text{
+    min-width:calc(100% - 82px);
+  }
+
+  .donation-now-btn{
+    margin-left:80px;
   }
 
 }
@@ -1206,6 +1558,73 @@ tr:hover td{
     text-align:left;
   }
 
+  .home-donation-banner{
+    padding:17px;
+  }
+
+  .donation-banner-content{
+    display:grid;
+    grid-template-columns:58px 1fr;
+    gap:12px;
+  }
+
+  .donation-banner-icon{
+    width:58px;
+    height:58px;
+    flex-basis:58px;
+  }
+
+  .donation-banner-text{
+    min-width:0;
+  }
+
+  .donation-banner-text h2{
+    font-size:18px;
+  }
+
+  .donation-banner-text p{
+    font-size:11px;
+  }
+
+  .donation-now-btn{
+    grid-column:1/-1;
+    margin-left:0;
+    width:100%;
+  }
+
+}
+
+
+/* =====================================================
+   EXTRA SMALL MOBILE
+===================================================== */
+
+@media(max-width:380px){
+
+  .content{
+    padding:12px;
+  }
+
+  .stats{
+    gap:9px;
+  }
+
+  .stat{
+    padding:14px;
+  }
+
+  .stat strong{
+    font-size:22px;
+  }
+
+  .college-title{
+    font-size:20px;
+  }
+
+  .college-ayah{
+    font-size:18px;
+  }
+
 }
 
 </style>
@@ -1232,9 +1651,9 @@ tr:hover td{
 <div class="app">
 
 
-<!-- =========================
+<!-- =====================================================
      SIDEBAR
-========================= -->
+===================================================== -->
 
 <aside class="sidebar" id="sidebar">
 
@@ -1333,8 +1752,6 @@ tr:hover td{
     </button>
 
 
-    <!-- NEW DONATION MENU -->
-
     <button
       class="nav-btn"
       data-section="donations">
@@ -1349,9 +1766,9 @@ tr:hover td{
 </aside>
 
 
-<!-- =========================
+<!-- =====================================================
      MAIN
-========================= -->
+===================================================== -->
 
 <main class="main">
 
@@ -1403,14 +1820,63 @@ tr:hover td{
 <div class="content">
 
 
-<!-- =========================
+<!-- =====================================================
      HOME
-========================= -->
+===================================================== -->
 
 <section
   class="section active"
   id="home">
 
+
+  <!-- =================================================
+       DONATION FEATURED AT TOP
+  ================================================== -->
+
+  <div class="home-donation-banner">
+
+    <div class="donation-banner-content">
+
+      <div class="donation-banner-icon">
+        💚
+      </div>
+
+      <div class="donation-banner-text">
+
+        <div class="small-title">
+          SAFA QURAN COLLEGE
+        </div>
+
+        <h2>
+          💰 MY DONATION TO SAFA
+        </h2>
+
+        <p>
+          Support Qur'an education and the activities of
+          SAFA QURAN COLLEGE. Make your contribution easily
+          and submit your payment reference for verification.
+        </p>
+
+      </div>
+
+      <button
+        class="donation-now-btn"
+        type="button"
+        data-go="donations">
+
+        DONATE NOW
+        →
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =================================================
+       COLLEGE HEADER
+  ================================================== -->
 
   <div class="college-header">
 
@@ -1443,6 +1909,10 @@ tr:hover td{
 
   </div>
 
+
+  <!-- =================================================
+       CHILD CARD
+  ================================================== -->
 
   <div class="child-card">
 
@@ -1559,6 +2029,10 @@ tr:hover td{
   </div>
 
 
+  <!-- =================================================
+       STATS
+  ================================================== -->
+
   <div class="stats">
 
     <div class="stat">
@@ -1630,6 +2104,10 @@ tr:hover td{
 
   </div>
 
+
+  <!-- =================================================
+       QUICK ACCESS
+  ================================================== -->
 
   <div class="panel">
 
@@ -1730,8 +2208,6 @@ tr:hover td{
       </button>
 
 
-      <!-- NEW DONATION QUICK ACCESS -->
-
       <button
         class="quick-btn"
         data-go="donations">
@@ -1753,9 +2229,9 @@ tr:hover td{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      CHILD
-========================= -->
+===================================================== -->
 
 <section
   class="section"
@@ -1764,7 +2240,7 @@ tr:hover td{
   <div class="section-head">
 
     <h2>
-      My Child
+      👦 My Child
     </h2>
 
     <p>
@@ -1888,9 +2364,9 @@ tr:hover td{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      ATTENDANCE
-========================= -->
+===================================================== -->
 
 <section
   class="section"
@@ -1899,7 +2375,7 @@ tr:hover td{
   <div class="section-head">
 
     <h2>
-      Attendance
+      ✓ Attendance
     </h2>
 
     <p>
@@ -1955,9 +2431,9 @@ tr:hover td{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      STUDY
-========================= -->
+===================================================== -->
 
 <section
   class="section"
@@ -1966,7 +2442,7 @@ tr:hover td{
   <div class="section-head">
 
     <h2>
-      Study Progress
+      📖 Study Progress
     </h2>
 
     <p>
@@ -1991,9 +2467,9 @@ tr:hover td{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      RESULTS
-========================= -->
+===================================================== -->
 
 <section
   class="section"
@@ -2002,7 +2478,7 @@ tr:hover td{
   <div class="section-head">
 
     <h2>
-      Results
+      🏆 Results
     </h2>
 
     <p>
@@ -2027,9 +2503,9 @@ tr:hover td{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      NOTICES
-========================= -->
+===================================================== -->
 
 <section
   class="section"
@@ -2038,7 +2514,7 @@ tr:hover td{
   <div class="section-head">
 
     <h2>
-      Notices
+      📢 Notices
     </h2>
 
     <p>
@@ -2064,9 +2540,9 @@ tr:hover td{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      LEAVE
-========================= -->
+===================================================== -->
 
 <section
   class="section"
@@ -2075,7 +2551,7 @@ tr:hover td{
   <div class="section-head">
 
     <h2>
-      Leave Application
+      📝 Leave Application
     </h2>
 
     <p>
@@ -2182,9 +2658,9 @@ tr:hover td{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      MESSAGES
-========================= -->
+===================================================== -->
 
 <section
   class="section"
@@ -2193,7 +2669,7 @@ tr:hover td{
   <div class="section-head">
 
     <h2>
-      Messages
+      💬 Messages
     </h2>
 
     <p>
@@ -2267,9 +2743,9 @@ tr:hover td{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      MY DONATION TO SAFA
-========================= -->
+===================================================== -->
 
 <section
   class="section"
@@ -2735,8 +3211,12 @@ document
   });
 
 
+/* QUICK ACCESS + DONATE NOW */
+
 document
-  .querySelectorAll(".quick-btn")
+  .querySelectorAll(
+    ".quick-btn, .donation-now-btn"
+  )
   .forEach(button=>{
 
     button.addEventListener(
