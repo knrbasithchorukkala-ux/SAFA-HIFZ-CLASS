@@ -5335,3 +5335,38 @@ setDefaultDates();
 
 </body>
 </html>
+<div class="admin-donation-section">
+  <h2>Donations Received</h2>
+  <table border="1" id="donationTable" style="width: 100%; border-collapse: collapse; text-align: left;">
+    <thead>
+      <tr style="background-color: #f2f2f2;">
+        <th>Date</th>
+        <th>Donor Name</th>
+        <th>Amount (₹)</th>
+        <th>Transaction ID</th>
+      </tr>
+    </thead>
+    <tbody id="donationTableBody">
+      <!-- Data will be inserted here -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+// അഡ്മിൻ പേജ് ലോഡ് ആകുമ്പോൾ വിവരങ്ങൾ കാണിക്കാൻ
+window.onload = function() {
+  let donations = JSON.parse(localStorage.getItem('donations') || '[]');
+  let tableBody = document.getElementById('donationTableBody');
+  
+  tableBody.innerHTML = '';
+  donations.forEach(d => {
+    let row = `<tr>
+      <td>${d.date}</td>
+      <td>${d.name}</td>
+      <td>₹${d.amount}</td>
+      <td>${d.txnId}</td>
+    </tr>`;
+    tableBody.innerHTML += row;
+  });
+};
+</script>
