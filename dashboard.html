@@ -7,6 +7,7 @@
 <title>SAFA QURAN COLLEGE | ONLINE PORTAL</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -299,103 +300,94 @@ button:disabled{
 
 
 /* =========================================
-   ISLAMIC ASSALAMU ALAIKUM BANNER
+   COLLEGE PHOTO HEADER
 ========================================= */
 
-.islamic-welcome{
+.college-header{
   position:relative;
   overflow:hidden;
   margin-bottom:25px;
-  padding:30px 25px;
+  min-height:300px;
   border-radius:22px;
-  text-align:center;
-  color:white;
-
-  background:
-    linear-gradient(
-      135deg,
-      #063b35 0%,
-      #075e54 45%,
-      #0b3d4a 100%
-    );
-
-  box-shadow:
-    0 12px 35px rgba(0,0,0,.15);
-
+  background:#063b35;
+  box-shadow:0 12px 35px rgba(0,0,0,.15);
   border:1px solid rgba(255,255,255,.10);
 }
 
-.islamic-welcome::before{
-  content:"";
-  position:absolute;
-  width:220px;
-  height:220px;
-  right:-70px;
-  top:-100px;
-
-  border:2px solid rgba(255,215,120,.18);
-  border-radius:50%;
-
-  box-shadow:
-    0 0 0 25px rgba(255,215,120,.04),
-    0 0 0 50px rgba(255,215,120,.025);
+.college-header img{
+  width:100%;
+  height:300px;
+  object-fit:cover;
+  display:block;
 }
 
-.islamic-welcome::after{
-  content:"✦";
+.college-header-overlay{
   position:absolute;
-  left:35px;
-  bottom:10px;
-  font-size:45px;
-  color:rgba(255,215,120,.18);
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:25px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(5,25,38,.18),
+      rgba(3,43,42,.82)
+    );
 }
 
-.welcome-arabic{
-  position:relative;
-  z-index:1;
+.college-title{
+  color:white;
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:1px;
+  text-shadow:0 3px 12px rgba(0,0,0,.45);
+}
+
+.college-subtitle{
+  color:#f6d98b;
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:2px;
+  margin-top:6px;
+}
+
+.college-ayah{
+  margin-top:18px;
+  color:#f6d98b;
 
   font-family:
     "Amiri",
     "Traditional Arabic",
     serif;
 
-  font-size:30px;
+  font-size:27px;
   font-weight:bold;
-  line-height:1.9;
-
-  color:#f6d98b;
-
   direction:rtl;
+  line-height:1.8;
 
   text-shadow:
-    0 2px 8px rgba(0,0,0,.25);
+    0 3px 10px rgba(0,0,0,.45);
 }
 
-.welcome-title{
-  position:relative;
-  z-index:1;
-
+.college-ayah-meaning{
   margin-top:5px;
-
-  font-size:20px;
-  font-weight:700;
-
-  color:#ffffff;
+  color:white;
+  font-size:12px;
+  opacity:.9;
 }
 
-.islamic-line{
-  position:relative;
-  z-index:1;
-
+.college-header-line{
   width:90px;
   height:3px;
-
   background:#e6c46a;
-
   border-radius:10px;
-
-  margin:15px auto 0;
+  margin-top:13px;
 }
+
 
 .stats{
   display:grid;
@@ -944,17 +936,27 @@ td strong{
     align-items:stretch;
   }
 
-  .islamic-welcome{
-    padding:25px 15px;
+  .college-header{
+    min-height:250px;
     border-radius:18px;
   }
 
-  .welcome-arabic{
-    font-size:24px;
+  .college-header img{
+    height:250px;
   }
 
-  .welcome-title{
-    font-size:17px;
+  .college-title{
+    font-size:23px;
+  }
+
+  .college-subtitle{
+    font-size:11px;
+    letter-spacing:1.2px;
+  }
+
+  .college-ayah{
+    font-size:21px;
+    margin-top:13px;
   }
 
 }
@@ -966,12 +968,16 @@ td strong{
   }
 
 }
+
 </style>
 </head>
 
 <body>
 
-<div id="loading">SAFA QURAN COLLEGE loading...</div>
+<div id="loading">
+  SAFA QURAN COLLEGE loading...
+</div>
+
 <div id="message"></div>
 
 
@@ -986,11 +992,13 @@ td strong{
     <div class="edit-modal-head">
 
       <div>
+
         <h3>Edit Student</h3>
 
         <p>
           Update student information
         </p>
+
       </div>
 
       <button
@@ -1141,57 +1149,91 @@ td strong{
       <div class="logo-box">📖</div>
 
       <div>
+
         <h1>SAFA QURAN COLLEGE</h1>
+
         <p>ONLINE PORTAL</p>
+
       </div>
 
     </div>
 
   </div>
 
+
   <div class="menu">
 
     <div class="menu-label">Main</div>
 
-    <button class="menu-btn active" data-section="home">
+    <button
+      class="menu-btn active"
+      data-section="home"
+    >
       <span>⌂</span> Dashboard
     </button>
 
-    <button class="menu-btn" data-section="students">
+    <button
+      class="menu-btn"
+      data-section="students"
+    >
       <span>👨‍🎓</span> Students
     </button>
 
+
     <div class="menu-label">Academic</div>
 
-    <button class="menu-btn" data-section="attendance">
+    <button
+      class="menu-btn"
+      data-section="attendance"
+    >
       <span>✓</span> Attendance
     </button>
 
-    <button class="menu-btn" data-section="study">
+    <button
+      class="menu-btn"
+      data-section="study"
+    >
       <span>📖</span> Study Progress
     </button>
 
-    <button class="menu-btn" data-section="results">
+    <button
+      class="menu-btn"
+      data-section="results"
+    >
       <span>🏆</span> Results
     </button>
 
-    <button class="menu-btn" data-section="notices">
+    <button
+      class="menu-btn"
+      data-section="notices"
+    >
       <span>📢</span> Notices
     </button>
 
+
     <div class="menu-label">Communication</div>
 
-    <button class="menu-btn" data-section="leave">
+    <button
+      class="menu-btn"
+      data-section="leave"
+    >
       <span>📝</span> Leave Requests
     </button>
 
-    <button class="menu-btn" data-section="messages">
+    <button
+      class="menu-btn"
+      data-section="messages"
+    >
       <span>💬</span> Parent Messages
     </button>
 
+
     <div class="menu-label">Public</div>
 
-    <button class="menu-btn" data-section="publicResult">
+    <button
+      class="menu-btn"
+      data-section="publicResult"
+    >
       <span>🌐</span> Public Result
     </button>
 
@@ -1199,25 +1241,34 @@ td strong{
 
 </aside>
 
+
 <main class="main">
 
 <header class="topbar">
 
   <div class="top-left">
 
-    <button class="mobile-menu" id="mobileMenu">
+    <button
+      class="mobile-menu"
+      id="mobileMenu"
+    >
       ☰
     </button>
 
     <div>
-      <div class="top-title">SAFA QURAN COLLEGE</div>
+
+      <div class="top-title">
+        SAFA QURAN COLLEGE
+      </div>
 
       <div class="top-subtitle">
         ONLINE PORTAL Management System
       </div>
+
     </div>
 
   </div>
+
 
   <div class="top-right">
 
@@ -1225,7 +1276,10 @@ td strong{
       ADMINISTRATOR
     </div>
 
-    <button class="logout" id="logoutBtn">
+    <button
+      class="logout"
+      id="logoutBtn"
+    >
       Logout
     </button>
 
@@ -1233,118 +1287,284 @@ td strong{
 
 </header>
 
+
 <div class="content">
 
-<section class="section active" id="home">
 
-  <div class="islamic-welcome">
+<section
+  class="section active"
+  id="home"
+>
 
-    <div class="welcome-arabic">
-      السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
+
+<!-- =========================================
+     COLLEGE PHOTO + QURAN HADITH
+========================================= -->
+
+<div class="college-header">
+
+  <img
+    src="./IMG-20260921-WA0016.jpg"
+    alt="SAFA QURAN COLLEGE"
+  >
+
+  <div class="college-header-overlay">
+
+    <div class="college-title">
+      SAFA QURAN COLLEGE
     </div>
 
-    <div class="welcome-title">
-      Assalamu Alaikum
+    <div class="college-subtitle">
+      ONLINE PORTAL
     </div>
 
-    <div class="islamic-line"></div>
+    <div class="college-ayah">
+      خيركم من تعلم القرءان وعلمه
+    </div>
+
+    <div class="college-ayah-meaning">
+      The best of you are those who learn the Qur'an and teach it.
+    </div>
+
+    <div class="college-header-line"></div>
 
   </div>
 
-  <div class="stats">
+</div>
 
-    <div class="stat">
-      <div class="stat-icon">👨‍🎓</div>
-      <small>Total Students</small>
-      <strong id="studentCount">0</strong>
+
+<div class="stats">
+
+  <div class="stat">
+
+    <div class="stat-icon">
+      👨‍🎓
     </div>
 
-    <div class="stat">
-      <div class="stat-icon">✓</div>
-      <small>Attendance Records</small>
-      <strong id="attendanceCount">0</strong>
-    </div>
+    <small>Total Students</small>
 
-    <div class="stat">
-      <div class="stat-icon">📝</div>
-      <small>Leave Requests</small>
-      <strong id="leaveCount">0</strong>
-    </div>
-
-    <div class="stat">
-      <div class="stat-icon">💬</div>
-      <small>Parent Messages</small>
-      <strong id="messageCount">0</strong>
-    </div>
+    <strong id="studentCount">
+      0
+    </strong>
 
   </div>
 
-  <div class="panel">
 
-    <div class="panel-head">
+  <div class="stat">
 
-      <div>
-        <h3>Quick Access</h3>
+    <div class="stat-icon">
+      ✓
+    </div>
 
-        <div class="panel-desc">
-          Frequently used management tools
-        </div>
+    <small>Attendance Records</small>
+
+    <strong id="attendanceCount">
+      0
+    </strong>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-icon">
+      📝
+    </div>
+
+    <small>Leave Requests</small>
+
+    <strong id="leaveCount">
+      0
+    </strong>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-icon">
+      💬
+    </div>
+
+    <small>Parent Messages</small>
+
+    <strong id="messageCount">
+      0
+    </strong>
+
+  </div>
+
+</div>
+
+
+<div class="panel">
+
+  <div class="panel-head">
+
+    <div>
+
+      <h3>
+        Quick Access
+      </h3>
+
+      <div class="panel-desc">
+        Frequently used management tools
       </div>
 
     </div>
 
-    <div class="quick">
+  </div>
 
-      <button class="quick-btn" data-go="students">
-        <div class="quick-icon">👨‍🎓</div>
-        <strong>Students</strong>
-        <small>Add and manage students</small>
-      </button>
 
-      <button class="quick-btn" data-go="attendance">
-        <div class="quick-icon">✓</div>
-        <strong>Attendance</strong>
-        <small>Record daily attendance</small>
-      </button>
+  <div class="quick">
 
-      <button class="quick-btn" data-go="study">
-        <div class="quick-icon">📖</div>
-        <strong>Study Progress</strong>
-        <small>Update Quran study progress</small>
-      </button>
+    <button
+      class="quick-btn"
+      data-go="students"
+    >
 
-      <button class="quick-btn" data-go="results">
-        <div class="quick-icon">🏆</div>
-        <strong>Results</strong>
-        <small>Publish student results</small>
-      </button>
+      <div class="quick-icon">
+        👨‍🎓
+      </div>
 
-      <button class="quick-btn" data-go="notices">
-        <div class="quick-icon">📢</div>
-        <strong>Notices</strong>
-        <small>Publish announcements</small>
-      </button>
+      <strong>
+        Students
+      </strong>
 
-      <button class="quick-btn" data-go="publicResult">
-        <div class="quick-icon">🌐</div>
-        <strong>Public Result</strong>
-        <small>Open public result system</small>
-      </button>
+      <small>
+        Add and manage students
+      </small>
 
-    </div>
+    </button>
+
+
+    <button
+      class="quick-btn"
+      data-go="attendance"
+    >
+
+      <div class="quick-icon">
+        ✓
+      </div>
+
+      <strong>
+        Attendance
+      </strong>
+
+      <small>
+        Record daily attendance
+      </small>
+
+    </button>
+
+
+    <button
+      class="quick-btn"
+      data-go="study"
+    >
+
+      <div class="quick-icon">
+        📖
+      </div>
+
+      <strong>
+        Study Progress
+      </strong>
+
+      <small>
+        Update Quran study progress
+      </small>
+
+    </button>
+
+
+    <button
+      class="quick-btn"
+      data-go="results"
+    >
+
+      <div class="quick-icon">
+        🏆
+      </div>
+
+      <strong>
+        Results
+      </strong>
+
+      <small>
+        Publish student results
+      </small>
+
+    </button>
+
+
+    <button
+      class="quick-btn"
+      data-go="notices"
+    >
+
+      <div class="quick-icon">
+        📢
+      </div>
+
+      <strong>
+        Notices
+      </strong>
+
+      <small>
+        Publish announcements
+      </small>
+
+    </button>
+
+
+    <button
+      class="quick-btn"
+      data-go="publicResult"
+    >
+
+      <div class="quick-icon">
+        🌐
+      </div>
+
+      <strong>
+        Public Result
+      </strong>
+
+      <small>
+        Open public result system
+      </small>
+
+    </button>
 
   </div>
+
+</div>
 
 </section>
 
 
-<section class="section" id="students">
+<!-- =========================
+     STUDENTS
+========================= -->
+
+<section
+  class="section"
+  id="students"
+>
 
   <div class="section-head">
 
     <div>
-      <h2>Students</h2>
-      <p>Manage Quran students and parent information.</p>
+
+      <h2>
+        Students
+      </h2>
+
+      <p>
+        Manage Quran students and parent information.
+      </p>
+
     </div>
 
     <div class="section-tag">
@@ -1353,96 +1573,140 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>Add Student</h3>
+
+        <h3>
+          Add Student
+        </h3>
 
         <div class="panel-desc">
           Create a new student profile
         </div>
+
       </div>
 
     </div>
+
 
     <form id="studentForm">
 
       <div class="form-grid">
 
         <div class="field">
-          <label>Student Number</label>
+
+          <label>
+            Student Number
+          </label>
 
           <input
             id="studentNumber"
             required
             placeholder="Example: 131"
           >
+
         </div>
 
+
         <div class="field">
-          <label>Student Name</label>
+
+          <label>
+            Student Name
+          </label>
 
           <input
             id="studentName"
             required
             placeholder="Student full name"
           >
+
         </div>
 
+
         <div class="field">
-          <label>Guardian Name</label>
+
+          <label>
+            Guardian Name
+          </label>
 
           <input
             id="guardianName"
             placeholder="Guardian name"
           >
+
         </div>
 
+
         <div class="field">
-          <label>Class</label>
+
+          <label>
+            Class
+          </label>
 
           <input
             id="className"
             placeholder="Example: HIFZ A"
           >
+
         </div>
 
+
         <div class="field">
-          <label>Parent Email</label>
+
+          <label>
+            Parent Email
+          </label>
 
           <input
             id="parentEmail"
             type="email"
             placeholder="Parent email"
           >
+
         </div>
 
+
         <div class="field">
-          <label>Student Address</label>
+
+          <label>
+            Student Address
+          </label>
 
           <input
             id="studentAddress"
             placeholder="Student address"
           >
+
         </div>
 
+
         <div class="field">
-          <label>Phone Number</label>
+
+          <label>
+            Phone Number
+          </label>
 
           <input
             id="phoneNumber"
             type="tel"
             placeholder="Phone number"
           >
+
         </div>
 
       </div>
 
+
       <br>
 
-      <button class="primary" type="submit">
+      <button
+        class="primary"
+        type="submit"
+      >
         + Add Student
       </button>
 
@@ -1456,14 +1720,19 @@ td strong{
     <div class="panel-head">
 
       <div>
-        <h3>Student List</h3>
+
+        <h3>
+          Student List
+        </h3>
 
         <div class="panel-desc">
           All registered students
         </div>
+
       </div>
 
     </div>
+
 
     <div class="toolbar">
 
@@ -1475,6 +1744,7 @@ td strong{
 
     </div>
 
+
     <div class="table-wrap">
 
       <table>
@@ -1482,6 +1752,7 @@ td strong{
         <thead>
 
           <tr>
+
             <th>No.</th>
             <th>Name</th>
             <th>Guardian Name</th>
@@ -1490,6 +1761,7 @@ td strong{
             <th>Phone Number</th>
             <th>Address</th>
             <th>Action</th>
+
           </tr>
 
         </thead>
@@ -1505,13 +1777,27 @@ td strong{
 </section>
 
 
-<section class="section" id="attendance">
+<!-- =========================
+     ATTENDANCE
+========================= -->
+
+<section
+  class="section"
+  id="attendance"
+>
 
   <div class="section-head">
 
     <div>
-      <h2>Attendance</h2>
-      <p>Record and manage daily student attendance.</p>
+
+      <h2>
+        Attendance
+      </h2>
+
+      <p>
+        Record and manage daily student attendance.
+      </p>
+
     </div>
 
     <div class="section-tag">
@@ -1520,19 +1806,25 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>New Attendance Record</h3>
+
+        <h3>
+          New Attendance Record
+        </h3>
 
         <div class="panel-desc">
           Record today's student attendance
         </div>
+
       </div>
 
     </div>
+
 
     <form id="attendanceForm">
 
@@ -1540,9 +1832,14 @@ td strong{
 
         <div class="field">
 
-          <label>Student</label>
+          <label>
+            Student
+          </label>
 
-          <select id="attendanceStudent" required>
+          <select
+            id="attendanceStudent"
+            required
+          >
 
             <option value="">
               Select student
@@ -1552,9 +1849,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Date</label>
+          <label>
+            Date
+          </label>
 
           <input
             type="date"
@@ -1564,11 +1864,17 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Status</label>
+          <label>
+            Status
+          </label>
 
-          <select id="attendanceStatus" required>
+          <select
+            id="attendanceStatus"
+            required
+          >
 
             <option value="">
               Select status
@@ -1592,9 +1898,13 @@ td strong{
 
       </div>
 
+
       <br>
 
-      <button class="primary" type="submit">
+      <button
+        class="primary"
+        type="submit"
+      >
         Save Attendance
       </button>
 
@@ -1602,19 +1912,25 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>Attendance Records</h3>
+
+        <h3>
+          Attendance Records
+        </h3>
 
         <div class="panel-desc">
           Latest attendance records
         </div>
+
       </div>
 
     </div>
+
 
     <div class="table-wrap">
 
@@ -1623,7 +1939,11 @@ td strong{
         <thead>
 
           <tr>
-            <th>Latest Attendance Records</th>
+
+            <th>
+              Latest Attendance Records
+            </th>
+
           </tr>
 
         </thead>
@@ -1639,13 +1959,27 @@ td strong{
 </section>
 
 
-<section class="section" id="study">
+<!-- =========================
+     STUDY PROGRESS
+========================= -->
+
+<section
+  class="section"
+  id="study"
+>
 
   <div class="section-head">
 
     <div>
-      <h2>Study Progress</h2>
-      <p>Manage daily Quran study progress.</p>
+
+      <h2>
+        Study Progress
+      </h2>
+
+      <p>
+        Manage daily Quran study progress.
+      </p>
+
     </div>
 
     <div class="section-tag">
@@ -1654,19 +1988,25 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>Add Study Progress</h3>
+
+        <h3>
+          Add Study Progress
+        </h3>
 
         <div class="panel-desc">
           Record lesson and revision details
         </div>
+
       </div>
 
     </div>
+
 
     <form id="studyForm">
 
@@ -1674,9 +2014,14 @@ td strong{
 
         <div class="field">
 
-          <label>Student</label>
+          <label>
+            Student
+          </label>
 
-          <select id="studyStudent" required>
+          <select
+            id="studyStudent"
+            required
+          >
 
             <option value="">
               Select student
@@ -1686,9 +2031,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Date</label>
+          <label>
+            Date
+          </label>
 
           <input
             type="date"
@@ -1698,9 +2046,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Surah / Portion</label>
+          <label>
+            Surah / Portion
+          </label>
 
           <input
             id="studySurah"
@@ -1709,9 +2060,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>New Lesson</label>
+          <label>
+            New Lesson
+          </label>
 
           <input
             id="newLesson"
@@ -1720,9 +2074,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Revision</label>
+          <label>
+            Revision
+          </label>
 
           <input
             id="revision"
@@ -1731,9 +2088,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Performance</label>
+          <label>
+            Performance
+          </label>
 
           <select id="performance">
 
@@ -1761,9 +2121,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Dars &amp; Study Status</label>
+          <label>
+            Dars &amp; Study Status
+          </label>
 
           <select id="studyStatus">
 
@@ -1799,9 +2162,12 @@ td strong{
 
         </div>
 
+
         <div class="field full">
 
-          <label>Teacher Note</label>
+          <label>
+            Teacher Note
+          </label>
 
           <textarea
             id="studyNote"
@@ -1812,9 +2178,13 @@ td strong{
 
       </div>
 
+
       <br>
 
-      <button class="primary" type="submit">
+      <button
+        class="primary"
+        type="submit"
+      >
         Save Progress
       </button>
 
@@ -1822,19 +2192,25 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>Study Records</h3>
+
+        <h3>
+          Study Records
+        </h3>
 
         <div class="panel-desc">
           Latest Quran study progress
         </div>
+
       </div>
 
     </div>
+
 
     <div class="table-wrap">
 
@@ -1843,6 +2219,7 @@ td strong{
         <thead>
 
           <tr>
+
             <th>Student</th>
             <th>Date</th>
             <th>Surah</th>
@@ -1851,6 +2228,7 @@ td strong{
             <th>Performance</th>
             <th>Dars &amp; Study Status</th>
             <th>Action</th>
+
           </tr>
 
         </thead>
@@ -1866,13 +2244,27 @@ td strong{
 </section>
 
 
-<section class="section" id="results">
+<!-- =========================
+     RESULTS
+========================= -->
+
+<section
+  class="section"
+  id="results"
+>
 
   <div class="section-head">
 
     <div>
-      <h2>Results</h2>
-      <p>Create, publish and manage student results.</p>
+
+      <h2>
+        Results
+      </h2>
+
+      <p>
+        Create, publish and manage student results.
+      </p>
+
     </div>
 
     <div class="section-tag">
@@ -1881,19 +2273,25 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>Create Result</h3>
+
+        <h3>
+          Create Result
+        </h3>
 
         <div class="panel-desc">
           Draft or publish a student result
         </div>
+
       </div>
 
     </div>
+
 
     <form id="resultForm">
 
@@ -1901,9 +2299,14 @@ td strong{
 
         <div class="field">
 
-          <label>Student</label>
+          <label>
+            Student
+          </label>
 
-          <select id="resultStudent" required>
+          <select
+            id="resultStudent"
+            required
+          >
 
             <option value="">
               Select student
@@ -1913,9 +2316,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Result Title</label>
+          <label>
+            Result Title
+          </label>
 
           <input
             id="resultTitle"
@@ -1925,9 +2331,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Mark / Grade</label>
+          <label>
+            Mark / Grade
+          </label>
 
           <input
             id="resultMark"
@@ -1937,9 +2346,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Status</label>
+          <label>
+            Status
+          </label>
 
           <select id="resultStatus">
 
@@ -1957,9 +2369,13 @@ td strong{
 
       </div>
 
+
       <br>
 
-      <button class="primary" type="submit">
+      <button
+        class="primary"
+        type="submit"
+      >
         Save Result
       </button>
 
@@ -1967,19 +2383,25 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>Results</h3>
+
+        <h3>
+          Results
+        </h3>
 
         <div class="panel-desc">
           Manage draft and published results
         </div>
+
       </div>
 
     </div>
+
 
     <div class="table-wrap">
 
@@ -1988,11 +2410,13 @@ td strong{
         <thead>
 
           <tr>
+
             <th>Student</th>
             <th>Title</th>
             <th>Mark</th>
             <th>Status</th>
             <th>Action</th>
+
           </tr>
 
         </thead>
@@ -2008,13 +2432,27 @@ td strong{
 </section>
 
 
-<section class="section" id="notices">
+<!-- =========================
+     NOTICES
+========================= -->
+
+<section
+  class="section"
+  id="notices"
+>
 
   <div class="section-head">
 
     <div>
-      <h2>Notices</h2>
-      <p>Publish announcements for parents.</p>
+
+      <h2>
+        Notices
+      </h2>
+
+      <p>
+        Publish announcements for parents.
+      </p>
+
     </div>
 
     <div class="section-tag">
@@ -2023,19 +2461,25 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>Create Notice</h3>
+
+        <h3>
+          Create Notice
+        </h3>
 
         <div class="panel-desc">
           Create an announcement
         </div>
+
       </div>
 
     </div>
+
 
     <form id="noticeForm">
 
@@ -2043,7 +2487,9 @@ td strong{
 
         <div class="field full">
 
-          <label>Notice Title</label>
+          <label>
+            Notice Title
+          </label>
 
           <input
             id="noticeTitle"
@@ -2053,9 +2499,12 @@ td strong{
 
         </div>
 
+
         <div class="field full">
 
-          <label>Notice</label>
+          <label>
+            Notice
+          </label>
 
           <textarea
             id="noticeText"
@@ -2065,9 +2514,12 @@ td strong{
 
         </div>
 
+
         <div class="field">
 
-          <label>Status</label>
+          <label>
+            Status
+          </label>
 
           <select id="noticeStatus">
 
@@ -2085,9 +2537,13 @@ td strong{
 
       </div>
 
+
       <br>
 
-      <button class="primary" type="submit">
+      <button
+        class="primary"
+        type="submit"
+      >
         Save Notice
       </button>
 
@@ -2095,19 +2551,25 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
-        <h3>Notices</h3>
+
+        <h3>
+          Notices
+        </h3>
 
         <div class="panel-desc">
           Published and draft announcements
         </div>
+
       </div>
 
     </div>
+
 
     <div class="table-wrap">
 
@@ -2116,10 +2578,12 @@ td strong{
         <thead>
 
           <tr>
+
             <th>Title</th>
             <th>Notice</th>
             <th>Status</th>
             <th>Action</th>
+
           </tr>
 
         </thead>
@@ -2135,13 +2599,27 @@ td strong{
 </section>
 
 
-<section class="section" id="leave">
+<!-- =========================
+     LEAVE
+========================= -->
+
+<section
+  class="section"
+  id="leave"
+>
 
   <div class="section-head">
 
     <div>
-      <h2>Leave Requests</h2>
-      <p>Manage applications received from parents.</p>
+
+      <h2>
+        Leave Requests
+      </h2>
+
+      <p>
+        Manage applications received from parents.
+      </p>
+
     </div>
 
     <div class="section-tag">
@@ -2149,6 +2627,7 @@ td strong{
     </div>
 
   </div>
+
 
   <div class="panel">
 
@@ -2159,6 +2638,7 @@ td strong{
         <thead>
 
           <tr>
+
             <th>Student</th>
             <th>Parent</th>
             <th>Date</th>
@@ -2166,6 +2646,7 @@ td strong{
             <th>Status</th>
             <th>Reply</th>
             <th>Action</th>
+
           </tr>
 
         </thead>
@@ -2181,13 +2662,27 @@ td strong{
 </section>
 
 
-<section class="section" id="messages">
+<!-- =========================
+     MESSAGES
+========================= -->
+
+<section
+  class="section"
+  id="messages"
+>
 
   <div class="section-head">
 
     <div>
-      <h2>Parent Messages</h2>
-      <p>View and reply to parent communication.</p>
+
+      <h2>
+        Parent Messages
+      </h2>
+
+      <p>
+        View and reply to parent communication.
+      </p>
+
     </div>
 
     <div class="section-tag">
@@ -2195,6 +2690,7 @@ td strong{
     </div>
 
   </div>
+
 
   <div class="panel">
 
@@ -2205,12 +2701,14 @@ td strong{
         <thead>
 
           <tr>
+
             <th>Student</th>
             <th>Parent</th>
             <th>Message</th>
             <th>Status</th>
             <th>Reply</th>
             <th>Action</th>
+
           </tr>
 
         </thead>
@@ -2226,12 +2724,22 @@ td strong{
 </section>
 
 
-<section class="section" id="publicResult">
+<!-- =========================
+     PUBLIC RESULT
+========================= -->
+
+<section
+  class="section"
+  id="publicResult"
+>
 
   <div class="section-head">
 
     <div>
-      <h2>Public Result</h2>
+
+      <h2>
+        Public Result
+      </h2>
 
       <p>
         Manage the public result checking system.
@@ -2245,9 +2753,13 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
-    <div class="welcome" style="margin:0;">
+    <div
+      class="welcome"
+      style="margin:0;"
+    >
 
       <h2 style="font-size:21px;">
         🌐 Public Result System
@@ -2271,13 +2783,16 @@ td strong{
 
   </div>
 
+
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
 
-        <h3>How it works</h3>
+        <h3>
+          How it works
+        </h3>
 
         <div class="panel-desc">
           Simple and secure result publishing
@@ -2287,17 +2802,34 @@ td strong{
 
     </div>
 
-    <div style="line-height:2;font-size:13px;color:#526174;">
 
-      <p>① Create a result for a student.</p>
+    <div
+      style="
+        line-height:2;
+        font-size:13px;
+        color:#526174;
+      "
+    >
 
-      <p>② Keep it as <strong>Draft</strong> while preparing it.</p>
+      <p>
+        ① Create a result for a student.
+      </p>
 
-      <p>③ Change the status to <strong>Published</strong>.</p>
+      <p>
+        ② Keep it as <strong>Draft</strong> while preparing it.
+      </p>
 
-      <p>④ The public result page will show published results.</p>
+      <p>
+        ③ Change the status to <strong>Published</strong>.
+      </p>
 
-      <p>⑤ Draft results remain hidden from parents/public users.</p>
+      <p>
+        ④ The public result page will show published results.
+      </p>
+
+      <p>
+        ⑤ Draft results remain hidden from parents/public users.
+      </p>
 
     </div>
 
@@ -2305,9 +2837,9 @@ td strong{
 
 </section>
 
+
 </div>
 </main>
-
 </div>
 
 
@@ -2337,31 +2869,30 @@ import {
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
-  authDomain: "safa-hifz-class-7e84b.firebaseapp.com",
-  projectId: "safa-hifz-class-7e84b",
-  storageBucket: "safa-hifz-class-7e84b.firebasestorage.app",
-  messagingSenderId: "476801753196",
-  appId: "1:476801753196:web:d4c8a8b0c1a4203606f849",
-  measurementId: "G-ZTBTJCB5SR"
+  apiKey:"AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
+  authDomain:"safa-hifz-class-7e84b.firebaseapp.com",
+  projectId:"safa-hifz-class-7e84b",
+  storageBucket:"safa-hifz-class-7e84b.firebasestorage.app",
+  messagingSenderId:"476801753196",
+  appId:"1:476801753196:web:d4c8a8b0c1a4203606f849",
+  measurementId:"G-ZTBTJCB5SR"
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app=initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+const auth=getAuth(app);
 
-const db = getFirestore(app);
+const db=getFirestore(app);
 
+const $=id=>document.getElementById(id);
 
-const $ = id => document.getElementById(id);
-
-window.students = [];
+window.students=[];
 
 
 function escapeHtml(value){
 
-  if(value === null || value === undefined){
+  if(value===null || value===undefined){
     return "";
   }
 
@@ -2377,23 +2908,21 @@ function escapeHtml(value){
 
 function showMessage(text,type="success"){
 
-  const box = $("message");
+  const box=$("message");
 
-  box.textContent = text;
+  box.textContent=text;
 
-  box.className =
-    type === "error"
-      ? "error-msg"
-      : "success-msg";
+  box.className=
+    type==="error"
+      ?"error-msg"
+      :"success-msg";
 
-  box.style.display = "block";
+  box.style.display="block";
 
   clearTimeout(window.messageTimer);
 
-  window.messageTimer = setTimeout(()=>{
-
-    box.style.display = "none";
-
+  window.messageTimer=setTimeout(()=>{
+    box.style.display="none";
   },3500);
 
 }
@@ -2401,14 +2930,14 @@ function showMessage(text,type="success"){
 
 function studentNameByNumber(number){
 
-  const found =
+  const found=
     window.students.find(
-      s => String(s.studentNumber) === String(number)
+      s=>String(s.studentNumber)===String(number)
     );
 
   return found
-    ? found.name
-    : String(number || "-");
+    ?found.name
+    :String(number || "-");
 
 }
 
@@ -2417,7 +2946,7 @@ onAuthStateChanged(auth,async user=>{
 
   if(!user){
 
-    location.href = "index.html";
+    location.href="index.html";
 
     return;
 
@@ -2425,7 +2954,7 @@ onAuthStateChanged(auth,async user=>{
 
   try{
 
-    const userSnap =
+    const userSnap=
       await getDoc(
         doc(db,"users",user.uid)
       );
@@ -2440,12 +2969,12 @@ onAuthStateChanged(auth,async user=>{
 
     }
 
-    const data = userSnap.data();
+    const data=userSnap.data();
 
     if(
       String(data.role || "")
         .trim()
-        .toLowerCase() !== "admin"
+        .toLowerCase()!=="admin"
     ){
 
       alert("You do not have administrator access.");
@@ -2456,7 +2985,7 @@ onAuthStateChanged(auth,async user=>{
 
     }
 
-    $("loading").style.display = "none";
+    $("loading").style.display="none";
 
     await loadEverything();
 
@@ -2464,8 +2993,8 @@ onAuthStateChanged(auth,async user=>{
 
     console.error(error);
 
-    $("loading").innerHTML =
-      "Dashboard loading error.<br><br>" +
+    $("loading").innerHTML=
+      "Dashboard loading error.<br><br>"+
       escapeHtml(error.message);
 
   }
@@ -2478,9 +3007,7 @@ document.querySelectorAll(".menu-btn")
 
   button.addEventListener("click",()=>{
 
-    openSection(
-      button.dataset.section
-    );
+    openSection(button.dataset.section);
 
     $("sidebar").classList.remove("open");
 
@@ -2505,35 +3032,27 @@ function openSection(sectionId){
 
   document.querySelectorAll(".section")
   .forEach(section=>{
-
     section.classList.remove("active");
-
   });
 
   document.querySelectorAll(".menu-btn")
   .forEach(button=>{
-
     button.classList.remove("active");
-
   });
 
-  const section = $(sectionId);
+  const section=$(sectionId);
 
   if(section){
-
     section.classList.add("active");
-
   }
 
-  const menuButton =
+  const menuButton=
     document.querySelector(
       `.menu-btn[data-section="${sectionId}"]`
     );
 
   if(menuButton){
-
     menuButton.classList.add("active");
-
   }
 
   window.scrollTo({
@@ -2554,14 +3073,12 @@ $("mobileMenu").addEventListener("click",()=>{
 $("logoutBtn").addEventListener("click",async()=>{
 
   if(!confirm("Logout from admin dashboard?")){
-
     return;
-
   }
 
   await signOut(auth);
 
-  location.href = "index.html";
+  location.href="index.html";
 
 });
 
@@ -2573,15 +3090,10 @@ async function loadEverything(){
   await Promise.all([
 
     loadAttendance(),
-
     loadStudy(),
-
     loadResults(),
-
     loadNotices(),
-
     loadLeaves(),
-
     loadMessages()
 
   ]);
@@ -2595,30 +3107,30 @@ async function loadEverything(){
 
 async function loadStudents(){
 
-  const snap =
+  const snap=
     await getDocs(
       collection(db,"students")
     );
 
-  window.students = [];
+  window.students=[];
 
-  $("studentsTable").innerHTML = "";
+  $("studentsTable").innerHTML="";
 
   snap.forEach(item=>{
 
-    const data = item.data();
+    const data=item.data();
 
-    const student = {
+    const student={
       id:item.id,
       ...data
     };
 
     window.students.push(student);
 
-    const tr =
+    const tr=
       document.createElement("tr");
 
-    tr.dataset.search =
+    tr.dataset.search=
       `${data.studentNumber || ""}
        ${data.name || ""}
        ${data.guardianName || ""}
@@ -2628,7 +3140,7 @@ async function loadStudents(){
        ${data.phoneNumber || ""}`
       .toLowerCase();
 
-    tr.innerHTML = `
+    tr.innerHTML=`
 
       <td>
         <strong>
@@ -2690,15 +3202,11 @@ async function loadStudents(){
 
   });
 
-  $("studentCount").textContent =
+  $("studentCount").textContent=
     window.students.length;
 
   populateStudentSelects();
 
-
-  /* =========================
-     DELETE STUDENT
-  ========================= */
 
   document.querySelectorAll(".delete-student")
   .forEach(button=>{
@@ -2706,9 +3214,7 @@ async function loadStudents(){
     button.addEventListener("click",async()=>{
 
       if(!confirm("Delete this student?")){
-
         return;
-
       }
 
       try{
@@ -2749,16 +3255,16 @@ async function loadStudents(){
 
 document.addEventListener("click",e=>{
 
-  const button =
+  const button=
     e.target.closest(".edit-student");
 
   if(!button){
     return;
   }
 
-  const student =
+  const student=
     window.students.find(
-      s => s.id === button.dataset.id
+      s=>s.id===button.dataset.id
     );
 
   if(!student){
@@ -2772,48 +3278,35 @@ document.addEventListener("click",e=>{
 
   }
 
-
-  $("editStudentId").value =
+  $("editStudentId").value=
     student.id;
 
-
-  $("editStudentNumber").value =
+  $("editStudentNumber").value=
     student.studentNumber || "";
 
-
-  $("editStudentName").value =
+  $("editStudentName").value=
     student.name || "";
 
-
-  $("editGuardianName").value =
+  $("editGuardianName").value=
     student.guardianName || "";
 
-
-  $("editClassName").value =
+  $("editClassName").value=
     student.className || "";
 
-
-  $("editParentEmail").value =
+  $("editParentEmail").value=
     student.parentEmail || "";
 
-
-  $("editStudentAddress").value =
+  $("editStudentAddress").value=
     student.studentAddress || "";
 
-
-  $("editPhoneNumber").value =
+  $("editPhoneNumber").value=
     student.phoneNumber || "";
-
 
   $("editStudentModal")
     .classList.add("show");
 
 });
 
-
-/* =========================
-   CLOSE EDIT MODAL
-========================= */
 
 function closeEditStudentModal(){
 
@@ -2841,7 +3334,7 @@ $("editStudentModal")
 .addEventListener("click",e=>{
 
   if(
-    e.target === $("editStudentModal")
+    e.target===$("editStudentModal")
   ){
 
     closeEditStudentModal();
@@ -2851,10 +3344,6 @@ $("editStudentModal")
 });
 
 
-/* =========================
-   SAVE EDITED STUDENT
-========================= */
-
 $("editStudentForm")
 .addEventListener(
   "submit",
@@ -2862,46 +3351,38 @@ $("editStudentForm")
 
     e.preventDefault();
 
-
-    const studentId =
+    const studentId=
       $("editStudentId").value;
 
-
-    const name =
+    const name=
       $("editStudentName")
         .value
         .trim();
 
-
-    const className =
+    const className=
       $("editClassName")
         .value
         .trim();
 
-
-    const parentEmail =
+    const parentEmail=
       $("editParentEmail")
         .value
         .trim();
 
-
-    const guardianName =
+    const guardianName=
       $("editGuardianName")
         .value
         .trim();
 
-
-    const studentAddress =
+    const studentAddress=
       $("editStudentAddress")
         .value
         .trim();
 
-
-    const phoneNumber =
+    const phoneNumber=
       $("editPhoneNumber")
         .value
         .trim();
-
 
     if(!name){
 
@@ -2913,7 +3394,6 @@ $("editStudentForm")
       return;
 
     }
-
 
     try{
 
@@ -2933,17 +3413,13 @@ $("editStudentForm")
         }
       );
 
-
       closeEditStudentModal();
-
 
       showMessage(
         "Student details updated successfully."
       );
 
-
       await loadStudents();
-
 
     }catch(error){
 
@@ -2962,7 +3438,7 @@ $("editStudentForm")
 
 function populateStudentSelects(){
 
-  const ids = [
+  const ids=[
     "attendanceStudent",
     "studyStudent",
     "resultStudent"
@@ -2970,15 +3446,13 @@ function populateStudentSelects(){
 
   ids.forEach(id=>{
 
-    const select = $(id);
+    const select=$(id);
 
     if(!select){
-
       return;
-
     }
 
-    select.innerHTML =
+    select.innerHTML=
       `<option value="">
         Select student
       </option>`;
@@ -2994,13 +3468,13 @@ function populateStudentSelects(){
     )
     .forEach(student=>{
 
-      const option =
+      const option=
         document.createElement("option");
 
-      option.value =
+      option.value=
         String(student.studentNumber);
 
-      option.textContent =
+      option.textContent=
         `${student.studentNumber} - ${student.name}`;
 
       select.appendChild(option);
@@ -3015,7 +3489,7 @@ function populateStudentSelects(){
 $("studentSearch")
 .addEventListener("input",e=>{
 
-  const value =
+  const value=
     e.target.value
       .trim()
       .toLowerCase();
@@ -3025,11 +3499,11 @@ $("studentSearch")
   )
   .forEach(row=>{
 
-    row.style.display =
+    row.style.display=
       !value ||
       row.dataset.search.includes(value)
-        ? ""
-        : "none";
+        ?""
+        :"none";
 
   });
 
@@ -3043,12 +3517,12 @@ $("studentForm")
 
   try{
 
-    const studentNumber =
+    const studentNumber=
       $("studentNumber")
         .value
         .trim();
 
-    const name =
+    const name=
       $("studentName")
         .value
         .trim();
@@ -3064,11 +3538,11 @@ $("studentForm")
 
     }
 
-    const duplicate =
+    const duplicate=
       window.students.some(
-        s =>
+        s=>
           String(s.studentNumber)
-          === String(studentNumber)
+          ===String(studentNumber)
       );
 
     if(duplicate){
@@ -3180,12 +3654,12 @@ $("attendanceForm")
 
 async function loadAttendance(){
 
-  const snap =
+  const snap=
     await getDocs(
       collection(db,"attendance")
     );
 
-  const rows = [];
+  const rows=[];
 
   snap.forEach(item=>{
 
@@ -3203,13 +3677,14 @@ async function loadAttendance(){
       )
   );
 
-  $("attendanceTable").innerHTML = "";
+  $("attendanceTable").innerHTML="";
 
   if(!rows.length){
 
-    $("attendanceTable").innerHTML = `
+    $("attendanceTable").innerHTML=`
 
       <tr>
+
         <td>
 
           <div class="empty">
@@ -3221,45 +3696,44 @@ async function loadAttendance(){
           </div>
 
         </td>
+
       </tr>
 
     `;
 
   }else{
 
-    const grouped = {};
+    const grouped={};
 
     rows.forEach(data=>{
 
-      const status =
+      const status=
         String(data.status || "")
           .trim()
           .toLowerCase();
 
       if(
-        status !== "absent" &&
-        status !== "leave"
+        status!=="absent" &&
+        status!=="leave"
       ){
-
         return;
-
       }
 
       if(!grouped[data.date]){
 
-        grouped[data.date] = {
+        grouped[data.date]={
           absent:[],
           leave:[]
         };
 
       }
 
-      const studentName =
+      const studentName=
         studentNameByNumber(
           data.studentNumber
         );
 
-      if(status === "absent"){
+      if(status==="absent"){
 
         grouped[data.date].absent.push({
           id:data.id,
@@ -3268,7 +3742,7 @@ async function loadAttendance(){
 
       }
 
-      if(status === "leave"){
+      if(status==="leave"){
 
         grouped[data.date].leave.push({
           id:data.id,
@@ -3279,7 +3753,7 @@ async function loadAttendance(){
 
     });
 
-    const dates =
+    const dates=
       Object.keys(grouped)
         .sort((a,b)=>
           String(b).localeCompare(String(a))
@@ -3287,9 +3761,10 @@ async function loadAttendance(){
 
     if(!dates.length){
 
-      $("attendanceTable").innerHTML = `
+      $("attendanceTable").innerHTML=`
 
         <tr>
+
           <td>
 
             <div class="empty">
@@ -3301,6 +3776,7 @@ async function loadAttendance(){
             </div>
 
           </td>
+
         </tr>
 
       `;
@@ -3309,59 +3785,58 @@ async function loadAttendance(){
 
       dates.forEach(date=>{
 
-        const data =
-          grouped[date];
+        const data=grouped[date];
 
-        const tr =
+        const tr=
           document.createElement("tr");
 
-        const absentHtml =
+        const absentHtml=
           data.absent.length
-            ? data.absent.map(item=>`
+            ?data.absent.map(item=>`
 
-                <div class="attendance-student">
+              <div class="attendance-student">
 
-                  <span>
-                    ${escapeHtml(item.name)}
-                  </span>
+                <span>
+                  ${escapeHtml(item.name)}
+                </span>
 
-                  <button
-                    class="attendance-delete delete-attendance"
-                    data-id="${item.id}"
-                    title="Delete attendance"
-                  >
-                    ×
-                  </button>
+                <button
+                  class="attendance-delete delete-attendance"
+                  data-id="${item.id}"
+                  title="Delete attendance"
+                >
+                  ×
+                </button>
 
-                </div>
+              </div>
 
-              `).join("")
-            : "";
+            `).join("")
+            :"";
 
-        const leaveHtml =
+        const leaveHtml=
           data.leave.length
-            ? data.leave.map(item=>`
+            ?data.leave.map(item=>`
 
-                <div class="attendance-student">
+              <div class="attendance-student">
 
-                  <span>
-                    ${escapeHtml(item.name)}
-                  </span>
+                <span>
+                  ${escapeHtml(item.name)}
+                </span>
 
-                  <button
-                    class="attendance-delete delete-attendance"
-                    data-id="${item.id}"
-                    title="Delete attendance"
-                  >
-                    ×
-                  </button>
+                <button
+                  class="attendance-delete delete-attendance"
+                  data-id="${item.id}"
+                  title="Delete attendance"
+                >
+                  ×
+                </button>
 
-                </div>
+              </div>
 
-              `).join("")
-            : "";
+            `).join("")
+            :"";
 
-        tr.innerHTML = `
+        tr.innerHTML=`
 
           <td style="padding:18px 12px;">
 
@@ -3371,7 +3846,7 @@ async function loadAttendance(){
 
             ${
               data.absent.length
-              ? `
+              ?`
                 <div class="attendance-group">
 
                   <div class="attendance-line">
@@ -3388,12 +3863,12 @@ async function loadAttendance(){
 
                 </div>
               `
-              : ""
+              :""
             }
 
             ${
               data.leave.length
-              ? `
+              ?`
                 <div class="attendance-group">
 
                   <div class="attendance-line">
@@ -3410,7 +3885,7 @@ async function loadAttendance(){
 
                 </div>
               `
-              : ""
+              :""
             }
 
           </td>
@@ -3426,7 +3901,7 @@ async function loadAttendance(){
 
   }
 
-  $("attendanceCount").textContent =
+  $("attendanceCount").textContent=
     rows.length;
 
   document.querySelectorAll(
@@ -3441,9 +3916,7 @@ async function loadAttendance(){
         if(!confirm(
           "Delete this attendance record?"
         )){
-
           return;
-
         }
 
         try{
@@ -3548,12 +4021,12 @@ $("studyForm")
 
 async function loadStudy(){
 
-  const snap =
+  const snap=
     await getDocs(
       collection(db,"studyProgress")
     );
 
-  const rows = [];
+  const rows=[];
 
   snap.forEach(item=>{
 
@@ -3574,13 +4047,14 @@ async function loadStudy(){
       )
   );
 
-  $("studyTable").innerHTML = "";
+  $("studyTable").innerHTML="";
 
   if(!rows.length){
 
-    $("studyTable").innerHTML = `
+    $("studyTable").innerHTML=`
 
       <tr>
+
         <td colspan="8">
 
           <div class="empty">
@@ -3594,6 +4068,7 @@ async function loadStudy(){
           </div>
 
         </td>
+
       </tr>
 
     `;
@@ -3602,10 +4077,10 @@ async function loadStudy(){
 
   rows.forEach(data=>{
 
-    const tr =
+    const tr=
       document.createElement("tr");
 
-    tr.innerHTML = `
+    tr.innerHTML=`
 
       <td>
 
@@ -3685,9 +4160,7 @@ async function loadStudy(){
         if(!confirm(
           "Delete this study record?"
         )){
-
           return;
-
         }
 
         await deleteDoc(
@@ -3767,14 +4240,14 @@ $("resultForm")
 
 async function loadResults(){
 
-  const snap =
+  const snap=
     await getDocs(
       collection(db,"results")
     );
 
-  $("resultsTable").innerHTML = "";
+  $("resultsTable").innerHTML="";
 
-  const rows = [];
+  const rows=[];
 
   snap.forEach(item=>{
 
@@ -3790,9 +4263,10 @@ async function loadResults(){
 
   if(!rows.length){
 
-    $("resultsTable").innerHTML = `
+    $("resultsTable").innerHTML=`
 
       <tr>
+
         <td colspan="5">
 
           <div class="empty">
@@ -3806,6 +4280,7 @@ async function loadResults(){
           </div>
 
         </td>
+
       </tr>
 
     `;
@@ -3814,13 +4289,13 @@ async function loadResults(){
 
   rows.forEach(data=>{
 
-    const published =
-      data.status === "published";
+    const published=
+      data.status==="published";
 
-    const tr =
+    const tr=
       document.createElement("tr");
 
-    tr.innerHTML = `
+    tr.innerHTML=`
 
       <td>
 
@@ -3839,17 +4314,19 @@ async function loadResults(){
       </td>
 
       <td>
+
         <strong>
           ${escapeHtml(data.mark)}
         </strong>
+
       </td>
 
       <td>
 
         <span class="badge ${
           published
-            ? "badge-green"
-            : "badge-yellow"
+            ?"badge-green"
+            :"badge-yellow"
         }">
 
           ${escapeHtml(data.status)}
@@ -3867,15 +4344,15 @@ async function loadResults(){
             data-id="${data.id}"
             data-status="${
               published
-                ? "draft"
-                : "published"
+                ?"draft"
+                :"published"
             }"
           >
 
             ${
               published
-                ? "Unpublish"
-                : "Publish"
+                ?"Unpublish"
+                :"Publish"
             }
 
           </button>
@@ -3926,7 +4403,6 @@ async function loadResults(){
         await loadResults();
 
       }
-
     );
 
   });
@@ -3943,9 +4419,7 @@ async function loadResults(){
         if(!confirm(
           "Delete this result?"
         )){
-
           return;
-
         }
 
         await deleteDoc(
@@ -3963,7 +4437,6 @@ async function loadResults(){
         await loadResults();
 
       }
-
     );
 
   });
@@ -4023,14 +4496,14 @@ $("noticeForm")
 
 async function loadNotices(){
 
-  const snap =
+  const snap=
     await getDocs(
       collection(db,"notices")
     );
 
-  $("noticesTable").innerHTML = "";
+  $("noticesTable").innerHTML="";
 
-  const rows = [];
+  const rows=[];
 
   snap.forEach(item=>{
 
@@ -4046,10 +4519,10 @@ async function loadNotices(){
 
   rows.sort((a,b)=>{
 
-    const aa =
+    const aa=
       a.createdAt?.seconds || 0;
 
-    const bb =
+    const bb=
       b.createdAt?.seconds || 0;
 
     return bb-aa;
@@ -4058,9 +4531,10 @@ async function loadNotices(){
 
   if(!rows.length){
 
-    $("noticesTable").innerHTML = `
+    $("noticesTable").innerHTML=`
 
       <tr>
+
         <td colspan="4">
 
           <div class="empty">
@@ -4074,6 +4548,7 @@ async function loadNotices(){
           </div>
 
         </td>
+
       </tr>
 
     `;
@@ -4082,13 +4557,13 @@ async function loadNotices(){
 
   rows.forEach(data=>{
 
-    const published =
-      data.status === "published";
+    const published=
+      data.status==="published";
 
-    const tr =
+    const tr=
       document.createElement("tr");
 
-    tr.innerHTML = `
+    tr.innerHTML=`
 
       <td>
 
@@ -4106,8 +4581,8 @@ async function loadNotices(){
 
         <span class="badge ${
           published
-            ? "badge-green"
-            : "badge-yellow"
+            ?"badge-green"
+            :"badge-yellow"
         }">
 
           ${escapeHtml(data.status)}
@@ -4125,15 +4600,15 @@ async function loadNotices(){
             data-id="${data.id}"
             data-status="${
               published
-                ? "draft"
-                : "published"
+                ?"draft"
+                :"published"
             }"
           >
 
             ${
               published
-                ? "Unpublish"
-                : "Publish"
+                ?"Unpublish"
+                :"Publish"
             }
 
           </button>
@@ -4184,7 +4659,6 @@ async function loadNotices(){
         await loadNotices();
 
       }
-
     );
 
   });
@@ -4201,9 +4675,7 @@ async function loadNotices(){
         if(!confirm(
           "Delete this notice?"
         )){
-
           return;
-
         }
 
         await deleteDoc(
@@ -4221,7 +4693,6 @@ async function loadNotices(){
         await loadNotices();
 
       }
-
     );
 
   });
@@ -4235,12 +4706,12 @@ async function loadNotices(){
 
 async function loadLeaves(){
 
-  const snap =
+  const snap=
     await getDocs(
       collection(db,"leaveRequests")
     );
 
-  const rows = [];
+  const rows=[];
 
   snap.forEach(item=>{
 
@@ -4256,23 +4727,24 @@ async function loadLeaves(){
 
   rows.sort((a,b)=>{
 
-    const aa =
+    const aa=
       a.createdAt?.seconds || 0;
 
-    const bb =
+    const bb=
       b.createdAt?.seconds || 0;
 
     return bb-aa;
 
   });
 
-  $("leaveTable").innerHTML = "";
+  $("leaveTable").innerHTML="";
 
   if(!rows.length){
 
-    $("leaveTable").innerHTML = `
+    $("leaveTable").innerHTML=`
 
       <tr>
+
         <td colspan="7">
 
           <div class="empty">
@@ -4286,6 +4758,7 @@ async function loadLeaves(){
           </div>
 
         </td>
+
       </tr>
 
     `;
@@ -4294,13 +4767,13 @@ async function loadLeaves(){
 
   rows.forEach(data=>{
 
-    const status =
+    const status=
       data.status || "pending";
 
-    const tr =
+    const tr=
       document.createElement("tr");
 
-    tr.innerHTML = `
+    tr.innerHTML=`
 
       <td>
 
@@ -4343,11 +4816,11 @@ async function loadLeaves(){
       <td>
 
         <span class="badge ${
-          status === "approved"
-            ? "badge-green"
-            : status === "rejected"
-            ? "badge-red"
-            : "badge-yellow"
+          status==="approved"
+            ?"badge-green"
+            :status==="rejected"
+            ?"badge-red"
+            :"badge-yellow"
         }">
 
           ${escapeHtml(status)}
@@ -4405,7 +4878,7 @@ async function loadLeaves(){
 
   });
 
-  $("leaveCount").textContent =
+  $("leaveCount").textContent=
     rows.length;
 
   document.querySelectorAll(
@@ -4437,7 +4910,6 @@ async function loadLeaves(){
         await loadLeaves();
 
       }
-
     );
 
   });
@@ -4471,7 +4943,6 @@ async function loadLeaves(){
         await loadLeaves();
 
       }
-
     );
 
   });
@@ -4485,15 +4956,13 @@ async function loadLeaves(){
       "click",
       async()=>{
 
-        const reply =
+        const reply=
           prompt(
             "Enter reply to parent:"
           );
 
-        if(reply === null){
-
+        if(reply===null){
           return;
-
         }
 
         if(!reply.trim()){
@@ -4531,7 +5000,6 @@ async function loadLeaves(){
         await loadLeaves();
 
       }
-
     );
 
   });
@@ -4548,9 +5016,7 @@ async function loadLeaves(){
         if(!confirm(
           "Delete this leave request?"
         )){
-
           return;
-
         }
 
         await deleteDoc(
@@ -4568,7 +5034,6 @@ async function loadLeaves(){
         await loadLeaves();
 
       }
-
     );
 
   });
@@ -4582,12 +5047,12 @@ async function loadLeaves(){
 
 async function loadMessages(){
 
-  const snap =
+  const snap=
     await getDocs(
       collection(db,"messages")
     );
 
-  const rows = [];
+  const rows=[];
 
   snap.forEach(item=>{
 
@@ -4603,23 +5068,24 @@ async function loadMessages(){
 
   rows.sort((a,b)=>{
 
-    const aa =
+    const aa=
       a.createdAt?.seconds || 0;
 
-    const bb =
+    const bb=
       b.createdAt?.seconds || 0;
 
     return bb-aa;
 
   });
 
-  $("messagesTable").innerHTML = "";
+  $("messagesTable").innerHTML="";
 
   if(!rows.length){
 
-    $("messagesTable").innerHTML = `
+    $("messagesTable").innerHTML=`
 
       <tr>
+
         <td colspan="6">
 
           <div class="empty">
@@ -4633,6 +5099,7 @@ async function loadMessages(){
           </div>
 
         </td>
+
       </tr>
 
     `;
@@ -4641,13 +5108,13 @@ async function loadMessages(){
 
   rows.forEach(data=>{
 
-    const status =
+    const status=
       data.status || "unread";
 
-    const tr =
+    const tr=
       document.createElement("tr");
 
-    tr.innerHTML = `
+    tr.innerHTML=`
 
       <td>
 
@@ -4684,9 +5151,9 @@ async function loadMessages(){
       <td>
 
         <span class="badge ${
-          status === "replied"
-            ? "badge-green"
-            : "badge-yellow"
+          status==="replied"
+            ?"badge-green"
+            :"badge-yellow"
         }">
 
           ${escapeHtml(status)}
@@ -4730,7 +5197,7 @@ async function loadMessages(){
 
   });
 
-  $("messageCount").textContent =
+  $("messageCount").textContent=
     rows.length;
 
   document.querySelectorAll(
@@ -4742,15 +5209,13 @@ async function loadMessages(){
       "click",
       async()=>{
 
-        const reply =
+        const reply=
           prompt(
             "Enter reply to parent:"
           );
 
-        if(reply === null){
-
+        if(reply===null){
           return;
-
         }
 
         if(!reply.trim()){
@@ -4791,7 +5256,6 @@ async function loadMessages(){
         await loadMessages();
 
       }
-
     );
 
   });
@@ -4808,9 +5272,7 @@ async function loadMessages(){
         if(!confirm(
           "Delete this message?"
         )){
-
           return;
-
         }
 
         await deleteDoc(
@@ -4828,7 +5290,6 @@ async function loadMessages(){
         await loadMessages();
 
       }
-
     );
 
   });
@@ -4843,7 +5304,7 @@ async function loadMessages(){
 $("openPublicResult")
 .addEventListener("click",()=>{
 
-  location.href = "result.html";
+  location.href="result.html";
 
 });
 
@@ -4854,15 +5315,15 @@ $("openPublicResult")
 
 function setDefaultDates(){
 
-  const today =
+  const today=
     new Date()
       .toISOString()
       .split("T")[0];
 
-  $("attendanceDate").value =
+  $("attendanceDate").value=
     today;
 
-  $("studyDate").value =
+  $("studyDate").value=
     today;
 
 }
