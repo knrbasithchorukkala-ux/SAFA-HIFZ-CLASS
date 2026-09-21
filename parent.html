@@ -885,6 +885,181 @@ tr:hover td{
 
 
 /* =========================
+   DONATION
+========================= */
+
+.donation-hero{
+  background:linear-gradient(
+    135deg,
+    #123b5d,
+    #176b87
+  );
+  color:white;
+  border-radius:17px;
+  padding:25px;
+  margin-bottom:20px;
+  box-shadow:0 10px 30px rgba(18,59,93,.15);
+}
+
+.donation-hero h3{
+  font-size:23px;
+  margin-bottom:7px;
+}
+
+.donation-hero p{
+  font-size:13px;
+  opacity:.88;
+  line-height:1.6;
+}
+
+.bank-card{
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:18px;
+  margin-bottom:20px;
+}
+
+.bank-card h3{
+  color:var(--primary);
+  margin-bottom:15px;
+}
+
+.bank-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:11px 0;
+  border-bottom:1px solid #e9edf2;
+  font-size:13px;
+}
+
+.bank-row:last-child{
+  border-bottom:0;
+}
+
+.bank-row span:first-child{
+  color:var(--muted);
+}
+
+.bank-row strong{
+  text-align:right;
+  word-break:break-word;
+}
+
+.qr-wrap{
+  text-align:center;
+  padding:10px;
+}
+
+.qr-wrap img{
+  width:230px;
+  max-width:100%;
+  height:auto;
+  border-radius:12px;
+  border:1px solid var(--border);
+  padding:8px;
+  background:white;
+}
+
+.qr-caption{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.donation-status{
+  display:inline-block;
+  padding:6px 11px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:700;
+  text-transform:capitalize;
+}
+
+.donation-pending{
+  background:#fff4d8;
+  color:#916300;
+}
+
+.donation-verified{
+  background:#e7f7ef;
+  color:#18794e;
+}
+
+.donation-rejected{
+  background:#fdeaea;
+  color:#b42318;
+}
+
+.donation-record{
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:17px;
+  margin-bottom:12px;
+  background:white;
+}
+
+.donation-record-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.donation-amount{
+  font-size:22px;
+  font-weight:800;
+  color:var(--primary2);
+}
+
+.donation-info{
+  margin-top:12px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
+}
+
+.donation-info-box{
+  background:#f7f9fc;
+  padding:10px;
+  border-radius:8px;
+}
+
+.donation-info-box small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.donation-info-box strong{
+  display:block;
+  margin-top:4px;
+  font-size:12px;
+  word-break:break-word;
+}
+
+.admin-note{
+  margin-top:12px;
+  background:#eef8f4;
+  border-radius:9px;
+  padding:12px;
+}
+
+.admin-note strong{
+  color:#18794e;
+  font-size:12px;
+}
+
+.admin-note p{
+  color:#285c49;
+  margin-top:5px;
+  font-size:13px;
+  line-height:1.5;
+}
+
+
+/* =========================
    MESSAGE
 ========================= */
 
@@ -1014,6 +1189,23 @@ tr:hover td{
     margin-top:13px;
   }
 
+  .donation-info{
+    grid-template-columns:1fr;
+  }
+
+  .donation-record-top{
+    flex-direction:column;
+  }
+
+  .bank-row{
+    flex-direction:column;
+    gap:4px;
+  }
+
+  .bank-row strong{
+    text-align:left;
+  }
+
 }
 
 </style>
@@ -1140,6 +1332,18 @@ tr:hover td{
 
     </button>
 
+
+    <!-- NEW DONATION MENU -->
+
+    <button
+      class="nav-btn"
+      data-section="donations">
+
+      <span>💰</span>
+      MY DONATION TO SAFA
+
+    </button>
+
   </div>
 
 </aside>
@@ -1207,8 +1411,6 @@ tr:hover td{
   class="section active"
   id="home">
 
-
-  <!-- COLLEGE PHOTO + QURAN QUOTE -->
 
   <div class="college-header">
 
@@ -1523,6 +1725,23 @@ tr:hover td{
 
         <small>
           Send a message
+        </small>
+
+      </button>
+
+
+      <!-- NEW DONATION QUICK ACCESS -->
+
+      <button
+        class="quick-btn"
+        data-go="donations">
+
+        <strong>
+          💰 MY DONATION TO SAFA
+        </strong>
+
+        <small>
+          Donate and view payment status
         </small>
 
       </button>
@@ -2048,6 +2267,270 @@ tr:hover td{
 </section>
 
 
+<!-- =========================
+     MY DONATION TO SAFA
+========================= -->
+
+<section
+  class="section"
+  id="donations">
+
+  <div class="section-head">
+
+    <h2>
+      💰 MY DONATION TO SAFA
+    </h2>
+
+    <p>
+      Support SAFA QURAN COLLEGE and submit your payment reference.
+    </p>
+
+  </div>
+
+
+  <div class="donation-hero">
+
+    <h3>
+      Support SAFA QURAN COLLEGE
+    </h3>
+
+    <p>
+      You can make your donation using the bank account or QR code below.
+      After completing the payment, enter the transaction/reference ID
+      and submit it for verification by Usthad/Admin.
+    </p>
+
+  </div>
+
+
+  <!-- BANK DETAILS -->
+
+  <div class="panel">
+
+    <div class="bank-card">
+
+      <h3>
+        🏦 Bank Details
+      </h3>
+
+
+      <div class="bank-row">
+
+        <span>
+          Bank
+        </span>
+
+        <strong>
+          Federal Bank
+        </strong>
+
+      </div>
+
+
+      <div class="bank-row">
+
+        <span>
+          Account Number
+        </span>
+
+        <strong>
+          10980200318831
+        </strong>
+
+      </div>
+
+
+      <div class="bank-row">
+
+        <span>
+          IFSC
+        </span>
+
+        <strong>
+          FDRL0001098
+        </strong>
+
+      </div>
+
+
+      <div class="bank-row">
+
+        <span>
+          Branch
+        </span>
+
+        <strong>
+          Kannur
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- QR -->
+
+    <div class="qr-wrap">
+
+      <img
+        src="./20260225.jpg"
+        alt="SAFA QURAN COLLEGE Donation QR Code"
+        onerror="
+          this.style.display='none';
+          document.getElementById('qrError').style.display='block';
+        "
+      >
+
+      <div
+        id="qrError"
+        style="
+          display:none;
+          color:#b42318;
+          padding:15px;
+        ">
+
+        QR image not found.
+        Please make sure
+        <strong>20260225.jpg</strong>
+        is uploaded to the same project folder.
+
+      </div>
+
+      <div class="qr-caption">
+
+        Scan the QR code to make your donation.
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- DONATION FORM -->
+
+  <div class="panel">
+
+    <h3>
+      Submit Donation Details
+    </h3>
+
+
+    <p style="
+      color:#718096;
+      font-size:13px;
+      margin-bottom:18px;
+      line-height:1.6;
+    ">
+
+      After payment, enter the amount and transaction/reference ID.
+      Your submission will remain <strong>Pending</strong> until
+      it is verified by Usthad/Admin.
+
+    </p>
+
+
+    <form id="donationForm">
+
+      <div class="form-grid">
+
+
+        <div class="field">
+
+          <label>
+            Donation Amount
+          </label>
+
+          <input
+            type="number"
+            id="donationAmount"
+            min="1"
+            step="0.01"
+            required
+            placeholder="Enter amount"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Transaction ID / Reference
+          </label>
+
+          <input
+            type="text"
+            id="donationTransactionId"
+            required
+            maxlength="100"
+            placeholder="Enter transaction/reference ID"
+          >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>
+            Note (Optional)
+          </label>
+
+          <textarea
+            id="donationNote"
+            maxlength="500"
+            placeholder="Any additional note..."
+          ></textarea>
+
+        </div>
+
+
+      </div>
+
+
+      <br>
+
+
+      <button
+        class="primary"
+        type="submit"
+        id="donationSubmitBtn">
+
+        Submit Donation
+
+      </button>
+
+    </form>
+
+  </div>
+
+
+  <!-- DONATION HISTORY -->
+
+  <div class="panel">
+
+    <h3>
+      My Donation History
+    </h3>
+
+
+    <div id="donationList"></div>
+
+
+    <div
+      class="empty"
+      id="donationEmpty"
+      style="display:none;">
+
+      No donation records yet.
+
+    </div>
+
+  </div>
+
+</section>
+
+
 </div>
 
 </main>
@@ -2468,7 +2951,9 @@ onAuthStateChanged(
 
         loadLeaves(),
 
-        loadMessages()
+        loadMessages(),
+
+        loadDonations()
 
       ]);
 
@@ -2612,10 +3097,6 @@ async function loadStudent(){
     studentData.studentAddress || "-";
 
 
-  /* =========================
-     HOME DETAILS
-  ========================= */
-
   $("homeChildName")
     .textContent =
     name;
@@ -2655,10 +3136,6 @@ async function loadStudent(){
     .textContent =
     studentAddress;
 
-
-  /* =========================
-     MY CHILD DETAILS
-  ========================= */
 
   $("childName")
     .textContent =
@@ -4008,6 +4485,529 @@ async function loadMessages(){
 
 
     $("messageList")
+      .appendChild(div);
+
+  });
+
+}
+
+
+/* =========================================================
+   DONATION FORM
+========================================================= */
+
+$("donationForm")
+  .addEventListener(
+    "submit",
+    async e=>{
+
+      e.preventDefault();
+
+
+      if(!currentUser){
+
+        showMessage(
+          "Please login again.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if(!studentData){
+
+        showMessage(
+          "Student information is not loaded.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      const amount =
+        Number(
+          $("donationAmount").value
+        );
+
+
+      const transactionId =
+        $("donationTransactionId")
+          .value
+          .trim();
+
+
+      const note =
+        $("donationNote")
+          .value
+          .trim();
+
+
+      if(
+        !amount ||
+        amount <= 0
+      ){
+
+        showMessage(
+          "Please enter a valid donation amount.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if(!transactionId){
+
+        showMessage(
+          "Please enter the transaction/reference ID.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      const submitBtn =
+        $("donationSubmitBtn");
+
+
+      submitBtn.disabled =
+        true;
+
+      submitBtn.textContent =
+        "Submitting...";
+
+
+      try{
+
+        await addDoc(
+          collection(
+            db,
+            "donations"
+          ),
+          {
+
+            parentUid:
+              currentUser.uid,
+
+            parentEmail:
+              currentUser.email || "",
+
+            studentNumber:
+              studentData.studentNumber,
+
+            studentName:
+              studentData.name || "",
+
+            amount:
+              amount,
+
+            transactionId:
+              transactionId,
+
+            note:
+              note,
+
+            status:
+              "pending",
+
+            adminNote:
+              "",
+
+            createdAt:
+              serverTimestamp()
+
+          }
+        );
+
+
+        $("donationForm")
+          .reset();
+
+
+        showMessage(
+          "Donation details submitted. Waiting for verification."
+        );
+
+
+        await loadDonations();
+
+
+      }catch(error){
+
+        console.error(error);
+
+        showMessage(
+          error.message,
+          "error"
+        );
+
+      }finally{
+
+        submitBtn.disabled =
+          false;
+
+        submitBtn.textContent =
+          "Submit Donation";
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   LOAD MY DONATIONS
+========================================================= */
+
+async function loadDonations(){
+
+  if(!currentUser){
+
+    return;
+
+  }
+
+
+  const q =
+    query(
+      collection(
+        db,
+        "donations"
+      ),
+      where(
+        "parentUid",
+        "==",
+        currentUser.uid
+      )
+    );
+
+
+  const snap =
+    await getDocs(q);
+
+
+  const rows = [];
+
+
+  snap.forEach(item=>{
+
+    rows.push({
+
+      id:item.id,
+
+      ...item.data()
+
+    });
+
+  });
+
+
+  rows.sort((a,b)=>{
+
+    const aa =
+      a.createdAt?.seconds ||
+      0;
+
+    const bb =
+      b.createdAt?.seconds ||
+      0;
+
+    return bb-aa;
+
+  });
+
+
+  $("donationList")
+    .innerHTML =
+    "";
+
+
+  if(rows.length === 0){
+
+    $("donationEmpty")
+      .style
+      .display =
+      "block";
+
+    return;
+
+  }
+
+
+  $("donationEmpty")
+    .style
+    .display =
+    "none";
+
+
+  rows.forEach(data=>{
+
+    const status =
+      String(
+        data.status ||
+        "pending"
+      ).toLowerCase();
+
+
+    let statusClass =
+      "donation-pending";
+
+
+    if(status === "verified"){
+
+      statusClass =
+        "donation-verified";
+
+    }else if(
+      status === "rejected"
+    ){
+
+      statusClass =
+        "donation-rejected";
+
+    }
+
+
+    const div =
+      document.createElement(
+        "div"
+      );
+
+
+    div.className =
+      "donation-record";
+
+
+    div.innerHTML = `
+
+      <div class="donation-record-top">
+
+        <div>
+
+          <div class="donation-amount">
+
+            ₹${escapeHtml(
+              Number(
+                data.amount || 0
+              ).toLocaleString(
+                "en-IN",
+                {
+                  minimumFractionDigits:2
+                }
+              )
+            )}
+
+          </div>
+
+
+          <div style="
+            margin-top:5px;
+            color:#718096;
+            font-size:12px;
+          ">
+
+            ${getDateText(
+              data.createdAt
+            )}
+
+          </div>
+
+        </div>
+
+
+        <span class="donation-status ${statusClass}">
+
+          ${escapeHtml(status)}
+
+        </span>
+
+      </div>
+
+
+      <div class="donation-info">
+
+        <div class="donation-info-box">
+
+          <small>
+            Student
+          </small>
+
+          <strong>
+
+            ${escapeHtml(
+              data.studentName ||
+              studentData?.name ||
+              "-"
+            )}
+
+          </strong>
+
+        </div>
+
+
+        <div class="donation-info-box">
+
+          <small>
+            Student Number
+          </small>
+
+          <strong>
+
+            ${escapeHtml(
+              data.studentNumber ||
+              "-"
+            )}
+
+          </strong>
+
+        </div>
+
+
+        <div class="donation-info-box">
+
+          <small>
+            Transaction ID
+          </small>
+
+          <strong>
+
+            ${escapeHtml(
+              data.transactionId ||
+              "-"
+            )}
+
+          </strong>
+
+        </div>
+
+
+        <div class="donation-info-box">
+
+          <small>
+            Submitted Date
+          </small>
+
+          <strong>
+
+            ${getDateText(
+              data.createdAt
+            )}
+
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      ${
+        data.note
+        ? `
+          <div style="
+            margin-top:12px;
+            color:#718096;
+            font-size:12px;
+          ">
+
+            <strong>
+              My Note:
+            </strong>
+
+            ${escapeHtml(
+              data.note
+            )}
+
+          </div>
+        `
+        : ""
+      }
+
+
+      ${
+        data.adminNote
+        ? `
+          <div class="admin-note">
+
+            <strong>
+              USTHAD / ADMIN NOTE
+            </strong>
+
+            <p>
+
+              ${escapeHtml(
+                data.adminNote
+              )}
+
+            </p>
+
+          </div>
+        `
+        : ""
+      }
+
+
+      ${
+        status === "pending"
+        ? `
+          <div style="
+            margin-top:12px;
+            color:#916300;
+            font-size:12px;
+          ">
+
+            ⏳ Your donation is waiting for verification.
+
+          </div>
+        `
+        : ""
+      }
+
+
+      ${
+        status === "verified"
+        ? `
+          <div style="
+            margin-top:12px;
+            color:#18794e;
+            font-size:12px;
+          ">
+
+            ✓ Donation verified by Usthad/Admin.
+
+          </div>
+        `
+        : ""
+      }
+
+
+      ${
+        status === "rejected"
+        ? `
+          <div style="
+            margin-top:12px;
+            color:#b42318;
+            font-size:12px;
+          ">
+
+            Donation submission was rejected.
+            Please check the Admin Note above.
+
+          </div>
+        `
+        : ""
+      }
+
+    `;
+
+
+    $("donationList")
       .appendChild(div);
 
   });
