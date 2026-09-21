@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -15,19 +16,25 @@
 }
 
 :root{
-  --navy:#0b1f33;
-  --navy2:#123b5d;
-  --primary:#176b87;
-  --primary2:#2087a5;
-  --bg:#f4f7fb;
+  --navy:#063b2b;
+  --navy2:#07553e;
+  --primary:#087f5b;
+  --primary2:#10a875;
+
+  --bg:#eef8f1;
   --card:#ffffff;
-  --text:#172033;
-  --muted:#718096;
-  --border:#e5eaf0;
-  --green:#198754;
-  --red:#dc3545;
-  --yellow:#e5a323;
-  --shadow:0 8px 25px rgba(15,40,65,.06);
+  --text:#16352a;
+  --muted:#668074;
+  --border:#d6e9dc;
+
+  --green:#087f5b;
+  --red:#c0392b;
+  --yellow:#c99a1a;
+
+  --gold:#d4af37;
+  --gold2:#f0cf65;
+
+  --shadow:0 8px 25px rgba(6,59,43,.10);
 }
 
 html{
@@ -36,7 +43,20 @@ html{
 
 body{
   font-family:Inter,Arial,sans-serif;
-  background:var(--bg);
+
+  background:
+    linear-gradient(
+      rgba(238,248,241,.96),
+      rgba(238,248,241,.96)
+    ),
+    repeating-linear-gradient(
+      45deg,
+      rgba(8,127,91,.035) 0,
+      rgba(8,127,91,.035) 2px,
+      transparent 2px,
+      transparent 18px
+    );
+
   color:var(--text);
 }
 
@@ -56,62 +76,115 @@ button:disabled{
   cursor:not-allowed;
 }
 
+/* =========================
+LOADING
+========================= */
+
 #loading{
   position:fixed;
   inset:0;
-  background:rgba(255,255,255,.97);
+
+  background:
+    linear-gradient(
+      135deg,
+      #063b2b,
+      #087f5b
+    );
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   z-index:99999;
+
   font-weight:700;
-  color:var(--primary);
+  color:white;
 }
+
+/* =========================
+MESSAGE
+========================= */
 
 #message{
   position:fixed;
   right:20px;
   bottom:20px;
+
   max-width:380px;
+
   padding:14px 18px;
+
   border-radius:12px;
+
   color:white;
+
   display:none;
+
   z-index:99999;
-  box-shadow:0 12px 30px rgba(0,0,0,.18);
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,.18);
+
   font-size:14px;
   font-weight:600;
 }
 
 #message.success-msg{
-  background:var(--green);
+  background:#087f5b;
 }
 
 #message.error-msg{
-  background:var(--red);
+  background:#c0392b;
 }
+
+/* =========================
+APP
+========================= */
 
 .app{
   min-height:100vh;
   display:flex;
 }
 
+/* =========================
+SIDEBAR
+========================= */
+
 .sidebar{
   width:260px;
-  background:linear-gradient(180deg,#0b1f33,#123b5d);
+
+  background:
+    linear-gradient(
+      180deg,
+      #063b2b 0%,
+      #07553e 55%,
+      #043426 100%
+    );
+
   color:white;
+
   position:fixed;
+
   left:0;
   top:0;
   bottom:0;
+
   z-index:1000;
+
   overflow-y:auto;
-  box-shadow:5px 0 25px rgba(0,0,0,.08);
+
+  border-right:
+    1px solid rgba(212,175,55,.35);
+
+  box-shadow:
+    5px 0 25px rgba(6,59,43,.18);
 }
 
 .brand{
   padding:25px 20px 22px;
-  border-bottom:1px solid rgba(255,255,255,.10);
+
+  border-bottom:
+    1px solid rgba(212,175,55,.25);
 }
 
 .brand-top{
@@ -123,22 +196,35 @@ button:disabled{
 .logo-box{
   width:44px;
   height:44px;
+
   border-radius:12px;
-  background:rgba(255,255,255,.12);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(212,175,55,.25),
+      rgba(255,255,255,.10)
+    );
+
+  border:
+    1px solid rgba(212,175,55,.35);
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   font-size:22px;
 }
 
 .brand h1{
   font-size:18px;
   letter-spacing:.5px;
+  color:#fff;
 }
 
 .brand p{
   font-size:11px;
-  opacity:.65;
+  color:#f0cf65;
   margin-top:4px;
 }
 
@@ -148,59 +234,107 @@ button:disabled{
 
 .menu-label{
   font-size:10px;
+
   text-transform:uppercase;
+
   letter-spacing:1.4px;
-  opacity:.45;
+
+  color:#d4af37;
+
+  opacity:.75;
+
   padding:10px 14px 8px;
 }
 
 .menu button{
   width:100%;
+
   border:0;
+
   background:transparent;
-  color:#dce8f2;
+
+  color:#e5f4ec;
+
   text-align:left;
+
   padding:12px 14px;
+
   border-radius:10px;
+
   margin-bottom:4px;
+
   transition:.2s;
+
   font-size:14px;
 }
 
 .menu button:hover{
-  background:rgba(255,255,255,.08);
+  background:rgba(212,175,55,.14);
+  color:#fff;
 }
 
 .menu button.active{
-  background:linear-gradient(90deg,#176b87,#2087a5);
-  color:white;
-  box-shadow:0 5px 15px rgba(0,0,0,.12);
+  background:
+    linear-gradient(
+      90deg,
+      #d4af37,
+      #f0cf65
+    );
+
+  color:#173b2d;
+
+  box-shadow:
+    0 5px 18px rgba(212,175,55,.25);
 }
 
 .menu button span{
   display:inline-flex;
+
   width:30px;
+
   align-items:center;
   justify-content:center;
 }
 
+/* =========================
+MAIN
+========================= */
+
 .main{
   margin-left:260px;
+
   width:calc(100% - 260px);
+
   min-height:100vh;
 }
 
+/* =========================
+TOPBAR
+========================= */
+
 .topbar{
   height:74px;
-  background:rgba(255,255,255,.96);
-  border-bottom:1px solid var(--border);
+
+  background:
+    rgba(255,255,255,.95);
+
+  border-bottom:
+    1px solid #d8eadc;
+
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
+
   padding:0 30px;
+
   position:sticky;
+
   top:0;
+
   z-index:500;
+
   backdrop-filter:blur(10px);
 }
 
@@ -213,10 +347,11 @@ button:disabled{
 .top-title{
   font-size:20px;
   font-weight:800;
+  color:#063b2b;
 }
 
 .top-subtitle{
-  color:var(--muted);
+  color:#668074;
   font-size:12px;
   margin-top:2px;
 }
@@ -228,20 +363,33 @@ button:disabled{
 }
 
 .admin-badge{
-  background:#eaf3ff;
-  color:#185a9d;
+  background:#e5f5eb;
+
+  color:#087f5b;
+
+  border:
+    1px solid #b8dcc5;
+
   padding:8px 13px;
+
   border-radius:20px;
+
   font-size:11px;
+
   font-weight:800;
 }
 
 .logout{
   border:0;
+
   background:#fff0ef;
-  color:#c53030;
+
+  color:#c0392b;
+
   padding:9px 14px;
+
   border-radius:9px;
+
   font-weight:700;
 }
 
@@ -251,17 +399,72 @@ button:disabled{
 
 .mobile-menu{
   display:none;
+
   border:0;
-  background:var(--navy);
+
+  background:#063b2b;
+
   color:white;
+
   font-size:20px;
+
   padding:8px 11px;
+
   border-radius:8px;
 }
 
+/* =========================
+CONTENT
+========================= */
+
 .content{
   padding:30px;
+
+  position:relative;
+
+  overflow:hidden;
 }
+
+.content::before{
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  opacity:.035;
+
+  pointer-events:none;
+
+  background-image:
+    linear-gradient(
+      30deg,
+      #087f5b 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #087f5b 87.5%,
+      #087f5b
+    ),
+    linear-gradient(
+      150deg,
+      #087f5b 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #087f5b 87.5%,
+      #087f5b
+    );
+
+  background-size:42px 72px;
+}
+
+.content > *{
+  position:relative;
+  z-index:1;
+}
+
+/* =========================
+SECTIONS
+========================= */
 
 .section{
   display:none;
@@ -273,15 +476,20 @@ button:disabled{
 
 .section-head{
   display:flex;
+
   align-items:flex-end;
+
   justify-content:space-between;
+
   gap:15px;
+
   margin-bottom:22px;
 }
 
 .section-head h2{
   font-size:25px;
   margin-bottom:5px;
+  color:#164c39;
 }
 
 .section-head p{
@@ -290,73 +498,114 @@ button:disabled{
 }
 
 .section-tag{
-  background:#eaf5f7;
-  color:var(--primary);
+  background:#e4f4e9;
+
+  color:#087f5b;
+
+  border:
+    1px solid #c7e3d0;
+
   padding:7px 12px;
+
   border-radius:20px;
+
   font-size:11px;
+
   font-weight:800;
 }
 
-
-/* =========================================
-   COLLEGE PHOTO HEADER
-========================================= */
+/* =========================
+COLLEGE HEADER
+========================= */
 
 .college-header{
   position:relative;
+
   overflow:hidden;
+
   margin-bottom:25px;
+
   min-height:300px;
+
   border-radius:22px;
-  background:#063b35;
-  box-shadow:0 12px 35px rgba(0,0,0,.15);
-  border:1px solid rgba(255,255,255,.10);
+
+  background:
+    linear-gradient(
+      135deg,
+      #063b2b,
+      #0b6b4c
+    );
+
+  box-shadow:
+    0 12px 35px rgba(6,59,43,.18);
+
+  border:
+    1px solid rgba(212,175,55,.50);
 }
 
 .college-header img{
   width:100%;
+
   height:300px;
+
   object-fit:cover;
+
   display:block;
 }
 
 .college-header-overlay{
   position:absolute;
+
   inset:0;
+
   display:flex;
+
   flex-direction:column;
+
   align-items:center;
+
   justify-content:center;
+
   text-align:center;
+
   padding:25px;
 
   background:
     linear-gradient(
       180deg,
-      rgba(5,25,38,.18),
-      rgba(3,43,42,.82)
+      rgba(5,25,38,.10),
+      rgba(3,43,42,.86)
     );
 }
 
 .college-title{
   color:white;
+
   font-size:30px;
+
   font-weight:900;
+
   letter-spacing:1px;
-  text-shadow:0 3px 12px rgba(0,0,0,.45);
+
+  text-shadow:
+    0 3px 12px rgba(0,0,0,.45);
 }
 
 .college-subtitle{
   color:#f6d98b;
+
   font-size:14px;
+
   font-weight:800;
+
   letter-spacing:2px;
+
   margin-top:6px;
 }
 
 .college-ayah{
   margin-top:18px;
+
   color:#f6d98b;
 
   font-family:
@@ -365,8 +614,11 @@ button:disabled{
     serif;
 
   font-size:27px;
+
   font-weight:bold;
+
   direction:rtl;
+
   line-height:1.8;
 
   text-shadow:
@@ -375,116 +627,206 @@ button:disabled{
 
 .college-ayah-meaning{
   margin-top:5px;
+
   color:white;
+
   font-size:12px;
+
   opacity:.9;
 }
 
 .college-header-line{
-  width:90px;
+  width:120px;
+
   height:3px;
-  background:#e6c46a;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #d4af37,
+      transparent
+    );
+
   border-radius:10px;
+
   margin-top:13px;
 }
 
+/* =========================
+STATS
+========================= */
 
 .stats{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+
+  grid-template-columns:
+    repeat(4,1fr);
+
   gap:18px;
+
   margin-bottom:25px;
 }
 
 .stat{
-  background:var(--card);
-  border:1px solid var(--border);
+  background:rgba(255,255,255,.97);
+
+  border:
+    1px solid #d6e9dc;
+
   border-radius:16px;
+
   padding:20px;
+
   box-shadow:var(--shadow);
+
   position:relative;
+
   overflow:hidden;
+
+  transition:.2s;
+}
+
+.stat:hover{
+  border-color:#d4af37;
+
+  transform:translateY(-2px);
 }
 
 .stat-icon{
   width:42px;
+
   height:42px;
+
   border-radius:12px;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
-  background:#edf6f8;
-  color:var(--primary);
+
+  background:#e5f5eb;
+
+  color:#087f5b;
+
   font-size:20px;
+
   margin-bottom:14px;
 }
 
 .stat small{
   color:var(--muted);
+
   font-size:12px;
+
   font-weight:600;
 }
 
 .stat strong{
   display:block;
+
   font-size:29px;
+
   margin-top:6px;
 }
 
+/* =========================
+PANELS
+========================= */
+
 .panel{
-  background:var(--card);
-  border:1px solid var(--border);
+  background:rgba(255,255,255,.97);
+
+  border:
+    1px solid #d6e9dc;
+
   border-radius:16px;
+
   padding:22px;
+
   margin-bottom:22px;
+
   box-shadow:var(--shadow);
 }
 
 .panel-head{
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
   gap:10px;
+
   margin-bottom:18px;
+
+  padding-bottom:12px;
+
+  border-bottom:
+    1px solid rgba(212,175,55,.15);
 }
 
 .panel h3{
   font-size:17px;
+
+  color:#164c39;
 }
 
 .panel-desc{
   color:var(--muted);
+
   font-size:12px;
 }
 
+/* =========================
+QUICK ACCESS
+========================= */
+
 .quick{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
+
   gap:14px;
 }
 
 .quick button{
   background:#fff;
-  border:1px solid var(--border);
+
+  border:
+    1px solid #d6e9dc;
+
   border-radius:13px;
+
   padding:18px;
+
   text-align:left;
+
   transition:.2s;
 }
 
 .quick button:hover{
   transform:translateY(-2px);
-  box-shadow:0 8px 20px rgba(20,40,70,.08);
-  border-color:#c9dce5;
+
+  box-shadow:
+    0 8px 20px rgba(6,59,43,.10);
+
+  border-color:#d4af37;
 }
 
 .quick-icon{
   font-size:22px;
+
   margin-bottom:12px;
+
+  color:#087f5b;
 }
 
 .quick strong{
   display:block;
+
   margin-bottom:5px;
 }
 
@@ -492,15 +834,24 @@ button:disabled{
   color:var(--muted);
 }
 
+/* =========================
+FORMS
+========================= */
+
 .form-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+
+  grid-template-columns:
+    repeat(2,1fr);
+
   gap:16px;
 }
 
 .field{
   display:flex;
+
   flex-direction:column;
+
   gap:7px;
 }
 
@@ -510,82 +861,138 @@ button:disabled{
 
 .field label{
   font-size:12px;
+
   font-weight:700;
-  color:#43546a;
+
+  color:#315b49;
 }
 
 .field input,
 .field select,
 .field textarea{
   width:100%;
-  border:1px solid #d7dee8;
+
+  border:
+    1px solid #cfe4d5;
+
   border-radius:9px;
+
   padding:11px 12px;
+
   outline:none;
-  background:white;
+
+  background:#fbfefc;
+
   color:var(--text);
 }
 
 .field textarea{
   min-height:100px;
+
   resize:vertical;
 }
 
 .field input:focus,
 .field select:focus,
 .field textarea:focus{
-  border-color:var(--primary2);
-  box-shadow:0 0 0 3px rgba(32,135,165,.10);
+  border-color:#0a956a;
+
+  box-shadow:
+    0 0 0 3px rgba(10,149,106,.12);
 }
+
+/* =========================
+BUTTONS
+========================= */
 
 .primary{
   border:0;
-  background:linear-gradient(135deg,#176b87,#2087a5);
+
+  background:
+    linear-gradient(
+      135deg,
+      #087f5b,
+      #0aa875
+    );
+
   color:white;
+
   padding:11px 18px;
+
   border-radius:9px;
+
   font-weight:700;
 }
 
 .primary:hover{
-  opacity:.92;
+  background:
+    linear-gradient(
+      135deg,
+      #066b4d,
+      #087f5b
+    );
 }
 
 .secondary{
-  border:1px solid #d7dee8;
+  border:
+    1px solid #cfe4d5;
+
   background:white;
-  color:#43546a;
+
+  color:#315b49;
+
   padding:10px 15px;
+
   border-radius:9px;
+
   font-weight:700;
 }
 
 .danger{
   border:0;
-  background:#fff0ef;
-  color:#c53030;
+
+  background:#fdebea;
+
+  color:#b42318;
+
   padding:8px 11px;
+
   border-radius:7px;
+
   font-weight:700;
 }
 
 .success{
   border:0;
-  background:#e8f7ef;
-  color:#18794e;
+
+  background:#e0f3e7;
+
+  color:#087f5b;
+
   padding:8px 11px;
+
   border-radius:7px;
+
   font-weight:700;
 }
 
 .warning{
   border:0;
-  background:#fff5dc;
+
+  background:#fff3d2;
+
   color:#916300;
+
   padding:8px 11px;
+
   border-radius:7px;
+
   font-weight:700;
 }
+
+/* =========================
+TABLE
+========================= */
 
 .table-wrap{
   overflow-x:auto;
@@ -593,106 +1000,170 @@ button:disabled{
 
 table{
   width:100%;
+
   border-collapse:collapse;
+
   min-width:720px;
+
+  background:#fff;
 }
 
 th,
 td{
   padding:13px 10px;
-  border-bottom:1px solid #edf0f4;
+
+  border-bottom:
+    1px solid #e1eee5;
+
   text-align:left;
+
   font-size:12px;
+
   vertical-align:middle;
 }
 
 th{
-  background:#f7f9fc;
-  color:#4a5b70;
+  background:#e7f4eb;
+
+  color:#18513d;
+
   font-weight:800;
+
   font-size:11px;
+
   text-transform:uppercase;
+
   letter-spacing:.4px;
 }
 
 tr:hover td{
-  background:#fbfcfe;
+  background:#f4fbf6;
 }
 
 td strong{
   font-size:13px;
 }
 
+/* =========================
+BADGES
+========================= */
+
 .badge{
   display:inline-block;
+
   padding:5px 9px;
+
   border-radius:20px;
+
   font-size:10px;
+
   font-weight:800;
+
   text-transform:capitalize;
 }
 
 .badge-green{
-  background:#e7f7ef;
-  color:#18794e;
+  background:#dff3e6;
+
+  color:#087f5b;
 }
 
 .badge-red{
-  background:#fdeaea;
-  color:#b42318;
+  background:#f8d7da;
+
+  color:#842029;
 }
 
 .badge-blue{
-  background:#eaf3ff;
-  color:#185a9d;
+  background:#e4f1ec;
+
+  color:#146c50;
 }
 
 .badge-yellow{
-  background:#fff4d8;
-  color:#916300;
+  background:#fff3cd;
+
+  color:#856404;
 }
+
+/* =========================
+EMPTY
+========================= */
 
 .empty{
   text-align:center;
+
   padding:35px 15px;
+
   color:var(--muted);
 }
 
 .empty-icon{
   font-size:30px;
+
   margin-bottom:8px;
 }
 
+/* =========================
+TOOLBAR
+========================= */
+
 .toolbar{
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
   gap:12px;
+
   margin-bottom:16px;
 }
 
 .search{
   width:280px;
-  border:1px solid #d7dee8;
+
+  border:
+    1px solid #cfe4d5;
+
   border-radius:9px;
+
   padding:10px 12px;
+
   outline:none;
+
+  background:#fff;
+
+  color:var(--text);
 }
 
 .search:focus{
-  border-color:var(--primary2);
+  border-color:#087f5b;
 }
+
+/* =========================
+ACTIONS
+========================= */
 
 .actions{
   display:flex;
+
   gap:6px;
+
   flex-wrap:wrap;
 }
 
+/* =========================
+ATTENDANCE
+========================= */
+
 .attendance-date{
   font-size:16px;
+
   font-weight:800;
-  color:var(--navy);
+
+  color:#063b2b;
+
   margin-bottom:12px;
 }
 
@@ -702,40 +1173,64 @@ td strong{
 
 .attendance-line{
   display:flex;
+
   align-items:center;
+
   gap:8px;
+
   flex-wrap:wrap;
+
   margin-bottom:8px;
 }
 
 .attendance-names{
   display:flex;
+
   flex-wrap:wrap;
+
   gap:7px;
+
   align-items:center;
 }
 
 .attendance-student{
   display:inline-flex;
+
   align-items:center;
+
   gap:7px;
-  background:#f7f9fc;
-  border:1px solid #e5eaf0;
+
+  background:#f1f8f3;
+
+  border:
+    1px solid #d6e9dc;
+
   border-radius:9px;
+
   padding:6px 8px 6px 10px;
+
   font-size:12px;
+
   font-weight:700;
 }
 
 .attendance-delete{
   border:0;
-  background:#fff0ef;
-  color:#c53030;
+
+  background:#fdebea;
+
+  color:#c0392b;
+
   width:24px;
+
   height:24px;
+
   border-radius:6px;
+
   font-size:13px;
+
   font-weight:800;
+
   padding:0;
 }
 
@@ -743,30 +1238,55 @@ td strong{
   background:#fde1df;
 }
 
-
-/* =========================================
-   DONATION VERIFICATION
-========================================= */
+/* =========================
+DONATION
+========================= */
 
 .donation-summary{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
+
   gap:14px;
+
   margin-bottom:20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #e6f5eb,
+      #fff8df
+    );
+
+  border:
+    1px solid #d4af37;
+
+  border-radius:14px;
+
+  padding:14px;
 }
 
 .donation-stat{
-  background:#f7fafc;
-  border:1px solid var(--border);
+  background:#fff;
+
+  border:
+    1px solid #d6e9dc;
+
   border-radius:12px;
+
   padding:16px;
 }
 
 .donation-stat small{
   display:block;
+
   color:var(--muted);
+
   font-size:11px;
+
   font-weight:700;
+
   margin-bottom:5px;
 }
 
@@ -779,27 +1299,34 @@ td strong{
 }
 
 .donation-verified{
-  color:#18794e;
+  color:#087f5b;
 }
 
 .donation-rejected{
   color:#b42318;
 }
 
-
-/* =========================================
-   EDIT STUDENT MODAL
-========================================= */
+/* =========================
+MODAL
+========================= */
 
 .modal-overlay{
   position:fixed;
+
   inset:0;
-  background:rgba(5,20,35,.55);
+
+  background:rgba(3,35,25,.60);
+
   display:none;
+
   align-items:center;
+
   justify-content:center;
+
   padding:20px;
+
   z-index:99990;
+
   backdrop-filter:blur(4px);
 }
 
@@ -809,81 +1336,146 @@ td strong{
 
 .edit-modal{
   width:100%;
+
   max-width:650px;
+
   max-height:90vh;
+
   overflow-y:auto;
+
   background:white;
+
+  border:
+    1px solid #d6e9dc;
+
   border-radius:18px;
-  box-shadow:0 20px 60px rgba(0,0,0,.25);
+
+  box-shadow:
+    0 20px 60px rgba(6,59,43,.25);
+
   padding:24px;
 }
 
 .edit-modal-head{
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
   gap:15px;
+
   margin-bottom:20px;
 }
 
 .edit-modal-head h3{
   font-size:20px;
+
+  color:#164c39;
 }
 
 .edit-modal-head p{
   color:var(--muted);
+
   font-size:12px;
+
   margin-top:4px;
 }
 
 .close-modal{
   border:0;
-  background:#f1f4f7;
-  color:#526174;
+
+  background:#eaf5ee;
+
+  color:#315b49;
+
   width:36px;
+
   height:36px;
+
   border-radius:9px;
+
   font-size:20px;
+
   font-weight:700;
 }
 
 .close-modal:hover{
-  background:#e5eaf0;
+  background:#dceee3;
 }
 
 .edit-student-number{
-  background:#f5f7fa !important;
-  color:#718096 !important;
+  background:#f1f6f3 !important;
+
+  color:#668074 !important;
 }
 
 .modal-actions{
   display:flex;
+
   justify-content:flex-end;
+
   gap:10px;
+
   margin-top:20px;
 }
 
-@media(max-width:600px){
+/* =========================
+PUBLIC RESULT
+========================= */
 
-  .modal-overlay{
-    padding:10px;
-  }
+.welcome{
+  margin:0;
 
-  .edit-modal{
-    padding:18px;
-    border-radius:15px;
-  }
+  background:
+    linear-gradient(
+      135deg,
+      #063b2b,
+      #0b6b4c
+    ) !important;
 
-  .modal-actions{
-    flex-direction:column;
-  }
+  border:
+    1px solid rgba(212,175,55,.45);
 
-  .modal-actions button{
-    width:100%;
-  }
-
+  color:#fff;
 }
 
+.welcome h2,
+.welcome p{
+  color:#fff;
+}
+
+/* =========================
+SCROLLBAR
+========================= */
+
+.sidebar::-webkit-scrollbar{
+  width:7px;
+}
+
+.sidebar::-webkit-scrollbar-track{
+  background:#043426;
+}
+
+.sidebar::-webkit-scrollbar-thumb{
+  background:#d4af37;
+
+  border-radius:10px;
+}
+
+.table-wrap::-webkit-scrollbar{
+  height:7px;
+}
+
+.table-wrap::-webkit-scrollbar-thumb{
+  background:#087f5b;
+
+  border-radius:10px;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
 
 @media(max-width:1100px){
 
@@ -901,6 +1493,7 @@ td strong{
 
   .sidebar{
     transform:translateX(-100%);
+
     transition:.25s;
   }
 
@@ -910,6 +1503,7 @@ td strong{
 
   .main{
     margin-left:0;
+
     width:100%;
   }
 
@@ -943,6 +1537,7 @@ td strong{
 
   .stats{
     grid-template-columns:1fr 1fr;
+
     gap:10px;
   }
 
@@ -976,11 +1571,13 @@ td strong{
 
   .toolbar{
     flex-direction:column;
+
     align-items:stretch;
   }
 
   .college-header{
     min-height:250px;
+
     border-radius:18px;
   }
 
@@ -994,16 +1591,36 @@ td strong{
 
   .college-subtitle{
     font-size:11px;
+
     letter-spacing:1.2px;
   }
 
   .college-ayah{
     font-size:21px;
+
     margin-top:13px;
   }
 
   .donation-summary{
     grid-template-columns:1fr;
+  }
+
+  .modal-overlay{
+    padding:10px;
+  }
+
+  .edit-modal{
+    padding:18px;
+
+    border-radius:15px;
+  }
+
+  .modal-actions{
+    flex-direction:column;
+  }
+
+  .modal-actions button{
+    width:100%;
   }
 
 }
@@ -1027,9 +1644,8 @@ td strong{
 
 <div id="message"></div>
 
-
 <!-- =========================
-     EDIT STUDENT MODAL
+EDIT STUDENT MODAL
 ========================= -->
 
 <div class="modal-overlay" id="editStudentModal">
@@ -1058,14 +1674,12 @@ td strong{
 
     </div>
 
-
     <form id="editStudentForm">
 
       <input
         type="hidden"
         id="editStudentId"
       >
-
 
       <div class="form-grid">
 
@@ -1081,7 +1695,6 @@ td strong{
 
         </div>
 
-
         <div class="field">
 
           <label>Student Name</label>
@@ -1094,7 +1707,6 @@ td strong{
 
         </div>
 
-
         <div class="field">
 
           <label>Guardian Name</label>
@@ -1106,7 +1718,6 @@ td strong{
 
         </div>
 
-
         <div class="field">
 
           <label>Class</label>
@@ -1117,7 +1728,6 @@ td strong{
           >
 
         </div>
-
 
         <div class="field">
 
@@ -1131,7 +1741,6 @@ td strong{
 
         </div>
 
-
         <div class="field">
 
           <label>Phone Number</label>
@@ -1143,7 +1752,6 @@ td strong{
           >
 
         </div>
-
 
         <div class="field full">
 
@@ -1157,7 +1765,6 @@ td strong{
         </div>
 
       </div>
-
 
       <div class="modal-actions">
 
@@ -1184,8 +1791,11 @@ td strong{
 
 </div>
 
-
 <div class="app">
+
+<!-- =========================
+SIDEBAR
+========================= -->
 
 <aside class="sidebar" id="sidebar">
 
@@ -1193,7 +1803,9 @@ td strong{
 
     <div class="brand-top">
 
-      <div class="logo-box">📖</div>
+      <div class="logo-box">
+        📖
+      </div>
 
       <div>
 
@@ -1207,94 +1819,111 @@ td strong{
 
   </div>
 
-
   <div class="menu">
 
-    <div class="menu-label">Main</div>
+    <div class="menu-label">
+      Main
+    </div>
 
     <button
       class="menu-btn active"
       data-section="home"
     >
-      <span>⌂</span> Dashboard
+      <span>⌂</span>
+      Dashboard
     </button>
 
     <button
       class="menu-btn"
       data-section="students"
     >
-      <span>👨‍🎓</span> Students
+      <span>👨‍🎓</span>
+      Students
     </button>
 
-
-    <div class="menu-label">Academic</div>
+    <div class="menu-label">
+      Academic
+    </div>
 
     <button
       class="menu-btn"
       data-section="attendance"
     >
-      <span>✓</span> Attendance
+      <span>✓</span>
+      Attendance
     </button>
 
     <button
       class="menu-btn"
       data-section="study"
     >
-      <span>📖</span> Study Progress
+      <span>📖</span>
+      Study Progress
     </button>
 
     <button
       class="menu-btn"
       data-section="results"
     >
-      <span>🏆</span> Results
+      <span>🏆</span>
+      Results
     </button>
 
     <button
       class="menu-btn"
       data-section="notices"
     >
-      <span>📢</span> Notices
+      <span>📢</span>
+      Notices
     </button>
 
-
-    <div class="menu-label">Communication</div>
+    <div class="menu-label">
+      Communication
+    </div>
 
     <button
       class="menu-btn"
       data-section="leave"
     >
-      <span>📝</span> Leave Requests
+      <span>📝</span>
+      Leave Requests
     </button>
 
     <button
       class="menu-btn"
       data-section="messages"
     >
-      <span>💬</span> Parent Messages
+      <span>💬</span>
+      Parent Messages
     </button>
 
     <button
       class="menu-btn"
       data-section="donations"
     >
-      <span>₹</span> Donations
+      <span>₹</span>
+      Donations
     </button>
 
-
-    <div class="menu-label">Public</div>
+    <div class="menu-label">
+      Public
+    </div>
 
     <button
       class="menu-btn"
       data-section="publicResult"
     >
-      <span>🌐</span> Public Result
+      <span>🌐</span>
+      Public Result
     </button>
 
   </div>
 
 </aside>
 
+<!-- =========================
+MAIN
+========================= -->
 
 <main class="main">
 
@@ -1323,7 +1952,6 @@ td strong{
 
   </div>
 
-
   <div class="top-right">
 
     <div class="admin-badge">
@@ -1341,283 +1969,268 @@ td strong{
 
 </header>
 
-
 <div class="content">
 
+<!-- =========================
+HOME
+========================= -->
 
 <section
   class="section active"
   id="home"
 >
 
+  <div class="college-header">
 
-<div class="college-header">
-
-  <img
-    src="./IMG-20260921-WA0016.jpg"
-    alt="SAFA QURAN COLLEGE"
-  >
-
-  <div class="college-header-overlay">
-
-    <div class="college-title">
-      SAFA QURAN COLLEGE
-    </div>
-
-    <div class="college-subtitle">
-      ONLINE PORTAL
-    </div>
-
-    <div class="college-ayah">
-      خيركم من تعلم القرءان وعلمه
-    </div>
-
-    <div class="college-ayah-meaning">
-      The best of you are those who learn the Qur'an and teach it.
-    </div>
-
-    <div class="college-header-line"></div>
-
-  </div>
-
-</div>
-
-
-<div class="stats">
-
-  <div class="stat">
-
-    <div class="stat-icon">
-      👨‍🎓
-    </div>
-
-    <small>Total Students</small>
-
-    <strong id="studentCount">
-      0
-    </strong>
-
-  </div>
-
-
-  <div class="stat">
-
-    <div class="stat-icon">
-      ✓
-    </div>
-
-    <small>Attendance Records</small>
-
-    <strong id="attendanceCount">
-      0
-    </strong>
-
-  </div>
-
-
-  <div class="stat">
-
-    <div class="stat-icon">
-      📝
-    </div>
-
-    <small>Leave Requests</small>
-
-    <strong id="leaveCount">
-      0
-    </strong>
-
-  </div>
-
-
-  <div class="stat">
-
-    <div class="stat-icon">
-      💬
-    </div>
-
-    <small>Parent Messages</small>
-
-    <strong id="messageCount">
-      0
-    </strong>
-
-  </div>
-
-</div>
-
-
-<div class="panel">
-
-  <div class="panel-head">
-
-    <div>
-
-      <h3>
-        Quick Access
-      </h3>
-
-      <div class="panel-desc">
-        Frequently used management tools
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="quick">
-
-    <button
-      class="quick-btn"
-      data-go="students"
+    <img
+      src="./IMG-20260921-WA0016.jpg"
+      alt="SAFA QURAN COLLEGE"
     >
 
-      <div class="quick-icon">
+    <div class="college-header-overlay">
+
+      <div class="college-title">
+        SAFA QURAN COLLEGE
+      </div>
+
+      <div class="college-subtitle">
+        ONLINE PORTAL
+      </div>
+
+      <div class="college-ayah">
+        خيركم من تعلم القرءان وعلمه
+      </div>
+
+      <div class="college-ayah-meaning">
+        The best of you are those who learn the Qur'an and teach it.
+      </div>
+
+      <div class="college-header-line"></div>
+
+    </div>
+
+  </div>
+
+  <div class="stats">
+
+    <div class="stat">
+
+      <div class="stat-icon">
         👨‍🎓
       </div>
 
-      <strong>
-        Students
+      <small>Total Students</small>
+
+      <strong id="studentCount">
+        0
       </strong>
 
-      <small>
-        Add and manage students
-      </small>
+    </div>
 
-    </button>
+    <div class="stat">
 
-
-    <button
-      class="quick-btn"
-      data-go="attendance"
-    >
-
-      <div class="quick-icon">
+      <div class="stat-icon">
         ✓
       </div>
 
-      <strong>
-        Attendance
+      <small>Attendance Records</small>
+
+      <strong id="attendanceCount">
+        0
       </strong>
 
-      <small>
-        Record daily attendance
-      </small>
+    </div>
 
-    </button>
+    <div class="stat">
 
-
-    <button
-      class="quick-btn"
-      data-go="study"
-    >
-
-      <div class="quick-icon">
-        📖
+      <div class="stat-icon">
+        📝
       </div>
 
-      <strong>
-        Study Progress
+      <small>Leave Requests</small>
+
+      <strong id="leaveCount">
+        0
       </strong>
 
-      <small>
-        Update Quran study progress
-      </small>
+    </div>
 
-    </button>
+    <div class="stat">
 
-
-    <button
-      class="quick-btn"
-      data-go="results"
-    >
-
-      <div class="quick-icon">
-        🏆
+      <div class="stat-icon">
+        💬
       </div>
 
-      <strong>
-        Results
+      <small>Parent Messages</small>
+
+      <strong id="messageCount">
+        0
       </strong>
 
-      <small>
-        Publish student results
-      </small>
-
-    </button>
-
-
-    <button
-      class="quick-btn"
-      data-go="notices"
-    >
-
-      <div class="quick-icon">
-        📢
-      </div>
-
-      <strong>
-        Notices
-      </strong>
-
-      <small>
-        Publish announcements
-      </small>
-
-    </button>
-
-
-    <!-- DONATIONS QUICK ACCESS -->
-
-    <button
-      class="quick-btn"
-      data-go="donations"
-    >
-
-      <div class="quick-icon">
-        ₹
-      </div>
-
-      <strong>
-        Donations
-      </strong>
-
-      <small>
-        View and verify parent donations
-      </small>
-
-    </button>
-
-
-    <button
-      class="quick-btn"
-      data-go="publicResult"
-    >
-
-      <div class="quick-icon">
-        🌐
-      </div>
-
-      <strong>
-        Public Result
-      </strong>
-
-      <small>
-        Open public result system
-      </small>
-
-    </button>
+    </div>
 
   </div>
 
-</div>
+  <div class="panel">
+
+    <div class="panel-head">
+
+      <div>
+
+        <h3>
+          Quick Access
+        </h3>
+
+        <div class="panel-desc">
+          Frequently used management tools
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="quick">
+
+      <button
+        class="quick-btn"
+        data-go="students"
+      >
+        <div class="quick-icon">
+          👨‍🎓
+        </div>
+
+        <strong>
+          Students
+        </strong>
+
+        <small>
+          Add and manage students
+        </small>
+
+      </button>
+
+      <button
+        class="quick-btn"
+        data-go="attendance"
+      >
+
+        <div class="quick-icon">
+          ✓
+        </div>
+
+        <strong>
+          Attendance
+        </strong>
+
+        <small>
+          Record daily attendance
+        </small>
+
+      </button>
+
+      <button
+        class="quick-btn"
+        data-go="study"
+      >
+
+        <div class="quick-icon">
+          📖
+        </div>
+
+        <strong>
+          Study Progress
+        </strong>
+
+        <small>
+          Update Quran study progress
+        </small>
+
+      </button>
+
+      <button
+        class="quick-btn"
+        data-go="results"
+      >
+
+        <div class="quick-icon">
+          🏆
+        </div>
+
+        <strong>
+          Results
+        </strong>
+
+        <small>
+          Publish student results
+        </small>
+
+      </button>
+
+      <button
+        class="quick-btn"
+        data-go="notices"
+      >
+
+        <div class="quick-icon">
+          📢
+        </div>
+
+        <strong>
+          Notices
+        </strong>
+
+        <small>
+          Publish announcements
+        </small>
+
+      </button>
+
+      <button
+        class="quick-btn"
+        data-go="donations"
+      >
+
+        <div class="quick-icon">
+          ₹
+        </div>
+
+        <strong>
+          Donations
+        </strong>
+
+        <small>
+          View and verify parent donations
+        </small>
+
+      </button>
+
+      <button
+        class="quick-btn"
+        data-go="publicResult"
+      >
+
+        <div class="quick-icon">
+          🌐
+        </div>
+
+        <strong>
+          Public Result
+        </strong>
+
+        <small>
+          Open public result system
+        </small>
+
+      </button>
+
+    </div>
+
+  </div>
 
 </section>
 
-
 <!-- =========================
-     STUDENTS
+STUDENTS
 ========================= -->
 
 <section
@@ -1629,9 +2242,7 @@ td strong{
 
     <div>
 
-      <h2>
-        Students
-      </h2>
+      <h2>Students</h2>
 
       <p>
         Manage Quran students and parent information.
@@ -1645,16 +2256,13 @@ td strong{
 
   </div>
 
-
   <div class="panel">
 
     <div class="panel-head">
 
       <div>
 
-        <h3>
-          Add Student
-        </h3>
+        <h3>Add Student</h3>
 
         <div class="panel-desc">
           Create a new student profile
@@ -1663,7 +2271,6 @@ td strong{
       </div>
 
     </div>
-
 
     <form id="studentForm">
 
@@ -1683,7 +2290,6 @@ td strong{
 
         </div>
 
-
         <div class="field">
 
           <label>
@@ -1698,7 +2304,6 @@ td strong{
 
         </div>
 
-
         <div class="field">
 
           <label>
@@ -1712,7 +2317,6 @@ td strong{
 
         </div>
 
-
         <div class="field">
 
           <label>
@@ -1725,7 +2329,6 @@ td strong{
           >
 
         </div>
-
 
         <div class="field">
 
@@ -1741,7 +2344,6 @@ td strong{
 
         </div>
 
-
         <div class="field">
 
           <label>
@@ -1754,7 +2356,6 @@ td strong{
           >
 
         </div>
-
 
         <div class="field">
 
@@ -1772,7 +2373,6 @@ td strong{
 
       </div>
 
-
       <br>
 
       <button
@@ -1785,7 +2385,6 @@ td strong{
     </form>
 
   </div>
-
 
   <div class="panel">
 
@@ -1805,7 +2404,6 @@ td strong{
 
     </div>
 
-
     <div class="toolbar">
 
       <input
@@ -1815,7 +2413,6 @@ td strong{
       >
 
     </div>
-
 
     <div class="table-wrap">
 
@@ -1848,9 +2445,8 @@ td strong{
 
 </section>
 
-
 <!-- =========================
-     ATTENDANCE
+ATTENDANCE
 ========================= -->
 
 <section
@@ -1862,9 +2458,7 @@ td strong{
 
     <div>
 
-      <h2>
-        Attendance
-      </h2>
+      <h2>Attendance</h2>
 
       <p>
         Record and manage daily student attendance.
@@ -1877,7 +2471,6 @@ td strong{
     </div>
 
   </div>
-
 
   <div class="panel">
 
@@ -1896,7 +2489,6 @@ td strong{
       </div>
 
     </div>
-
 
     <form id="attendanceForm">
 
@@ -1921,7 +2513,6 @@ td strong{
 
         </div>
 
-
         <div class="field">
 
           <label>
@@ -1935,7 +2526,6 @@ td strong{
           >
 
         </div>
-
 
         <div class="field">
 
@@ -1970,7 +2560,6 @@ td strong{
 
       </div>
 
-
       <br>
 
       <button
@@ -1983,7 +2572,6 @@ td strong{
     </form>
 
   </div>
-
 
   <div class="panel">
 
@@ -2002,7 +2590,6 @@ td strong{
       </div>
 
     </div>
-
 
     <div class="table-wrap">
 
@@ -2030,9 +2617,8 @@ td strong{
 
 </section>
 
-
 <!-- =========================
-     STUDY PROGRESS
+STUDY
 ========================= -->
 
 <section
@@ -2044,9 +2630,7 @@ td strong{
 
     <div>
 
-      <h2>
-        Study Progress
-      </h2>
+      <h2>Study Progress</h2>
 
       <p>
         Manage daily Quran study progress.
@@ -2059,7 +2643,6 @@ td strong{
     </div>
 
   </div>
-
 
   <div class="panel">
 
@@ -2078,7 +2661,6 @@ td strong{
       </div>
 
     </div>
-
 
     <form id="studyForm">
 
@@ -2103,7 +2685,6 @@ td strong{
 
         </div>
 
-
         <div class="field">
 
           <label>
@@ -2118,7 +2699,6 @@ td strong{
 
         </div>
 
-
         <div class="field">
 
           <label>
@@ -2131,7 +2711,6 @@ td strong{
           >
 
         </div>
-
 
         <div class="field">
 
@@ -2146,7 +2725,6 @@ td strong{
 
         </div>
 
-
         <div class="field">
 
           <label>
@@ -2159,7 +2737,6 @@ td strong{
           >
 
         </div>
-
 
         <div class="field">
 
@@ -2192,7 +2769,6 @@ td strong{
           </select>
 
         </div>
-
 
         <div class="field">
 
@@ -2234,7 +2810,6 @@ td strong{
 
         </div>
 
-
         <div class="field full">
 
           <label>
@@ -2250,7 +2825,6 @@ td strong{
 
       </div>
 
-
       <br>
 
       <button
@@ -2263,7 +2837,6 @@ td strong{
     </form>
 
   </div>
-
 
   <div class="panel">
 
@@ -2282,7 +2855,6 @@ td strong{
       </div>
 
     </div>
-
 
     <div class="table-wrap">
 
@@ -2315,9 +2887,8 @@ td strong{
 
 </section>
 
-
 <!-- =========================
-     RESULTS
+RESULTS
 ========================= -->
 
 <section
@@ -2329,9 +2900,7 @@ td strong{
 
     <div>
 
-      <h2>
-        Results
-      </h2>
+      <h2>Results</h2>
 
       <p>
         Create, publish and manage student results.
@@ -2344,7 +2913,6 @@ td strong{
     </div>
 
   </div>
-
 
   <div class="panel">
 
@@ -2363,7 +2931,6 @@ td strong{
       </div>
 
     </div>
-
 
     <form id="resultForm">
 
@@ -2388,7 +2955,6 @@ td strong{
 
         </div>
 
-
         <div class="field">
 
           <label>
@@ -2403,7 +2969,6 @@ td strong{
 
         </div>
 
-
         <div class="field">
 
           <label>
@@ -2417,7 +2982,6 @@ td strong{
           >
 
         </div>
-
 
         <div class="field">
 
@@ -2441,7 +3005,6 @@ td strong{
 
       </div>
 
-
       <br>
 
       <button
@@ -2454,7 +3017,6 @@ td strong{
     </form>
 
   </div>
-
 
   <div class="panel">
 
@@ -2473,7 +3035,6 @@ td strong{
       </div>
 
     </div>
-
 
     <div class="table-wrap">
 
@@ -2503,9 +3064,8 @@ td strong{
 
 </section>
 
-
 <!-- =========================
-     NOTICES
+NOTICES
 ========================= -->
 
 <section
@@ -2517,9 +3077,7 @@ td strong{
 
     <div>
 
-      <h2>
-        Notices
-      </h2>
+      <h2>Notices</h2>
 
       <p>
         Publish announcements for parents.
@@ -2532,7 +3090,6 @@ td strong{
     </div>
 
   </div>
-
 
   <div class="panel">
 
@@ -2552,7 +3109,6 @@ td strong{
 
     </div>
 
-
     <form id="noticeForm">
 
       <div class="form-grid">
@@ -2571,7 +3127,6 @@ td strong{
 
         </div>
 
-
         <div class="field full">
 
           <label>
@@ -2585,7 +3140,6 @@ td strong{
           ></textarea>
 
         </div>
-
 
         <div class="field">
 
@@ -2609,7 +3163,6 @@ td strong{
 
       </div>
 
-
       <br>
 
       <button
@@ -2622,7 +3175,6 @@ td strong{
     </form>
 
   </div>
-
 
   <div class="panel">
 
@@ -2641,7 +3193,6 @@ td strong{
       </div>
 
     </div>
-
 
     <div class="table-wrap">
 
@@ -2670,9 +3221,8 @@ td strong{
 
 </section>
 
-
 <!-- =========================
-     LEAVE
+LEAVE
 ========================= -->
 
 <section
@@ -2699,7 +3249,6 @@ td strong{
     </div>
 
   </div>
-
 
   <div class="panel">
 
@@ -2733,9 +3282,8 @@ td strong{
 
 </section>
 
-
 <!-- =========================
-     MESSAGES
+MESSAGES
 ========================= -->
 
 <section
@@ -2762,7 +3310,6 @@ td strong{
     </div>
 
   </div>
-
 
   <div class="panel">
 
@@ -2795,9 +3342,8 @@ td strong{
 
 </section>
 
-
 <!-- =========================
-     DONATIONS
+DONATIONS
 ========================= -->
 
 <section
@@ -2825,7 +3371,6 @@ td strong{
 
   </div>
 
-
   <div class="donation-summary">
 
     <div class="donation-stat">
@@ -2839,7 +3384,6 @@ td strong{
       </strong>
 
     </div>
-
 
     <div class="donation-stat">
 
@@ -2855,7 +3399,6 @@ td strong{
       </strong>
 
     </div>
-
 
     <div class="donation-stat">
 
@@ -2874,7 +3417,6 @@ td strong{
 
   </div>
 
-
   <div class="panel">
 
     <div class="panel-head">
@@ -2892,7 +3434,6 @@ td strong{
       </div>
 
     </div>
-
 
     <div class="table-wrap">
 
@@ -2925,9 +3466,8 @@ td strong{
 
 </section>
 
-
 <!-- =========================
-     PUBLIC RESULT
+PUBLIC RESULT
 ========================= -->
 
 <section
@@ -2955,12 +3495,11 @@ td strong{
 
   </div>
 
-
   <div class="panel">
 
     <div
       class="welcome"
-      style="margin:0;"
+      style="margin:0;padding:24px;border-radius:14px;"
     >
 
       <h2 style="font-size:21px;">
@@ -2976,7 +3515,7 @@ td strong{
       <button
         class="primary"
         id="openPublicResult"
-        style="background:white;color:#176b87;"
+        style="background:white;color:#087f5b;"
       >
         Open Public Result
       </button>
@@ -2984,7 +3523,6 @@ td strong{
     </div>
 
   </div>
-
 
   <div class="panel">
 
@@ -3003,7 +3541,6 @@ td strong{
       </div>
 
     </div>
-
 
     <div
       style="
@@ -3039,11 +3576,11 @@ td strong{
 
 </section>
 
-
 </div>
+
 </main>
-</div>
 
+</div>
 
 <script type="module">
 
@@ -3070,35 +3607,65 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
+/* =========================
+FIREBASE
+========================= */
+
 const firebaseConfig = {
-  apiKey:"AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
-  authDomain:"safa-hifz-class-7e84b.firebaseapp.com",
-  projectId:"safa-hifz-class-7e84b",
-  storageBucket:"safa-hifz-class-7e84b.firebasestorage.app",
-  messagingSenderId:"476801753196",
-  appId:"1:476801753196:web:d4c8a8b0c1a4203606f849",
-  measurementId:"G-ZTBTJCB5SR"
+
+  apiKey:
+    "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
+
+  authDomain:
+    "safa-hifz-class-7e84b.firebaseapp.com",
+
+  projectId:
+    "safa-hifz-class-7e84b",
+
+  storageBucket:
+    "safa-hifz-class-7e84b.firebasestorage.app",
+
+  messagingSenderId:
+    "476801753196",
+
+  appId:
+    "1:476801753196:web:d4c8a8b0c1a4203606f849",
+
+  measurementId:
+    "G-ZTBTJCB5SR"
+
 };
 
+const app =
+  initializeApp(firebaseConfig);
 
-const app=initializeApp(firebaseConfig);
+const auth =
+  getAuth(app);
 
-const auth=getAuth(app);
+const db =
+  getFirestore(app);
 
-const db=getFirestore(app);
+const $ =
+  id => document.getElementById(id);
 
-const $=id=>document.getElementById(id);
+window.students = [];
 
-window.students=[];
 
+/* =========================
+SAFE HTML
+========================= */
 
 function escapeHtml(value){
 
-  if(value===null || value===undefined){
+  if(value === null ||
+     value === undefined){
+
     return "";
+
   }
 
   return String(value)
+
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;")
@@ -3108,153 +3675,235 @@ function escapeHtml(value){
 }
 
 
-function showMessage(text,type="success"){
+/* =========================
+MESSAGE
+========================= */
 
-  const box=$("message");
+function showMessage(
+  text,
+  type="success"
+){
 
-  box.textContent=text;
+  const box =
+    $("message");
 
-  box.className=
-    type==="error"
-      ?"error-msg"
-      :"success-msg";
+  box.textContent =
+    text;
 
-  box.style.display="block";
+  box.className =
+    type === "error"
+      ? "error-msg"
+      : "success-msg";
 
-  clearTimeout(window.messageTimer);
+  box.style.display =
+    "block";
 
-  window.messageTimer=setTimeout(()=>{
-    box.style.display="none";
-  },3500);
+  clearTimeout(
+    window.messageTimer
+  );
+
+  window.messageTimer =
+    setTimeout(()=>{
+
+      box.style.display =
+        "none";
+
+    },3500);
 
 }
 
+
+/* =========================
+STUDENT NAME
+========================= */
 
 function studentNameByNumber(number){
 
-  const found=
+  const found =
     window.students.find(
-      s=>String(s.studentNumber)===String(number)
+      s =>
+        String(s.studentNumber) ===
+        String(number)
     );
 
   return found
-    ?found.name
-    :String(number || "-");
+    ? found.name
+    : String(number || "-");
 
 }
 
 
-onAuthStateChanged(auth,async user=>{
+/* =========================
+AUTH
+========================= */
 
-  if(!user){
+onAuthStateChanged(
+  auth,
+  async user => {
 
-    location.href="index.html";
+    if(!user){
 
-    return;
-
-  }
-
-  try{
-
-    const userSnap=
-      await getDoc(
-        doc(db,"users",user.uid)
-      );
-
-    if(!userSnap.exists()){
-
-      alert("Admin profile not found.");
-
-      await signOut(auth);
+      location.href =
+        "index.html";
 
       return;
 
     }
 
-    const data=userSnap.data();
+    try{
 
-    if(
-      String(data.role || "")
-        .trim()
-        .toLowerCase()!=="admin"
-    ){
+      const userSnap =
+        await getDoc(
+          doc(
+            db,
+            "users",
+            user.uid
+          )
+        );
 
-      alert("You do not have administrator access.");
+      if(!userSnap.exists()){
 
-      await signOut(auth);
+        alert(
+          "Admin profile not found."
+        );
 
-      return;
+        await signOut(auth);
+
+        return;
+
+      }
+
+      const data =
+        userSnap.data();
+
+      if(
+        String(data.role || "")
+          .trim()
+          .toLowerCase() !==
+        "admin"
+      ){
+
+        alert(
+          "You do not have administrator access."
+        );
+
+        await signOut(auth);
+
+        return;
+
+      }
+
+      $("loading").style.display =
+        "none";
+
+      await loadEverything();
+
+    }catch(error){
+
+      console.error(error);
+
+      $("loading").innerHTML =
+        "Dashboard loading error.<br><br>" +
+        escapeHtml(error.message);
 
     }
 
-    $("loading").style.display="none";
-
-    await loadEverything();
-
-  }catch(error){
-
-    console.error(error);
-
-    $("loading").innerHTML=
-      "Dashboard loading error.<br><br>"+
-      escapeHtml(error.message);
-
   }
+);
 
-});
 
+/* =========================
+MENU
+========================= */
 
-document.querySelectorAll(".menu-btn")
-.forEach(button=>{
+document
+  .querySelectorAll(".menu-btn")
+  .forEach(button => {
 
-  button.addEventListener("click",()=>{
+    button.addEventListener(
+      "click",
+      () => {
 
-    openSection(button.dataset.section);
+        openSection(
+          button.dataset.section
+        );
 
-    $("sidebar").classList.remove("open");
+        $("sidebar")
+          .classList
+          .remove("open");
+
+      }
+    );
 
   });
 
-});
 
+/* =========================
+QUICK BUTTONS
+========================= */
 
-document.querySelectorAll(".quick-btn")
-.forEach(button=>{
+document
+  .querySelectorAll(".quick-btn")
+  .forEach(button => {
 
-  button.addEventListener("click",()=>{
+    button.addEventListener(
+      "click",
+      () => {
 
-    openSection(button.dataset.go);
+        openSection(
+          button.dataset.go
+        );
+
+      }
+    );
 
   });
 
-});
 
+/* =========================
+OPEN SECTION
+========================= */
 
 function openSection(sectionId){
 
-  document.querySelectorAll(".section")
-  .forEach(section=>{
-    section.classList.remove("active");
-  });
+  document
+    .querySelectorAll(".section")
+    .forEach(section => {
 
-  document.querySelectorAll(".menu-btn")
-  .forEach(button=>{
-    button.classList.remove("active");
-  });
+      section.classList
+        .remove("active");
 
-  const section=$(sectionId);
+    });
+
+  document
+    .querySelectorAll(".menu-btn")
+    .forEach(button => {
+
+      button.classList
+        .remove("active");
+
+    });
+
+  const section =
+    $(sectionId);
 
   if(section){
-    section.classList.add("active");
+
+    section.classList
+      .add("active");
+
   }
 
-  const menuButton=
+  const menuButton =
     document.querySelector(
       `.menu-btn[data-section="${sectionId}"]`
     );
 
   if(menuButton){
-    menuButton.classList.add("active");
+
+    menuButton.classList
+      .add("active");
+
   }
 
   window.scrollTo({
@@ -3265,25 +3914,54 @@ function openSection(sectionId){
 }
 
 
-$("mobileMenu").addEventListener("click",()=>{
+/* =========================
+MOBILE MENU
+========================= */
 
-  $("sidebar").classList.toggle("open");
+$("mobileMenu")
+  .addEventListener(
+    "click",
+    () => {
 
-});
+      $("sidebar")
+        .classList
+        .toggle("open");
+
+    }
+  );
 
 
-$("logoutBtn").addEventListener("click",async()=>{
+/* =========================
+LOGOUT
+========================= */
 
-  if(!confirm("Logout from admin dashboard?")){
-    return;
-  }
+$("logoutBtn")
+  .addEventListener(
+    "click",
+    async () => {
 
-  await signOut(auth);
+      if(
+        !confirm(
+          "Logout from admin dashboard?"
+        )
+      ){
 
-  location.href="index.html";
+        return;
 
-});
+      }
 
+      await signOut(auth);
+
+      location.href =
+        "index.html";
+
+    }
+  );
+
+
+/* =========================
+LOAD EVERYTHING
+========================= */
 
 async function loadEverything(){
 
@@ -3304,46 +3982,53 @@ async function loadEverything(){
 }
 
 
-/* =========================
-   STUDENTS
-========================= */
+/* =====================================================
+STUDENTS
+===================================================== */
 
 async function loadStudents(){
 
-  const snap=
+  const snap =
     await getDocs(
-      collection(db,"students")
+      collection(
+        db,
+        "students"
+      )
     );
 
-  window.students=[];
+  window.students = [];
 
-  $("studentsTable").innerHTML="";
+  $("studentsTable")
+    .innerHTML = "";
 
-  snap.forEach(item=>{
+  snap.forEach(item => {
 
-    const data=item.data();
+    const data =
+      item.data();
 
-    const student={
+    const student = {
       id:item.id,
       ...data
     };
 
-    window.students.push(student);
+    window.students
+      .push(student);
 
-    const tr=
+    const tr =
       document.createElement("tr");
 
-    tr.dataset.search=
-      `${data.studentNumber || ""}
-       ${data.name || ""}
-       ${data.guardianName || ""}
-       ${data.className || ""}
-       ${data.parentEmail || ""}
-       ${data.studentAddress || ""}
-       ${data.phoneNumber || ""}`
-      .toLowerCase();
+    tr.dataset.search =
+      `
+      ${data.studentNumber || ""}
+      ${data.name || ""}
+      ${data.guardianName || ""}
+      ${data.className || ""}
+      ${data.parentEmail || ""}
+      ${data.studentAddress || ""}
+      ${data.phoneNumber || ""}
+      `.toLowerCase();
 
-    tr.innerHTML=`
+    tr.innerHTML = `
 
       <td>
         <strong>
@@ -3401,37 +4086,480 @@ async function loadStudents(){
 
     `;
 
-    $("studentsTable").appendChild(tr);
+    $("studentsTable")
+      .appendChild(tr);
 
   });
 
-  $("studentCount").textContent=
+  $("studentCount")
+    .textContent =
     window.students.length;
 
   populateStudentSelects();
 
 
-  document.querySelectorAll(".delete-student")
-  .forEach(button=>{
+  document
+    .querySelectorAll(".delete-student")
+    .forEach(button => {
 
-    button.addEventListener("click",async()=>{
+      button.addEventListener(
+        "click",
+        async () => {
 
-      if(!confirm("Delete this student?")){
+          if(
+            !confirm(
+              "Delete this student?"
+            )
+          ){
+
+            return;
+
+          }
+
+          try{
+
+            await deleteDoc(
+              doc(
+                db,
+                "students",
+                button.dataset.id
+              )
+            );
+
+            showMessage(
+              "Student deleted successfully."
+            );
+
+            await loadStudents();
+
+          }catch(error){
+
+            showMessage(
+              error.message,
+              "error"
+            );
+
+          }
+
+        }
+      );
+
+    });
+
+}
+
+
+/* =====================================================
+EDIT STUDENT
+===================================================== */
+
+document.addEventListener(
+  "click",
+  e => {
+
+    const button =
+      e.target.closest(
+        ".edit-student"
+      );
+
+    if(!button){
+      return;
+    }
+
+    const student =
+      window.students.find(
+        s =>
+          s.id ===
+          button.dataset.id
+      );
+
+    if(!student){
+
+      showMessage(
+        "Student details not found.",
+        "error"
+      );
+
+      return;
+
+    }
+
+    $("editStudentId").value =
+      student.id;
+
+    $("editStudentNumber").value =
+      student.studentNumber || "";
+
+    $("editStudentName").value =
+      student.name || "";
+
+    $("editGuardianName").value =
+      student.guardianName || "";
+
+    $("editClassName").value =
+      student.className || "";
+
+    $("editParentEmail").value =
+      student.parentEmail || "";
+
+    $("editStudentAddress").value =
+      student.studentAddress || "";
+
+    $("editPhoneNumber").value =
+      student.phoneNumber || "";
+
+    $("editStudentModal")
+      .classList
+      .add("show");
+
+  }
+);
+
+
+function closeEditStudentModal(){
+
+  $("editStudentModal")
+    .classList
+    .remove("show");
+
+}
+
+
+$("closeEditStudent")
+  .addEventListener(
+    "click",
+    closeEditStudentModal
+  );
+
+
+$("cancelEditStudent")
+  .addEventListener(
+    "click",
+    closeEditStudentModal
+  );
+
+
+$("editStudentModal")
+  .addEventListener(
+    "click",
+    e => {
+
+      if(
+        e.target ===
+        $("editStudentModal")
+      ){
+
+        closeEditStudentModal();
+
+      }
+
+    }
+  );
+
+
+$("editStudentForm")
+  .addEventListener(
+    "submit",
+    async e => {
+
+      e.preventDefault();
+
+      const studentId =
+        $("editStudentId")
+          .value;
+
+      const name =
+        $("editStudentName")
+          .value
+          .trim();
+
+      const className =
+        $("editClassName")
+          .value
+          .trim();
+
+      const parentEmail =
+        $("editParentEmail")
+          .value
+          .trim();
+
+      const guardianName =
+        $("editGuardianName")
+          .value
+          .trim();
+
+      const studentAddress =
+        $("editStudentAddress")
+          .value
+          .trim();
+
+      const phoneNumber =
+        $("editPhoneNumber")
+          .value
+          .trim();
+
+      if(!name){
+
+        showMessage(
+          "Student name is required.",
+          "error"
+        );
+
         return;
+
       }
 
       try{
 
-        await deleteDoc(
+        await updateDoc(
           doc(
             db,
             "students",
-            button.dataset.id
-          )
+            studentId
+          ),
+          {
+            name:name,
+            guardianName:guardianName,
+            className:className,
+            parentEmail:parentEmail,
+            studentAddress:studentAddress,
+            phoneNumber:phoneNumber
+          }
         );
 
+        closeEditStudentModal();
+
         showMessage(
-          "Student deleted successfully."
+          "Student details updated successfully."
+        );
+
+        await loadStudents();
+
+      }catch(error){
+
+        console.error(error);
+
+        showMessage(
+          error.message,
+          "error"
+        );
+
+      }
+
+    }
+  );
+
+
+/* =====================================================
+STUDENT SELECTS
+===================================================== */
+
+function populateStudentSelects(){
+
+  const ids = [
+    "attendanceStudent",
+    "studyStudent",
+    "resultStudent"
+  ];
+
+  ids.forEach(id => {
+
+    const select =
+      $(id);
+
+    if(!select){
+      return;
+    }
+
+    select.innerHTML =
+      `
+      <option value="">
+        Select student
+      </option>
+      `;
+
+    [...window.students]
+
+      .sort(
+        (a,b) =>
+          String(
+            a.studentNumber || ""
+          ).localeCompare(
+            String(
+              b.studentNumber || ""
+            ),
+            undefined,
+            {
+              numeric:true
+            }
+          )
+      )
+
+      .forEach(student => {
+
+        const option =
+          document.createElement(
+            "option"
+          );
+
+        option.value =
+          String(
+            student.studentNumber
+          );
+
+        option.textContent =
+          `${student.studentNumber} - ${student.name}`;
+
+        select.appendChild(
+          option
+        );
+
+      });
+
+  });
+
+}
+
+
+/* =========================
+STUDENT SEARCH
+========================= */
+
+$("studentSearch")
+  .addEventListener(
+    "input",
+    e => {
+
+      const value =
+        e.target.value
+          .trim()
+          .toLowerCase();
+
+      document
+        .querySelectorAll(
+          "#studentsTable tr"
+        )
+        .forEach(row => {
+
+          row.style.display =
+            !value ||
+            row.dataset.search
+              .includes(value)
+              ? ""
+              : "none";
+
+        });
+
+    }
+  );
+
+
+/* =========================
+ADD STUDENT
+========================= */
+
+$("studentForm")
+  .addEventListener(
+    "submit",
+    async e => {
+
+      e.preventDefault();
+
+      try{
+
+        const studentNumber =
+          $("studentNumber")
+            .value
+            .trim();
+
+        const name =
+          $("studentName")
+            .value
+            .trim();
+
+        if(
+          !studentNumber ||
+          !name
+        ){
+
+          showMessage(
+            "Student number and name are required.",
+            "error"
+          );
+
+          return;
+
+        }
+
+        const duplicate =
+          window.students.some(
+            s =>
+              String(
+                s.studentNumber
+              ) ===
+              String(
+                studentNumber
+              )
+          );
+
+        if(duplicate){
+
+          showMessage(
+            "This student number already exists.",
+            "error"
+          );
+
+          return;
+
+        }
+
+        await addDoc(
+          collection(
+            db,
+            "students"
+          ),
+          {
+
+            studentNumber,
+
+            name,
+
+            guardianName:
+              $("guardianName")
+                .value
+                .trim(),
+
+            className:
+              $("className")
+                .value
+                .trim(),
+
+            parentEmail:
+              $("parentEmail")
+                .value
+                .trim(),
+
+            studentAddress:
+              $("studentAddress")
+                .value
+                .trim(),
+
+            phoneNumber:
+              $("phoneNumber")
+                .value
+                .trim(),
+
+            createdAt:
+              serverTimestamp()
+
+          }
+        );
+
+        $("studentForm")
+          .reset();
+
+        showMessage(
+          "Student added successfully."
         );
 
         await loadStudents();
@@ -3445,426 +4573,85 @@ async function loadStudents(){
 
       }
 
-    });
-
-  });
-
-}
-
-
-/* =========================
-   EDIT STUDENT
-========================= */
-
-document.addEventListener("click",e=>{
-
-  const button=
-    e.target.closest(".edit-student");
-
-  if(!button){
-    return;
-  }
-
-  const student=
-    window.students.find(
-      s=>s.id===button.dataset.id
-    );
-
-  if(!student){
-
-    showMessage(
-      "Student details not found.",
-      "error"
-    );
-
-    return;
-
-  }
-
-  $("editStudentId").value=
-    student.id;
-
-  $("editStudentNumber").value=
-    student.studentNumber || "";
-
-  $("editStudentName").value=
-    student.name || "";
-
-  $("editGuardianName").value=
-    student.guardianName || "";
-
-  $("editClassName").value=
-    student.className || "";
-
-  $("editParentEmail").value=
-    student.parentEmail || "";
-
-  $("editStudentAddress").value=
-    student.studentAddress || "";
-
-  $("editPhoneNumber").value=
-    student.phoneNumber || "";
-
-  $("editStudentModal")
-    .classList.add("show");
-
-});
-
-
-function closeEditStudentModal(){
-
-  $("editStudentModal")
-    .classList.remove("show");
-
-}
-
-
-$("closeEditStudent")
-.addEventListener(
-  "click",
-  closeEditStudentModal
-);
-
-
-$("cancelEditStudent")
-.addEventListener(
-  "click",
-  closeEditStudentModal
-);
-
-
-$("editStudentModal")
-.addEventListener("click",e=>{
-
-  if(
-    e.target===$("editStudentModal")
-  ){
-
-    closeEditStudentModal();
-
-  }
-
-});
-
-
-$("editStudentForm")
-.addEventListener(
-  "submit",
-  async e=>{
-
-    e.preventDefault();
-
-    const studentId=
-      $("editStudentId").value;
-
-    const name=
-      $("editStudentName")
-        .value
-        .trim();
-
-    const className=
-      $("editClassName")
-        .value
-        .trim();
-
-    const parentEmail=
-      $("editParentEmail")
-        .value
-        .trim();
-
-    const guardianName=
-      $("editGuardianName")
-        .value
-        .trim();
-
-    const studentAddress=
-      $("editStudentAddress")
-        .value
-        .trim();
-
-    const phoneNumber=
-      $("editPhoneNumber")
-        .value
-        .trim();
-
-    if(!name){
-
-      showMessage(
-        "Student name is required.",
-        "error"
-      );
-
-      return;
-
     }
-
-    try{
-
-      await updateDoc(
-        doc(
-          db,
-          "students",
-          studentId
-        ),
-        {
-          name:name,
-          guardianName:guardianName,
-          className:className,
-          parentEmail:parentEmail,
-          studentAddress:studentAddress,
-          phoneNumber:phoneNumber
-        }
-      );
-
-      closeEditStudentModal();
-
-      showMessage(
-        "Student details updated successfully."
-      );
-
-      await loadStudents();
-
-    }catch(error){
-
-      console.error(error);
-
-      showMessage(
-        error.message,
-        "error"
-      );
-
-    }
-
-  }
-);
+  );
 
 
-function populateStudentSelects(){
-
-  const ids=[
-    "attendanceStudent",
-    "studyStudent",
-    "resultStudent"
-  ];
-
-  ids.forEach(id=>{
-
-    const select=$(id);
-
-    if(!select){
-      return;
-    }
-
-    select.innerHTML=
-      `<option value="">
-        Select student
-      </option>`;
-
-    window.students
-    .sort((a,b)=>
-      String(a.studentNumber || "")
-        .localeCompare(
-          String(b.studentNumber || ""),
-          undefined,
-          {numeric:true}
-        )
-    )
-    .forEach(student=>{
-
-      const option=
-        document.createElement("option");
-
-      option.value=
-        String(student.studentNumber);
-
-      option.textContent=
-        `${student.studentNumber} - ${student.name}`;
-
-      select.appendChild(option);
-
-    });
-
-  });
-
-}
-
-
-$("studentSearch")
-.addEventListener("input",e=>{
-
-  const value=
-    e.target.value
-      .trim()
-      .toLowerCase();
-
-  document.querySelectorAll(
-    "#studentsTable tr"
-  )
-  .forEach(row=>{
-
-    row.style.display=
-      !value ||
-      row.dataset.search.includes(value)
-        ?""
-        :"none";
-
-  });
-
-});
-
-
-$("studentForm")
-.addEventListener("submit",async e=>{
-
-  e.preventDefault();
-
-  try{
-
-    const studentNumber=
-      $("studentNumber")
-        .value
-        .trim();
-
-    const name=
-      $("studentName")
-        .value
-        .trim();
-
-    if(!studentNumber || !name){
-
-      showMessage(
-        "Student number and name are required.",
-        "error"
-      );
-
-      return;
-
-    }
-
-    const duplicate=
-      window.students.some(
-        s=>
-          String(s.studentNumber)
-          ===String(studentNumber)
-      );
-
-    if(duplicate){
-
-      showMessage(
-        "This student number already exists.",
-        "error"
-      );
-
-      return;
-
-    }
-
-    await addDoc(
-      collection(db,"students"),
-      {
-        studentNumber,
-        name,
-
-        guardianName:
-          $("guardianName").value.trim(),
-
-        className:
-          $("className").value.trim(),
-
-        parentEmail:
-          $("parentEmail").value.trim(),
-
-        studentAddress:
-          $("studentAddress").value.trim(),
-
-        phoneNumber:
-          $("phoneNumber").value.trim(),
-
-        createdAt:
-          serverTimestamp()
-      }
-    );
-
-    $("studentForm").reset();
-
-    showMessage(
-      "Student added successfully."
-    );
-
-    await loadStudents();
-
-  }catch(error){
-
-    showMessage(
-      error.message,
-      "error"
-    );
-
-  }
-
-});
-
-
-/* =========================
-   ATTENDANCE
-========================= */
+/* =====================================================
+ATTENDANCE
+===================================================== */
 
 $("attendanceForm")
-.addEventListener("submit",async e=>{
+  .addEventListener(
+    "submit",
+    async e => {
 
-  e.preventDefault();
+      e.preventDefault();
 
-  try{
+      try{
 
-    await addDoc(
-      collection(db,"attendance"),
-      {
-        studentNumber:
-          $("attendanceStudent").value,
+        await addDoc(
+          collection(
+            db,
+            "attendance"
+          ),
+          {
 
-        date:
-          $("attendanceDate").value,
+            studentNumber:
+              $("attendanceStudent")
+                .value,
 
-        status:
-          $("attendanceStatus").value,
+            date:
+              $("attendanceDate")
+                .value,
 
-        createdAt:
-          serverTimestamp()
+            status:
+              $("attendanceStatus")
+                .value,
+
+            createdAt:
+              serverTimestamp()
+
+          }
+        );
+
+        $("attendanceForm")
+          .reset();
+
+        setDefaultDates();
+
+        showMessage(
+          "Attendance saved successfully."
+        );
+
+        await loadAttendance();
+
+      }catch(error){
+
+        showMessage(
+          error.message,
+          "error"
+        );
+
       }
-    );
 
-    $("attendanceForm").reset();
-
-    setDefaultDates();
-
-    showMessage(
-      "Attendance saved successfully."
-    );
-
-    await loadAttendance();
-
-  }catch(error){
-
-    showMessage(
-      error.message,
-      "error"
-    );
-
-  }
-
-});
+    }
+  );
 
 
 async function loadAttendance(){
 
-  const snap=
+  const snap =
     await getDocs(
-      collection(db,"attendance")
+      collection(
+        db,
+        "attendance"
+      )
     );
 
-  const rows=[];
+  const rows = [];
 
-  snap.forEach(item=>{
+  snap.forEach(item => {
 
     rows.push({
       id:item.id,
@@ -3873,98 +4660,24 @@ async function loadAttendance(){
 
   });
 
-  rows.sort((a,b)=>
-    String(b.date || "")
-      .localeCompare(
-        String(a.date || "")
+  rows.sort(
+    (a,b) =>
+      String(
+        b.date || ""
+      ).localeCompare(
+        String(
+          a.date || ""
+        )
       )
   );
 
-  $("attendanceTable").innerHTML="";
+  $("attendanceTable")
+    .innerHTML = "";
 
   if(!rows.length){
 
-    $("attendanceTable").innerHTML=`
-
-      <tr>
-
-        <td>
-
-          <div class="empty">
-
-            <div class="empty-icon">📅</div>
-
-            No attendance records yet.
-
-          </div>
-
-        </td>
-
-      </tr>
-
-    `;
-
-  }else{
-
-    const grouped={};
-
-    rows.forEach(data=>{
-
-      const status=
-        String(data.status || "")
-          .trim()
-          .toLowerCase();
-
-      if(
-        status!=="absent" &&
-        status!=="leave"
-      ){
-        return;
-      }
-
-      if(!grouped[data.date]){
-
-        grouped[data.date]={
-          absent:[],
-          leave:[]
-        };
-
-      }
-
-      const studentName=
-        studentNameByNumber(
-          data.studentNumber
-        );
-
-      if(status==="absent"){
-
-        grouped[data.date].absent.push({
-          id:data.id,
-          name:studentName
-        });
-
-      }
-
-      if(status==="leave"){
-
-        grouped[data.date].leave.push({
-          id:data.id,
-          name:studentName
-        });
-
-      }
-
-    });
-
-    const dates=
-      Object.keys(grouped)
-        .sort((a,b)=>
-          String(b).localeCompare(String(a))
-        );
-
-    if(!dates.length){
-
-      $("attendanceTable").innerHTML=`
+    $("attendanceTable")
+      .innerHTML = `
 
         <tr>
 
@@ -3972,9 +4685,11 @@ async function loadAttendance(){
 
             <div class="empty">
 
-              <div class="empty-icon">✓</div>
+              <div class="empty-icon">
+                📅
+              </div>
 
-              No absent or leave records yet.
+              No attendance records yet.
 
             </div>
 
@@ -3984,62 +4699,168 @@ async function loadAttendance(){
 
       `;
 
+  }else{
+
+    const grouped = {};
+
+    rows.forEach(data => {
+
+      const status =
+        String(
+          data.status || ""
+        )
+        .trim()
+        .toLowerCase();
+
+      if(
+        status !== "absent" &&
+        status !== "leave"
+      ){
+
+        return;
+
+      }
+
+      if(!grouped[data.date]){
+
+        grouped[data.date] = {
+          absent:[],
+          leave:[]
+        };
+
+      }
+
+      const studentName =
+        studentNameByNumber(
+          data.studentNumber
+        );
+
+      if(status === "absent"){
+
+        grouped[data.date]
+          .absent
+          .push({
+            id:data.id,
+            name:studentName
+          });
+
+      }
+
+      if(status === "leave"){
+
+        grouped[data.date]
+          .leave
+          .push({
+            id:data.id,
+            name:studentName
+          });
+
+      }
+
+    });
+
+    const dates =
+      Object.keys(grouped)
+        .sort(
+          (a,b) =>
+            String(b)
+              .localeCompare(
+                String(a)
+              )
+        );
+
+    if(!dates.length){
+
+      $("attendanceTable")
+        .innerHTML = `
+
+          <tr>
+
+            <td>
+
+              <div class="empty">
+
+                <div class="empty-icon">
+                  ✓
+                </div>
+
+                No absent or leave records yet.
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        `;
+
     }else{
 
-      dates.forEach(date=>{
+      dates.forEach(date => {
 
-        const data=grouped[date];
+        const data =
+          grouped[date];
 
-        const tr=
-          document.createElement("tr");
+        const tr =
+          document.createElement(
+            "tr"
+          );
 
-        const absentHtml=
+        const absentHtml =
           data.absent.length
-            ?data.absent.map(item=>`
 
-              <div class="attendance-student">
+            ? data.absent
+                .map(item => `
 
-                <span>
-                  ${escapeHtml(item.name)}
-                </span>
+                  <div class="attendance-student">
 
-                <button
-                  class="attendance-delete delete-attendance"
-                  data-id="${item.id}"
-                  title="Delete attendance"
-                >
-                  ×
-                </button>
+                    <span>
+                      ${escapeHtml(item.name)}
+                    </span>
 
-              </div>
+                    <button
+                      class="attendance-delete delete-attendance"
+                      data-id="${item.id}"
+                      title="Delete attendance"
+                    >
+                      ×
+                    </button>
 
-            `).join("")
-            :"";
+                  </div>
 
-        const leaveHtml=
+                `)
+                .join("")
+
+            : "";
+
+        const leaveHtml =
           data.leave.length
-            ?data.leave.map(item=>`
 
-              <div class="attendance-student">
+            ? data.leave
+                .map(item => `
 
-                <span>
-                  ${escapeHtml(item.name)}
-                </span>
+                  <div class="attendance-student">
 
-                <button
-                  class="attendance-delete delete-attendance"
-                  data-id="${item.id}"
-                  title="Delete attendance"
-                >
-                  ×
-                </button>
+                    <span>
+                      ${escapeHtml(item.name)}
+                    </span>
 
-              </div>
+                    <button
+                      class="attendance-delete delete-attendance"
+                      data-id="${item.id}"
+                      title="Delete attendance"
+                    >
+                      ×
+                    </button>
 
-            `).join("")
-            :"";
+                  </div>
 
-        tr.innerHTML=`
+                `)
+                .join("")
+
+            : "";
+
+        tr.innerHTML = `
 
           <td style="padding:18px 12px;">
 
@@ -4049,7 +4870,8 @@ async function loadAttendance(){
 
             ${
               data.absent.length
-              ?`
+              ? `
+
                 <div class="attendance-group">
 
                   <div class="attendance-line">
@@ -4065,13 +4887,15 @@ async function loadAttendance(){
                   </div>
 
                 </div>
+
               `
-              :""
+              : ""
             }
 
             ${
               data.leave.length
-              ?`
+              ? `
+
                 <div class="attendance-group">
 
                   <div class="attendance-line">
@@ -4087,8 +4911,9 @@ async function loadAttendance(){
                   </div>
 
                 </div>
+
               `
-              :""
+              : ""
             }
 
           </td>
@@ -4104,186 +4929,219 @@ async function loadAttendance(){
 
   }
 
-  $("attendanceCount").textContent=
+  $("attendanceCount")
+    .textContent =
     rows.length;
 
-  document.querySelectorAll(
-    ".delete-attendance"
-  )
-  .forEach(button=>{
+  document
+    .querySelectorAll(
+      ".delete-attendance"
+    )
+    .forEach(button => {
 
-    button.addEventListener(
-      "click",
-      async()=>{
+      button.addEventListener(
+        "click",
+        async () => {
 
-        if(!confirm(
-          "Delete this attendance record?"
-        )){
-          return;
-        }
-
-        try{
-
-          await deleteDoc(
-            doc(
-              db,
-              "attendance",
-              button.dataset.id
+          if(
+            !confirm(
+              "Delete this attendance record?"
             )
-          );
+          ){
 
-          showMessage(
-            "Attendance deleted."
-          );
+            return;
 
-          await loadAttendance();
+          }
 
-        }catch(error){
+          try{
 
-          showMessage(
-            error.message,
-            "error"
-          );
+            await deleteDoc(
+              doc(
+                db,
+                "attendance",
+                button.dataset.id
+              )
+            );
+
+            showMessage(
+              "Attendance deleted."
+            );
+
+            await loadAttendance();
+
+          }catch(error){
+
+            showMessage(
+              error.message,
+              "error"
+            );
+
+          }
 
         }
+      );
 
-      }
-    );
-
-  });
+    });
 
 }
 
 
-/* =========================
-   STUDY PROGRESS
-========================= */
+/* =====================================================
+STUDY
+===================================================== */
 
 $("studyForm")
-.addEventListener("submit",async e=>{
+  .addEventListener(
+    "submit",
+    async e => {
 
-  e.preventDefault();
+      e.preventDefault();
 
-  try{
+      try{
 
-    await addDoc(
-      collection(db,"studyProgress"),
-      {
+        await addDoc(
+          collection(
+            db,
+            "studyProgress"
+          ),
+          {
 
-        studentNumber:
-          $("studyStudent").value,
+            studentNumber:
+              $("studyStudent")
+                .value,
 
-        date:
-          $("studyDate").value,
+            date:
+              $("studyDate")
+                .value,
 
-        surah:
-          $("studySurah").value.trim(),
+            surah:
+              $("studySurah")
+                .value
+                .trim(),
 
-        newLesson:
-          $("newLesson").value.trim(),
+            newLesson:
+              $("newLesson")
+                .value
+                .trim(),
 
-        revision:
-          $("revision").value.trim(),
+            revision:
+              $("revision")
+                .value
+                .trim(),
 
-        performance:
-          $("performance").value,
+            performance:
+              $("performance")
+                .value,
 
-        studyStatus:
-          $("studyStatus").value,
+            studyStatus:
+              $("studyStatus")
+                .value,
 
-        note:
-          $("studyNote").value.trim(),
+            note:
+              $("studyNote")
+                .value
+                .trim(),
 
-        createdAt:
-          serverTimestamp()
+            createdAt:
+              serverTimestamp()
+
+          }
+        );
+
+        $("studyForm")
+          .reset();
+
+        setDefaultDates();
+
+        showMessage(
+          "Study progress saved."
+        );
+
+        await loadStudy();
+
+      }catch(error){
+
+        showMessage(
+          error.message,
+          "error"
+        );
 
       }
-    );
 
-    $("studyForm").reset();
-
-    setDefaultDates();
-
-    showMessage(
-      "Study progress saved."
-    );
-
-    await loadStudy();
-
-  }catch(error){
-
-    showMessage(
-      error.message,
-      "error"
-    );
-
-  }
-
-});
+    }
+  );
 
 
 async function loadStudy(){
 
-  const snap=
+  const snap =
     await getDocs(
-      collection(db,"studyProgress")
+      collection(
+        db,
+        "studyProgress"
+      )
     );
 
-  const rows=[];
+  const rows = [];
 
-  snap.forEach(item=>{
+  snap.forEach(item => {
 
     rows.push({
-
       id:item.id,
-
       ...item.data()
-
     });
 
   });
 
-  rows.sort((a,b)=>
-    String(b.date || "")
-      .localeCompare(
-        String(a.date || "")
+  rows.sort(
+    (a,b) =>
+      String(
+        b.date || ""
+      ).localeCompare(
+        String(
+          a.date || ""
+        )
       )
   );
 
-  $("studyTable").innerHTML="";
+  $("studyTable")
+    .innerHTML = "";
 
   if(!rows.length){
 
-    $("studyTable").innerHTML=`
+    $("studyTable")
+      .innerHTML = `
 
-      <tr>
+        <tr>
 
-        <td colspan="8">
+          <td colspan="8">
 
-          <div class="empty">
+            <div class="empty">
 
-            <div class="empty-icon">
-              📖
+              <div class="empty-icon">
+                📖
+              </div>
+
+              No study records yet.
+
             </div>
 
-            No study records yet.
+          </td>
 
-          </div>
+        </tr>
 
-        </td>
-
-      </tr>
-
-    `;
+      `;
 
   }
 
-  rows.forEach(data=>{
+  rows.forEach(data => {
 
-    const tr=
-      document.createElement("tr");
+    const tr =
+      document.createElement(
+        "tr"
+      );
 
-    tr.innerHTML=`
+    tr.innerHTML = `
 
       <td>
 
@@ -4351,154 +5209,189 @@ async function loadStudy(){
 
   });
 
-  document.querySelectorAll(
-    ".delete-study"
-  )
-  .forEach(button=>{
 
-    button.addEventListener(
-      "click",
-      async()=>{
+  document
+    .querySelectorAll(
+      ".delete-study"
+    )
+    .forEach(button => {
 
-        if(!confirm(
-          "Delete this study record?"
-        )){
-          return;
+      button.addEventListener(
+        "click",
+        async () => {
+
+          if(
+            !confirm(
+              "Delete this study record?"
+            )
+          ){
+
+            return;
+
+          }
+
+          try{
+
+            await deleteDoc(
+              doc(
+                db,
+                "studyProgress",
+                button.dataset.id
+              )
+            );
+
+            showMessage(
+              "Study record deleted."
+            );
+
+            await loadStudy();
+
+          }catch(error){
+
+            showMessage(
+              error.message,
+              "error"
+            );
+
+          }
+
         }
+      );
 
-        await deleteDoc(
-          doc(
-            db,
-            "studyProgress",
-            button.dataset.id
-          )
-        );
-
-        showMessage(
-          "Study record deleted."
-        );
-
-        await loadStudy();
-
-      }
-    );
-
-  });
+    });
 
 }
 
 
-/* =========================
-   RESULTS
-========================= */
+/* =====================================================
+RESULTS
+===================================================== */
 
 $("resultForm")
-.addEventListener("submit",async e=>{
+  .addEventListener(
+    "submit",
+    async e => {
 
-  e.preventDefault();
+      e.preventDefault();
 
-  try{
+      try{
 
-    await addDoc(
-      collection(db,"results"),
-      {
+        await addDoc(
+          collection(
+            db,
+            "results"
+          ),
+          {
 
-        studentNumber:
-          $("resultStudent").value,
+            studentNumber:
+              $("resultStudent")
+                .value,
 
-        title:
-          $("resultTitle").value.trim(),
+            title:
+              $("resultTitle")
+                .value
+                .trim(),
 
-        mark:
-          $("resultMark").value.trim(),
+            mark:
+              $("resultMark")
+                .value
+                .trim(),
 
-        status:
-          $("resultStatus").value,
+            status:
+              $("resultStatus")
+                .value,
 
-        createdAt:
-          serverTimestamp()
+            createdAt:
+              serverTimestamp()
+
+          }
+        );
+
+        $("resultForm")
+          .reset();
+
+        showMessage(
+          "Result saved successfully."
+        );
+
+        await loadResults();
+
+      }catch(error){
+
+        showMessage(
+          error.message,
+          "error"
+        );
 
       }
-    );
 
-    $("resultForm").reset();
-
-    showMessage(
-      "Result saved successfully."
-    );
-
-    await loadResults();
-
-  }catch(error){
-
-    showMessage(
-      error.message,
-      "error"
-    );
-
-  }
-
-});
+    }
+  );
 
 
 async function loadResults(){
 
-  const snap=
+  const snap =
     await getDocs(
-      collection(db,"results")
+      collection(
+        db,
+        "results"
+      )
     );
 
-  $("resultsTable").innerHTML="";
+  $("resultsTable")
+    .innerHTML = "";
 
-  const rows=[];
+  const rows = [];
 
-  snap.forEach(item=>{
+  snap.forEach(item => {
 
     rows.push({
-
       id:item.id,
-
       ...item.data()
-
     });
 
   });
 
   if(!rows.length){
 
-    $("resultsTable").innerHTML=`
+    $("resultsTable")
+      .innerHTML = `
 
-      <tr>
+        <tr>
 
-        <td colspan="5">
+          <td colspan="5">
 
-          <div class="empty">
+            <div class="empty">
 
-            <div class="empty-icon">
-              🏆
+              <div class="empty-icon">
+                🏆
+              </div>
+
+              No results yet.
+
             </div>
 
-            No results yet.
+          </td>
 
-          </div>
+        </tr>
 
-        </td>
-
-      </tr>
-
-    `;
+      `;
 
   }
 
-  rows.forEach(data=>{
+  rows.forEach(data => {
 
-    const published=
-      data.status==="published";
+    const published =
+      data.status ===
+      "published";
 
-    const tr=
-      document.createElement("tr");
+    const tr =
+      document.createElement(
+        "tr"
+      );
 
-    tr.innerHTML=`
+    tr.innerHTML = `
 
       <td>
 
@@ -4528,8 +5421,8 @@ async function loadResults(){
 
         <span class="badge ${
           published
-            ?"badge-green"
-            :"badge-yellow"
+            ? "badge-green"
+            : "badge-yellow"
         }">
 
           ${escapeHtml(data.status)}
@@ -4547,15 +5440,15 @@ async function loadResults(){
             data-id="${data.id}"
             data-status="${
               published
-                ?"draft"
-                :"published"
+                ? "draft"
+                : "published"
             }"
           >
 
             ${
               published
-                ?"Unpublish"
-                :"Publish"
+                ? "Unpublish"
+                : "Publish"
             }
 
           </button>
@@ -4578,195 +5471,248 @@ async function loadResults(){
 
   });
 
-  document.querySelectorAll(
-    ".toggle-result"
-  )
-  .forEach(button=>{
 
-    button.addEventListener(
-      "click",
-      async()=>{
+  document
+    .querySelectorAll(
+      ".toggle-result"
+    )
+    .forEach(button => {
 
-        await updateDoc(
-          doc(
-            db,
-            "results",
-            button.dataset.id
-          ),
-          {
-            status:
-              button.dataset.status
+      button.addEventListener(
+        "click",
+        async () => {
+
+          try{
+
+            await updateDoc(
+              doc(
+                db,
+                "results",
+                button.dataset.id
+              ),
+              {
+                status:
+                  button.dataset.status
+              }
+            );
+
+            showMessage(
+              "Result status updated."
+            );
+
+            await loadResults();
+
+          }catch(error){
+
+            showMessage(
+              error.message,
+              "error"
+            );
+
           }
-        );
 
-        showMessage(
-          "Result status updated."
-        );
-
-        await loadResults();
-
-      }
-    );
-
-  });
-
-  document.querySelectorAll(
-    ".delete-result"
-  )
-  .forEach(button=>{
-
-    button.addEventListener(
-      "click",
-      async()=>{
-
-        if(!confirm(
-          "Delete this result?"
-        )){
-          return;
         }
+      );
 
-        await deleteDoc(
-          doc(
-            db,
-            "results",
-            button.dataset.id
-          )
-        );
+    });
 
-        showMessage(
-          "Result deleted."
-        );
 
-        await loadResults();
+  document
+    .querySelectorAll(
+      ".delete-result"
+    )
+    .forEach(button => {
 
-      }
-    );
+      button.addEventListener(
+        "click",
+        async () => {
 
-  });
+          if(
+            !confirm(
+              "Delete this result?"
+            )
+          ){
+
+            return;
+
+          }
+
+          try{
+
+            await deleteDoc(
+              doc(
+                db,
+                "results",
+                button.dataset.id
+              )
+            );
+
+            showMessage(
+              "Result deleted."
+            );
+
+            await loadResults();
+
+          }catch(error){
+
+            showMessage(
+              error.message,
+              "error"
+            );
+
+          }
+
+        }
+      );
+
+    });
 
 }
 
 
-/* =========================
-   NOTICES
-========================= */
+/* =====================================================
+NOTICES
+===================================================== */
 
 $("noticeForm")
-.addEventListener("submit",async e=>{
+  .addEventListener(
+    "submit",
+    async e => {
 
-  e.preventDefault();
+      e.preventDefault();
 
-  try{
+      try{
 
-    await addDoc(
-      collection(db,"notices"),
-      {
+        await addDoc(
+          collection(
+            db,
+            "notices"
+          ),
+          {
 
-        title:
-          $("noticeTitle").value.trim(),
+            title:
+              $("noticeTitle")
+                .value
+                .trim(),
 
-        text:
-          $("noticeText").value.trim(),
+            text:
+              $("noticeText")
+                .value
+                .trim(),
 
-        status:
-          $("noticeStatus").value,
+            status:
+              $("noticeStatus")
+                .value,
 
-        createdAt:
-          serverTimestamp()
+            createdAt:
+              serverTimestamp()
+
+          }
+        );
+
+        $("noticeForm")
+          .reset();
+
+        showMessage(
+          "Notice saved successfully."
+        );
+
+        await loadNotices();
+
+      }catch(error){
+
+        showMessage(
+          error.message,
+          "error"
+        );
 
       }
-    );
 
-    $("noticeForm").reset();
-
-    showMessage(
-      "Notice saved successfully."
-    );
-
-    await loadNotices();
-
-  }catch(error){
-
-    showMessage(
-      error.message,
-      "error"
-    );
-
-  }
-
-});
+    }
+  );
 
 
 async function loadNotices(){
 
-  const snap=
+  const snap =
     await getDocs(
-      collection(db,"notices")
+      collection(
+        db,
+        "notices"
+      )
     );
 
-  $("noticesTable").innerHTML="";
+  $("noticesTable")
+    .innerHTML = "";
 
-  const rows=[];
+  const rows = [];
 
-  snap.forEach(item=>{
+  snap.forEach(item => {
 
     rows.push({
-
       id:item.id,
-
       ...item.data()
-
     });
 
   });
 
-  rows.sort((a,b)=>{
+  rows.sort(
+    (a,b) => {
 
-    const aa=
-      a.createdAt?.seconds || 0;
+      const aa =
+        a.createdAt?.seconds ||
+        0;
 
-    const bb=
-      b.createdAt?.seconds || 0;
+      const bb =
+        b.createdAt?.seconds ||
+        0;
 
-    return bb-aa;
+      return bb-aa;
 
-  });
+    }
+  );
+
 
   if(!rows.length){
 
-    $("noticesTable").innerHTML=`
+    $("noticesTable")
+      .innerHTML = `
 
-      <tr>
+        <tr>
 
-        <td colspan="4">
+          <td colspan="4">
 
-          <div class="empty">
+            <div class="empty">
 
-            <div class="empty-icon">
-              📢
+              <div class="empty-icon">
+                📢
+              </div>
+
+              No notices yet.
+
             </div>
 
-            No notices yet.
+          </td>
 
-          </div>
+        </tr>
 
-        </td>
-
-      </tr>
-
-    `;
+      `;
 
   }
 
-  rows.forEach(data=>{
 
-    const published=
-      data.status==="published";
+  rows.forEach(data => {
 
-    const tr=
-      document.createElement("tr");
+    const published =
+      data.status ===
+      "published";
 
-    tr.innerHTML=`
+    const tr =
+      document.createElement(
+        "tr"
+      );
+
+    tr.innerHTML = `
 
       <td>
 
@@ -4784,8 +5730,8 @@ async function loadNotices(){
 
         <span class="badge ${
           published
-            ?"badge-green"
-            :"badge-yellow"
+            ? "badge-green"
+            : "badge-yellow"
         }">
 
           ${escapeHtml(data.status)}
@@ -4803,15 +5749,15 @@ async function loadNotices(){
             data-id="${data.id}"
             data-status="${
               published
-                ?"draft"
-                :"published"
+                ? "draft"
+                : "published"
             }"
           >
 
             ${
               published
-                ?"Unpublish"
-                :"Publish"
+                ? "Unpublish"
+                : "Publish"
             }
 
           </button>
@@ -4834,149 +5780,190 @@ async function loadNotices(){
 
   });
 
-  document.querySelectorAll(
-    ".toggle-notice"
-  )
-  .forEach(button=>{
 
-    button.addEventListener(
-      "click",
-      async()=>{
+  document
+    .querySelectorAll(
+      ".toggle-notice"
+    )
+    .forEach(button => {
 
-        await updateDoc(
-          doc(
-            db,
-            "notices",
-            button.dataset.id
-          ),
-          {
-            status:
-              button.dataset.status
+      button.addEventListener(
+        "click",
+        async () => {
+
+          try{
+
+            await updateDoc(
+              doc(
+                db,
+                "notices",
+                button.dataset.id
+              ),
+              {
+                status:
+                  button.dataset.status
+              }
+            );
+
+            showMessage(
+              "Notice status updated."
+            );
+
+            await loadNotices();
+
+          }catch(error){
+
+            showMessage(
+              error.message,
+              "error"
+            );
+
           }
-        );
 
-        showMessage(
-          "Notice status updated."
-        );
-
-        await loadNotices();
-
-      }
-    );
-
-  });
-
-  document.querySelectorAll(
-    ".delete-notice"
-  )
-  .forEach(button=>{
-
-    button.addEventListener(
-      "click",
-      async()=>{
-
-        if(!confirm(
-          "Delete this notice?"
-        )){
-          return;
         }
+      );
 
-        await deleteDoc(
-          doc(
-            db,
-            "notices",
-            button.dataset.id
-          )
-        );
+    });
 
-        showMessage(
-          "Notice deleted."
-        );
 
-        await loadNotices();
+  document
+    .querySelectorAll(
+      ".delete-notice"
+    )
+    .forEach(button => {
 
-      }
-    );
+      button.addEventListener(
+        "click",
+        async () => {
 
-  });
+          if(
+            !confirm(
+              "Delete this notice?"
+            )
+          ){
+
+            return;
+
+          }
+
+          try{
+
+            await deleteDoc(
+              doc(
+                db,
+                "notices",
+                button.dataset.id
+              )
+            );
+
+            showMessage(
+              "Notice deleted."
+            );
+
+            await loadNotices();
+
+          }catch(error){
+
+            showMessage(
+              error.message,
+              "error"
+            );
+
+          }
+
+        }
+      );
+
+    });
 
 }
 
 
-/* =========================
-   LEAVE REQUESTS
-========================= */
+/* =====================================================
+LEAVE REQUESTS
+===================================================== */
 
 async function loadLeaves(){
 
-  const snap=
+  const snap =
     await getDocs(
-      collection(db,"leaveRequests")
+      collection(
+        db,
+        "leaveRequests"
+      )
     );
 
-  const rows=[];
+  const rows = [];
 
-  snap.forEach(item=>{
+  snap.forEach(item => {
 
     rows.push({
-
       id:item.id,
-
       ...item.data()
-
     });
 
   });
 
-  rows.sort((a,b)=>{
+  rows.sort(
+    (a,b) => {
 
-    const aa=
-      a.createdAt?.seconds || 0;
+      const aa =
+        a.createdAt?.seconds ||
+        0;
 
-    const bb=
-      b.createdAt?.seconds || 0;
+      const bb =
+        b.createdAt?.seconds ||
+        0;
 
-    return bb-aa;
+      return bb-aa;
 
-  });
+    }
+  );
 
-  $("leaveTable").innerHTML="";
+  $("leaveTable")
+    .innerHTML = "";
+
 
   if(!rows.length){
 
-    $("leaveTable").innerHTML=`
+    $("leaveTable")
+      .innerHTML = `
 
-      <tr>
+        <tr>
 
-        <td colspan="7">
+          <td colspan="7">
 
-          <div class="empty">
+            <div class="empty">
 
-            <div class="empty-icon">
-              📝
+              <div class="empty-icon">
+                📝
+              </div>
+
+              No leave requests yet.
+
             </div>
 
-            No leave requests yet.
+          </td>
 
-          </div>
+        </tr>
 
-        </td>
-
-      </tr>
-
-    `;
+      `;
 
   }
 
-  rows.forEach(data=>{
 
-    const status=
-      data.status || "pending";
+  rows.forEach(data => {
 
-    const tr=
-      document.createElement("tr");
+    const status =
+      data.status ||
+      "pending";
 
-    tr.innerHTML=`
+    const tr =
+      document.createElement(
+        "tr"
+      );
+
+    tr.innerHTML = `
 
       <td>
 
@@ -5019,11 +6006,11 @@ async function loadLeaves(){
       <td>
 
         <span class="badge ${
-          status==="approved"
-            ?"badge-green"
-            :status==="rejected"
-            ?"badge-red"
-            :"badge-yellow"
+          status === "approved"
+            ? "badge-green"
+            : status === "rejected"
+            ? "badge-red"
+            : "badge-yellow"
         }">
 
           ${escapeHtml(status)}
@@ -5081,243 +6068,314 @@ async function loadLeaves(){
 
   });
 
-  $("leaveCount").textContent=
+
+  $("leaveCount")
+    .textContent =
     rows.length;
 
-  document.querySelectorAll(
-    ".approve-leave"
-  )
-  .forEach(button=>{
 
-    button.addEventListener(
-      "click",
-      async()=>{
+  document
+    .querySelectorAll(
+      ".approve-leave"
+    )
+    .forEach(button => {
 
-        await updateDoc(
-          doc(
-            db,
-            "leaveRequests",
-            button.dataset.id
-          ),
-          {
-            status:"approved",
-            repliedAt:
-              serverTimestamp()
-          }
-        );
+      button.addEventListener(
+        "click",
+        async () => {
 
-        showMessage(
-          "Leave approved."
-        );
+          try{
 
-        await loadLeaves();
+            await updateDoc(
+              doc(
+                db,
+                "leaveRequests",
+                button.dataset.id
+              ),
+              {
+                status:"approved",
 
-      }
-    );
+                repliedAt:
+                  serverTimestamp()
+              }
+            );
 
-  });
+            showMessage(
+              "Leave approved."
+            );
 
-  document.querySelectorAll(
-    ".reject-leave"
-  )
-  .forEach(button=>{
+            await loadLeaves();
 
-    button.addEventListener(
-      "click",
-      async()=>{
+          }catch(error){
 
-        await updateDoc(
-          doc(
-            db,
-            "leaveRequests",
-            button.dataset.id
-          ),
-          {
-            status:"rejected",
-            repliedAt:
-              serverTimestamp()
-          }
-        );
-
-        showMessage(
-          "Leave rejected."
-        );
-
-        await loadLeaves();
-
-      }
-    );
-
-  });
-
-  document.querySelectorAll(
-    ".reply-leave"
-  )
-  .forEach(button=>{
-
-    button.addEventListener(
-      "click",
-      async()=>{
-
-        const reply=
-          prompt(
-            "Enter reply to parent:"
-          );
-
-        if(reply===null){
-          return;
-        }
-
-        if(!reply.trim()){
-
-          showMessage(
-            "Reply cannot be empty.",
-            "error"
-          );
-
-          return;
-
-        }
-
-        await updateDoc(
-          doc(
-            db,
-            "leaveRequests",
-            button.dataset.id
-          ),
-          {
-
-            reply:
-              reply.trim(),
-
-            repliedAt:
-              serverTimestamp()
+            showMessage(
+              error.message,
+              "error"
+            );
 
           }
-        );
 
-        showMessage(
-          "Reply sent."
-        );
-
-        await loadLeaves();
-
-      }
-    );
-
-  });
-
-  document.querySelectorAll(
-    ".delete-leave"
-  )
-  .forEach(button=>{
-
-    button.addEventListener(
-      "click",
-      async()=>{
-
-        if(!confirm(
-          "Delete this leave request?"
-        )){
-          return;
         }
+      );
 
-        await deleteDoc(
-          doc(
-            db,
-            "leaveRequests",
-            button.dataset.id
-          )
-        );
+    });
 
-        showMessage(
-          "Leave request deleted."
-        );
 
-        await loadLeaves();
+  document
+    .querySelectorAll(
+      ".reject-leave"
+    )
+    .forEach(button => {
 
-      }
-    );
+      button.addEventListener(
+        "click",
+        async () => {
 
-  });
+          try{
+
+            await updateDoc(
+              doc(
+                db,
+                "leaveRequests",
+                button.dataset.id
+              ),
+              {
+                status:"rejected",
+
+                repliedAt:
+                  serverTimestamp()
+              }
+            );
+
+            showMessage(
+              "Leave rejected."
+            );
+
+            await loadLeaves();
+
+          }catch(error){
+
+            showMessage(
+              error.message,
+              "error"
+            );
+
+          }
+
+        }
+      );
+
+    });
+
+
+  document
+    .querySelectorAll(
+      ".reply-leave"
+    )
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        async () => {
+
+          const reply =
+            prompt(
+              "Enter reply to parent:"
+            );
+
+          if(reply === null){
+            return;
+          }
+
+          if(!reply.trim()){
+
+            showMessage(
+              "Reply cannot be empty.",
+              "error"
+            );
+
+            return;
+
+          }
+
+          try{
+
+            await updateDoc(
+              doc(
+                db,
+                "leaveRequests",
+                button.dataset.id
+              ),
+              {
+
+                reply:
+                  reply.trim(),
+
+                repliedAt:
+                  serverTimestamp()
+
+              }
+            );
+
+            showMessage(
+              "Reply sent."
+            );
+
+            await loadLeaves();
+
+          }catch(error){
+
+            showMessage(
+              error.message,
+              "error"
+            );
+
+          }
+
+        }
+      );
+
+    });
+
+
+  document
+    .querySelectorAll(
+      ".delete-leave"
+    )
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        async () => {
+
+          if(
+            !confirm(
+              "Delete this leave request?"
+            )
+          ){
+
+            return;
+
+          }
+
+          try{
+
+            await deleteDoc(
+              doc(
+                db,
+                "leaveRequests",
+                button.dataset.id
+              )
+            );
+
+            showMessage(
+              "Leave request deleted."
+            );
+
+            await loadLeaves();
+
+          }catch(error){
+
+            showMessage(
+              error.message,
+              "error"
+            );
+
+          }
+
+        }
+      );
+
+    });
 
 }
 
 
-/* =========================
-   MESSAGES
-========================= */
+/* =====================================================
+MESSAGES
+===================================================== */
 
 async function loadMessages(){
 
-  const snap=
+  const snap =
     await getDocs(
-      collection(db,"messages")
+      collection(
+        db,
+        "messages"
+      )
     );
 
-  const rows=[];
+  const rows = [];
 
-  snap.forEach(item=>{
+  snap.forEach(item => {
 
     rows.push({
-
       id:item.id,
-
       ...item.data()
-
     });
 
   });
 
-  rows.sort((a,b)=>{
+  rows.sort(
+    (a,b) => {
 
-    const aa=
-      a.createdAt?.seconds || 0;
+      const aa =
+        a.createdAt?.seconds ||
+        0;
 
-    const bb=
-      b.createdAt?.seconds || 0;
+      const bb =
+        b.createdAt?.seconds ||
+        0;
 
-    return bb-aa;
+      return bb-aa;
 
-  });
+    }
+  );
 
-  $("messagesTable").innerHTML="";
+  $("messagesTable")
+    .innerHTML = "";
+
 
   if(!rows.length){
 
-    $("messagesTable").innerHTML=`
+    $("messagesTable")
+      .innerHTML = `
 
-      <tr>
+        <tr>
 
-        <td colspan="6">
+          <td colspan="6">
 
-          <div class="empty">
+            <div class="empty">
 
-            <div class="empty-icon">
-              💬
+              <div class="empty-icon">
+                💬
+              </div>
+
+              No parent messages yet.
+
             </div>
 
-            No parent messages yet.
+          </td>
 
-          </div>
+        </tr>
 
-        </td>
-
-      </tr>
-
-    `;
+      `;
 
   }
 
-  rows.forEach(data=>{
 
-    const status=
-      data.status || "unread";
+  rows.forEach(data => {
 
-    const tr=
-      document.createElement("tr");
+    const status =
+      data.status ||
+      "unread";
 
-    tr.innerHTML=`
+    const tr =
+      document.createElement(
+        "tr"
+      );
+
+    tr.innerHTML = `
 
       <td>
 
@@ -5354,9 +6412,9 @@ async function loadMessages(){
       <td>
 
         <span class="badge ${
-          status==="replied"
-            ?"badge-green"
-            :"badge-yellow"
+          status === "replied"
+            ? "badge-green"
+            : "badge-yellow"
         }">
 
           ${escapeHtml(status)}
@@ -5400,229 +6458,292 @@ async function loadMessages(){
 
   });
 
-  $("messageCount").textContent=
+
+  $("messageCount")
+    .textContent =
     rows.length;
 
-  document.querySelectorAll(
-    ".reply-message"
-  )
-  .forEach(button=>{
 
-    button.addEventListener(
-      "click",
-      async()=>{
+  document
+    .querySelectorAll(
+      ".reply-message"
+    )
+    .forEach(button => {
 
-        const reply=
-          prompt(
-            "Enter reply to parent:"
-          );
+      button.addEventListener(
+        "click",
+        async () => {
 
-        if(reply===null){
-          return;
-        }
+          const reply =
+            prompt(
+              "Enter reply to parent:"
+            );
 
-        if(!reply.trim()){
+          if(reply === null){
+            return;
+          }
 
-          showMessage(
-            "Reply cannot be empty.",
-            "error"
-          );
+          if(!reply.trim()){
 
-          return;
+            showMessage(
+              "Reply cannot be empty.",
+              "error"
+            );
 
-        }
-
-        await updateDoc(
-          doc(
-            db,
-            "messages",
-            button.dataset.id
-          ),
-          {
-
-            reply:
-              reply.trim(),
-
-            status:
-              "replied",
-
-            repliedAt:
-              serverTimestamp()
+            return;
 
           }
-        );
 
-        showMessage(
-          "Parent reply sent."
-        );
+          try{
 
-        await loadMessages();
+            await updateDoc(
+              doc(
+                db,
+                "messages",
+                button.dataset.id
+              ),
+              {
 
-      }
-    );
+                reply:
+                  reply.trim(),
 
-  });
+                status:
+                  "replied",
 
-  document.querySelectorAll(
-    ".delete-message"
-  )
-  .forEach(button=>{
+                repliedAt:
+                  serverTimestamp()
 
-    button.addEventListener(
-      "click",
-      async()=>{
+              }
+            );
 
-        if(!confirm(
-          "Delete this message?"
-        )){
-          return;
+            showMessage(
+              "Parent reply sent."
+            );
+
+            await loadMessages();
+
+          }catch(error){
+
+            showMessage(
+              error.message,
+              "error"
+            );
+
+          }
+
         }
+      );
 
-        await deleteDoc(
-          doc(
-            db,
-            "messages",
-            button.dataset.id
-          )
-        );
+    });
 
-        showMessage(
-          "Message deleted."
-        );
 
-        await loadMessages();
+  document
+    .querySelectorAll(
+      ".delete-message"
+    )
+    .forEach(button => {
 
-      }
-    );
+      button.addEventListener(
+        "click",
+        async () => {
 
-  });
+          if(
+            !confirm(
+              "Delete this message?"
+            )
+          ){
+
+            return;
+
+          }
+
+          try{
+
+            await deleteDoc(
+              doc(
+                db,
+                "messages",
+                button.dataset.id
+              )
+            );
+
+            showMessage(
+              "Message deleted."
+            );
+
+            await loadMessages();
+
+          }catch(error){
+
+            showMessage(
+              error.message,
+              "error"
+            );
+
+          }
+
+        }
+      );
+
+    });
 
 }
 
 
-/* =========================
-   DONATIONS
-========================= */
+/* =====================================================
+DONATIONS
+===================================================== */
 
 async function loadDonations(){
 
   try{
 
-    const snap=
+    const snap =
       await getDocs(
-        collection(db,"donations")
+        collection(
+          db,
+          "donations"
+        )
       );
 
-    const rows=[];
+    const rows = [];
 
-    snap.forEach(item=>{
+    snap.forEach(item => {
 
       rows.push({
-
         id:item.id,
-
         ...item.data()
-
       });
 
     });
 
 
-    rows.sort((a,b)=>{
+    rows.sort(
+      (a,b) => {
 
-      const aa=
-        a.createdAt?.seconds || 0;
+        const aa =
+          a.createdAt?.seconds ||
+          0;
 
-      const bb=
-        b.createdAt?.seconds || 0;
+        const bb =
+          b.createdAt?.seconds ||
+          0;
 
-      return bb-aa;
+        return bb-aa;
 
-    });
-
-
-    $("donationsTable").innerHTML="";
+      }
+    );
 
 
-    let pendingCount=0;
+    $("donationsTable")
+      .innerHTML = "";
 
-    let verifiedCount=0;
+
+    let pendingCount = 0;
+
+    let verifiedCount = 0;
 
 
     if(!rows.length){
 
-      $("donationsTable").innerHTML=`
+      $("donationsTable")
+        .innerHTML = `
 
-        <tr>
+          <tr>
 
-          <td colspan="8">
+            <td colspan="8">
 
-            <div class="empty">
+              <div class="empty">
 
-              <div class="empty-icon">
-                ₹
+                <div class="empty-icon">
+                  ₹
+                </div>
+
+                No donations received yet.
+
               </div>
 
-              No donations received yet.
+            </td>
 
-            </div>
+          </tr>
 
-          </td>
-
-        </tr>
-
-      `;
+        `;
 
     }
 
 
-    rows.forEach(data=>{
+    rows.forEach(data => {
 
-      const status=
-        String(data.status || "pending")
-          .toLowerCase();
+      const status =
+        String(
+          data.status ||
+          "pending"
+        ).toLowerCase();
 
 
-      if(status==="pending"){
+      if(
+        status === "pending"
+      ){
+
         pendingCount++;
+
       }
 
 
-      if(status==="verified"){
+      if(
+        status === "verified"
+      ){
+
         verifiedCount++;
+
       }
 
 
-      let badgeClass="badge-yellow";
+      let badgeClass =
+        "badge-yellow";
 
 
-      if(status==="verified"){
-        badgeClass="badge-green";
+      if(
+        status === "verified"
+      ){
+
+        badgeClass =
+          "badge-green";
+
+      }else if(
+        status === "rejected"
+      ){
+
+        badgeClass =
+          "badge-red";
+
       }
 
-      else if(status==="rejected"){
-        badgeClass="badge-red";
-      }
+
+      let dateText =
+        "-";
 
 
-      let dateText="-";
+      if(
+        data.createdAt?.seconds
+      ){
 
-
-      if(data.createdAt?.seconds){
-
-        dateText=
+        dateText =
           new Date(
-            data.createdAt.seconds*1000
+            data.createdAt.seconds *
+            1000
           ).toLocaleString();
 
       }
 
 
-      const tr=
-        document.createElement("tr");
+      const tr =
+        document.createElement(
+          "tr"
+        );
 
 
-      tr.innerHTML=`
+      tr.innerHTML = `
 
         <td>
 
@@ -5644,25 +6765,23 @@ async function loadDonations(){
 
         </td>
 
-
         <td>
           ${escapeHtml(
             data.parentEmail || "-"
           )}
         </td>
 
-
         <td>
 
           <strong>
             ₹${escapeHtml(
-              Number(data.amount || 0)
-                .toFixed(2)
+              Number(
+                data.amount || 0
+              ).toFixed(2)
             )}
           </strong>
 
         </td>
-
 
         <td>
 
@@ -5674,11 +6793,9 @@ async function loadDonations(){
 
         </td>
 
-
         <td>
           ${escapeHtml(dateText)}
         </td>
-
 
         <td>
 
@@ -5690,7 +6807,6 @@ async function loadDonations(){
 
         </td>
 
-
         <td>
 
           ${escapeHtml(
@@ -5698,7 +6814,6 @@ async function loadDonations(){
           )}
 
         </td>
-
 
         <td>
 
@@ -5711,14 +6826,12 @@ async function loadDonations(){
               Verify
             </button>
 
-
             <button
               class="warning reject-donation"
               data-id="${data.id}"
             >
               Reject
             </button>
-
 
             <button
               class="danger delete-donation"
@@ -5740,313 +6853,309 @@ async function loadDonations(){
     });
 
 
-    $("donationTotal").textContent=
+    $("donationTotal")
+      .textContent =
       rows.length;
 
-    $("donationPending").textContent=
+    $("donationPending")
+      .textContent =
       pendingCount;
 
-    $("donationVerified").textContent=
+    $("donationVerified")
+      .textContent =
       verifiedCount;
 
 
     /* VERIFY */
 
-    document.querySelectorAll(
-      ".verify-donation"
-    )
-    .forEach(button=>{
+    document
+      .querySelectorAll(
+        ".verify-donation"
+      )
+      .forEach(button => {
 
-      button.addEventListener(
-        "click",
-        async()=>{
+        button.addEventListener(
+          "click",
+          async () => {
 
-          if(!confirm(
-            "Verify this donation?"
-          )){
+            if(
+              !confirm(
+                "Verify this donation?"
+              )
+            ){
 
-            return;
+              return;
 
-          }
+            }
 
+            const note =
+              prompt(
+                "Enter admin note (optional):"
+              );
 
-          const note=
-            prompt(
-              "Enter admin note (optional):"
-            );
+            try{
 
+              await updateDoc(
+                doc(
+                  db,
+                  "donations",
+                  button.dataset.id
+                ),
+                {
 
-          try{
+                  status:
+                    "verified",
 
-            await updateDoc(
+                  adminNote:
+                    note
+                      ? note.trim()
+                      : "",
 
-              doc(
-                db,
-                "donations",
-                button.dataset.id
-              ),
+                  verifiedAt:
+                    serverTimestamp()
 
-              {
+                }
+              );
 
-                status:
-                  "verified",
+              showMessage(
+                "Donation verified successfully."
+              );
 
-                adminNote:
-                  note
-                    ?note.trim()
-                    :"",
+              await loadDonations();
 
-                verifiedAt:
-                  serverTimestamp()
+            }catch(error){
 
-              }
+              console.error(error);
 
-            );
+              showMessage(
+                error.message,
+                "error"
+              );
 
-
-            showMessage(
-              "Donation verified successfully."
-            );
-
-
-            await loadDonations();
-
-
-          }catch(error){
-
-            console.error(error);
-
-            showMessage(
-              error.message,
-              "error"
-            );
+            }
 
           }
+        );
 
-        }
-      );
-
-    });
+      });
 
 
     /* REJECT */
 
-    document.querySelectorAll(
-      ".reject-donation"
-    )
-    .forEach(button=>{
+    document
+      .querySelectorAll(
+        ".reject-donation"
+      )
+      .forEach(button => {
 
-      button.addEventListener(
-        "click",
-        async()=>{
+        button.addEventListener(
+          "click",
+          async () => {
 
-          const note=
-            prompt(
-              "Enter reason for rejecting this donation:"
-            );
+            const note =
+              prompt(
+                "Enter reason for rejecting this donation:"
+              );
 
+            if(note === null){
+              return;
+            }
 
-          if(note===null){
-            return;
-          }
+            if(!note.trim()){
 
+              showMessage(
+                "Please enter a rejection reason.",
+                "error"
+              );
 
-          if(!note.trim()){
+              return;
 
-            showMessage(
-              "Please enter a rejection reason.",
-              "error"
-            );
+            }
 
-            return;
+            if(
+              !confirm(
+                "Reject this donation?"
+              )
+            ){
 
-          }
+              return;
 
+            }
 
-          if(!confirm(
-            "Reject this donation?"
-          )){
+            try{
 
-            return;
+              await updateDoc(
+                doc(
+                  db,
+                  "donations",
+                  button.dataset.id
+                ),
+                {
 
-          }
+                  status:
+                    "rejected",
 
+                  adminNote:
+                    note.trim(),
 
-          try{
+                  rejectedAt:
+                    serverTimestamp()
 
-            await updateDoc(
+                }
+              );
 
-              doc(
-                db,
-                "donations",
-                button.dataset.id
-              ),
+              showMessage(
+                "Donation rejected."
+              );
 
-              {
+              await loadDonations();
 
-                status:
-                  "rejected",
+            }catch(error){
 
-                adminNote:
-                  note.trim(),
+              console.error(error);
 
-                rejectedAt:
-                  serverTimestamp()
+              showMessage(
+                error.message,
+                "error"
+              );
 
-              }
-
-            );
-
-
-            showMessage(
-              "Donation rejected."
-            );
-
-
-            await loadDonations();
-
-
-          }catch(error){
-
-            console.error(error);
-
-            showMessage(
-              error.message,
-              "error"
-            );
+            }
 
           }
+        );
 
-        }
-      );
-
-    });
+      });
 
 
     /* DELETE */
 
-    document.querySelectorAll(
-      ".delete-donation"
-    )
-    .forEach(button=>{
+    document
+      .querySelectorAll(
+        ".delete-donation"
+      )
+      .forEach(button => {
 
-      button.addEventListener(
-        "click",
-        async()=>{
+        button.addEventListener(
+          "click",
+          async () => {
 
-          if(!confirm(
-            "Delete this donation record?"
-          )){
-
-            return;
-
-          }
-
-
-          try{
-
-            await deleteDoc(
-
-              doc(
-                db,
-                "donations",
-                button.dataset.id
+            if(
+              !confirm(
+                "Delete this donation record?"
               )
+            ){
 
-            );
+              return;
 
+            }
 
-            showMessage(
-              "Donation record deleted."
-            );
+            try{
 
+              await deleteDoc(
+                doc(
+                  db,
+                  "donations",
+                  button.dataset.id
+                )
+              );
 
-            await loadDonations();
+              showMessage(
+                "Donation record deleted."
+              );
 
+              await loadDonations();
 
-          }catch(error){
+            }catch(error){
 
-            console.error(error);
+              console.error(error);
 
-            showMessage(
-              error.message,
-              "error"
-            );
+              showMessage(
+                error.message,
+                "error"
+              );
+
+            }
 
           }
+        );
 
-        }
-      );
-
-    });
+      });
 
 
   }catch(error){
 
     console.error(error);
 
-    $("donationsTable").innerHTML=`
+    $("donationsTable")
+      .innerHTML = `
 
-      <tr>
+        <tr>
 
-        <td colspan="8">
+          <td colspan="8">
 
-          <div class="empty">
+            <div class="empty">
 
-            <div class="empty-icon">
-              ⚠️
+              <div class="empty-icon">
+                ⚠️
+              </div>
+
+              Unable to load donations.
+
+              <br><br>
+
+              ${escapeHtml(
+                error.message
+              )}
+
             </div>
 
-            Unable to load donations.
+          </td>
 
-            <br><br>
+        </tr>
 
-            ${escapeHtml(error.message)}
-
-          </div>
-
-        </td>
-
-      </tr>
-
-    `;
+      `;
 
   }
 
 }
 
 
-/* =========================
-   PUBLIC RESULT
-========================= */
+/* =====================================================
+PUBLIC RESULT
+===================================================== */
 
 $("openPublicResult")
-.addEventListener("click",()=>{
+  .addEventListener(
+    "click",
+    () => {
 
-  location.href="result.html";
+      location.href =
+        "result.html";
 
-});
+    }
+  );
 
 
-/* =========================
-   DEFAULT DATE
-========================= */
+/* =====================================================
+DEFAULT DATES
+===================================================== */
 
 function setDefaultDates(){
 
-  const today=
+  const today =
     new Date()
       .toISOString()
       .split("T")[0];
 
-  $("attendanceDate").value=
+  $("attendanceDate")
+    .value =
     today;
 
-  $("studyDate").value=
+  $("studyDate")
+    .value =
     today;
 
 }
-
 
 setDefaultDates();
 
