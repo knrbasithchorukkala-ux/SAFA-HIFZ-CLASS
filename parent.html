@@ -291,6 +291,7 @@ body::before{
 .home-donation-banner{
   position:relative;
   overflow:hidden;
+  z-index:10;
   margin-bottom:22px;
   border-radius:20px;
   padding:20px;
@@ -314,6 +315,7 @@ body::before{
   right:-60px;
   top:-80px;
   background:rgba(255,255,255,.10);
+  pointer-events:none;
 }
 
 .home-donation-banner::after{
@@ -325,11 +327,12 @@ body::before{
   left:-45px;
   bottom:-65px;
   background:rgba(246,217,139,.10);
+  pointer-events:none;
 }
 
 .donation-banner-content{
   position:relative;
-  z-index:2;
+  z-index:20;
   display:flex;
   align-items:center;
   gap:18px;
@@ -347,10 +350,12 @@ body::before{
   border:1px solid rgba(255,255,255,.22);
   font-size:31px;
   box-shadow:0 8px 20px rgba(0,0,0,.10);
+  pointer-events:none;
 }
 
 .donation-banner-text{
   flex:1;
+  pointer-events:none;
 }
 
 .donation-banner-text .small-title{
@@ -375,6 +380,8 @@ body::before{
 }
 
 .donation-now-btn{
+  position:relative;
+  z-index:50;
   flex:0 0 auto;
   border:0;
   background:#f6d98b;
@@ -384,11 +391,18 @@ body::before{
   font-weight:900;
   box-shadow:0 7px 18px rgba(0,0,0,.14);
   transition:.2s;
+  pointer-events:auto;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
 }
 
 .donation-now-btn:hover{
   transform:translateY(-2px);
   background:#ffe5a5;
+}
+
+.donation-now-btn:active{
+  transform:scale(.97);
 }
 
 
@@ -1817,8 +1831,8 @@ tr:hover td{
 
       <button
         class="donation-now-btn"
-        type="button"
-        data-go="donations">
+        id="donateNowBtn"
+        type="button">
 
         DONATE NOW
         →
@@ -2457,8 +2471,6 @@ tr:hover td{
   </div>
 
 
-  <!-- BANK DETAILS -->
-
   <div class="panel">
 
     <div class="bank-card">
@@ -2500,8 +2512,6 @@ tr:hover td{
     </div>
 
 
-    <!-- QR -->
-
     <div class="qr-wrap">
 
       <img
@@ -2536,10 +2546,6 @@ tr:hover td{
 
   </div>
 
-
-  <!-- =================================================
-       DONATION PAYMENT + SUBMISSION
-  ================================================= -->
 
   <div class="panel">
 
@@ -2616,8 +2622,6 @@ tr:hover td{
     </div>
 
 
-    <!-- DIRECT UPI -->
-
     <div class="upi-payment-box">
 
       <div class="upi-payment-head">
@@ -2691,8 +2695,6 @@ tr:hover td{
 
   </div>
 
-
-  <!-- DONATION HISTORY -->
 
   <div class="panel">
 
@@ -2813,6 +2815,7 @@ function escapeHtml(value){
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
+
 }
 
 
@@ -2896,71 +2899,6 @@ let studentData = null;
    NAVIGATION
 ========================================================= */
 
-document
-  .querySelectorAll(".nav-btn")
-  .forEach(button=>{
-
-    button.addEventListener(
-      "click",
-      ()=>{
-
-        openSection(
-          button.dataset.section
-        );
-
-        $("sidebar")
-          .classList
-          .remove("open");
-
-      }
-    );
-
-  });
-
-
-/* QUICK ACCESS + DONATE NOW */
-
-document
-  .querySelectorAll(
-    ".quick-btn, .donation-now-btn"
-  )
-  .forEach(button=>{
-
-    button.addEventListener(
-      "click",
-      ()=>{
-
-        openSection(
-          button.dataset.go
-        );
-
-        if(
-          button.classList.contains(
-            "donation-now-btn"
-          )
-        ){
-
-          setTimeout(()=>{
-
-            const amount =
-              $("donationAmount");
-
-            if(amount){
-
-              amount.focus();
-
-            }
-
-          },350);
-
-        }
-
-      }
-    );
-
-  });
-
-
 function openSection(id){
 
   document
@@ -3017,6 +2955,107 @@ function openSection(id){
   });
 
 }
+
+
+/* =========================================================
+   IMPORTANT DONATE BUTTON FIX
+========================================================= */
+
+window.openDonation = function(){
+
+  openSection("donations");
+
+  setTimeout(()=>{
+
+    const amount =
+      $("donationAmount");
+
+    if(amount){
+
+      amount.focus();
+
+    }
+
+  },300);
+
+};
+
+
+/* =========================================================
+   NAV BUTTONS
+========================================================= */
+
+document
+  .querySelectorAll(".nav-btn")
+  .forEach(button=>{
+
+    button.addEventListener(
+      "click",
+      ()=>{
+
+        openSection(
+          button.dataset.section
+        );
+
+        $("sidebar")
+          .classList
+          .remove("open");
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   DONATE NOW
+========================================================= */
+
+const donateNowBtn =
+  $("donateNowBtn");
+
+if(donateNowBtn){
+
+  donateNowBtn.addEventListener(
+    "click",
+    function(event){
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      window.openDonation();
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   QUICK ACCESS
+========================================================= */
+
+document
+  .querySelectorAll(".quick-btn")
+  .forEach(button=>{
+
+    button.addEventListener(
+      "click",
+      ()=>{
+
+        const section =
+          button.getAttribute("data-go");
+
+        if(section){
+
+          openSection(section);
+
+        }
+
+      }
+    );
+
+  });
 
 
 /* =========================================================
@@ -4687,21 +4726,8 @@ $("upiPayBtn")
         encodeURIComponent(note);
 
 
-      try{
-
-        window.location.href =
-          upiUrl;
-
-      }catch(error){
-
-        console.error(error);
-
-        showMessage(
-          "Unable to open UPI payment.",
-          "error"
-        );
-
-      }
+      window.location.href =
+        upiUrl;
 
     }
   );
