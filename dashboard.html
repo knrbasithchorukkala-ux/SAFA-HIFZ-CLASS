@@ -745,6 +745,49 @@ td strong{
 
 
 /* =========================================
+   DONATION VERIFICATION
+========================================= */
+
+.donation-summary{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-bottom:20px;
+}
+
+.donation-stat{
+  background:#f7fafc;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:16px;
+}
+
+.donation-stat small{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:700;
+  margin-bottom:5px;
+}
+
+.donation-stat strong{
+  font-size:24px;
+}
+
+.donation-pending{
+  color:#916300;
+}
+
+.donation-verified{
+  color:#18794e;
+}
+
+.donation-rejected{
+  color:#b42318;
+}
+
+
+/* =========================================
    EDIT STUDENT MODAL
 ========================================= */
 
@@ -957,6 +1000,10 @@ td strong{
   .college-ayah{
     font-size:21px;
     margin-top:13px;
+  }
+
+  .donation-summary{
+    grid-template-columns:1fr;
   }
 
 }
@@ -1227,6 +1274,13 @@ td strong{
       <span>💬</span> Parent Messages
     </button>
 
+    <button
+      class="menu-btn"
+      data-section="donations"
+    >
+      <span>💚</span> Donations
+    </button>
+
 
     <div class="menu-label">Public</div>
 
@@ -1296,10 +1350,6 @@ td strong{
   id="home"
 >
 
-
-<!-- =========================================
-     COLLEGE PHOTO + QURAN HADITH
-========================================= -->
 
 <div class="college-header">
 
@@ -2725,6 +2775,136 @@ td strong{
 
 
 <!-- =========================
+     DONATIONS
+========================= -->
+
+<section
+  class="section"
+  id="donations"
+>
+
+  <div class="section-head">
+
+    <div>
+
+      <h2>
+        Donations
+      </h2>
+
+      <p>
+        View and verify donations received from parents.
+      </p>
+
+    </div>
+
+    <div class="section-tag">
+      DONATION VERIFICATION
+    </div>
+
+  </div>
+
+
+  <div class="donation-summary">
+
+    <div class="donation-stat">
+
+      <small>
+        Total Donations
+      </small>
+
+      <strong id="donationTotal">
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="donation-stat">
+
+      <small>
+        Pending
+      </small>
+
+      <strong
+        id="donationPending"
+        class="donation-pending"
+      >
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="donation-stat">
+
+      <small>
+        Verified
+      </small>
+
+      <strong
+        id="donationVerified"
+        class="donation-verified"
+      >
+        0
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <div class="panel">
+
+    <div class="panel-head">
+
+      <div>
+
+        <h3>
+          Donation Received
+        </h3>
+
+        <div class="panel-desc">
+          Verify payment details submitted by parents.
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Student</th>
+            <th>Parent</th>
+            <th>Amount</th>
+            <th>Transaction ID</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Admin Note</th>
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="donationsTable"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
      PUBLIC RESULT
 ========================= -->
 
@@ -3094,7 +3274,8 @@ async function loadEverything(){
     loadResults(),
     loadNotices(),
     loadLeaves(),
-    loadMessages()
+    loadMessages(),
+    loadDonations()
 
   ]);
 
@@ -5293,6 +5474,522 @@ async function loadMessages(){
     );
 
   });
+
+}
+
+
+/* =========================
+   DONATIONS
+========================= */
+
+async function loadDonations(){
+
+  try{
+
+    const snap=
+      await getDocs(
+        collection(db,"donations")
+      );
+
+    const rows=[];
+
+    snap.forEach(item=>{
+
+      rows.push({
+
+        id:item.id,
+
+        ...item.data()
+
+      });
+
+    });
+
+
+    rows.sort((a,b)=>{
+
+      const aa=
+        a.createdAt?.seconds || 0;
+
+      const bb=
+        b.createdAt?.seconds || 0;
+
+      return bb-aa;
+
+    });
+
+
+    $("donationsTable").innerHTML="";
+
+
+    let pendingCount=0;
+
+    let verifiedCount=0;
+
+
+    if(!rows.length){
+
+      $("donationsTable").innerHTML=`
+
+        <tr>
+
+          <td colspan="8">
+
+            <div class="empty">
+
+              <div class="empty-icon">
+                💚
+              </div>
+
+              No donations received yet.
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+
+
+    rows.forEach(data=>{
+
+      const status=
+        String(data.status || "pending")
+          .toLowerCase();
+
+
+      if(status==="pending"){
+        pendingCount++;
+      }
+
+
+      if(status==="verified"){
+        verifiedCount++;
+      }
+
+
+      let badgeClass="badge-yellow";
+
+
+      if(status==="verified"){
+        badgeClass="badge-green";
+      }
+
+      else if(status==="rejected"){
+        badgeClass="badge-red";
+      }
+
+
+      let dateText="-";
+
+
+      if(data.createdAt?.seconds){
+
+        dateText=
+          new Date(
+            data.createdAt.seconds*1000
+          ).toLocaleString();
+
+      }
+
+
+      const tr=
+        document.createElement("tr");
+
+
+      tr.innerHTML=`
+
+        <td>
+
+          <strong>
+            ${escapeHtml(
+              studentNameByNumber(
+                data.studentNumber
+              )
+            )}
+          </strong>
+
+          <br>
+
+          <small>
+            ${escapeHtml(
+              data.studentNumber || "-"
+            )}
+          </small>
+
+        </td>
+
+
+        <td>
+          ${escapeHtml(
+            data.parentEmail || "-"
+          )}
+        </td>
+
+
+        <td>
+
+          <strong>
+            ₹${escapeHtml(
+              Number(data.amount || 0)
+                .toFixed(2)
+            )}
+          </strong>
+
+        </td>
+
+
+        <td>
+
+          <strong>
+            ${escapeHtml(
+              data.transactionId || "-"
+            )}
+          </strong>
+
+        </td>
+
+
+        <td>
+          ${escapeHtml(dateText)}
+        </td>
+
+
+        <td>
+
+          <span class="badge ${badgeClass}">
+
+            ${escapeHtml(status)}
+
+          </span>
+
+        </td>
+
+
+        <td>
+
+          ${escapeHtml(
+            data.adminNote || "-"
+          )}
+
+        </td>
+
+
+        <td>
+
+          <div class="actions">
+
+            <button
+              class="success verify-donation"
+              data-id="${data.id}"
+            >
+              Verify
+            </button>
+
+
+            <button
+              class="warning reject-donation"
+              data-id="${data.id}"
+            >
+              Reject
+            </button>
+
+
+            <button
+              class="danger delete-donation"
+              data-id="${data.id}"
+            >
+              Delete
+            </button>
+
+          </div>
+
+        </td>
+
+      `;
+
+
+      $("donationsTable")
+        .appendChild(tr);
+
+    });
+
+
+    $("donationTotal").textContent=
+      rows.length;
+
+    $("donationPending").textContent=
+      pendingCount;
+
+    $("donationVerified").textContent=
+      verifiedCount;
+
+
+    /* VERIFY */
+
+    document.querySelectorAll(
+      ".verify-donation"
+    )
+    .forEach(button=>{
+
+      button.addEventListener(
+        "click",
+        async()=>{
+
+          if(!confirm(
+            "Verify this donation?"
+          )){
+
+            return;
+
+          }
+
+
+          const note=
+            prompt(
+              "Enter admin note (optional):"
+            );
+
+
+          try{
+
+            await updateDoc(
+
+              doc(
+                db,
+                "donations",
+                button.dataset.id
+              ),
+
+              {
+
+                status:
+                  "verified",
+
+                adminNote:
+                  note
+                    ?note.trim()
+                    :"",
+
+                verifiedAt:
+                  serverTimestamp()
+
+              }
+
+            );
+
+
+            showMessage(
+              "Donation verified successfully."
+            );
+
+
+            await loadDonations();
+
+
+          }catch(error){
+
+            console.error(error);
+
+            showMessage(
+              error.message,
+              "error"
+            );
+
+          }
+
+        }
+      );
+
+    });
+
+
+    /* REJECT */
+
+    document.querySelectorAll(
+      ".reject-donation"
+    )
+    .forEach(button=>{
+
+      button.addEventListener(
+        "click",
+        async()=>{
+
+          const note=
+            prompt(
+              "Enter reason for rejecting this donation:"
+            );
+
+
+          if(note===null){
+            return;
+          }
+
+
+          if(!note.trim()){
+
+            showMessage(
+              "Please enter a rejection reason.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          if(!confirm(
+            "Reject this donation?"
+          )){
+
+            return;
+
+          }
+
+
+          try{
+
+            await updateDoc(
+
+              doc(
+                db,
+                "donations",
+                button.dataset.id
+              ),
+
+              {
+
+                status:
+                  "rejected",
+
+                adminNote:
+                  note.trim(),
+
+                rejectedAt:
+                  serverTimestamp()
+
+              }
+
+            );
+
+
+            showMessage(
+              "Donation rejected."
+            );
+
+
+            await loadDonations();
+
+
+          }catch(error){
+
+            console.error(error);
+
+            showMessage(
+              error.message,
+              "error"
+            );
+
+          }
+
+        }
+      );
+
+    });
+
+
+    /* DELETE */
+
+    document.querySelectorAll(
+      ".delete-donation"
+    )
+    .forEach(button=>{
+
+      button.addEventListener(
+        "click",
+        async()=>{
+
+          if(!confirm(
+            "Delete this donation record?"
+          )){
+
+            return;
+
+          }
+
+
+          try{
+
+            await deleteDoc(
+
+              doc(
+                db,
+                "donations",
+                button.dataset.id
+              )
+
+            );
+
+
+            showMessage(
+              "Donation record deleted."
+            );
+
+
+            await loadDonations();
+
+
+          }catch(error){
+
+            console.error(error);
+
+            showMessage(
+              error.message,
+              "error"
+            );
+
+          }
+
+        }
+      );
+
+    });
+
+
+  }catch(error){
+
+    console.error(error);
+
+    $("donationsTable").innerHTML=`
+
+      <tr>
+
+        <td colspan="8">
+
+          <div class="empty">
+
+            <div class="empty-icon">
+              ⚠️
+            </div>
+
+            Unable to load donations.
+
+            <br><br>
+
+            ${escapeHtml(error.message)}
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+
+  }
 
 }
 
