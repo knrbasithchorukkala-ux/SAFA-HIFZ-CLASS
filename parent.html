@@ -58,45 +58,11 @@ body::before{
   opacity:.035;
 
   background-image:
-    linear-gradient(
-      30deg,
-      #123b5d 12%,
-      transparent 12.5%,
-      transparent 87%,
-      #123b5d 87.5%,
-      #123b5d
-    ),
-    linear-gradient(
-      150deg,
-      #123b5d 12%,
-      transparent 12.5%,
-      transparent 87%,
-      #123b5d 87.5%,
-      #123b5d
-    ),
-    linear-gradient(
-      30deg,
-      #123b5d 12%,
-      transparent 12.5%,
-      transparent 87%,
-      #123b5d 87.5%,
-      #123b5d
-    ),
-    linear-gradient(
-      150deg,
-      #123b5d 12%,
-      transparent 12.5%,
-      transparent 87%,
-      #123b5d 87.5%,
-      #123b5d
-    ),
-    linear-gradient(
-      60deg,
-      #123b5d 25%,
-      transparent 25.5%,
-      transparent 75%,
-      #123b5d 75%
-    );
+    linear-gradient(30deg,#123b5d 12%,transparent 12.5%,transparent 87%,#123b5d 87.5%,#123b5d),
+    linear-gradient(150deg,#123b5d 12%,transparent 12.5%,transparent 87%,#123b5d 87.5%,#123b5d),
+    linear-gradient(30deg,#123b5d 12%,transparent 12.5%,transparent 87%,#123b5d 87.5%,#123b5d),
+    linear-gradient(150deg,#123b5d 12%,transparent 12.5%,transparent 87%,#123b5d 87.5%,#123b5d),
+    linear-gradient(60deg,#123b5d 25%,transparent 25.5%,transparent 75%,#123b5d 75%);
 
   background-size:
     40px 70px,
@@ -335,8 +301,7 @@ body::before{
       #087f5b 48%,
       #c49a35 150%
     );
-  box-shadow:
-    0 14px 35px rgba(7,94,84,.20);
+  box-shadow:0 14px 35px rgba(7,94,84,.20);
   color:white;
 }
 
@@ -485,10 +450,7 @@ body::before{
 .college-ayah{
   margin-top:18px;
   color:#f6d98b;
-  font-family:
-    "Amiri",
-    "Traditional Arabic",
-    serif;
+  font-family:"Amiri","Traditional Arabic",serif;
   font-size:27px;
   font-weight:bold;
   direction:rtl;
@@ -576,12 +538,7 @@ body::before{
   top:0;
   bottom:0;
   width:5px;
-  background:linear-gradient(
-    180deg,
-    #176b87,
-    #24936e,
-    #d5a83c
-  );
+  background:linear-gradient(180deg,#176b87,#24936e,#d5a83c);
 }
 
 .child-top{
@@ -761,9 +718,6 @@ body::before{
   margin-bottom:17px;
 }
 
-
-/* colorful panels */
-
 #attendance .panel{
   border-top:5px solid #24936e;
 }
@@ -878,11 +832,7 @@ tr:hover td{
   border-radius:15px;
   padding:19px;
   margin-bottom:12px;
-  background:linear-gradient(
-    135deg,
-    #f1f8ff,
-    #e8f7ff
-  );
+  background:linear-gradient(135deg,#f1f8ff,#e8f7ff);
   box-shadow:var(--shadow);
   border-left:5px solid #3182ce;
 }
@@ -914,11 +864,7 @@ tr:hover td{
 .progress-fill{
   height:100%;
   width:70%;
-  background:linear-gradient(
-    90deg,
-    #176b87,
-    #24936e
-  );
+  background:linear-gradient(90deg,#176b87,#24936e);
   border-radius:10px;
 }
 
@@ -936,11 +882,7 @@ tr:hover td{
   align-items:center;
   justify-content:space-between;
   gap:15px;
-  background:linear-gradient(
-    135deg,
-    #fffdf4,
-    #fff6d9
-  );
+  background:linear-gradient(135deg,#fffdf4,#fff6d9);
   box-shadow:var(--shadow);
   border-left:5px solid #d5a83c;
 }
@@ -970,11 +912,7 @@ tr:hover td{
 .notice{
   border:0;
   border-left:5px solid #7b61a8;
-  background:linear-gradient(
-    135deg,
-    #faf7ff,
-    #f0eaff
-  );
+  background:linear-gradient(135deg,#faf7ff,#f0eaff);
   padding:17px;
   border-radius:10px;
   margin-bottom:12px;
@@ -1049,11 +987,7 @@ tr:hover td{
 
 .primary{
   border:0;
-  background:linear-gradient(
-    135deg,
-    #176b87,
-    #24936e
-  );
+  background:linear-gradient(135deg,#176b87,#24936e);
   color:white;
   padding:11px 18px;
   border-radius:8px;
@@ -1062,11 +996,110 @@ tr:hover td{
 }
 
 .primary:hover{
-  background:linear-gradient(
-    135deg,
-    #12586f,
-    #187a5a
-  );
+  background:linear-gradient(135deg,#12586f,#187a5a);
+}
+
+
+/* =====================================================
+   DIRECT UPI PAYMENT
+===================================================== */
+
+.upi-payment-box{
+  margin-top:20px;
+  padding:18px;
+  border-radius:15px;
+  background:
+    linear-gradient(
+      135deg,
+      #edf9f3,
+      #fff8df
+    );
+  border:1px solid #d9eadf;
+}
+
+.upi-payment-head{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:10px;
+}
+
+.upi-icon{
+  width:46px;
+  height:46px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#087f5b;
+  color:white;
+  font-size:23px;
+  box-shadow:0 6px 15px rgba(8,127,91,.18);
+}
+
+.upi-payment-head strong{
+  color:#176b4d;
+  font-size:16px;
+}
+
+.upi-payment-head small{
+  display:block;
+  color:#718096;
+  margin-top:3px;
+  font-size:11px;
+}
+
+.upi-id-box{
+  background:white;
+  border:1px dashed #24936e;
+  border-radius:10px;
+  padding:11px 13px;
+  margin:12px 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.upi-id-box span{
+  color:#718096;
+  font-size:12px;
+}
+
+.upi-id-box strong{
+  color:#174b3e;
+  font-size:14px;
+  word-break:break-all;
+}
+
+.upi-pay-btn{
+  width:100%;
+  border:0;
+  border-radius:11px;
+  padding:14px 18px;
+  background:linear-gradient(135deg,#087f5b,#075e54);
+  color:white;
+  font-weight:900;
+  font-size:15px;
+  box-shadow:0 8px 20px rgba(7,94,84,.20);
+  transition:.2s;
+}
+
+.upi-pay-btn:hover{
+  transform:translateY(-2px);
+}
+
+.upi-pay-btn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+  transform:none;
+}
+
+.upi-note{
+  margin-top:9px;
+  color:#718096;
+  font-size:11px;
+  line-height:1.5;
 }
 
 
@@ -1079,11 +1112,7 @@ tr:hover td{
   border-radius:13px;
   padding:17px;
   margin-bottom:12px;
-  background:linear-gradient(
-    135deg,
-    #fff8f8,
-    #fff1f1
-  );
+  background:linear-gradient(135deg,#fff8f8,#fff1f1);
   box-shadow:var(--shadow);
   border-left:5px solid #e06c75;
 }
@@ -1237,11 +1266,7 @@ tr:hover td{
 }
 
 .bank-card{
-  background:linear-gradient(
-    135deg,
-    #f4fbf7,
-    #e8f7f0
-  );
+  background:linear-gradient(135deg,#f4fbf7,#e8f7f0);
   border:1px solid #d5eee2;
   border-radius:13px;
   padding:18px;
@@ -1329,11 +1354,7 @@ tr:hover td{
   border-radius:13px;
   padding:17px;
   margin-bottom:12px;
-  background:linear-gradient(
-    135deg,
-    #f9fffc,
-    #edf9f3
-  );
+  background:linear-gradient(135deg,#f9fffc,#edf9f3);
   box-shadow:var(--shadow);
   border-left:5px solid #24936e;
 }
@@ -1595,10 +1616,6 @@ tr:hover td{
 }
 
 
-/* =====================================================
-   EXTRA SMALL MOBILE
-===================================================== */
-
 @media(max-width:380px){
 
   .content{
@@ -1672,93 +1689,49 @@ tr:hover td{
 
   <div class="nav">
 
-    <button
-      class="nav-btn active"
-      data-section="home">
-
+    <button class="nav-btn active" data-section="home">
       <span>🏠</span>
       Home
-
     </button>
 
-
-    <button
-      class="nav-btn"
-      data-section="child">
-
+    <button class="nav-btn" data-section="child">
       <span>👦</span>
       My Child
-
     </button>
 
-
-    <button
-      class="nav-btn"
-      data-section="attendance">
-
+    <button class="nav-btn" data-section="attendance">
       <span>✓</span>
       Attendance
-
     </button>
 
-
-    <button
-      class="nav-btn"
-      data-section="study">
-
+    <button class="nav-btn" data-section="study">
       <span>📖</span>
       Study Progress
-
     </button>
 
-
-    <button
-      class="nav-btn"
-      data-section="results">
-
+    <button class="nav-btn" data-section="results">
       <span>🏆</span>
       Results
-
     </button>
 
-
-    <button
-      class="nav-btn"
-      data-section="notices">
-
+    <button class="nav-btn" data-section="notices">
       <span>📢</span>
       Notices
-
     </button>
 
-
-    <button
-      class="nav-btn"
-      data-section="leave">
-
+    <button class="nav-btn" data-section="leave">
       <span>📝</span>
       Leave
-
     </button>
 
-
-    <button
-      class="nav-btn"
-      data-section="messages">
-
+    <button class="nav-btn" data-section="messages">
       <span>💬</span>
       Messages
-
     </button>
 
-
-    <button
-      class="nav-btn"
-      data-section="donations">
-
+    <button class="nav-btn" data-section="donations">
       <span>💰</span>
       MY DONATION TO SAFA
-
     </button>
 
   </div>
@@ -1776,14 +1749,9 @@ tr:hover td{
 
   <div class="left-top">
 
-    <button
-      class="mobile-menu"
-      id="mobileMenu">
-
+    <button class="mobile-menu" id="mobileMenu">
       ☰
-
     </button>
-
 
     <div class="top-title">
       Parent Dashboard
@@ -1792,24 +1760,18 @@ tr:hover td{
   </div>
 
 
-  <div
-    style="
-      display:flex;
-      align-items:center;
-      gap:12px;
-    ">
+  <div style="
+    display:flex;
+    align-items:center;
+    gap:12px;
+  ">
 
     <div class="parent-badge">
       PARENT PORTAL
     </div>
 
-
-    <button
-      class="logout"
-      id="logoutBtn">
-
+    <button class="logout" id="logoutBtn">
       Logout
-
     </button>
 
   </div>
@@ -1824,14 +1786,8 @@ tr:hover td{
      HOME
 ===================================================== -->
 
-<section
-  class="section active"
-  id="home">
+<section class="section active" id="home">
 
-
-  <!-- =================================================
-       DONATION FEATURED AT TOP
-  ================================================== -->
 
   <div class="home-donation-banner">
 
@@ -1854,7 +1810,7 @@ tr:hover td{
         <p>
           Support Qur'an education and the activities of
           SAFA QURAN COLLEGE. Make your contribution easily
-          and submit your payment reference for verification.
+          through UPI and submit your payment reference.
         </p>
 
       </div>
@@ -1873,10 +1829,6 @@ tr:hover td{
 
   </div>
 
-
-  <!-- =================================================
-       COLLEGE HEADER
-  ================================================== -->
 
   <div class="college-header">
 
@@ -1910,22 +1862,13 @@ tr:hover td{
   </div>
 
 
-  <!-- =================================================
-       CHILD CARD
-  ================================================== -->
-
   <div class="child-card">
 
     <div class="child-top">
 
-      <div
-        class="avatar"
-        id="avatar">
-
+      <div class="avatar" id="avatar">
         S
-
       </div>
-
 
       <div class="child-info">
 
@@ -1935,9 +1878,7 @@ tr:hover td{
 
         <p>
           Student No.
-          <strong id="homeStudentNumber">
-            -
-          </strong>
+          <strong id="homeStudentNumber">-</strong>
         </p>
 
       </div>
@@ -1948,166 +1889,68 @@ tr:hover td{
     <div class="child-meta">
 
       <div class="meta-box">
-
-        <small>
-          Student Number
-        </small>
-
-        <strong id="homeNo">
-          -
-        </strong>
-
+        <small>Student Number</small>
+        <strong id="homeNo">-</strong>
       </div>
 
-
       <div class="meta-box">
-
-        <small>
-          Class
-        </small>
-
-        <strong id="homeClass">
-          -
-        </strong>
-
+        <small>Class</small>
+        <strong id="homeClass">-</strong>
       </div>
 
-
       <div class="meta-box">
-
-        <small>
-          Email ID
-        </small>
-
-        <strong id="homeParentEmail">
-          -
-        </strong>
-
+        <small>Email ID</small>
+        <strong id="homeParentEmail">-</strong>
       </div>
 
-
       <div class="meta-box">
-
-        <small>
-          Guardian Name
-        </small>
-
-        <strong id="homeGuardianName">
-          -
-        </strong>
-
+        <small>Guardian Name</small>
+        <strong id="homeGuardianName">-</strong>
       </div>
 
-
       <div class="meta-box">
-
-        <small>
-          Phone Number
-        </small>
-
-        <strong id="homePhoneNumber">
-          -
-        </strong>
-
+        <small>Phone Number</small>
+        <strong id="homePhoneNumber">-</strong>
       </div>
 
-
       <div class="meta-box">
-
-        <small>
-          Address / Place
-        </small>
-
-        <strong id="homeStudentAddress">
-          -
-        </strong>
-
+        <small>Address / Place</small>
+        <strong id="homeStudentAddress">-</strong>
       </div>
 
     </div>
 
   </div>
 
-
-  <!-- =================================================
-       STATS
-  ================================================== -->
 
   <div class="stats">
 
     <div class="stat">
-
-      <div class="stat-icon">
-        ✓
-      </div>
-
-      <small>
-        Attendance Records
-      </small>
-
-      <strong id="attendanceTotal">
-        0
-      </strong>
-
+      <div class="stat-icon">✓</div>
+      <small>Attendance Records</small>
+      <strong id="attendanceTotal">0</strong>
     </div>
 
-
     <div class="stat">
-
-      <div class="stat-icon">
-        📖
-      </div>
-
-      <small>
-        Study Records
-      </small>
-
-      <strong id="studyTotal">
-        0
-      </strong>
-
+      <div class="stat-icon">📖</div>
+      <small>Study Records</small>
+      <strong id="studyTotal">0</strong>
     </div>
 
-
     <div class="stat">
-
-      <div class="stat-icon">
-        🏆
-      </div>
-
-      <small>
-        Published Results
-      </small>
-
-      <strong id="resultTotal">
-        0
-      </strong>
-
+      <div class="stat-icon">🏆</div>
+      <small>Published Results</small>
+      <strong id="resultTotal">0</strong>
     </div>
 
-
     <div class="stat">
-
-      <div class="stat-icon">
-        📢
-      </div>
-
-      <small>
-        Notices
-      </small>
-
-      <strong id="noticeTotal">
-        0
-      </strong>
-
+      <div class="stat-icon">📢</div>
+      <small>Notices</small>
+      <strong id="noticeTotal">0</strong>
     </div>
 
   </div>
 
-
-  <!-- =================================================
-       QUICK ACCESS
-  ================================================== -->
 
   <div class="panel">
 
@@ -2115,111 +1958,41 @@ tr:hover td{
       Quick Access
     </h3>
 
-
     <div class="quick-grid">
 
-      <button
-        class="quick-btn"
-        data-go="attendance">
-
-        <strong>
-          ✓ Attendance
-        </strong>
-
-        <small>
-          View attendance records
-        </small>
-
+      <button class="quick-btn" data-go="attendance">
+        <strong>✓ Attendance</strong>
+        <small>View attendance records</small>
       </button>
 
-
-      <button
-        class="quick-btn"
-        data-go="study">
-
-        <strong>
-          📖 Study Progress
-        </strong>
-
-        <small>
-          View study progress
-        </small>
-
+      <button class="quick-btn" data-go="study">
+        <strong>📖 Study Progress</strong>
+        <small>View study progress</small>
       </button>
 
-
-      <button
-        class="quick-btn"
-        data-go="results">
-
-        <strong>
-          🏆 Results
-        </strong>
-
-        <small>
-          View published results
-        </small>
-
+      <button class="quick-btn" data-go="results">
+        <strong>🏆 Results</strong>
+        <small>View published results</small>
       </button>
 
-
-      <button
-        class="quick-btn"
-        data-go="notices">
-
-        <strong>
-          📢 Notices
-        </strong>
-
-        <small>
-          View class announcements
-        </small>
-
+      <button class="quick-btn" data-go="notices">
+        <strong>📢 Notices</strong>
+        <small>View class announcements</small>
       </button>
 
-
-      <button
-        class="quick-btn"
-        data-go="leave">
-
-        <strong>
-          📝 Apply Leave
-        </strong>
-
-        <small>
-          Send leave application
-        </small>
-
+      <button class="quick-btn" data-go="leave">
+        <strong>📝 Apply Leave</strong>
+        <small>Send leave application</small>
       </button>
 
-
-      <button
-        class="quick-btn"
-        data-go="messages">
-
-        <strong>
-          💬 Contact Usthad
-        </strong>
-
-        <small>
-          Send a message
-        </small>
-
+      <button class="quick-btn" data-go="messages">
+        <strong>💬 Contact Usthad</strong>
+        <small>Send a message</small>
       </button>
 
-
-      <button
-        class="quick-btn"
-        data-go="donations">
-
-        <strong>
-          💰 MY DONATION TO SAFA
-        </strong>
-
-        <small>
-          Donate and view payment status
-        </small>
-
+      <button class="quick-btn" data-go="donations">
+        <strong>💰 MY DONATION TO SAFA</strong>
+        <small>Donate and view payment status</small>
       </button>
 
     </div>
@@ -2233,15 +2006,11 @@ tr:hover td{
      CHILD
 ===================================================== -->
 
-<section
-  class="section"
-  id="child">
+<section class="section" id="child">
 
   <div class="section-head">
 
-    <h2>
-      👦 My Child
-    </h2>
+    <h2>👦 My Child</h2>
 
     <p>
       Student information connected to this parent account.
@@ -2254,20 +2023,13 @@ tr:hover td{
 
     <div class="child-top">
 
-      <div
-        class="avatar"
-        id="childAvatar">
-
+      <div class="avatar" id="childAvatar">
         S
-
       </div>
-
 
       <div class="child-info">
 
-        <h3 id="childName">
-          -
-        </h3>
+        <h3 id="childName">-</h3>
 
         <p>
           Hifz Student
@@ -2281,80 +2043,33 @@ tr:hover td{
     <div class="child-meta">
 
       <div class="meta-box">
-
-        <small>
-          Student Number
-        </small>
-
-        <strong id="childNumber">
-          -
-        </strong>
-
+        <small>Student Number</small>
+        <strong id="childNumber">-</strong>
       </div>
 
-
       <div class="meta-box">
-
-        <small>
-          Class
-        </small>
-
-        <strong id="childClass">
-          -
-        </strong>
-
+        <small>Class</small>
+        <strong id="childClass">-</strong>
       </div>
 
-
       <div class="meta-box">
-
-        <small>
-          Email ID
-        </small>
-
-        <strong id="childParentEmail">
-          -
-        </strong>
-
+        <small>Email ID</small>
+        <strong id="childParentEmail">-</strong>
       </div>
 
-
       <div class="meta-box">
-
-        <small>
-          Guardian Name
-        </small>
-
-        <strong id="childGuardianName">
-          -
-        </strong>
-
+        <small>Guardian Name</small>
+        <strong id="childGuardianName">-</strong>
       </div>
 
-
       <div class="meta-box">
-
-        <small>
-          Phone Number
-        </small>
-
-        <strong id="childPhoneNumber">
-          -
-        </strong>
-
+        <small>Phone Number</small>
+        <strong id="childPhoneNumber">-</strong>
       </div>
 
-
       <div class="meta-box">
-
-        <small>
-          Address / Place
-        </small>
-
-        <strong id="childStudentAddress">
-          -
-        </strong>
-
+        <small>Address / Place</small>
+        <strong id="childStudentAddress">-</strong>
       </div>
 
     </div>
@@ -2368,15 +2083,11 @@ tr:hover td{
      ATTENDANCE
 ===================================================== -->
 
-<section
-  class="section"
-  id="attendance">
+<section class="section" id="attendance">
 
   <div class="section-head">
 
-    <h2>
-      ✓ Attendance
-    </h2>
+    <h2>✓ Attendance</h2>
 
     <p>
       Your child's attendance records.
@@ -2392,25 +2103,13 @@ tr:hover td{
       <table>
 
         <thead>
-
           <tr>
-
-            <th>
-              Date
-            </th>
-
-            <th>
-              Status
-            </th>
-
+            <th>Date</th>
+            <th>Status</th>
           </tr>
-
         </thead>
 
-
-        <tbody
-          id="attendanceTable">
-        </tbody>
+        <tbody id="attendanceTable"></tbody>
 
       </table>
 
@@ -2435,15 +2134,11 @@ tr:hover td{
      STUDY
 ===================================================== -->
 
-<section
-  class="section"
-  id="study">
+<section class="section" id="study">
 
   <div class="section-head">
 
-    <h2>
-      📖 Study Progress
-    </h2>
+    <h2>📖 Study Progress</h2>
 
     <p>
       View your child's Quran study progress.
@@ -2471,15 +2166,11 @@ tr:hover td{
      RESULTS
 ===================================================== -->
 
-<section
-  class="section"
-  id="results">
+<section class="section" id="results">
 
   <div class="section-head">
 
-    <h2>
-      🏆 Results
-    </h2>
+    <h2>🏆 Results</h2>
 
     <p>
       Published examination results.
@@ -2507,15 +2198,11 @@ tr:hover td{
      NOTICES
 ===================================================== -->
 
-<section
-  class="section"
-  id="notices">
+<section class="section" id="notices">
 
   <div class="section-head">
 
-    <h2>
-      📢 Notices
-    </h2>
+    <h2>📢 Notices</h2>
 
     <p>
       Important announcements from
@@ -2544,15 +2231,11 @@ tr:hover td{
      LEAVE
 ===================================================== -->
 
-<section
-  class="section"
-  id="leave">
+<section class="section" id="leave">
 
   <div class="section-head">
 
-    <h2>
-      📝 Leave Application
-    </h2>
+    <h2>📝 Leave Application</h2>
 
     <p>
       Apply for leave and check the response from Usthad.
@@ -2662,15 +2345,11 @@ tr:hover td{
      MESSAGES
 ===================================================== -->
 
-<section
-  class="section"
-  id="messages">
+<section class="section" id="messages">
 
   <div class="section-head">
 
-    <h2>
-      💬 Messages
-    </h2>
+    <h2>💬 Messages</h2>
 
     <p>
       Contact Usthad regarding your child's studies.
@@ -2747,9 +2426,7 @@ tr:hover td{
      MY DONATION TO SAFA
 ===================================================== -->
 
-<section
-  class="section"
-  id="donations">
+<section class="section" id="donations">
 
   <div class="section-head">
 
@@ -2758,7 +2435,7 @@ tr:hover td{
     </h2>
 
     <p>
-      Support SAFA QURAN COLLEGE and submit your payment reference.
+      Support SAFA QURAN COLLEGE through direct UPI payment.
     </p>
 
   </div>
@@ -2771,9 +2448,10 @@ tr:hover td{
     </h3>
 
     <p>
-      You can make your donation using the bank account or QR code below.
-      After completing the payment, enter the transaction/reference ID
-      and submit it for verification by Usthad/Admin.
+      Enter your donation amount below and use the
+      secure UPI payment button. After completing the payment,
+      return to this page and enter your Transaction ID / UTR
+      for verification by Usthad/Admin.
     </p>
 
   </div>
@@ -2791,54 +2469,32 @@ tr:hover td{
 
 
       <div class="bank-row">
-
-        <span>
-          Bank
-        </span>
-
-        <strong>
-          Federal Bank
-        </strong>
-
+        <span>Bank</span>
+        <strong>Federal Bank</strong>
       </div>
 
 
       <div class="bank-row">
-
-        <span>
-          Account Number
-        </span>
-
-        <strong>
-          10980200318831
-        </strong>
-
+        <span>Account Number</span>
+        <strong>10980200318831</strong>
       </div>
 
 
       <div class="bank-row">
-
-        <span>
-          IFSC
-        </span>
-
-        <strong>
-          FDRL0001098
-        </strong>
-
+        <span>IFSC</span>
+        <strong>FDRL0001098</strong>
       </div>
 
 
       <div class="bank-row">
+        <span>Branch</span>
+        <strong>Kannur</strong>
+      </div>
 
-        <span>
-          Branch
-        </span>
 
-        <strong>
-          Kannur
-        </strong>
-
+      <div class="bank-row">
+        <span>UPI ID</span>
+        <strong>563safa@fbl</strong>
       </div>
 
     </div>
@@ -2873,9 +2529,7 @@ tr:hover td{
       </div>
 
       <div class="qr-caption">
-
-        Scan the QR code to make your donation.
-
+        You can also scan the QR code to make your donation.
       </div>
 
     </div>
@@ -2883,12 +2537,14 @@ tr:hover td{
   </div>
 
 
-  <!-- DONATION FORM -->
+  <!-- =================================================
+       DONATION PAYMENT + SUBMISSION
+  ================================================= -->
 
   <div class="panel">
 
     <h3>
-      Submit Donation Details
+      💳 Make Your Donation
     </h3>
 
 
@@ -2899,84 +2555,139 @@ tr:hover td{
       line-height:1.6;
     ">
 
-      After payment, enter the amount and transaction/reference ID.
-      Your submission will remain <strong>Pending</strong> until
-      it is verified by Usthad/Admin.
+      First enter the donation amount.
+      Then press <strong>PAY NOW WITH UPI</strong>.
+      Your phone may show the available UPI apps.
+      Complete the payment and return here to submit
+      the transaction/reference ID.
 
     </p>
 
 
-    <form id="donationForm">
+    <div class="form-grid">
 
-      <div class="form-grid">
+      <div class="field">
 
+        <label>
+          Donation Amount (₹)
+        </label>
 
-        <div class="field">
-
-          <label>
-            Donation Amount
-          </label>
-
-          <input
-            type="number"
-            id="donationAmount"
-            min="1"
-            step="0.01"
-            required
-            placeholder="Enter amount"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Transaction ID / Reference
-          </label>
-
-          <input
-            type="text"
-            id="donationTransactionId"
-            required
-            maxlength="100"
-            placeholder="Enter transaction/reference ID"
-          >
-
-        </div>
-
-
-        <div class="field full">
-
-          <label>
-            Note (Optional)
-          </label>
-
-          <textarea
-            id="donationNote"
-            maxlength="500"
-            placeholder="Any additional note..."
-          ></textarea>
-
-        </div>
-
+        <input
+          type="number"
+          id="donationAmount"
+          min="1"
+          step="0.01"
+          placeholder="Enter amount"
+        >
 
       </div>
 
 
-      <br>
+      <div class="field">
+
+        <label>
+          Transaction ID / UTR
+        </label>
+
+        <input
+          type="text"
+          id="donationTransactionId"
+          maxlength="100"
+          placeholder="Enter after payment"
+        >
+
+      </div>
+
+
+      <div class="field full">
+
+        <label>
+          Note (Optional)
+        </label>
+
+        <textarea
+          id="donationNote"
+          maxlength="500"
+          placeholder="Any additional note..."
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <!-- DIRECT UPI -->
+
+    <div class="upi-payment-box">
+
+      <div class="upi-payment-head">
+
+        <div class="upi-icon">
+          ₹
+        </div>
+
+        <div>
+
+          <strong>
+            Direct UPI Payment
+          </strong>
+
+          <small>
+            Pay directly to SAFA QURAN COLLEGE
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <div class="upi-id-box">
+
+        <span>
+          UPI ID
+        </span>
+
+        <strong>
+          563safa@fbl
+        </strong>
+
+      </div>
 
 
       <button
-        class="primary"
-        type="submit"
-        id="donationSubmitBtn">
+        type="button"
+        class="upi-pay-btn"
+        id="upiPayBtn">
 
-        Submit Donation
+        💳 PAY NOW WITH UPI
 
       </button>
 
-    </form>
+
+      <div class="upi-note">
+
+        After pressing the button, select your preferred
+        UPI app if your device provides an app chooser.
+        Complete the payment there, then return here and
+        enter the Transaction ID / UTR.
+
+      </div>
+
+    </div>
+
+
+    <br>
+
+
+    <button
+      class="primary"
+      type="button"
+      id="donationSubmitBtn"
+      style="width:100%;">
+
+      ✓ SUBMIT DONATION DETAILS
+
+    </button>
 
   </div>
 
@@ -3093,19 +2804,15 @@ function escapeHtml(value){
     value === null ||
     value === undefined
   ){
-
     return "";
-
   }
 
   return String(value)
-
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
-
 }
 
 
@@ -3226,6 +2933,27 @@ document
         openSection(
           button.dataset.go
         );
+
+        if(
+          button.classList.contains(
+            "donation-now-btn"
+          )
+        ){
+
+          setTimeout(()=>{
+
+            const amount =
+              $("donationAmount");
+
+            if(amount){
+
+              amount.focus();
+
+            }
+
+          },350);
+
+        }
 
       }
     );
@@ -3695,11 +3423,8 @@ async function loadAttendance(){
   snap.forEach(item=>{
 
     records.push({
-
       id:item.id,
-
       ...item.data()
-
     });
 
   });
@@ -3839,9 +3564,7 @@ async function loadAttendance(){
 
 
       const tr =
-        document.createElement(
-          "tr"
-        );
+        document.createElement("tr");
 
 
       tr.innerHTML = `
@@ -3905,11 +3628,8 @@ async function loadStudy(){
   snap.forEach(item=>{
 
     rows.push({
-
       id:item.id,
-
       ...item.data()
-
     });
 
   });
@@ -3962,41 +3682,19 @@ async function loadStudy(){
         70;
 
 
-      if(
-        performance ===
-        "Excellent"
-      ){
-
+      if(performance === "Excellent"){
         width = 100;
-
-      }else if(
-        performance ===
-        "Very Good"
-      ){
-
+      }else if(performance === "Very Good"){
         width = 85;
-
-      }else if(
-        performance ===
-        "Good"
-      ){
-
+      }else if(performance === "Good"){
         width = 70;
-
-      }else if(
-        performance ===
-        "Needs Improvement"
-      ){
-
+      }else if(performance === "Needs Improvement"){
         width = 45;
-
       }
 
 
       const div =
-        document.createElement(
-          "div"
-        );
+        document.createElement("div");
 
 
       div.className =
@@ -4066,10 +3764,7 @@ async function loadStudy(){
           <span class="badge blue">
 
             Hifz Performance:
-
-            ${escapeHtml(
-              performance
-            )}
+            ${escapeHtml(performance)}
 
           </span>
 
@@ -4077,10 +3772,7 @@ async function loadStudy(){
           <span class="badge green">
 
             Dars & Study Status:
-
-            ${escapeHtml(
-              studyStatus
-            )}
+            ${escapeHtml(studyStatus)}
 
           </span>
 
@@ -4157,11 +3849,8 @@ async function loadResults(){
   snap.forEach(item=>{
 
     rows.push({
-
       id:item.id,
-
       ...item.data()
-
     });
 
   });
@@ -4205,9 +3894,7 @@ async function loadResults(){
     rows.forEach(data=>{
 
       const div =
-        document.createElement(
-          "div"
-        );
+        document.createElement("div");
 
 
       div.className =
@@ -4249,9 +3936,7 @@ async function loadResults(){
 
 
           <span class="badge green">
-
             Published
-
           </span>
 
         </div>
@@ -4301,11 +3986,8 @@ async function loadNotices(){
   snap.forEach(item=>{
 
     rows.push({
-
       id:item.id,
-
       ...item.data()
-
     });
 
   });
@@ -4349,9 +4031,7 @@ async function loadNotices(){
     rows.forEach(data=>{
 
       const div =
-        document.createElement(
-          "div"
-        );
+        document.createElement("div");
 
 
       div.className =
@@ -4448,8 +4128,7 @@ $("leaveForm")
               studentNumber,
 
             leaveDate:
-              $("leaveDate")
-                .value,
+              $("leaveDate").value,
 
             reason:
               $("leaveReason")
@@ -4528,11 +4207,8 @@ async function loadLeaves(){
   snap.forEach(item=>{
 
     rows.push({
-
       id:item.id,
-
       ...item.data()
-
     });
 
   });
@@ -4588,24 +4264,14 @@ async function loadLeaves(){
 
 
     if(status === "approved"){
-
-      badge =
-        "green";
-
-    }else if(
-      status === "rejected"
-    ){
-
-      badge =
-        "red";
-
+      badge = "green";
+    }else if(status === "rejected"){
+      badge = "red";
     }
 
 
     const div =
-      document.createElement(
-        "div"
-      );
+      document.createElement("div");
 
 
     div.className =
@@ -4622,9 +4288,7 @@ async function loadLeaves(){
             Leave Application
           </h4>
 
-          <small style="
-            color:#718096;
-          ">
+          <small style="color:#718096;">
 
             ${escapeHtml(
               data.leaveDate || "-"
@@ -4637,9 +4301,7 @@ async function loadLeaves(){
 
         <span class="badge ${badge}">
 
-          ${escapeHtml(
-            status
-          )}
+          ${escapeHtml(status)}
 
         </span>
 
@@ -4829,11 +4491,8 @@ async function loadMessages(){
   snap.forEach(item=>{
 
     rows.push({
-
       id:item.id,
-
       ...item.data()
-
     });
 
   });
@@ -4891,9 +4550,7 @@ async function loadMessages(){
 
 
     const div =
-      document.createElement(
-        "div"
-      );
+      document.createElement("div");
 
 
     div.className =
@@ -4911,9 +4568,7 @@ async function loadMessages(){
 
         <span class="badge ${badge}">
 
-          ${escapeHtml(
-            status
-          )}
+          ${escapeHtml(status)}
 
         </span>
 
@@ -4973,16 +4628,93 @@ async function loadMessages(){
 
 
 /* =========================================================
-   DONATION FORM
+   DIRECT UPI PAYMENT
 ========================================================= */
 
-$("donationForm")
+$("upiPayBtn")
   .addEventListener(
-    "submit",
-    async e=>{
+    "click",
+    ()=>{
 
-      e.preventDefault();
+      const amount =
+        Number(
+          $("donationAmount").value
+        );
 
+
+      if(
+        !amount ||
+        amount <= 0
+      ){
+
+        showMessage(
+          "Please enter the donation amount first.",
+          "error"
+        );
+
+        $("donationAmount")
+          .focus();
+
+        return;
+
+      }
+
+
+      const upiId =
+        "563safa@fbl";
+
+
+      const payeeName =
+        "SAFA QURAN COLLEGE";
+
+
+      const note =
+        "Donation to SAFA QURAN COLLEGE";
+
+
+      const upiUrl =
+        "upi://pay?" +
+        "pa=" +
+        encodeURIComponent(upiId) +
+        "&pn=" +
+        encodeURIComponent(payeeName) +
+        "&am=" +
+        encodeURIComponent(
+          amount.toFixed(2)
+        ) +
+        "&cu=INR" +
+        "&tn=" +
+        encodeURIComponent(note);
+
+
+      try{
+
+        window.location.href =
+          upiUrl;
+
+      }catch(error){
+
+        console.error(error);
+
+        showMessage(
+          "Unable to open UPI payment.",
+          "error"
+        );
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   DONATION SUBMIT
+========================================================= */
+
+$("donationSubmitBtn")
+  .addEventListener(
+    "click",
+    async ()=>{
 
       if(!currentUser){
 
@@ -5036,6 +4768,9 @@ $("donationForm")
           "error"
         );
 
+        $("donationAmount")
+          .focus();
+
         return;
 
       }
@@ -5044,9 +4779,12 @@ $("donationForm")
       if(!transactionId){
 
         showMessage(
-          "Please enter the transaction/reference ID.",
+          "Please enter the transaction ID / UTR after payment.",
           "error"
         );
+
+        $("donationTransactionId")
+          .focus();
 
         return;
 
@@ -5107,8 +4845,17 @@ $("donationForm")
         );
 
 
-        $("donationForm")
-          .reset();
+        $("donationAmount")
+          .value =
+          "";
+
+        $("donationTransactionId")
+          .value =
+          "";
+
+        $("donationNote")
+          .value =
+          "";
 
 
         showMessage(
@@ -5134,7 +4881,7 @@ $("donationForm")
           false;
 
         submitBtn.textContent =
-          "Submit Donation";
+          "✓ SUBMIT DONATION DETAILS";
 
       }
 
@@ -5179,11 +4926,8 @@ async function loadDonations(){
   snap.forEach(item=>{
 
     rows.push({
-
       id:item.id,
-
       ...item.data()
-
     });
 
   });
@@ -5256,9 +5000,7 @@ async function loadDonations(){
 
 
     const div =
-      document.createElement(
-        "div"
-      );
+      document.createElement("div");
 
 
     div.className =
