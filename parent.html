@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>SAFA QURAN COLLEGE ONLINE PORTAL | Parent Dashboard</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -17,150 +19,279 @@
   --primary:#123b5d;
   --primary2:#176b87;
   --accent:#24936e;
-  --green:#087f5b;
-  --green2:#10a875;
-  --gold:#d4af37;
-  --orange:#f59e0b;
-  --blue:#2563eb;
-  --purple:#7c3aed;
-  --red:#dc2626;
-  --pink:#db2777;
   --bg:#f4f7fb;
   --card:#ffffff;
   --text:#172033;
   --muted:#718096;
   --border:#e5eaf0;
-  --shadow:0 10px 30px rgba(20,40,70,.09);
+  --shadow:0 8px 25px rgba(20,40,70,.06);
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:
-    radial-gradient(circle at top left,rgba(36,147,110,.08),transparent 28%),
-    radial-gradient(circle at top right,rgba(37,99,235,.07),transparent 25%),
-    var(--bg);
+  font-family:Inter,Arial,sans-serif;
+  background:var(--bg);
   color:var(--text);
-  min-height:100vh;
+  position:relative;
 }
 
-/* SIDEBAR */
+button,
+input,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+
+/* =========================
+   ISLAMIC BACKGROUND
+========================= */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  opacity:.035;
+
+  background-image:
+    linear-gradient(
+      30deg,
+      #123b5d 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #123b5d 87.5%,
+      #123b5d
+    ),
+    linear-gradient(
+      150deg,
+      #123b5d 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #123b5d 87.5%,
+      #123b5d
+    ),
+    linear-gradient(
+      30deg,
+      #123b5d 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #123b5d 87.5%,
+      #123b5d
+    ),
+    linear-gradient(
+      150deg,
+      #123b5d 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #123b5d 87.5%,
+      #123b5d
+    ),
+    linear-gradient(
+      60deg,
+      #123b5d 25%,
+      transparent 25.5%,
+      transparent 75%,
+      #123b5d 75%
+    );
+
+  background-size:
+    40px 70px,
+    40px 70px,
+    40px 70px,
+    40px 70px,
+    40px 70px;
+
+  background-position:
+    0 0,
+    0 0,
+    20px 35px,
+    20px 35px,
+    0 0;
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+#loading{
+  position:fixed;
+  inset:0;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:12px;
+  z-index:9999;
+  color:var(--primary);
+  font-weight:700;
+}
+
+.loader{
+  width:38px;
+  height:38px;
+  border:4px solid #e4edf3;
+  border-top-color:var(--primary2);
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+
+/* =========================
+   APP
+========================= */
+
+.app{
+  min-height:100vh;
+  display:flex;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
 
 .sidebar{
+  width:255px;
   position:fixed;
   left:0;
   top:0;
-  width:255px;
-  height:100vh;
-  background:linear-gradient(180deg,#082f49,#123b5d 48%,#0b6b55);
-  color:#fff;
+  bottom:0;
+  background:linear-gradient(180deg,#102a43,#123b5d);
+  color:white;
   z-index:1000;
   overflow-y:auto;
-  box-shadow:8px 0 30px rgba(0,0,0,.12);
+  transition:.25s;
 }
 
 .brand{
-  padding:22px 18px;
-  border-bottom:1px solid rgba(255,255,255,.13);
-  text-align:center;
+  padding:25px 20px;
+  border-bottom:1px solid rgba(255,255,255,.12);
 }
 
-.brand h2{
-  font-size:19px;
+.brand h1{
+  font-size:20px;
   letter-spacing:.5px;
 }
 
 .brand p{
-  font-size:11px;
-  opacity:.75;
   margin-top:5px;
+  font-size:12px;
+  opacity:.7;
 }
 
-.menu-title{
-  font-size:10px;
-  letter-spacing:1.5px;
-  opacity:.55;
-  padding:20px 18px 8px;
+.nav{
+  padding:16px 11px;
 }
 
-.nav-btn{
-  width:calc(100% - 20px);
-  margin:4px 10px;
-  padding:12px 14px;
+.nav button{
+  width:100%;
   border:0;
-  border-radius:12px;
   background:transparent;
-  color:#fff;
+  color:#dbe8f5;
   text-align:left;
-  cursor:pointer;
-  font-size:14px;
+  padding:13px 15px;
+  border-radius:9px;
+  margin-bottom:5px;
   transition:.2s;
 }
 
-.nav-btn:hover,
-.nav-btn.active{
-  background:rgba(255,255,255,.14);
-  transform:translateX(2px);
+.nav button:hover,
+.nav button.active{
+  background:rgba(255,255,255,.13);
+  color:white;
 }
 
-.nav-btn span{
+.nav button span{
   display:inline-block;
-  width:25px;
+  width:30px;
 }
 
-/* MAIN */
+
+/* =========================
+   MAIN
+========================= */
 
 .main{
   margin-left:255px;
+  width:calc(100% - 255px);
   min-height:100vh;
 }
 
+
+/* =========================
+   TOPBAR
+========================= */
+
 .topbar{
+  height:72px;
+  background:white;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 28px;
   position:sticky;
   top:0;
-  z-index:500;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--border);
-  padding:15px 24px;
+  z-index:100;
+}
+
+.left-top{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  gap:13px;
 }
 
-.topbar-left h1{
-  font-size:22px;
-  color:var(--primary);
+.mobile-menu{
+  display:none;
+  border:0;
+  background:var(--primary);
+  color:white;
+  padding:8px 11px;
+  border-radius:7px;
+  font-size:20px;
 }
 
-.topbar-left p{
-  color:var(--muted);
+.top-title{
+  font-size:20px;
+  font-weight:750;
+}
+
+.parent-badge{
+  background:#eaf3ff;
+  color:#185a9d;
+  padding:8px 13px;
+  border-radius:20px;
   font-size:12px;
-  margin-top:3px;
-}
-
-.badge{
-  background:linear-gradient(135deg,var(--green),var(--primary2));
-  color:#fff;
-  padding:7px 12px;
-  border-radius:30px;
-  font-size:10px;
-  font-weight:bold;
-  letter-spacing:.8px;
+  font-weight:700;
 }
 
 .logout{
   border:0;
-  background:#fee2e2;
-  color:#b91c1c;
+  background:#e74c3c;
+  color:white;
   padding:9px 14px;
-  border-radius:10px;
-  cursor:pointer;
-  font-weight:bold;
-  margin-left:8px;
+  border-radius:7px;
 }
 
+
+/* =========================
+   CONTENT
+========================= */
+
 .content{
-  padding:22px;
+  padding:28px;
 }
 
 .section{
@@ -171,682 +302,659 @@ body{
   display:block;
 }
 
-/* COMMON */
-
-.panel{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:18px;
-  box-shadow:var(--shadow);
-  overflow:hidden;
+.section-head{
   margin-bottom:20px;
 }
 
-.panel-head{
-  padding:18px 20px;
-  border-bottom:1px solid var(--border);
-}
-
-.panel-head h3{
-  color:var(--primary);
-  font-size:18px;
-}
-
-.panel-desc{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:5px;
-}
-
-.section-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:18px;
-}
-
 .section-head h2{
-  color:var(--primary);
+  font-size:25px;
+  margin-bottom:5px;
 }
 
 .section-head p{
   color:var(--muted);
-  font-size:13px;
-  margin-top:4px;
+  font-size:14px;
 }
 
-.section-tag{
-  background:#e7f7f0;
-  color:#087f5b;
-  padding:7px 12px;
-  border-radius:20px;
-  font-size:10px;
-  font-weight:bold;
-}
 
-/* DONATION HERO */
+/* =========================
+   ISLAMIC ASSALAMU ALAIKUM
+========================= */
 
-.donation-hero{
+.islamic-welcome{
   position:relative;
   overflow:hidden;
-  border-radius:24px;
-  padding:25px;
+
   margin-bottom:22px;
+
+  padding:27px 30px;
+
+  border-radius:20px;
+
+  color:white;
+
   background:
-    radial-gradient(circle at 90% 10%,rgba(255,255,255,.25),transparent 25%),
-    radial-gradient(circle at 10% 100%,rgba(212,175,55,.22),transparent 30%),
-    linear-gradient(135deg,#064e3b,#087f5b 48%,#123b5d);
-  color:#fff;
-  box-shadow:0 18px 45px rgba(6,78,59,.25);
+    linear-gradient(
+      135deg,
+      rgba(7,38,55,.98),
+      rgba(18,75,88,.96)
+    );
+
+  box-shadow:
+    0 12px 35px
+    rgba(11,31,51,.14);
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
 }
 
-.donation-hero:after{
+.islamic-welcome::before{
   content:"";
+
   position:absolute;
-  width:170px;
-  height:170px;
-  right:-70px;
-  bottom:-80px;
-  border:2px solid rgba(255,255,255,.15);
+
+  width:220px;
+  height:220px;
+
+  right:-65px;
+  top:-90px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.10);
+
   border-radius:50%;
+
+  box-shadow:
+    0 0 0 25px
+    rgba(255,255,255,.025),
+
+    0 0 0 50px
+    rgba(255,255,255,.02);
 }
 
-.donation-content{
+.islamic-welcome::after{
+  content:"✦";
+
+  position:absolute;
+
+  right:80px;
+  bottom:12px;
+
+  font-size:55px;
+
+  color:
+    rgba(255,255,255,.08);
+}
+
+.welcome-arabic{
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:25px;
+
+  line-height:1.8;
+
+  color:#f4d58b;
+
+  margin-bottom:4px;
+
+  direction:rtl;
+
+  text-align:center;
+
   position:relative;
-  z-index:2;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
+  z-index:1;
 }
 
-.donation-left{
-  flex:1;
-}
+.welcome-title{
+  font-size:22px;
 
-.donation-kicker{
-  display:inline-block;
-  background:rgba(255,255,255,.14);
-  border:1px solid rgba(255,255,255,.25);
-  padding:6px 11px;
-  border-radius:30px;
-  font-size:10px;
-  font-weight:bold;
-  letter-spacing:1px;
-  margin-bottom:10px;
-}
-
-.donation-left h2{
-  font-size:28px;
-  margin-bottom:7px;
-}
-
-.donation-left p{
-  color:rgba(255,255,255,.85);
-  font-size:13px;
-  max-width:560px;
-  line-height:1.6;
-}
-
-.donation-btn{
-  border:0;
-  background:linear-gradient(135deg,#f6d365,#d4af37);
-  color:#173b2f;
-  padding:14px 20px;
-  border-radius:14px;
-  font-size:14px;
   font-weight:800;
-  cursor:pointer;
-  box-shadow:0 8px 22px rgba(0,0,0,.2);
-  white-space:nowrap;
-  transition:.2s;
+
+  margin-top:2px;
+
+  text-align:center;
+
+  position:relative;
+  z-index:1;
 }
 
-.donation-btn:hover{
-  transform:translateY(-2px);
+.islamic-line{
+  width:65px;
+
+  height:3px;
+
+  background:#d6ad55;
+
+  border-radius:10px;
+
+  margin:13px auto 0;
+
+  position:relative;
+  z-index:1;
 }
 
-/* HERO */
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
-  background:linear-gradient(135deg,#123b5d,#176b87 60%,#24936e);
-  color:#fff;
-  border-radius:22px;
+  background:linear-gradient(135deg,#123b5d,#176b87);
+  color:white;
+  border-radius:18px;
+  padding:30px;
+  margin-bottom:22px;
+  box-shadow:0 10px 30px rgba(18,59,93,.16);
+  position:relative;
   overflow:hidden;
-  margin-bottom:20px;
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background:rgba(255,255,255,.06);
+  right:-50px;
+  top:-60px;
+}
+
+.hero small{
+  opacity:.75;
+}
+
+.hero h2{
+  margin-top:7px;
+  font-size:27px;
+}
+
+.hero p{
+  margin-top:8px;
+  opacity:.85;
+  font-size:14px;
+}
+
+
+/* =========================
+   CHILD CARD
+========================= */
+
+.child-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:22px;
   box-shadow:var(--shadow);
+  margin-bottom:22px;
 }
 
-.hero-image{
-  width:100%;
-  height:210px;
-  object-fit:cover;
-  display:block;
-  opacity:.88;
+.child-top{
+  display:flex;
+  align-items:center;
+  gap:15px;
 }
 
-.hero-body{
-  padding:20px;
-  text-align:center;
+.avatar{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#176b87,#24936e);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+  font-weight:800;
 }
 
-.hero-body h2{
-  font-size:25px;
+.child-info h3{
+  font-size:20px;
 }
 
-.hero-body p{
+.child-info p{
+  color:var(--muted);
   margin-top:4px;
-  opacity:.8;
+  font-size:13px;
 }
 
-.ayah{
-  margin-top:12px;
-  font-size:19px;
-  color:#ffe9a6;
-  font-family:serif;
+.child-meta{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:20px;
 }
 
-/* STATS */
+.meta-box{
+  background:#f7f9fc;
+  border-radius:10px;
+  padding:13px;
+  overflow:hidden;
+}
+
+.meta-box small{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.meta-box strong{
+  display:block;
+  margin-top:5px;
+  font-size:14px;
+  word-break:break-word;
+}
+
+
+/* =========================
+   STATS
+========================= */
 
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:15px;
-  margin-bottom:20px;
+  margin-bottom:22px;
 }
 
 .stat{
-  border-radius:18px;
-  padding:18px;
-  color:#fff;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:19px;
   box-shadow:var(--shadow);
-  position:relative;
-  overflow:hidden;
 }
 
-.stat:after{
-  content:"";
-  position:absolute;
-  width:80px;
-  height:80px;
-  border:2px solid rgba(255,255,255,.15);
-  border-radius:50%;
-  right:-25px;
-  top:-25px;
-}
-
-.stat:nth-child(1){
-  background:linear-gradient(135deg,#2563eb,#38bdf8);
-}
-
-.stat:nth-child(2){
-  background:linear-gradient(135deg,#059669,#34d399);
-}
-
-.stat:nth-child(3){
-  background:linear-gradient(135deg,#7c3aed,#a78bfa);
-}
-
-.stat:nth-child(4){
-  background:linear-gradient(135deg,#db2777,#f472b6);
+.stat-icon{
+  font-size:23px;
 }
 
 .stat small{
   display:block;
-  opacity:.85;
-  font-size:11px;
+  margin-top:10px;
+  color:var(--muted);
 }
 
 .stat strong{
   display:block;
-  font-size:29px;
-  margin-top:7px;
-}
-
-/* QUICK */
-
-.quick-grid{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:12px;
-}
-
-.quick{
-  border:0;
-  padding:17px 10px;
-  border-radius:16px;
-  cursor:pointer;
-  color:#fff;
-  font-weight:bold;
-  box-shadow:var(--shadow);
-  transition:.2s;
-}
-
-.quick:hover{
-  transform:translateY(-3px);
-}
-
-.quick:nth-child(1){
-  background:linear-gradient(135deg,#2563eb,#60a5fa)
-}
-
-.quick:nth-child(2){
-  background:linear-gradient(135deg,#059669,#34d399)
-}
-
-.quick:nth-child(3){
-  background:linear-gradient(135deg,#7c3aed,#a78bfa)
-}
-
-.quick:nth-child(4){
-  background:linear-gradient(135deg,#db2777,#f472b6)
-}
-
-.quick:nth-child(5){
-  background:linear-gradient(135deg,#ea580c,#fb923c)
-}
-
-.quick:nth-child(6){
-  background:linear-gradient(135deg,#0891b2,#22d3ee)
-}
-
-/* CHILD */
-
-.child-card{
-  padding:20px;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-}
-
-.info-box{
-  padding:15px;
-  border-radius:14px;
-  background:linear-gradient(135deg,#eff6ff,#f0fdfa);
-  border:1px solid #dbeafe;
-}
-
-.info-box small{
-  color:var(--muted);
-  display:block;
-  font-size:11px;
-}
-
-.info-box strong{
-  display:block;
   margin-top:5px;
-  color:var(--primary);
+  font-size:27px;
 }
 
-/* RECORDS */
 
-.record-list{
-  padding:18px;
-  display:grid;
-  gap:12px;
-}
+/* =========================
+   PANELS
+========================= */
 
-.record-card{
-  padding:16px;
+.panel{
+  background:white;
+  border:1px solid var(--border);
   border-radius:15px;
-  border-left:6px solid var(--blue);
-  background:linear-gradient(135deg,#eff6ff,#fff);
-  box-shadow:0 5px 18px rgba(20,40,70,.06);
+  padding:22px;
+  margin-bottom:22px;
+  box-shadow:var(--shadow);
 }
 
-.record-card.study{
-  border-left-color:var(--green);
-  background:linear-gradient(135deg,#ecfdf5,#fff);
+.panel h3{
+  margin-bottom:17px;
 }
 
-.record-card.result{
-  border-left-color:var(--purple);
-  background:linear-gradient(135deg,#f5f3ff,#fff);
+.empty{
+  padding:25px;
+  text-align:center;
+  color:var(--muted);
+  background:#f8fafc;
+  border-radius:10px;
 }
 
-.record-card.notice{
-  border-left-color:var(--orange);
-  background:linear-gradient(135deg,#fff7ed,#fff);
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap{
+  overflow-x:auto;
 }
 
-.record-card.leave{
-  border-left-color:var(--pink);
-  background:linear-gradient(135deg,#fdf2f8,#fff);
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:500px;
 }
 
-.record-card.message{
-  border-left-color:#0891b2;
-  background:linear-gradient(135deg,#ecfeff,#fff);
+th,
+td{
+  padding:12px 10px;
+  border-bottom:1px solid #edf0f4;
+  text-align:left;
+  font-size:13px;
 }
 
-.record-top{
+th{
+  background:#f7f9fc;
+  color:#4a5b70;
+  font-weight:700;
+}
+
+tr:hover td{
+  background:#fbfcfe;
+}
+
+
+/* =========================
+   BADGES
+========================= */
+
+.badge{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.green{
+  background:#e7f7ef;
+  color:#18794e;
+}
+
+.red{
+  background:#fdeaea;
+  color:#b42318;
+}
+
+.blue{
+  background:#eaf3ff;
+  color:#185a9d;
+}
+
+.yellow{
+  background:#fff4d8;
+  color:#916300;
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-card{
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:18px;
+  margin-bottom:12px;
+}
+
+.progress-head{
   display:flex;
   justify-content:space-between;
   gap:10px;
+  margin-bottom:10px;
 }
 
-.record-card h4{
-  color:var(--primary);
-  margin-bottom:6px;
+.progress-head strong{
+  font-size:14px;
 }
 
-.record-card p{
-  color:#4a5568;
-  font-size:13px;
-  line-height:1.6;
-}
-
-.date{
+.progress-head span{
+  font-size:12px;
   color:var(--muted);
-  font-size:11px;
+}
+
+.progress-line{
+  height:8px;
+  background:#edf2f6;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:70%;
+  background:linear-gradient(90deg,#176b87,#24936e);
+  border-radius:10px;
+}
+
+
+/* =========================
+   RESULT CARDS
+========================= */
+
+.result-card{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:19px;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.result-title{
+  font-weight:750;
+}
+
+.result-date{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:5px;
+}
+
+.result-mark{
+  font-size:24px;
+  font-weight:800;
+  color:var(--primary2);
+}
+
+
+/* =========================
+   NOTICE
+========================= */
+
+.notice{
+  border-left:4px solid var(--primary2);
+  background:#f7fafc;
+  padding:17px;
+  border-radius:8px;
+  margin-bottom:12px;
+}
+
+.notice h4{
+  font-size:15px;
+}
+
+.notice p{
   margin-top:8px;
+  color:#536477;
+  line-height:1.6;
+  white-space:pre-wrap;
 }
 
-/* BADGES */
-
-.status{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:20px;
-  font-size:10px;
-  font-weight:bold;
+.notice small{
+  display:block;
+  margin-top:10px;
+  color:var(--muted);
 }
 
-.present{
-  background:#dcfce7;
-  color:#166534;
-}
 
-.absent{
-  background:#fee2e2;
-  color:#991b1b;
-}
-
-.pending{
-  background:#fef3c7;
-  color:#92400e;
-}
-
-.approved{
-  background:#dcfce7;
-  color:#166534;
-}
-
-.rejected{
-  background:#fee2e2;
-  color:#991b1b;
-}
-
-.published{
-  background:#ede9fe;
-  color:#6d28d9;
-}
-
-/* FORMS */
-
-.form{
-  padding:20px;
-}
+/* =========================
+   FORMS
+========================= */
 
 .form-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:14px;
+  gap:15px;
 }
 
 .field{
-  margin-bottom:13px;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.field.full{
+  grid-column:1/-1;
 }
 
 .field label{
-  display:block;
-  font-size:12px;
-  font-weight:bold;
-  color:#475569;
-  margin-bottom:6px;
+  font-size:13px;
+  font-weight:650;
+  color:#43546a;
 }
 
 .field input,
-.field textarea,
-.field select{
-  width:100%;
-  border:1px solid var(--border);
-  border-radius:11px;
-  padding:12px;
-  font-size:13px;
+.field textarea{
+  border:1px solid #d7dee8;
+  border-radius:9px;
+  padding:11px 12px;
   outline:none;
-  background:#fff;
 }
 
 .field textarea{
-  min-height:100px;
+  min-height:105px;
   resize:vertical;
 }
 
 .field input:focus,
-.field textarea:focus,
-.field select:focus{
-  border-color:var(--primary2);
-  box-shadow:0 0 0 3px rgba(23,107,135,.1);
+.field textarea:focus{
+  border-color:#2878b5;
+  box-shadow:0 0 0 3px rgba(40,120,181,.1);
 }
 
-.primary-btn{
+.primary{
   border:0;
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
-  color:#fff;
-  padding:12px 18px;
-  border-radius:11px;
-  cursor:pointer;
-  font-weight:bold;
+  background:#176b87;
+  color:white;
+  padding:11px 18px;
+  border-radius:8px;
+  font-weight:650;
 }
 
-/* DONATION */
-
-.donation-section-card{
-  padding:20px;
+.primary:hover{
+  background:#12586f;
 }
 
-.bank-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-}
 
-.bank-card{
-  background:linear-gradient(135deg,#ecfdf5,#f0fdfa);
-  border:1px solid #bbf7d0;
-  border-radius:18px;
-  padding:18px;
-}
+/* =========================
+   LEAVE / MESSAGE CARDS
+========================= */
 
-.bank-card h3{
-  color:#065f46;
-  margin-bottom:12px;
-}
-
-.bank-row{
-  padding:9px 0;
-  border-bottom:1px dashed #cbd5e1;
-  font-size:13px;
-}
-
-.bank-row:last-child{
-  border-bottom:0;
-}
-
-.bank-row span{
-  color:var(--muted);
-  display:inline-block;
-  width:125px;
-}
-
-/* UPI AMOUNT */
-
-.upi-amount-box{
-  margin-top:15px;
-  padding:14px;
-  background:linear-gradient(135deg,#eff6ff,#eef2ff);
-  border:1px solid #bfdbfe;
-  border-radius:14px;
-}
-
-.upi-amount-box label{
-  display:block;
-  font-size:12px;
-  font-weight:bold;
-  color:#123b5d;
-  margin-bottom:7px;
-}
-
-.upi-amount-box input{
-  width:100%;
-  padding:13px;
-  border:1px solid #cbd5e1;
-  border-radius:10px;
-  font-size:15px;
-  outline:none;
-  background:#fff;
-}
-
-.upi-amount-box input:focus{
-  border-color:#2563eb;
-  box-shadow:0 0 0 3px rgba(37,99,235,.1);
-}
-
-.upi-amount-box p{
-  margin-top:7px;
-  font-size:11px;
-  color:#64748b;
-}
-
-.qr-card{
-  text-align:center;
-  background:linear-gradient(135deg,#fff7ed,#fffbeb);
-  border:1px solid #fde68a;
-  border-radius:18px;
-  padding:18px;
-}
-
-.qr-card img{
-  width:210px;
-  max-width:100%;
-  border-radius:12px;
-  border:5px solid #fff;
-  box-shadow:var(--shadow);
-}
-
-.qr-card h3{
-  color:#92400e;
-  margin-bottom:10px;
-}
-
-.upi-btn{
-  margin-top:14px;
-  border:0;
-  background:linear-gradient(135deg,#7c3aed,#a855f7);
-  color:#fff;
-  padding:13px 20px;
-  border-radius:12px;
-  cursor:pointer;
-  font-weight:bold;
-  width:100%;
-}
-
-.upi-btn:active{
-  transform:scale(.98);
-}
-
-.donation-history{
-  margin-top:20px;
-}
-
-.donation-history h3{
-  margin-bottom:12px;
-  color:var(--primary);
-}
-
-.donation-history-card{
-  padding:15px;
-  border-radius:14px;
-  margin-bottom:10px;
-  background:linear-gradient(135deg,#f8fafc,#fff);
+.request-card{
   border:1px solid var(--border);
+  border-radius:13px;
+  padding:17px;
+  margin-bottom:12px;
 }
 
-.donation-row{
+.request-top{
   display:flex;
   justify-content:space-between;
   gap:10px;
-  flex-wrap:wrap;
 }
 
-.amount{
-  color:#087f5b;
-  font-size:20px;
-  font-weight:bold;
+.request-card h4{
+  font-size:15px;
 }
 
-/* LOADING */
-
-.loading{
-  position:fixed;
-  inset:0;
-  background:rgba(255,255,255,.96);
-  z-index:5000;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
+.request-card p{
+  color:#536477;
+  margin-top:8px;
+  line-height:1.5;
 }
 
-.spinner{
-  width:48px;
-  height:48px;
-  border:5px solid #dbeafe;
-  border-top-color:var(--primary);
-  border-radius:50%;
-  animation:spin 1s linear infinite;
-}
-
-.loading p{
-  margin-top:12px;
-  color:var(--primary);
-  font-weight:bold;
-}
-
-@keyframes spin{
-  to{
-    transform:rotate(360deg)
-  }
-}
-
-.mobile-menu{
-  display:none;
-  border:0;
-  background:var(--primary);
-  color:#fff;
-  padding:9px 12px;
+.reply-box{
+  margin-top:13px;
+  background:#eef8f4;
   border-radius:9px;
-  cursor:pointer;
+  padding:12px;
 }
 
-@media(max-width:1000px){
-
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .quick-grid{
-    grid-template-columns:repeat(3,1fr);
-  }
-
+.reply-box strong{
+  font-size:12px;
+  color:#18794e;
 }
 
-@media(max-width:760px){
+.reply-box p{
+  color:#285c49;
+  margin-top:5px;
+}
+
+
+/* =========================
+   QUICK ACTIONS
+========================= */
+
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:13px;
+}
+
+.quick-btn{
+  border:1px solid var(--border);
+  background:white;
+  border-radius:12px;
+  padding:17px;
+  text-align:left;
+  transition:.2s;
+}
+
+.quick-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow);
+}
+
+.quick-btn strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+.quick-btn small{
+  color:var(--muted);
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+#message{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  max-width:360px;
+  padding:14px 18px;
+  border-radius:9px;
+  color:white;
+  display:none;
+  z-index:9999;
+  box-shadow:0 8px 25px rgba(0,0,0,.15);
+}
+
+.success-msg{
+  background:#198754;
+}
+
+.error-msg{
+  background:#dc3545;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
 
   .sidebar{
     transform:translateX(-100%);
-    transition:.25s;
   }
 
   .sidebar.open{
@@ -855,229 +963,403 @@ body{
 
   .main{
     margin-left:0;
-  }
-
-  .mobile-menu{
-    display:inline-block;
-    margin-right:8px;
-  }
-
-  .topbar{
-    padding:12px;
-  }
-
-  .topbar-left h1{
-    font-size:18px;
-  }
-
-  .badge{
-    display:none;
-  }
-
-  .content{
-    padding:12px;
-  }
-
-  .donation-content{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .donation-btn{
     width:100%;
   }
 
-  .donation-left h2{
-    font-size:23px;
+  .mobile-menu{
+    display:block;
+  }
+
+  .topbar{
+    padding:0 15px;
+  }
+
+  .content{
+    padding:18px;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .quick-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+
+@media(max-width:600px){
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
   }
 
   .stats{
     grid-template-columns:1fr 1fr;
-    gap:10px;
   }
 
-  .quick-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .child-card,
-  .form-grid,
-  .bank-grid{
+  .child-meta{
     grid-template-columns:1fr;
   }
 
-  .hero-image{
-    height:150px;
-  }
-
-  .section-head{
-    align-items:flex-start;
-    gap:10px;
-  }
-
-  .section-tag{
+  .parent-badge{
     display:none;
   }
 
+  .top-title{
+    font-size:16px;
+  }
+
+  .hero{
+    padding:23px;
+  }
+
+  .hero h2{
+    font-size:22px;
+  }
+
+  .result-card{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .islamic-welcome{
+    padding:22px 20px;
+    border-radius:16px;
+  }
+
+  .welcome-arabic{
+    font-size:21px;
+    text-align:center;
+  }
+
+  .welcome-title{
+    font-size:19px;
+    text-align:center;
+  }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="loading" id="loading">
-  <div class="spinner"></div>
-  <p>SAFA QURAN COLLEGE loading...</p>
+<div id="loading">
+
+  <div class="loader"></div>
+
+  <div>
+    SAFA QURAN COLLEGE ONLINE PORTAL
+  </div>
+
+  <small>
+    Loading Parent Dashboard...
+  </small>
+
 </div>
+
+<div id="message"></div>
+
+<div class="app">
+
+
+<!-- =========================
+     SIDEBAR
+========================= -->
 
 <aside class="sidebar" id="sidebar">
 
   <div class="brand">
-    <h2>SAFA QURAN COLLEGE</h2>
-    <p>PARENT ONLINE PORTAL</p>
+
+    <h1>
+      SAFA QURAN COLLEGE ONLINE PORTAL
+    </h1>
+
+    <p>
+      Parent Portal
+    </p>
+
   </div>
 
-  <div class="menu-title">MAIN</div>
 
-  <button class="nav-btn active" data-section="home">
-    <span>🏠</span> Home
-  </button>
+  <div class="nav">
 
-  <button class="nav-btn" data-section="child">
-    <span>👦</span> My Child
-  </button>
+    <button
+      class="nav-btn active"
+      data-section="home">
 
-  <div class="menu-title">ACADEMIC</div>
+      <span>🏠</span>
+      Home
 
-  <button class="nav-btn" data-section="attendance">
-    <span>📅</span> Attendance
-  </button>
+    </button>
 
-  <button class="nav-btn" data-section="study">
-    <span>📖</span> Study Progress
-  </button>
 
-  <button class="nav-btn" data-section="results">
-    <span>📊</span> Results
-  </button>
+    <button
+      class="nav-btn"
+      data-section="child">
 
-  <button class="nav-btn" data-section="notices">
-    <span>📢</span> Notices
-  </button>
+      <span>👦</span>
+      My Child
 
-  <div class="menu-title">COMMUNICATION</div>
+    </button>
 
-  <button class="nav-btn" data-section="leave">
-    <span>📝</span> Leave
-  </button>
 
-  <button class="nav-btn" data-section="messages">
-    <span>💬</span> Messages
-  </button>
+    <button
+      class="nav-btn"
+      data-section="attendance">
 
-  <button class="nav-btn" data-section="donations">
-    <span>💚</span> My Donation
-  </button>
+      <span>✓</span>
+      Attendance
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-section="study">
+
+      <span>📖</span>
+      Study Progress
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-section="results">
+
+      <span>🏆</span>
+      Results
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-section="notices">
+
+      <span>📢</span>
+      Notices
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-section="leave">
+
+      <span>📝</span>
+      Leave
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-section="messages">
+
+      <span>💬</span>
+      Messages
+
+    </button>
+
+  </div>
 
 </aside>
+
+
+<!-- =========================
+     MAIN
+========================= -->
 
 <main class="main">
 
 <header class="topbar">
 
-  <div class="topbar-left">
+  <div class="left-top">
 
-    <div>
+    <button
+      class="mobile-menu"
+      id="mobileMenu">
 
-      <button class="mobile-menu" id="mobileMenu">
-        ☰
-      </button>
+      ☰
 
-      <span style="font-weight:bold;color:#123b5d;">
-        Parent Dashboard
-      </span>
+    </button>
 
+
+    <div class="top-title">
+      Parent Dashboard
     </div>
-
-    <p>SAFA QURAN COLLEGE ONLINE PORTAL</p>
 
   </div>
 
-  <div>
 
-    <span class="badge">
+  <div
+    style="
+      display:flex;
+      align-items:center;
+      gap:12px;
+    ">
+
+    <div class="parent-badge">
       PARENT PORTAL
-    </span>
+    </div>
 
-    <button class="logout" id="logoutBtn">
+
+    <button
+      class="logout"
+      id="logoutBtn">
+
       Logout
+
     </button>
 
   </div>
 
 </header>
 
+
 <div class="content">
 
-<!-- =====================================================
+
+<!-- =========================
      HOME
-===================================================== -->
+========================= -->
 
-<section class="section active" id="home">
+<section
+  class="section active"
+  id="home">
 
-  <div class="donation-hero">
 
-    <div class="donation-content">
+  <div class="islamic-welcome">
 
-      <div class="donation-left">
-
-        <div class="donation-kicker">
-          SAFA QURAN COLLEGE
-        </div>
-
-        <h2>
-          💚 MY DONATION TO SAFA
-        </h2>
-
-        <p>
-          Support the educational activities and development
-          of SAFA Quran College through your contribution.
-        </p>
-
-      </div>
-
-      <button
-        class="donation-btn"
-        id="donationHeroBtn"
-      >
-        💳 DONATE NOW →
-      </button>
-
+    <div class="welcome-arabic">
+      السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
     </div>
+
+    <div class="welcome-title">
+      Assalamu Alaikum
+    </div>
+
+    <div class="islamic-line"></div>
 
   </div>
 
 
-  <div class="hero">
+  <div class="child-card">
 
-    <img
-      src="./IMG-20260921-WA0016.jpg"
-      class="hero-image"
-      alt="SAFA QURAN COLLEGE"
-    >
+    <div class="child-top">
 
-    <div class="hero-body">
+      <div
+        class="avatar"
+        id="avatar">
 
-      <h2>
-        SAFA QURAN COLLEGE
-      </h2>
+        S
 
-      <p>
-        ONLINE PORTAL
-      </p>
+      </div>
 
-      <div class="ayah">
-        خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ
+
+      <div class="child-info">
+
+        <h3 id="homeChildName">
+          Loading...
+        </h3>
+
+        <p>
+          Student No.
+          <strong id="homeStudentNumber">
+            -
+          </strong>
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="child-meta">
+
+      <div class="meta-box">
+
+        <small>
+          Student Number
+        </small>
+
+        <strong id="homeNo">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Class
+        </small>
+
+        <strong id="homeClass">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Email ID
+        </small>
+
+        <strong id="homeParentEmail">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Guardian Name
+        </small>
+
+        <strong id="homeGuardianName">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Phone Number
+        </small>
+
+        <strong id="homePhoneNumber">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Address / Place
+        </small>
+
+        <strong id="homeStudentAddress">
+          -
+        </strong>
+
       </div>
 
     </div>
@@ -1089,6 +1371,10 @@ body{
 
     <div class="stat">
 
+      <div class="stat-icon">
+        ✓
+      </div>
+
       <small>
         Attendance Records
       </small>
@@ -1099,7 +1385,12 @@ body{
 
     </div>
 
+
     <div class="stat">
+
+      <div class="stat-icon">
+        📖
+      </div>
 
       <small>
         Study Records
@@ -1111,7 +1402,12 @@ body{
 
     </div>
 
+
     <div class="stat">
+
+      <div class="stat-icon">
+        🏆
+      </div>
 
       <small>
         Published Results
@@ -1123,7 +1419,12 @@ body{
 
     </div>
 
+
     <div class="stat">
+
+      <div class="stat-icon">
+        📢
+      </div>
 
       <small>
         Notices
@@ -1140,138 +1441,100 @@ body{
 
   <div class="panel">
 
-    <div class="panel-head">
+    <h3>
+      Quick Access
+    </h3>
 
-      <h3>
-        👦 My Child
-      </h3>
 
-      <div class="panel-desc">
-        Current student information
-      </div>
+    <div class="quick-grid">
 
-    </div>
+      <button
+        class="quick-btn"
+        data-go="attendance">
 
-    <div class="child-card">
-
-      <div class="info-box">
-
-        <small>
-          Student Number
-        </small>
-
-        <strong id="homeStudentNumber">
-          -
+        <strong>
+          ✓ Attendance
         </strong>
 
-      </div>
-
-      <div class="info-box">
-
         <small>
-          Student Name
+          View attendance records
         </small>
 
-        <strong id="homeStudentName">
-          -
+      </button>
+
+
+      <button
+        class="quick-btn"
+        data-go="study">
+
+        <strong>
+          📖 Study Progress
         </strong>
-
-      </div>
-
-      <div class="info-box">
 
         <small>
-          Class
+          View study progress
         </small>
 
-        <strong id="homeStudentClass">
-          -
+      </button>
+
+
+      <button
+        class="quick-btn"
+        data-go="results">
+
+        <strong>
+          🏆 Results
         </strong>
-
-      </div>
-
-      <div class="info-box">
 
         <small>
-          Parent Email
+          View published results
         </small>
 
-        <strong id="homeParentEmail">
-          -
+      </button>
+
+
+      <button
+        class="quick-btn"
+        data-go="notices">
+
+        <strong>
+          📢 Notices
         </strong>
 
-      </div>
+        <small>
+          View class announcements
+        </small>
 
-    </div>
-
-  </div>
-
-
-  <div class="panel">
-
-    <div class="panel-head">
-
-      <h3>
-        Quick Access
-      </h3>
-
-      <div class="panel-desc">
-        Open frequently used sections
-      </div>
-
-    </div>
-
-    <div
-      class="quick-grid"
-      style="padding:18px;"
-    >
-
-      <button
-        class="quick"
-        data-section="attendance"
-      >
-        📅<br>
-        Attendance
       </button>
 
-      <button
-        class="quick"
-        data-section="study"
-      >
-        📖<br>
-        Study Progress
-      </button>
 
       <button
-        class="quick"
-        data-section="results"
-      >
-        📊<br>
-        Results
+        class="quick-btn"
+        data-go="leave">
+
+        <strong>
+          📝 Apply Leave
+        </strong>
+
+        <small>
+          Send leave application
+        </small>
+
       </button>
 
-      <button
-        class="quick"
-        data-section="notices"
-      >
-        📢<br>
-        Notices
-      </button>
 
       <button
-        class="quick"
-        data-section="leave"
-      >
-        📝<br>
-        Apply Leave
-      </button>
+        class="quick-btn"
+        data-go="messages">
 
-      <button
-        class="quick"
-        data-section="messages"
-      >
-        💬<br>
-        Contact Usthad
+        <strong>
+          💬 Contact Usthad
+        </strong>
+
+        <small>
+          Send a message
+        </small>
+
       </button>
 
     </div>
@@ -1281,74 +1544,71 @@ body{
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      CHILD
-===================================================== -->
+========================= -->
 
-<section class="section" id="child">
+<section
+  class="section"
+  id="child">
 
   <div class="section-head">
 
-    <div>
+    <h2>
+      My Child
+    </h2>
 
-      <h2>
-        My Child
-      </h2>
-
-      <p>
-        Student information
-      </p>
-
-    </div>
-
-    <div class="section-tag">
-      STUDENT PROFILE
-    </div>
+    <p>
+      Student information connected to this parent account.
+    </p>
 
   </div>
 
 
-  <div class="panel">
+  <div class="child-card">
 
-    <div class="child-card">
+    <div class="child-top">
 
-      <div class="info-box">
+      <div
+        class="avatar"
+        id="childAvatar">
+
+        S
+
+      </div>
+
+
+      <div class="child-info">
+
+        <h3 id="childName">
+          -
+        </h3>
+
+        <p>
+          Hifz Student
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="child-meta">
+
+      <div class="meta-box">
 
         <small>
           Student Number
         </small>
 
-        <strong id="childStudentNumber">
+        <strong id="childNumber">
           -
         </strong>
 
       </div>
 
-      <div class="info-box">
 
-        <small>
-          Student Name
-        </small>
-
-        <strong id="childStudentName">
-          -
-        </strong>
-
-      </div>
-
-      <div class="info-box">
-
-        <small>
-          Guardian Name
-        </small>
-
-        <strong id="childGuardianName">
-          -
-        </strong>
-
-      </div>
-
-      <div class="info-box">
+      <div class="meta-box">
 
         <small>
           Class
@@ -1360,25 +1620,53 @@ body{
 
       </div>
 
-      <div class="info-box">
+
+      <div class="meta-box">
 
         <small>
-          Phone
+          Email ID
         </small>
 
-        <strong id="childPhone">
+        <strong id="childParentEmail">
           -
         </strong>
 
       </div>
 
-      <div class="info-box">
+
+      <div class="meta-box">
 
         <small>
-          Address
+          Guardian Name
         </small>
 
-        <strong id="childAddress">
+        <strong id="childGuardianName">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Phone Number
+        </small>
+
+        <strong id="childPhoneNumber">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="meta-box">
+
+        <small>
+          Address / Place
+        </small>
+
+        <strong id="childStudentAddress">
           -
         </strong>
 
@@ -1391,43 +1679,65 @@ body{
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      ATTENDANCE
-===================================================== -->
+========================= -->
 
-<section class="section" id="attendance">
+<section
+  class="section"
+  id="attendance">
 
   <div class="section-head">
 
-    <div>
+    <h2>
+      Attendance
+    </h2>
 
-      <h2>
-        Attendance
-      </h2>
-
-      <p>
-        Student attendance records
-      </p>
-
-    </div>
-
-    <div class="section-tag">
-      ATTENDANCE
-    </div>
+    <p>
+      Your child's attendance records.
+    </p>
 
   </div>
 
 
   <div class="panel">
 
-    <div
-      class="record-list"
-      id="attendanceList"
-    >
+    <div class="table-wrap">
 
-      <div class="record-card">
-        Loading attendance...
-      </div>
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Date
+            </th>
+
+            <th>
+              Status
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody
+          id="attendanceTable">
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <div
+      class="empty"
+      id="attendanceEmpty"
+      style="display:none;">
+
+      No attendance records available.
 
     </div>
 
@@ -1436,174 +1746,144 @@ body{
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      STUDY
-===================================================== -->
+========================= -->
 
-<section class="section" id="study">
+<section
+  class="section"
+  id="study">
 
   <div class="section-head">
 
-    <div>
+    <h2>
+      Study Progress
+    </h2>
 
-      <h2>
-        Study Progress
-      </h2>
-
-      <p>
-        Hifz and revision progress
-      </p>
-
-    </div>
-
-    <div class="section-tag">
-      HIFZ PROGRESS
-    </div>
+    <p>
+      View your child's Quran study progress.
+    </p>
 
   </div>
 
 
-  <div class="panel">
+  <div id="studyList"></div>
 
-    <div
-      class="record-list"
-      id="studyList"
-    >
 
-      <div class="record-card study">
-        Loading study progress...
-      </div>
+  <div
+    class="empty"
+    id="studyEmpty"
+    style="display:none;">
 
-    </div>
+    No study progress records available.
 
   </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      RESULTS
-===================================================== -->
+========================= -->
 
-<section class="section" id="results">
+<section
+  class="section"
+  id="results">
 
   <div class="section-head">
 
-    <div>
+    <h2>
+      Results
+    </h2>
 
-      <h2>
-        Results
-      </h2>
-
-      <p>
-        Published student results
-      </p>
-
-    </div>
-
-    <div class="section-tag">
-      PUBLISHED RESULTS
-    </div>
+    <p>
+      Published examination results.
+    </p>
 
   </div>
 
 
-  <div class="panel">
+  <div id="resultList"></div>
 
-    <div
-      class="record-list"
-      id="resultsList"
-    >
 
-      <div class="record-card result">
-        Loading results...
-      </div>
+  <div
+    class="empty"
+    id="resultEmpty"
+    style="display:none;">
 
-    </div>
+    No published results available.
 
   </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      NOTICES
-===================================================== -->
+========================= -->
 
-<section class="section" id="notices">
+<section
+  class="section"
+  id="notices">
 
   <div class="section-head">
 
-    <div>
+    <h2>
+      Notices
+    </h2>
 
-      <h2>
-        Notices
-      </h2>
-
-      <p>
-        College announcements
-      </p>
-
-    </div>
-
-    <div class="section-tag">
-      ANNOUNCEMENTS
-    </div>
+    <p>
+      Important announcements from
+      SAFA QURAN COLLEGE ONLINE PORTAL.
+    </p>
 
   </div>
 
 
-  <div class="panel">
+  <div id="noticeList"></div>
 
-    <div
-      class="record-list"
-      id="noticesList"
-    >
 
-      <div class="record-card notice">
-        Loading notices...
-      </div>
+  <div
+    class="empty"
+    id="noticeEmpty"
+    style="display:none;">
 
-    </div>
+    No notices available.
 
   </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      LEAVE
-===================================================== -->
+========================= -->
 
-<section class="section" id="leave">
+<section
+  class="section"
+  id="leave">
 
   <div class="section-head">
 
-    <div>
+    <h2>
+      Leave Application
+    </h2>
 
-      <h2>
-        Leave Application
-      </h2>
-
-      <p>
-        Submit a leave request to Usthad
-      </p>
-
-    </div>
-
-    <div class="section-tag">
-      LEAVE
-    </div>
+    <p>
+      Apply for leave and check the response from Usthad.
+    </p>
 
   </div>
 
 
   <div class="panel">
 
-    <form
-      class="form"
-      id="leaveForm"
-    >
+    <h3>
+      New Leave Application
+    </h3>
+
+
+    <form id="leaveForm">
 
       <div class="form-grid">
 
@@ -1629,36 +1909,39 @@ body{
           </label>
 
           <input
-            type="text"
             id="leaveReason"
-            placeholder="Reason for leave"
             required
+            placeholder="Reason for leave"
           >
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>
+            Additional Details
+          </label>
+
+          <textarea
+            id="leaveDetails"
+            placeholder="Additional information (optional)"
+          ></textarea>
 
         </div>
 
       </div>
 
 
-      <div class="field">
-
-        <label>
-          Details
-        </label>
-
-        <textarea
-          id="leaveDetails"
-          placeholder="Additional details..."
-        ></textarea>
-
-      </div>
+      <br>
 
 
       <button
-        class="primary-btn"
-        type="submit"
-      >
-        Submit Leave
+        class="primary"
+        type="submit">
+
+        Submit Leave Application
+
       </button>
 
     </form>
@@ -1668,19 +1951,21 @@ body{
 
   <div class="panel">
 
-    <div class="panel-head">
+    <h3>
+      My Leave Applications
+    </h3>
 
-      <h3>
-        My Leave Requests
-      </h3>
 
-    </div>
+    <div id="leaveList"></div>
+
 
     <div
-      class="record-list"
-      id="leaveList"
-    >
-      Loading leave requests...
+      class="empty"
+      id="leaveEmpty"
+      style="display:none;">
+
+      No leave applications yet.
+
     </div>
 
   </div>
@@ -1688,60 +1973,60 @@ body{
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      MESSAGES
-===================================================== -->
+========================= -->
 
-<section class="section" id="messages">
+<section
+  class="section"
+  id="messages">
 
   <div class="section-head">
 
-    <div>
+    <h2>
+      Messages
+    </h2>
 
-      <h2>
-        Contact Usthad
-      </h2>
-
-      <p>
-        Send a message to the college
-      </p>
-
-    </div>
-
-    <div class="section-tag">
-      MESSAGES
-    </div>
+    <p>
+      Contact Usthad regarding your child's studies.
+    </p>
 
   </div>
 
 
   <div class="panel">
 
-    <form
-      class="form"
-      id="messageForm"
-    >
+    <h3>
+      Send Message
+    </h3>
+
+
+    <form id="messageForm">
 
       <div class="field">
 
         <label>
-          Your Message
+          Message
         </label>
 
         <textarea
           id="messageText"
-          placeholder="Write your message..."
           required
+          placeholder="Write your message here..."
         ></textarea>
 
       </div>
 
 
+      <br>
+
+
       <button
-        class="primary-btn"
-        type="submit"
-      >
+        class="primary"
+        type="submit">
+
         Send Message
+
       </button>
 
     </form>
@@ -1751,301 +2036,50 @@ body{
 
   <div class="panel">
 
-    <div class="panel-head">
+    <h3>
+      Message History
+    </h3>
 
-      <h3>
-        My Messages
-      </h3>
 
-    </div>
+    <div id="messageList"></div>
+
 
     <div
-      class="record-list"
-      id="messagesList"
-    >
-      Loading messages...
+      class="empty"
+      id="messageEmpty"
+      style="display:none;">
+
+      No messages yet.
+
     </div>
 
   </div>
 
 </section>
 
-
-<!-- =====================================================
-     DONATIONS
-===================================================== -->
-
-<section class="section" id="donations">
-
-  <div class="section-head">
-
-    <div>
-
-      <h2>
-        💚 My Donation to SAFA
-      </h2>
-
-      <p>
-        Support SAFA Quran College
-      </p>
-
-    </div>
-
-    <div class="section-tag">
-      DONATION
-    </div>
-
-  </div>
-
-
-  <div class="panel">
-
-    <div class="donation-section-card">
-
-      <div class="bank-grid">
-
-
-        <!-- BANK -->
-
-        <div class="bank-card">
-
-          <h3>
-            🏦 Bank Transfer
-          </h3>
-
-
-          <div class="bank-row">
-
-            <span>
-              Bank
-            </span>
-
-            <strong>
-              Federal Bank
-            </strong>
-
-          </div>
-
-
-          <div class="bank-row">
-
-            <span>
-              Account No.
-            </span>
-
-            <strong>
-              10980200318831
-            </strong>
-
-          </div>
-
-
-          <div class="bank-row">
-
-            <span>
-              IFSC
-            </span>
-
-            <strong>
-              FDRL0001098
-            </strong>
-
-          </div>
-
-
-          <div class="bank-row">
-
-            <span>
-              Branch
-            </span>
-
-            <strong>
-              Kannur
-            </strong>
-
-          </div>
-
-
-          <!-- UPI AMOUNT -->
-
-          <div class="upi-amount-box">
-
-            <label>
-              💰 Donation Amount (₹)
-            </label>
-
-            <input
-              type="number"
-              id="upiAmount"
-              min="1"
-              step="1"
-              placeholder="Enter amount to pay"
-            >
-
-            <p>
-              Enter the amount you want to donate,
-              then tap PAY VIA UPI.
-            </p>
-
-          </div>
-
-
-          <!-- UPI BUTTON -->
-
-          <button
-            type="button"
-            class="upi-btn"
-            id="upiPayBtn"
-          >
-            📱 PAY VIA UPI
-          </button>
-
-
-        </div>
-
-
-        <!-- QR -->
-
-        <div class="qr-card">
-
-          <h3>
-            📲 Scan & Pay
-          </h3>
-
-
-          <img
-            src="./20260225.jpg"
-            alt="SAFA Donation QR Code"
-          >
-
-
-          <p style="
-            font-size:12px;
-            color:#718096;
-            margin-top:10px;
-          ">
-            Scan the QR code using your UPI app.
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <!-- PAYMENT DETAILS -->
-
-      <div style="margin-top:20px;">
-
-        <h3 style="
-          color:#123b5d;
-          margin-bottom:12px;
-        ">
-          Submit Payment Details
-        </h3>
-
-
-        <form id="donationForm">
-
-          <div class="form-grid">
-
-
-            <div class="field">
-
-              <label>
-                Amount (₹)
-              </label>
-
-              <input
-                type="number"
-                id="donationAmount"
-                min="1"
-                step="1"
-                placeholder="Enter amount"
-                required
-              >
-
-            </div>
-
-
-            <div class="field">
-
-              <label>
-                Transaction ID / UTR
-              </label>
-
-              <input
-                type="text"
-                id="transactionId"
-                placeholder="Enter transaction reference"
-                required
-              >
-
-            </div>
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              Note
-            </label>
-
-            <textarea
-              id="donationNote"
-              placeholder="Optional note"
-            ></textarea>
-
-          </div>
-
-
-          <button
-            type="submit"
-            class="primary-btn"
-          >
-            💚 SUBMIT DONATION
-          </button>
-
-        </form>
-
-      </div>
-
-
-      <!-- HISTORY -->
-
-      <div class="donation-history">
-
-        <h3>
-          Donation History
-        </h3>
-
-        <div id="donationHistory">
-          Loading donation history...
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
 
 </div>
+
 </main>
+
+</div>
 
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+/* =========================================================
+   FIREBASE
+========================================================= */
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 import {
   getAuth,
   onAuthStateChanged,
   signOut
-}
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 import {
   getFirestore,
@@ -2057,13 +2091,8 @@ import {
   query,
   where,
   serverTimestamp
-}
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-
-/* =====================================================
-   FIREBASE CONFIG
-===================================================== */
 
 const firebaseConfig = {
 
@@ -2101,27 +2130,15 @@ const db =
   getFirestore(app);
 
 
-let currentUser = null;
+/* =========================================================
+   HELPERS
+========================================================= */
 
-let currentStudent = null;
-
-
-/* =====================================================
-   HELPER
-===================================================== */
-
-function $(id){
-
-  return document.getElementById(id);
-
-}
+const $ =
+  id => document.getElementById(id);
 
 
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
-
-function escapeHTML(value){
+function escapeHtml(value){
 
   if(
     value === null ||
@@ -2134,821 +2151,270 @@ function escapeHTML(value){
 
   return String(value)
 
-    .replace(/&/g,"&amp;")
-
-    .replace(/</g,"&lt;")
-
-    .replace(/>/g,"&gt;")
-
-    .replace(/"/g,"&quot;")
-
-    .replace(/'/g,"&#039;");
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
 }
 
 
-/* =====================================================
-   DATE
-===================================================== */
+function showMessage(
+  text,
+  type="success"
+){
 
-function dateText(value){
+  const box =
+    $("message");
+
+  box.textContent =
+    text;
+
+  box.className =
+    type === "error"
+      ? "error-msg"
+      : "success-msg";
+
+  box.style.display =
+    "block";
+
+  setTimeout(()=>{
+
+    box.style.display =
+      "none";
+
+  },3500);
+
+}
+
+
+function getDateText(value){
 
   if(!value){
-
     return "-";
+  }
+
+  if(
+    typeof value === "object" &&
+    value.seconds
+  ){
+
+    return new Date(
+      value.seconds * 1000
+    ).toLocaleDateString("en-IN");
 
   }
 
-
-  try{
-
-    if(value.seconds){
-
-      return new Date(
-        value.seconds * 1000
-      ).toLocaleDateString();
-
-    }
-
-
-    return new Date(value)
-      .toLocaleDateString();
-
-  }catch(e){
-
-    return "-";
-
-  }
+  return String(value);
 
 }
 
 
-/* =====================================================
-   SECTION
-===================================================== */
+function getInitial(name){
 
-function showSection(sectionId){
+  if(!name){
+    return "S";
+  }
+
+  return String(name)
+    .trim()
+    .charAt(0)
+    .toUpperCase();
+
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+let currentUser = null;
+
+let studentNumber = "";
+
+let studentData = null;
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+document
+  .querySelectorAll(".nav-btn")
+  .forEach(button=>{
+
+    button.addEventListener(
+      "click",
+      ()=>{
+
+        openSection(
+          button.dataset.section
+        );
+
+        $("sidebar")
+          .classList
+          .remove("open");
+
+      }
+    );
+
+  });
+
+
+document
+  .querySelectorAll(".quick-btn")
+  .forEach(button=>{
+
+    button.addEventListener(
+      "click",
+      ()=>{
+
+        openSection(
+          button.dataset.go
+        );
+
+      }
+    );
+
+  });
+
+
+function openSection(id){
 
   document
     .querySelectorAll(".section")
     .forEach(section=>{
 
-      section.classList.remove("active");
+      section
+        .classList
+        .remove("active");
 
     });
-
-
-  const section =
-    $(sectionId);
-
-
-  if(section){
-
-    section.classList.add("active");
-
-  }
 
 
   document
     .querySelectorAll(".nav-btn")
     .forEach(button=>{
 
-      button.classList.toggle(
-
-        "active",
-
-        button.dataset.section ===
-        sectionId
-
-      );
+      button
+        .classList
+        .remove("active");
 
     });
 
 
-  $("sidebar")
-    ?.classList.remove("open");
+  const section =
+    $(id);
+
+  if(section){
+
+    section
+      .classList
+      .add("active");
+
+  }
+
+
+  const nav =
+    document.querySelector(
+      `.nav-btn[data-section="${id}"]`
+    );
+
+  if(nav){
+
+    nav
+      .classList
+      .add("active");
+
+  }
 
 
   window.scrollTo({
-
     top:0,
-
     behavior:"smooth"
-
   });
 
 }
 
 
-/* =====================================================
-   DOM CONTENT LOADED
-===================================================== */
+/* =========================================================
+   MOBILE MENU
+========================================================= */
 
-document.addEventListener(
+$("mobileMenu")
+  .addEventListener(
+    "click",
+    ()=>{
 
-  "DOMContentLoaded",
+      $("sidebar")
+        .classList
+        .toggle("open");
 
-  ()=>{
+    }
+  );
 
 
-    /* NAVIGATION */
+/* =========================================================
+   LOGOUT
+========================================================= */
 
-    document
-      .querySelectorAll(".nav-btn,.quick")
-      .forEach(button=>{
+$("logoutBtn")
+  .addEventListener(
+    "click",
+    async ()=>{
 
-        button.addEventListener(
+      if(
+        confirm(
+          "Logout from Parent Dashboard?"
+        )
+      ){
 
-          "click",
+        await signOut(auth);
 
-          ()=>{
-
-            const section =
-              button.dataset.section;
-
-
-            if(section){
-
-              showSection(section);
-
-            }
-
-          }
-
-        );
-
-      });
-
-
-    /* MOBILE MENU */
-
-    $("mobileMenu")
-      ?.addEventListener(
-
-        "click",
-
-        ()=>{
-
-          $("sidebar")
-            .classList.toggle("open");
-
-        }
-
-      );
-
-
-    /* DONATION HERO */
-
-    $("donationHeroBtn")
-      ?.addEventListener(
-
-        "click",
-
-        ()=>{
-
-          showSection("donations");
-
-        }
-
-      );
-
-
-    /* =================================================
-       UPI PAYMENT
-       UPI ID: 563safa@fbl
-    ================================================= */
-
-    $("upiPayBtn")
-      ?.addEventListener(
-
-        "click",
-
-        (event)=>{
-
-          event.preventDefault();
-
-
-          const UPI_ID =
-            "563safa@fbl";
-
-
-          const amountInput =
-            $("upiAmount");
-
-
-          const amount =
-            amountInput
-              ? amountInput.value.trim()
-              : "";
-
-
-          /* AMOUNT REQUIRED */
-
-          if(!amount){
-
-            alert(
-              "Please enter the donation amount first."
-            );
-
-
-            amountInput?.focus();
-
-
-            return;
-
-          }
-
-
-          const numericAmount =
-            Number(amount);
-
-
-          if(
-            isNaN(numericAmount) ||
-            numericAmount <= 0
-          ){
-
-            alert(
-              "Please enter a valid donation amount."
-            );
-
-
-            amountInput?.focus();
-
-
-            return;
-
-          }
-
-
-          /*
-             CREATE UPI URL
-          */
-
-          const upiUrl =
-
-            "upi://pay" +
-
-            "?pa=" +
-
-            encodeURIComponent(
-              UPI_ID
-            ) +
-
-            "&pn=" +
-
-            encodeURIComponent(
-              "SAFA QURAN COLLEGE"
-            ) +
-
-            "&am=" +
-
-            encodeURIComponent(
-              numericAmount.toFixed(2)
-            ) +
-
-            "&cu=INR" +
-
-            "&tn=" +
-
-            encodeURIComponent(
-              "Donation to SAFA Quran College"
-            );
-
-
-          /*
-             TEMPORARY LINK
-             This is more reliable on
-             Android browsers than only
-             using window.location.href.
-          */
-
-          const link =
-            document.createElement("a");
-
-
-          link.href =
-            upiUrl;
-
-
-          link.style.display =
-            "none";
-
-
-          document.body
-            .appendChild(link);
-
-
-          link.click();
-
-
-          setTimeout(
-
-            ()=>{
-
-              link.remove();
-
-            },
-
-            1000
-
-          );
-
-        }
-
-      );
-
-
-    /* =================================================
-       DONATION FORM
-    ================================================= */
-
-    $("donationForm")
-      ?.addEventListener(
-
-        "submit",
-
-        async(event)=>{
-
-          event.preventDefault();
-
-
-          if(
-            !currentUser ||
-            !currentStudent
-          ){
-
-            alert(
-              "Student information is not loaded yet."
-            );
-
-
-            return;
-
-          }
-
-
-          const amount =
-            Number(
-              $("donationAmount").value
-            );
-
-
-          const transactionId =
-            $("transactionId")
-              .value
-              .trim();
-
-
-          const note =
-            $("donationNote")
-              .value
-              .trim();
-
-
-          if(
-            !amount ||
-            amount <= 0
-          ){
-
-            alert(
-              "Please enter a valid donation amount."
-            );
-
-
-            return;
-
-          }
-
-
-          if(!transactionId){
-
-            alert(
-              "Please enter Transaction ID / UTR."
-            );
-
-
-            return;
-
-          }
-
-
-          const button =
-            $("donationForm")
-              .querySelector(
-                "button[type='submit']"
-              );
-
-
-          button.disabled =
-            true;
-
-
-          button.textContent =
-            "Submitting...";
-
-
-          try{
-
-            await addDoc(
-
-              collection(
-                db,
-                "donations"
-              ),
-
-              {
-
-                parentUid:
-                  currentUser.uid,
-
-                parentEmail:
-                  currentUser.email || "",
-
-                studentNumber:
-                  currentStudent.studentNumber,
-
-                studentName:
-                  currentStudent.name || "",
-
-                amount:
-                  amount,
-
-                transactionId:
-                  transactionId,
-
-                note:
-                  note,
-
-                status:
-                  "pending",
-
-                createdAt:
-                  serverTimestamp()
-
-              }
-
-            );
-
-
-            alert(
-              "Donation details submitted successfully. It is now pending verification."
-            );
-
-
-            $("donationForm")
-              .reset();
-
-
-            await loadDonations();
-
-
-          }catch(error){
-
-            console.error(error);
-
-
-            alert(
-              "Donation submission failed: " +
-              error.message
-            );
-
-
-          }finally{
-
-            button.disabled =
-              false;
-
-
-            button.textContent =
-              "💚 SUBMIT DONATION";
-
-          }
-
-        }
-
-      );
-
-
-    /* =================================================
-       LEAVE FORM
-    ================================================= */
-
-    $("leaveForm")
-      ?.addEventListener(
-
-        "submit",
-
-        async(event)=>{
-
-          event.preventDefault();
-
-
-          if(
-            !currentUser ||
-            !currentStudent
-          ){
-
-            alert(
-              "Student information is not loaded."
-            );
-
-
-            return;
-
-          }
-
-
-          const leaveDate =
-            $("leaveDate").value;
-
-
-          const reason =
-            $("leaveReason")
-              .value
-              .trim();
-
-
-          const details =
-            $("leaveDetails")
-              .value
-              .trim();
-
-
-          if(
-            !leaveDate ||
-            !reason
-          ){
-
-            alert(
-              "Please enter leave date and reason."
-            );
-
-
-            return;
-
-          }
-
-
-          try{
-
-            await addDoc(
-
-              collection(
-                db,
-                "leaveRequests"
-              ),
-
-              {
-
-                parentUid:
-                  currentUser.uid,
-
-                parentEmail:
-                  currentUser.email || "",
-
-                studentNumber:
-                  currentStudent.studentNumber,
-
-                leaveDate:
-                  leaveDate,
-
-                reason:
-                  reason,
-
-                details:
-                  details,
-
-                status:
-                  "pending",
-
-                reply:
-                  "",
-
-                createdAt:
-                  serverTimestamp()
-
-              }
-
-            );
-
-
-            alert(
-              "Leave request submitted successfully."
-            );
-
-
-            $("leaveForm")
-              .reset();
-
-
-            await loadLeaves();
-
-
-          }catch(error){
-
-            console.error(error);
-
-
-            alert(
-              "Leave submission failed: " +
-              error.message
-            );
-
-          }
-
-        }
-
-      );
-
-
-    /* =================================================
-       MESSAGE FORM
-    ================================================= */
-
-    $("messageForm")
-      ?.addEventListener(
-
-        "submit",
-
-        async(event)=>{
-
-          event.preventDefault();
-
-
-          if(
-            !currentUser ||
-            !currentStudent
-          ){
-
-            alert(
-              "Student information is not loaded."
-            );
-
-
-            return;
-
-          }
-
-
-          const text =
-            $("messageText")
-              .value
-              .trim();
-
-
-          if(!text){
-
-            alert(
-              "Please enter your message."
-            );
-
-
-            return;
-
-          }
-
-
-          try{
-
-            await addDoc(
-
-              collection(
-                db,
-                "messages"
-              ),
-
-              {
-
-                parentUid:
-                  currentUser.uid,
-
-                parentEmail:
-                  currentUser.email || "",
-
-                studentNumber:
-                  currentStudent.studentNumber,
-
-                text:
-                  text,
-
-                reply:
-                  "",
-
-                status:
-                  "unread",
-
-                createdAt:
-                  serverTimestamp()
-
-              }
-
-            );
-
-
-            alert(
-              "Message sent successfully."
-            );
-
-
-            $("messageForm")
-              .reset();
-
-
-            await loadMessages();
-
-
-          }catch(error){
-
-            console.error(error);
-
-
-            alert(
-              "Message sending failed: " +
-              error.message
-            );
-
-          }
-
-        }
-
-      );
-
-
-    /* =================================================
-       LOGOUT
-    ================================================= */
-
-    $("logoutBtn")
-      ?.addEventListener(
-
-        "click",
-
-        async()=>{
-
-          try{
-
-            await signOut(auth);
-
-
-            window.location.href =
-              "index.html";
-
-
-          }catch(error){
-
-            alert(
-              "Logout failed: " +
-              error.message
-            );
-
-          }
-
-        }
-
-      );
-
-  }
-
-);
-
-
-/* =====================================================
-   AUTH
-===================================================== */
-
-onAuthStateChanged(
-
-  auth,
-
-  async(user)=>{
-
-    try{
-
-      if(!user){
-
-        window.location.href =
+        location.href =
           "index.html";
-
-
-        return;
 
       }
 
+    }
+  );
 
-      currentUser =
-        user;
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+onAuthStateChanged(
+  auth,
+  async user=>{
+
+    if(!user){
+
+      location.href =
+        "index.html";
+
+      return;
+
+    }
+
+    currentUser =
+      user;
+
+
+    try{
+
+      const userRef =
+        doc(
+          db,
+          "users",
+          user.uid
+        );
 
 
       const userSnap =
         await getDoc(
-
-          doc(
-            db,
-            "users",
-            user.uid
-          )
-
+          userRef
         );
 
 
@@ -2965,10 +2431,15 @@ onAuthStateChanged(
         userSnap.data();
 
 
-      if(
-        userData.role !==
-        "parent"
-      ){
+      const role =
+        String(
+          userData.role || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+      if(role !== "parent"){
 
         throw new Error(
           "This account is not a parent account."
@@ -2977,8 +2448,10 @@ onAuthStateChanged(
       }
 
 
-      const studentNumber =
-        userData.studentNumber;
+      studentNumber =
+        String(
+          userData.studentNumber || ""
+        ).trim();
 
 
       if(!studentNumber){
@@ -2990,9 +2463,7 @@ onAuthStateChanged(
       }
 
 
-      await loadStudent(
-        studentNumber
-      );
+      await loadStudent();
 
 
       await Promise.all([
@@ -3007,14 +2478,14 @@ onAuthStateChanged(
 
         loadLeaves(),
 
-        loadMessages(),
-
-        loadDonations()
+        loadMessages()
 
       ]);
 
 
-      $("loading").style.display =
+      $("loading")
+        .style
+        .display =
         "none";
 
 
@@ -3022,92 +2493,76 @@ onAuthStateChanged(
 
       console.error(error);
 
+      $("loading").innerHTML =
 
-      $("loading").innerHTML = `
-
-        <div style="
-          max-width:420px;
+        `<div style="
           text-align:center;
           padding:25px;
+          max-width:420px;
         ">
 
-          <h2 style="color:#dc2626;">
+          <h3 style="margin-bottom:10px;">
             Parent Dashboard Error
-          </h2>
+          </h3>
 
           <p style="
-            margin-top:10px;
-            color:#64748b;
+            color:#718096;
+            font-weight:400;
             line-height:1.6;
           ">
-            ${escapeHTML(
-              error.message
-            )}
+            ${escapeHtml(error.message)}
           </p>
 
+          <br>
+
           <button
-            id="errorBack"
-            style="
-              margin-top:18px;
-              border:0;
-              background:#123b5d;
-              color:#fff;
-              padding:12px 18px;
-              border-radius:10px;
-              cursor:pointer;
-            "
-          >
+            id="errorLogout"
+            class="primary">
+
             Back to Login
+
           </button>
 
-        </div>
-
-      `;
+        </div>`;
 
 
-      $("errorBack")
-        ?.addEventListener(
+      const errorLogout =
+        $("errorLogout");
 
-          "click",
 
-          ()=>{
+      if(errorLogout){
 
-            window.location.href =
+        errorLogout.onclick =
+          async()=>{
+
+            await signOut(auth);
+
+            location.href =
               "index.html";
 
-          }
+          };
 
-        );
+      }
 
     }
 
-  }
-
-);
+  });
 
 
-/* =====================================================
+/* =========================================================
    LOAD STUDENT
-===================================================== */
+========================================================= */
 
-async function loadStudent(
-  studentNumber
-){
+async function loadStudent(){
 
   const q =
     query(
-
-      collection(
-        db,
-        "students"
-      ),
-
+      collection(db,"students"),
       where(
         "studentNumber",
         "==",
         studentNumber
       )
-
     );
 
 
@@ -3118,104 +2573,168 @@ async function loadStudent(
   if(snap.empty){
 
     throw new Error(
-      "Student record not found."
+      "Linked student was not found."
     );
 
   }
 
 
-  const studentDoc =
+  const first =
     snap.docs[0];
 
 
-  currentStudent = {
+  studentData = {
 
-    id:
-      studentDoc.id,
+    id:first.id,
 
-    ...studentDoc.data()
+    ...first.data()
 
   };
 
 
-  const s =
-    currentStudent;
+  const name =
+    studentData.name || "-";
+
+
+  const number =
+    studentData.studentNumber || "-";
+
+
+  const className =
+    studentData.className || "-";
+
+
+  const parentEmail =
+    currentUser?.email ||
+    studentData.parentEmail ||
+    "-";
+
+
+  const guardianName =
+    studentData.guardianName || "-";
+
+
+  const phoneNumber =
+    studentData.phoneNumber || "-";
+
+
+  const studentAddress =
+    studentData.studentAddress || "-";
+
+
+  /* =========================
+     HOME DETAILS
+  ========================= */
+
+  $("homeChildName")
+    .textContent =
+    name;
 
 
   $("homeStudentNumber")
     .textContent =
-    s.studentNumber || "-";
+    number;
 
 
-  $("homeStudentName")
+  $("homeNo")
     .textContent =
-    s.name || "-";
+    number;
 
 
-  $("homeStudentClass")
+  $("homeClass")
     .textContent =
-    s.className || "-";
+    className;
 
 
   $("homeParentEmail")
     .textContent =
-    s.parentEmail ||
-    currentUser.email ||
-    "-";
+    parentEmail;
 
 
-  $("childStudentNumber")
+  $("homeGuardianName")
     .textContent =
-    s.studentNumber || "-";
+    guardianName;
 
 
-  $("childStudentName")
+  $("homePhoneNumber")
     .textContent =
-    s.name || "-";
+    phoneNumber;
 
 
-  $("childGuardianName")
+  $("homeStudentAddress")
     .textContent =
-    s.guardianName || "-";
+    studentAddress;
+
+
+  /* =========================
+     MY CHILD DETAILS
+  ========================= */
+
+  $("childName")
+    .textContent =
+    name;
+
+
+  $("childNumber")
+    .textContent =
+    number;
 
 
   $("childClass")
     .textContent =
-    s.className || "-";
+    className;
 
 
-  $("childPhone")
+  $("childParentEmail")
     .textContent =
-    s.phoneNumber || "-";
+    parentEmail;
 
 
-  $("childAddress")
+  $("childGuardianName")
     .textContent =
-    s.studentAddress || "-";
+    guardianName;
+
+
+  $("childPhoneNumber")
+    .textContent =
+    phoneNumber;
+
+
+  $("childStudentAddress")
+    .textContent =
+    studentAddress;
+
+
+  const initial =
+    getInitial(name);
+
+
+  $("avatar")
+    .textContent =
+    initial;
+
+
+  $("childAvatar")
+    .textContent =
+    initial;
 
 }
 
 
-/* =====================================================
+/* =========================================================
    ATTENDANCE
-===================================================== */
+========================================================= */
 
 async function loadAttendance(){
 
   const q =
     query(
-
-      collection(
-        db,
-        "attendance"
-      ),
-
+      collection(db,"attendance"),
       where(
         "studentNumber",
         "==",
-        currentStudent.studentNumber
+        studentNumber
       )
-
     );
 
 
@@ -3223,134 +2742,209 @@ async function loadAttendance(){
     await getDocs(q);
 
 
-  const records =
-    snap.docs.map(
-
-      d=>({
-
-        id:d.id,
-
-        ...d.data()
-
-      })
-
-    );
+  const records = [];
 
 
-  records.sort(
+  snap.forEach(item=>{
 
-    (a,b)=>
-      (b.createdAt?.seconds || 0) -
-      (a.createdAt?.seconds || 0)
+    records.push({
 
+      id:item.id,
+
+      ...item.data()
+
+    });
+
+  });
+
+
+  const today =
+    new Date()
+      .toISOString()
+      .split("T")[0];
+
+
+  const dateMap = {};
+
+
+  records.forEach(data=>{
+
+    const date =
+      String(
+        data.date || ""
+      ).trim();
+
+
+    if(!date){
+      return;
+    }
+
+
+    const status =
+      String(
+        data.status || ""
+      ).trim();
+
+
+    if(!dateMap[date]){
+
+      dateMap[date] = {
+
+        date:date,
+
+        status:
+          status || "Present"
+
+      };
+
+    }else{
+
+      if(
+        status === "Absent" ||
+        status === "Leave"
+      ){
+
+        dateMap[date].status =
+          status;
+
+      }
+
+    }
+
+  });
+
+
+  if(!dateMap[today]){
+
+    dateMap[today] = {
+
+      date:today,
+
+      status:"Present"
+
+    };
+
+  }
+
+
+  const rows =
+    Object.values(dateMap);
+
+
+  rows.sort((a,b)=>
+    String(b.date)
+      .localeCompare(
+        String(a.date)
+      )
   );
+
+
+  $("attendanceTable")
+    .innerHTML =
+    "";
+
+
+  if(rows.length === 0){
+
+    $("attendanceEmpty")
+      .style
+      .display =
+      "block";
+
+  }else{
+
+    $("attendanceEmpty")
+      .style
+      .display =
+      "none";
+
+
+    rows.forEach(data=>{
+
+      let status =
+        data.status ||
+        "Present";
+
+
+      let badge =
+        "green";
+
+
+      if(status === "Absent"){
+
+        badge =
+          "red";
+
+      }else if(status === "Leave"){
+
+        badge =
+          "yellow";
+
+      }else{
+
+        status =
+          "Present";
+
+        badge =
+          "green";
+
+      }
+
+
+      const tr =
+        document.createElement(
+          "tr"
+        );
+
+
+      tr.innerHTML = `
+
+        <td>
+          ${escapeHtml(
+            data.date || "-"
+          )}
+        </td>
+
+        <td>
+
+          <span class="badge ${badge}">
+            ${escapeHtml(status)}
+          </span>
+
+        </td>
+
+      `;
+
+
+      $("attendanceTable")
+        .appendChild(tr);
+
+    });
+
+  }
 
 
   $("attendanceTotal")
     .textContent =
     records.length;
 
-
-  const list =
-    $("attendanceList");
-
-
-  if(records.length === 0){
-
-    list.innerHTML = `
-
-      <div class="record-card">
-        No attendance records found.
-      </div>
-
-    `;
-
-
-    return;
-
-  }
-
-
-  list.innerHTML =
-
-    records.map(
-
-      item=>{
-
-        const isPresent =
-
-          String(
-            item.status || ""
-          ).toLowerCase() ===
-          "present";
-
-
-        return `
-
-          <div class="record-card">
-
-            <div class="record-top">
-
-              <div>
-
-                <h4>
-                  📅 ${escapeHTML(
-                    item.date || "-"
-                  )}
-                </h4>
-
-                <p>
-                  Attendance status
-                </p>
-
-              </div>
-
-
-              <span class="status ${
-                isPresent
-                ? "present"
-                : "absent"
-              }">
-
-                ${escapeHTML(
-                  item.status || "-"
-                )}
-
-              </span>
-
-            </div>
-
-          </div>
-
-        `;
-
-      }
-
-    ).join("");
-
 }
 
 
-/* =====================================================
-   STUDY
-===================================================== */
+/* =========================================================
+   STUDY PROGRESS
+========================================================= */
 
 async function loadStudy(){
 
   const q =
     query(
-
-      collection(
-        db,
-        "studyProgress"
-      ),
-
+      collection(db,"studyProgress"),
       where(
         "studentNumber",
         "==",
-        currentStudent.studentNumber
+        studentNumber
       )
-
     );
 
 
@@ -3358,157 +2952,251 @@ async function loadStudy(){
     await getDocs(q);
 
 
-  const records =
-    snap.docs.map(
-
-      d=>({
-
-        id:d.id,
-
-        ...d.data()
-
-      })
-
-    );
+  const rows = [];
 
 
-  records.sort(
+  snap.forEach(item=>{
 
-    (a,b)=>
-      (b.createdAt?.seconds || 0) -
-      (a.createdAt?.seconds || 0)
+    rows.push({
 
+      id:item.id,
+
+      ...item.data()
+
+    });
+
+  });
+
+
+  rows.sort((a,b)=>
+    String(
+      b.date || ""
+    ).localeCompare(
+      String(
+        a.date || ""
+      )
+    )
   );
 
 
-  $("studyTotal")
-    .textContent =
-    records.length;
+  $("studyList")
+    .innerHTML =
+    "";
 
 
-  const list =
-    $("studyList");
+  if(rows.length === 0){
+
+    $("studyEmpty")
+      .style
+      .display =
+      "block";
+
+  }else{
+
+    $("studyEmpty")
+      .style
+      .display =
+      "none";
 
 
-  if(records.length === 0){
+    rows.forEach(data=>{
 
-    list.innerHTML = `
-
-      <div class="record-card study">
-        No study progress records found.
-      </div>
-
-    `;
+      let performance =
+        data.performance ||
+        "Not specified";
 
 
-    return;
+      let studyStatus =
+        data.studyStatus ||
+        "Not specified";
 
-  }
+
+      let width =
+        70;
 
 
-  list.innerHTML =
+      if(
+        performance ===
+        "Excellent"
+      ){
 
-    records.map(
+        width = 100;
 
-      item=>`
+      }else if(
+        performance ===
+        "Very Good"
+      ){
 
-        <div class="record-card study">
+        width = 85;
 
-          <h4>
-            📖 ${escapeHTML(
-              item.surah ||
+      }else if(
+        performance ===
+        "Good"
+      ){
+
+        width = 70;
+
+      }else if(
+        performance ===
+        "Needs Improvement"
+      ){
+
+        width = 45;
+
+      }
+
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "progress-card";
+
+
+      div.innerHTML = `
+
+        <div class="progress-head">
+
+          <strong>
+            ${escapeHtml(
+              data.surah ||
               "Study Progress"
             )}
-          </h4>
+          </strong>
 
-          <p>
-            New Lesson:
-            ${escapeHTML(
-              item.newLesson || "-"
+          <span>
+            ${escapeHtml(
+              data.date || "-"
             )}
-          </p>
+          </span>
 
-          <p>
-            Revision:
-            ${escapeHTML(
-              item.revision || "-"
-            )}
-          </p>
+        </div>
 
-          <p>
-            Performance:
-            ${escapeHTML(
-              item.performance || "-"
-            )}
-          </p>
 
-          <p>
-            Status:
-            ${escapeHTML(
-              item.studyStatus || "-"
-            )}
-          </p>
+        <div style="
+          font-size:13px;
+          color:#536477;
+          margin-bottom:10px;
+        ">
 
-          ${
-            item.note
+          <b>New Lesson:</b>
 
-            ? `
+          ${escapeHtml(
+            data.newLesson || "-"
+          )}
 
-              <p style="margin-top:8px;">
+          &nbsp; | &nbsp;
 
-                📝 ${escapeHTML(
-                  item.note
-                )}
+          <b>Revision:</b>
 
-              </p>
+          ${escapeHtml(
+            data.revision || "-"
+          )}
 
-            `
+        </div>
 
-            : ""
 
-          }
+        <div class="progress-line">
 
-          <div class="date">
-            ${dateText(
-              item.createdAt
-            )}
+          <div
+            class="progress-fill"
+            style="width:${width}%">
           </div>
 
         </div>
 
-      `
 
-    ).join("");
+        <div style="
+          margin-top:12px;
+          display:flex;
+          flex-wrap:wrap;
+          gap:8px;
+        ">
+
+          <span class="badge blue">
+
+            Hifz Performance:
+
+            ${escapeHtml(
+              performance
+            )}
+
+          </span>
+
+
+          <span class="badge green">
+
+            Dars & Study Status:
+
+            ${escapeHtml(
+              studyStatus
+            )}
+
+          </span>
+
+        </div>
+
+
+        ${
+          data.note
+          ? `
+            <div style="
+              margin-top:10px;
+              color:#718096;
+              font-size:12px;
+            ">
+
+              <b>Teacher Note:</b>
+
+              ${escapeHtml(
+                data.note
+              )}
+
+            </div>
+          `
+          : ""
+        }
+
+      `;
+
+
+      $("studyList")
+        .appendChild(div);
+
+    });
+
+  }
+
+
+  $("studyTotal")
+    .textContent =
+    rows.length;
 
 }
 
 
-/* =====================================================
+/* =========================================================
    RESULTS
-===================================================== */
+========================================================= */
 
 async function loadResults(){
 
   const q =
     query(
-
-      collection(
-        db,
-        "results"
-      ),
-
+      collection(db,"results"),
       where(
         "studentNumber",
         "==",
-        currentStudent.studentNumber
+        studentNumber
       ),
-
       where(
         "status",
         "==",
         "published"
       )
-
     );
 
 
@@ -3516,134 +3204,143 @@ async function loadResults(){
     await getDocs(q);
 
 
-  const records =
-    snap.docs.map(
-
-      d=>({
-
-        id:d.id,
-
-        ...d.data()
-
-      })
-
-    );
+  const rows = [];
 
 
-  records.sort(
+  snap.forEach(item=>{
 
-    (a,b)=>
-      (b.createdAt?.seconds || 0) -
-      (a.createdAt?.seconds || 0)
+    rows.push({
 
-  );
+      id:item.id,
 
+      ...item.data()
 
-  $("resultTotal")
-    .textContent =
-    records.length;
+    });
 
-
-  const list =
-    $("resultsList");
+  });
 
 
-  if(records.length === 0){
+  rows.sort((a,b)=>{
 
-    list.innerHTML = `
+    const aa =
+      a.createdAt?.seconds ||
+      0;
 
-      <div class="record-card result">
-        No published results available.
-      </div>
+    const bb =
+      b.createdAt?.seconds ||
+      0;
 
-    `;
+    return bb-aa;
 
-
-    return;
-
-  }
-
-
-  list.innerHTML =
-
-    records.map(
-
-      item=>`
-
-        <div class="record-card result">
-
-          <div class="record-top">
-
-            <div>
-
-              <h4>
-                📊 ${escapeHTML(
-                  item.title ||
-                  "Result"
-                )}
-              </h4>
-
-              <p>
-
-                Mark:
-
-                <strong>
-
-                  ${escapeHTML(
-                    item.mark ?? "-"
-                  )}
-
-                </strong>
-
-              </p>
-
-            </div>
+  });
 
 
-            <span class="status published">
-              PUBLISHED
-            </span>
+  $("resultList")
+    .innerHTML =
+    "";
+
+
+  if(rows.length === 0){
+
+    $("resultEmpty")
+      .style
+      .display =
+      "block";
+
+  }else{
+
+    $("resultEmpty")
+      .style
+      .display =
+      "none";
+
+
+    rows.forEach(data=>{
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "result-card";
+
+
+      div.innerHTML = `
+
+        <div>
+
+          <div class="result-title">
+
+            ${escapeHtml(
+              data.title ||
+              "Study Result"
+            )}
 
           </div>
 
 
-          <div class="date">
+          <div class="result-date">
 
-            ${dateText(
-              item.createdAt
-            )}
+            Published result
 
           </div>
 
         </div>
 
-      `
 
-    ).join("");
+        <div>
+
+          <div class="result-mark">
+
+            ${escapeHtml(
+              data.mark || "-"
+            )}
+
+          </div>
+
+
+          <span class="badge green">
+
+            Published
+
+          </span>
+
+        </div>
+
+      `;
+
+
+      $("resultList")
+        .appendChild(div);
+
+    });
+
+  }
+
+
+  $("resultTotal")
+    .textContent =
+    rows.length;
 
 }
 
 
-/* =====================================================
+/* =========================================================
    NOTICES
-===================================================== */
+========================================================= */
 
 async function loadNotices(){
 
   const q =
     query(
-
-      collection(
-        db,
-        "notices"
-      ),
-
+      collection(db,"notices"),
       where(
         "status",
         "==",
         "published"
       )
-
     );
 
 
@@ -3651,118 +3348,226 @@ async function loadNotices(){
     await getDocs(q);
 
 
-  const records =
-    snap.docs.map(
-
-      d=>({
-
-        id:d.id,
-
-        ...d.data()
-
-      })
-
-    );
+  const rows = [];
 
 
-  records.sort(
+  snap.forEach(item=>{
 
-    (a,b)=>
-      (b.createdAt?.seconds || 0) -
-      (a.createdAt?.seconds || 0)
+    rows.push({
 
-  );
+      id:item.id,
 
+      ...item.data()
 
-  $("noticeTotal")
-    .textContent =
-    records.length;
+    });
 
-
-  const list =
-    $("noticesList");
+  });
 
 
-  if(records.length === 0){
+  rows.sort((a,b)=>{
 
-    list.innerHTML = `
+    const aa =
+      a.createdAt?.seconds ||
+      0;
 
-      <div class="record-card notice">
-        No published notices.
-      </div>
+    const bb =
+      b.createdAt?.seconds ||
+      0;
 
-    `;
+    return bb-aa;
+
+  });
 
 
-    return;
+  $("noticeList")
+    .innerHTML =
+    "";
+
+
+  if(rows.length === 0){
+
+    $("noticeEmpty")
+      .style
+      .display =
+      "block";
+
+  }else{
+
+    $("noticeEmpty")
+      .style
+      .display =
+      "none";
+
+
+    rows.forEach(data=>{
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "notice";
+
+
+      div.innerHTML = `
+
+        <h4>
+
+          ${escapeHtml(
+            data.title ||
+            "Notice"
+          )}
+
+        </h4>
+
+
+        <p>
+
+          ${escapeHtml(
+            data.text || ""
+          )}
+
+        </p>
+
+
+        <small>
+
+          ${getDateText(
+            data.createdAt
+          )}
+
+        </small>
+
+      `;
+
+
+      $("noticeList")
+        .appendChild(div);
+
+    });
 
   }
 
 
-  list.innerHTML =
-
-    records.map(
-
-      item=>`
-
-        <div class="record-card notice">
-
-          <h4>
-
-            📢 ${escapeHTML(
-              item.title ||
-              "Notice"
-            )}
-
-          </h4>
-
-
-          <p>
-
-            ${escapeHTML(
-              item.text || ""
-            )}
-
-          </p>
-
-
-          <div class="date">
-
-            ${dateText(
-              item.createdAt
-            )}
-
-          </div>
-
-        </div>
-
-      `
-
-    ).join("");
+  $("noticeTotal")
+    .textContent =
+    rows.length;
 
 }
 
 
-/* =====================================================
-   LEAVES
-===================================================== */
+/* =========================================================
+   LEAVE APPLICATION
+========================================================= */
+
+$("leaveForm")
+  .addEventListener(
+    "submit",
+    async e=>{
+
+      e.preventDefault();
+
+
+      if(!currentUser){
+
+        showMessage(
+          "Please login again.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      try{
+
+        await addDoc(
+          collection(
+            db,
+            "leaveRequests"
+          ),
+          {
+
+            parentUid:
+              currentUser.uid,
+
+            parentEmail:
+              currentUser.email || "",
+
+            studentNumber:
+              studentNumber,
+
+            leaveDate:
+              $("leaveDate")
+                .value,
+
+            reason:
+              $("leaveReason")
+                .value
+                .trim(),
+
+            details:
+              $("leaveDetails")
+                .value
+                .trim(),
+
+            status:
+              "pending",
+
+            reply:
+              "",
+
+            createdAt:
+              serverTimestamp()
+
+          }
+        );
+
+
+        $("leaveForm")
+          .reset();
+
+
+        showMessage(
+          "Leave application submitted successfully."
+        );
+
+
+        await loadLeaves();
+
+
+      }catch(error){
+
+        console.error(error);
+
+        showMessage(
+          error.message,
+          "error"
+        );
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   LOAD LEAVES
+========================================================= */
 
 async function loadLeaves(){
 
   const q =
     query(
-
-      collection(
-        db,
-        "leaveRequests"
-      ),
-
+      collection(db,"leaveRequests"),
       where(
         "parentUid",
         "==",
         currentUser.uid
       )
-
     );
 
 
@@ -3770,184 +3575,300 @@ async function loadLeaves(){
     await getDocs(q);
 
 
-  const records =
-    snap.docs.map(
-
-      d=>({
-
-        id:d.id,
-
-        ...d.data()
-
-      })
-
-    );
+  const rows = [];
 
 
-  records.sort(
+  snap.forEach(item=>{
 
-    (a,b)=>
-      (b.createdAt?.seconds || 0) -
-      (a.createdAt?.seconds || 0)
+    rows.push({
 
-  );
+      id:item.id,
+
+      ...item.data()
+
+    });
+
+  });
 
 
-  const list =
-    $("leaveList");
+  rows.sort((a,b)=>{
+
+    const aa =
+      a.createdAt?.seconds ||
+      0;
+
+    const bb =
+      b.createdAt?.seconds ||
+      0;
+
+    return bb-aa;
+
+  });
 
 
-  if(records.length === 0){
+  $("leaveList")
+    .innerHTML =
+    "";
 
-    list.innerHTML = `
 
-      <div class="record-card leave">
-        No leave requests found.
-      </div>
+  if(rows.length === 0){
 
-    `;
-
+    $("leaveEmpty")
+      .style
+      .display =
+      "block";
 
     return;
 
   }
 
 
-  list.innerHTML =
-
-    records.map(
-
-      item=>`
-
-        <div class="record-card leave">
-
-          <div class="record-top">
-
-            <div>
-
-              <h4>
-
-                📝 Leave:
-
-                ${escapeHTML(
-                  item.leaveDate || "-"
-                )}
-
-              </h4>
+  $("leaveEmpty")
+    .style
+    .display =
+    "none";
 
 
-              <p>
+  rows.forEach(data=>{
 
-                Reason:
-
-                ${escapeHTML(
-                  item.reason || "-"
-                )}
-
-              </p>
-
-            </div>
+    const status =
+      data.status ||
+      "pending";
 
 
-            <span class="status ${
-              item.status === "approved"
-
-              ? "approved"
-
-              : item.status === "rejected"
-
-              ? "rejected"
-
-              : "pending"
-            }">
-
-              ${escapeHTML(
-                item.status ||
-                "pending"
-              )}
-
-            </span>
-
-          </div>
+    let badge =
+      "yellow";
 
 
-          ${
-            item.details
+    if(status === "approved"){
 
-            ? `
+      badge =
+        "green";
 
-              <p style="margin-top:8px;">
+    }else if(
+      status === "rejected"
+    ){
 
-                ${escapeHTML(
-                  item.details
-                )}
+      badge =
+        "red";
 
-              </p>
-
-            `
-
-            : ""
-
-          }
+    }
 
 
-          ${
-            item.reply
+    const div =
+      document.createElement(
+        "div"
+      );
 
-            ? `
 
-              <div style="
-                margin-top:10px;
-                padding:10px;
-                border-radius:10px;
-                background:#f1f5f9;
-              ">
+    div.className =
+      "request-card";
 
-                <strong>
-                  Usthad Reply:
-                </strong>
 
-                ${escapeHTML(
-                  item.reply
-                )}
+    div.innerHTML = `
 
-              </div>
+      <div class="request-top">
 
-            `
+        <div>
 
-            : ""
+          <h4>
+            Leave Application
+          </h4>
 
-          }
+          <small style="
+            color:#718096;
+          ">
+
+            ${escapeHtml(
+              data.leaveDate || "-"
+            )}
+
+          </small>
 
         </div>
 
-      `
 
-    ).join("");
+        <span class="badge ${badge}">
+
+          ${escapeHtml(
+            status
+          )}
+
+        </span>
+
+      </div>
+
+
+      <p>
+
+        <strong>
+          Reason:
+        </strong>
+
+        ${escapeHtml(
+          data.reason || "-"
+        )}
+
+      </p>
+
+
+      ${
+        data.details
+        ? `
+          <p>
+
+            <strong>
+              Details:
+            </strong>
+
+            ${escapeHtml(
+              data.details
+            )}
+
+          </p>
+        `
+        : ""
+      }
+
+
+      ${
+        data.reply
+        ? `
+          <div class="reply-box">
+
+            <strong>
+              USTHAD REPLY
+            </strong>
+
+            <p>
+
+              ${escapeHtml(
+                data.reply
+              )}
+
+            </p>
+
+          </div>
+        `
+        : ""
+      }
+
+    `;
+
+
+    $("leaveList")
+      .appendChild(div);
+
+  });
 
 }
 
 
-/* =====================================================
-   MESSAGES
-===================================================== */
+/* =========================================================
+   MESSAGE FORM
+========================================================= */
+
+$("messageForm")
+  .addEventListener(
+    "submit",
+    async e=>{
+
+      e.preventDefault();
+
+
+      const text =
+        $("messageText")
+          .value
+          .trim();
+
+
+      if(!text){
+
+        showMessage(
+          "Please enter a message.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      try{
+
+        await addDoc(
+          collection(
+            db,
+            "messages"
+          ),
+          {
+
+            parentUid:
+              currentUser.uid,
+
+            parentEmail:
+              currentUser.email || "",
+
+            studentNumber:
+              studentNumber,
+
+            text:
+              text,
+
+            reply:
+              "",
+
+            status:
+              "unread",
+
+            createdAt:
+              serverTimestamp()
+
+          }
+        );
+
+
+        $("messageForm")
+          .reset();
+
+
+        showMessage(
+          "Message sent successfully."
+        );
+
+
+        await loadMessages();
+
+
+      }catch(error){
+
+        console.error(error);
+
+        showMessage(
+          error.message,
+          "error"
+        );
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   LOAD MESSAGES
+========================================================= */
 
 async function loadMessages(){
 
   const q =
     query(
-
-      collection(
-        db,
-        "messages"
-      ),
-
+      collection(db,"messages"),
       where(
         "parentUid",
         "==",
         currentUser.uid
       )
-
     );
 
 
@@ -3955,334 +3876,168 @@ async function loadMessages(){
     await getDocs(q);
 
 
-  const records =
-    snap.docs.map(
-
-      d=>({
-
-        id:d.id,
-
-        ...d.data()
-
-      })
-
-    );
+  const rows = [];
 
 
-  records.sort(
+  snap.forEach(item=>{
 
-    (a,b)=>
-      (b.createdAt?.seconds || 0) -
-      (a.createdAt?.seconds || 0)
+    rows.push({
 
-  );
+      id:item.id,
+
+      ...item.data()
+
+    });
+
+  });
 
 
-  const list =
-    $("messagesList");
+  rows.sort((a,b)=>{
+
+    const aa =
+      a.createdAt?.seconds ||
+      0;
+
+    const bb =
+      b.createdAt?.seconds ||
+      0;
+
+    return bb-aa;
+
+  });
 
 
-  if(records.length === 0){
+  $("messageList")
+    .innerHTML =
+    "";
 
-    list.innerHTML = `
 
-      <div class="record-card message">
-        No messages found.
-      </div>
+  if(rows.length === 0){
 
-    `;
-
+    $("messageEmpty")
+      .style
+      .display =
+      "block";
 
     return;
 
   }
 
 
-  list.innerHTML =
-
-    records.map(
-
-      item=>`
-
-        <div class="record-card message">
-
-          <h4>
-            💬 Your Message
-          </h4>
+  $("messageEmpty")
+    .style
+    .display =
+    "none";
 
 
-          <p>
+  rows.forEach(data=>{
 
-            ${escapeHTML(
-              item.text || ""
-            )}
-
-          </p>
+    const status =
+      data.status ||
+      "unread";
 
 
-          ${
-            item.reply
-
-            ? `
-
-              <div style="
-                margin-top:10px;
-                padding:10px;
-                border-radius:10px;
-                background:#ecfeff;
-              ">
-
-                <strong>
-                  Usthad Reply:
-                </strong>
-
-                ${escapeHTML(
-                  item.reply
-                )}
-
-              </div>
-
-            `
-
-            : `
-
-              <div style="
-                margin-top:10px;
-                color:#d97706;
-                font-size:12px;
-              ">
-
-                Waiting for reply...
-
-              </div>
-
-            `
-
-          }
+    const badge =
+      status === "replied"
+        ? "green"
+        : "yellow";
 
 
-          <div class="date">
-
-            ${dateText(
-              item.createdAt
-            )}
-
-          </div>
-
-        </div>
-
-      `
-
-    ).join("");
-
-}
+    const div =
+      document.createElement(
+        "div"
+      );
 
 
-/* =====================================================
-   DONATIONS
-===================================================== */
-
-async function loadDonations(){
-
-  const q =
-    query(
-
-      collection(
-        db,
-        "donations"
-      ),
-
-      where(
-        "parentUid",
-        "==",
-        currentUser.uid
-      )
-
-    );
+    div.className =
+      "request-card";
 
 
-  const snap =
-    await getDocs(q);
+    div.innerHTML = `
+
+      <div class="request-top">
+
+        <h4>
+          My Message
+        </h4>
 
 
-  const records =
-    snap.docs.map(
+        <span class="badge ${badge}">
 
-      d=>({
+          ${escapeHtml(
+            status
+          )}
 
-        id:d.id,
-
-        ...d.data()
-
-      })
-
-    );
-
-
-  records.sort(
-
-    (a,b)=>
-      (b.createdAt?.seconds || 0) -
-      (a.createdAt?.seconds || 0)
-
-  );
-
-
-  const list =
-    $("donationHistory");
-
-
-  if(records.length === 0){
-
-    list.innerHTML = `
-
-      <div class="donation-history-card">
-
-        <p style="color:#718096;">
-          No donations submitted yet.
-        </p>
+        </span>
 
       </div>
 
-    `;
+
+      <p>
+
+        ${escapeHtml(
+          data.text || "-"
+        )}
+
+      </p>
 
 
-    return;
+      ${
+        data.reply
+        ? `
+          <div class="reply-box">
 
-  }
+            <strong>
+              USTHAD REPLY
+            </strong>
 
+            <p>
 
-  list.innerHTML =
-
-    records.map(
-
-      item=>{
-
-        let statusClass =
-          "pending";
-
-
-        if(
-          item.status ===
-          "verified"
-        ){
-
-          statusClass =
-            "approved";
-
-        }
-
-
-        if(
-          item.status ===
-          "rejected"
-        ){
-
-          statusClass =
-            "rejected";
-
-        }
-
-
-        return `
-
-          <div class="donation-history-card">
-
-            <div class="donation-row">
-
-              <div>
-
-                <div class="amount">
-
-                  ₹${escapeHTML(
-                    item.amount ??
-                    "0"
-                  )}
-
-                </div>
-
-
-                <div style="
-                  font-size:12px;
-                  color:#718096;
-                  margin-top:5px;
-                ">
-
-                  Transaction ID:
-
-                  ${escapeHTML(
-                    item.transactionId ||
-                    "-"
-                  )}
-
-                </div>
-
-              </div>
-
-
-              <div>
-
-                <span class="status ${statusClass}">
-
-                  ${escapeHTML(
-                    item.status ||
-                    "pending"
-                  )}
-
-                </span>
-
-              </div>
-
-            </div>
-
-
-            ${
-              item.adminNote
-
-              ? `
-
-                <div style="
-                  margin-top:10px;
-                  padding:10px;
-                  background:#f8fafc;
-                  border-radius:9px;
-                  font-size:12px;
-                ">
-
-                  <strong>
-                    Admin Note:
-                  </strong>
-
-                  ${escapeHTML(
-                    item.adminNote
-                  )}
-
-                </div>
-
-              `
-
-              : ""
-
-            }
-
-
-            <div class="date">
-
-              ${dateText(
-                item.createdAt
+              ${escapeHtml(
+                data.reply
               )}
 
-            </div>
+            </p>
 
           </div>
+        `
+        : `
+          <div style="
+            margin-top:12px;
+            color:#718096;
+            font-size:12px;
+          ">
 
-        `;
+            Waiting for Usthad's reply...
 
+          </div>
+        `
       }
 
-    ).join("");
+    `;
+
+
+    $("messageList")
+      .appendChild(div);
+
+  });
 
 }
+
+
+/* =========================================================
+   INITIAL DATE
+========================================================= */
+
+const today =
+  new Date()
+    .toISOString()
+    .split("T")[0];
+
+
+$("leaveDate")
+  .value =
+  today;
 
 </script>
 
