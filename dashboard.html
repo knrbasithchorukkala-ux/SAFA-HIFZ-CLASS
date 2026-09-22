@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html> <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>SAFA QURAN COLLEGE | ONLINE PORTAL</title>
-
-<style>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"> <title>SAFA
+QURAN COLLEGE | ONLINE PORTAL</title> <style>
 *{
 box-sizing:border-box;
 margin:0;
@@ -49,7 +45,6 @@ linear-gradient(135deg,#f9fdfb,#e3f3ea);
 
 min-height:100vh
 }
-
 button,
 input,
 select,
@@ -146,7 +141,6 @@ linear-gradient(180deg,#032b24 0%,#06483a 48%,#02251e 100%);
 border-right:1px solid rgba(212,175,55,.42);
 box-shadow:7px 0 30px rgba(3,43,36,.20)
 }
-
 .sidebar:before{
 content:"";
 position:absolute;
@@ -194,7 +188,6 @@ border-radius:14px;
 display:flex;
 align-items:center;
 justify-content:center;
-
 font-size:23px;
 font-weight:900;
 color:#173b2d;
@@ -530,7 +523,6 @@ border:1px solid rgba(244,215,120,.20);
 border-radius:18px;
 pointer-events:none
 }
-
 .college-title{
 position:relative;
 color:#fff;
@@ -579,7 +571,6 @@ font-family:
 "Amiri",
 "Traditional Arabic",
 serif;
-
 font-size:29px;
 font-weight:bold;
 line-height:1.8;
@@ -771,7 +762,6 @@ linear-gradient(
 #e1f5ea
 )
 }
-
 .quick-icon{
 margin-bottom:12px;
 color:#087f5b;
@@ -819,7 +809,6 @@ width:100%;
 padding:11px 12px;
 outline:none;
 color:var(--text);
-
 background:#f5fbf7;
 border:1px solid #c4dfcf;
 border-radius:10px;
@@ -916,7 +905,7 @@ color:#315b49;
 background:#eef8f2;
 font-weight:800
 }
-  .secondary:hover{
+.secondary:hover{
 background:#dff1e7
 }
 
@@ -963,7 +952,6 @@ overflow-x:auto;
 border-radius:12px;
 border:1px solid #d2e6da
 }
-
 table{
 width:100%;
 min-width:720px;
@@ -1011,8 +999,7 @@ overflow-x:auto;
 border-radius:12px;
 border:1px solid #d2e6da
 }
-
-.study-table{
+  .study-table{
 min-width:1200px
 }
 
@@ -1202,7 +1189,6 @@ color:#fff !important;
 background:
 radial-gradient(circle at 90% 15%,rgba(212,175,55,.20),transparent 25%),
 linear-gradient(135deg,#032b24,#087f5b) !important;
-
 border:1px solid rgba(212,175,55,.55)
 }
 
@@ -1250,7 +1236,6 @@ grid-template-columns:repeat(2,1fr)
 .study-info{
 grid-template-columns:repeat(3,1fr)
 }
-
 }
 
 @media(max-width:900px){
@@ -1395,29 +1380,25 @@ grid-template-columns:1fr
 }
 
 }
-
-
 </style>
 </head>
 
 <body>
 
-<div id="loading">
-SAFA QURAN COLLEGE loading...
-</div>
+<div id="loading">SAFA QURAN COLLEGE loading...</div>
 
 <div id="message"></div>
 
 <!-- EDIT STUDENT MODAL -->
 
-<div class="modal-overlay" id="editStudentModal">
+<div class="modal-overlay"
+id="editStudentModal">
 
 <div class="edit-modal">
 
 <div class="panel-head">
 
 <div>
-
 <h3>Edit Student</h3>
 
 <p class="panel-desc">
@@ -1521,7 +1502,105 @@ Save Changes
 </div>
 
 </div>
+</div>
 
+<!-- EDIT ATTENDANCE MODAL -->
+
+<div class="modal-overlay" id="editAttendanceModal">
+
+<div class="edit-modal">
+
+<div class="panel-head">
+
+<div>
+<h3>Edit Attendance</h3>
+
+<p class="panel-desc">
+Update the attendance exception record
+</p>
+
+</div>
+
+<button
+class="danger"
+id="closeEditAttendanceModal">
+✕
+</button>
+
+</div>
+
+<div class="form-grid">
+
+<div class="field">
+
+<label>Student Number</label>
+
+<input
+id="editAttendanceStudent"
+readonly>
+
+</div>
+
+<div class="field">
+
+<label>Student Name</label>
+
+<input
+id="editAttendanceStudentName"
+readonly>
+
+</div>
+
+<div class="field">
+
+<label>Date</label>
+
+<input
+id="editAttendanceDate"
+type="date"
+required>
+
+</div>
+
+<div class="field">
+
+<label>Status</label>
+
+<select
+id="editAttendanceStatus"
+required>
+
+<option value="absent">
+Absent
+</option>
+
+<option value="leave">
+Leave
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="modal-actions">
+
+<button
+class="secondary"
+id="cancelEditAttendance">
+Cancel
+</button>
+
+<button
+class="primary"
+id="saveEditAttendance">
+Save Changes
+</button>
+
+</div>
+
+</div>
 </div>
 
 <div class="app">
@@ -1549,7 +1628,6 @@ ONLINE PORTAL
 </div>
 
 </div>
-
 </div>
 
 <div class="menu">
@@ -1571,7 +1649,8 @@ Dashboard
 class="menu-btn"
 data-section="students">
 
-<span>👨‍🎓</span>
+👨‍🎓
+<span> </span>
 Students
 
 </button>
@@ -1593,7 +1672,8 @@ Attendance
 class="menu-btn"
 data-section="study">
 
-<span>📖</span>
+📖
+<span> </span>
 Study Progress
 
 </button>
@@ -1602,7 +1682,7 @@ Study Progress
 class="menu-btn"
 data-section="results">
 
-<span>🏆</span>
+<span> 🏆</span>
 Results
 
 </button>
@@ -1611,7 +1691,7 @@ Results
 class="menu-btn"
 data-section="notices">
 
-<span>📢</span>
+<span> 📢</span>
 Notices
 
 </button>
@@ -1624,7 +1704,8 @@ Communication
 class="menu-btn"
 data-section="leave">
 
-<span>📝</span>
+📝
+<span> </span>
 Leave Requests
 
 </button>
@@ -1633,7 +1714,8 @@ Leave Requests
 class="menu-btn"
 data-section="messages">
 
-<span>💬</span>
+💬
+<span> </span>
 Parent Messages
 
 </button>
@@ -1642,7 +1724,8 @@ Parent Messages
 class="menu-btn"
 data-section="donations">
 
-<span>💰</span>
+💰
+<span> </span>
 Donations
 
 </button>
@@ -1655,13 +1738,13 @@ Public
 class="menu-btn"
 data-section="publicResult">
 
-<span>🌐</span>
+🌐
+<span> </span>
 Public Result
 
 </button>
 
 </div>
-
 </aside>
 
 <main class="main">
@@ -1687,7 +1770,6 @@ ONLINE PORTAL Management System
 </div>
 
 </div>
-
 </div>
 
 <div class="top-right">
@@ -1733,7 +1815,7 @@ ONLINE PORTAL
 <div class="college-header-line"></div>
 
 <div class="college-ayah">
-وعلمه القرءان تعلم من خيركم
+‫خيركم من تعلم القرءان وعلمه‬
 </div>
 
 <div class="college-ayah-meaning">
@@ -1742,6 +1824,8 @@ The best among you are those who learn the Qur'an and teach it.
 
 </div>
 
+👨‍🎓
+
 </div>
 
 <div class="stats">
@@ -1749,7 +1833,6 @@ The best among you are those who learn the Qur'an and teach it.
 <div class="stat">
 
 <div class="stat-icon">
-👨‍🎓
 </div>
 
 <small>
@@ -1790,6 +1873,8 @@ Leave Requests
 
 <strong id="leaveCount">
 0
+
+💬
 </strong>
 
 </div>
@@ -1797,7 +1882,6 @@ Leave Requests
 <div class="stat">
 
 <div class="stat-icon">
-💬
 </div>
 
 <small>
@@ -1836,8 +1920,9 @@ Manage your college portal quickly
 class="quick-btn"
 data-go="students">
 
-<div class="quick-icon">
 👨‍🎓
+
+<div class="quick-icon">
 </div>
 
 <strong>
@@ -1872,8 +1957,9 @@ Manage daily attendance
 class="quick-btn"
 data-go="study">
 
-<div class="quick-icon">
 📖
+
+<div class="quick-icon">
 </div>
 
 <strong>
@@ -1890,8 +1976,9 @@ Update
 class="quick-btn"
 data-go="results">
 
-<div class="quick-icon">
 🏆
+
+<div class="quick-icon">
 </div>
 
 <strong>
@@ -1908,8 +1995,9 @@ Publish student results
 class="quick-btn"
 data-go="notices">
 
-<div class="quick-icon">
 📢
+
+<div class="quick-icon">
 </div>
 
 <strong>
@@ -1926,8 +2014,9 @@ Publish announcements
 class="quick-btn"
 data-go="donations">
 
-<div class="quick-icon">
 💰
+
+<div class="quick-icon">
 </div>
 
 <strong>
@@ -1944,8 +2033,9 @@ Verify donations
 class="quick-btn"
 data-go="publicResult">
 
-<div class="quick-icon">
 🌐
+
+<div class="quick-icon">
 </div>
 
 <strong>
@@ -1959,7 +2049,6 @@ Open public result system
 </button>
 
 </div>
-
 </div>
 
 </section>
@@ -2201,7 +2290,7 @@ Add Attendance
 </h3>
 
 <div class="panel-desc">
-Record attendance for students
+Record only Absent / Leave. All other students are automatically Present for that date.
 </div>
 
 </div>
@@ -2215,12 +2304,30 @@ Record attendance for students
 <div class="field">
 
 <label>
+Search Student by No / Name
+</label>
+
+<input
+class="search"
+id="attendanceStudentSearch"
+placeholder="Search student number or name...">
+
+</div>
+
+<div class="field">
+
+<label>
 Student
 </label>
 
 <select
 id="attendanceStudent"
 required>
+
+<option value="">
+Select student
+</option>
+
 </select>
 
 </div>
@@ -2245,10 +2352,14 @@ Status
 </label>
 
 <select
-id="attendanceStatus">
+id="attendanceStatus"
+required>
 
-<option value="present">
-Present
+<option
+value=""
+selected
+disabled>
+Select status
 </option>
 
 <option value="absent">
@@ -2268,9 +2379,7 @@ Leave
 <button
 class="primary"
 type="submit">
-
 Save Attendance
-
 </button>
 
 </div>
@@ -2352,7 +2461,20 @@ Record the student's daily Qur'an and Dars progress
 <div class="field">
 
 <label>
-Student Search
+Search Student by No / Name
+</label>
+
+<input
+class="search"
+id="studyStudentSearch"
+placeholder="Search student number or name...">
+
+</div>
+
+<div class="field">
+
+<label>
+Student
 </label>
 
 <select
@@ -2440,7 +2562,7 @@ placeholder="Enter status code">
 <label>
 Performance
 </label>
-</label>
+
 <select
 id="performance">
 
@@ -2469,129 +2591,63 @@ Needs Improvement
 </option>
 
 </select>
+
 </div>
 
 <div class="field">
+
 <label>
 Teacher's Remarks
 </label>
-
-<input
+</label> <input
 id="studyNote"
 placeholder="Teacher's comments about today's study">
 
-</div>
-
-<div class="field">
-<label>
+</div> <div class="field"> <label>
 Dars Study Level
-</label>
-
-<select
+</label> <select
 id="darsLevel">
 
 <option value="">
 Select level
-</option>
-
-<option value="Excellent">
+</option> <option value="Excellent">
 Excellent
-</option>
-
-<option value="Very Good">
+</option> <option value="Very Good">
 Very Good
-</option>
-
-<option value="Good">
+</option> <option value="Good">
 Good
-</option>
-
-<option value="Average">
+</option> <option value="Average">
 Average
-</option>
-
-<option value="Needs Improvement">
+</option> <option value="Needs Improvement">
 Needs Improvement
-</option>
-
-</select>
-</div>
-
-<div class="field">
-<label>
+</option> </select> </div> <div class="field"> <label>
 Discipline
-</label>
-
-<select
+</label> <select
 id="discipline">
 
 <option value="">
 Select discipline
-</option>
-
-<option value="Excellent">
+</option> <option value="Excellent">
 Excellent
-</option>
-
-<option value="Very Good">
+</option> <option value="Very Good">
 Very Good
-</option>
-
-<option value="Good">
+</option> <option value="Good">
 Good
-</option>
-
-<option value="Average">
+</option> <option value="Average">
 Average
-</option>
-
-<option value="Needs Improvement">
+</option> <option value="Needs Improvement">
 Needs Improvement
-</option>
-
-</select>
-</div>
-
-<div class="field">
-
-<button
+</option> </select> </div> <div class="field"> <button
 class="primary"
 type="submit">
 Save Study Progress
 </button>
 
-</div>
-
-</div>
-</form>
-</div>
-
-<div class="panel">
-
-<div class="panel-head">
-
-<div>
-
-<h3>
+</div> </div> </form> </div> <div class="panel"> <div class="panel-head"> <div> <h3>
 Study Progress Records
-</h3>
-
-<div class="panel-desc">
+</h3> <div class="panel-desc">
 Daily Hifz, revision, performance, Dars level and discipline
-</div>
-
-</div>
-
-</div>
-
-<div class="table-wrap">
-
-<table class="study-table">
-
-<thead>
-
-<tr>
-
+</div> </div> </div> <div class="table-wrap"> <table class="study-table"> <thead> <tr>
 <th>Student</th>
 <th>Date</th>
 <th>Juz / Surah Studied</th>
@@ -2602,58 +2658,30 @@ Daily Hifz, revision, performance, Dars level and discipline
 <th>Teacher's Remarks</th>
 <th>Dars Study Level</th>
 <th>Discipline</th>
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-<tbody
+<th>Action</th> </tr> </thead> <tbody
 id="studyTable">
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- RESULTS -->
-
-<section
+</tbody> </table> </div> </div> </section> <!-- RESULTS --> <section
 class="section"
-id="results">
-
-<div class="section-head">
-
-<div>
-
-<h2>
+id="results"> <div class="section-head"> <div> <h2>
 Results
-</h2>
-
-<p>
+</h2> <p>
 Add and publish student results
-</p>
-
-</div>
-
-<div class="section-tag">
+</p> </div> <div class="section-tag">
 RESULT MANAGEMENT
-</div>
+</div> </div> <div class="panel"> <form id="resultForm"> <div class="form-grid"> 
+<div class="field">
+<label>
+Search Student by No / Name
+</label>
+
+<input
+class="search"
+id="resultStudentSearch"
+placeholder="Search student number or name...">
 
 </div>
-
-<div class="panel">
-
-<form id="resultForm">
-
-<div class="form-grid">
 
 <div class="field">
-
 <label>
 Student
 </label>
@@ -2663,502 +2691,165 @@ id="resultStudent"
 required>
 </select>
 
-</div>
-
-<div class="field">
-
-<label>
+</div> <div class="field"> <label>
 Test / Exam Title
-</label>
-
-<input
+</label> <input
 id="resultTitle"
 required>
 
-</div>
-
-<div class="field">
-
-<label>
+</div> <div class="field"> <label>
 Mark
-</label>
-
-<input
+</label> <input
 id="resultMark"
 required>
 
-</div>
-
-<div class="field">
-
-<label>
+</div> <div class="field"> <label>
 Status
-</label>
-
-<select
+</label> <select
 id="resultStatus">
 
 <option value="draft">
 Draft
-</option>
-
-<option value="published">
+</option> <option value="published">
 Published
-</option>
-
-</select>
-
-</div>
-
-<div class="field">
-
-<button
+</option> </select> </div> <div class="field"> <button
 class="primary"
 type="submit">
 Add Result
 </button>
 
-</div>
-
-</div>
-
-</form>
-
-</div>
-
-<div class="panel">
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Student</th>
+</div> </div> </form> </div> <div class="panel"> <div class="table-wrap"> <table>
+<thead> <tr> <th>Student</th>
 <th>Title</th>
 <th>Mark</th>
 <th>Status</th>
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-<tbody
+<th>Action</th> </tr> </thead> <tbody
 id="resultsTable">
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- NOTICES -->
-
-<section
+</tbody> </table> </div> </div> </section> <!-- NOTICES --> <section
 class="section"
-id="notices">
-
-<div class="section-head">
-
-<div>
-
-<h2>
+id="notices"> <div class="section-head"> <div> <h2>
 Notices
-</h2>
-
-<p>
+</h2> <p>
 Publish announcements for parents
-</p>
-
-</div>
-
-<div class="section-tag">
+</p> </div> <div class="section-tag">
 ANNOUNCEMENTS
-</div>
-
-</div>
-
-<div class="panel">
-
-<form id="noticeForm">
-
-<div class="form-grid">
-
-<div class="field">
-
-<label>
+</div> </div> <div class="panel"> <form id="noticeForm"> <div class="form-grid"> <div
+class="field"> <label>
 Notice Title
-</label>
-
-<input
+</label> <input
 id="noticeTitle"
 required>
 
-</div>
-
-<div class="field">
-
-<label>
+</div> <div class="field"> <label>
 Status
-</label>
-
-<select
+</label> <select
 id="noticeStatus">
 
 <option value="draft">
 Draft
-</option>
-
-<option value="published">
+</option> <option value="published">
 Published
-</option>
-
-</select>
-
-</div>
-
-<div class="field full">
-
-<label>
+</option> </select> </div> <div class="field full"> <label>
 Notice
-</label>
-
-<textarea
+</label> <textarea
 id="noticeText"
 required>
-</textarea>
-
-</div>
-
-<div class="field">
-
-<button
+</textarea> </div> <div class="field"> <button
 class="primary"
 type="submit">
 Add Notice
 </button>
 
-</div>
-
-</div>
-
-</form>
-
-</div>
-
-<div class="panel">
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Title</th>
+</div> </div> </form> </div> <div class="panel"> <div class="table-wrap"> <table>
+<thead> <tr> <th>Title</th>
 <th>Notice</th>
 <th>Status</th>
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-<tbody
+<th>Action</th> </tr> </thead> <tbody
 id="noticesTable">
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- LEAVE -->
-
-<section
+</tbody> </table> </div> </div> </section> <!-- LEAVE --> <section
 class="section"
-id="leave">
-
-<div class="section-head">
-
-<div>
-
-<h2>
+id="leave"> <div class="section-head"> <div> <h2>
 Leave Requests
-</h2>
-
-<p>
+</h2> <p>
 Review and respond to parent leave requests
-</p>
-
-</div>
-
-<div class="section-tag">
+</p> </div> <div class="section-tag">
 PARENT REQUESTS
-</div>
-
-</div>
-
-<div class="panel">
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
+</div> </div> <div class="panel"> <div class="table-wrap"> <table> <thead> <tr>
 <th>Student</th>
 <th>Parent</th>
 <th>Date</th>
 <th>Reason</th>
 <th>Status</th>
 <th>Reply</th>
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-<tbody
+<th>Action</th> </tr> </thead> <tbody
 id="leaveTable">
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- MESSAGES -->
-
-<section
+</tbody> </table> </div> </div> </section> <!-- MESSAGES --> <section
 class="section"
-id="messages">
-
-<div class="section-head">
-
-<div>
-
-<h2>
+id="messages"> <div class="section-head"> <div> <h2>
 Parent Messages
-</h2>
-
-<p>
+</h2> <p>
 Read and reply to parent messages
-</p>
-
-</div>
-
-<div class="section-tag">
+</p> </div> <div class="section-tag">
 COMMUNICATION
-</div>
-
-</div>
-
-<div class="panel">
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
+</div> </div> <div class="panel"> <div class="table-wrap"> <table> <thead> <tr>
 <th>Student</th>
 <th>Parent</th>
 <th>Message</th>
 <th>Status</th>
 <th>Reply</th>
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-<tbody
+<th>Action</th> </tr> </thead> <tbody
 id="messagesTable">
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- DONATIONS -->
-
-<section
+</tbody> </table> </div> </div> </section> <!-- DONATIONS --> <section
 class="section"
-id="donations">
-
-<div class="section-head">
-
-<div>
-
-<h2>
+id="donations"> <div class="section-head"> <div> <h2>
 Donations
-</h2>
-
-<p>
+</h2> <p>
 Review and verify parent donations
-</p>
-
-</div>
-
-<div class="section-tag">
+</p> </div> <div class="section-tag">
 SAFA DONATION
-</div>
-
-</div>
-
-<div class="donation-summary">
-
-<div class="donation-stat">
-
-<small>
+</div> </div> <div class="donation-summary"> <div class="donation-stat"> <small>
 Total Donations
-</small>
-
-<strong id="donationTotal">
+</small> <strong id="donationTotal">
 ₹0
-</strong>
-
-</div>
-
-<div class="donation-stat">
-
-<small>
+</strong> </div> <div class="donation-stat"> <small>
 Pending
-</small>
-
-<strong id="donationPending">
+</small> <strong id="donationPending">
 ₹0
-</strong>
-
-</div>
-
-<div class="donation-stat">
-
-<small>
+</strong> </div> <div class="donation-stat"> <small>
 Verified
-</small>
-
-<strong id="donationVerified">
+</small> <strong id="donationVerified">
 ₹0
-</strong>
-
-</div>
-
-</div>
-
-<div class="panel">
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Student</th>
+</strong> </div> </div> <div class="panel"> <div class="table-wrap"> <table> <thead>
+<tr> <th>Student</th>
 <th>Parent Email</th>
 <th>Amount</th>
 <th>Transaction ID</th>
 <th>Date</th>
 <th>Status</th>
 <th>Admin Note</th>
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-<tbody
+<th>Action</th> </tr> </thead> <tbody
 id="donationsTable">
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- PUBLIC RESULT -->
-
-<section
+</tbody> </table> </div> </div> </section> <!-- PUBLIC RESULT --> <section
 class="section"
-id="publicResult">
-
-<div class="section-head">
-
-<div>
-
-<h2>
+id="publicResult"> <div class="section-head"> <div> <h2>
 Public Result
-</h2>
-
-<p>
+</h2> <p>
 Open the public result system
-</p>
-
-</div>
-
-<div class="section-tag">
+</p> </div> <div class="section-tag">
 PUBLIC
-</div>
-
-</div>
-
-<div class="panel welcome">
-
-<h2 style="margin-bottom:10px">
+</div> </div> <div class="panel welcome"> <h2 style="margin-bottom:10px">
 Public Student Result
-</h2>
-
-<p style="margin-bottom:20px">
+</h2> <p style="margin-bottom:20px">
 Open the public result page where students and parents
 can check published results.
-</p>
-
-<button
+</p> <button
 class="primary"
 id="openPublicResult">
 
 🌐 Open Public Result
-
-</button>
-
-</div>
-
-</section>
-
-</div>
-
+</button> </div> </section> </div>
 </main>
-
-</div>
-
-<script type="module">
+</div> <script type="module">
 
 import {
 initializeApp
@@ -3304,8 +2995,6 @@ value.seconds*1000
 return String(value);
 
 }
-
-
 function money(value){
 
 const n=Number(value||0);
@@ -3354,7 +3043,6 @@ await signOut(auth);
 location.href="index.html";
 
 return;
-
 }
 
 const profile=
@@ -3402,7 +3090,6 @@ document
 button.addEventListener(
 "click",
 ()=>{
-
 openSection(
 button.dataset.section
 );
@@ -3498,7 +3185,6 @@ location.href="index.html";
 
 
 /* LOAD EVERYTHING */
-
 async function loadEverything(){
 
 await loadStudents();
@@ -3540,12 +3226,12 @@ db,
 
 window.students=
 snap.docs.map(item=>({
+
 id:item.id,
 
 ...item.data()
 
 }));
-
 renderStudents(
 window.students
 );
@@ -3592,7 +3278,6 @@ No students found
 </td>
 </tr>
 `;
-
 return;
 
 }
@@ -3640,7 +3325,6 @@ ${escapeHtml(
 student.phoneNumber||"-"
 )}
 </td>
-
 <td>
 
 <div class="actions">
@@ -3843,7 +3527,8 @@ $("className")
 parentEmail:
 $("parentEmail")
 .value.trim(),
-  studentAddress:
+
+studentAddress:
 $("studentAddress")
 .value.trim(),
 
@@ -3879,7 +3564,1780 @@ error.message,
 }
 
 });
+$("studentSearch")
+.addEventListener(
+"input",
+event=>{
 
+const query=
+event.target.value
+.toLowerCase()
+.trim();
+
+const filtered=
+window.students.filter(
+student=>{
+
+const text=[
+
+student.studentNumber,
+student.studentName,
+student.guardianName,
+student.className,
+student.parentEmail,
+student.studentAddress,
+student.phoneNumber
+
+]
+.join(" ")
+.toLowerCase();
+
+return text.includes(query);
+
+});
+
+renderStudents(filtered);
+  });
+ 
+ 
+/* EDIT STUDENT */
+ 
+$("closeEditModal")
+.addEventListener(
+"click",
+()=>
+$("editStudentModal")
+.classList.remove("show")
+);
+$("cancelEditStudent")
+.addEventListener(
+"click",
+()=>
+$("editStudentModal")
+.classList.remove("show")
+);
+ 
+ 
+$("saveEditStudent")
+.addEventListener(
+"click",
+async()=>{
+ 
+const id=
+$("saveEditStudent")
+.dataset.id;
+ 
+if(!id)return;
+ 
+try{
+ 
+await updateDoc(
+doc(
+db,
+"students",
+id
+),
+{
+ 
+studentName:
+$("editStudentName")
+.value.trim(),
+ 
+guardianName:
+$("editGuardianName")
+.value.trim(),
+ 
+className:
+$("editClassName")
+.value.trim(),
+ 
+parentEmail:
+$("editParentEmail")
+.value.trim(),
+ 
+studentAddress:
+$("editStudentAddress")
+.value.trim(),
+ 
+phoneNumber:
+$("editPhoneNumber")
+.value.trim()
+ 
+}
+);
+ 
+$("editStudentModal")
+.classList.remove("show");
+ 
+showMessage(
+"Student updated successfully."
+);
+ 
+await loadStudents();
+ 
+}catch(error){
+ 
+console.error(error);
+ 
+showMessage(
+"Unable to update student.",
+"error"
+);
+ 
+}
+ 
+});
+ 
+ 
+/* STUDENT SELECTS */
+ 
+const studentSelectSearchState={
+attendance:"",
+study:"",
+result:""
+};
+ 
+function renderStudentSelect(
+selectId,
+searchQuery=""
+){
+ 
+const select=$(selectId);
+ 
+if(!select)return;
+ 
+const old=select.value;
+ 
+const query=
+String(
+searchQuery||""
+)
+.toLowerCase()
+.trim();
+ 
+const filtered=
+window.students.filter(
+student=>{
+ 
+const number=
+String(
+student.studentNumber||""
+)
+.toLowerCase();
+ 
+const name=
+String(
+student.studentName||""
+)
+.toLowerCase();
+ 
+return !query
+|| number.includes(query)
+|| name.includes(query);
+ 
+}
+);
+ 
+select.innerHTML=
+`
+<option value="">
+Select student
+</option>
+`
++
+filtered.map(
+student=>`
+ 
+<option
+value="${escapeHtml(
+student.studentNumber
+)}">
+ 
+${escapeHtml(
+student.studentNumber
+)}
+-
+${escapeHtml(
+student.studentName
+)}
+ 
+</option>
+ 
+`
+)
+.join("");
+ 
+if(
+old &&
+filtered.some(
+student=>
+String(
+student.studentNumber
+)===
+String(
+old
+)
+)
+){
+select.value=old;
+}
+ 
+}
+ 
+function populateStudentSelects(){
+ 
+const configs=[
+ 
+["attendanceStudent","attendance"],
+["studyStudent","study"],
+["resultStudent","result"]
+ 
+];
+ 
+configs.forEach(
+([selectId,key])=>{
+ 
+renderStudentSelect(
+selectId,
+studentSelectSearchState[key]
+);
+ 
+}
+);
+ 
+}
+ 
+[
+[
+"attendanceStudentSearch",
+"attendanceStudent",
+"attendance"
+],
+[
+"studyStudentSearch",
+"studyStudent",
+"study"
+],
+[
+"resultStudentSearch",
+"resultStudent",
+"result"
+]
+].forEach(
+([searchId,selectId,key])=>{
+ 
+const input=$(searchId);
+ 
+if(!input)return;
+ 
+input.value=
+studentSelectSearchState[key]||"";
+ 
+input.addEventListener(
+"input",
+event=>{
+ 
+studentSelectSearchState[key]=
+event.target.value;
+ 
+renderStudentSelect(
+selectId,
+studentSelectSearchState[key]
+);
+ 
+}
+);
+ 
+}
+);
+ 
+ 
+/* ATTENDANCE */
+ 
+$("attendanceForm")
+.addEventListener(
+"submit",
+async event=>{
+ 
+event.preventDefault();
+ 
+const studentNumber=
+$("attendanceStudent")
+.value;
+ 
+const date=
+$("attendanceDate")
+.value;
+ 
+const status=
+$("attendanceStatus")
+.value;
+ 
+if(
+!studentNumber ||
+!date ||
+!["absent","leave"].includes(status)
+){
+ 
+showMessage(
+"Please select a student, date and Absent / Leave status.",
+"error"
+);
+ 
+return;
+ 
+}
+ 
+try{
+ 
+const snap=
+await getDocs(
+collection(
+db,
+"attendance"
+)
+);
+ 
+const existing=
+snap.docs.find(
+item=>{
+ 
+const data=
+item.data();
+ 
+return (
+String(data.studentNumber||"")
+===
+String(studentNumber)
+&&
+String(data.date||"")
+===
+String(date)
+);
+ 
+}
+);
+ 
+if(existing){
+ 
+await updateDoc(
+doc(
+db,
+"attendance",
+existing.id
+),
+{
+ 
+status,
+updatedAt:
+serverTimestamp()
+ 
+}
+);
+ 
+showMessage(
+"Attendance updated."
+);
+ 
+}else{
+ 
+await addDoc(
+collection(
+db,
+"attendance"
+),
+{
+ 
+studentNumber,
+date,
+status,
+createdAt:
+serverTimestamp()
+ 
+}
+);
+ 
+showMessage(
+"Attendance saved."
+);
+ 
+}
+ 
+$("attendanceStatus")
+.value="";
+ 
+await loadAttendance();
+ 
+}catch(error){
+ 
+console.error(error);
+ 
+showMessage(
+"Unable to save attendance.",
+"error"
+);
+ 
+}
+ 
+});
+ 
+ 
+function openAttendanceEdit(id){
+ 
+const row=
+window.attendanceRows.find(
+item=>item.id===id
+);
+ 
+if(!row)return;
+ 
+$("editAttendanceStudent")
+.value=
+row.studentNumber||"";
+ 
+$("editAttendanceStudentName")
+.value=
+studentNameByNumber(
+row.studentNumber
+);
+ 
+$("editAttendanceDate")
+.value=
+row.date||"";
+ 
+$("editAttendanceStatus")
+.value=
+row.status==="leave"
+?
+"leave"
+:
+"absent";
+ 
+$("saveEditAttendance")
+.dataset.id=id;
+ 
+$("editAttendanceModal")
+.classList.add("show");
+ 
+}
+ 
+ 
+function closeAttendanceEdit(){
+ 
+$("editAttendanceModal")
+.classList.remove("show");
+ 
+}
+ 
+ 
+$("closeEditAttendanceModal")
+.addEventListener(
+"click",
+closeAttendanceEdit
+);
+ 
+$("cancelEditAttendance")
+.addEventListener(
+"click",
+closeAttendanceEdit
+);
+ 
+ 
+$("saveEditAttendance")
+.addEventListener(
+"click",
+async()=>{
+ 
+const id=
+$("saveEditAttendance")
+.dataset.id;
+ 
+if(!id)return;
+ 
+const date=
+$("editAttendanceDate")
+.value;
+ 
+const status=
+$("editAttendanceStatus")
+.value;
+ 
+if(
+!date ||
+!["absent","leave"].includes(status)
+){
+ 
+showMessage(
+"Please select a valid date and status.",
+"error"
+);
+ 
+return;
+ 
+}
+ 
+try{
+ 
+const snap=
+await getDocs(
+collection(
+db,
+"attendance"
+)
+);
+ 
+const current=
+snap.docs.find(
+item=>item.id===id
+);
+ 
+if(!current){
+ 
+showMessage(
+"Attendance record not found.",
+"error"
+);
+ 
+closeAttendanceEdit();
+ 
+await loadAttendance();
+ 
+return;
+ 
+}
+ 
+const currentData=
+current.data();
+ 
+const duplicate=
+snap.docs.find(
+item=>{
+ 
+if(item.id===id)return false;
+ 
+const data=
+item.data();
+ 
+return (
+String(data.studentNumber||"")
+===
+String(currentData.studentNumber||"")
+&&
+String(data.date||"")
+===
+String(date)
+);
+ 
+}
+);
+ 
+if(duplicate){
+ 
+await updateDoc(
+doc(
+db,
+"attendance",
+duplicate.id
+),
+{
+ 
+status,
+updatedAt:
+serverTimestamp()
+ 
+}
+);
+ 
+await deleteDoc(
+doc(
+db,
+"attendance",
+id
+)
+);
+ 
+}else{
+ 
+await updateDoc(
+doc(
+db,
+"attendance",
+id
+),
+{
+ 
+date,
+status,
+updatedAt:
+serverTimestamp()
+ 
+}
+);
+ 
+}
+ 
+closeAttendanceEdit();
+ 
+showMessage(
+"Attendance updated."
+);
+ 
+await loadAttendance();
+ 
+}catch(error){
+ 
+console.error(error);
+ 
+showMessage(
+"Unable to update attendance.",
+"error"
+);
+ 
+}
+ 
+});
+ 
+ 
+async function loadAttendance(){
+ 
+try{
+ 
+const snap=
+await getDocs(
+collection(
+db,
+"attendance"
+)
+);
+ 
+const allRows=
+snap.docs.map(
+item=>({
+ 
+id:item.id,
+ 
+...item.data()
+ 
+})
+);
+ 
+/*
+Only exception records are displayed.
+Students with no Absent / Leave record for a date
+are automatically treated as Present.
+Existing Present documents are left untouched
+and are not required for new attendance entries.
+*/
+ 
+const rows=
+allRows.filter(
+row=>
+row.status==="absent"
+||
+row.status==="leave"
+);
+ 
+rows.sort(
+(a,b)=>
+String(
+b.date||""
+)
+.localeCompare(
+String(
+a.date||""
+)
+)
+);
+ 
+window.attendanceRows=rows;
+ 
+$("attendanceCount")
+.textContent=
+rows.length;
+ 
+const table=
+$("attendanceTable");
+ 
+if(!rows.length){
+ 
+table.innerHTML=
+`
+<div class="empty">
+No Absent / Leave attendance records.
+Students without an exception are automatically Present for the date.
+</div>
+`;
+ 
+return;
+ 
+}
+ 
+const dates=
+[
+...new Set(
+rows.map(
+row=>
+String(
+row.date||""
+)
+)
+)
+];
+ 
+table.innerHTML=
+`
+<div class="table-wrap">
+ 
+<table>
+ 
+<thead>
+ 
+<tr>
+ 
+<th>Date</th>
+<th>No</th>
+<th>Name</th>
+<th>Status</th>
+<th>Action</th>
+ 
+</tr>
+ 
+</thead>
+ 
+<tbody>
+ 
+${
+dates.map(
+date=>{
+ 
+const dateRows=
+rows.filter(
+row=>
+String(
+row.date||""
+)===
+date
+);
+ 
+return dateRows.map(
+row=>`
+ 
+<tr>
+ 
+<td>
+<strong>
+${escapeHtml(
+date||"-"
+)}
+</strong>
+</td>
+ 
+<td>
+${escapeHtml(
+row.studentNumber||"-"
+)}
+</td>
+ 
+<td>
+${escapeHtml(
+studentNameByNumber(
+row.studentNumber
+)
+)}
+</td>
+ 
+<td>
+ 
+<span class="badge ${
+row.status==="leave"
+?
+"badge-yellow"
+:
+"badge-red"
+}">
+ 
+${escapeHtml(
+row.status||"-"
+)}
+ 
+</span>
+ 
+</td>
+ 
+<td>
+ 
+<div class="actions">
+ 
+<button
+class="secondary attendance-edit-btn"
+data-id="${row.id}">
+Edit
+</button>
+ 
+<button
+class="danger attendance-delete-btn"
+data-id="${row.id}">
+Delete
+</button>
+ 
+</div>
+ 
+</td>
+ 
+</tr>
+ 
+`
+).join("");
+ 
+}
+)
+.join("")
+}
+ 
+</tbody>
+ 
+</table>
+ 
+</div>
+`;
+ 
+document
+.querySelectorAll(
+".attendance-edit-btn"
+)
+.forEach(
+button=>{
+ 
+button.addEventListener(
+"click",
+()=>{
+ 
+openAttendanceEdit(
+button.dataset.id
+);
+ 
+}
+);
+ 
+}
+);
+ 
+ 
+document
+.querySelectorAll(
+".attendance-delete-btn"
+)
+.forEach(
+button=>{
+ 
+button.addEventListener(
+"click",
+async()=>{
+ 
+if(
+!confirm(
+"Delete attendance exception record?"
+)
+)return;
+ 
+try{
+ 
+await deleteDoc(
+doc(
+db,
+"attendance",
+button.dataset.id
+)
+);
+ 
+showMessage(
+"Attendance deleted."
+);
+ 
+await loadAttendance();
+ 
+}catch(error){
+ 
+console.error(error);
+ 
+showMessage(
+"Unable to delete attendance.",
+"error"
+);
+ 
+}
+ 
+}
+);
+ 
+}
+);
+ 
+}catch(error){
+ 
+console.error(error);
+ 
+$("attendanceTable")
+.innerHTML=
+`
+<div class="empty">
+Unable to load attendance.
+</div>
+`;
+ 
+}
+ 
+}
+ 
+ 
+/* STUDY PROGRESS */
+ 
+$("studyForm")
+.addEventListener(
+"submit",
+async event=>{
+ 
+event.preventDefault();
+ 
+try{
+ 
+await addDoc(
+collection(
+db,
+"studyProgress"
+),
+{
+ 
+studentNumber:
+$("studyStudent")
+.value,
+ 
+date:
+$("studyDate")
+.value,
+ 
+surah:
+$("studySurah")
+.value.trim(),
+ 
+newLesson:
+$("newLesson")
+.value.trim(),
+ 
+revision:
+$("revision")
+.value.trim(),
+ 
+/* PERFORMANCE NOW COMES FROM DROPDOWN */
+ 
+performance:
+$("performance")
+.value.trim(),
+ 
+/* STATUS NOW COMES FROM EMPTY TEXT BOX */
+ 
+studyStatus:
+$("studyStatus")
+.value.trim(),
+ 
+note:
+$("studyNote")
+.value.trim(),
+ 
+darsLevel:
+$("darsLevel")
+.value,
+ 
+discipline:
+$("discipline")
+.value,
+ 
+createdAt:
+serverTimestamp()
+ 
+}
+);
+ 
+$("studyForm").reset();
+ 
+setDefaultDates();
+ 
+showMessage(
+"Study progress saved successfully."
+);
+ 
+await loadStudy();
+ 
+}catch(error){
+ 
+console.error(error);
+ 
+showMessage(
+"Unable to save study progress.",
+"error"
+);
+ 
+}
+ 
+});
+ 
+ 
+async function loadStudy(){
+ 
+try{
+ 
+const snap=
+await getDocs(
+collection(
+db,
+"studyProgress"
+)
+);
+ 
+const rows=
+snap.docs.map(
+item=>({
+  repliedAt:
+serverTimestamp()
+
+}
+);
+
+showMessage(
+"Leave rejected."
+);
+await loadLeaves();
+
+});
+
+});
+
+document
+.querySelectorAll(".leave-reply")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+const reply=
+prompt(
+"Enter reply to parent:"
+);
+
+if(reply===null)return;
+
+await updateDoc(
+doc(
+db,
+"leaveRequests",
+button.dataset.id
+),
+{
+
+reply:
+reply.trim(),
+
+repliedAt:
+serverTimestamp()
+
+}
+);
+
+showMessage(
+"Leave reply saved."
+);
+await loadLeaves();
+
+});
+
+});
+
+
+document
+.querySelectorAll(".leave-delete")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+if(
+!confirm(
+"Delete this leave request?"
+)
+)return;
+
+await deleteDoc(
+doc(
+db,
+"leaveRequests",
+button.dataset.id
+)
+);
+
+showMessage(
+"Leave request deleted."
+);
+
+await loadLeaves();
+
+});
+
+});
+
+}catch(error){
+
+console.error(error);
+
+$("leaveTable")
+.innerHTML=
+`
+<tr>
+<td colspan="7">
+Unable to load leave requests.
+</td>
+</tr>
+`;
+
+}
+
+}
+
+
+/* MESSAGES */
+
+async function loadMessages(){
+
+try{
+
+const snap=
+await getDocs(
+collection(
+db,
+"parentMessages"
+)
+);
+
+const rows=
+snap.docs.map(
+item=>({
+
+id:item.id,
+
+...item.data()
+
+})
+);
+
+rows.sort(
+(a,b)=>
+(b.createdAt?.seconds||0)
+-
+(a.createdAt?.seconds||0)
+);
+
+$("messageCount")
+.textContent=
+rows.length;
+
+const table=
+$("messagesTable");
+
+if(!rows.length){
+
+table.innerHTML=
+`
+<tr>
+
+<td colspan="6">
+
+<div class="empty">
+No parent messages.
+</div>
+
+</td>
+
+</tr>
+`;
+
+return;
+
+}
+
+table.innerHTML=
+rows.map(
+row=>`
+
+<tr>
+
+<td>
+
+<strong>
+${escapeHtml(
+studentNameByNumber(
+row.studentNumber
+)
+)}
+</strong>
+
+<br>
+
+${escapeHtml(
+row.studentNumber||"-"
+)}
+
+</td>
+
+<td>
+${escapeHtml(
+row.parentEmail||"-"
+)}
+</td>
+
+<td>
+${escapeHtml(
+row.message||"-"
+)}
+</td>
+
+<td>
+
+<span class="badge ${
+row.status==="replied"
+?
+"badge-green"
+:
+"badge-yellow"
+}">
+
+${escapeHtml(
+row.status||"pending"
+)}
+
+</span>
+
+</td>
+
+<td>
+${escapeHtml(
+row.reply||"-"
+)}
+</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="secondary message-reply"
+data-id="${row.id}">
+Reply
+</button>
+
+<button
+class="danger message-delete"
+data-id="${row.id}">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`
+)
+.join("");
+
+document
+.querySelectorAll(".message-reply")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+const reply=
+prompt(
+"Enter reply to parent:"
+);
+
+if(reply===null)return;
+
+await updateDoc(
+doc(
+db,
+"parentMessages",
+button.dataset.id
+),
+{
+
+reply:
+reply.trim(),
+
+status:"replied",
+
+repliedAt:
+serverTimestamp()
+
+}
+);
+
+showMessage(
+"Parent reply saved."
+);
+
+await loadMessages();
+
+});
+
+});
+
+
+document
+.querySelectorAll(".message-delete")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+if(
+!confirm(
+"Delete this parent message?"
+)
+)return;
+
+await deleteDoc(
+doc(
+db,
+"parentMessages",
+button.dataset.id
+)
+);
+
+showMessage(
+"Parent message deleted."
+);
+
+await loadMessages();
+
+});
+
+});
+
+}catch(error){
+
+console.error(error);
+
+$("messagesTable")
+.innerHTML=
+`
+<tr>
+
+<td colspan="6">
+Unable to load parent messages.
+</td>
+
+</tr>
+`;
+
+}
+
+}
+
+
+/* DONATIONS */
+
+async function loadDonations(){
+
+try{
+
+const snap=
+await getDocs(
+collection(
+db,
+"donations"
+)
+);
+
+const rows=
+snap.docs.map(
+item=>({
+
+id:item.id,
+
+...item.data()
+
+})
+);
+
+rows.sort(
+(a,b)=>
+(b.createdAt?.seconds||0)
+-
+(a.createdAt?.seconds||0)
+);
+
+let total=0;
+let pending=0;
+let verified=0;
+
+rows.forEach(
+row=>{
+
+const amount=
+Number(
+row.amount||0
+);
+
+total+=amount;
+
+if(
+row.status==="verified"
+){
+
+verified+=amount;
+
+}else{
+
+pending+=amount;
+
+}
+
+}
+);
+
+$("donationTotal")
+.textContent=
+money(total);
+
+$("donationPending")
+.textContent=
+money(pending);
+
+$("donationVerified")
+.textContent=
+money(verified);
+
+const table=
+$("donationsTable");
+
+if(!rows.length){
+
+table.innerHTML=
+`
+<tr>
+
+<td colspan="8">
+
+<div class="empty">
+No donations received.
+</div>
+
+</td>
+
+</tr>
+`;
+
+return;
+
+}
+
+table.innerHTML=
+rows.map(
+row=>`
+
+<tr>
+
+<td>
+
+<strong>
+${escapeHtml(
+studentNameByNumber(
+row.studentNumber
+)
+)}
+</strong>
+
+<br>
+
+${escapeHtml(
+row.studentNumber||"-"
+)}
+
+</td>
+
+<td>
+${escapeHtml(
+row.parentEmail||"-"
+)}
+</td>
+
+<td>
+${escapeHtml(
+money(row.amount)
+)}
+</td>
+
+<td>
+${escapeHtml(
+row.transactionId||"-"
+)}
+</td>
+
+<td>
+${escapeHtml(
+formatDate(
+row.createdAt
+)
+)}
+</td>
+
+<td>
+
+<span class="badge ${
+row.status==="verified"
+?
+"badge-green"
+:
+"badge-yellow"
+}">
+
+${escapeHtml(
+row.status||"pending"
+)}
+
+</span>
+
+</td>
+
+<td>
+${escapeHtml(
+row.adminNote||"-"
+)}
+</td>
+
+<td>
+
+<div class="actions">
+
+${
+row.status==="verified"
+?
+`
+<button
+class="warning donation-unverify"
+data-id="${row.id}">
+Unverify
+</button>
+`
+:
+`
+<button
+class="success donation-verify"
+data-id="${row.id}">
+Verify
+</button>
+`
+}
+
+<button
+class="danger donation-delete"
+data-id="${row.id}">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`
+)
+.join("");
+
+document
+.querySelectorAll(".donation-verify")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+const note=
+prompt(
+"Admin note (optional):"
+);
+
+if(note===null)return;
+
+await updateDoc(
+doc(
+db,
+"donations",
+button.dataset.id
+),
+{
+
+status:"verified",
+
+adminNote:
+note.trim(),
+
+verifiedAt:
+serverTimestamp()
+
+}
+);
+
+showMessage(
+"Donation verified."
+);
+
+await loadDonations();
+
+});
+
+});
+
+
+document
+.querySelectorAll(".donation-unverify")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+await updateDoc(
+doc(
+db,
+"donations",
+button.dataset.id
+),
+{
+
+status:"pending",
+
+verifiedAt:
+null
+
+}
+);
+
+showMessage(
+"Donation moved to pending."
+);
+
+await loadDonations();
+
+});
+
+});
+
+
+document
+.querySelectorAll(".donation-delete")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+if(
+!confirm(
+"Delete this donation record?"
+)
+)return;
+
+await deleteDoc(
+doc(
+db,
+"donations",
+button.dataset.id
+)
+);
+
+showMessage(
+"Donation deleted."
+);
+
+await loadDonations();
+
+});
+
+});
+
+}catch(error){
+
+console.error(error);
+
+$("donationsTable")
+.innerHTML=
+`
+<tr>
+
+<td colspan="8">
+
+<div class="empty">
+Unable to load donations.
+</div>
+
+</td>
+
+</tr>
+`;
+
+}
+
+}
+
+
+/* PUBLIC RESULT */
+
+$("openPublicResult")
+.addEventListener(
+"click",
+()=>{
+
+window.open(
+"public-result.html",
+"_blank"
+);
+
+});
+
+
+/* DEFAULT DATES */
+
+function setDefaultDates(){
+
+const today=
+new Date()
+.toISOString()
+.split("T")[0];
+
+if($("attendanceDate"))
+$("attendanceDate")
+.value=today;
+
+if($("studyDate"))
+$("studyDate")
+.value=today;
+
+}
+
+
+/* INITIAL DEFAULT DATE */
+
+setDefaultDates();
+
+
+/* STUDENT SEARCH */
 
 $("studentSearch")
 .addEventListener(
@@ -3918,1542 +5376,33 @@ renderStudents(filtered);
 });
 
 
-/* EDIT STUDENT */
-
-$("closeEditModal")
-.addEventListener(
-"click",
-()=>
-$("editStudentModal")
-.classList.remove("show")
-);
-
-
-$("cancelEditStudent")
-.addEventListener(
-"click",
-()=>
-$("editStudentModal")
-.classList.remove("show")
-);
-
-
-$("saveEditStudent")
-.addEventListener(
-"click",
-async()=>{
-
-const id=
-$("saveEditStudent")
-.dataset.id;
-
-if(!id)return;
-
-try{
-
-await updateDoc(
-doc(
-db,
-"students",
-id
-),
-{
-
-studentName:
-$("editStudentName")
-.value.trim(),
-
-guardianName:
-$("editGuardianName")
-.value.trim(),
-
-className:
-$("editClassName")
-.value.trim(),
-
-parentEmail:
-$("editParentEmail")
-.value.trim(),
-
-studentAddress:
-$("editStudentAddress")
-.value.trim(),
-
-phoneNumber:
-$("editPhoneNumber")
-.value.trim()
-
-}
-);
-
-$("editStudentModal")
-.classList.remove("show");
-
-showMessage(
-"Student updated successfully."
-);
-
-await loadStudents();
-
-}catch(error){
-
-console.error(error);
-
-showMessage(
-"Unable to update student.",
-"error"
-);
-
-}
-
-});
-
-
-/* STUDENT SELECTS */
-
-function populateStudentSelects(){
-
-const selects=[
-
-"attendanceStudent",
-"studyStudent",
-"resultStudent"
-
-];
-
-selects.forEach(id=>{
-
-const select=$(id);
-
-if(!select)return;
-
-const old=select.value;
-
-select.innerHTML=
-`
-<option value="">
-Select student
-</option>
-`
-+
-window.students
-.map(
-student=>`
-
-<option
-value="${escapeHtml(
-student.studentNumber
-)}">
-
-${escapeHtml(
-student.studentNumber
-)}
--
-${escapeHtml(
-student.studentName
-)}
-
-</option>
-
-`
-)
-.join("");
-
-if(old)
-select.value=old;
-
-});
-
-}
-
-
-/* ATTENDANCE */
-
-$("attendanceForm")
-.addEventListener(
-"submit",
-
-async event=>{
-
-event.preventDefault();
-
-try{
-
-await addDoc(
-collection(
-db,
-"attendance"
-),
-{
-
-studentNumber:
-$("attendanceStudent")
-.value,
-
-date:
-$("attendanceDate")
-.value,
-
-status:
-$("attendanceStatus")
-.value,
-
-createdAt:
-serverTimestamp()
-
-}
-);
-
-showMessage(
-"Attendance saved."
-);
-
-await loadAttendance();
-
-}catch(error){
-
-console.error(error);
-
-showMessage(
-"Unable to save attendance.",
-"error"
-);
-
-}
-
-});
-
-
-async function loadAttendance(){
-
-try{
-
-const snap=
-await getDocs(
-collection(
-db,
-"attendance"
-)
-);
-
-const rows=
-snap.docs.map(
-item=>({
-
-id:item.id,
-
-...item.data()
-
-})
-);
-
-rows.sort(
-(a,b)=>
-String(
-b.date||""
-)
-.localeCompare(
-String(
-a.date||""
-)
-)
-);
-
-$("attendanceCount")
-.textContent=
-rows.length;
-
-const table=
-$("attendanceTable");
-
-if(!rows.length){
-
-table.innerHTML=
-`
-<div class="empty">
-No attendance records.
-</div>
-`;
-
-return;
-
-}
-
-table.innerHTML=
-`
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Student</th>
-<th>Number</th>
-<th>Date</th>
-<th>Status</th>
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-${
-rows.map(
-row=>`
-
-<tr>
-
-<td>
-${escapeHtml(
-studentNameByNumber(
-row.studentNumber
-)
-)}
-</td>
-
-<td>
-${escapeHtml(
-row.studentNumber
-)}
-</td>
-
-<td>
-${escapeHtml(
-row.date
-)}
-</td>
-
-<td>
-
-<span class="badge ${
-row.status==="present"
-?
-"badge-green"
-:
-row.status==="leave"
-?
-"badge-yellow"
-:
-"badge-red"
-}">
-
-${escapeHtml(
-row.status
-)}
-
-</span>
-
-</td>
-
-<td>
-
-<button
-class="danger attendance-delete-btn"
-data-id="${row.id}">
-
-Delete
-
-</button>
-
-</td>
-
-</tr>
-
-`
-).join("")
-}
-
-</tbody>
-
-</table>
-
-</div>
-`;
+/* CLOSE MODALS WHEN CLICKING OUTSIDE */
 
 document
-.querySelectorAll(
-".attendance-delete-btn"
-)
-.forEach(button=>{
+.querySelectorAll(".modal")
+.forEach(modal=>{
 
-button.addEventListener(
+modal.addEventListener(
 "click",
-async()=>{
+event=>{
 
 if(
-!confirm(
-"Delete attendance record?"
-)
-)return;
+event.target===modal
+){
 
-await deleteDoc(
-doc(
-db,
-"attendance",
-button.dataset.id
-)
-);
-
-showMessage(
-"Attendance deleted."
-);
-
-await loadAttendance();
-
-});
-
-});
-
-}catch(error){
-
-console.error(error);
-
-$("attendanceTable")
-
-.innerHTML=
-`
-<div class="empty">
-Unable to load attendance.
-</div>
-`;
-
-}
-
-}
-
-
-/* STUDY PROGRESS */
-
-$("studyForm")
-.addEventListener(
-"submit",
-async event=>{
-
-event.preventDefault();
-
-try{
-
-await addDoc(
-collection(
-db,
-"studyProgress"
-),
-{
-
-studentNumber:
-$("studyStudent")
-.value,
-
-date:
-$("studyDate")
-.value,
-
-surah:
-$("studySurah")
-.value.trim(),
-
-newLesson:
-$("newLesson")
-.value.trim(),
-
-revision:
-$("revision")
-.value.trim(),
-
-/* PERFORMANCE NOW COMES FROM DROPDOWN */
-
-performance:
-$("performance")
-.value.trim(),
-
-/* STATUS NOW COMES FROM EMPTY TEXT BOX */
-
-studyStatus:
-$("studyStatus")
-.value.trim(),
-
-note:
-$("studyNote")
-.value.trim(),
-
-darsLevel:
-$("darsLevel")
-.value,
-
-discipline:
-$("discipline")
-.value,
-
-createdAt:
-serverTimestamp()
-
-}
-);
-
-$("studyForm").reset();
-
-setDefaultDates();
-
-showMessage(
-"Study progress saved successfully."
-);
-
-await loadStudy();
-
-}catch(error){
-
-console.error(error);
-
-showMessage(
-"Unable to save study progress.",
-"error"
-);
+modal.classList.remove("show");
 
 }
 
 });
 
-
-async function loadStudy(){
-
-try{
-
-const snap=
-await getDocs(
-collection(
-db,
-"studyProgress"
-)
-);
-
-const rows=
-snap.docs.map(
-item=>({
-
-id:item.id,
-
-...item.data()
-
-})
-);
-
-rows.sort(
-(a,b)=>
-String(
-b.date||""
-)
-.localeCompare(
-String(
-a.date||""
-)
-)
-);
-
-const table=
-$("studyTable");
-
-if(!rows.length){
-
-table.innerHTML=
-`
-<tr>
-
-<td colspan="11">
-
-<div class="empty">
-No study records.
-</div>
-
-</td>
-
-</tr>
-`;
-
-return;
-
-}
-
-table.innerHTML=
-rows.map(
-row=>`
-
-<tr>
-
-<td>
-
-<strong>
-${escapeHtml(
-studentNameByNumber(
-row.studentNumber
-)
-)}
-</strong>
-
-<br>
-
-<small>
-${escapeHtml(
-row.studentNumber||""
-)}
-</small>
-
-</td>
-
-<td>
-${escapeHtml(
-row.date||"-"
-)}
-</td>
-
-<td>
-${escapeHtml(
-row.surah||"-"
-)}
-</td>
-
-<td>
-${escapeHtml(
-row.newLesson||"-"
-)}
-${row.newLesson
-?
-" pages"
-:
-""}
-</td>
-
-<td>
-${escapeHtml(
-row.revision||"-"
-)}
-</td>
-
-<td>
-
-<span class="badge ${
-row.studyStatus
-?
-"badge-green"
-:
-"badge-yellow"
-}">
-
-${escapeHtml(
-row.studyStatus||"-"
-)}
-
-</span>
-
-</td>
-
-<td>
-${escapeHtml(
-row.performance||"-"
-)}
-
-</td>
-
-<td class="teacher-remark-cell">
-${escapeHtml(
-row.note||"-"
-)}
-</td>
-
-<td>
-${escapeHtml(
-row.darsLevel||"-"
-)}
-</td>
-
-<td>
-${escapeHtml(
-row.discipline||"-"
-)}
-</td>
-
-<td>
-
-<button
-class="danger study-delete"
-data-id="${row.id}">
-
-Delete
-
-</button>
-
-</td>
-
-</tr>
-
-`
-)
-.join("");
-
-document
-.querySelectorAll(".study-delete")
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-async()=>{
-
-if(
-!confirm(
-
-"Delete study record?"
-
-)
-)return;
-
-await deleteDoc(
-doc(
-db,
-"studyProgress",
-button.dataset.id
-)
-);
-
-showMessage(
-"Study record deleted."
-);
-
-await loadStudy();
-
 });
 
-});
+</script>
 
-}catch(error){
+</body>
 
-console.error(error);
-
-$("studyTable")
-.innerHTML=
-`
-<tr>
-
-<td colspan="11">
-Unable to load study records.
-</td>
-
-</tr>
-`;
-
-}
-
-}
-
-
-/* RESULTS */
-
-$("resultForm")
-.addEventListener(
-"submit",
-
-async event=>{
-
-event.preventDefault();
-
-try{
-
-await addDoc(
-collection(
-db,
-"results"
-),
-{
-
-studentNumber:
-$("resultStudent")
-.value,
-
-title:
-$("resultTitle")
-.value.trim(),
-
-mark:
-$("resultMark")
-.value.trim(),
-
-status:
-$("resultStatus")
-.value,
-
-createdAt:
-serverTimestamp()
-
-}
-);
-
-$("resultForm").reset();
-
-showMessage(
-"Result added successfully."
-);
-
-await loadResults();
-
-}catch(error){
-
-console.error(error);
-
-showMessage(
-
-"Unable to add result.",
-"error"
-
-);
-
-}
-
-});
-
-
-async function loadResults(){
-
-try{
-
-const snap=
-await getDocs(
-collection(
-db,
-"results"
-)
-);
-
-const rows=
-snap.docs.map(
-item=>({
-
-id:item.id,
-
-...item.data()
-
-})
-);
-
-rows.sort(
-(a,b)=>
-(b.createdAt?.seconds||0)
--
-(a.createdAt?.seconds||0)
-);
-
-const table=
-$("resultsTable");
-
-if(!rows.length){
-
-table.innerHTML=
-`
-<tr>
-
-<td colspan="5">
-
-<div class="empty">
-No results found.
-</div>
-
-</td>
-
-</tr>
-`;
-
-return;
-
-}
-
-table.innerHTML=
-rows.map(
-row=>`
-
-<tr>
-
-<td>
-
-${escapeHtml(
-studentNameByNumber(
-row.studentNumber
-)
-)}
-
-<br>
-
-<small>
-${escapeHtml(
-row.studentNumber
-)}
-</small>
-
-</td>
-
-<td>
-${escapeHtml(
-  row.title
-)}
-</td>
-
-<td>
-
-<strong>
-${escapeHtml(
-row.mark
-)}
-</strong>
-
-</td>
-
-<td>
-
-<span class="badge ${
-row.status==="published"
-?
-"badge-green"
-:
-"badge-yellow"
-}">
-
-${escapeHtml(
-row.status
-)}
-
-</span>
-
-</td>
-
-<td>
-
-<div class="actions">
-
-<button
-class="${
-row.status==="published"
-?
-"warning"
-:
-"success"
-} result-toggle"
-
-data-id="${row.id}"
-
-data-status="${row.status}">
-
-${
-row.status==="published"
-?
-"Unpublish"
-:
-"Publish"
-}
-
-</button>
-
-<button
-class="danger result-delete"
-data-id="${row.id}">
-
-Delete
-
-</button>
-
-</div>
-
-</td>
-
-</tr>
-
-`
-)
-.join("");
-
-document
-.querySelectorAll(".result-toggle")
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-async()=>{
-
-const newStatus=
-button.dataset.status==="published"
-?
-"draft"
-:
-"published";
-
-await updateDoc(
-doc(
-db,
-"results",
-button.dataset.id
-),
-{
-status:newStatus
-}
-);
-
-showMessage(
-newStatus==="published"
-
-?
-"Result published."
-:
-"Result unpublished."
-);
-
-await loadResults();
-
-});
-
-});
-
-
-document
-.querySelectorAll(".result-delete")
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-async()=>{
-
-if(
-!confirm(
-"Delete this result?"
-)
-)return;
-
-await deleteDoc(
-doc(
-db,
-"results",
-button.dataset.id
-)
-);
-
-showMessage(
-"Result deleted."
-);
-
-await loadResults();
-
-});
-
-});
-
-}catch(error){
-
-console.error(error);
-
-}
-
-}
-
-
-/* NOTICES */
-
-$("noticeForm")
-.addEventListener(
-"submit",
-async event=>{
-
-event.preventDefault();
-
-try{
-
-await addDoc(
-collection(
-db,
-"notices"
-),
-{
-
-title:
-$("noticeTitle")
-.value.trim(),
-
-text:
-$("noticeText")
-.value.trim(),
-
-status:
-$("noticeStatus")
-.value,
-
-createdAt:
-serverTimestamp()
-
-}
-);
-
-$("noticeForm").reset();
-
-showMessage(
-"Notice added successfully."
-);
-
-await loadNotices();
-
-}catch(error){
-
-console.error(error);
-
-showMessage(
-"Unable to add notice.",
-"error"
-);
-
-}
-
-});
-
-
-async function loadNotices(){
-
-try{
-
-const snap=
-await getDocs(
-collection(
-db,
-"notices"
-)
-);
-
-const rows=
-snap.docs.map(
-item=>({
-
-id:item.id,
-
-...item.data()
-
-})
-);
-
-rows.sort(
-(a,b)=>
-(b.createdAt?.seconds||0)
--
-(a.createdAt?.seconds||0)
-);
-
-const table=
-$("noticesTable");
-
-if(!rows.length){
-
-table.innerHTML=
-`
-<tr>
-
-<td colspan="4">
-
-<div class="empty">
-No notices.
-</div>
-
-</td>
-
-</tr>
-`;
-
-return;
-
-}
-
-table.innerHTML=
-rows.map(
-row=>`
-
-<tr>
-
-<td>
-
-<strong>
-${escapeHtml(
-row.title
-)}
-</strong>
-
-</td>
-
-<td>
-${escapeHtml(
-row.text
-)}
-</td>
-
-<td>
-
-<span class="badge ${
-row.status==="published"
-
-?
-"badge-green"
-:
-"badge-yellow"
-}">
-
-${escapeHtml(
-row.status
-)}
-
-</span>
-
-</td>
-
-<td>
-
-<div class="actions">
-
-<button
-class="${
-row.status==="published"
-?
-"warning"
-:
-"success"
-} notice-toggle"
-
-data-id="${row.id}"
-
-data-status="${row.status}">
-
-${
-row.status==="published"
-?
-"Unpublish"
-:
-"Publish"
-}
-
-</button>
-
-<button
-class="danger notice-delete"
-data-id="${row.id}">
-
-Delete
-
-</button>
-
-</div>
-
-</td>
-
-</tr>
-
-`
-)
-.join("");
-
-document
-.querySelectorAll(".notice-toggle")
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-async()=>{
-
-const status=
-button.dataset.status==="published"
-?
-"draft"
-:
-"published";
-
-await updateDoc(
-doc(
-db,
-"notices",
-button.dataset.id
-),
-{
-status
-}
-);
-
-showMessage(
-status==="published"
-?
-"Notice published."
-:
-"Notice unpublished."
-);
-
-await loadNotices();
-
-});
-
-});
-
-
-document
-.querySelectorAll(".notice-delete")
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-async()=>{
-
-if(
-!confirm(
-"Delete this notice?"
-)
-)return;
-
-await deleteDoc(
-doc(
-db,
-"notices",
-button.dataset.id
-)
-);
-
-showMessage(
-"Notice deleted."
-);
-
-await loadNotices();
-
-});
-
-});
-
-}catch(error){
-
-console.error(error);
-
-}
-
-}
-
-
-/* LEAVE */
-
-async function loadLeaves(){
-
-try{
-
-const snap=
-await getDocs(
-collection(
-db,
-"leaveRequests"
-)
-);
-
-const rows=
-snap.docs.map(
-item=>({
-
-id:item.id,
-
-...item.data()
-
-})
-);
-
-rows.sort(
-(a,b)=>
-(b.createdAt?.seconds||0)
--
-(a.createdAt?.seconds||0)
-);
-
-$("leaveCount")
-.textContent=
-rows.length;
-
-const table=
-$("leaveTable");
-
-if(!rows.length){
-
-table.innerHTML=
-`
-<tr>
-
-<td colspan="7">
-
-<div class="empty">
-No leave requests.
-</div>
-
-</td>
-
-</tr>
-`;
-
-return;
-
-}
-
-table.innerHTML=
-rows.map(
-row=>`
-
-<tr>
-
-<td>
-
-<strong>
-${escapeHtml(
-studentNameByNumber(
-row.studentNumber
-)
-)}
-</strong>
-
-<br>
-
-${escapeHtml(
-row.studentNumber
-)}
-
-</td>
-
-<td>
-${escapeHtml(
-row.parentEmail||"-"
-)}
-</td>
-
-<td>
-${escapeHtml(
-row.leaveDate||"-"
-)}
-</td>
-
-<td>
-${escapeHtml(
-row.reason||"-"
-)}
-</td>
-
-<td>
-
-<span class="badge ${
-row.status==="approved"
-?
-"badge-green"
-:
-row.status==="rejected"
-?
-"badge-red"
-:
-"badge-yellow"
-}">
-
-${escapeHtml(
-row.status||"pending"
-)}
-
-</span>
-
-</td>
-
-<td>
-${escapeHtml(
-row.reply||"-"
-)}
-</td>
-
-<td>
-
-<div class="actions">
-
-<button
-class="success leave-approve"
-data-id="${row.id}">
-Approve
-</button>
-
-<button
-class="warning leave-reject"
-data-id="${row.id}">
-Reject
-</button>
-
-<button
-class="secondary leave-reply"
-data-id="${row.id}">
-Reply
-</button>
-
-<button
-class="danger leave-delete"
-data-id="${row.id}">
-Delete
-</button>
-
-</div>
-
-</td>
-
-</tr>
-
-`
-)
-.join("");
-
-document
-.querySelectorAll(".leave-approve")
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-async()=>{
-
-await updateDoc(
-doc(
-db,
-"leaveRequests",
-button.dataset.id
-),
-{
-
-status:"approved",
-
-repliedAt:
-serverTimestamp()
-
-}
-);
-
-showMessage(
-"Leave approved."
-);
-
-await loadLeaves();
-
-});
-
-});
-
-
-document
-.querySelectorAll(".leave-reject")
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-async()=>{
-
-await updateDoc(
-doc(
-db,
-"leaveRequests",
-button.dataset.id
-),
-{
-
-status:"rejected",
-
+</html>
 repliedAt:
 serverTimestamp()
 
@@ -5572,7 +5521,6 @@ db,
 const rows=
 snap.docs.map(
 item=>({
-
 id:item.id,
 
 ...item.data()
@@ -5620,7 +5568,6 @@ rows.map(
 row=>`
 
 <tr>
-
 <td>
 
 ${escapeHtml(
@@ -5668,11 +5615,9 @@ row.status||"new"
 </td>
 
 <td>
-
 ${escapeHtml(
 row.reply||"-"
 )}
-
 </td>
 
 <td>
@@ -5738,7 +5683,8 @@ serverTimestamp()
 showMessage(
 "Reply sent."
 );
-  await loadMessages();
+
+await loadMessages();
 
 });
 
@@ -5813,7 +5759,6 @@ id:item.id,
 
 rows.sort(
 (a,b)=>
-
 (b.createdAt?.seconds||0)
 -
 (a.createdAt?.seconds||0)
@@ -5862,7 +5807,6 @@ money(verified);
 
 const table=
 $("donationsTable");
-
 if(!rows.length){
 
 table.innerHTML=
@@ -5909,7 +5853,6 @@ row.studentNumber||"-"
 </small>
 
 </td>
-
 <td>
 ${escapeHtml(
 row.parentEmail||"-"
@@ -5957,7 +5900,6 @@ row.status||"pending"
 </span>
 
 </td>
-
 <td>
 ${escapeHtml(
 row.adminNote||"-"
@@ -6005,7 +5947,6 @@ Delete
 </div>
 
 </td>
-
 </tr>
 
 `
@@ -6150,7 +6091,6 @@ db,
 button.dataset.id
 )
 );
-
 showMessage(
 "Donation deleted."
 );
@@ -6197,7 +6137,6 @@ location.href=
 
 
 /* DEFAULT DATES */
-
 function setDefaultDates(){
 
 const today=
@@ -6221,8 +6160,5 @@ $("studyDate")
 
 setDefaultDates();
 
-</script>
-
-</body>
-
+</script> </body>
 </html>
