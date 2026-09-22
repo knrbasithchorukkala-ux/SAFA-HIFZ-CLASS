@@ -42,26 +42,10 @@ font-family:Arial,Helvetica,sans-serif;
 color:var(--text);
 
 background:
-radial-gradient(
-circle at 5% 5%,
-rgba(212,175,55,.14),
-transparent 22%
-),
-radial-gradient(
-circle at 95% 10%,
-rgba(16,185,129,.14),
-transparent 25%
-),
-radial-gradient(
-circle at 50% 100%,
-rgba(8,127,91,.08),
-transparent 30%
-),
-linear-gradient(
-135deg,
-#f9fdfb,
-#e3f3ea
-);
+radial-gradient(circle at 5% 5%,rgba(212,175,55,.14),transparent 22%),
+radial-gradient(circle at 95% 10%,rgba(16,185,129,.14),transparent 25%),
+radial-gradient(circle at 50% 100%,rgba(8,127,91,.08),transparent 30%),
+linear-gradient(135deg,#f9fdfb,#e3f3ea);
 
 min-height:100vh
 }
@@ -77,9 +61,7 @@ button{
 cursor:pointer
 }
 
-/* =========================================
-LOADING
-========================================= */
+/* LOADING */
 
 #loading{
 position:fixed;
@@ -96,195 +78,106 @@ font-weight:900;
 letter-spacing:.5px;
 
 background:
-radial-gradient(
-circle at center,
-rgba(212,175,55,.15),
-transparent 30%
-),
-linear-gradient(
-135deg,
-#021f1a,
-#06483a,
-#087f5b
-)
+radial-gradient(circle at center,rgba(212,175,55,.15),transparent 30%),
+linear-gradient(135deg,#021f1a,#06483a,#087f5b)
 }
 
 #loading:before{
 content:"";
-
 position:absolute;
-
 width:180px;
 height:180px;
-
-border:
-2px solid rgba(244,215,120,.18);
-
+border:2px solid rgba(244,215,120,.18);
 transform:rotate(45deg);
-
 border-radius:28px
 }
 
 #loading:after{
 content:"";
-
 position:absolute;
-
 width:110px;
 height:110px;
-
-border:
-1px solid rgba(244,215,120,.14);
-
+border:1px solid rgba(244,215,120,.14);
 transform:rotate(45deg);
-
 border-radius:18px
 }
 
-/* =========================================
-MESSAGE
-========================================= */
+/* MESSAGE */
 
 #message{
 position:fixed;
-
 right:20px;
 bottom:20px;
-
 max-width:390px;
-
 padding:15px 19px;
-
 border-radius:14px;
-
 color:#fff;
-
 display:none;
-
 z-index:99999;
-
-box-shadow:
-0 15px 35px rgba(0,0,0,.22);
-
+box-shadow:0 15px 35px rgba(0,0,0,.22);
 font-size:14px;
 font-weight:800
 }
 
-/* =========================================
-APP
-========================================= */
+/* APP */
 
 .app{
 min-height:100vh;
 display:flex
 }
 
-/* =========================================
-SIDEBAR
-========================================= */
+/* SIDEBAR */
 
 .sidebar{
 width:270px;
-
 position:fixed;
-
 left:0;
 top:0;
 bottom:0;
-
 z-index:1000;
-
 overflow-y:auto;
-
 color:#fff;
 
 background:
-radial-gradient(
-circle at 50% 12%,
-rgba(212,175,55,.15),
-transparent 25%
-),
-radial-gradient(
-circle at 20% 85%,
-rgba(16,185,129,.10),
-transparent 28%
-),
-linear-gradient(
-180deg,
-#032b24 0%,
-#06483a 48%,
-#02251e 100%
-);
+radial-gradient(circle at 50% 12%,rgba(212,175,55,.15),transparent 25%),
+radial-gradient(circle at 20% 85%,rgba(16,185,129,.10),transparent 28%),
+linear-gradient(180deg,#032b24 0%,#06483a 48%,#02251e 100%);
 
-border-right:
-1px solid rgba(212,175,55,.42);
-
-box-shadow:
-7px 0 30px rgba(3,43,36,.20)
+border-right:1px solid rgba(212,175,55,.42);
+box-shadow:7px 0 30px rgba(3,43,36,.20)
 }
 
 .sidebar:before{
 content:"";
-
 position:absolute;
-
 inset:0;
-
 pointer-events:none;
-
 opacity:.055;
 
 background:
-linear-gradient(
-30deg,
-#fff 12%,
-transparent 12.5%,
-transparent 87%,
-#fff 87.5%
-),
-linear-gradient(
-150deg,
-#fff 12%,
-transparent 12.5%,
-transparent 87%,
-#fff 87.5%
-);
+linear-gradient(30deg,#fff 12%,transparent 12.5%,transparent 87%,#fff 87.5%),
+linear-gradient(150deg,#fff 12%,transparent 12.5%,transparent 87%,#fff 87.5%);
 
-background-size:
-40px 70px
+background-size:40px 70px
 }
 
 .sidebar:after{
 content:"";
-
 position:absolute;
-
 left:50%;
 top:110px;
-
 width:150px;
 height:150px;
-
-transform:
-translateX(-50%)
-rotate(45deg);
-
-border:
-1px solid rgba(212,175,55,.08);
-
+transform:translateX(-50%) rotate(45deg);
+border:1px solid rgba(212,175,55,.08);
 pointer-events:none
 }
 
 .brand{
 position:relative;
-
 z-index:1;
-
-padding:
-25px 19px 23px;
-
-border-bottom:
-1px solid rgba(212,175,55,.28)
+padding:25px 19px 23px;
+border-bottom:1px solid rgba(212,175,55,.28)
 }
 
 .brand-top{
@@ -296,35 +189,22 @@ gap:12px
 .logo-box{
 width:48px;
 height:48px;
-
 flex-shrink:0;
-
 border-radius:14px;
-
 display:flex;
-
 align-items:center;
 justify-content:center;
-
 font-size:23px;
 font-weight:900;
-
 color:#173b2d;
 
-background:
-linear-gradient(
-135deg,
-#d4af37,
-#f5da78
-);
+background:linear-gradient(135deg,#d4af37,#f5da78);
 
-box-shadow:
-0 7px 22px rgba(212,175,55,.28)
+box-shadow:0 7px 22px rgba(212,175,55,.28)
 }
 
 .logo-box:after{
 content:"✦";
-
 font-size:25px
 }
 
@@ -339,209 +219,130 @@ font-weight:900
 
 .brand p{
 margin-top:5px;
-
 color:#f1d77d;
-
 font-size:10px;
 font-weight:900;
-
 letter-spacing:1.8px
 }
 
 .menu{
 position:relative;
 z-index:1;
-
-padding:
-17px 11px 25px
+padding:17px 11px 25px
 }
 
 .menu-label{
-padding:
-12px 14px 8px;
-
+padding:12px 14px 8px;
 color:#d4af37;
-
 font-size:9px;
 font-weight:900;
-
 letter-spacing:1.8px;
-
 text-transform:uppercase
 }
 
 .menu button{
 width:100%;
-
 border:0;
-
 background:transparent;
-
 color:#d9eee5;
-
 text-align:left;
-
 padding:12px 14px;
-
 margin-bottom:4px;
-
 border-radius:11px;
-
 font-size:13px;
 font-weight:700;
-
 transition:.2s
 }
 
 .menu button:hover{
 color:#fff;
-
-background:
-rgba(212,175,55,.13);
-
-transform:
-translateX(2px)
+background:rgba(212,175,55,.13);
+transform:translateX(2px)
 }
 
 .menu button.active{
 color:#183b2e;
-
 font-weight:900;
-
-background:
-linear-gradient(
-135deg,
-#d4af37,
-#f2d46d
-);
-
-box-shadow:
-0 7px 22px rgba(212,175,55,.23)
+background:linear-gradient(135deg,#d4af37,#f2d46d);
+box-shadow:0 7px 22px rgba(212,175,55,.23)
 }
 
 .menu button span{
 display:inline-flex;
-
 width:31px;
 height:28px;
-
 align-items:center;
 justify-content:center;
-
 margin-right:2px;
-
 font-size:16px
 }
 
-/* =========================================
-MAIN
-========================================= */
+/* MAIN */
 
 .main{
 margin-left:270px;
-
-width:
-calc(100% - 270px);
-
+width:calc(100% - 270px);
 min-height:100vh
 }
 
-/* =========================================
-TOPBAR
-========================================= */
+/* TOPBAR */
 
 .topbar{
 height:76px;
-
 position:sticky;
-
 top:0;
-
 z-index:500;
-
 display:flex;
-
 align-items:center;
-
 justify-content:space-between;
+padding:0 30px;
 
-padding:
-0 30px;
-
-background:
-rgba(248,253,250,.95);
-
-border-bottom:
-2px solid rgba(212,175,55,.25);
-
-backdrop-filter:
-blur(14px);
-
-box-shadow:
-0 5px 20px rgba(3,43,36,.07)
+background:rgba(248,253,250,.95);
+border-bottom:2px solid rgba(212,175,55,.25);
+backdrop-filter:blur(14px);
+box-shadow:0 5px 20px rgba(3,43,36,.07)
 }
 
 .top-left{
 display:flex;
-
 align-items:center;
-
 gap:14px
 }
 
 .top-title{
 color:#063b2b;
-
 font-size:20px;
 font-weight:900
 }
 
 .top-subtitle{
 margin-top:3px;
-
 color:var(--muted);
-
 font-size:11px
 }
 
 .top-right{
 display:flex;
-
 align-items:center;
-
 gap:10px
 }
 
 .admin-badge{
-padding:
-8px 14px;
-
+padding:8px 14px;
 border-radius:20px;
-
 color:#087f5b;
-
 background:#e1f5e9;
-
-border:
-1px solid #acd7bd;
-
+border:1px solid #acd7bd;
 font-size:10px;
 font-weight:900
 }
 
 .logout{
-border:
-1px solid #efc5c0;
-
-padding:
-9px 14px;
-
+border:1px solid #efc5c0;
+padding:9px 14px;
 border-radius:9px;
-
 color:#a32016;
-
 background:#fff0ee;
-
 font-weight:900
 }
 
@@ -551,83 +352,46 @@ background:#ffe4e0
 
 .mobile-menu{
 display:none;
-
 border:0;
-
-padding:
-8px 11px;
-
+padding:8px 11px;
 border-radius:9px;
-
 color:#fff;
-
 background:#063b2b;
-
 font-size:20px
 }
 
-/* =========================================
-CONTENT
-========================================= */
+/* CONTENT */
 
 .content{
 position:relative;
-
 padding:30px;
-
-min-height:
-calc(100vh - 76px);
-
+min-height:calc(100vh - 76px);
 overflow:hidden
 }
 
 .content:before{
 content:"";
-
 position:absolute;
-
 inset:0;
-
 pointer-events:none;
-
 opacity:.035;
 
 background:
-linear-gradient(
-30deg,
-#087f5b 12%,
-transparent 12.5%,
-transparent 87%,
-#087f5b 87.5%
-),
-linear-gradient(
-150deg,
-#087f5b 12%,
-transparent 12.5%,
-transparent 87%,
-#087f5b 87.5%
-);
+linear-gradient(30deg,#087f5b 12%,transparent 12.5%,transparent 87%,#087f5b 87.5%),
+linear-gradient(150deg,#087f5b 12%,transparent 12.5%,transparent 87%,#087f5b 87.5%);
 
-background-size:
-42px 72px
+background-size:42px 72px
 }
 
 .content:after{
 content:"";
-
 position:absolute;
-
 width:360px;
 height:360px;
-
 right:-180px;
 bottom:-180px;
-
-border:
-1px solid rgba(212,175,55,.10);
-
+border:1px solid rgba(212,175,55,.10);
 transform:rotate(45deg);
-
 pointer-events:none
 }
 
@@ -636,9 +400,7 @@ position:relative;
 z-index:1
 }
 
-/* =========================================
-SECTIONS
-========================================= */
+/* SECTIONS */
 
 .section{
 display:none
@@ -646,172 +408,108 @@ display:none
 
 .section.active{
 display:block;
-
-animation:
-fadeIn .25s ease
+animation:fadeIn .25s ease
 }
 
 @keyframes fadeIn{
-
 from{
 opacity:0;
-transform:
-translateY(5px)
+transform:translateY(5px)
 }
-
 to{
 opacity:1;
-transform:
-translateY(0)
+transform:translateY(0)
 }
-
 }
 
 .section-head{
 display:flex;
-
 align-items:flex-end;
-
 justify-content:space-between;
-
 gap:15px;
-
 margin-bottom:22px
 }
 
 .section-head h2{
 color:#164c39;
-
 font-size:26px;
 font-weight:900;
-
 margin-bottom:5px
 }
 
 .section-head p{
 color:var(--muted);
-
 font-size:13px
 }
 
 .section-tag{
-padding:
-7px 13px;
-
+padding:7px 13px;
 border-radius:20px;
-
 color:#087f5b;
-
 background:#dff3e7;
-
-border:
-1px solid #b9ddc8;
-
+border:1px solid #b9ddc8;
 font-size:10px;
 font-weight:900
 }
 
-/* =========================================
-COLLEGE HERO
-========================================= */
+/* COLLEGE HERO */
 
 .college-header{
 position:relative;
-
 overflow:hidden;
-
 min-height:330px;
-
 margin-bottom:25px;
-
 border-radius:25px;
+border:2px solid rgba(212,175,55,.65);
 
-border:
-2px solid rgba(212,175,55,.65);
+background:linear-gradient(135deg,#032b24,#087f5b);
 
-background:
-linear-gradient(
-135deg,
-#032b24,
-#087f5b
-);
-
-box-shadow:
-0 18px 45px rgba(3,43,36,.23)
+box-shadow:0 18px 45px rgba(3,43,36,.23)
 }
 
 .college-header:before{
 content:"";
-
 position:absolute;
-
 width:280px;
 height:280px;
-
 left:-150px;
 top:-150px;
-
-border:
-1px solid rgba(244,215,120,.16);
-
+border:1px solid rgba(244,215,120,.16);
 transform:rotate(45deg);
-
 z-index:2;
-
 pointer-events:none
 }
 
 .college-header:after{
 content:"";
-
 position:absolute;
-
 width:210px;
 height:210px;
-
 right:-120px;
 bottom:-120px;
-
-border:
-1px solid rgba(244,215,120,.13);
-
+border:1px solid rgba(244,215,120,.13);
 transform:rotate(45deg);
-
 z-index:2;
-
 pointer-events:none
 }
 
 .college-header img{
 width:100%;
 height:330px;
-
 display:block;
-
 object-fit:cover;
-
 object-position:center;
-
-filter:
-saturate(1.08)
-contrast(1.03)
+filter:saturate(1.08) contrast(1.03)
 }
 
 .college-header-overlay{
 position:absolute;
-
 inset:0;
-
 display:flex;
-
 flex-direction:column;
-
 align-items:center;
-
 justify-content:center;
-
 text-align:center;
-
 padding:25px;
 
 background:
@@ -825,54 +523,36 @@ rgba(3,43,36,.94) 100%
 
 .college-header-overlay:before{
 content:"";
-
 position:absolute;
-
 inset:12px;
-
-border:
-1px solid rgba(244,215,120,.20);
-
+border:1px solid rgba(244,215,120,.20);
 border-radius:18px;
-
 pointer-events:none
 }
 
 .college-title{
 position:relative;
-
 color:#fff;
-
 font-size:31px;
 font-weight:900;
-
 letter-spacing:1px;
-
-text-shadow:
-0 4px 16px rgba(0,0,0,.55)
+text-shadow:0 4px 16px rgba(0,0,0,.55)
 }
 
 .college-subtitle{
 position:relative;
-
 margin-top:7px;
-
 color:#f4d778;
-
 font-size:13px;
 font-weight:900;
-
 letter-spacing:3px
 }
 
 .college-header-line{
 position:relative;
-
 width:150px;
 height:3px;
-
 margin-top:14px;
-
 border-radius:10px;
 
 background:
@@ -885,17 +565,13 @@ transparent,
 transparent
 );
 
-box-shadow:
-0 0 15px rgba(212,175,55,.4)
+box-shadow:0 0 15px rgba(212,175,55,.4)
 }
 
 .college-ayah{
 position:relative;
-
 margin-top:18px;
-
 color:#f7dc83;
-
 direction:rtl;
 
 font-family:
@@ -905,178 +581,104 @@ serif;
 
 font-size:29px;
 font-weight:bold;
-
 line-height:1.8;
-
-text-shadow:
-0 4px 14px rgba(0,0,0,.60)
+text-shadow:0 4px 14px rgba(0,0,0,.60)
 }
 
 .college-ayah-meaning{
 position:relative;
-
 margin-top:5px;
-
 color:#fff;
-
 font-size:12px;
-
 opacity:.94
 }
 
-/* =========================================
-STATS
-========================================= */
+/* STATS */
 
 .stats{
 display:grid;
-
-grid-template-columns:
-repeat(4,1fr);
-
+grid-template-columns:repeat(4,1fr);
 gap:16px;
-
 margin-bottom:25px
 }
 
 .stat{
 position:relative;
-
 overflow:hidden;
-
 padding:20px;
-
 border-radius:17px;
-
 color:#fff;
-
-border:
-1px solid rgba(212,175,55,.35);
-
-box-shadow:
-var(--shadow);
-
+border:1px solid rgba(212,175,55,.35);
+box-shadow:var(--shadow);
 transition:.25s
 }
 
 .stat:nth-child(1){
-background:
-linear-gradient(
-135deg,
-#07583f,
-#0a9670
-)
+background:linear-gradient(135deg,#07583f,#0a9670)
 }
 
 .stat:nth-child(2){
-background:
-linear-gradient(
-135deg,
-#06483a,
-#087f5b
-)
+background:linear-gradient(135deg,#06483a,#087f5b)
 }
 
 .stat:nth-child(3){
-background:
-linear-gradient(
-135deg,
-#176247,
-#0b8b68
-)
+background:linear-gradient(135deg,#176247,#0b8b68)
 }
 
 .stat:nth-child(4){
-background:
-linear-gradient(
-135deg,
-#07503c,
-#08765a
-)
+background:linear-gradient(135deg,#07503c,#08765a)
 }
 
 .stat:after{
 content:"";
-
 position:absolute;
-
 width:100px;
 height:100px;
-
 right:-35px;
 top:-35px;
-
-border:
-1px solid rgba(255,255,255,.13);
-
-transform:
-rotate(45deg);
-
+border:1px solid rgba(255,255,255,.13);
+transform:rotate(45deg);
 border-radius:18px
 }
 
 .stat:hover{
-transform:
-translateY(-4px);
-
+transform:translateY(-4px);
 border-color:#f4d778;
-
-box-shadow:
-0 16px 35px rgba(3,43,36,.2)
+box-shadow:0 16px 35px rgba(3,43,36,.2)
 }
 
 .stat-icon{
 width:44px;
 height:44px;
-
 display:flex;
-
 align-items:center;
 justify-content:center;
-
 margin-bottom:14px;
-
 border-radius:13px;
-
 color:#174331;
-
-background:
-linear-gradient(
-135deg,
-#f1d36a,
-#fff0a6
-);
-
+background:linear-gradient(135deg,#f1d36a,#fff0a6);
 font-size:20px
 }
 
 .stat small{
 color:#dff4e9;
-
 font-size:11px;
 font-weight:800
 }
 
 .stat strong{
 display:block;
-
 margin-top:6px;
-
 color:#fff;
-
 font-size:30px;
 font-weight:900
 }
 
-/* =========================================
-PANELS
-========================================= */
+/* PANELS */
 
 .panel{
 padding:23px;
-
 margin-bottom:22px;
-
 border-radius:17px;
 
 background:
@@ -1086,79 +688,52 @@ rgba(255,255,255,.98),
 rgba(239,249,244,.98)
 );
 
-border:
-1px solid var(--border);
-
-box-shadow:
-var(--shadow);
-
+border:1px solid var(--border);
+box-shadow:var(--shadow);
 transition:.2s
 }
 
 .panel:hover{
-box-shadow:
-0 15px 35px rgba(3,43,36,.13)
+box-shadow:0 15px 35px rgba(3,43,36,.13)
 }
 
 .panel-head{
 display:flex;
-
 align-items:center;
-
 justify-content:space-between;
-
 gap:10px;
-
 margin-bottom:18px;
-
 padding-bottom:13px;
-
-border-bottom:
-2px solid rgba(212,175,55,.20)
+border-bottom:2px solid rgba(212,175,55,.20)
 }
 
 .panel h3{
 color:#164c39;
-
 font-size:17px;
 font-weight:900
 }
 
 .panel-desc{
 margin-top:3px;
-
 color:var(--muted);
-
 font-size:11px
 }
 
-/* =========================================
-QUICK ACCESS
-========================================= */
+/* QUICK ACCESS */
 
 .quick{
 display:grid;
-
-grid-template-columns:
-repeat(3,1fr);
-
+grid-template-columns:repeat(3,1fr);
 gap:14px
 }
 
 .quick button{
 position:relative;
-
 overflow:hidden;
-
 padding:19px;
-
 text-align:left;
-
-border:
-1px solid #c7e1d3;
-
+border:1px solid #c7e1d3;
 border-radius:14px;
-
 color:var(--text);
 
 background:
@@ -1173,33 +748,20 @@ transition:.25s
 
 .quick button:before{
 content:"";
-
 position:absolute;
-
 width:65px;
 height:65px;
-
 right:-20px;
 top:-20px;
-
-border:
-1px solid rgba(8,127,91,.12);
-
-transform:
-rotate(45deg);
-
+border:1px solid rgba(8,127,91,.12);
+transform:rotate(45deg);
 border-radius:12px
 }
 
 .quick button:hover{
-transform:
-translateY(-4px);
-
-border-color:
-rgba(212,175,55,.8);
-
-box-shadow:
-0 12px 25px rgba(3,43,36,.13);
+transform:translateY(-4px);
+border-color:rgba(212,175,55,.8);
+box-shadow:0 12px 25px rgba(3,43,36,.13);
 
 background:
 linear-gradient(
@@ -1211,17 +773,13 @@ linear-gradient(
 
 .quick-icon{
 margin-bottom:12px;
-
 color:#087f5b;
-
 font-size:23px
 }
 
 .quick strong{
 display:block;
-
 margin-bottom:5px;
-
 color:#173e30
 }
 
@@ -1229,24 +787,17 @@ color:#173e30
 color:var(--muted)
 }
 
-/* =========================================
-FORMS
-========================================= */
+/* FORMS */
 
 .form-grid{
 display:grid;
-
-grid-template-columns:
-repeat(2,1fr);
-
+grid-template-columns:repeat(2,1fr);
 gap:16px
 }
 
 .field{
 display:flex;
-
 flex-direction:column;
-
 gap:7px
 }
 
@@ -1256,7 +807,6 @@ grid-column:1/-1
 
 .field label{
 color:#315b49;
-
 font-size:12px;
 font-weight:900
 }
@@ -1265,27 +815,17 @@ font-weight:900
 .field select,
 .field textarea{
 width:100%;
-
-padding:
-11px 12px;
-
+padding:11px 12px;
 outline:none;
-
 color:var(--text);
-
 background:#f5fbf7;
-
-border:
-1px solid #c4dfcf;
-
+border:1px solid #c4dfcf;
 border-radius:10px;
-
 transition:.2s
 }
 
 .field textarea{
 min-height:100px;
-
 resize:vertical
 }
 
@@ -1293,31 +833,22 @@ resize:vertical
 .field select:focus,
 .field textarea:focus{
 border-color:#0a956a;
-
 background:#fff;
-
-box-shadow:
-0 0 0 3px rgba(10,149,106,.11)
+box-shadow:0 0 0 3px rgba(10,149,106,.11)
 }
 
 /* STUDY SPECIAL FORM */
 
 .study-info{
 grid-column:1/-1;
-
 display:grid;
-
-grid-template-columns:
-repeat(3,1fr);
-
+grid-template-columns:repeat(3,1fr);
 gap:12px;
-
 margin-bottom:3px
 }
 
 .study-info-card{
 padding:13px;
-
 border-radius:12px;
 
 background:
@@ -1327,41 +858,29 @@ linear-gradient(
 #fff8df
 );
 
-border:
-1px solid rgba(212,175,55,.35)
+border:1px solid rgba(212,175,55,.35)
 }
 
 .study-info-card strong{
 display:block;
-
 color:#164c39;
-
 font-size:12px;
 font-weight:900
 }
 
 .study-info-card span{
 display:block;
-
 margin-top:4px;
-
 color:var(--muted);
-
 font-size:10px
 }
 
-/* =========================================
-BUTTONS
-========================================= */
+/* BUTTONS */
 
 .primary{
 border:0;
-
-padding:
-11px 18px;
-
+padding:11px 18px;
 border-radius:10px;
-
 color:#fff;
 
 background:
@@ -1372,10 +891,7 @@ linear-gradient(
 );
 
 font-weight:900;
-
-box-shadow:
-0 5px 15px rgba(8,127,91,.18);
-
+box-shadow:0 5px 15px rgba(8,127,91,.18);
 transition:.2s
 }
 
@@ -1387,23 +903,15 @@ linear-gradient(
 #098f68
 );
 
-transform:
-translateY(-1px)
+transform:translateY(-1px)
 }
 
 .secondary{
-padding:
-10px 15px;
-
-border:
-1px solid #c5dfcf;
-
+padding:10px 15px;
+border:1px solid #c5dfcf;
 border-radius:9px;
-
 color:#315b49;
-
 background:#eef8f2;
-
 font-weight:800
 }
 
@@ -1414,13 +922,9 @@ background:#dff1e7
 .danger,
 .success,
 .warning{
-padding:
-8px 11px;
-
+padding:8px 11px;
 border:0;
-
 border-radius:8px;
-
 font-weight:900
 }
 
@@ -1451,41 +955,27 @@ background:#cdebd9
 background:#ffe9ae
 }
 
-/* =========================================
-TABLE
-========================================= */
+/* TABLE */
 
 .table-wrap{
 overflow-x:auto;
-
 border-radius:12px;
-
-border:
-1px solid #d2e6da
+border:1px solid #d2e6da
 }
 
 table{
 width:100%;
-
 min-width:720px;
-
 border-collapse:collapse;
-
 background:#fdfefe
 }
 
 th,
 td{
-padding:
-13px 10px;
-
-border-bottom:
-1px solid #dcebe2;
-
+padding:13px 10px;
+border-bottom:1px solid #dcebe2;
 text-align:left;
-
 font-size:12px;
-
 vertical-align:middle
 }
 
@@ -1501,9 +991,7 @@ linear-gradient(
 
 font-size:10px;
 font-weight:900;
-
 text-transform:uppercase;
-
 letter-spacing:.3px
 }
 
@@ -1515,17 +1003,12 @@ td strong{
 color:#173e30
 }
 
-/* =========================================
-STUDY TABLE
-========================================= */
+/* STUDY TABLE */
 
 .study-table-wrap{
 overflow-x:auto;
-
 border-radius:12px;
-
-border:
-1px solid #d2e6da
+border:1px solid #d2e6da
 }
 
 .study-table{
@@ -1542,122 +1025,79 @@ max-width:220px
 
 .teacher-remark-cell{
 max-width:240px;
-
 white-space:normal;
-
 line-height:1.5
 }
 
-/* =========================================
-BADGES
-========================================= */
+/* BADGES */
 
 .badge{
 display:inline-block;
-
-padding:
-5px 10px;
-
+padding:5px 10px;
 border-radius:20px;
-
 font-size:10px;
 font-weight:900;
-
 text-transform:capitalize
 }
 
 .badge-green{
 color:#087f5b;
-
 background:#dff3e6
 }
 
 .badge-red{
 color:#842029;
-
 background:#f8d7da
 }
 
 .badge-yellow{
 color:#856404;
-
 background:#fff3cd
 }
 
-/* =========================================
-TOOLBAR
-========================================= */
+/* TOOLBAR */
 
 .toolbar{
 display:flex;
-
 align-items:center;
-
 justify-content:space-between;
-
 gap:12px;
-
 margin-bottom:16px
 }
 
 .search{
 width:280px;
-
-padding:
-10px 12px;
-
+padding:10px 12px;
 outline:none;
-
 color:var(--text);
-
 background:#f7fcf9;
-
-border:
-1px solid #c5dfcf;
-
+border:1px solid #c5dfcf;
 border-radius:10px;
-
 transition:.2s
 }
 
 .search:focus{
 border-color:#0a956a;
-
-box-shadow:
-0 0 0 3px rgba(10,149,106,.1)
+box-shadow:0 0 0 3px rgba(10,149,106,.1)
 }
 
-/* =========================================
-ACTIONS
-========================================= */
+/* ACTIONS */
 
 .actions{
 display:flex;
-
 flex-wrap:wrap;
-
 gap:6px
 }
 
-/* =========================================
-DONATIONS
-========================================= */
+/* DONATIONS */
 
 .donation-summary{
 display:grid;
-
-grid-template-columns:
-repeat(3,1fr);
-
+grid-template-columns:repeat(3,1fr);
 gap:14px;
-
 margin-bottom:20px;
-
 padding:15px;
-
-border:
-2px solid rgba(212,175,55,.58);
-
+border:2px solid rgba(212,175,55,.58);
 border-radius:16px;
 
 background:
@@ -1670,10 +1110,7 @@ linear-gradient(
 
 .donation-stat{
 padding:17px;
-
-border:
-1px solid #d0e5d8;
-
+border:1px solid #d0e5d8;
 border-radius:12px;
 
 background:
@@ -1683,17 +1120,13 @@ linear-gradient(
 #f0f9f4
 );
 
-box-shadow:
-0 5px 16px rgba(3,43,36,.06)
+box-shadow:0 5px 16px rgba(3,43,36,.06)
 }
 
 .donation-stat small{
 display:block;
-
 margin-bottom:5px;
-
 color:var(--muted);
-
 font-size:10px;
 font-weight:900
 }
@@ -1701,52 +1134,33 @@ font-weight:900
 .donation-stat strong{
 font-size:25px;
 font-weight:900;
-
 color:#087f5b
 }
 
-/* =========================================
-EMPTY
-========================================= */
+/* EMPTY */
 
 .empty{
 padding:28px;
-
 text-align:center;
-
 color:var(--muted);
-
 font-weight:700;
-
 background:#f3faf6;
-
 border-radius:10px
 }
 
-/* =========================================
-MODAL
-========================================= */
+/* MODAL */
 
 .modal-overlay{
 position:fixed;
-
 inset:0;
-
 display:none;
-
 align-items:center;
-
 justify-content:center;
-
 padding:20px;
-
 z-index:99990;
 
-background:
-rgba(3,35,25,.68);
-
-backdrop-filter:
-blur(5px)
+background:rgba(3,35,25,.68);
+backdrop-filter:blur(5px)
 }
 
 .modal-overlay.show{
@@ -1755,18 +1169,11 @@ display:flex
 
 .edit-modal{
 width:100%;
-
 max-width:650px;
-
 max-height:90vh;
-
 overflow-y:auto;
-
 padding:25px;
-
-border:
-2px solid rgba(212,175,55,.4);
-
+border:2px solid rgba(212,175,55,.4);
 border-radius:19px;
 
 background:
@@ -1776,41 +1183,26 @@ linear-gradient(
 #eef8f2
 );
 
-box-shadow:
-0 25px 70px rgba(0,0,0,.28)
+box-shadow:0 25px 70px rgba(0,0,0,.28)
 }
 
 .modal-actions{
 display:flex;
-
 justify-content:flex-end;
-
 gap:10px;
-
 margin-top:20px
 }
 
-/* =========================================
-PUBLIC RESULT
-========================================= */
+/* PUBLIC RESULT */
 
 .welcome{
 color:#fff !important;
 
 background:
-radial-gradient(
-circle at 90% 15%,
-rgba(212,175,55,.20),
-transparent 25%
-),
-linear-gradient(
-135deg,
-#032b24,
-#087f5b
-) !important;
+radial-gradient(circle at 90% 15%,rgba(212,175,55,.20),transparent 25%),
+linear-gradient(135deg,#032b24,#087f5b) !important;
 
-border:
-1px solid rgba(212,175,55,.55)
+border:1px solid rgba(212,175,55,.55)
 }
 
 .welcome h2,
@@ -1818,9 +1210,7 @@ border:
 color:#fff
 }
 
-/* =========================================
-SCROLLBAR
-========================================= */
+/* SCROLLBAR */
 
 .sidebar::-webkit-scrollbar{
 width:6px
@@ -1832,7 +1222,6 @@ background:#02251e
 
 .sidebar::-webkit-scrollbar-thumb{
 background:#d4af37;
-
 border-radius:10px
 }
 
@@ -1842,29 +1231,23 @@ height:7px
 
 .table-wrap::-webkit-scrollbar-thumb{
 background:#087f5b;
-
 border-radius:10px
 }
 
-/* =========================================
-RESPONSIVE
-========================================= */
+/* RESPONSIVE */
 
 @media(max-width:1100px){
 
 .stats{
-grid-template-columns:
-repeat(2,1fr)
+grid-template-columns:repeat(2,1fr)
 }
 
 .quick{
-grid-template-columns:
-repeat(2,1fr)
+grid-template-columns:repeat(2,1fr)
 }
 
 .study-info{
-grid-template-columns:
-repeat(3,1fr)
+grid-template-columns:repeat(3,1fr)
 }
 
 }
@@ -1872,20 +1255,16 @@ repeat(3,1fr)
 @media(max-width:900px){
 
 .sidebar{
-transform:
-translateX(-100%);
-
+transform:translateX(-100%);
 transition:.25s
 }
 
 .sidebar.open{
-transform:
-translateX(0)
+transform:translateX(0)
 }
 
 .main{
 margin-left:0;
-
 width:100%
 }
 
@@ -1894,8 +1273,7 @@ display:block
 }
 
 .topbar{
-padding:
-0 15px
+padding:0 15px
 }
 
 .content{
@@ -1923,9 +1301,7 @@ grid-template-columns:1fr
 }
 
 .stats{
-grid-template-columns:
-1fr 1fr;
-
+grid-template-columns:1fr 1fr;
 gap:10px
 }
 
@@ -1955,13 +1331,11 @@ width:100%
 
 .toolbar{
 flex-direction:column;
-
 align-items:stretch
 }
 
 .college-header{
 min-height:250px;
-
 border-radius:18px
 }
 
@@ -1975,7 +1349,6 @@ font-size:23px
 
 .college-subtitle{
 font-size:10px;
-
 letter-spacing:1.5px
 }
 
@@ -1993,7 +1366,6 @@ padding:10px
 
 .edit-modal{
 padding:18px;
-
 border-radius:15px
 }
 
@@ -2022,7 +1394,6 @@ grid-template-columns:1fr
 }
 
 }
-
 </style>
 </head>
 
@@ -2032,9 +1403,7 @@ grid-template-columns:1fr
 
 <div id="message"></div>
 
-<!-- =========================================
-EDIT STUDENT MODAL
-========================================= -->
+<!-- EDIT STUDENT MODAL -->
 
 <div class="modal-overlay" id="editStudentModal">
 
@@ -2135,30 +1504,21 @@ id="editStudentAddress">
 <button
 class="secondary"
 id="cancelEditStudent">
-
 Cancel
-
 </button>
 
 <button
 class="primary"
 id="saveEditStudent">
-
 Save Changes
-
 </button>
 
 </div>
 
 </div>
-
 </div>
 
 <div class="app">
-
-<!-- =========================================
-SIDEBAR
-========================================= -->
 
 <aside
 class="sidebar"
@@ -2295,12 +1655,7 @@ Public Result
 </button>
 
 </div>
-
 </aside>
-
-<!-- =========================================
-MAIN
-========================================= -->
 
 <main class="main">
 
@@ -2311,9 +1666,7 @@ MAIN
 <button
 class="mobile-menu"
 id="mobileMenu">
-
 ☰
-
 </button>
 
 <div>
@@ -2339,9 +1692,7 @@ ADMINISTRATOR
 <button
 class="logout"
 id="logoutBtn">
-
 Logout
-
 </button>
 
 </div>
@@ -2350,9 +1701,7 @@ Logout
 
 <div class="content">
 
-<!-- =========================================
-HOME
-========================================= -->
+<!-- HOME -->
 
 <section
 class="section active"
@@ -2385,7 +1734,6 @@ The best among you are those who learn the Qur'an and teach it.
 </div>
 
 </div>
-
 </div>
 
 <div class="stats">
@@ -2525,7 +1873,7 @@ Study Progress
 </strong>
 
 <small>
-Update Hifz progress
+Update
 </small>
 
 </button>
@@ -2603,14 +1951,11 @@ Open public result system
 </button>
 
 </div>
-
 </div>
 
 </section>
 
-<!-- =========================================
-STUDENTS
-========================================= -->
+<!-- STUDENTS -->
 
 <section
 class="section"
@@ -2746,9 +2091,7 @@ id="studentAddress">
 <button
 class="primary"
 type="submit">
-
 + Add Student
-
 </button>
 
 </div>
@@ -2785,35 +2128,13 @@ placeholder="Search student...">
 <thead>
 
 <tr>
-
-<th>
-Number
-</th>
-
-<th>
-Name
-</th>
-
-<th>
-Guardian
-</th>
-
-<th>
-Class
-</th>
-
-<th>
-Email
-</th>
-
-<th>
-Phone
-</th>
-
-<th>
-Action
-</th>
-
+<th>Number</th>
+<th>Name</th>
+<th>Guardian</th>
+<th>Class</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Action</th>
 </tr>
 
 </thead>
@@ -2825,14 +2146,11 @@ id="studentsTable">
 </table>
 
 </div>
-
 </div>
 
 </section>
 
-<!-- =========================================
-ATTENDANCE
-========================================= -->
+<!-- ATTENDANCE -->
 
 <section
 class="section"
@@ -2936,9 +2254,7 @@ Leave
 <button
 class="primary"
 type="submit">
-
 Save Attendance
-
 </button>
 
 </div>
@@ -2969,9 +2285,7 @@ Attendance Records
 
 </section>
 
-<!-- =========================================
-STUDY PROGRESS
-========================================= -->
+<!-- STUDY PROGRESS -->
 
 <section
 class="section"
@@ -3089,14 +2403,42 @@ placeholder="Example: 3 pages / 1 Juz">
 
 </div>
 
+<!-- CHANGED: STATUS IS NOW EMPTY TEXT BOX -->
+
 <div class="field">
 
 <label>
 Study Status
 </label>
 
+<input
+id="studyStatus"
+placeholder="Enter status code">
+
+</div>
+
+<!-- CHANGED: PERFORMANCE IS NOW DROPDOWN -->
+
+<div class="field">
+
+<label>
+Performance
+</label>
+
 <select
-id="studyStatus">
+id="performance">
+
+<option value="">
+Select performance
+</option>
+
+<option value="Excellent">
+Excellent
+</option>
+
+<option value="Very Good">
+Very Good
+</option>
 
 <option value="Good">
 Good
@@ -3111,18 +2453,6 @@ Needs Improvement
 </option>
 
 </select>
-
-</div>
-
-<div class="field">
-
-<label>
-Performance
-</label>
-
-<input
-id="performance"
-placeholder="Example: Excellent / Good / Average">
 
 </div>
 
@@ -3217,9 +2547,7 @@ Needs Improvement
 <button
 class="primary"
 type="submit">
-
 Save Study Progress
-
 </button>
 
 </div>
@@ -3256,49 +2584,17 @@ Daily Hifz, revision, performance, Dars level and discipline
 
 <tr>
 
-<th>
-Student
-</th>
-
-<th>
-Date
-</th>
-
-<th>
-Juz / Surah Studied
-</th>
-
-<th>
-Today's New Lesson Target
-</th>
-
-<th>
-Revision Completed
-</th>
-
-<th>
-Study Status
-</th>
-
-<th>
-Performance
-</th>
-
-<th>
-Teacher's Remarks
-</th>
-
-<th>
-Dars Study Level
-</th>
-
-<th>
-Discipline
-</th>
-
-<th>
-Action
-</th>
+<th>Student</th>
+<th>Date</th>
+<th>Juz / Surah Studied</th>
+<th>Today's New Lesson Target</th>
+<th>Revision Completed</th>
+<th>Study Status</th>
+<th>Performance</th>
+<th>Teacher's Remarks</th>
+<th>Dars Study Level</th>
+<th>Discipline</th>
+<th>Action</th>
 
 </tr>
 
@@ -3316,9 +2612,7 @@ id="studyTable">
 
 </section>
 
-<!-- =========================================
-RESULTS
-========================================= -->
+<!-- RESULTS -->
 
 <section
 class="section"
@@ -3413,9 +2707,7 @@ Published
 <button
 class="primary"
 type="submit">
-
 Add Result
-
 </button>
 
 </div>
@@ -3436,25 +2728,11 @@ Add Result
 
 <tr>
 
-<th>
-Student
-</th>
-
-<th>
-Title
-</th>
-
-<th>
-Mark
-</th>
-
-<th>
-Status
-</th>
-
-<th>
-Action
-</th>
+<th>Student</th>
+<th>Title</th>
+<th>Mark</th>
+<th>Status</th>
+<th>Action</th>
 
 </tr>
 
@@ -3472,9 +2750,7 @@ id="resultsTable">
 
 </section>
 
-<!-- =========================================
-NOTICES
-========================================= -->
+<!-- NOTICES -->
 
 <section
 class="section"
@@ -3557,9 +2833,7 @@ required>
 <button
 class="primary"
 type="submit">
-
 Add Notice
-
 </button>
 
 </div>
@@ -3580,21 +2854,10 @@ Add Notice
 
 <tr>
 
-<th>
-Title
-</th>
-
-<th>
-Notice
-</th>
-
-<th>
-Status
-</th>
-
-<th>
-Action
-</th>
+<th>Title</th>
+<th>Notice</th>
+<th>Status</th>
+<th>Action</th>
 
 </tr>
 
@@ -3612,9 +2875,7 @@ id="noticesTable">
 
 </section>
 
-<!-- =========================================
-LEAVE
-========================================= -->
+<!-- LEAVE -->
 
 <section
 class="section"
@@ -3650,33 +2911,13 @@ PARENT REQUESTS
 
 <tr>
 
-<th>
-Student
-</th>
-
-<th>
-Parent
-</th>
-
-<th>
-Date
-</th>
-
-<th>
-Reason
-</th>
-
-<th>
-Status
-</th>
-
-<th>
-Reply
-</th>
-
-<th>
-Action
-</th>
+<th>Student</th>
+<th>Parent</th>
+<th>Date</th>
+<th>Reason</th>
+<th>Status</th>
+<th>Reply</th>
+<th>Action</th>
 
 </tr>
 
@@ -3694,9 +2935,7 @@ id="leaveTable">
 
 </section>
 
-<!-- =========================================
-MESSAGES
-========================================= -->
+<!-- MESSAGES -->
 
 <section
 class="section"
@@ -3732,29 +2971,12 @@ COMMUNICATION
 
 <tr>
 
-<th>
-Student
-</th>
-
-<th>
-Parent
-</th>
-
-<th>
-Message
-</th>
-
-<th>
-Status
-</th>
-
-<th>
-Reply
-</th>
-
-<th>
-Action
-</th>
+<th>Student</th>
+<th>Parent</th>
+<th>Message</th>
+<th>Status</th>
+<th>Reply</th>
+<th>Action</th>
 
 </tr>
 
@@ -3772,9 +2994,7 @@ id="messagesTable">
 
 </section>
 
-<!-- =========================================
-DONATIONS
-========================================= -->
+<!-- DONATIONS -->
 
 <section
 class="section"
@@ -3850,37 +3070,14 @@ Verified
 
 <tr>
 
-<th>
-Student
-</th>
-
-<th>
-Parent Email
-</th>
-
-<th>
-Amount
-</th>
-
-<th>
-Transaction ID
-</th>
-
-<th>
-Date
-</th>
-
-<th>
-Status
-</th>
-
-<th>
-Admin Note
-</th>
-
-<th>
-Action
-</th>
+<th>Student</th>
+<th>Parent Email</th>
+<th>Amount</th>
+<th>Transaction ID</th>
+<th>Date</th>
+<th>Status</th>
+<th>Admin Note</th>
+<th>Action</th>
 
 </tr>
 
@@ -3898,9 +3095,7 @@ id="donationsTable">
 
 </section>
 
-<!-- =========================================
-PUBLIC RESULT
-========================================= -->
+<!-- PUBLIC RESULT -->
 
 <section
 class="section"
@@ -3950,9 +3145,7 @@ id="openPublicResult">
 </section>
 
 </div>
-
 </main>
-
 </div>
 
 <script type="module">
@@ -4026,9 +3219,7 @@ let currentUser=null;
 window.students=[];
 
 
-/* =========================================
-UTILITIES
-========================================= */
+/* UTILITIES */
 
 function escapeHtml(value){
 
@@ -4115,9 +3306,7 @@ n.toLocaleString("en-IN");
 }
 
 
-/* =========================================
-AUTH
-========================================= */
+/* AUTH */
 
 onAuthStateChanged(
 auth,
@@ -4194,9 +3383,7 @@ error.message;
 });
 
 
-/* =========================================
-NAVIGATION
-========================================= */
+/* NAVIGATION */
 
 document
 .querySelectorAll(".menu-btn")
@@ -4247,12 +3434,10 @@ section.classList.remove(
 
 });
 
-
 const target=$(id);
 
 if(target)
 target.classList.add("active");
-
 
 document
 .querySelectorAll(".menu-btn")
@@ -4264,7 +3449,6 @@ button.dataset.section===id
 );
 
 });
-
 
 window.scrollTo({
 top:0,
@@ -4303,9 +3487,7 @@ location.href="index.html";
 });
 
 
-/* =========================================
-LOAD EVERYTHING
-========================================= */
+/* LOAD EVERYTHING */
 
 async function loadEverything(){
 
@@ -4332,9 +3514,7 @@ loadDonations()
 }
 
 
-/* =========================================
-STUDENTS
-========================================= */
+/* STUDENTS */
 
 async function loadStudents(){
 
@@ -4408,7 +3588,6 @@ return;
 
 }
 
-
 table.innerHTML=
 list.map(
 student=>`
@@ -4481,7 +3660,6 @@ Delete
 
 `
 ).join("");
-
 
 document
 .querySelectorAll(".delete-student")
@@ -4712,17 +3890,11 @@ student=>{
 const text=[
 
 student.studentNumber,
-
 student.studentName,
-
 student.guardianName,
-
 student.className,
-
 student.parentEmail,
-
 student.studentAddress,
-
 student.phoneNumber
 
 ]
@@ -4738,9 +3910,7 @@ renderStudents(filtered);
 });
 
 
-/* =========================================
-EDIT STUDENT
-========================================= */
+/* EDIT STUDENT */
 
 $("closeEditModal")
 .addEventListener(
@@ -4831,18 +4001,14 @@ showMessage(
 });
 
 
-/* =========================================
-STUDENT SELECTS
-========================================= */
+/* STUDENT SELECTS */
 
 function populateStudentSelects(){
 
 const selects=[
 
 "attendanceStudent",
-
 "studyStudent",
-
 "resultStudent"
 
 ];
@@ -4893,9 +4059,7 @@ select.value=old;
 }
 
 
-/* =========================================
-ATTENDANCE
-========================================= */
+/* ATTENDANCE */
 
 $("attendanceForm")
 .addEventListener(
@@ -5016,25 +4180,11 @@ table.innerHTML=
 
 <tr>
 
-<th>
-Student
-</th>
-
-<th>
-Number
-</th>
-
-<th>
-Date
-</th>
-
-<th>
-Status
-</th>
-
-<th>
-Action
-</th>
+<th>Student</th>
+<th>Number</th>
+<th>Date</th>
+<th>Status</th>
+<th>Action</th>
 
 </tr>
 
@@ -5115,7 +4265,6 @@ Delete
 </div>
 `;
 
-
 document
 .querySelectorAll(
 ".attendance-delete-btn"
@@ -5167,9 +4316,7 @@ Unable to load attendance.
 }
 
 
-/* =========================================
-STUDY PROGRESS
-========================================= */
+/* STUDY PROGRESS */
 
 $("studyForm")
 .addEventListener(
@@ -5207,13 +4354,17 @@ revision:
 $("revision")
 .value.trim(),
 
+/* PERFORMANCE NOW COMES FROM DROPDOWN */
+
 performance:
 $("performance")
 .value.trim(),
 
+/* STATUS NOW COMES FROM EMPTY TEXT BOX */
+
 studyStatus:
 $("studyStatus")
-.value,
+.value.trim(),
 
 note:
 $("studyNote")
@@ -5316,7 +4467,6 @@ return;
 
 }
 
-
 table.innerHTML=
 rows.map(
 row=>`
@@ -5375,15 +4525,11 @@ row.revision||"-"
 <td>
 
 <span class="badge ${
-row.studyStatus==="Good"
+row.studyStatus
 ?
 "badge-green"
 :
-row.studyStatus==="Average"
-?
 "badge-yellow"
-:
-"badge-red"
 }">
 
 ${escapeHtml(
@@ -5435,7 +4581,6 @@ Delete
 `
 )
 .join("");
-
 
 document
 .querySelectorAll(".study-delete")
@@ -5490,9 +4635,7 @@ Unable to load study records.
 }
 
 
-/* =========================================
-RESULTS
-========================================= */
+/* RESULTS */
 
 $("resultForm")
 .addEventListener(
@@ -5709,7 +4852,6 @@ Delete
 )
 .join("");
 
-
 document
 .querySelectorAll(".result-toggle")
 .forEach(button=>{
@@ -5792,9 +4934,7 @@ console.error(error);
 }
 
 
-/* =========================================
-NOTICES
-========================================= */
+/* NOTICES */
 
 $("noticeForm")
 .addEventListener(
@@ -5991,7 +5131,6 @@ Delete
 )
 .join("");
 
-
 document
 .querySelectorAll(".notice-toggle")
 .forEach(button=>{
@@ -6074,9 +5213,7 @@ console.error(error);
 }
 
 
-/* =========================================
-LEAVE
-========================================= */
+/* LEAVE */
 
 async function loadLeaves(){
 
@@ -6213,33 +5350,25 @@ row.reply||"-"
 <button
 class="success leave-approve"
 data-id="${row.id}">
-
 Approve
-
 </button>
 
 <button
 class="warning leave-reject"
 data-id="${row.id}">
-
 Reject
-
 </button>
 
 <button
 class="secondary leave-reply"
 data-id="${row.id}">
-
 Reply
-
 </button>
 
 <button
 class="danger leave-delete"
 data-id="${row.id}">
-
 Delete
-
 </button>
 
 </div>
@@ -6251,7 +5380,6 @@ Delete
 `
 )
 .join("");
-
 
 document
 .querySelectorAll(".leave-approve")
@@ -6407,9 +5535,7 @@ console.error(error);
 }
 
 
-/* =========================================
-MESSAGES
-========================================= */
+/* MESSAGES */
 
 async function loadMessages(){
 
@@ -6534,17 +5660,13 @@ row.reply||"-"
 <button
 class="secondary message-reply"
 data-id="${row.id}">
-
 Reply
-
 </button>
 
 <button
 class="danger message-delete"
 data-id="${row.id}">
-
 Delete
-
 </button>
 
 </div>
@@ -6556,7 +5678,6 @@ Delete
 `
 )
 .join("");
-
 
 document
 .querySelectorAll(".message-reply")
@@ -6644,9 +5765,7 @@ console.error(error);
 }
 
 
-/* =========================================
-DONATIONS
-========================================= */
+/* DONATIONS */
 
 async function loadDonations(){
 
@@ -6834,9 +5953,7 @@ row.status!=="verified"
 <button
 class="success donation-verify"
 data-id="${row.id}">
-
 Verify
-
 </button>
 `
 :
@@ -6850,9 +5967,7 @@ row.status!=="rejected"
 <button
 class="warning donation-reject"
 data-id="${row.id}">
-
 Reject
-
 </button>
 `
 :
@@ -6862,9 +5977,7 @@ Reject
 <button
 class="danger donation-delete"
 data-id="${row.id}">
-
 Delete
-
 </button>
 
 </div>
@@ -6876,7 +5989,6 @@ Delete
 `
 )
 .join("");
-
 
 document
 .querySelectorAll(
@@ -7048,9 +6160,7 @@ Unable to load donations.
 }
 
 
-/* =========================================
-PUBLIC RESULT
-========================================= */
+/* PUBLIC RESULT */
 
 $("openPublicResult")
 .addEventListener(
@@ -7064,9 +6174,7 @@ location.href=
 );
 
 
-/* =========================================
-DEFAULT DATES
-========================================= */
+/* DEFAULT DATES */
 
 function setDefaultDates(){
 
