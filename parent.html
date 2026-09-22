@@ -696,6 +696,15 @@ body{
   width:100%;
 }
 
+.upi-btn:active{
+  transform:scale(.98);
+}
+
+.upi-btn:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
 .donation-history{
   margin-top:20px;
 }
@@ -769,6 +778,7 @@ body{
 }
 
 @media(max-width:1000px){
+
   .stats{
     grid-template-columns:repeat(2,1fr);
   }
@@ -776,6 +786,7 @@ body{
   .quick-grid{
     grid-template-columns:repeat(3,1fr);
   }
+
 }
 
 @media(max-width:760px){
@@ -854,6 +865,7 @@ body{
   .section-tag{
     display:none;
   }
+
 }
 </style>
 </head>
@@ -921,21 +933,35 @@ body{
 <header class="topbar">
 
   <div class="topbar-left">
+
     <div>
-      <button class="mobile-menu" id="mobileMenu">☰</button>
+
+      <button class="mobile-menu" id="mobileMenu">
+        ☰
+      </button>
+
       <span style="font-weight:bold;color:#123b5d;">
         Parent Dashboard
       </span>
+
     </div>
 
-    <p>SAFA QURAN COLLEGE ONLINE PORTAL</p>
+    <p>
+      SAFA QURAN COLLEGE ONLINE PORTAL
+    </p>
+
   </div>
 
   <div>
-    <span class="badge">PARENT PORTAL</span>
+
+    <span class="badge">
+      PARENT PORTAL
+    </span>
+
     <button class="logout" id="logoutBtn">
       Logout
     </button>
+
   </div>
 
 </header>
@@ -956,7 +982,9 @@ body{
           SAFA QURAN COLLEGE
         </div>
 
-        <h2>💚 MY DONATION TO SAFA</h2>
+        <h2>
+          💚 MY DONATION TO SAFA
+        </h2>
 
         <p>
           Support the educational activities and development
@@ -965,7 +993,10 @@ body{
 
       </div>
 
-      <button class="donation-btn" id="donationHeroBtn">
+      <button
+        class="donation-btn"
+        id="donationHeroBtn"
+      >
         💳 DONATE NOW →
       </button>
 
@@ -983,9 +1014,13 @@ body{
 
     <div class="hero-body">
 
-      <h2>SAFA QURAN COLLEGE</h2>
+      <h2>
+        SAFA QURAN COLLEGE
+      </h2>
 
-      <p>ONLINE PORTAL</p>
+      <p>
+        ONLINE PORTAL
+      </p>
 
       <div class="ayah">
         خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ
@@ -1022,10 +1057,15 @@ body{
   <div class="panel">
 
     <div class="panel-head">
-      <h3>👦 My Child</h3>
+
+      <h3>
+        👦 My Child
+      </h3>
+
       <div class="panel-desc">
         Current student information
       </div>
+
     </div>
 
     <div class="child-card">
@@ -1057,35 +1097,61 @@ body{
   <div class="panel">
 
     <div class="panel-head">
-      <h3>Quick Access</h3>
+
+      <h3>
+        Quick Access
+      </h3>
+
       <div class="panel-desc">
         Open frequently used sections
       </div>
+
     </div>
 
-    <div class="quick-grid" style="padding:18px;">
+    <div
+      class="quick-grid"
+      style="padding:18px;"
+    >
 
-      <button class="quick" data-section="attendance">
+      <button
+        class="quick"
+        data-section="attendance"
+      >
         📅<br>Attendance
       </button>
 
-      <button class="quick" data-section="study">
+      <button
+        class="quick"
+        data-section="study"
+      >
         📖<br>Study Progress
       </button>
 
-      <button class="quick" data-section="results">
+      <button
+        class="quick"
+        data-section="results"
+      >
         📊<br>Results
       </button>
 
-      <button class="quick" data-section="notices">
+      <button
+        class="quick"
+        data-section="notices"
+      >
         📢<br>Notices
       </button>
 
-      <button class="quick" data-section="leave">
+      <button
+        class="quick"
+        data-section="leave"
+      >
         📝<br>Apply Leave
       </button>
 
-      <button class="quick" data-section="messages">
+      <button
+        class="quick"
+        data-section="messages"
+      >
         💬<br>Contact Usthad
       </button>
 
@@ -1095,16 +1161,29 @@ body{
 
 </section>
 
+
 <!-- CHILD -->
 
 <section class="section" id="child">
 
   <div class="section-head">
+
     <div>
-      <h2>My Child</h2>
-      <p>Student information</p>
+
+      <h2>
+        My Child
+      </h2>
+
+      <p>
+        Student information
+      </p>
+
     </div>
-    <div class="section-tag">STUDENT PROFILE</div>
+
+    <div class="section-tag">
+      STUDENT PROFILE
+    </div>
+
   </div>
 
   <div class="panel">
@@ -1147,139 +1226,244 @@ body{
 
 </section>
 
+
 <!-- ATTENDANCE -->
 
 <section class="section" id="attendance">
 
   <div class="section-head">
+
     <div>
-      <h2>Attendance</h2>
-      <p>Student attendance records</p>
+
+      <h2>
+        Attendance
+      </h2>
+
+      <p>
+        Student attendance records
+      </p>
+
     </div>
-    <div class="section-tag">ATTENDANCE</div>
+
+    <div class="section-tag">
+      ATTENDANCE
+    </div>
+
   </div>
 
   <div class="panel">
 
-    <div class="record-list" id="attendanceList">
+    <div
+      class="record-list"
+      id="attendanceList"
+    >
+
       <div class="record-card">
         Loading attendance...
       </div>
+
     </div>
 
   </div>
 
 </section>
+
 
 <!-- STUDY -->
 
 <section class="section" id="study">
 
   <div class="section-head">
+
     <div>
-      <h2>Study Progress</h2>
-      <p>Hifz and revision progress</p>
+
+      <h2>
+        Study Progress
+      </h2>
+
+      <p>
+        Hifz and revision progress
+      </p>
+
     </div>
-    <div class="section-tag">HIFZ PROGRESS</div>
+
+    <div class="section-tag">
+      HIFZ PROGRESS
+    </div>
+
   </div>
 
   <div class="panel">
 
-    <div class="record-list" id="studyList">
+    <div
+      class="record-list"
+      id="studyList"
+    >
+
       <div class="record-card study">
         Loading study progress...
       </div>
+
     </div>
 
   </div>
 
 </section>
+
 
 <!-- RESULTS -->
 
 <section class="section" id="results">
 
   <div class="section-head">
+
     <div>
-      <h2>Results</h2>
-      <p>Published student results</p>
+
+      <h2>
+        Results
+      </h2>
+
+      <p>
+        Published student results
+      </p>
+
     </div>
-    <div class="section-tag">PUBLISHED RESULTS</div>
+
+    <div class="section-tag">
+      PUBLISHED RESULTS
+    </div>
+
   </div>
 
   <div class="panel">
 
-    <div class="record-list" id="resultsList">
+    <div
+      class="record-list"
+      id="resultsList"
+    >
+
       <div class="record-card result">
         Loading results...
       </div>
+
     </div>
 
   </div>
 
 </section>
+
 
 <!-- NOTICES -->
 
 <section class="section" id="notices">
 
   <div class="section-head">
+
     <div>
-      <h2>Notices</h2>
-      <p>College announcements</p>
+
+      <h2>
+        Notices
+      </h2>
+
+      <p>
+        College announcements
+      </p>
+
     </div>
-    <div class="section-tag">ANNOUNCEMENTS</div>
+
+    <div class="section-tag">
+      ANNOUNCEMENTS
+    </div>
+
   </div>
 
   <div class="panel">
 
-    <div class="record-list" id="noticesList">
+    <div
+      class="record-list"
+      id="noticesList"
+    >
+
       <div class="record-card notice">
         Loading notices...
       </div>
+
     </div>
 
   </div>
 
 </section>
 
+
 <!-- LEAVE -->
 
 <section class="section" id="leave">
 
   <div class="section-head">
+
     <div>
-      <h2>Leave Application</h2>
-      <p>Submit a leave request to Usthad</p>
+
+      <h2>
+        Leave Application
+      </h2>
+
+      <p>
+        Submit a leave request to Usthad
+      </p>
+
     </div>
-    <div class="section-tag">LEAVE</div>
+
+    <div class="section-tag">
+      LEAVE
+    </div>
+
   </div>
 
   <div class="panel">
 
-    <form class="form" id="leaveForm">
+    <form
+      class="form"
+      id="leaveForm"
+    >
 
       <div class="form-grid">
 
         <div class="field">
-          <label>Leave Date</label>
-          <input type="date" id="leaveDate" required>
+
+          <label>
+            Leave Date
+          </label>
+
+          <input
+            type="date"
+            id="leaveDate"
+            required
+          >
+
         </div>
 
         <div class="field">
-          <label>Reason</label>
+
+          <label>
+            Reason
+          </label>
+
           <input
             type="text"
             id="leaveReason"
             placeholder="Reason for leave"
             required
           >
+
         </div>
 
       </div>
 
       <div class="field">
-        <label>Details</label>
+
+        <label>
+          Details
+        </label>
 
         <textarea
           id="leaveDetails"
@@ -1288,7 +1472,10 @@ body{
 
       </div>
 
-      <button class="primary-btn" type="submit">
+      <button
+        class="primary-btn"
+        type="submit"
+      >
         Submit Leave
       </button>
 
@@ -1299,10 +1486,17 @@ body{
   <div class="panel">
 
     <div class="panel-head">
-      <h3>My Leave Requests</h3>
+
+      <h3>
+        My Leave Requests
+      </h3>
+
     </div>
 
-    <div class="record-list" id="leaveList">
+    <div
+      class="record-list"
+      id="leaveList"
+    >
       Loading leave requests...
     </div>
 
@@ -1310,25 +1504,43 @@ body{
 
 </section>
 
+
 <!-- MESSAGES -->
 
 <section class="section" id="messages">
 
   <div class="section-head">
+
     <div>
-      <h2>Contact Usthad</h2>
-      <p>Send a message to the college</p>
+
+      <h2>
+        Contact Usthad
+      </h2>
+
+      <p>
+        Send a message to the college
+      </p>
+
     </div>
-    <div class="section-tag">MESSAGES</div>
+
+    <div class="section-tag">
+      MESSAGES
+    </div>
+
   </div>
 
   <div class="panel">
 
-    <form class="form" id="messageForm">
+    <form
+      class="form"
+      id="messageForm"
+    >
 
       <div class="field">
 
-        <label>Your Message</label>
+        <label>
+          Your Message
+        </label>
 
         <textarea
           id="messageText"
@@ -1338,7 +1550,10 @@ body{
 
       </div>
 
-      <button class="primary-btn" type="submit">
+      <button
+        class="primary-btn"
+        type="submit"
+      >
         Send Message
       </button>
 
@@ -1349,16 +1564,24 @@ body{
   <div class="panel">
 
     <div class="panel-head">
-      <h3>My Messages</h3>
+
+      <h3>
+        My Messages
+      </h3>
+
     </div>
 
-    <div class="record-list" id="messagesList">
+    <div
+      class="record-list"
+      id="messagesList"
+    >
       Loading messages...
     </div>
 
   </div>
 
 </section>
+
 
 <!-- DONATIONS -->
 
@@ -1367,8 +1590,15 @@ body{
   <div class="section-head">
 
     <div>
-      <h2>💚 My Donation to SAFA</h2>
-      <p>Support SAFA Quran College</p>
+
+      <h2>
+        💚 My Donation to SAFA
+      </h2>
+
+      <p>
+        Support SAFA Quran College
+      </p>
+
     </div>
 
     <div class="section-tag">
@@ -1385,7 +1615,9 @@ body{
 
         <div class="bank-card">
 
-          <h3>🏦 Bank Transfer</h3>
+          <h3>
+            🏦 Bank Transfer
+          </h3>
 
           <div class="bank-row">
             <span>Bank</span>
@@ -1419,14 +1651,20 @@ body{
 
         <div class="qr-card">
 
-          <h3>📲 Scan & Pay</h3>
+          <h3>
+            📲 Scan & Pay
+          </h3>
 
           <img
             src="./20260225.jpg"
             alt="SAFA Donation QR Code"
           >
 
-          <p style="font-size:12px;color:#718096;margin-top:10px;">
+          <p style="
+            font-size:12px;
+            color:#718096;
+            margin-top:10px;
+          ">
             Scan the QR code using your UPI app.
           </p>
 
@@ -1434,9 +1672,13 @@ body{
 
       </div>
 
+
       <div style="margin-top:20px;">
 
-        <h3 style="color:#123b5d;margin-bottom:12px;">
+        <h3 style="
+          color:#123b5d;
+          margin-bottom:12px;
+        ">
           Submit Payment Details
         </h3>
 
@@ -1446,7 +1688,9 @@ body{
 
             <div class="field">
 
-              <label>Amount (₹)</label>
+              <label>
+                Amount (₹)
+              </label>
 
               <input
                 type="number"
@@ -1461,7 +1705,9 @@ body{
 
             <div class="field">
 
-              <label>Transaction ID / UTR</label>
+              <label>
+                Transaction ID / UTR
+              </label>
 
               <input
                 type="text"
@@ -1476,7 +1722,9 @@ body{
 
           <div class="field">
 
-            <label>Note</label>
+            <label>
+              Note
+            </label>
 
             <textarea
               id="donationNote"
@@ -1496,9 +1744,12 @@ body{
 
       </div>
 
+
       <div class="donation-history">
 
-        <h3>Donation History</h3>
+        <h3>
+          Donation History
+        </h3>
 
         <div id="donationHistory">
           Loading donation history...
@@ -1543,18 +1794,40 @@ from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
 const firebaseConfig = {
-  apiKey:"AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
-  authDomain:"safa-hifz-class-7e84b.firebaseapp.com",
-  projectId:"safa-hifz-class-7e84b",
-  storageBucket:"safa-hifz-class-7e84b.firebasestorage.app",
-  messagingSenderId:"476801753196",
-  appId:"1:476801753196:web:d4c8a8b0c1a4203606f849",
-  measurementId:"G-ZTBTJCB5SR"
+
+  apiKey:
+    "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
+
+  authDomain:
+    "safa-hifz-class-7e84b.firebaseapp.com",
+
+  projectId:
+    "safa-hifz-class-7e84b",
+
+  storageBucket:
+    "safa-hifz-class-7e84b.firebasestorage.app",
+
+  messagingSenderId:
+    "476801753196",
+
+  appId:
+    "1:476801753196:web:d4c8a8b0c1a4203606f849",
+
+  measurementId:
+    "G-ZTBTJCB5SR"
+
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+
+const app =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(app);
+
+const db =
+  getFirestore(app);
+
 
 let currentUser = null;
 let currentStudent = null;
@@ -1567,7 +1840,10 @@ function $(id){
 
 function escapeHTML(value){
 
-  if(value === null || value === undefined){
+  if(
+    value === null ||
+    value === undefined
+  ){
     return "";
   }
 
@@ -1577,19 +1853,24 @@ function escapeHTML(value){
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
+
 }
 
 
 function dateText(value){
 
-  if(!value) return "-";
+  if(!value){
+    return "-";
+  }
 
   try{
 
     if(value.seconds){
+
       return new Date(
         value.seconds * 1000
       ).toLocaleDateString();
+
     }
 
     return new Date(value)
@@ -1600,6 +1881,7 @@ function dateText(value){
     return "-";
 
   }
+
 }
 
 
@@ -1608,31 +1890,51 @@ function showSection(sectionId){
   document
     .querySelectorAll(".section")
     .forEach(section=>{
-      section.classList.remove("active");
+
+      section.classList.remove(
+        "active"
+      );
+
     });
 
-  const section = $(sectionId);
+
+  const section =
+    $(sectionId);
+
 
   if(section){
-    section.classList.add("active");
+
+    section.classList.add(
+      "active"
+    );
+
   }
+
 
   document
     .querySelectorAll(".nav-btn")
     .forEach(button=>{
+
       button.classList.toggle(
         "active",
-        button.dataset.section === sectionId
+        button.dataset.section ===
+        sectionId
       );
+
     });
+
 
   $("sidebar")
     ?.classList.remove("open");
 
+
   window.scrollTo({
+
     top:0,
     behavior:"smooth"
+
   });
+
 }
 
 
@@ -1644,10 +1946,13 @@ document.addEventListener(
   "DOMContentLoaded",
   ()=>{
 
+
     /* NAVIGATION */
 
     document
-      .querySelectorAll(".nav-btn,.quick")
+      .querySelectorAll(
+        ".nav-btn,.quick"
+      )
       .forEach(button=>{
 
         button.addEventListener(
@@ -1658,7 +1963,11 @@ document.addEventListener(
               button.dataset.section;
 
             if(section){
-              showSection(section);
+
+              showSection(
+                section
+              );
+
             }
 
           }
@@ -1673,8 +1982,12 @@ document.addEventListener(
       ?.addEventListener(
         "click",
         ()=>{
+
           $("sidebar")
-            .classList.toggle("open");
+            .classList.toggle(
+              "open"
+            );
+
         }
       );
 
@@ -1685,7 +1998,11 @@ document.addEventListener(
       ?.addEventListener(
         "click",
         ()=>{
-          showSection("donations");
+
+          showSection(
+            "donations"
+          );
+
         }
       );
 
@@ -1698,13 +2015,18 @@ document.addEventListener(
     $("upiPayBtn")
       ?.addEventListener(
         "click",
-        ()=>{
+        (event)=>{
+
+          event.preventDefault();
+
 
           const UPI_ID =
             "563safa@fbl";
 
+
           const amountInput =
             $("donationAmount");
+
 
           const amount =
             amountInput
@@ -1715,10 +2037,16 @@ document.addEventListener(
           let upiUrl =
             "upi://pay" +
             "?pa=" +
-            encodeURIComponent(UPI_ID) +
+            encodeURIComponent(
+              UPI_ID
+            ) +
             "&pn=" +
             encodeURIComponent(
               "SAFA QURAN COLLEGE"
+            ) +
+            "&tn=" +
+            encodeURIComponent(
+              "Donation to SAFA Quran College"
             ) +
             "&cu=INR";
 
@@ -1727,6 +2055,7 @@ document.addEventListener(
 
             const numericAmount =
               Number(amount);
+
 
             if(
               !isNaN(numericAmount) &&
@@ -1745,11 +2074,39 @@ document.addEventListener(
 
 
           /*
-            Open UPI payment application.
+            Use a temporary anchor.
+            This works more reliably on
+            Android browsers for UPI links.
           */
 
-          window.location.href =
+          const upiLink =
+            document.createElement(
+              "a"
+            );
+
+
+          upiLink.href =
             upiUrl;
+
+
+          upiLink.style.display =
+            "none";
+
+
+          document.body.appendChild(
+            upiLink
+          );
+
+
+          upiLink.click();
+
+
+          setTimeout(
+            ()=>{
+              upiLink.remove();
+            },
+            1000
+          );
 
         }
       );
@@ -1763,6 +2120,7 @@ document.addEventListener(
         async(event)=>{
 
           event.preventDefault();
+
 
           if(
             !currentUser ||
@@ -1783,10 +2141,12 @@ document.addEventListener(
               $("donationAmount").value
             );
 
+
           const transactionId =
             $("transactionId")
               .value
               .trim();
+
 
           const note =
             $("donationNote")
@@ -1794,7 +2154,10 @@ document.addEventListener(
               .trim();
 
 
-          if(!amount || amount <= 0){
+          if(
+            !amount ||
+            amount <= 0
+          ){
 
             alert(
               "Please enter a valid donation amount."
@@ -1822,7 +2185,11 @@ document.addEventListener(
                 "button[type='submit']"
               );
 
-          button.disabled = true;
+
+          button.disabled =
+            true;
+
+
           button.textContent =
             "Submitting...";
 
@@ -1830,10 +2197,12 @@ document.addEventListener(
           try{
 
             await addDoc(
+
               collection(
                 db,
                 "donations"
               ),
+
               {
 
                 parentUid:
@@ -1864,6 +2233,7 @@ document.addEventListener(
                   serverTimestamp()
 
               }
+
             );
 
 
@@ -1872,22 +2242,29 @@ document.addEventListener(
             );
 
 
-            $("donationForm").reset();
+            $("donationForm")
+              .reset();
+
 
             await loadDonations();
+
 
           }catch(error){
 
             console.error(error);
+
 
             alert(
               "Donation submission failed: " +
               error.message
             );
 
+
           }finally{
 
-            button.disabled = false;
+            button.disabled =
+              false;
+
 
             button.textContent =
               "💚 SUBMIT DONATION";
@@ -1907,6 +2284,7 @@ document.addEventListener(
 
           event.preventDefault();
 
+
           if(
             !currentUser ||
             !currentStudent
@@ -1924,10 +2302,12 @@ document.addEventListener(
           const leaveDate =
             $("leaveDate").value;
 
+
           const reason =
             $("leaveReason")
               .value
               .trim();
+
 
           const details =
             $("leaveDetails")
@@ -1935,7 +2315,10 @@ document.addEventListener(
               .trim();
 
 
-          if(!leaveDate || !reason){
+          if(
+            !leaveDate ||
+            !reason
+          ){
 
             alert(
               "Please enter leave date and reason."
@@ -1949,10 +2332,12 @@ document.addEventListener(
           try{
 
             await addDoc(
+
               collection(
                 db,
                 "leaveRequests"
               ),
+
               {
 
                 parentUid:
@@ -1983,6 +2368,7 @@ document.addEventListener(
                   serverTimestamp()
 
               }
+
             );
 
 
@@ -1990,13 +2376,18 @@ document.addEventListener(
               "Leave request submitted successfully."
             );
 
-            $("leaveForm").reset();
+
+            $("leaveForm")
+              .reset();
+
 
             await loadLeaves();
+
 
           }catch(error){
 
             console.error(error);
+
 
             alert(
               "Leave submission failed: " +
@@ -2017,6 +2408,7 @@ document.addEventListener(
         async(event)=>{
 
           event.preventDefault();
+
 
           if(
             !currentUser ||
@@ -2052,10 +2444,12 @@ document.addEventListener(
           try{
 
             await addDoc(
+
               collection(
                 db,
                 "messages"
               ),
+
               {
 
                 parentUid:
@@ -2080,6 +2474,7 @@ document.addEventListener(
                   serverTimestamp()
 
               }
+
             );
 
 
@@ -2087,13 +2482,18 @@ document.addEventListener(
               "Message sent successfully."
             );
 
-            $("messageForm").reset();
+
+            $("messageForm")
+              .reset();
+
 
             await loadMessages();
+
 
           }catch(error){
 
             console.error(error);
+
 
             alert(
               "Message sending failed: " +
@@ -2115,10 +2515,14 @@ document.addEventListener(
 
           try{
 
-            await signOut(auth);
+            await signOut(
+              auth
+            );
+
 
             window.location.href =
               "index.html";
+
 
           }catch(error){
 
@@ -2156,16 +2560,19 @@ onAuthStateChanged(
       }
 
 
-      currentUser = user;
+      currentUser =
+        user;
 
 
       const userSnap =
         await getDoc(
+
           doc(
             db,
             "users",
             user.uid
           )
+
         );
 
 
@@ -2182,7 +2589,10 @@ onAuthStateChanged(
         userSnap.data();
 
 
-      if(userData.role !== "parent"){
+      if(
+        userData.role !==
+        "parent"
+      ){
 
         throw new Error(
           "This account is not a parent account."
@@ -2230,6 +2640,7 @@ onAuthStateChanged(
 
       console.error(error);
 
+
       $("loading").innerHTML = `
 
         <div style="
@@ -2247,7 +2658,9 @@ onAuthStateChanged(
             color:#64748b;
             line-height:1.6;
           ">
-            ${escapeHTML(error.message)}
+            ${escapeHTML(
+              error.message
+            )}
           </p>
 
           <button
@@ -2266,6 +2679,7 @@ onAuthStateChanged(
           </button>
 
         </div>
+
       `;
 
 
@@ -2273,8 +2687,10 @@ onAuthStateChanged(
         ?.addEventListener(
           "click",
           ()=>{
+
             window.location.href =
               "index.html";
+
           }
         );
 
@@ -2294,15 +2710,18 @@ async function loadStudent(
 
   const q =
     query(
+
       collection(
         db,
         "students"
       ),
+
       where(
         "studentNumber",
         "==",
         studentNumber
       )
+
     );
 
 
@@ -2324,8 +2743,12 @@ async function loadStudent(
 
 
   currentStudent = {
-    id:studentDoc.id,
+
+    id:
+      studentDoc.id,
+
     ...studentDoc.data()
+
   };
 
 
@@ -2333,37 +2756,55 @@ async function loadStudent(
     currentStudent;
 
 
-  $("homeStudentNumber").textContent =
+  $("homeStudentNumber")
+    .textContent =
     s.studentNumber || "-";
 
-  $("homeStudentName").textContent =
+
+  $("homeStudentName")
+    .textContent =
     s.name || "-";
 
-  $("homeStudentClass").textContent =
+
+  $("homeStudentClass")
+    .textContent =
     s.className || "-";
 
-  $("homeParentEmail").textContent =
+
+  $("homeParentEmail")
+    .textContent =
     s.parentEmail ||
     currentUser.email ||
     "-";
 
 
-  $("childStudentNumber").textContent =
+  $("childStudentNumber")
+    .textContent =
     s.studentNumber || "-";
 
-  $("childStudentName").textContent =
+
+  $("childStudentName")
+    .textContent =
     s.name || "-";
 
-  $("childGuardianName").textContent =
+
+  $("childGuardianName")
+    .textContent =
     s.guardianName || "-";
 
-  $("childClass").textContent =
+
+  $("childClass")
+    .textContent =
     s.className || "-";
 
-  $("childPhone").textContent =
+
+  $("childPhone")
+    .textContent =
     s.phoneNumber || "-";
 
-  $("childAddress").textContent =
+
+  $("childAddress")
+    .textContent =
     s.studentAddress || "-";
 
 }
@@ -2377,15 +2818,18 @@ async function loadAttendance(){
 
   const q =
     query(
+
       collection(
         db,
         "attendance"
       ),
+
       where(
         "studentNumber",
         "==",
         currentStudent.studentNumber
       )
+
     );
 
 
@@ -2396,20 +2840,26 @@ async function loadAttendance(){
   const records =
     snap.docs.map(
       d=>({
+
         id:d.id,
+
         ...d.data()
+
       })
     );
 
 
   records.sort(
+
     (a,b)=>
       (b.createdAt?.seconds || 0) -
       (a.createdAt?.seconds || 0)
+
   );
 
 
-  $("attendanceTotal").textContent =
+  $("attendanceTotal")
+    .textContent =
     records.length;
 
 
@@ -2420,9 +2870,11 @@ async function loadAttendance(){
   if(records.length === 0){
 
     list.innerHTML = `
+
       <div class="record-card">
         No attendance records found.
       </div>
+
     `;
 
     return;
@@ -2463,8 +2915,8 @@ async function loadAttendance(){
 
               <span class="status ${
                 isPresent
-                ? "present"
-                : "absent"
+                  ? "present"
+                  : "absent"
               }">
 
                 ${escapeHTML(
@@ -2493,15 +2945,18 @@ async function loadStudy(){
 
   const q =
     query(
+
       collection(
         db,
         "studyProgress"
       ),
+
       where(
         "studentNumber",
         "==",
         currentStudent.studentNumber
       )
+
     );
 
 
@@ -2512,20 +2967,26 @@ async function loadStudy(){
   const records =
     snap.docs.map(
       d=>({
+
         id:d.id,
+
         ...d.data()
+
       })
     );
 
 
   records.sort(
+
     (a,b)=>
       (b.createdAt?.seconds || 0) -
       (a.createdAt?.seconds || 0)
+
   );
 
 
-  $("studyTotal").textContent =
+  $("studyTotal")
+    .textContent =
     records.length;
 
 
@@ -2536,9 +2997,11 @@ async function loadStudy(){
   if(records.length === 0){
 
     list.innerHTML = `
+
       <div class="record-card study">
         No study progress records found.
       </div>
+
     `;
 
     return;
@@ -2554,7 +3017,8 @@ async function loadStudy(){
 
           <h4>
             📖 ${escapeHTML(
-              item.surah || "Study Progress"
+              item.surah ||
+              "Study Progress"
             )}
           </h4>
 
@@ -2588,16 +3052,20 @@ async function loadStudy(){
 
           ${
             item.note
-            ? `
-              <p style="margin-top:8px;">
-                📝 ${escapeHTML(item.note)}
-              </p>
-            `
-            : ""
+              ? `
+                <p style="margin-top:8px;">
+                  📝 ${escapeHTML(
+                    item.note
+                  )}
+                </p>
+              `
+              : ""
           }
 
           <div class="date">
-            ${dateText(item.createdAt)}
+            ${dateText(
+              item.createdAt
+            )}
           </div>
 
         </div>
@@ -2616,20 +3084,24 @@ async function loadResults(){
 
   const q =
     query(
+
       collection(
         db,
         "results"
       ),
+
       where(
         "studentNumber",
         "==",
         currentStudent.studentNumber
       ),
+
       where(
         "status",
         "==",
         "published"
       )
+
     );
 
 
@@ -2640,20 +3112,26 @@ async function loadResults(){
   const records =
     snap.docs.map(
       d=>({
+
         id:d.id,
+
         ...d.data()
+
       })
     );
 
 
   records.sort(
+
     (a,b)=>
       (b.createdAt?.seconds || 0) -
       (a.createdAt?.seconds || 0)
+
   );
 
 
-  $("resultTotal").textContent =
+  $("resultTotal")
+    .textContent =
     records.length;
 
 
@@ -2664,9 +3142,11 @@ async function loadResults(){
   if(records.length === 0){
 
     list.innerHTML = `
+
       <div class="record-card result">
         No published results available.
       </div>
+
     `;
 
     return;
@@ -2686,7 +3166,8 @@ async function loadResults(){
 
               <h4>
                 📊 ${escapeHTML(
-                  item.title || "Result"
+                  item.title ||
+                  "Result"
                 )}
               </h4>
 
@@ -2708,7 +3189,9 @@ async function loadResults(){
           </div>
 
           <div class="date">
-            ${dateText(item.createdAt)}
+            ${dateText(
+              item.createdAt
+            )}
           </div>
 
         </div>
@@ -2727,15 +3210,18 @@ async function loadNotices(){
 
   const q =
     query(
+
       collection(
         db,
         "notices"
       ),
+
       where(
         "status",
         "==",
         "published"
       )
+
     );
 
 
@@ -2746,20 +3232,26 @@ async function loadNotices(){
   const records =
     snap.docs.map(
       d=>({
+
         id:d.id,
+
         ...d.data()
+
       })
     );
 
 
   records.sort(
+
     (a,b)=>
       (b.createdAt?.seconds || 0) -
       (a.createdAt?.seconds || 0)
+
   );
 
 
-  $("noticeTotal").textContent =
+  $("noticeTotal")
+    .textContent =
     records.length;
 
 
@@ -2770,9 +3262,11 @@ async function loadNotices(){
   if(records.length === 0){
 
     list.innerHTML = `
+
       <div class="record-card notice">
         No published notices.
       </div>
+
     `;
 
     return;
@@ -2788,7 +3282,8 @@ async function loadNotices(){
 
           <h4>
             📢 ${escapeHTML(
-              item.title || "Notice"
+              item.title ||
+              "Notice"
             )}
           </h4>
 
@@ -2799,7 +3294,9 @@ async function loadNotices(){
           </p>
 
           <div class="date">
-            ${dateText(item.createdAt)}
+            ${dateText(
+              item.createdAt
+            )}
           </div>
 
         </div>
@@ -2818,15 +3315,18 @@ async function loadLeaves(){
 
   const q =
     query(
+
       collection(
         db,
         "leaveRequests"
       ),
+
       where(
         "parentUid",
         "==",
         currentUser.uid
       )
+
     );
 
 
@@ -2837,16 +3337,21 @@ async function loadLeaves(){
   const records =
     snap.docs.map(
       d=>({
+
         id:d.id,
+
         ...d.data()
+
       })
     );
 
 
   records.sort(
+
     (a,b)=>
       (b.createdAt?.seconds || 0) -
       (a.createdAt?.seconds || 0)
+
   );
 
 
@@ -2857,9 +3362,11 @@ async function loadLeaves(){
   if(records.length === 0){
 
     list.innerHTML = `
+
       <div class="record-card leave">
         No leave requests found.
       </div>
+
     `;
 
     return;
@@ -2895,14 +3402,15 @@ async function loadLeaves(){
 
             <span class="status ${
               item.status === "approved"
-              ? "approved"
-              : item.status === "rejected"
-              ? "rejected"
-              : "pending"
+                ? "approved"
+                : item.status === "rejected"
+                ? "rejected"
+                : "pending"
             }">
 
               ${escapeHTML(
-                item.status || "pending"
+                item.status ||
+                "pending"
               )}
 
             </span>
@@ -2911,28 +3419,37 @@ async function loadLeaves(){
 
           ${
             item.details
-            ? `
-              <p style="margin-top:8px;">
-                ${escapeHTML(item.details)}
-              </p>
-            `
-            : ""
+              ? `
+                <p style="margin-top:8px;">
+                  ${escapeHTML(
+                    item.details
+                  )}
+                </p>
+              `
+              : ""
           }
 
           ${
             item.reply
-            ? `
-              <div style="
-                margin-top:10px;
-                padding:10px;
-                border-radius:10px;
-                background:#f1f5f9;
-              ">
-                <strong>Usthad Reply:</strong>
-                ${escapeHTML(item.reply)}
-              </div>
-            `
-            : ""
+              ? `
+                <div style="
+                  margin-top:10px;
+                  padding:10px;
+                  border-radius:10px;
+                  background:#f1f5f9;
+                ">
+
+                  <strong>
+                    Usthad Reply:
+                  </strong>
+
+                  ${escapeHTML(
+                    item.reply
+                  )}
+
+                </div>
+              `
+              : ""
           }
 
         </div>
@@ -2951,15 +3468,18 @@ async function loadMessages(){
 
   const q =
     query(
+
       collection(
         db,
         "messages"
       ),
+
       where(
         "parentUid",
         "==",
         currentUser.uid
       )
+
     );
 
 
@@ -2970,16 +3490,21 @@ async function loadMessages(){
   const records =
     snap.docs.map(
       d=>({
+
         id:d.id,
+
         ...d.data()
+
       })
     );
 
 
   records.sort(
+
     (a,b)=>
       (b.createdAt?.seconds || 0) -
       (a.createdAt?.seconds || 0)
+
   );
 
 
@@ -2990,9 +3515,11 @@ async function loadMessages(){
   if(records.length === 0){
 
     list.innerHTML = `
+
       <div class="record-card message">
         No messages found.
       </div>
+
     `;
 
     return;
@@ -3018,30 +3545,39 @@ async function loadMessages(){
 
           ${
             item.reply
-            ? `
-              <div style="
-                margin-top:10px;
-                padding:10px;
-                border-radius:10px;
-                background:#ecfeff;
-              ">
-                <strong>Usthad Reply:</strong>
-                ${escapeHTML(item.reply)}
-              </div>
-            `
-            : `
-              <div style="
-                margin-top:10px;
-                color:#d97706;
-                font-size:12px;
-              ">
-                Waiting for reply...
-              </div>
-            `
+              ? `
+                <div style="
+                  margin-top:10px;
+                  padding:10px;
+                  border-radius:10px;
+                  background:#ecfeff;
+                ">
+
+                  <strong>
+                    Usthad Reply:
+                  </strong>
+
+                  ${escapeHTML(
+                    item.reply
+                  )}
+
+                </div>
+              `
+              : `
+                <div style="
+                  margin-top:10px;
+                  color:#d97706;
+                  font-size:12px;
+                ">
+                  Waiting for reply...
+                </div>
+              `
           }
 
           <div class="date">
-            ${dateText(item.createdAt)}
+            ${dateText(
+              item.createdAt
+            )}
           </div>
 
         </div>
@@ -3060,15 +3596,18 @@ async function loadDonations(){
 
   const q =
     query(
+
       collection(
         db,
         "donations"
       ),
+
       where(
         "parentUid",
         "==",
         currentUser.uid
       )
+
     );
 
 
@@ -3079,16 +3618,21 @@ async function loadDonations(){
   const records =
     snap.docs.map(
       d=>({
+
         id:d.id,
+
         ...d.data()
+
       })
     );
 
 
   records.sort(
+
     (a,b)=>
       (b.createdAt?.seconds || 0) -
       (a.createdAt?.seconds || 0)
+
   );
 
 
@@ -3099,11 +3643,15 @@ async function loadDonations(){
   if(records.length === 0){
 
     list.innerHTML = `
+
       <div class="donation-history-card">
+
         <p style="color:#718096;">
           No donations submitted yet.
         </p>
+
       </div>
+
     `;
 
     return;
@@ -3118,14 +3666,26 @@ async function loadDonations(){
         let statusClass =
           "pending";
 
-        if(item.status === "verified"){
+
+        if(
+          item.status ===
+          "verified"
+        ){
+
           statusClass =
             "approved";
+
         }
 
-        if(item.status === "rejected"){
+
+        if(
+          item.status ===
+          "rejected"
+        ){
+
           statusClass =
             "rejected";
+
         }
 
 
@@ -3148,20 +3708,28 @@ async function loadDonations(){
                   color:#718096;
                   margin-top:5px;
                 ">
+
                   Transaction ID:
                   ${escapeHTML(
-                    item.transactionId || "-"
+                    item.transactionId ||
+                    "-"
                   )}
+
                 </div>
 
               </div>
 
               <div>
 
-                <span class="status ${statusClass}">
+                <span
+                  class="status ${statusClass}"
+                >
+
                   ${escapeHTML(
-                    item.status || "pending"
+                    item.status ||
+                    "pending"
                   )}
+
                 </span>
 
               </div>
@@ -3170,23 +3738,34 @@ async function loadDonations(){
 
             ${
               item.adminNote
-              ? `
-                <div style="
-                  margin-top:10px;
-                  padding:10px;
-                  background:#f8fafc;
-                  border-radius:9px;
-                  font-size:12px;
-                ">
-                  <strong>Admin Note:</strong>
-                  ${escapeHTML(item.adminNote)}
-                </div>
-              `
-              : ""
+                ? `
+                  <div style="
+                    margin-top:10px;
+                    padding:10px;
+                    background:#f8fafc;
+                    border-radius:9px;
+                    font-size:12px;
+                  ">
+
+                    <strong>
+                      Admin Note:
+                    </strong>
+
+                    ${escapeHTML(
+                      item.adminNote
+                    )}
+
+                  </div>
+                `
+                : ""
             }
 
             <div class="date">
-              ${dateText(item.createdAt)}
+
+              ${dateText(
+                item.createdAt
+              )}
+
             </div>
 
           </div>
