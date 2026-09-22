@@ -2,991 +2,903 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>SAFA QURAN COLLEGE | ONLINE PORTAL</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --navy:#032b24;
-  --navy2:#06483a;
-  --primary:#087f5b;
-  --primary2:#10b981;
-  --bg:#eef8f3;
-  --card:#ffffff;
-  --text:#12382d;
-  --muted:#668178;
-  --border:#d5e9df;
-  --gold:#d4af37;
-  --gold2:#f4d778;
-  --green-light:#e2f5eb;
-  --red:#b42318;
-  --red-light:#fdebea;
-  --yellow:#916300;
-  --yellow-light:#fff3d2;
-  --shadow:0 10px 30px rgba(3,43,36,.10);
+--navy:#032b24;
+--navy2:#06483a;
+--primary:#087f5b;
+--primary2:#10b981;
+--bg:#e9f5ef;
+--card:#fdfefe;
+--text:#12382d;
+--muted:#668178;
+--border:#c8e1d4;
+--gold:#d4af37;
+--gold2:#f6dc78;
+--green-light:#d9f2e4;
+--red:#b42318;
+--red-light:#fdebea;
+--yellow:#916300;
+--yellow-light:#fff1c9;
+--shadow:0 12px 32px rgba(3,43,36,.12)
 }
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  color:var(--text);
-  background:
-    radial-gradient(circle at 10% 10%,rgba(212,175,55,.08),transparent 25%),
-    radial-gradient(circle at 90% 20%,rgba(8,127,91,.08),transparent 25%),
-    linear-gradient(135deg,#f4faf6,#eaf6ef);
-  min-height:100vh;
+font-family:Arial,Helvetica,sans-serif;
+color:var(--text);
+background:
+radial-gradient(circle at 8% 8%,rgba(212,175,55,.13),transparent 23%),
+radial-gradient(circle at 92% 12%,rgba(16,185,129,.12),transparent 25%),
+linear-gradient(135deg,#f7fcf9,#e4f3eb);
+min-height:100vh
 }
 
-button,input,select,textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
 
 /* LOADING */
 #loading{
-  position:fixed;
-  inset:0;
-  z-index:99999;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-  font-weight:800;
-  background:
-    radial-gradient(circle,rgba(212,175,55,.15),transparent 30%),
-    linear-gradient(135deg,#021f1a,#06483a,#087f5b);
+position:fixed;
+inset:0;
+z-index:99999;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#fff;
+font-weight:900;
+letter-spacing:.5px;
+background:
+radial-gradient(circle at center,rgba(212,175,55,.14),transparent 30%),
+linear-gradient(135deg,#021f1a,#06483a,#087f5b)
 }
 
-#loading::before{
-  content:"☪";
-  position:absolute;
-  font-size:100px;
-  opacity:.07;
+/* Islamic geometric loading decoration - no moon */
+#loading:before{
+content:"";
+position:absolute;
+width:170px;
+height:170px;
+border:2px solid rgba(244,215,120,.16);
+transform:rotate(45deg);
+border-radius:25px
+}
+
+#loading:after{
+content:"";
+position:absolute;
+width:105px;
+height:105px;
+border:1px solid rgba(244,215,120,.12);
+transform:rotate(45deg);
+border-radius:18px
 }
 
 /* MESSAGE */
 #message{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  max-width:390px;
-  padding:15px 19px;
-  border-radius:14px;
-  color:white;
-  display:none;
-  z-index:99999;
-  box-shadow:0 15px 35px rgba(0,0,0,.22);
-  font-size:14px;
-  font-weight:700;
+position:fixed;
+right:20px;
+bottom:20px;
+max-width:390px;
+padding:15px 19px;
+border-radius:14px;
+color:#fff;
+display:none;
+z-index:99999;
+box-shadow:0 15px 35px rgba(0,0,0,.22);
+font-size:14px;
+font-weight:800
 }
 
 /* APP */
-.app{
-  min-height:100vh;
-  display:flex;
-}
+.app{min-height:100vh;display:flex}
 
 /* SIDEBAR */
 .sidebar{
-  width:270px;
-  position:fixed;
-  left:0;
-  top:0;
-  bottom:0;
-  z-index:1000;
-  overflow-y:auto;
-  color:white;
-  background:
-    radial-gradient(circle at 50% 15%,rgba(212,175,55,.12),transparent 25%),
-    linear-gradient(180deg,#032b24,#06483a 48%,#02251e);
-  border-right:1px solid rgba(212,175,55,.38);
-  box-shadow:7px 0 30px rgba(3,43,36,.20);
+width:270px;
+position:fixed;
+left:0;
+top:0;
+bottom:0;
+z-index:1000;
+overflow-y:auto;
+color:#fff;
+background:
+radial-gradient(circle at 50% 15%,rgba(212,175,55,.13),transparent 26%),
+linear-gradient(180deg,#032b24 0%,#06483a 48%,#02251e 100%);
+border-right:1px solid rgba(212,175,55,.4);
+box-shadow:7px 0 30px rgba(3,43,36,.2)
 }
 
-.sidebar::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  opacity:.035;
-  background-image:
-    linear-gradient(30deg,#fff 12%,transparent 12.5%,transparent 87%,#fff 87.5%),
-    linear-gradient(150deg,#fff 12%,transparent 12.5%,transparent 87%,#fff 87.5%);
-  background-size:40px 70px;
+.sidebar:before{
+content:"";
+position:absolute;
+inset:0;
+pointer-events:none;
+opacity:.055;
+background:
+linear-gradient(30deg,#fff 12%,transparent 12.5%,transparent 87%,#fff 87.5%),
+linear-gradient(150deg,#fff 12%,transparent 12.5%,transparent 87%,#fff 87.5%);
+background-size:40px 70px
 }
 
 .brand{
-  position:relative;
-  z-index:1;
-  padding:25px 19px 23px;
-  border-bottom:1px solid rgba(212,175,55,.25);
+position:relative;
+z-index:1;
+padding:25px 19px 23px;
+border-bottom:1px solid rgba(212,175,55,.28)
 }
 
-.brand-top{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
+.brand-top{display:flex;align-items:center;gap:12px}
 
 .logo-box{
-  width:48px;
-  height:48px;
-  flex-shrink:0;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:24px;
-  color:#173b2d;
-  background:linear-gradient(135deg,#d4af37,#f5da78);
-  box-shadow:0 6px 20px rgba(212,175,55,.25);
+width:48px;
+height:48px;
+flex-shrink:0;
+border-radius:14px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:23px;
+font-weight:900;
+color:#173b2d;
+background:
+linear-gradient(135deg,#d4af37,#f5da78);
+box-shadow:0 7px 22px rgba(212,175,55,.28)
 }
 
-.brand h1{
-  font-size:17px;
-  font-weight:900;
+/* Geometric logo instead of crescent */
+.logo-box:after{
+content:"✦";
+font-size:25px
 }
 
+.logo-box{font-size:0}
+
+.brand h1{font-size:17px;font-weight:900}
 .brand p{
-  margin-top:5px;
-  color:#f1d77d;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:1.8px;
+margin-top:5px;
+color:#f1d77d;
+font-size:10px;
+font-weight:900;
+letter-spacing:1.8px
 }
 
 .menu{
-  position:relative;
-  z-index:1;
-  padding:17px 11px 25px;
+position:relative;
+z-index:1;
+padding:17px 11px 25px
 }
 
 .menu-label{
-  padding:12px 14px 8px;
-  color:#d4af37;
-  font-size:9px;
-  font-weight:900;
-  letter-spacing:1.8px;
-  text-transform:uppercase;
+padding:12px 14px 8px;
+color:#d4af37;
+font-size:9px;
+font-weight:900;
+letter-spacing:1.8px;
+text-transform:uppercase
 }
 
 .menu button{
-  width:100%;
-  border:0;
-  background:transparent;
-  color:#d9eee5;
-  text-align:left;
-  padding:12px 14px;
-  margin-bottom:4px;
-  border-radius:11px;
-  font-size:13px;
-  font-weight:600;
-  transition:.2s;
+width:100%;
+border:0;
+background:transparent;
+color:#d9eee5;
+text-align:left;
+padding:12px 14px;
+margin-bottom:4px;
+border-radius:11px;
+font-size:13px;
+font-weight:700;
+transition:.2s
 }
 
 .menu button:hover{
-  color:white;
-  background:rgba(212,175,55,.13);
-  transform:translateX(2px);
+color:#fff;
+background:rgba(212,175,55,.13);
+transform:translateX(2px)
 }
 
 .menu button.active{
-  color:#183b2e;
-  font-weight:800;
-  background:linear-gradient(135deg,#d4af37,#f2d46d);
-  box-shadow:0 7px 22px rgba(212,175,55,.23);
+color:#183b2e;
+font-weight:900;
+background:linear-gradient(135deg,#d4af37,#f2d46d);
+box-shadow:0 7px 22px rgba(212,175,55,.23)
 }
 
 .menu button span{
-  display:inline-flex;
-  width:31px;
-  height:28px;
-  align-items:center;
-  justify-content:center;
-  margin-right:2px;
-  font-size:16px;
+display:inline-flex;
+width:31px;
+height:28px;
+align-items:center;
+justify-content:center;
+margin-right:2px;
+font-size:16px
 }
 
 /* MAIN */
 .main{
-  margin-left:270px;
-  width:calc(100% - 270px);
-  min-height:100vh;
+margin-left:270px;
+width:calc(100% - 270px);
+min-height:100vh
 }
 
 /* TOPBAR */
 .topbar{
-  height:76px;
-  position:sticky;
-  top:0;
-  z-index:500;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 30px;
-  background:rgba(255,255,255,.94);
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(14px);
-  box-shadow:0 4px 18px rgba(3,43,36,.05);
+height:76px;
+position:sticky;
+top:0;
+z-index:500;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 30px;
+background:rgba(248,253,250,.95);
+border-bottom:2px solid rgba(212,175,55,.25);
+backdrop-filter:blur(14px);
+box-shadow:0 5px 20px rgba(3,43,36,.07)
 }
 
-.top-left{
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-
-.top-title{
-  color:#063b2b;
-  font-size:20px;
-  font-weight:900;
-}
-
-.top-subtitle{
-  margin-top:3px;
-  color:var(--muted);
-  font-size:11px;
-}
-
-.top-right{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
+.top-left{display:flex;align-items:center;gap:14px}
+.top-title{color:#063b2b;font-size:20px;font-weight:900}
+.top-subtitle{margin-top:3px;color:var(--muted);font-size:11px}
+.top-right{display:flex;align-items:center;gap:10px}
 
 .admin-badge{
-  padding:8px 14px;
-  border-radius:20px;
-  color:#087f5b;
-  background:#e6f7ed;
-  border:1px solid #b9ddc8;
-  font-size:10px;
-  font-weight:900;
+padding:8px 14px;
+border-radius:20px;
+color:#087f5b;
+background:#e1f5e9;
+border:1px solid #acd7bd;
+font-size:10px;
+font-weight:900
 }
 
 .logout{
-  border:0;
-  padding:9px 14px;
-  border-radius:9px;
-  color:#b42318;
-  background:#fff0ee;
-  font-weight:800;
+border:1px solid #efc5c0;
+padding:9px 14px;
+border-radius:9px;
+color:#a32016;
+background:#fff0ee;
+font-weight:900
 }
 
 .mobile-menu{
-  display:none;
-  border:0;
-  padding:8px 11px;
-  border-radius:9px;
-  color:white;
-  background:#063b2b;
-  font-size:20px;
+display:none;
+border:0;
+padding:8px 11px;
+border-radius:9px;
+color:#fff;
+background:#063b2b;
+font-size:20px
 }
 
 /* CONTENT */
 .content{
-  position:relative;
-  padding:30px;
-  min-height:calc(100vh - 76px);
-  overflow:hidden;
+position:relative;
+padding:30px;
+min-height:calc(100vh - 76px);
+overflow:hidden
 }
 
-.content::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  opacity:.025;
-  background-image:
-    linear-gradient(30deg,#087f5b 12%,transparent 12.5%,transparent 87%,#087f5b 87.5%),
-    linear-gradient(150deg,#087f5b 12%,transparent 12.5%,transparent 87%,#087f5b 87.5%);
-  background-size:42px 72px;
+.content:before{
+content:"";
+position:absolute;
+inset:0;
+pointer-events:none;
+opacity:.035;
+background:
+linear-gradient(30deg,#087f5b 12%,transparent 12.5%,transparent 87%,#087f5b 87.5%),
+linear-gradient(150deg,#087f5b 12%,transparent 12.5%,transparent 87%,#087f5b 87.5%);
+background-size:42px 72px
 }
 
-.content>*{
-  position:relative;
-  z-index:1;
-}
+.content>*{position:relative;z-index:1}
 
 /* SECTIONS */
-.section{
-  display:none;
-}
-
-.section.active{
-  display:block;
-  animation:fadeIn .25s ease;
-}
+.section{display:none}
+.section.active{display:block;animation:fadeIn .25s ease}
 
 @keyframes fadeIn{
-  from{opacity:0;transform:translateY(5px)}
-  to{opacity:1;transform:translateY(0)}
+from{opacity:0;transform:translateY(5px)}
+to{opacity:1;transform:translateY(0)}
 }
 
 .section-head{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:15px;
-  margin-bottom:22px;
+display:flex;
+align-items:flex-end;
+justify-content:space-between;
+gap:15px;
+margin-bottom:22px
 }
 
 .section-head h2{
-  color:#164c39;
-  font-size:26px;
-  font-weight:900;
-  margin-bottom:5px;
+color:#164c39;
+font-size:26px;
+font-weight:900;
+margin-bottom:5px
 }
 
-.section-head p{
-  color:var(--muted);
-  font-size:13px;
-}
+.section-head p{color:var(--muted);font-size:13px}
 
 .section-tag{
-  padding:7px 13px;
-  border-radius:20px;
-  color:#087f5b;
-  background:#e2f5eb;
-  border:1px solid #c7e3d0;
-  font-size:10px;
-  font-weight:900;
+padding:7px 13px;
+border-radius:20px;
+color:#087f5b;
+background:#dff3e7;
+border:1px solid #b9ddc8;
+font-size:10px;
+font-weight:900
 }
 
 /* COLLEGE HEADER */
 .college-header{
-  position:relative;
-  overflow:hidden;
-  min-height:310px;
-  margin-bottom:25px;
-  border-radius:24px;
-  border:1px solid rgba(212,175,55,.55);
-  background:linear-gradient(135deg,#032b24,#087f5b);
-  box-shadow:0 16px 40px rgba(3,43,36,.20);
+position:relative;
+overflow:hidden;
+min-height:310px;
+margin-bottom:25px;
+border-radius:24px;
+border:2px solid rgba(212,175,55,.62);
+background:linear-gradient(135deg,#032b24,#087f5b);
+box-shadow:0 18px 42px rgba(3,43,36,.22)
 }
 
 .college-header img{
-  width:100%;
-  height:310px;
-  display:block;
-  object-fit:cover;
+width:100%;
+height:310px;
+display:block;
+object-fit:cover
 }
 
 .college-header-overlay{
-  position:absolute;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:25px;
-  background:linear-gradient(180deg,rgba(3,43,36,.12),rgba(3,43,36,.90));
+position:absolute;
+inset:0;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:25px;
+background:
+linear-gradient(180deg,rgba(3,43,36,.12),rgba(3,43,36,.92))
 }
 
 .college-title{
-  color:white;
-  font-size:31px;
-  font-weight:900;
-  letter-spacing:1px;
-  text-shadow:0 4px 16px rgba(0,0,0,.45);
+color:#fff;
+font-size:31px;
+font-weight:900;
+letter-spacing:1px;
+text-shadow:0 4px 16px rgba(0,0,0,.45)
 }
 
 .college-subtitle{
-  margin-top:7px;
-  color:#f4d778;
-  font-size:13px;
-  font-weight:900;
-  letter-spacing:3px;
+margin-top:7px;
+color:#f4d778;
+font-size:13px;
+font-weight:900;
+letter-spacing:3px
 }
 
 .college-ayah{
-  margin-top:18px;
-  color:#f7dc83;
-  direction:rtl;
-  font-family:"Amiri","Traditional Arabic",serif;
-  font-size:29px;
-  font-weight:bold;
-  line-height:1.8;
-  text-shadow:0 4px 14px rgba(0,0,0,.5);
+margin-top:18px;
+color:#f7dc83;
+direction:rtl;
+font-family:"Amiri","Traditional Arabic",serif;
+font-size:29px;
+font-weight:bold;
+line-height:1.8;
+text-shadow:0 4px 14px rgba(0,0,0,.5)
 }
 
 .college-ayah-meaning{
-  margin-top:5px;
-  color:white;
-  font-size:12px;
-  opacity:.9;
+margin-top:5px;
+color:#fff;
+font-size:12px;
+opacity:.92
 }
 
 .college-header-line{
-  width:140px;
-  height:3px;
-  margin-top:14px;
-  border-radius:10px;
-  background:linear-gradient(90deg,transparent,#d4af37,transparent);
+width:150px;
+height:3px;
+margin-top:14px;
+border-radius:10px;
+background:linear-gradient(90deg,transparent,#d4af37,transparent)
 }
 
 /* STATS */
 .stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-  margin-bottom:25px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:16px;
+margin-bottom:25px
 }
 
 .stat{
-  position:relative;
-  overflow:hidden;
-  padding:20px;
-  border-radius:17px;
-  background:rgba(255,255,255,.96);
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-  transition:.25s;
+position:relative;
+overflow:hidden;
+padding:20px;
+border-radius:17px;
+color:#fff;
+border:1px solid rgba(212,175,55,.35);
+box-shadow:var(--shadow);
+transition:.25s
+}
+
+.stat:nth-child(1){
+background:linear-gradient(135deg,#07583f,#0a9670)
+}
+.stat:nth-child(2){
+background:linear-gradient(135deg,#06483a,#087f5b)
+}
+.stat:nth-child(3){
+background:linear-gradient(135deg,#176247,#0b8b68)
+}
+.stat:nth-child(4){
+background:linear-gradient(135deg,#07503c,#08765a)
+}
+
+.stat:after{
+content:"";
+position:absolute;
+width:100px;
+height:100px;
+right:-35px;
+top:-35px;
+border:1px solid rgba(255,255,255,.12);
+transform:rotate(45deg);
+border-radius:18px
 }
 
 .stat:hover{
-  transform:translateY(-4px);
-  border-color:rgba(212,175,55,.65);
+transform:translateY(-4px);
+border-color:#f4d778;
+box-shadow:0 16px 35px rgba(3,43,36,.2)
 }
 
 .stat-icon{
-  width:44px;
-  height:44px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:14px;
-  border-radius:13px;
-  color:#087f5b;
-  background:#e1f5e9;
-  font-size:20px;
+width:44px;
+height:44px;
+display:flex;
+align-items:center;
+justify-content:center;
+margin-bottom:14px;
+border-radius:13px;
+color:#174331;
+background:linear-gradient(135deg,#f1d36a,#fff0a6);
+font-size:20px
 }
 
-.stat small{
-  color:var(--muted);
-  font-size:11px;
-  font-weight:700;
-}
-
+.stat small{color:#dff4e9;font-size:11px;font-weight:800}
 .stat strong{
-  display:block;
-  margin-top:6px;
-  color:#12382d;
-  font-size:30px;
-  font-weight:900;
+display:block;
+margin-top:6px;
+color:#fff;
+font-size:30px;
+font-weight:900
 }
 
 /* PANELS */
 .panel{
-  padding:23px;
-  margin-bottom:22px;
-  border-radius:17px;
-  background:rgba(255,255,255,.97);
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
+padding:23px;
+margin-bottom:22px;
+border-radius:17px;
+background:
+linear-gradient(135deg,rgba(255,255,255,.98),rgba(239,249,244,.98));
+border:1px solid var(--border);
+box-shadow:var(--shadow)
 }
 
 .panel-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:18px;
-  padding-bottom:13px;
-  border-bottom:1px solid rgba(212,175,55,.18);
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin-bottom:18px;
+padding-bottom:13px;
+border-bottom:2px solid rgba(212,175,55,.2)
 }
 
-.panel h3{
-  color:#164c39;
-  font-size:17px;
-  font-weight:900;
-}
-
-.panel-desc{
-  margin-top:3px;
-  color:var(--muted);
-  font-size:11px;
-}
+.panel h3{color:#164c39;font-size:17px;font-weight:900}
+.panel-desc{margin-top:3px;color:var(--muted);font-size:11px}
 
 /* QUICK */
 .quick{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:14px
 }
 
 .quick button{
-  position:relative;
-  overflow:hidden;
-  padding:19px;
-  text-align:left;
-  border:1px solid var(--border);
-  border-radius:14px;
-  background:linear-gradient(135deg,#fff,#f8fcfa);
-  transition:.25s;
+position:relative;
+overflow:hidden;
+padding:19px;
+text-align:left;
+border:1px solid #c7e1d3;
+border-radius:14px;
+color:var(--text);
+background:linear-gradient(135deg,#f5fcf8,#e4f4eb);
+transition:.25s
+}
+
+.quick button:before{
+content:"";
+position:absolute;
+width:65px;
+height:65px;
+right:-20px;
+top:-20px;
+border:1px solid rgba(8,127,91,.12);
+transform:rotate(45deg);
+border-radius:12px
 }
 
 .quick button:hover{
-  transform:translateY(-4px);
-  border-color:rgba(212,175,55,.7);
-  box-shadow:0 12px 25px rgba(3,43,36,.11);
+transform:translateY(-4px);
+border-color:rgba(212,175,55,.8);
+box-shadow:0 12px 25px rgba(3,43,36,.13);
+background:linear-gradient(135deg,#fffdf3,#e1f5ea)
 }
 
 .quick-icon{
-  margin-bottom:12px;
-  color:#087f5b;
-  font-size:23px;
+margin-bottom:12px;
+color:#087f5b;
+font-size:23px
 }
 
-.quick strong{
-  display:block;
-  margin-bottom:5px;
-  color:#173e30;
-}
-
-.quick small{
-  color:var(--muted);
-}
+.quick strong{display:block;margin-bottom:5px;color:#173e30}
+.quick small{color:var(--muted)}
 
 /* FORMS */
 .form-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:16px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:16px
 }
 
-.field{
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-}
-
-.field.full{
-  grid-column:1/-1;
-}
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:1/-1}
 
 .field label{
-  color:#315b49;
-  font-size:12px;
-  font-weight:800;
+color:#315b49;
+font-size:12px;
+font-weight:900
 }
 
 .field input,
 .field select,
 .field textarea{
-  width:100%;
-  padding:11px 12px;
-  outline:none;
-  color:var(--text);
-  background:#fbfefc;
-  border:1px solid #cfe4d5;
-  border-radius:10px;
+width:100%;
+padding:11px 12px;
+outline:none;
+color:var(--text);
+background:#f5fbf7;
+border:1px solid #c4dfcf;
+border-radius:10px
 }
 
-.field textarea{
-  min-height:100px;
-  resize:vertical;
-}
+.field textarea{min-height:100px;resize:vertical}
 
 .field input:focus,
 .field select:focus,
 .field textarea:focus{
-  border-color:#0a956a;
-  background:white;
-  box-shadow:0 0 0 3px rgba(10,149,106,.11);
+border-color:#0a956a;
+background:#fff;
+box-shadow:0 0 0 3px rgba(10,149,106,.11)
 }
 
 /* BUTTONS */
 .primary{
-  border:0;
-  padding:11px 18px;
-  border-radius:10px;
-  color:white;
-  background:linear-gradient(135deg,#087f5b,#0aad78);
-  font-weight:800;
+border:0;
+padding:11px 18px;
+border-radius:10px;
+color:#fff;
+background:linear-gradient(135deg,#087f5b,#0aad78);
+font-weight:900;
+box-shadow:0 5px 15px rgba(8,127,91,.18)
+}
+
+.primary:hover{
+background:linear-gradient(135deg,#076b4d,#098f68);
+transform:translateY(-1px)
 }
 
 .secondary{
-  padding:10px 15px;
-  border:1px solid #cfe4d5;
-  border-radius:9px;
-  color:#315b49;
-  background:white;
-  font-weight:700;
+padding:10px 15px;
+border:1px solid #c5dfcf;
+border-radius:9px;
+color:#315b49;
+background:#eef8f2;
+font-weight:800
 }
 
-.danger,
-.success,
-.warning{
-  padding:8px 11px;
-  border:0;
-  border-radius:8px;
-  font-weight:800;
+.secondary:hover{background:#dff1e7}
+
+.danger,.success,.warning{
+padding:8px 11px;
+border:0;
+border-radius:8px;
+font-weight:900
 }
 
-.danger{
-  color:#b42318;
-  background:#fdebea;
-}
-
-.success{
-  color:#087f5b;
-  background:#e0f3e7;
-}
-
-.warning{
-  color:#916300;
-  background:#fff3d2;
-}
+.danger{color:#b42318;background:#fdebea}
+.success{color:#087f5b;background:#dff3e7}
+.warning{color:#916300;background:#fff1ca}
 
 /* TABLE */
 .table-wrap{
-  overflow-x:auto;
-  border-radius:11px;
+overflow-x:auto;
+border-radius:12px;
+border:1px solid #d2e6da
 }
 
 table{
-  width:100%;
-  min-width:720px;
-  border-collapse:collapse;
-  background:white;
+width:100%;
+min-width:720px;
+border-collapse:collapse;
+background:#fdfefe
 }
 
 th,td{
-  padding:13px 10px;
-  border-bottom:1px solid #e1eee5;
-  text-align:left;
-  font-size:12px;
-  vertical-align:middle;
+padding:13px 10px;
+border-bottom:1px solid #dcebe2;
+text-align:left;
+font-size:12px;
+vertical-align:middle
 }
 
 th{
-  color:#18513d;
-  background:#e5f4ea;
-  font-size:10px;
-  font-weight:900;
-  text-transform:uppercase;
+color:#18513d;
+background:linear-gradient(135deg,#dff2e7,#cce9d9);
+font-size:10px;
+font-weight:900;
+text-transform:uppercase
 }
 
-tr:hover td{
-  background:#f5fbf7;
-}
+tr:hover td{background:#f0f9f4}
 
 /* BADGES */
 .badge{
-  display:inline-block;
-  padding:5px 10px;
-  border-radius:20px;
-  font-size:10px;
-  font-weight:900;
-  text-transform:capitalize;
+display:inline-block;
+padding:5px 10px;
+border-radius:20px;
+font-size:10px;
+font-weight:900;
+text-transform:capitalize
 }
 
-.badge-green{
-  color:#087f5b;
-  background:#dff3e6;
-}
-
-.badge-red{
-  color:#842029;
-  background:#f8d7da;
-}
-
-.badge-yellow{
-  color:#856404;
-  background:#fff3cd;
-}
+.badge-green{color:#087f5b;background:#dff3e6}
+.badge-red{color:#842029;background:#f8d7da}
+.badge-yellow{color:#856404;background:#fff3cd}
 
 /* TOOLBAR */
 .toolbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin-bottom:16px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+margin-bottom:16px
 }
 
 .search{
-  width:280px;
-  padding:10px 12px;
-  outline:none;
-  color:var(--text);
-  background:white;
-  border:1px solid #cfe4d5;
-  border-radius:10px;
+width:280px;
+padding:10px 12px;
+outline:none;
+color:var(--text);
+background:#f7fcf9;
+border:1px solid #c5dfcf;
+border-radius:10px
+}
+
+.search:focus{
+border-color:#0a956a;
+box-shadow:0 0 0 3px rgba(10,149,106,.1)
 }
 
 /* ACTIONS */
-.actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-}
+.actions{display:flex;flex-wrap:wrap;gap:6px}
 
 /* DONATIONS */
 .donation-summary{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-  margin-bottom:20px;
-  padding:15px;
-  border:1px solid rgba(212,175,55,.65);
-  border-radius:16px;
-  background:linear-gradient(135deg,#e5f5eb,#fff8df);
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:14px;
+margin-bottom:20px;
+padding:15px;
+border:2px solid rgba(212,175,55,.58);
+border-radius:16px;
+background:
+linear-gradient(135deg,#dff2e7,#fff5cf)
 }
 
 .donation-stat{
-  padding:17px;
-  border:1px solid #d6e9dc;
-  border-radius:12px;
-  background:white;
+padding:17px;
+border:1px solid #d0e5d8;
+border-radius:12px;
+background:linear-gradient(135deg,#fff,#f0f9f4);
+box-shadow:0 5px 16px rgba(3,43,36,.06)
 }
 
 .donation-stat small{
-  display:block;
-  margin-bottom:5px;
-  color:var(--muted);
-  font-size:10px;
-  font-weight:800;
+display:block;
+margin-bottom:5px;
+color:var(--muted);
+font-size:10px;
+font-weight:900
 }
 
 .donation-stat strong{
-  font-size:25px;
-  font-weight:900;
+font-size:25px;
+font-weight:900;
+color:#087f5b
+}
+
+/* EMPTY */
+.empty{
+padding:28px;
+text-align:center;
+color:var(--muted);
+font-weight:700;
+background:#f3faf6;
+border-radius:10px
 }
 
 /* MODAL */
 .modal-overlay{
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  z-index:99990;
-  background:rgba(3,35,25,.68);
-  backdrop-filter:blur(5px);
+position:fixed;
+inset:0;
+display:none;
+align-items:center;
+justify-content:center;
+padding:20px;
+z-index:99990;
+background:rgba(3,35,25,.68);
+backdrop-filter:blur(5px)
 }
 
-.modal-overlay.show{
-  display:flex;
-}
+.modal-overlay.show{display:flex}
 
 .edit-modal{
-  width:100%;
-  max-width:650px;
-  max-height:90vh;
-  overflow-y:auto;
-  padding:25px;
-  border:1px solid #d6e9dc;
-  border-radius:19px;
-  background:white;
-  box-shadow:0 25px 70px rgba(0,0,0,.28);
+width:100%;
+max-width:650px;
+max-height:90vh;
+overflow-y:auto;
+padding:25px;
+border:2px solid rgba(212,175,55,.4);
+border-radius:19px;
+background:linear-gradient(135deg,#fff,#eef8f2);
+box-shadow:0 25px 70px rgba(0,0,0,.28)
 }
 
 .modal-actions{
-  display:flex;
-  justify-content:flex-end;
-  gap:10px;
-  margin-top:20px;
+display:flex;
+justify-content:flex-end;
+gap:10px;
+margin-top:20px
 }
 
 /* RESPONSIVE */
 @media(max-width:1100px){
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .quick{
-    grid-template-columns:repeat(2,1fr);
-  }
+.stats{grid-template-columns:repeat(2,1fr)}
+.quick{grid-template-columns:repeat(2,1fr)}
 }
 
 @media(max-width:900px){
-  .sidebar{
-    transform:translateX(-100%);
-    transition:.25s;
-  }
+.sidebar{
+transform:translateX(-100%);
+transition:.25s
+}
 
-  .sidebar.open{
-    transform:translateX(0);
-  }
+.sidebar.open{transform:translateX(0)}
 
-  .main{
-    margin-left:0;
-    width:100%;
-  }
+.main{
+margin-left:0;
+width:100%
+}
 
-  .mobile-menu{
-    display:block;
-  }
+.mobile-menu{display:block}
 
-  .topbar{
-    padding:0 15px;
-  }
-
-  .content{
-    padding:18px;
-  }
-
-  .admin-badge{
-    display:none;
-  }
+.topbar{padding:0 15px}
+.content{padding:18px}
+.admin-badge{display:none}
 }
 
 @media(max-width:600px){
-  .form-grid{
-    grid-template-columns:1fr;
-  }
+.form-grid{grid-template-columns:1fr}
+.field.full{grid-column:auto}
+.stats{grid-template-columns:1fr 1fr;gap:10px}
+.quick{grid-template-columns:1fr}
+.top-title{font-size:16px}
+.top-subtitle{display:none}
+.search{width:100%}
+.toolbar{flex-direction:column;align-items:stretch}
 
-  .field.full{
-    grid-column:auto;
-  }
+.college-header,
+.college-header img{
+height:250px;
+min-height:250px
+}
 
-  .stats{
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  }
-
-  .quick{
-    grid-template-columns:1fr;
-  }
-
-  .top-title{
-    font-size:16px;
-  }
-
-  .top-subtitle{
-    display:none;
-  }
-
-  .search{
-    width:100%;
-  }
-
-  .toolbar{
-    flex-direction:column;
-    align-items:stretch;
-  }
-
-  .college-header,
-  .college-header img{
-    height:250px;
-    min-height:250px;
-  }
-
-  .college-title{
-    font-size:23px;
-  }
-
-  .college-subtitle{
-    font-size:10px;
-    letter-spacing:1.5px;
-  }
-
-  .college-ayah{
-    font-size:21px;
-  }
-
-  .donation-summary{
-    grid-template-columns:1fr;
-  }
+.college-title{font-size:23px}
+.college-subtitle{font-size:10px;letter-spacing:1.5px}
+.college-ayah{font-size:21px}
+.donation-summary{grid-template-columns:1fr}
 }
 
 @media(max-width:400px){
-  .stats{
-    grid-template-columns:1fr;
-  }
+.stats{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<div id="loading">
-  SAFA QURAN COLLEGE loading...
-</div>
-
+<div id="loading">SAFA QURAN COLLEGE loading...</div>
 <div id="message"></div>
 
 <!-- EDIT STUDENT MODAL -->
 <div class="modal-overlay" id="editStudentModal">
+<div class="edit-modal">
 
-  <div class="edit-modal">
+<div class="panel-head">
+<div>
+<h3>Edit Student</h3>
+<p class="panel-desc">Update student information</p>
+</div>
+<button class="danger" id="closeEditModal">✕</button>
+</div>
 
-    <div class="panel-head">
-      <div>
-        <h3>Edit Student</h3>
-        <p class="panel-desc">Update student information</p>
-      </div>
+<div class="form-grid">
 
-      <button class="danger" id="closeEditModal">✕</button>
-    </div>
+<div class="field">
+<label>Student Number</label>
+<input id="editStudentNumber" readonly>
+</div>
 
-    <div class="form-grid">
+<div class="field">
+<label>Student Name</label>
+<input id="editStudentName">
+</div>
 
-      <div class="field">
-        <label>Student Number</label>
-        <input id="editStudentNumber" readonly>
-      </div>
+<div class="field">
+<label>Guardian Name</label>
+<input id="editGuardianName">
+</div>
 
-      <div class="field">
-        <label>Student Name</label>
-        <input id="editStudentName">
-      </div>
+<div class="field">
+<label>Class</label>
+<input id="editClassName">
+</div>
 
-      <div class="field">
-        <label>Guardian Name</label>
-        <input id="editGuardianName">
-      </div>
+<div class="field">
+<label>Parent Email</label>
+<input id="editParentEmail" type="email">
+</div>
 
-      <div class="field">
-        <label>Class</label>
-        <input id="editClassName">
-      </div>
+<div class="field">
+<label>Phone Number</label>
+<input id="editPhoneNumber">
+</div>
 
-      <div class="field">
-        <label>Parent Email</label>
-        <input id="editParentEmail" type="email">
-      </div>
+<div class="field full">
+<label>Address</label>
+<textarea id="editStudentAddress"></textarea>
+</div>
 
-      <div class="field">
-        <label>Phone Number</label>
-        <input id="editPhoneNumber">
-      </div>
+</div>
 
-      <div class="field full">
-        <label>Address</label>
-        <textarea id="editStudentAddress"></textarea>
-      </div>
+<div class="modal-actions">
+<button class="secondary" id="cancelEditStudent">Cancel</button>
+<button class="primary" id="saveEditStudent">Save Changes</button>
+</div>
 
-    </div>
-
-    <div class="modal-actions">
-      <button class="secondary" id="cancelEditStudent">
-        Cancel
-      </button>
-
-      <button class="primary" id="saveEditStudent">
-        Save Changes
-      </button>
-    </div>
-
-  </div>
+</div>
 </div>
 
 <div class="app">
@@ -994,3250 +906,2574 @@ tr:hover td{
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
 
-  <div class="brand">
+<div class="brand">
+<div class="brand-top">
 
-    <div class="brand-top">
+<div class="logo-box"></div>
 
-      <div class="logo-box">
-        ☪
-      </div>
+<div>
+<h1>SAFA QURAN COLLEGE</h1>
+<p>ONLINE PORTAL</p>
+</div>
 
-      <div>
-        <h1>SAFA QURAN COLLEGE</h1>
-        <p>ONLINE PORTAL</p>
-      </div>
+</div>
+</div>
 
-    </div>
+<div class="menu">
 
-  </div>
+<div class="menu-label">Main</div>
 
-  <div class="menu">
+<button class="menu-btn active" data-section="home">
+<span>⌂</span> Dashboard
+</button>
 
-    <div class="menu-label">Main</div>
+<button class="menu-btn" data-section="students">
+<span>👨‍🎓</span> Students
+</button>
 
-    <button class="menu-btn active" data-section="home">
-      <span>⌂</span> Dashboard
-    </button>
+<div class="menu-label">Academic</div>
 
-    <button class="menu-btn" data-section="students">
-      <span>👨‍🎓</span> Students
-    </button>
+<button class="menu-btn" data-section="attendance">
+<span>✓</span> Attendance
+</button>
 
-    <div class="menu-label">Academic</div>
+<button class="menu-btn" data-section="study">
+<span>📖</span> Study Progress
+</button>
 
-    <button class="menu-btn" data-section="attendance">
-      <span>✓</span> Attendance
-    </button>
+<button class="menu-btn" data-section="results">
+<span>🏆</span> Results
+</button>
 
-    <button class="menu-btn" data-section="study">
-      <span>📖</span> Study Progress
-    </button>
+<button class="menu-btn" data-section="notices">
+<span>📢</span> Notices
+</button>
 
-    <button class="menu-btn" data-section="results">
-      <span>🏆</span> Results
-    </button>
+<div class="menu-label">Communication</div>
 
-    <button class="menu-btn" data-section="notices">
-      <span>📢</span> Notices
-    </button>
+<button class="menu-btn" data-section="leave">
+<span>📝</span> Leave Requests
+</button>
 
-    <div class="menu-label">Communication</div>
+<button class="menu-btn" data-section="messages">
+<span>💬</span> Parent Messages
+</button>
 
-    <button class="menu-btn" data-section="leave">
-      <span>📝</span> Leave Requests
-    </button>
+<button class="menu-btn" data-section="donations">
+<span>💰</span> Donations
+</button>
 
-    <button class="menu-btn" data-section="messages">
-      <span>💬</span> Parent Messages
-    </button>
+<div class="menu-label">Public</div>
 
-    <button class="menu-btn" data-section="donations">
-      <span>💰</span> Donations
-    </button>
+<button class="menu-btn" data-section="publicResult">
+<span>🌐</span> Public Result
+</button>
 
-    <div class="menu-label">Public</div>
-
-    <button class="menu-btn" data-section="publicResult">
-      <span>🌐</span> Public Result
-    </button>
-
-  </div>
-
+</div>
 </aside>
 
 <!-- MAIN -->
 <main class="main">
 
-  <header class="topbar">
+<header class="topbar">
 
-    <div class="top-left">
+<div class="top-left">
 
-      <button class="mobile-menu" id="mobileMenu">
-        ☰
-      </button>
+<button class="mobile-menu" id="mobileMenu">☰</button>
 
-      <div>
-        <div class="top-title">
-          SAFA QURAN COLLEGE
-        </div>
+<div>
+<div class="top-title">SAFA QURAN COLLEGE</div>
+<div class="top-subtitle">ONLINE PORTAL Management System</div>
+</div>
 
-        <div class="top-subtitle">
-          ONLINE PORTAL Management System
-        </div>
-      </div>
+</div>
 
-    </div>
+<div class="top-right">
 
-    <div class="top-right">
+<div class="admin-badge">ADMINISTRATOR</div>
 
-      <div class="admin-badge">
-        ADMINISTRATOR
-      </div>
+<button class="logout" id="logoutBtn">Logout</button>
 
-      <button class="logout" id="logoutBtn">
-        Logout
-      </button>
+</div>
 
-    </div>
+</header>
 
-  </header>
-
-  <div class="content">
+<div class="content">
 
 <!-- HOME -->
 <section class="section active" id="home">
 
-  <div class="college-header">
+<div class="college-header">
 
-    <img
-      src="./IMG-20260921-WA0016.jpg"
-      alt="SAFA QURAN COLLEGE"
-    >
+<img src="./IMG-20260921-WA0016.jpg" alt="SAFA QURAN COLLEGE">
 
-    <div class="college-header-overlay">
+<div class="college-header-overlay">
 
-      <div class="college-title">
-        SAFA QURAN COLLEGE
-      </div>
+<div class="college-title">SAFA QURAN COLLEGE</div>
 
-      <div class="college-subtitle">
-        ONLINE PORTAL
-      </div>
+<div class="college-subtitle">ONLINE PORTAL</div>
 
-      <div class="college-header-line"></div>
+<div class="college-header-line"></div>
 
-      <div class="college-ayah">
-        خيركم من تعلم القرءان وعلمه
-      </div>
+<div class="college-ayah">
+خيركم من تعلم القرءان وعلمه
+</div>
 
-      <div class="college-ayah-meaning">
-        The best among you are those who learn the Qur'an and teach it.
-      </div>
+<div class="college-ayah-meaning">
+The best among you are those who learn the Qur'an and teach it.
+</div>
 
-    </div>
+</div>
+</div>
 
-  </div>
+<div class="stats">
 
-  <div class="stats">
+<div class="stat">
+<div class="stat-icon">👨‍🎓</div>
+<small>Total Students</small>
+<strong id="studentCount">0</strong>
+</div>
 
-    <div class="stat">
-      <div class="stat-icon">👨‍🎓</div>
-      <small>Total Students</small>
-      <strong id="studentCount">0</strong>
-    </div>
+<div class="stat">
+<div class="stat-icon">✓</div>
+<small>Attendance Records</small>
+<strong id="attendanceCount">0</strong>
+</div>
 
-    <div class="stat">
-      <div class="stat-icon">✓</div>
-      <small>Attendance Records</small>
-      <strong id="attendanceCount">0</strong>
-    </div>
+<div class="stat">
+<div class="stat-icon">📝</div>
+<small>Leave Requests</small>
+<strong id="leaveCount">0</strong>
+</div>
 
-    <div class="stat">
-      <div class="stat-icon">📝</div>
-      <small>Leave Requests</small>
-      <strong id="leaveCount">0</strong>
-    </div>
+<div class="stat">
+<div class="stat-icon">💬</div>
+<small>Parent Messages</small>
+<strong id="messageCount">0</strong>
+</div>
 
-    <div class="stat">
-      <div class="stat-icon">💬</div>
-      <small>Parent Messages</small>
-      <strong id="messageCount">0</strong>
-    </div>
+</div>
 
-  </div>
+<div class="panel">
 
-  <div class="panel">
+<div class="panel-head">
+<div>
+<h3>Quick Access</h3>
+<div class="panel-desc">Manage your college portal quickly</div>
+</div>
+</div>
 
-    <div class="panel-head">
-      <div>
-        <h3>Quick Access</h3>
-        <div class="panel-desc">
-          Manage your college portal quickly
-        </div>
-      </div>
-    </div>
+<div class="quick">
 
-    <div class="quick">
+<button class="quick-btn" data-go="students">
+<div class="quick-icon">👨‍🎓</div>
+<strong>Students</strong>
+<small>Manage student records</small>
+</button>
 
-      <button class="quick-btn" data-go="students">
-        <div class="quick-icon">👨‍🎓</div>
-        <strong>Students</strong>
-        <small>Manage student records</small>
-      </button>
+<button class="quick-btn" data-go="attendance">
+<div class="quick-icon">✓</div>
+<strong>Attendance</strong>
+<small>Manage daily attendance</small>
+</button>
 
-      <button class="quick-btn" data-go="attendance">
-        <div class="quick-icon">✓</div>
-        <strong>Attendance</strong>
-        <small>Manage daily attendance</small>
-      </button>
+<button class="quick-btn" data-go="study">
+<div class="quick-icon">📖</div>
+<strong>Study Progress</strong>
+<small>Update Hifz progress</small>
+</button>
 
-      <button class="quick-btn" data-go="study">
-        <div class="quick-icon">📖</div>
-        <strong>Study Progress</strong>
-        <small>Update Hifz progress</small>
-      </button>
+<button class="quick-btn" data-go="results">
+<div class="quick-icon">🏆</div>
+<strong>Results</strong>
+<small>Publish student results</small>
+</button>
 
-      <button class="quick-btn" data-go="results">
-        <div class="quick-icon">🏆</div>
-        <strong>Results</strong>
-        <small>Publish student results</small>
-      </button>
+<button class="quick-btn" data-go="notices">
+<div class="quick-icon">📢</div>
+<strong>Notices</strong>
+<small>Publish announcements</small>
+</button>
 
-      <button class="quick-btn" data-go="notices">
-        <div class="quick-icon">📢</div>
-        <strong>Notices</strong>
-        <small>Publish announcements</small>
-      </button>
+<button class="quick-btn" data-go="donations">
+<div class="quick-icon">💰</div>
+<strong>Donations</strong>
+<small>Verify donations</small>
+</button>
 
-      <button class="quick-btn" data-go="donations">
-        <div class="quick-icon">💰</div>
-        <strong>Donations</strong>
-        <small>Verify donations</small>
-      </button>
+<button class="quick-btn" data-go="publicResult">
+<div class="quick-icon">🌐</div>
+<strong>Public Result</strong>
+<small>Open public result system</small>
+</button>
 
-      <button class="quick-btn" data-go="publicResult">
-        <div class="quick-icon">🌐</div>
-        <strong>Public Result</strong>
-        <small>Open public result system</small>
-      </button>
-
-    </div>
-
-  </div>
+</div>
+</div>
 
 </section>
 
 <!-- STUDENTS -->
 <section class="section" id="students">
 
-  <div class="section-head">
+<div class="section-head">
+<div>
+<h2>Students</h2>
+<p>Manage student information</p>
+</div>
+<div class="section-tag">STUDENT MANAGEMENT</div>
+</div>
 
-    <div>
-      <h2>Students</h2>
-      <p>Manage student information</p>
-    </div>
+<div class="panel">
 
-    <div class="section-tag">
-      STUDENT MANAGEMENT
-    </div>
+<div class="panel-head">
+<div>
+<h3>Add Student</h3>
+<div class="panel-desc">Create a new student profile</div>
+</div>
+</div>
 
-  </div>
+<form id="studentForm">
 
-  <div class="panel">
+<div class="form-grid">
 
-    <div class="panel-head">
-      <div>
-        <h3>Add Student</h3>
-        <div class="panel-desc">
-          Create a new student profile
-        </div>
-      </div>
-    </div>
+<div class="field">
+<label>Student Number</label>
+<input id="studentNumber" required placeholder="Example: 131">
+</div>
 
-    <form id="studentForm">
+<div class="field">
+<label>Student Name</label>
+<input id="studentName" required>
+</div>
 
-      <div class="form-grid">
+<div class="field">
+<label>Guardian Name</label>
+<input id="guardianName">
+</div>
 
-        <div class="field">
-          <label>Student Number</label>
-          <input
-            id="studentNumber"
-            required
-            placeholder="Example: 131"
-          >
-        </div>
+<div class="field">
+<label>Class</label>
+<input id="className" placeholder="HIFZ A">
+</div>
 
-        <div class="field">
-          <label>Student Name</label>
-          <input
-            id="studentName"
-            required
-          >
-        </div>
+<div class="field">
+<label>Parent Email</label>
+<input id="parentEmail" type="email">
+</div>
 
-        <div class="field">
-          <label>Guardian Name</label>
-          <input id="guardianName">
-        </div>
+<div class="field">
+<label>Phone Number</label>
+<input id="phoneNumber">
+</div>
 
-        <div class="field">
-          <label>Class</label>
-          <input
-            id="className"
-            placeholder="HIFZ A"
-          >
-        </div>
+<div class="field full">
+<label>Address</label>
+<textarea id="studentAddress"></textarea>
+</div>
 
-        <div class="field">
-          <label>Parent Email</label>
-          <input
-            id="parentEmail"
-            type="email"
-          >
-        </div>
+<div class="field">
+<button class="primary" type="submit">+ Add Student</button>
+</div>
 
-        <div class="field">
-          <label>Phone Number</label>
-          <input id="phoneNumber">
-        </div>
+</div>
+</form>
 
-        <div class="field full">
-          <label>Address</label>
-          <textarea id="studentAddress"></textarea>
-        </div>
+</div>
 
-        <div class="field">
-          <button class="primary" type="submit">
-            + Add Student
-          </button>
-        </div>
+<div class="panel">
 
-      </div>
+<div class="toolbar">
+<div><h3>Student List</h3></div>
 
-    </form>
+<input
+class="search"
+id="studentSearch"
+placeholder="Search student..."
+>
 
-  </div>
+</div>
 
-  <div class="panel">
+<div class="table-wrap">
 
-    <div class="toolbar">
+<table>
 
-      <div>
-        <h3>Student List</h3>
-      </div>
+<thead>
+<tr>
+<th>Number</th>
+<th>Name</th>
+<th>Guardian</th>
+<th>Class</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Action</th>
+</tr>
+</thead>
 
-      <input
-        class="search"
-        id="studentSearch"
-        placeholder="Search student..."
-      >
+<tbody id="studentsTable"></tbody>
 
-    </div>
+</table>
+</div>
 
-    <div class="table-wrap">
-
-      <table>
-
-        <thead>
-          <tr>
-            <th>Number</th>
-            <th>Name</th>
-            <th>Guardian</th>
-            <th>Class</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-
-        <tbody id="studentsTable"></tbody>
-
-      </table>
-
-    </div>
-
-  </div>
+</div>
 
 </section>
 
 <!-- ATTENDANCE -->
 <section class="section" id="attendance">
 
-  <div class="section-head">
-    <div>
-      <h2>Attendance</h2>
-      <p>Manage daily student attendance</p>
-    </div>
-    <div class="section-tag">ACADEMIC</div>
-  </div>
+<div class="section-head">
+<div>
+<h2>Attendance</h2>
+<p>Manage daily student attendance</p>
+</div>
+<div class="section-tag">ACADEMIC</div>
+</div>
 
-  <div class="panel">
+<div class="panel">
 
-    <div class="panel-head">
-      <div>
-        <h3>Add Attendance</h3>
-        <div class="panel-desc">
-          Record attendance for students
-        </div>
-      </div>
-    </div>
+<div class="panel-head">
+<div>
+<h3>Add Attendance</h3>
+<div class="panel-desc">Record attendance for students</div>
+</div>
+</div>
 
-    <form id="attendanceForm">
+<form id="attendanceForm">
 
-      <div class="form-grid">
+<div class="form-grid">
 
-        <div class="field">
-          <label>Student</label>
-          <select id="attendanceStudent" required></select>
-        </div>
+<div class="field">
+<label>Student</label>
+<select id="attendanceStudent" required></select>
+</div>
 
-        <div class="field">
-          <label>Date</label>
-          <input type="date" id="attendanceDate" required>
-        </div>
+<div class="field">
+<label>Date</label>
+<input type="date" id="attendanceDate" required>
+</div>
 
-        <div class="field">
-          <label>Status</label>
-          <select id="attendanceStatus">
-            <option value="present">Present</option>
-            <option value="absent">Absent</option>
-            <option value="leave">Leave</option>
-          </select>
-        </div>
+<div class="field">
+<label>Status</label>
+<select id="attendanceStatus">
+<option value="present">Present</option>
+<option value="absent">Absent</option>
+<option value="leave">Leave</option>
+</select>
+</div>
 
-        <div class="field">
-          <button class="primary" type="submit">
-            Save Attendance
-          </button>
-        </div>
+<div class="field">
+<button class="primary" type="submit">Save Attendance</button>
+</div>
 
-      </div>
+</div>
+</form>
 
-    </form>
+</div>
 
-  </div>
+<div class="panel">
 
-  <div class="panel">
+<div class="panel-head">
+<div><h3>Attendance Records</h3></div>
+</div>
 
-    <div class="panel-head">
-      <div>
-        <h3>Attendance Records</h3>
-      </div>
-    </div>
+<div id="attendanceTable"></div>
 
-    <div id="attendanceTable"></div>
-
-  </div>
+</div>
 
 </section>
 
 <!-- STUDY -->
 <section class="section" id="study">
 
-  <div class="section-head">
-    <div>
-      <h2>Study Progress</h2>
-      <p>Update daily Hifz and Qur'an progress</p>
-    </div>
-    <div class="section-tag">HIFZ PROGRESS</div>
-  </div>
+<div class="section-head">
+<div>
+<h2>Study Progress</h2>
+<p>Update daily Hifz and Qur'an progress</p>
+</div>
+<div class="section-tag">HIFZ PROGRESS</div>
+</div>
 
-  <div class="panel">
+<div class="panel">
 
-    <div class="panel-head">
-      <div>
-        <h3>Update Study Progress</h3>
-      </div>
-    </div>
+<div class="panel-head">
+<div><h3>Update Study Progress</h3></div>
+</div>
 
-    <form id="studyForm">
+<form id="studyForm">
 
-      <div class="form-grid">
+<div class="form-grid">
 
-        <div class="field">
-          <label>Student</label>
-          <select id="studyStudent" required></select>
-        </div>
+<div class="field">
+<label>Student</label>
+<select id="studyStudent" required></select>
+</div>
 
-        <div class="field">
-          <label>Date</label>
-          <input type="date" id="studyDate" required>
-        </div>
+<div class="field">
+<label>Date</label>
+<input type="date" id="studyDate" required>
+</div>
 
-        <div class="field">
-          <label>Surah / Juz</label>
-          <input id="studySurah">
-        </div>
+<div class="field">
+<label>Surah / Juz</label>
+<input id="studySurah">
+</div>
 
-        <div class="field">
-          <label>New Lesson</label>
-          <input id="newLesson">
-        </div>
+<div class="field">
+<label>New Lesson</label>
+<input id="newLesson">
+</div>
 
-        <div class="field">
-          <label>Revision</label>
-          <input id="revision">
-        </div>
+<div class="field">
+<label>Revision</label>
+<input id="revision">
+</div>
 
-        <div class="field">
-          <label>Performance</label>
-          <input id="performance">
-        </div>
+<div class="field">
+<label>Performance</label>
+<input id="performance">
+</div>
 
-        <div class="field">
-          <label>Status</label>
-          <select id="studyStatus">
-            <option value="Good">Good</option>
-            <option value="Average">Average</option>
-            <option value="Needs Improvement">Needs Improvement</option>
-          </select>
-        </div>
+<div class="field">
+<label>Status</label>
+<select id="studyStatus">
+<option value="Good">Good</option>
+<option value="Average">Average</option>
+<option value="Needs Improvement">Needs Improvement</option>
+</select>
+</div>
 
-        <div class="field">
-          <label>Note</label>
-          <input id="studyNote">
-        </div>
+<div class="field">
+<label>Note</label>
+<input id="studyNote">
+</div>
 
-        <div class="field">
-          <button class="primary" type="submit">
-            Save Progress
-          </button>
-        </div>
+<div class="field">
+<button class="primary" type="submit">Save Progress</button>
+</div>
 
-      </div>
+</div>
+</form>
 
-    </form>
+</div>
 
-  </div>
+<div class="panel">
 
-  <div class="panel">
+<div class="panel-head">
+<div><h3>Progress Records</h3></div>
+</div>
 
-    <div class="panel-head">
-      <div>
-        <h3>Progress Records</h3>
-      </div>
-    </div>
+<div class="table-wrap">
 
-    <div class="table-wrap">
+<table>
 
-      <table>
+<thead>
+<tr>
+<th>Student</th>
+<th>Date</th>
+<th>Surah</th>
+<th>New Lesson</th>
+<th>Revision</th>
+<th>Performance</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
 
-        <thead>
-          <tr>
-            <th>Student</th>
-            <th>Date</th>
-            <th>Surah</th>
-            <th>New Lesson</th>
-            <th>Revision</th>
-            <th>Performance</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
+<tbody id="studyTable"></tbody>
 
-        <tbody id="studyTable"></tbody>
+</table>
+</div>
 
-      </table>
-
-    </div>
-
-  </div>
+</div>
 
 </section>
 
 <!-- RESULTS -->
 <section class="section" id="results">
 
-  <div class="section-head">
-    <div>
-      <h2>Results</h2>
-      <p>Add and publish student results</p>
-    </div>
-    <div class="section-tag">RESULT MANAGEMENT</div>
-  </div>
+<div class="section-head">
+<div>
+<h2>Results</h2>
+<p>Add and publish student results</p>
+</div>
+<div class="section-tag">RESULT MANAGEMENT</div>
+</div>
 
-  <div class="panel">
+<div class="panel">
 
-    <form id="resultForm">
+<form id="resultForm">
 
-      <div class="form-grid">
+<div class="form-grid">
 
-        <div class="field">
-          <label>Student</label>
-          <select id="resultStudent" required></select>
-        </div>
+<div class="field">
+<label>Student</label>
+<select id="resultStudent" required></select>
+</div>
 
-        <div class="field">
-          <label>Test / Exam Title</label>
-          <input id="resultTitle" required>
-        </div>
+<div class="field">
+<label>Test / Exam Title</label>
+<input id="resultTitle" required>
+</div>
 
-        <div class="field">
-          <label>Mark</label>
-          <input id="resultMark" required>
-        </div>
+<div class="field">
+<label>Mark</label>
+<input id="resultMark" required>
+</div>
 
-        <div class="field">
-          <label>Status</label>
-          <select id="resultStatus">
-            <option value="draft">Draft</option>
-            <option value="published">Published</option>
-          </select>
-        </div>
+<div class="field">
+<label>Status</label>
+<select id="resultStatus">
+<option value="draft">Draft</option>
+<option value="published">Published</option>
+</select>
+</div>
 
-        <div class="field">
-          <button class="primary" type="submit">
-            Add Result
-          </button>
-        </div>
+<div class="field">
+<button class="primary" type="submit">Add Result</button>
+</div>
 
-      </div>
+</div>
+</form>
 
-    </form>
+</div>
 
-  </div>
+<div class="panel">
 
-  <div class="panel">
+<div class="table-wrap">
 
-    <div class="table-wrap">
+<table>
 
-      <table>
+<thead>
+<tr>
+<th>Student</th>
+<th>Title</th>
+<th>Mark</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
 
-        <thead>
-          <tr>
-            <th>Student</th>
-            <th>Title</th>
-            <th>Mark</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
+<tbody id="resultsTable"></tbody>
 
-        <tbody id="resultsTable"></tbody>
+</table>
+</div>
 
-      </table>
-
-    </div>
-
-  </div>
+</div>
 
 </section>
 
 <!-- NOTICES -->
 <section class="section" id="notices">
 
-  <div class="section-head">
-    <div>
-      <h2>Notices</h2>
-      <p>Publish announcements for parents</p>
-    </div>
-    <div class="section-tag">ANNOUNCEMENTS</div>
-  </div>
+<div class="section-head">
+<div>
+<h2>Notices</h2>
+<p>Publish announcements for parents</p>
+</div>
+<div class="section-tag">ANNOUNCEMENTS</div>
+</div>
 
-  <div class="panel">
+<div class="panel">
 
-    <form id="noticeForm">
+<form id="noticeForm">
 
-      <div class="form-grid">
+<div class="form-grid">
 
-        <div class="field">
-          <label>Notice Title</label>
-          <input id="noticeTitle" required>
-        </div>
+<div class="field">
+<label>Notice Title</label>
+<input id="noticeTitle" required>
+</div>
 
-        <div class="field">
-          <label>Status</label>
-          <select id="noticeStatus">
-            <option value="draft">Draft</option>
-            <option value="published">Published</option>
-          </select>
-        </div>
+<div class="field">
+<label>Status</label>
+<select id="noticeStatus">
+<option value="draft">Draft</option>
+<option value="published">Published</option>
+</select>
+</div>
 
-        <div class="field full">
-          <label>Notice</label>
-          <textarea id="noticeText" required></textarea>
-        </div>
+<div class="field full">
+<label>Notice</label>
+<textarea id="noticeText" required></textarea>
+</div>
 
-        <div class="field">
-          <button class="primary" type="submit">
-            Add Notice
-          </button>
-        </div>
+<div class="field">
+<button class="primary" type="submit">Add Notice</button>
+</div>
 
-      </div>
+</div>
+</form>
 
-    </form>
+</div>
 
-  </div>
+<div class="panel">
 
-  <div class="panel">
+<div class="table-wrap">
 
-    <div class="table-wrap">
+<table>
 
-      <table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Notice</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
 
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Notice</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
+<tbody id="noticesTable"></tbody>
 
-        <tbody id="noticesTable"></tbody>
+</table>
+</div>
 
-      </table>
-
-    </div>
-
-  </div>
+</div>
 
 </section>
 
 <!-- LEAVE -->
 <section class="section" id="leave">
 
-  <div class="section-head">
-    <div>
-      <h2>Leave Requests</h2>
-      <p>Review and respond to parent leave requests</p>
-    </div>
-    <div class="section-tag">PARENT REQUESTS</div>
-  </div>
+<div class="section-head">
+<div>
+<h2>Leave Requests</h2>
+<p>Review and respond to parent leave requests</p>
+</div>
+<div class="section-tag">PARENT REQUESTS</div>
+</div>
 
-  <div class="panel">
+<div class="panel">
 
-    <div class="table-wrap">
+<div class="table-wrap">
 
-      <table>
+<table>
 
-        <thead>
-          <tr>
-            <th>Student</th>
-            <th>Parent</th>
-            <th>Date</th>
-            <th>Reason</th>
-            <th>Status</th>
-            <th>Reply</th>
-            <th>Action</th>
-          </tr>
-        </thead>
+<thead>
+<tr>
+<th>Student</th>
+<th>Parent</th>
+<th>Date</th>
+<th>Reason</th>
+<th>Status</th>
+<th>Reply</th>
+<th>Action</th>
+</tr>
+</thead>
 
-        <tbody id="leaveTable"></tbody>
+<tbody id="leaveTable"></tbody>
 
-      </table>
+</table>
+</div>
 
-    </div>
-
-  </div>
+</div>
 
 </section>
 
 <!-- MESSAGES -->
 <section class="section" id="messages">
 
-  <div class="section-head">
-    <div>
-      <h2>Parent Messages</h2>
-      <p>Read and reply to parent messages</p>
-    </div>
-    <div class="section-tag">COMMUNICATION</div>
-  </div>
+<div class="section-head">
+<div>
+<h2>Parent Messages</h2>
+<p>Read and reply to parent messages</p>
+</div>
+<div class="section-tag">COMMUNICATION</div>
+</div>
 
-  <div class="panel">
+<div class="panel">
 
-    <div class="table-wrap">
+<div class="table-wrap">
 
-      <table>
+<table>
 
-        <thead>
-          <tr>
-            <th>Student</th>
-            <th>Parent</th>
-            <th>Message</th>
-            <th>Status</th>
-            <th>Reply</th>
-            <th>Action</th>
-          </tr>
-        </thead>
+<thead>
+<tr>
+<th>Student</th>
+<th>Parent</th>
+<th>Message</th>
+<th>Status</th>
+<th>Reply</th>
+<th>Action</th>
+</tr>
+</thead>
 
-        <tbody id="messagesTable"></tbody>
+<tbody id="messagesTable"></tbody>
 
-      </table>
+</table>
+</div>
 
-    </div>
-
-  </div>
+</div>
 
 </section>
 
 <!-- DONATIONS -->
 <section class="section" id="donations">
 
-  <div class="section-head">
-    <div>
-      <h2>Donations</h2>
-      <p>Review and verify parent donations</p>
-    </div>
-    <div class="section-tag">SAFA DONATION</div>
-  </div>
+<div class="section-head">
+<div>
+<h2>Donations</h2>
+<p>Review and verify parent donations</p>
+</div>
+<div class="section-tag">SAFA DONATION</div>
+</div>
 
-  <div class="donation-summary">
+<div class="donation-summary">
 
-    <div class="donation-stat">
-      <small>Total Donations</small>
-      <strong id="donationTotal">₹0</strong>
-    </div>
+<div class="donation-stat">
+<small>Total Donations</small>
+<strong id="donationTotal">₹0</strong>
+</div>
 
-    <div class="donation-stat">
-      <small>Pending</small>
-      <strong id="donationPending">₹0</strong>
-    </div>
+<div class="donation-stat">
+<small>Pending</small>
+<strong id="donationPending">₹0</strong>
+</div>
 
-    <div class="donation-stat">
-      <small>Verified</small>
-      <strong id="donationVerified">₹0</strong>
-    </div>
+<div class="donation-stat">
+<small>Verified</small>
+<strong id="donationVerified">₹0</strong>
+</div>
 
-  </div>
+</div>
 
-  <div class="panel">
+<div class="panel">
 
-    <div class="table-wrap">
+<div class="table-wrap">
 
-      <table>
+<table>
 
-        <thead>
-          <tr>
-            <th>Student</th>
-            <th>Parent Email</th>
-            <th>Amount</th>
-            <th>Transaction ID</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th>Admin Note</th>
-            <th>Action</th>
-          </tr>
-        </thead>
+<thead>
+<tr>
+<th>Student</th>
+<th>Parent Email</th>
+<th>Amount</th>
+<th>Transaction ID</th>
+<th>Date</th>
+<th>Status</th>
+<th>Admin Note</th>
+<th>Action</th>
+</tr>
+</thead>
 
-        <tbody id="donationsTable"></tbody>
+<tbody id="donationsTable"></tbody>
 
-      </table>
+</table>
+</div>
 
-    </div>
-
-  </div>
+</div>
 
 </section>
 
 <!-- PUBLIC RESULT -->
 <section class="section" id="publicResult">
 
-  <div class="section-head">
-    <div>
-      <h2>Public Result</h2>
-      <p>Open the public result system</p>
-    </div>
-    <div class="section-tag">PUBLIC</div>
-  </div>
+<div class="section-head">
+<div>
+<h2>Public Result</h2>
+<p>Open the public result system</p>
+</div>
+<div class="section-tag">PUBLIC</div>
+</div>
 
-  <div class="panel welcome">
+<div class="panel welcome">
 
-    <h2 style="margin-bottom:10px;">
-      Public Student Result
-    </h2>
+<h2 style="margin-bottom:10px">Public Student Result</h2>
 
-    <p style="margin-bottom:20px;">
-      Open the public result page where students and parents
-      can check published results.
-    </p>
+<p style="margin-bottom:20px">
+Open the public result page where students and parents
+can check published results.
+</p>
 
-    <button class="primary" id="openPublicResult">
-      🌐 Open Public Result
-    </button>
+<button class="primary" id="openPublicResult">
+🌐 Open Public Result
+</button>
 
-  </div>
+</div>
 
 </section>
 
-  </div>
+</div>
 </main>
-
 </div>
 
 <script type="module">
 
 import {
-  initializeApp
+initializeApp
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 import {
-  getAuth,
-  onAuthStateChanged,
-  signOut
+getAuth,
+onAuthStateChanged,
+signOut
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 import {
-  getFirestore,
-  collection,
-  getDocs,
-  getDoc,
-  doc,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  serverTimestamp
+getFirestore,
+collection,
+getDocs,
+getDoc,
+doc,
+addDoc,
+updateDoc,
+deleteDoc,
+serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
-  authDomain: "safa-hifz-class-7e84b.firebaseapp.com",
-  projectId: "safa-hifz-class-7e84b",
-  storageBucket: "safa-hifz-class-7e84b.firebasestorage.app",
-  messagingSenderId: "476801753196",
-  appId: "1:476801753196:web:d4c8a8b0c1a4203606f849",
-  measurementId: "G-ZTBTJCB5SR"
+const firebaseConfig={
+apiKey:"AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
+authDomain:"safa-hifz-class-7e84b.firebaseapp.com",
+projectId:"safa-hifz-class-7e84b",
+storageBucket:"safa-hifz-class-7e84b.firebasestorage.app",
+messagingSenderId:"476801753196",
+appId:"1:476801753196:web:d4c8a8b0c1a4203606f849",
+measurementId:"G-ZTBTJCB5SR"
 };
 
-const app = initializeApp(firebaseConfig);
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+const $=id=>document.getElementById(id);
 
-const auth = getAuth(app);
-const db = getFirestore(app);
+let currentUser=null;
+window.students=[];
 
-const $ = id => document.getElementById(id);
-
-let currentUser = null;
-
-window.students = [];
-
-/* =====================================
-UTILITIES
-===================================== */
+/* UTILITIES */
 
 function escapeHtml(value){
-  return String(value ?? "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+return String(value??"")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 }
 
 function showMessage(text,type="success"){
-
-  const box = $("message");
-
-  box.textContent = text;
-
-  box.style.display = "block";
-
-  box.style.background =
-    type === "error"
-      ? "linear-gradient(135deg,#b42318,#d6453b)"
-      : "linear-gradient(135deg,#087f5b,#0ca875)";
-
-  setTimeout(()=>{
-    box.style.display = "none";
-  },3000);
+const box=$("message");
+box.textContent=text;
+box.style.display="block";
+box.style.background=
+type==="error"
+?"linear-gradient(135deg,#b42318,#d6453b)"
+:"linear-gradient(135deg,#087f5b,#0ca875)";
+setTimeout(()=>box.style.display="none",3000);
 }
 
 function studentNameByNumber(number){
-
-  const student =
-    window.students.find(
-      s => String(s.studentNumber) === String(number)
-    );
-
-  return student
-    ? student.studentName
-    : number;
+const student=window.students.find(
+s=>String(s.studentNumber)===String(number)
+);
+return student?student.studentName:number;
 }
 
 function formatDate(value){
-
-  if(!value) return "";
-
-  if(value.toDate){
-    return value.toDate().toLocaleDateString();
-  }
-
-  if(value.seconds){
-    return new Date(value.seconds*1000).toLocaleDateString();
-  }
-
-  return String(value);
+if(!value)return "";
+if(value.toDate)return value.toDate().toLocaleDateString();
+if(value.seconds)return new Date(value.seconds*1000).toLocaleDateString();
+return String(value);
 }
 
 function money(value){
-
-  const n = Number(value || 0);
-
-  return "₹" + n.toLocaleString("en-IN");
+const n=Number(value||0);
+return "₹"+n.toLocaleString("en-IN");
 }
 
-/* =====================================
-AUTH
-===================================== */
+/* AUTH */
 
-onAuthStateChanged(auth, async user => {
+onAuthStateChanged(auth,async user=>{
+try{
 
-  try{
+if(!user){
+location.href="index.html";
+return;
+}
 
-    if(!user){
+currentUser=user;
 
-      location.href = "index.html";
+const userSnap=await getDoc(
+doc(db,"users",user.uid)
+);
 
-      return;
-    }
+if(!userSnap.exists()){
+alert("Admin profile not found.");
+await signOut(auth);
+location.href="index.html";
+return;
+}
 
-    currentUser = user;
+const profile=userSnap.data();
 
-    const userSnap =
-      await getDoc(
-        doc(db,"users",user.uid)
-      );
+if(profile.role!=="admin"){
+alert("Admin access required.");
+await signOut(auth);
+location.href="index.html";
+return;
+}
 
-    if(!userSnap.exists()){
+$("loading").style.display="none";
 
-      alert("Admin profile not found.");
+await loadEverything();
 
-      await signOut(auth);
+}catch(error){
 
-      location.href = "index.html";
+console.error(error);
 
-      return;
-    }
+$("loading").textContent=
+"Dashboard loading error: "+error.message;
 
-    const profile = userSnap.data();
-
-    if(profile.role !== "admin"){
-
-      alert("Admin access required.");
-
-      await signOut(auth);
-
-      location.href = "index.html";
-
-      return;
-    }
-
-    $("loading").style.display = "none";
-
-    await loadEverything();
-
-  }catch(error){
-
-    console.error(error);
-
-    $("loading").textContent =
-      "Dashboard loading error: " + error.message;
-
-  }
-
+}
 });
 
-/* =====================================
-NAVIGATION
-===================================== */
+/* NAVIGATION */
 
 document.querySelectorAll(".menu-btn")
 .forEach(button=>{
-
-  button.addEventListener("click",()=>{
-
-    openSection(
-      button.dataset.section
-    );
-
-    $("sidebar").classList.remove("open");
-
-  });
-
+button.addEventListener("click",()=>{
+openSection(button.dataset.section);
+$("sidebar").classList.remove("open");
+});
 });
 
 document.querySelectorAll(".quick-btn")
 .forEach(button=>{
-
-  button.addEventListener("click",()=>{
-
-    openSection(
-      button.dataset.go
-    );
-
-  });
-
+button.addEventListener("click",()=>{
+openSection(button.dataset.go);
+});
 });
 
 function openSection(id){
 
-  document.querySelectorAll(".section")
-  .forEach(section=>{
-    section.classList.remove("active");
-  });
+document.querySelectorAll(".section")
+.forEach(section=>{
+section.classList.remove("active");
+});
 
-  const target = $(id);
+const target=$(id);
 
-  if(target){
-    target.classList.add("active");
-  }
+if(target)target.classList.add("active");
 
-  document.querySelectorAll(".menu-btn")
-  .forEach(button=>{
-    button.classList.toggle(
-      "active",
-      button.dataset.section === id
-    );
-  });
+document.querySelectorAll(".menu-btn")
+.forEach(button=>{
+button.classList.toggle(
+"active",
+button.dataset.section===id
+);
+});
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
+window.scrollTo({top:0,behavior:"smooth"});
 }
 
 $("mobileMenu").addEventListener("click",()=>{
-
-  $("sidebar").classList.toggle("open");
-
+$("sidebar").classList.toggle("open");
 });
 
 $("logoutBtn").addEventListener("click",async()=>{
-
-  if(!confirm("Logout from admin dashboard?")) return;
-
-  await signOut(auth);
-
-  location.href="index.html";
-
+if(!confirm("Logout from admin dashboard?"))return;
+await signOut(auth);
+location.href="index.html";
 });
 
-/* =====================================
-LOAD EVERYTHING
-===================================== */
+/* LOAD EVERYTHING */
 
 async function loadEverything(){
 
-  await loadStudents();
+await loadStudents();
 
-  await Promise.all([
-    loadAttendance(),
-    loadStudy(),
-    loadResults(),
-    loadNotices(),
-    loadLeaves(),
-    loadMessages(),
-    loadDonations()
-  ]);
+await Promise.all([
+loadAttendance(),
+loadStudy(),
+loadResults(),
+loadNotices(),
+loadLeaves(),
+loadMessages(),
+loadDonations()
+]);
 
 }
 
-/* =====================================
-STUDENTS
-===================================== */
+/* STUDENTS */
 
 async function loadStudents(){
 
-  try{
+try{
 
-    const snap =
-      await getDocs(
-        collection(db,"students")
-      );
+const snap=await getDocs(
+collection(db,"students")
+);
 
-    window.students =
-      snap.docs.map(item=>({
-        id:item.id,
-        ...item.data()
-      }));
+window.students=snap.docs.map(item=>({
+id:item.id,
+...item.data()
+}));
 
-    renderStudents(
-      window.students
-    );
+renderStudents(window.students);
 
-    $("studentCount").textContent =
-      window.students.length;
+$("studentCount").textContent=
+window.students.length;
 
-    populateStudentSelects();
+populateStudentSelects();
 
-  }catch(error){
+}catch(error){
 
-    console.error(error);
+console.error(error);
 
-    $("studentsTable").innerHTML =
-      `<tr>
-        <td colspan="7">
-          Unable to load students
-        </td>
-      </tr>`;
+$("studentsTable").innerHTML=
+`<tr><td colspan="7">Unable to load students</td></tr>`;
 
-  }
-
+}
 }
 
 function renderStudents(list){
 
-  const table = $("studentsTable");
+const table=$("studentsTable");
 
-  if(!list.length){
+if(!list.length){
 
-    table.innerHTML =
-      `<tr>
-        <td colspan="7">
-          <div class="empty">
-            No students found
-          </div>
-        </td>
-      </tr>`;
+table.innerHTML=
+`<tr><td colspan="7"><div class="empty">No students found</div></td></tr>`;
 
-    return;
-  }
+return;
+}
 
-  table.innerHTML =
-    list.map(student=>`
+table.innerHTML=list.map(student=>`
 
-      <tr>
+<tr>
 
-        <td>
-          <strong>
-            ${escapeHtml(student.studentNumber)}
-          </strong>
-        </td>
+<td><strong>${escapeHtml(student.studentNumber)}</strong></td>
 
-        <td>
-          ${escapeHtml(student.studentName)}
-        </td>
+<td>${escapeHtml(student.studentName)}</td>
 
-        <td>
-          ${escapeHtml(student.guardianName || "-")}
-        </td>
+<td>${escapeHtml(student.guardianName||"-")}</td>
 
-        <td>
-          ${escapeHtml(student.className || "-")}
-        </td>
+<td>${escapeHtml(student.className||"-")}</td>
 
-        <td>
-          ${escapeHtml(student.parentEmail || "-")}
-        </td>
+<td>${escapeHtml(student.parentEmail||"-")}</td>
 
-        <td>
-          ${escapeHtml(student.phoneNumber || "-")}
-        </td>
+<td>${escapeHtml(student.phoneNumber||"-")}</td>
 
-        <td>
+<td>
 
-          <div class="actions">
+<div class="actions">
 
-            <button
-              class="secondary edit-student"
-              data-id="${student.id}">
-              Edit
-            </button>
+<button
+class="secondary edit-student"
+data-id="${student.id}">
+Edit
+</button>
 
-            <button
-              class="danger delete-student"
-              data-id="${student.id}">
-              Delete
-            </button>
+<button
+class="danger delete-student"
+data-id="${student.id}">
+Delete
+</button>
 
-          </div>
+</div>
 
-        </td>
+</td>
 
-      </tr>
+</tr>
 
-    `).join("");
+`).join("");
 
-  document.querySelectorAll(".delete-student")
-  .forEach(button=>{
+document.querySelectorAll(".delete-student")
+.forEach(button=>{
 
-    button.addEventListener("click",async()=>{
+button.addEventListener("click",async()=>{
 
-      const student =
-        window.students.find(
-          s => s.id === button.dataset.id
-        );
+const student=window.students.find(
+s=>s.id===button.dataset.id
+);
 
-      if(!student) return;
+if(!student)return;
 
-      if(!confirm(
-        `Delete ${student.studentName}?`
-      )) return;
+if(!confirm(`Delete ${student.studentName}?`))return;
 
-      try{
+try{
 
-        await deleteDoc(
-          doc(
-            db,
-            "students",
-            button.dataset.id
-          )
-        );
+await deleteDoc(
+doc(db,"students",button.dataset.id)
+);
 
-        showMessage("Student deleted.");
+showMessage("Student deleted.");
 
-        await loadStudents();
+await loadStudents();
 
-      }catch(error){
+}catch(error){
 
-        console.error(error);
+console.error(error);
 
-        showMessage(
-          "Unable to delete student.",
-          "error"
-        );
+showMessage(
+"Unable to delete student.",
+"error"
+);
 
-      }
+}
 
-    });
+});
 
-  });
+});
 
-  document.querySelectorAll(".edit-student")
-  .forEach(button=>{
+document.querySelectorAll(".edit-student")
+.forEach(button=>{
 
-    button.addEventListener("click",()=>{
+button.addEventListener("click",()=>{
 
-      const student =
-        window.students.find(
-          s => s.id === button.dataset.id
-        );
+const student=window.students.find(
+s=>s.id===button.dataset.id
+);
 
-      if(!student) return;
+if(!student)return;
 
-      $("editStudentNumber").value =
-        student.studentNumber || "";
+$("editStudentNumber").value=
+student.studentNumber||"";
 
-      $("editStudentName").value =
-        student.studentName || "";
+$("editStudentName").value=
+student.studentName||"";
 
-      $("editGuardianName").value =
-        student.guardianName || "";
+$("editGuardianName").value=
+student.guardianName||"";
 
-      $("editClassName").value =
-        student.className || "";
+$("editClassName").value=
+student.className||"";
 
-      $("editParentEmail").value =
-        student.parentEmail || "";
+$("editParentEmail").value=
+student.parentEmail||"";
 
-      $("editPhoneNumber").value =
-        student.phoneNumber || "";
+$("editPhoneNumber").value=
+student.phoneNumber||"";
 
-      $("editStudentAddress").value =
-        student.studentAddress || "";
+$("editStudentAddress").value=
+student.studentAddress||"";
 
-      $("editStudentModal").classList.add("show");
+$("editStudentModal").classList.add("show");
 
-      $("saveEditStudent").dataset.id =
-        student.id;
+$("saveEditStudent").dataset.id=student.id;
 
-    });
+});
 
-  });
+});
 
 }
 
 $("studentForm").addEventListener(
-  "submit",
-  async event=>{
+"submit",
+async event=>{
 
-    event.preventDefault();
+event.preventDefault();
 
-    const studentNumber =
-      $("studentNumber").value.trim();
+const studentNumber=$("studentNumber").value.trim();
+const studentName=$("studentName").value.trim();
 
-    const studentName =
-      $("studentName").value.trim();
+if(window.students.some(
+s=>String(s.studentNumber).trim()===studentNumber
+)){
 
-    if(
-      window.students.some(
-        s =>
-          String(s.studentNumber).trim() ===
-          studentNumber
-      )
-    ){
-
-      showMessage(
-        "Student number already exists.",
-        "error"
-      );
-
-      return;
-    }
-
-    try{
-
-      await addDoc(
-        collection(db,"students"),
-        {
-          studentNumber,
-          studentName,
-          guardianName:$("guardianName").value.trim(),
-          className:$("className").value.trim(),
-          parentEmail:$("parentEmail").value.trim(),
-          studentAddress:$("studentAddress").value.trim(),
-          phoneNumber:$("phoneNumber").value.trim(),
-          createdAt:serverTimestamp()
-        }
-      );
-
-      $("studentForm").reset();
-
-      showMessage("Student added successfully.");
-
-      await loadStudents();
-
-    }catch(error){
-
-      console.error(error);
-
-      showMessage(
-        "Unable to add student: " + error.message,
-        "error"
-      );
-
-    }
-
-  }
+showMessage(
+"Student number already exists.",
+"error"
 );
+
+return;
+}
+
+try{
+
+await addDoc(
+collection(db,"students"),
+{
+studentNumber,
+studentName,
+guardianName:$("guardianName").value.trim(),
+className:$("className").value.trim(),
+parentEmail:$("parentEmail").value.trim(),
+studentAddress:$("studentAddress").value.trim(),
+phoneNumber:$("phoneNumber").value.trim(),
+createdAt:serverTimestamp()
+}
+);
+
+$("studentForm").reset();
+
+showMessage("Student added successfully.");
+
+await loadStudents();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"Unable to add student: "+error.message,
+"error"
+);
+
+}
+
+});
 
 /* SEARCH */
 
 $("studentSearch").addEventListener(
-  "input",
-  event=>{
+"input",
+event=>{
 
-    const query =
-      event.target.value
-        .toLowerCase()
-        .trim();
+const query=event.target.value.toLowerCase().trim();
 
-    const filtered =
-      window.students.filter(student=>{
+const filtered=window.students.filter(student=>{
 
-        const text = [
-          student.studentNumber,
-          student.studentName,
-          student.guardianName,
-          student.className,
-          student.parentEmail,
-          student.studentAddress,
-          student.phoneNumber
-        ]
-        .join(" ")
-        .toLowerCase();
+const text=[
+student.studentNumber,
+student.studentName,
+student.guardianName,
+student.className,
+student.parentEmail,
+student.studentAddress,
+student.phoneNumber
+].join(" ").toLowerCase();
 
-        return text.includes(query);
+return text.includes(query);
 
-      });
+});
 
-    renderStudents(filtered);
+renderStudents(filtered);
 
-  }
-);
+});
 
 /* EDIT MODAL */
 
 $("closeEditModal").addEventListener(
-  "click",
-  ()=>{
-    $("editStudentModal")
-      .classList.remove("show");
-  }
+"click",
+()=>$("editStudentModal").classList.remove("show")
 );
 
 $("cancelEditStudent").addEventListener(
-  "click",
-  ()=>{
-    $("editStudentModal")
-      .classList.remove("show");
-  }
+"click",
+()=>$("editStudentModal").classList.remove("show")
 );
 
 $("saveEditStudent").addEventListener(
-  "click",
-  async()=>{
+"click",
+async()=>{
 
-    const id =
-      $("saveEditStudent").dataset.id;
+const id=$("saveEditStudent").dataset.id;
 
-    if(!id) return;
+if(!id)return;
 
-    try{
+try{
 
-      await updateDoc(
-        doc(db,"students",id),
-        {
-          studentName:
-            $("editStudentName").value.trim(),
-
-          guardianName:
-            $("editGuardianName").value.trim(),
-
-          className:
-            $("editClassName").value.trim(),
-
-          parentEmail:
-            $("editParentEmail").value.trim(),
-
-          studentAddress:
-            $("editStudentAddress").value.trim(),
-
-          phoneNumber:
-            $("editPhoneNumber").value.trim()
-        }
-      );
-
-      $("editStudentModal")
-        .classList.remove("show");
-
-      showMessage(
-        "Student updated successfully."
-      );
-
-      await loadStudents();
-
-    }catch(error){
-
-      console.error(error);
-
-      showMessage(
-        "Unable to update student.",
-        "error"
-      );
-
-    }
-
-  }
+await updateDoc(
+doc(db,"students",id),
+{
+studentName:$("editStudentName").value.trim(),
+guardianName:$("editGuardianName").value.trim(),
+className:$("editClassName").value.trim(),
+parentEmail:$("editParentEmail").value.trim(),
+studentAddress:$("editStudentAddress").value.trim(),
+phoneNumber:$("editPhoneNumber").value.trim()
+}
 );
 
-/* =====================================
-STUDENT SELECTS
-===================================== */
+$("editStudentModal").classList.remove("show");
+
+showMessage("Student updated successfully.");
+
+await loadStudents();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"Unable to update student.",
+"error"
+);
+
+}
+
+});
+
+/* STUDENT SELECTS */
 
 function populateStudentSelects(){
 
-  const selects = [
-    "attendanceStudent",
-    "studyStudent",
-    "resultStudent"
-  ];
+const selects=[
+"attendanceStudent",
+"studyStudent",
+"resultStudent"
+];
 
-  selects.forEach(id=>{
+selects.forEach(id=>{
 
-    const select = $(id);
+const select=$(id);
 
-    if(!select) return;
+if(!select)return;
 
-    const old =
-      select.value;
+const old=select.value;
 
-    select.innerHTML =
-      `<option value="">
-        Select student
-      </option>` +
+select.innerHTML=
+`<option value="">Select student</option>`+
+window.students.map(student=>`
+<option value="${escapeHtml(student.studentNumber)}">
+${escapeHtml(student.studentNumber)} - ${escapeHtml(student.studentName)}
+</option>
+`).join("");
 
-      window.students
-      .map(student=>`
+if(old)select.value=old;
 
-        <option value="${escapeHtml(student.studentNumber)}">
-          ${escapeHtml(student.studentNumber)}
-          - 
-          ${escapeHtml(student.studentName)}
-        </option>
-
-      `)
-      .join("");
-
-    if(old){
-      select.value = old;
-    }
-
-  });
+});
 
 }
 
-/* =====================================
-ATTENDANCE
-===================================== */
+/* ATTENDANCE */
 
 $("attendanceForm").addEventListener(
-  "submit",
-  async event=>{
+"submit",
+async event=>{
 
-    event.preventDefault();
+event.preventDefault();
 
-    try{
+try{
 
-      await addDoc(
-        collection(db,"attendance"),
-        {
-          studentNumber:
-            $("attendanceStudent").value,
-
-          date:
-            $("attendanceDate").value,
-
-          status:
-            $("attendanceStatus").value,
-
-          createdAt:
-            serverTimestamp()
-        }
-      );
-
-      showMessage(
-        "Attendance saved."
-      );
-
-      await loadAttendance();
-
-    }catch(error){
-
-      console.error(error);
-
-      showMessage(
-        "Unable to save attendance.",
-        "error"
-      );
-
-    }
-
-  }
+await addDoc(
+collection(db,"attendance"),
+{
+studentNumber:$("attendanceStudent").value,
+date:$("attendanceDate").value,
+status:$("attendanceStatus").value,
+createdAt:serverTimestamp()
+}
 );
+
+showMessage("Attendance saved.");
+
+await loadAttendance();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"Unable to save attendance.",
+"error"
+);
+
+}
+
+});
 
 async function loadAttendance(){
 
-  try{
+try{
 
-    const snap =
-      await getDocs(
-        collection(db,"attendance")
-      );
+const snap=await getDocs(
+collection(db,"attendance")
+);
 
-    const rows =
-      snap.docs.map(item=>({
-        id:item.id,
-        ...item.data()
-      }));
+const rows=snap.docs.map(item=>({
+id:item.id,
+...item.data()
+}));
 
-    rows.sort(
-      (a,b)=>
-        String(b.date||"")
-        .localeCompare(
-          String(a.date||"")
-        )
-    );
+rows.sort((a,b)=>
+String(b.date||"").localeCompare(String(a.date||""))
+);
 
-    $("attendanceCount").textContent =
-      rows.length;
+$("attendanceCount").textContent=rows.length;
 
-    const table =
-      $("attendanceTable");
+const table=$("attendanceTable");
 
-    if(!rows.length){
+if(!rows.length){
 
-      table.innerHTML =
-        `<div class="empty">
-          No attendance records.
-        </div>`;
+table.innerHTML=
+`<div class="empty">No attendance records.</div>`;
 
-      return;
-    }
+return;
+}
 
-    table.innerHTML =
-      `<div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Student</th>
-              <th>Number</th>
-              <th>Date</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
+table.innerHTML=
+`<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Student</th>
+<th>Number</th>
+<th>Date</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
 
-          <tbody>
+${rows.map(row=>`
 
-            ${rows.map(row=>`
+<tr>
 
-              <tr>
+<td>${escapeHtml(studentNameByNumber(row.studentNumber))}</td>
 
-                <td>
-                  ${escapeHtml(
-                    studentNameByNumber(
-                      row.studentNumber
-                    )
-                  )}
-                </td>
+<td>${escapeHtml(row.studentNumber)}</td>
 
-                <td>
-                  ${escapeHtml(
-                    row.studentNumber
-                  )}
-                </td>
+<td>${escapeHtml(row.date)}</td>
 
-                <td>
-                  ${escapeHtml(row.date)}
-                </td>
+<td>
 
-                <td>
+<span class="badge ${
+row.status==="present"
+?"badge-green"
+:row.status==="leave"
+?"badge-yellow"
+:"badge-red"
+}">
 
-                  <span class="badge ${
-                    row.status === "present"
-                      ? "badge-green"
-                      : row.status === "leave"
-                      ? "badge-yellow"
-                      : "badge-red"
-                  }">
+${escapeHtml(row.status)}
 
-                    ${escapeHtml(row.status)}
+</span>
 
-                  </span>
+</td>
 
-                </td>
+<td>
 
-                <td>
+<button
+class="danger attendance-delete-btn"
+data-id="${row.id}">
+Delete
+</button>
 
-                  <button
-                    class="danger attendance-delete-btn"
-                    data-id="${row.id}">
-                    Delete
-                  </button>
+</td>
 
-                </td>
+</tr>
 
-              </tr>
+`).join("")}
 
-            `).join("")}
+</tbody>
+</table>
+</div>`;
 
-          </tbody>
-        </table>
-      </div>`;
+document.querySelectorAll(".attendance-delete-btn")
+.forEach(button=>{
 
-    document
-      .querySelectorAll(".attendance-delete-btn")
-      .forEach(button=>{
+button.addEventListener("click",async()=>{
 
-        button.addEventListener(
-          "click",
-          async()=>{
+if(!confirm("Delete attendance record?"))return;
 
-            if(!confirm("Delete attendance record?"))
-              return;
+await deleteDoc(
+doc(db,"attendance",button.dataset.id)
+);
 
-            await deleteDoc(
-              doc(
-                db,
-                "attendance",
-                button.dataset.id
-              )
-            );
+showMessage("Attendance deleted.");
 
-            showMessage(
-              "Attendance deleted."
-            );
+await loadAttendance();
 
-            await loadAttendance();
+});
 
-          }
-        );
+});
 
-      });
+}catch(error){
 
-  }catch(error){
+console.error(error);
 
-    console.error(error);
-
-    $("attendanceTable").innerHTML =
-      `<div class="empty">
-        Unable to load attendance.
-      </div>`;
-
-  }
+$("attendanceTable").innerHTML=
+`<div class="empty">Unable to load attendance.</div>`;
 
 }
 
-/* =====================================
-STUDY
-===================================== */
+}
+
+/* STUDY */
 
 $("studyForm").addEventListener(
-  "submit",
-  async event=>{
+"submit",
+async event=>{
 
-    event.preventDefault();
+event.preventDefault();
 
-    try{
+try{
 
-      await addDoc(
-        collection(db,"studyProgress"),
-        {
-          studentNumber:
-            $("studyStudent").value,
-
-          date:
-            $("studyDate").value,
-
-          surah:
-            $("studySurah").value.trim(),
-
-          newLesson:
-            $("newLesson").value.trim(),
-
-          revision:
-            $("revision").value.trim(),
-
-          performance:
-            $("performance").value.trim(),
-
-          studyStatus:
-            $("studyStatus").value,
-
-          note:
-            $("studyNote").value.trim(),
-
-          createdAt:
-            serverTimestamp()
-        }
-      );
-
-      $("studyForm").reset();
-
-      setDefaultDates();
-
-      showMessage(
-        "Study progress saved."
-      );
-
-      await loadStudy();
-
-    }catch(error){
-
-      console.error(error);
-
-      showMessage(
-        "Unable to save study progress.",
-        "error"
-      );
-
-    }
-
-  }
+await addDoc(
+collection(db,"studyProgress"),
+{
+studentNumber:$("studyStudent").value,
+date:$("studyDate").value,
+surah:$("studySurah").value.trim(),
+newLesson:$("newLesson").value.trim(),
+revision:$("revision").value.trim(),
+performance:$("performance").value.trim(),
+studyStatus:$("studyStatus").value,
+note:$("studyNote").value.trim(),
+createdAt:serverTimestamp()
+}
 );
+
+$("studyForm").reset();
+
+setDefaultDates();
+
+showMessage("Study progress saved.");
+
+await loadStudy();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"Unable to save study progress.",
+"error"
+);
+
+}
+
+});
 
 async function loadStudy(){
 
-  try{
+try{
 
-    const snap =
-      await getDocs(
-        collection(db,"studyProgress")
-      );
+const snap=await getDocs(
+collection(db,"studyProgress")
+);
 
-    const rows =
-      snap.docs.map(item=>({
-        id:item.id,
-        ...item.data()
-      }));
+const rows=snap.docs.map(item=>({
+id:item.id,
+...item.data()
+}));
 
-    rows.sort(
-      (a,b)=>
-        String(b.date||"")
-        .localeCompare(
-          String(a.date||"")
-        )
-    );
+rows.sort((a,b)=>
+String(b.date||"").localeCompare(String(a.date||""))
+);
 
-    const table =
-      $("studyTable");
+const table=$("studyTable");
 
-    if(!rows.length){
+if(!rows.length){
 
-      table.innerHTML =
-        `<tr>
-          <td colspan="8">
-            <div class="empty">
-              No study records.
-            </div>
-          </td>
-        </tr>`;
+table.innerHTML=
+`<tr><td colspan="8">
+<div class="empty">No study records.</div>
+</td></tr>`;
 
-      return;
-    }
+return;
+}
 
-    table.innerHTML =
-      rows.map(row=>`
+table.innerHTML=rows.map(row=>`
 
-        <tr>
+<tr>
 
-          <td>
-            ${escapeHtml(
-              studentNameByNumber(
-                row.studentNumber
-              )
-            )}
-          </td>
+<td>${escapeHtml(studentNameByNumber(row.studentNumber))}</td>
 
-          <td>
-            ${escapeHtml(row.date)}
-          </td>
+<td>${escapeHtml(row.date)}</td>
 
-          <td>
-            ${escapeHtml(row.surah || "-")}
-          </td>
+<td>${escapeHtml(row.surah||"-")}</td>
 
-          <td>
-            ${escapeHtml(row.newLesson || "-")}
-          </td>
+<td>${escapeHtml(row.newLesson||"-")}</td>
 
-          <td>
-            ${escapeHtml(row.revision || "-")}
-          </td>
+<td>${escapeHtml(row.revision||"-")}</td>
 
-          <td>
-            ${escapeHtml(row.performance || "-")}
-          </td>
+<td>${escapeHtml(row.performance||"-")}</td>
 
-          <td>
-            ${escapeHtml(row.studyStatus || "-")}
-          </td>
+<td>${escapeHtml(row.studyStatus||"-")}</td>
 
-          <td>
+<td>
 
-            <button
-              class="danger study-delete"
-              data-id="${row.id}">
-              Delete
-            </button>
+<button
+class="danger study-delete"
+data-id="${row.id}">
+Delete
+</button>
 
-          </td>
+</td>
 
-        </tr>
+</tr>
 
-      `).join("");
+`).join("");
 
-    document
-      .querySelectorAll(".study-delete")
-      .forEach(button=>{
+document.querySelectorAll(".study-delete")
+.forEach(button=>{
 
-        button.addEventListener(
-          "click",
-          async()=>{
+button.addEventListener("click",async()=>{
 
-            if(!confirm("Delete study record?"))
-              return;
+if(!confirm("Delete study record?"))return;
 
-            await deleteDoc(
-              doc(
-                db,
-                "studyProgress",
-                button.dataset.id
-              )
-            );
+await deleteDoc(
+doc(db,"studyProgress",button.dataset.id)
+);
 
-            showMessage(
-              "Study record deleted."
-            );
+showMessage("Study record deleted.");
 
-            await loadStudy();
+await loadStudy();
 
-          }
-        );
+});
 
-      });
+});
 
-  }catch(error){
+}catch(error){
 
-    console.error(error);
+console.error(error);
 
-    $("studyTable").innerHTML =
-      `<tr>
-        <td colspan="8">
-          Unable to load study records.
-        </td>
-      </tr>`;
-
-  }
+$("studyTable").innerHTML=
+`<tr><td colspan="8">Unable to load study records.</td></tr>`;
 
 }
 
-/* =====================================
-RESULTS
-===================================== */
+}
+
+/* RESULTS */
 
 $("resultForm").addEventListener(
-  "submit",
-  async event=>{
+"submit",
+async event=>{
 
-    event.preventDefault();
+event.preventDefault();
 
-    try{
+try{
 
-      await addDoc(
-        collection(db,"results"),
-        {
-          studentNumber:
-            $("resultStudent").value,
-
-          title:
-            $("resultTitle").value.trim(),
-
-          mark:
-            $("resultMark").value.trim(),
-
-          status:
-            $("resultStatus").value,
-
-          createdAt:
-            serverTimestamp()
-        }
-      );
-
-      $("resultForm").reset();
-
-      showMessage(
-        "Result added successfully."
-      );
-
-      await loadResults();
-
-    }catch(error){
-
-      console.error(error);
-
-      showMessage(
-        "Unable to add result.",
-        "error"
-      );
-
-    }
-
-  }
+await addDoc(
+collection(db,"results"),
+{
+studentNumber:$("resultStudent").value,
+title:$("resultTitle").value.trim(),
+mark:$("resultMark").value.trim(),
+status:$("resultStatus").value,
+createdAt:serverTimestamp()
+}
 );
+
+$("resultForm").reset();
+
+showMessage("Result added successfully.");
+
+await loadResults();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"Unable to add result.",
+"error"
+);
+
+}
+
+});
 
 async function loadResults(){
 
-  try{
+try{
 
-    const snap =
-      await getDocs(
-        collection(db,"results")
-      );
+const snap=await getDocs(
+collection(db,"results")
+);
 
-    const rows =
-      snap.docs.map(item=>({
-        id:item.id,
-        ...item.data()
-      }));
+const rows=snap.docs.map(item=>({
+id:item.id,
+...item.data()
+}));
 
-    rows.sort(
-      (a,b)=>
-        (b.createdAt?.seconds||0) -
-        (a.createdAt?.seconds||0)
-    );
+rows.sort((a,b)=>
+(b.createdAt?.seconds||0)-
+(a.createdAt?.seconds||0)
+);
 
-    const table =
-      $("resultsTable");
+const table=$("resultsTable");
 
-    if(!rows.length){
+if(!rows.length){
 
-      table.innerHTML =
-        `<tr>
-          <td colspan="5">
-            <div class="empty">
-              No results found.
-            </div>
-          </td>
-        </tr>`;
+table.innerHTML=
+`<tr><td colspan="5">
+<div class="empty">No results found.</div>
+</td></tr>`;
 
-      return;
-    }
+return;
+}
 
-    table.innerHTML =
-      rows.map(row=>`
+table.innerHTML=rows.map(row=>`
 
-        <tr>
+<tr>
 
-          <td>
-            ${escapeHtml(
-              studentNameByNumber(
-                row.studentNumber
-              )
-            )}
-            <br>
-            <small>
-              ${escapeHtml(row.studentNumber)}
-            </small>
-          </td>
+<td>
+${escapeHtml(studentNameByNumber(row.studentNumber))}
+<br>
+<small>${escapeHtml(row.studentNumber)}</small>
+</td>
 
-          <td>
-            ${escapeHtml(row.title)}
-          </td>
+<td>${escapeHtml(row.title)}</td>
 
-          <td>
-            <strong>
-              ${escapeHtml(row.mark)}
-            </strong>
-          </td>
+<td><strong>${escapeHtml(row.mark)}</strong></td>
 
-          <td>
+<td>
 
-            <span class="badge ${
-              row.status === "published"
-                ? "badge-green"
-                : "badge-yellow"
-            }">
+<span class="badge ${
+row.status==="published"
+?"badge-green"
+:"badge-yellow"
+}">
 
-              ${escapeHtml(row.status)}
+${escapeHtml(row.status)}
 
-            </span>
+</span>
 
-          </td>
+</td>
 
-          <td>
+<td>
 
-            <div class="actions">
+<div class="actions">
 
-              <button
-                class="${
-                  row.status === "published"
-                    ? "warning"
-                    : "success"
-                } result-toggle"
-                data-id="${row.id}"
-                data-status="${row.status}">
+<button
+class="${
+row.status==="published"
+?"warning"
+:"success"
+} result-toggle"
+data-id="${row.id}"
+data-status="${row.status}">
 
-                ${
-                  row.status === "published"
-                    ? "Unpublish"
-                    : "Publish"
-                }
+${row.status==="published"?"Unpublish":"Publish"}
 
-              </button>
+</button>
 
-              <button
-                class="danger result-delete"
-                data-id="${row.id}">
-                Delete
-              </button>
+<button
+class="danger result-delete"
+data-id="${row.id}">
+Delete
+</button>
 
-            </div>
+</div>
 
-          </td>
+</td>
 
-        </tr>
+</tr>
 
-      `).join("");
+`).join("");
 
-    document
-      .querySelectorAll(".result-toggle")
-      .forEach(button=>{
+document.querySelectorAll(".result-toggle")
+.forEach(button=>{
 
-        button.addEventListener(
-          "click",
-          async()=>{
+button.addEventListener("click",async()=>{
 
-            const newStatus =
-              button.dataset.status === "published"
-                ? "draft"
-                : "published";
+const newStatus=
+button.dataset.status==="published"
+?"draft"
+:"published";
 
-            await updateDoc(
-              doc(
-                db,
-                "results",
-                button.dataset.id
-              ),
-              {
-                status:newStatus
-              }
-            );
+await updateDoc(
+doc(db,"results",button.dataset.id),
+{status:newStatus}
+);
 
-            showMessage(
-              newStatus === "published"
-                ? "Result published."
-                : "Result unpublished."
-            );
+showMessage(
+newStatus==="published"
+?"Result published."
+:"Result unpublished."
+);
 
-            await loadResults();
+await loadResults();
 
-          }
-        );
+});
 
-      });
+});
 
-    document
-      .querySelectorAll(".result-delete")
-      .forEach(button=>{
+document.querySelectorAll(".result-delete")
+.forEach(button=>{
 
-        button.addEventListener(
-          "click",
-          async()=>{
+button.addEventListener("click",async()=>{
 
-            if(!confirm("Delete this result?"))
-              return;
+if(!confirm("Delete this result?"))return;
 
-            await deleteDoc(
-              doc(
-                db,
-                "results",
-                button.dataset.id
-              )
-            );
+await deleteDoc(
+doc(db,"results",button.dataset.id)
+);
 
-            showMessage(
-              "Result deleted."
-            );
+showMessage("Result deleted.");
 
-            await loadResults();
+await loadResults();
 
-          }
-        );
+});
 
-      });
+});
 
-  }catch(error){
+}catch(error){
 
-    console.error(error);
-
-  }
+console.error(error);
 
 }
 
-/* =====================================
-NOTICES
-===================================== */
+}
+
+/* NOTICES */
 
 $("noticeForm").addEventListener(
-  "submit",
-  async event=>{
+"submit",
+async event=>{
 
-    event.preventDefault();
+event.preventDefault();
 
-    try{
+try{
 
-      await addDoc(
-        collection(db,"notices"),
-        {
-          title:
-            $("noticeTitle").value.trim(),
-
-          text:
-            $("noticeText").value.trim(),
-
-          status:
-            $("noticeStatus").value,
-
-          createdAt:
-            serverTimestamp()
-        }
-      );
-
-      $("noticeForm").reset();
-
-      showMessage(
-        "Notice added successfully."
-      );
-
-      await loadNotices();
-
-    }catch(error){
-
-      console.error(error);
-
-      showMessage(
-        "Unable to add notice.",
-        "error"
-      );
-
-    }
-
-  }
+await addDoc(
+collection(db,"notices"),
+{
+title:$("noticeTitle").value.trim(),
+text:$("noticeText").value.trim(),
+status:$("noticeStatus").value,
+createdAt:serverTimestamp()
+}
 );
+
+$("noticeForm").reset();
+
+showMessage("Notice added successfully.");
+
+await loadNotices();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"Unable to add notice.",
+"error"
+);
+
+}
+
+});
 
 async function loadNotices(){
 
-  try{
+try{
 
-    const snap =
-      await getDocs(
-        collection(db,"notices")
-      );
+const snap=await getDocs(
+collection(db,"notices")
+);
 
-    const rows =
-      snap.docs.map(item=>({
-        id:item.id,
-        ...item.data()
-      }));
+const rows=snap.docs.map(item=>({
+id:item.id,
+...item.data()
+}));
 
-    rows.sort(
-      (a,b)=>
-        (b.createdAt?.seconds||0) -
-        (a.createdAt?.seconds||0)
-    );
+rows.sort((a,b)=>
+(b.createdAt?.seconds||0)-
+(a.createdAt?.seconds||0)
+);
 
-    const table =
-      $("noticesTable");
+const table=$("noticesTable");
 
-    if(!rows.length){
+if(!rows.length){
 
-      table.innerHTML =
-        `<tr>
-          <td colspan="4">
-            <div class="empty">
-              No notices.
-            </div>
-          </td>
-        </tr>`;
+table.innerHTML=
+`<tr><td colspan="4">
+<div class="empty">No notices.</div>
+</td></tr>`;
 
-      return;
-    }
+return;
+}
 
-    table.innerHTML =
-      rows.map(row=>`
+table.innerHTML=rows.map(row=>`
 
-        <tr>
+<tr>
 
-          <td>
-            <strong>
-              ${escapeHtml(row.title)}
-            </strong>
-          </td>
+<td><strong>${escapeHtml(row.title)}</strong></td>
 
-          <td>
-            ${escapeHtml(row.text)}
-          </td>
+<td>${escapeHtml(row.text)}</td>
 
-          <td>
+<td>
 
-            <span class="badge ${
-              row.status === "published"
-                ? "badge-green"
-                : "badge-yellow"
-            }">
+<span class="badge ${
+row.status==="published"
+?"badge-green"
+:"badge-yellow"
+}">
 
-              ${escapeHtml(row.status)}
+${escapeHtml(row.status)}
 
-            </span>
+</span>
 
-          </td>
+</td>
 
-          <td>
+<td>
 
-            <div class="actions">
+<div class="actions">
 
-              <button
-                class="${
-                  row.status === "published"
-                    ? "warning"
-                    : "success"
-                } notice-toggle"
-                data-id="${row.id}"
-                data-status="${row.status}">
+<button
+class="${
+row.status==="published"
+?"warning"
+:"success"
+} notice-toggle"
+data-id="${row.id}"
+data-status="${row.status}">
 
-                ${
-                  row.status === "published"
-                    ? "Unpublish"
-                    : "Publish"
-                }
+${row.status==="published"?"Unpublish":"Publish"}
 
-              </button>
+</button>
 
-              <button
-                class="danger notice-delete"
-                data-id="${row.id}">
-                Delete
-              </button>
+<button
+class="danger notice-delete"
+data-id="${row.id}">
+Delete
+</button>
 
-            </div>
+</div>
 
-          </td>
+</td>
 
-        </tr>
+</tr>
 
-      `).join("");
+`).join("");
 
-    document
-      .querySelectorAll(".notice-toggle")
-      .forEach(button=>{
+document.querySelectorAll(".notice-toggle")
+.forEach(button=>{
 
-        button.addEventListener(
-          "click",
-          async()=>{
+button.addEventListener("click",async()=>{
 
-            const status =
-              button.dataset.status === "published"
-                ? "draft"
-                : "published";
+const status=
+button.dataset.status==="published"
+?"draft"
+:"published";
 
-            await updateDoc(
-              doc(
-                db,
-                "notices",
-                button.dataset.id
-              ),
-              {status}
-            );
+await updateDoc(
+doc(db,"notices",button.dataset.id),
+{status}
+);
 
-            showMessage(
-              status === "published"
-                ? "Notice published."
-                : "Notice unpublished."
-            );
+showMessage(
+status==="published"
+?"Notice published."
+:"Notice unpublished."
+);
 
-            await loadNotices();
+await loadNotices();
 
-          }
-        );
+});
 
-      });
+});
 
-    document
-      .querySelectorAll(".notice-delete")
-      .forEach(button=>{
+document.querySelectorAll(".notice-delete")
+.forEach(button=>{
 
-        button.addEventListener(
-          "click",
-          async()=>{
+button.addEventListener("click",async()=>{
 
-            if(!confirm("Delete this notice?"))
-              return;
+if(!confirm("Delete this notice?"))return;
 
-            await deleteDoc(
-              doc(
-                db,
-                "notices",
-                button.dataset.id
-              )
-            );
+await deleteDoc(
+doc(db,"notices",button.dataset.id)
+);
 
-            showMessage(
-              "Notice deleted."
-            );
+showMessage("Notice deleted.");
 
-            await loadNotices();
+await loadNotices();
 
-          }
-        );
+});
 
-      });
+});
 
-  }catch(error){
+}catch(error){
 
-    console.error(error);
-
-  }
+console.error(error);
 
 }
 
-/* =====================================
-LEAVE
-===================================== */
+}
+
+/* LEAVE */
 
 async function loadLeaves(){
 
-  try{
-
-    const snap =
-      await getDocs(
-        collection(db,"leaveRequests")
-      );
-
-    const rows =
-      snap.docs.map(item=>({
-        id:item.id,
-        ...item.data()
-      }));
-
-    rows.sort(
-      (a,b)=>
-        (b.createdAt?.seconds||0) -
-        (a.createdAt?.seconds||0)
-    );
-
-    $("leaveCount").textContent =
-      rows.length;
-
-    const table =
-      $("leaveTable");
+try{
 
-    if(!rows.length){
-
-      table.innerHTML =
-        `<tr>
-          <td colspan="7">
-            <div class="empty">
-              No leave requests.
-            </div>
-          </td>
-        </tr>`;
-
-      return;
-    }
-
-    table.innerHTML =
-      rows.map(row=>`
-
-        <tr>
-
-          <td>
-            <strong>
-              ${escapeHtml(
-                studentNameByNumber(
-                  row.studentNumber
-                )
-              )}
-            </strong>
-            <br>
-            ${escapeHtml(row.studentNumber)}
-          </td>
-
-          <td>
-            ${escapeHtml(row.parentEmail || "-")}
-          </td>
-
-          <td>
-            ${escapeHtml(row.leaveDate || "-")}
-          </td>
-
-          <td>
-            ${escapeHtml(row.reason || "-")}
-          </td>
-
-          <td>
-
-            <span class="badge ${
-              row.status === "approved"
-                ? "badge-green"
-                : row.status === "rejected"
-                ? "badge-red"
-                : "badge-yellow"
-            }">
-
-              ${escapeHtml(row.status || "pending")}
-
-            </span>
-
-          </td>
-
-          <td>
-            ${escapeHtml(row.reply || "-")}
-          </td>
-
-          <td>
-
-            <div class="actions">
-
-              <button
-                class="success leave-approve"
-                data-id="${row.id}">
-                Approve
-              </button>
-
-              <button
-                class="warning leave-reject"
-                data-id="${row.id}">
-                Reject
-              </button>
-
-              <button
-                class="secondary leave-reply"
-                data-id="${row.id}">
-                Reply
-              </button>
-
-              <button
-                class="danger leave-delete"
-                data-id="${row.id}">
-                Delete
-              </button>
-
-            </div>
-
-          </td>
-
-        </tr>
-
-      `).join("");
-
-    document
-      .querySelectorAll(".leave-approve")
-      .forEach(button=>{
-
-        button.addEventListener(
-          "click",
-          async()=>{
-
-            await updateDoc(
-              doc(
-                db,
-                "leaveRequests",
-                button.dataset.id
-              ),
-              {
-                status:"approved",
-                repliedAt:serverTimestamp()
-              }
-            );
-
-            showMessage(
-              "Leave approved."
-            );
-
-            await loadLeaves();
-
-          }
-        );
+const snap=await getDocs(
+collection(db,"leaveRequests")
+);
 
-      });
+const rows=snap.docs.map(item=>({
+id:item.id,
+...item.data()
+}));
 
-    document
-      .querySelectorAll(".leave-reject")
-      .forEach(button=>{
+rows.sort((a,b)=>
+(b.createdAt?.seconds||0)-
+(a.createdAt?.seconds||0)
+);
 
-        button.addEventListener(
-          "click",
-          async()=>{
+$("leaveCount").textContent=rows.length;
 
-            await updateDoc(
-              doc(
-                db,
-                "leaveRequests",
-                button.dataset.id
-              ),
-              {
-                status:"rejected",
-                repliedAt:serverTimestamp()
-              }
-            );
+const table=$("leaveTable");
 
-            showMessage(
-              "Leave rejected."
-            );
+if(!rows.length){
 
-            await loadLeaves();
+table.innerHTML=
+`<tr><td colspan="7">
+<div class="empty">No leave requests.</div>
+</td></tr>`;
 
-          }
-        );
+return;
+}
 
-      });
+table.innerHTML=rows.map(row=>`
 
-    document
-      .querySelectorAll(".leave-reply")
-      .forEach(button=>{
+<tr>
 
-        button.addEventListener(
-          "click",
-          async()=>{
+<td>
+<strong>
+${escapeHtml(studentNameByNumber(row.studentNumber))}
+</strong>
+<br>
+${escapeHtml(row.studentNumber)}
+</td>
 
-            const reply =
-              prompt("Enter reply:");
+<td>${escapeHtml(row.parentEmail||"-")}</td>
 
-            if(reply === null) return;
+<td>${escapeHtml(row.leaveDate||"-")}</td>
 
-            await updateDoc(
-              doc(
-                db,
-                "leaveRequests",
-                button.dataset.id
-              ),
-              {
-                reply:reply.trim(),
-                repliedAt:serverTimestamp()
-              }
-            );
+<td>${escapeHtml(row.reason||"-")}</td>
 
-            showMessage(
-              "Reply sent."
-            );
+<td>
 
-            await loadLeaves();
+<span class="badge ${
+row.status==="approved"
+?"badge-green"
+:row.status==="rejected"
+?"badge-red"
+:"badge-yellow"
+}">
 
-          }
-        );
+${escapeHtml(row.status||"pending")}
 
-      });
+</span>
 
-    document
-      .querySelectorAll(".leave-delete")
-      .forEach(button=>{
+</td>
 
-        button.addEventListener(
-          "click",
-          async()=>{
+<td>${escapeHtml(row.reply||"-")}</td>
 
-            if(!confirm("Delete leave request?"))
-              return;
+<td>
 
-            await deleteDoc(
-              doc(
-                db,
-                "leaveRequests",
-                button.dataset.id
-              )
-            );
+<div class="actions">
 
-            showMessage(
-              "Leave request deleted."
-            );
+<button
+class="success leave-approve"
+data-id="${row.id}">
+Approve
+</button>
 
-            await loadLeaves();
+<button
+class="warning leave-reject"
+data-id="${row.id}">
+Reject
+</button>
 
-          }
-        );
+<button
+class="secondary leave-reply"
+data-id="${row.id}">
+Reply
+</button>
 
-      });
+<button
+class="danger leave-delete"
+data-id="${row.id}">
+Delete
+</button>
 
-  }catch(error){
+</div>
 
-    console.error(error);
+</td>
 
-  }
+</tr>
+
+`).join("");
+
+document.querySelectorAll(".leave-approve")
+.forEach(button=>{
+
+button.addEventListener("click",async()=>{
+
+await updateDoc(
+doc(db,"leaveRequests",button.dataset.id),
+{
+status:"approved",
+repliedAt:serverTimestamp()
+}
+);
+
+showMessage("Leave approved.");
+
+await loadLeaves();
+
+});
+
+});
+
+document.querySelectorAll(".leave-reject")
+.forEach(button=>{
+
+button.addEventListener("click",async()=>{
+
+await updateDoc(
+doc(db,"leaveRequests",button.dataset.id),
+{
+status:"rejected",
+repliedAt:serverTimestamp()
+}
+);
+
+showMessage("Leave rejected.");
+
+await loadLeaves();
+
+});
+
+});
+
+document.querySelectorAll(".leave-reply")
+.forEach(button=>{
+
+button.addEventListener("click",async()=>{
+
+const reply=prompt("Enter reply:");
+
+if(reply===null)return;
+
+await updateDoc(
+doc(db,"leaveRequests",button.dataset.id),
+{
+reply:reply.trim(),
+repliedAt:serverTimestamp()
+}
+);
+
+showMessage("Reply sent.");
+
+await loadLeaves();
+
+});
+
+});
+
+document.querySelectorAll(".leave-delete")
+.forEach(button=>{
+
+button.addEventListener("click",async()=>{
+
+if(!confirm("Delete leave request?"))return;
+
+await deleteDoc(
+doc(db,"leaveRequests",button.dataset.id)
+);
+
+showMessage("Leave request deleted.");
+
+await loadLeaves();
+
+});
+
+});
+
+}catch(error){
+
+console.error(error);
 
 }
 
-/* =====================================
-MESSAGES
-===================================== */
+}
+
+/* MESSAGES */
 
 async function loadMessages(){
 
-  try{
+try{
 
-    const snap =
-      await getDocs(
-        collection(db,"messages")
-      );
+const snap=await getDocs(
+collection(db,"messages")
+);
 
-    const rows =
-      snap.docs.map(item=>({
-        id:item.id,
-        ...item.data()
-      }));
+const rows=snap.docs.map(item=>({
+id:item.id,
+...item.data()
+}));
 
-    rows.sort(
-      (a,b)=>
-        (b.createdAt?.seconds||0) -
-        (a.createdAt?.seconds||0)
-    );
+rows.sort((a,b)=>
+(b.createdAt?.seconds||0)-
+(a.createdAt?.seconds||0)
+);
 
-    $("messageCount").textContent =
-      rows.length;
+$("messageCount").textContent=rows.length;
 
-    const table =
-      $("messagesTable");
+const table=$("messagesTable");
 
-    if(!rows.length){
+if(!rows.length){
 
-      table.innerHTML =
-        `<tr>
-          <td colspan="6">
-            <div class="empty">
-              No parent messages.
-            </div>
-          </td>
-        </tr>`;
+table.innerHTML=
+`<tr><td colspan="6">
+<div class="empty">No parent messages.</div>
+</td></tr>`;
 
-      return;
-    }
+return;
+}
 
-    table.innerHTML =
-      rows.map(row=>`
+table.innerHTML=rows.map(row=>`
 
-        <tr>
+<tr>
 
-          <td>
-            ${escapeHtml(
-              studentNameByNumber(
-                row.studentNumber
-              )
-            )}
-            <br>
-            ${escapeHtml(row.studentNumber)}
-          </td>
+<td>
+${escapeHtml(studentNameByNumber(row.studentNumber))}
+<br>
+${escapeHtml(row.studentNumber)}
+</td>
 
-          <td>
-            ${escapeHtml(row.parentEmail || "-")}
-          </td>
+<td>${escapeHtml(row.parentEmail||"-")}</td>
 
-          <td>
-            ${escapeHtml(row.text || "-")}
-          </td>
+<td>${escapeHtml(row.text||"-")}</td>
 
-          <td>
+<td>
 
-            <span class="badge ${
-              row.status === "replied"
-                ? "badge-green"
-                : "badge-yellow"
-            }">
+<span class="badge ${
+row.status==="replied"
+?"badge-green"
+:"badge-yellow"
+}">
 
-              ${escapeHtml(row.status || "new")}
+${escapeHtml(row.status||"new")}
 
-            </span>
+</span>
 
-          </td>
+</td>
 
-          <td>
-            ${escapeHtml(row.reply || "-")}
-          </td>
+<td>${escapeHtml(row.reply||"-")}</td>
 
-          <td>
+<td>
 
-            <div class="actions">
+<div class="actions">
 
-              <button
-                class="secondary message-reply"
-                data-id="${row.id}">
-                Reply
-              </button>
+<button
+class="secondary message-reply"
+data-id="${row.id}">
+Reply
+</button>
 
-              <button
-                class="danger message-delete"
-                data-id="${row.id}">
-                Delete
-              </button>
+<button
+class="danger message-delete"
+data-id="${row.id}">
+Delete
+</button>
 
-            </div>
+</div>
 
-          </td>
+</td>
 
-        </tr>
+</tr>
 
-      `).join("");
+`).join("");
 
-    document
-      .querySelectorAll(".message-reply")
-      .forEach(button=>{
+document.querySelectorAll(".message-reply")
+.forEach(button=>{
 
-        button.addEventListener(
-          "click",
-          async()=>{
+button.addEventListener("click",async()=>{
 
-            const reply =
-              prompt("Enter reply:");
+const reply=prompt("Enter reply:");
 
-            if(reply === null) return;
+if(reply===null)return;
 
-            await updateDoc(
-              doc(
-                db,
-                "messages",
-                button.dataset.id
-              ),
-              {
-                reply:reply.trim(),
-                status:"replied",
-                repliedAt:serverTimestamp()
-              }
-            );
+await updateDoc(
+doc(db,"messages",button.dataset.id),
+{
+reply:reply.trim(),
+status:"replied",
+repliedAt:serverTimestamp()
+}
+);
 
-            showMessage(
-              "Reply sent."
-            );
+showMessage("Reply sent.");
 
-            await loadMessages();
+await loadMessages();
 
-          }
-        );
+});
 
-      });
+});
 
-    document
-      .querySelectorAll(".message-delete")
-      .forEach(button=>{
+document.querySelectorAll(".message-delete")
+.forEach(button=>{
 
-        button.addEventListener(
-          "click",
-          async()=>{
+button.addEventListener("click",async()=>{
 
-            if(!confirm("Delete this message?"))
-              return;
+if(!confirm("Delete this message?"))return;
 
-            await deleteDoc(
-              doc(
-                db,
-                "messages",
-                button.dataset.id
-              )
-            );
+await deleteDoc(
+doc(db,"messages",button.dataset.id)
+);
 
-            showMessage(
-              "Message deleted."
-            );
+showMessage("Message deleted.");
 
-            await loadMessages();
+await loadMessages();
 
-          }
-        );
+});
 
-      });
+});
 
-  }catch(error){
+}catch(error){
 
-    console.error(error);
-
-  }
+console.error(error);
 
 }
 
-/* =====================================
-DONATIONS
-===================================== */
+}
+
+/* DONATIONS */
 
 async function loadDonations(){
 
-  try{
+try{
 
-    const snap =
-      await getDocs(
-        collection(db,"donations")
-      );
+const snap=await getDocs(
+collection(db,"donations")
+);
 
-    const rows =
-      snap.docs.map(item=>({
-        id:item.id,
-        ...item.data()
-      }));
+const rows=snap.docs.map(item=>({
+id:item.id,
+...item.data()
+}));
 
-    rows.sort(
-      (a,b)=>
-        (b.createdAt?.seconds||0) -
-        (a.createdAt?.seconds||0)
-    );
+rows.sort((a,b)=>
+(b.createdAt?.seconds||0)-
+(a.createdAt?.seconds||0)
+);
 
-    let total = 0;
-    let pending = 0;
-    let verified = 0;
-
-    rows.forEach(row=>{
+let total=0;
+let pending=0;
+let verified=0;
 
-      const amount =
-        Number(row.amount || 0);
+rows.forEach(row=>{
 
-      total += amount;
+const amount=Number(row.amount||0);
 
-      if(row.status === "pending"){
-        pending += amount;
-      }
+total+=amount;
 
-      if(row.status === "verified"){
-        verified += amount;
-      }
+if(row.status==="pending")pending+=amount;
 
-    });
+if(row.status==="verified")verified+=amount;
 
-    $("donationTotal").textContent =
-      money(total);
+});
 
-    $("donationPending").textContent =
-      money(pending);
+$("donationTotal").textContent=money(total);
+$("donationPending").textContent=money(pending);
+$("donationVerified").textContent=money(verified);
 
-    $("donationVerified").textContent =
-      money(verified);
+const table=$("donationsTable");
 
-    const table =
-      $("donationsTable");
-
-    if(!rows.length){
-
-      table.innerHTML =
-        `<tr>
-          <td colspan="8">
-            <div class="empty">
-              No donations found.
-            </div>
-          </td>
-        </tr>`;
-
-      return;
-    }
-
-    table.innerHTML =
-      rows.map(row=>`
-
-        <tr>
-
-          <td>
-
-            <strong>
-              ${escapeHtml(
-                studentNameByNumber(
-                  row.studentNumber
-                )
-              )}
-            </strong>
-
-            <br>
-
-            <small>
-              ${escapeHtml(
-                row.studentNumber || "-"
-              )}
-            </small>
-
-          </td>
-
-          <td>
-            ${escapeHtml(
-              row.parentEmail || "-"
-            )}
-          </td>
-
-          <td>
-            <strong>
-              ${money(row.amount)}
-            </strong>
-          </td>
-
-          <td>
-            ${escapeHtml(
-              row.transactionId || "-"
-            )}
-          </td>
-
-          <td>
-            ${formatDate(row.createdAt)}
-          </td>
-
-          <td>
-
-            <span class="badge ${
-              row.status === "verified"
-                ? "badge-green"
-                : row.status === "rejected"
-                ? "badge-red"
-                : "badge-yellow"
-            }">
-
-              ${escapeHtml(
-                row.status || "pending"
-              )}
-
-            </span>
-
-          </td>
-
-          <td>
-            ${escapeHtml(
-              row.adminNote || "-"
-            )}
-          </td>
-
-          <td>
-
-            <div class="actions">
-
-              ${
-                row.status !== "verified"
-                ? `
-                  <button
-                    class="success donation-verify"
-                    data-id="${row.id}">
-                    Verify
-                  </button>
-                `
-                : ""
-              }
-
-              ${
-                row.status !== "rejected"
-                ? `
-                  <button
-                    class="warning donation-reject"
-                    data-id="${row.id}">
-                    Reject
-                  </button>
-                `
-                : ""
-              }
-
-              <button
-                class="danger donation-delete"
-                data-id="${row.id}">
-                Delete
-              </button>
-
-            </div>
-
-          </td>
-
-        </tr>
-
-      `).join("");
-
-    document
-      .querySelectorAll(".donation-verify")
-      .forEach(button=>{
-
-        button.addEventListener(
-          "click",
-          async()=>{
-
-            if(!confirm(
-              "Verify this donation?"
-            )) return;
-
-            const note =
-              prompt(
-                "Admin note (optional):"
-              );
-
-            await updateDoc(
-              doc(
-                db,
-                "donations",
-                button.dataset.id
-              ),
-              {
-                status:"verified",
-                adminNote:
-                  note || "",
-                verifiedAt:
-                  serverTimestamp()
-              }
-            );
-
-            showMessage(
-              "Donation verified."
-            );
-
-            await loadDonations();
-
-          }
-        );
-
-      });
-
-    document
-      .querySelectorAll(".donation-reject")
-      .forEach(button=>{
-
-        button.addEventListener(
-          "click",
-          async()=>{
-
-            const note =
-              prompt(
-                "Reason for rejection:"
-              );
-
-            if(!note || !note.trim()){
-
-              alert(
-                "Please enter a rejection reason."
-              );
-
-              return;
-            }
-
-            if(!confirm(
-              "Reject this donation?"
-            )) return;
-
-            await updateDoc(
-              doc(
-                db,
-                "donations",
-                button.dataset.id
-              ),
-              {
-                status:"rejected",
-                adminNote:note.trim(),
-                rejectedAt:
-                  serverTimestamp()
-              }
-            );
-
-            showMessage(
-              "Donation rejected."
-            );
-
-            await loadDonations();
-
-          }
-        );
-
-      });
-
-    document
-      .querySelectorAll(".donation-delete")
-      .forEach(button=>{
-
-        button.addEventListener(
-          "click",
-          async()=>{
-
-            if(!confirm(
-              "Delete this donation record?"
-            )) return;
-
-            await deleteDoc(
-              doc(
-                db,
-                "donations",
-                button.dataset.id
-              )
-            );
-
-            showMessage(
-              "Donation deleted."
-            );
-
-            await loadDonations();
-
-          }
-        );
-
-      });
-
-  }catch(error){
-
-    console.error(error);
-
-    $("donationsTable").innerHTML =
-      `<tr>
-        <td colspan="8">
-          Unable to load donations.
-        </td>
-      </tr>`;
-
-  }
+if(!rows.length){
+
+table.innerHTML=
+`<tr><td colspan="8">
+<div class="empty">No donations found.</div>
+</td></tr>`;
+
+return;
+}
+
+table.innerHTML=rows.map(row=>`
+
+<tr>
+
+<td>
+
+<strong>
+${escapeHtml(studentNameByNumber(row.studentNumber))}
+</strong>
+
+<br>
+
+<small>
+${escapeHtml(row.studentNumber||"-")}
+</small>
+
+</td>
+
+<td>
+${escapeHtml(row.parentEmail||"-")}
+</td>
+
+<td>
+<strong>${money(row.amount)}</strong>
+</td>
+
+<td>
+${escapeHtml(row.transactionId||"-")}
+</td>
+
+<td>
+${formatDate(row.createdAt)}
+</td>
+
+<td>
+
+<span class="badge ${
+row.status==="verified"
+?"badge-green"
+:row.status==="rejected"
+?"badge-red"
+:"badge-yellow"
+}">
+
+${escapeHtml(row.status||"pending")}
+
+</span>
+
+</td>
+
+<td>
+${escapeHtml(row.adminNote||"-")}
+</td>
+
+<td>
+
+<div class="actions">
+
+${
+row.status!=="verified"
+?`
+<button
+class="success donation-verify"
+data-id="${row.id}">
+Verify
+</button>
+`
+:""
+}
+
+${
+row.status!=="rejected"
+?`
+<button
+class="warning donation-reject"
+data-id="${row.id}">
+Reject
+</button>
+`
+:""
+}
+
+<button
+class="danger donation-delete"
+data-id="${row.id}">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`).join("");
+
+document.querySelectorAll(".donation-verify")
+.forEach(button=>{
+
+button.addEventListener("click",async()=>{
+
+if(!confirm("Verify this donation?"))return;
+
+const note=prompt("Admin note (optional):");
+
+await updateDoc(
+doc(db,"donations",button.dataset.id),
+{
+status:"verified",
+adminNote:note||"",
+verifiedAt:serverTimestamp()
+}
+);
+
+showMessage("Donation verified.");
+
+await loadDonations();
+
+});
+
+});
+
+document.querySelectorAll(".donation-reject")
+.forEach(button=>{
+
+button.addEventListener("click",async()=>{
+
+const note=prompt("Reason for rejection:");
+
+if(!note||!note.trim()){
+
+alert("Please enter a rejection reason.");
+
+return;
+}
+
+if(!confirm("Reject this donation?"))return;
+
+await updateDoc(
+doc(db,"donations",button.dataset.id),
+{
+status:"rejected",
+adminNote:note.trim(),
+rejectedAt:serverTimestamp()
+}
+);
+
+showMessage("Donation rejected.");
+
+await loadDonations();
+
+});
+
+});
+
+document.querySelectorAll(".donation-delete")
+.forEach(button=>{
+
+button.addEventListener("click",async()=>{
+
+if(!confirm("Delete this donation record?"))return;
+
+await deleteDoc(
+doc(db,"donations",button.dataset.id)
+);
+
+showMessage("Donation deleted.");
+
+await loadDonations();
+
+});
+
+});
+
+}catch(error){
+
+console.error(error);
+
+$("donationsTable").innerHTML=
+`<tr><td colspan="8">Unable to load donations.</td></tr>`;
 
 }
 
-/* =====================================
-PUBLIC RESULT
-===================================== */
+}
 
-$("openPublicResult")
-.addEventListener(
-  "click",
-  ()=>{
-    location.href = "result.html";
-  }
+/* PUBLIC RESULT */
+
+$("openPublicResult").addEventListener(
+"click",
+()=>{
+location.href="result.html";
+}
 );
 
-/* =====================================
-DEFAULT DATES
-===================================== */
+/* DEFAULT DATES */
 
 function setDefaultDates(){
 
-  const today =
-    new Date()
-      .toISOString()
-      .split("T")[0];
+const today=new Date()
+.toISOString()
+.split("T")[0];
 
-  if($("attendanceDate")){
-    $("attendanceDate").value = today;
-  }
+if($("attendanceDate"))
+$("attendanceDate").value=today;
 
-  if($("studyDate")){
-    $("studyDate").value = today;
-  }
+if($("studyDate"))
+$("studyDate").value=today;
 
 }
 
