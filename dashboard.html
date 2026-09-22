@@ -997,8 +997,7 @@ linear-gradient(
 #cce9d9
 );
 
-font-size:10px;
-font-weight:900;
+font-size:10px;font-weight:900;
 text-transform:uppercase;
 letter-spacing:.3px
 }
@@ -1589,7 +1588,7 @@ SAFA QURAN COLLEGE
 </div> <div class="college-subtitle">
 ONLINE PORTAL
 </div> <div class="college-header-line"></div> <div class="college-ayah">
-خيركم من تعلم القرءان وعلمه
+‫خيركم من تعلم القرءان وعلمه‬
 </div> <div class="college-ayah-meaning">
 The best among you are those who learn the Qur'an and teach it.
 </div> </div>
@@ -1998,7 +1997,6 @@ id="noticeStatus">
 <option value="draft">
 Draft
 </option> <option value="published">
-Published
 </option> </select> </div> <div class="field full"> <label>
 Notice
 </label> <textarea
@@ -2050,1065 +2048,7 @@ COMMUNICATION
 <th>Reply</th>
 <th>Action</th> </tr> </thead> <tbody
 id="messagesTable">
-</tbody> </table> </div> </div> </section> <!-- DONATIONS --> <section
-class="section"
-id="donations"> <div class="section-head"> <div> <h2>
-Donations
-</h2> <p>
-Review and verify parent donations
-</p> </div> <div class="section-tag">
-
-SAFA DONATION
-</div> </div> <div class="donation-summary"> <div class="donation-stat"> <small>
-Total Donations
-</small> <strong id="donationTotal">
-₹0
-</strong> </div> <div class="donation-stat"> <small>
-Pending
-</small> <strong id="donationPending">
-₹0
-</strong> </div> <div class="donation-stat"> <small>
-Verified
-</small> <strong id="donationVerified">
-₹0
-</strong> </div> </div> <div class="panel"> <div class="table-wrap"> <table> <thead>
-<tr> <th>Student</th>
-<th>Parent Email</th>
-<th>Amount</th>
-<th>Transaction ID</th>
-<th>Date</th>
-<th>Status</th>
-<th>Admin Note</th>
-<th>Action</th> </tr> </thead> <tbody
-id="donationsTable">
-</tbody> </table> </div> </div> </section> <!-- PUBLIC RESULT --> <section
-class="section"
-id="publicResult"> <div class="section-head"> <div> <h2>
-Public Result
-</h2> <p>
-Open the public result system
-</p> </div> <div class="section-tag">
-PUBLIC
-</div> </div> <div class="panel welcome"> <h2 style="margin-bottom:10px">
-Public Student Result
-</h2> <p style="margin-bottom:20px">
-Open the public result page where students and parents
-can check published results.
-</p> <button
-class="primary"
-id="openPublicResult">
-
-🌐 Open Public Result
-</button> </div> </section> </div>
-</main>
-</div> <script type="module">
-
-import {
-initializeApp
-
-}
-from
-"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-
-import {
-getAuth,
-onAuthStateChanged,
-signOut
-}
-from
-"https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-
-import {
-getFirestore,
-collection,
-getDocs,
-getDoc,
-doc,
-addDoc,
-updateDoc,
-deleteDoc,
-serverTimestamp
-}
-from
-"https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-
-
-const firebaseConfig={
-
-apiKey:
-"AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
-
-authDomain:
-"safa-hifz-class-7e84b.firebaseapp.com",
-
-projectId:
-"safa-hifz-class-7e84b",
-
-storageBucket:
-"safa-hifz-class-7e84b.firebasestorage.app",
-
-messagingSenderId:
-"476801753196",
-
-appId:
-"1:476801753196:web:d4c8a8b0c1a4203606f849",
-
-measurementId:
-
-"G-ZTBTJCB5SR"
-
-};
-
-
-const app=initializeApp(firebaseConfig);
-
-const auth=getAuth(app);
-
-const db=getFirestore(app);
-
-const $=id=>
-document.getElementById(id);
-
-let currentUser=null;
-
-window.students=[];
-
-
-/* UTILITIES */
-
-function escapeHtml(value){
-
-return String(value??"")
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
-
-}
-
-
-function showMessage(
-text,
-type="success"
-){
-
-const box=$("message");
-
-box.textContent=text;
-
-box.style.display="block";
-
-box.style.background=
-type==="error"
-?
-"linear-gradient(135deg,#b42318,#d6453b)"
-
-:
-"linear-gradient(135deg,#087f5b,#0ca875)";
-
-setTimeout(
-()=>box.style.display="none",
-3000
-);
-
-}
-
-
-function studentNameByNumber(number){
-
-const student=
-window.students.find(
-s=>
-String(s.studentNumber)
-===
-String(number)
-);
-
-return student
-?
-student.studentName
-:
-number;
-
-}
-
-
-function formatDate(value){
-
-if(!value)return "";
-
-if(value.toDate)
-return value.toDate()
-.toLocaleDateString();
-
-if(value.seconds)
-return new Date(
-value.seconds*1000
-).toLocaleDateString();
-
-return String(value);
-
-}
-
-function money(value){
-
-const n=Number(value||0);
-
-return "₹"+
-n.toLocaleString("en-IN");
-
-}
-
-
-/* AUTH */
-
-onAuthStateChanged(
-auth,
-async user=>{
-
-try{
-
-if(!user){
-
-location.href="index.html";
-
-return;
-
-}
-
-currentUser=user;
-
-/* SHOW THE DASHBOARD AS SOON AS AUTHENTICATION IS CONFIRMED. */
-$("loading").style.display="none";
-
-const userSnap=
-await Promise.race([
-getDoc(
-  doc(
-    db,
-    "users",
-    user.uid
-  )
-),
-new Promise((_,reject)=>
-  setTimeout(()=>reject(new Error("Admin profile check timed out. Please check Firebase Firestore rules and internet connection.")),10000)
-)
-]);
-
-if(!userSnap.exists()){
-
-alert(
-"Admin profile not found."
-);
-
-await signOut(auth);
-
-location.href="index.html";
-
-return;
-
-}
-
-const profile=
-userSnap.data();
-
-if(profile.role!=="admin"){
-
-alert(
-"Admin access required."
-);
-
-await signOut(auth);
-
-location.href="index.html";
-
-return;
-
-}
-
-await loadEverything();
-
-}catch(error){
-
-console.error(error);
-
-$("loading").textContent=
-"Dashboard loading error: "
-+
-error.message;
-
-}
-
-});
-
-
-/* NAVIGATION */
-
-document
-.querySelectorAll(".menu-btn")
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-()=>{
-
-openSection(
-button.dataset.section
-);
-
-$("sidebar")
-.classList.remove("open");
-
-});
-
-});
-
-
-document
-.querySelectorAll(".quick-btn")
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-()=>{
-
-openSection(
-button.dataset.go
-);
-
-});
-
-});
-
-
-function openSection(id){
-
-document
-.querySelectorAll(".section")
-.forEach(section=>{
-
-section.classList.remove(
-"active"
-);
-
-});
-
-const target=$(id);
-
-if(target)
-target.classList.add("active");
-
-document
-
-.querySelectorAll(".menu-btn")
-.forEach(button=>{
-
-button.classList.toggle(
-"active",
-button.dataset.section===id
-);
-
-});
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
-
-
-$("mobileMenu")
-.addEventListener(
-"click",
-()=>{
-
-$("sidebar")
-.classList.toggle("open");
-
-});
-
-
-$("logoutBtn")
-.addEventListener(
-"click",
-async()=>{
-
-if(
-!confirm(
-"Logout from admin dashboard?"
-)
-)return;
-
-await signOut(auth);
-
-location.href="index.html";
-
-});
-
-
-/* LOAD EVERYTHING */
-
-async function loadEverything(){
-
-await loadStudents();
-
-await Promise.all([
-
-loadAttendance(),
-
-loadStudy(),
-
-loadResults(),
-
-loadNotices(),
-
-loadLeaves(),
-
-loadMessages(),
-
-loadDonations()
-
-]);
-
-}
-
-
-/* STUDENTS */
-
-async function loadStudents(){
-
-try{
-
-const snap=
-await getDocs(
-collection(
-db,
-"students"
-)
-);
-
-window.students=
-snap.docs.map(item=>({
-
-id:item.id,
-
-...item.data()
-
-}));
-
-renderStudents(
-window.students
-);
-
-$("studentCount")
-.textContent=
-window.students.length;
-
-populateStudentSelects();
-
-}catch(error){
-
-console.error(error);
-
-$("studentsTable")
-.innerHTML=
-`
-<tr>
-<td colspan="7">
-Unable to load students
-</td>
-</tr>
-`;
-
-}
-
-}
-
-
-function renderStudents(list){
-
-const table=
-$("studentsTable");
-
-if(!list.length){
-
-table.innerHTML=
-`
-<tr>
-<td colspan="7">
-<div class="empty">
-No students found
-</div>
-</td>
-</tr>
-`;
-
-return;
-
-}
-
-table.innerHTML=
-list.map(
-student=>`
-
-<tr>
-
-<td>
-<strong>
-${escapeHtml(
-student.studentNumber
-)}
-</strong>
-</td>
-
-<td>
-${escapeHtml(
-student.studentName
-)}
-</td>
-
-<td>
-${escapeHtml(
-student.guardianName||"-"
-)}
-</td>
-
-<td>
-${escapeHtml(
-student.className||"-"
-)}
-</td>
-
-<td>
-${escapeHtml(
-student.parentEmail||"-"
-)}
-</td>
-
-<td>
-${escapeHtml(
-student.phoneNumber||"-"
-)}
-</td>
-
-<td>
-
-<div class="actions">
-
-<button
-class="secondary edit-student"
-data-id="${student.id}">
-
-Edit
-
-</button>
-
-<button
-class="danger delete-student"
-data-id="${student.id}">
-
-Delete
-
-</button>
-
-</div>
-
-</td>
-
-</tr>
-
-`
-).join("");
-
-document
-.querySelectorAll(".delete-student")
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-async()=>{
-
-const student=
-window.students.find(
-s=>
-s.id===
-button.dataset.id
-);
-
-if(!student)return;
-
-if(
-!confirm(
-
-`Delete ${student.studentName}?`
-)
-)return;
-
-try{
-
-await deleteDoc(
-doc(
-db,
-"students",
-button.dataset.id
-)
-);
-
-showMessage(
-"Student deleted."
-);
-
-await loadStudents();
-
-}catch(error){
-
-console.error(error);
-
-showMessage(
-"Unable to delete student.",
-"error"
-);
-
-}
-
-});
-
-});
-
-
-document
-.querySelectorAll(".edit-student")
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-()=>{
-
-const student=
-window.students.find(
-s=>
-s.id===
-
-button.dataset.id
-);
-
-if(!student)return;
-
-$("editStudentNumber")
-.value=
-student.studentNumber||"";
-
-$("editStudentName")
-.value=
-student.studentName||"";
-
-$("editGuardianName")
-.value=
-student.guardianName||"";
-
-$("editClassName")
-.value=
-student.className||"";
-
-$("editParentEmail")
-.value=
-student.parentEmail||"";
-
-$("editPhoneNumber")
-.value=
-student.phoneNumber||"";
-
-$("editStudentAddress")
-.value=
-student.studentAddress||"";
-
-$("editStudentModal")
-.classList.add("show");
-
-$("saveEditStudent")
-.dataset.id=
-student.id;
-
-});
-
-});
-
-}
-
-
-$("studentForm")
-
-.addEventListener(
-"submit",
-async event=>{
-
-event.preventDefault();
-
-const studentNumber=
-$("studentNumber")
-.value.trim();
-
-const studentName=
-$("studentName")
-.value.trim();
-
-if(
-window.students.some(
-s=>
-String(
-s.studentNumber
-).trim()
-===
-studentNumber
-)
-){
-
-showMessage(
-"Student number already exists.",
-"error"
-);
-
-return;
-
-}
-
-try{
-
-await addDoc(
-collection(
-db,
-"students"
-),
-{
-
-studentNumber,
-
-studentName,
-
-guardianName:
-
-$("guardianName")
-.value.trim(),
-
-className:
-$("className")
-.value.trim(),
-
-parentEmail:
-$("parentEmail")
-.value.trim(),
-
-studentAddress:
-$("studentAddress")
-.value.trim(),
-
-phoneNumber:
-$("phoneNumber")
-.value.trim(),
-
-createdAt:
-serverTimestamp()
-
-}
-);
-
-$("studentForm").reset();
-
-showMessage(
-"Student added successfully."
-);
-
-await loadStudents();
-
-}catch(error){
-
-console.error(error);
-
-showMessage(
-"Unable to add student: "
-+
-error.message,
-"error"
-);
-
-}
-
-});
-
-$("studentSearch")
-.addEventListener(
-"input",
-event=>{
-
-const query=
-event.target.value
-.toLowerCase()
-.trim();
-
-const filtered=
-window.students.filter(
-student=>{
-
-const text=[
-
-student.studentNumber,
-student.studentName,
-student.guardianName,
-student.className,
-student.parentEmail,
-student.studentAddress,
-student.phoneNumber
-
-]
-.join(" ")
-.toLowerCase();
-
-return text.includes(query);
-
-});
-
-renderStudents(filtered);
-
-});
-
-
-/* EDIT STUDENT */
-
-$("closeEditModal")
-.addEventListener(
-"click",
-()=>
-$("editStudentModal")
-.classList.remove("show")
-);
-
-$("cancelEditStudent")
-.addEventListener(
-"click",
-()=>
-$("editStudentModal")
-.classList.remove("show")
-);
-
-
-$("saveEditStudent")
-.addEventListener(
-"click",
-async()=>{
-
-const id=
-$("saveEditStudent")
-.dataset.id;
-
-if(!id)return;
-
-try{
-
-await updateDoc(
-doc(
-db,
-"students",
-id
-),
-{
-
-studentName:
-$("editStudentName")
-.value.trim(),
-
-guardianName:
-$("editGuardianName")
-.value.trim(),
-
-className:
-$("editClassName")
-.value.trim(),
-
-parentEmail:
-$("editParentEmail")
-.value.trim(),
-
-studentAddress:
-
-$("editStudentAddress")
-.value.trim(),
-
-phoneNumber:
-$("editPhoneNumber")
-.value.trim()
-
-}
-);
-
-$("editStudentModal")
-.classList.remove("show");
-
-showMessage(
-"Student updated successfully."
-);
-
-await loadStudents();
-
-}catch(error){
-
-console.error(error);
-
-showMessage(
-"Unable to update student.",
-"error"
-);
-
-}
-
-});
-
-
-/* STUDENT SELECTS */
-
-function renderStudentOptions(selectId,searchId){
-
-const select=$(selectId);
-const search=$(searchId);
-if(!select)return;
-
-const old=select.value;
-const term=String(search?.value||"").trim().toLowerCase();
-
-const filtered=window.students.filter(student=>{
-const number=String(student.studentNumber||"").toLowerCase();
-const name=String(student.studentName||"").toLowerCase();
-return !term || number.includes(term) || name.includes(term);
-});
-
-select.innerHTML=`<option value="">Select student</option>`+
-filtered.map(student=>{
-const number=String(student.studentNumber||"");
-const name=String(student.studentName||"");
-return `<option value="${escapeHtml(number)}">${escapeHtml(number)} - ${escapeHtml(name)}</option>`;
-}).join("");
-
-if(old && filtered.some(student=>String(student.studentNumber)===String(old)))select.value=old;
-}
-
-function populateStudentSelects(){
-renderStudentOptions("attendanceStudent","attendanceStudentSearch");
-renderStudentOptions("studyStudent","studyStudentSearch");
-renderStudentOptions("resultStudent","resultStudentSearch");
-}
-
-function setupStudentSearches(){
-[["attendanceStudentSearch","attendanceStudent"],["studyStudentSearch","studyStudent"],["resultStudentSearch","resultStudent"]].forEach(([searchId,selectId])=>{
-const search=$(searchId);
-if(!search)return;
-search.addEventListener("input",()=>renderStudentOptions(selectId,searchId));
-});
-}
-
-setupStudentSearches();
-
-
-/* ATTENDANCE */
-
-$("attendanceForm").addEventListener("submit",async event=>{
-event.preventDefault();
-try{
-const studentNumber=$("attendanceStudent").value;
-const date=$("attendanceDate").value;
-const status=$("attendanceStatus").value;
-
-if(!studentNumber || !date || !["absent","leave"].includes(status)){
-showMessage("Please select a student, date and Absent / Leave status.","error");
-return;
-}
-
-/* Only Absent / Leave records are saved. All other students are automatically Present for the date. */
-const existingSnap=await getDocs(collection(db,"attendance"));
-const duplicate=existingSnap.docs.some(item=>{
-const data=item.data();
-return String(data.studentNumber||"")===String(studentNumber) && String(data.date||"")===String(date) && ["absent","leave"].includes(String(data.status||""));
-});
-
-if(duplicate){
-showMessage("Attendance for this student and date is already recorded.","error");
-return;
-}
-
-await addDoc(collection(db,"attendance"),{studentNumber,date,status,createdAt:serverTimestamp()});
-showMessage("Attendance saved.");
-await loadAttendance();
-}catch(error){
-console.error(error);
-showMessage("Unable to save attendance.","error");
-}
-});
-
-async function loadAttendance(){
-try{
-const snap=await getDocs(collection(db,"attendance"));
-const rows=snap.docs.map(item=>({id:item.id,...item.data()})).filter(row=>row.status==="absent"||row.status==="leave");
-rows.sort((a,b)=>String(b.date||"").localeCompare(String(a.date||"")));
-
-$("attendanceCount").textContent=rows.length;
-const table=$("attendanceTable");
-
-if(!rows.length){
-table.innerHTML=`<div class="empty">No Absent / Leave attendance records.</div>`;
-return;
-}
-
-const grouped={};
-rows.forEach(row=>{const date=String(row.date||"-");if(!grouped[date])grouped[date]=[];grouped[date].push(row);});
-const dates=Object.keys(grouped).sort((a,b)=>b.localeCompare(a));
-
-table.innerHTML=dates.map(date=>{
-const dateRows=grouped[date];
-return `<div class="table-wrap" style="margin-bottom:18px"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 15px;background:linear-gradient(135deg,#dff2e7,#fff8df);border-bottom:1px solid #d2e6da"><strong style="color:#164c39">Date: ${escapeHtml(date)}</strong><span class="badge badge-red">Absent / Leave: ${dateRows.length}</span></div><table><thead><tr><th>No</th><th>Name</th><th>Status</th><th>Action</th></tr></thead><tbody>${dateRows.map(row=>`<tr><td><strong>${escapeHtml(row.studentNumber||"-")}</strong></td><td>${escapeHtml(studentNameByNumber(row.studentNumber))}</td><td><span class="badge ${row.status==="leave"?"badge-yellow":"badge-red"}">${escapeHtml(row.status)}</span></td><td><div class="actions"><button class="secondary attendance-edit-btn" data-id="${row.id}" data-status="${escapeHtml(row.status)}">Edit</button><button class="danger attendance-delete-btn" data-id="${row.id}">Delete</button></div></td></tr>`).join("")}</tbody></table></div>`;
-}).join("");
-
-document.querySelectorAll(".attendance-edit-btn").forEach(button=>{
-button.addEventListener("click",async()=>{
-const current=button.dataset.status==="leave"?"leave":"absent";
-const value=prompt("Enter status: absent or leave",current);
-if(value===null)return;
-const newStatus=value.trim().toLowerCase();
-if(!["absent","leave"].includes(newStatus)){alert("Please enter only absent or leave.");return;}
-       r>
-</thead> <tbody
-id="noticesTable">
-</tbody> </table> </div> </div> </section> <!-- LEAVE --> <section
-class="section"
-id="leave"> <div class="section-head"> <div> <h2>
-Leave Requests
-</h2> <p>
-Review and respond to parent leave requests
-</p> </div> <div class="section-tag">
-PARENT REQUESTS
-</div> </div> <div class="panel"> <div class="table-wrap"> <table> <thead> <tr>
-<th>Student</th>
-<th>Parent</th>
-<th>Date</th>
-<th>Reason</th>
-<th>Status</th>
-<th>Reply</th>
-<th>Action</th> </tr> </thead> <tbody
-id="leaveTable">
-</tbody> </table> </div> </div> </section> <!-- MESSAGES --> <section
-class="section"
-id="messages"> <div class="section-head"> <div> <h2>
-Parent Messages
-</h2> <p>
-Read and reply to parent messages
-</p> </div> <div class="section-tag">
-COMMUNICATION
-</div> </div> <div class="panel"> <div class="table-wrap"> <table> <thead> <tr>
-<th>Student</th>
-<th>Parent</th>
-<th>Message</th>
-<th>Status</th>
-<th>Reply</th>
-<th>Action</th> </tr> </thead> <tbody
+</tbody> </table> </div> </div> </section> 
 id="messagesTable">
 </tbody> </table> </div> </div> </section> <!-- DONATIONS --> <section
 class="section"
@@ -3339,22 +2279,14 @@ return;
 
 currentUser=user;
 
-/* SHOW THE DASHBOARD AS SOON AS AUTHENTICATION IS CONFIRMED. */
-$("loading").style.display="none";
-
 const userSnap=
-await Promise.race([
-getDoc(
-  doc(
-    db,
-    "users",
-    user.uid
-  )
-),
-new Promise((_,reject)=>
-  setTimeout(()=>reject(new Error("Admin profile check timed out. Please check Firebase Firestore rules and internet connection.")),10000)
+await getDoc(
+doc(
+db,
+"users",
+user.uid
 )
-]);
+);
 
 if(!userSnap.exists()){
 
@@ -3386,6 +2318,9 @@ location.href="index.html";
 return;
 
 }
+
+$("loading")
+.style.display="none";
 
 await loadEverything();
 
@@ -4043,11 +2978,7 @@ return !term || number.includes(term) || name.includes(term);
 });
 
 select.innerHTML=`<option value="">Select student</option>`+
-filtered.map(student=>{
-const number=String(student.studentNumber||"");
-const name=String(student.studentName||"");
-return `<option value="${escapeHtml(number)}">${escapeHtml(number)} - ${escapeHtml(name)}</option>`;
-}).join("");
+filtered.map(student=>`<option value="${escapeHtml(student.studentNumber)}">${escapeHtml(student.studentNumber)} - ${escapeHtml(student.studentName)}</option>`).join("");
 
 if(old && filtered.some(student=>String(student.studentNumber)===String(old)))select.value=old;
 }
@@ -4056,8 +2987,7 @@ function populateStudentSelects(){
 renderStudentOptions("attendanceStudent","attendanceStudentSearch");
 renderStudentOptions("studyStudent","studyStudentSearch");
 renderStudentOptions("resultStudent","resultStudentSearch");
-}
-
+}      
 function setupStudentSearches(){
 [["attendanceStudentSearch","attendanceStudent"],["studyStudentSearch","studyStudent"],["resultStudentSearch","resultStudent"]].forEach(([searchId,selectId])=>{
 const search=$(searchId);
@@ -4191,7 +3121,6 @@ $("newLesson")
 
 revision:
 $("revision")
-
 .value.trim(),
 
 /* PERFORMANCE NOW COMES FROM DROPDOWN */
@@ -4483,6 +3412,7 @@ Unable to load study records.
 
 $("resultForm")
 .addEventListener(
+
 "submit",
 
 async event=>{
@@ -4536,6 +3466,7 @@ showMessage(
 
 "Unable to add result.",
 "error"
+
 );
 
 }
@@ -4668,7 +3599,6 @@ row.status==="published"
 } result-toggle"
 
 data-id="${row.id}"
-
 data-status="${row.status}">
 
 ${
@@ -4922,6 +3852,7 @@ row.text
 row.status==="published"
 
 ?
+
 "badge-green"
 :
 "badge-yellow"
@@ -4949,7 +3880,6 @@ row.status==="published"
 } notice-toggle"
 
 data-id="${row.id}"
-
 data-status="${row.status}">
 
 ${
@@ -5056,7 +3986,6 @@ await loadNotices();
 }catch(error){
 
 console.error(error);
-
 }
 
 }
@@ -5120,6 +4049,7 @@ No leave requests.
 
 return;
 
+}      
 }
 
 table.innerHTML=
@@ -5385,6 +4315,7 @@ console.error(error);
 
 }
 
+}  
 }
 
 
@@ -5505,6 +4436,7 @@ row.status||"new"
 ${escapeHtml(
 row.reply||"-"
 )}
+
 </td>
 
 <td>
@@ -6059,4 +4991,4 @@ $("studyDate")
 setDefaultDates();
 
 </script> </body>
-</html>
+</html>       
