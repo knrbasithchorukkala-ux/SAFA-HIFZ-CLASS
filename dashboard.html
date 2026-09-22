@@ -1589,7 +1589,7 @@ SAFA QURAN COLLEGE
 </div> <div class="college-subtitle">
 ONLINE PORTAL
 </div> <div class="college-header-line"></div> <div class="college-ayah">
-‫خيركم من تعلم القرءان وعلمه‬
+خيركم من تعلم القرءان وعلمه
 </div> <div class="college-ayah-meaning">
 The best among you are those who learn the Qur'an and teach it.
 </div> </div>
@@ -2997,7 +2997,1304 @@ search.addEventListener("input",()=>renderStudentOptions(selectId,searchId));
 });
 }
 
-setupStudentSearches();)
+setupStudentSearches();
+/* ATTENDANCE */
+
+$("attendanceForm").addEventListener("submit",async event=>{
+event.preventDefault();
+try{
+const studentNumber=$("attendanceStudent").value;
+const date=$("attendanceDate").value;
+const status=$("attendanceStatus").value;
+
+if(!studentNumber || !date || !["absent","leave"].includes(status)){
+showMessage("Please select a student, date and Absent / Leave status.","error");
+return;
+}
+
+/* Only Absent / Leave records are saved. All other students are automatically Present for the date. */
+const existingSnap=await getDocs(collection(db,"attendance"));
+const duplicate=existingSnap.docs.some(item=>{
+const data=item.data();
+return String(data.studentNumber||"")===String(studentNumber) && String(data.date||"")===String(date) && ["absent","leave"].includes(String(data.status||""));
+});
+
+if(duplicate){
+showMessage("Attendance for this student and date is already recorded.","error");
+return;
+}
+
+await addDoc(collection(db,"attendance"),{studentNumber,date,status,createdAt:serverTimestamp()});
+showMessage("Attendance saved.");
+await loadAttendance();
+}catch(error){
+console.error(error);
+showMessage("Unable to save attendance.","error");
+}
+});
+
+async function loadAttendance(){
+try{
+const snap=await getDocs(collection(db,"attendance"));
+const rows=snap.docs.map(item=>({id:item.id,...item.data()})).filter(row=>row.status==="absent"||row.status==="leave");
+rows.sort((a,b)=>String(b.date||"").localeCompare(String(a.date||"")));
+
+$("attendanceCount").textContent=rows.length;
+const table=$("attendanceTable");
+
+if(!rows.length){
+table.innerHTML=`<div class="empty">No Absent / Leave attendance records.</div>`;
+return;
+}
+
+const grouped={};
+rows.forEach(row=>{const date=String(row.date||"-");if(!grouped[date])grouped[date]=[];grouped[date].push(row);});
+const dates=Object.keys(grouped).sort((a,b)=>b.localeCompare(a));
+
+table.innerHTML=dates.map(date=>{
+const dateRows=grouped[date];
+return `<div class="table-wrap" style="margin-bottom:18px"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 15px;background:linear-gradient(135deg,#dff2e7,#fff8df);border-bottom:1px solid #d2e6da"><strong style="color:#164c39">Date: ${escapeHtml(date)}</strong><span class="badge badge-red">Absent / Leave: ${dateRows.length}</span></div><table><thead><tr><th>No</th><th>Name</th><th>Status</th><th>Action</th></tr></thead><tbody>${dateRows.map(row=>`<tr><td><strong>${escapeHtml(row.studentNumber||"-")}</strong></td><td>${escapeHtml(studentNameByNumber(row.studentNumber))}</td><td><span class="badge ${row.status==="leave"?"badge-yellow":"badge-red"}">${escapeHtml(row.status)}</span></td><td><div class="actions"><button class="secondary attendance-edit-btn" data-id="${row.id}" data-status="${escapeHtml(row.status)}">Edit</button><button class="danger attendance-delete-btn" data-id="${row.id}">Delete</button></div></td></tr>`).join("")}</tbody></table></div>`;
+}).join("");
+
+document.querySelectorAll(".attendance-edit-btn").forEach(button=>{
+button.addEventListener("click",async()=>{
+const current=button.dataset.status==="leave"?"leave":"absent";
+const value=prompt("Enter status: absent or leave",current);
+if(value===null)return;
+const newStatus=value.trim().toLowerCase();
+if(!["absent","leave"].includes(newStatus)){alert("Please enter only absent or leave.");return;}
+await updateDoc(doc(db,"attendance",button.dataset.id),{status:newStatus});
+showMessage("Attendance updated.");
+await loadAttendance();
+});
+});
+
+document.querySelectorAll(".attendance-delete-btn").forEach(button=>{
+button.addEventListener("click",async()=>{
+if(!confirm("Delete attendance record?"))return;
+await deleteDoc(doc(db,"attendance",button.dataset.id));
+showMessage("Attendance deleted.");
+await loadAttendance();
+});
+});
+}catch(error){
+console.error(error);
+$("attendanceTable").innerHTML=`<div class="empty">Unable to load attendance.</div>`;
+}
+}
+
+
+/* STUDY PROGRESS */
+
+$("studyForm")
+.addEventListener(
+"submit",
+async event=>{
+
+event.preventDefault();
+
+try{
+
+await addDoc(
+collection(
+db,
+"studyProgress"
+),
+{
+
+studentNumber:
+$("studyStudent")
+.value,
+
+date:
+$("studyDate")
+.value,
+
+surah:
+$("studySurah")
+.value.trim(),
+
+newLesson:
+$("newLesson")
+.value.trim(),
+
+revision:
+$("revision")
+.value.trim(),
+
+/* PERFORMANCE NOW COMES FROM DROPDOWN */
+
+performance:
+$("performance")
+.value.trim(),
+
+/* STATUS NOW COMES FROM EMPTY TEXT BOX */
+
+studyStatus:
+$("studyStatus")
+.value.trim(),
+
+note:
+$("studyNote")
+.value.trim(),
+
+darsLevel:
+$("darsLevel")
+.value,
+
+discipline:
+$("discipline")
+.value,
+
+createdAt:
+serverTimestamp()
+
+}
+);
+
+$("studyForm").reset();
+
+setDefaultDates();
+
+showMessage(
+"Study progress saved successfully."
+);
+
+await loadStudy();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"Unable to save study progress.",
+
+"error"
+);
+
+}
+
+});
+
+
+async function loadStudy(){
+
+try{
+
+const snap=
+await getDocs(
+collection(
+db,
+"studyProgress"
+)
+);
+
+const rows=
+snap.docs.map(
+item=>({
+
+id:item.id,
+
+...item.data()
+
+})
+);
+
+rows.sort(
+(a,b)=>
+String(
+b.date||""
+)
+.localeCompare(
+String(
+a.date||""
+)
+)
+);
+
+const table=
+$("studyTable");
+
+if(!rows.length){
+
+table.innerHTML=
+`
+<tr>
+
+<td colspan="11">
+
+<div class="empty">
+No study records.
+</div>
+
+</td>
+
+</tr>
+`;
+
+return;
+
+}
+
+table.innerHTML=
+rows.map(
+row=>`
+
+<tr>
+
+<td>
+
+<strong>
+${escapeHtml(
+studentNameByNumber(
+row.studentNumber
+)
+)}
+</strong>
+
+<br>
+
+<small>
+${escapeHtml(
+row.studentNumber||""
+)}
+</small>
+
+</td>
+
+<td>
+${escapeHtml(
+row.date||"-"
+
+)}
+</td>
+
+<td>
+${escapeHtml(
+row.surah||"-"
+)}
+</td>
+
+<td>
+${escapeHtml(
+row.newLesson||"-"
+)}
+${row.newLesson
+?
+" pages"
+:
+""}
+</td>
+
+<td>
+${escapeHtml(
+row.revision||"-"
+)}
+</td>
+
+<td>
+
+<span class="badge ${
+row.studyStatus
+?
+"badge-green"
+:
+"badge-yellow"
+}">
+
+${escapeHtml(
+row.studyStatus||"-"
+)}
+
+</span>
+
+</td>
+
+<td>
+${escapeHtml(
+row.performance||"-"
+)}
+
+</td>
+
+<td class="teacher-remark-cell">
+${escapeHtml(
+row.note||"-"
+)}
+</td>
+
+<td>
+${escapeHtml(
+row.darsLevel||"-"
+)}
+</td>
+
+<td>
+${escapeHtml(
+row.discipline||"-"
+)}
+</td>
+
+<td>
+
+<button
+class="danger study-delete"
+data-id="${row.id}">
+
+Delete
+
+</button>
+
+</td>
+
+</tr>
+
+`
+)
+.join("");
+
+document
+.querySelectorAll(".study-delete")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+if(
+!confirm(
+
+"Delete study record?"
+)
+)return;
+
+await deleteDoc(
+doc(
+db,
+"studyProgress",
+button.dataset.id
+)
+);
+
+showMessage(
+"Study record deleted."
+);
+
+await loadStudy();
+
+});
+
+});
+
+}catch(error){
+
+console.error(error);
+
+$("studyTable")
+.innerHTML=
+`
+<tr>
+
+<td colspan="11">
+Unable to load study records.
+</td>
+
+</tr>
+`;
+
+}
+
+}
+
+
+/* RESULTS */
+
+$("resultForm")
+.addEventListener(
+"submit",
+
+async event=>{
+
+event.preventDefault();
+
+try{
+
+await addDoc(
+collection(
+db,
+"results"
+),
+{
+
+studentNumber:
+$("resultStudent")
+.value,
+
+title:
+$("resultTitle")
+.value.trim(),
+
+mark:
+$("resultMark")
+.value.trim(),
+
+status:
+$("resultStatus")
+.value,
+
+createdAt:
+serverTimestamp()
+
+}
+);
+
+$("resultForm").reset();
+
+showMessage(
+"Result added successfully."
+);
+
+await loadResults();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+
+"Unable to add result.",
+"error"
+
+);
+
+}
+
+});
+
+
+async function loadResults(){
+
+try{
+
+const snap=
+await getDocs(
+collection(
+db,
+"results"
+)
+);
+
+const rows=
+snap.docs.map(
+item=>({
+
+id:item.id,
+
+...item.data()
+
+})
+);
+
+rows.sort(
+(a,b)=>
+(b.createdAt?.seconds||0)
+-
+(a.createdAt?.seconds||0)
+);
+
+const table=
+$("resultsTable");
+
+if(!rows.length){
+
+table.innerHTML=
+`
+<tr>
+
+<td colspan="5">
+
+<div class="empty">
+No results found.
+</div>
+
+</td>
+
+</tr>
+`;
+
+return;
+
+}
+
+table.innerHTML=
+rows.map(
+row=>`
+
+<tr>
+
+<td>
+
+${escapeHtml(
+studentNameByNumber(
+row.studentNumber
+)
+)}
+
+<br>
+
+<small>
+${escapeHtml(
+row.studentNumber
+)}
+</small>
+
+</td>
+
+<td>
+${escapeHtml(
+row.title
+)}
+</td>
+
+<td>
+<strong>
+${escapeHtml(
+
+row.mark
+)}
+</strong>
+</td>
+
+<td>
+
+<span class="badge ${
+row.status==="published"
+?
+"badge-green"
+:
+"badge-yellow"
+}">
+
+${escapeHtml(
+row.status
+)}
+
+</span>
+
+</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="${
+row.status==="published"
+?
+"warning"
+:
+"success"
+} result-toggle"
+
+data-id="${row.id}"
+data-status="${row.status}">
+
+${
+row.status==="published"
+?
+"Unpublish"
+:
+"Publish"
+}
+
+</button>
+
+<button
+class="danger result-delete"
+data-id="${row.id}">
+
+Delete
+
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`
+)
+.join("");
+
+document
+.querySelectorAll(".result-toggle")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+const newStatus=
+button.dataset.status==="published"
+?
+"draft"
+:
+"published";
+
+await updateDoc(
+doc(
+db,
+"results",
+button.dataset.id
+),
+{
+status:newStatus
+}
+);
+
+showMessage(
+newStatus==="published"
+
+?
+"Result published."
+:
+"Result unpublished."
+);
+
+await loadResults();
+
+});
+
+});
+
+
+document
+.querySelectorAll(".result-delete")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+if(
+!confirm(
+"Delete this result?"
+)
+)return;
+
+await deleteDoc(
+doc(
+db,
+"results",
+button.dataset.id
+)
+);
+
+showMessage(
+"Result deleted."
+);
+
+await loadResults();
+
+});
+
+});
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* NOTICES */
+
+$("noticeForm")
+.addEventListener(
+"submit",
+async event=>{
+
+event.preventDefault();
+
+try{
+
+await addDoc(
+collection(
+db,
+"notices"
+),
+{
+
+title:
+$("noticeTitle")
+.value.trim(),
+
+text:
+$("noticeText")
+.value.trim(),
+
+status:
+$("noticeStatus")
+.value,
+
+createdAt:
+serverTimestamp()
+
+}
+);
+
+$("noticeForm").reset();
+
+showMessage(
+"Notice added successfully."
+);
+
+await loadNotices();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"Unable to add notice.",
+"error"
+);
+
+}
+
+});
+
+
+async function loadNotices(){
+
+try{
+
+const snap=
+await getDocs(
+collection(
+db,
+"notices"
+)
+);
+
+const rows=
+snap.docs.map(
+item=>({
+
+id:item.id,
+
+...item.data()
+
+})
+);
+
+rows.sort(
+(a,b)=>
+(b.createdAt?.seconds||0)
+-
+(a.createdAt?.seconds||0)
+);
+
+const table=
+$("noticesTable");
+
+if(!rows.length){
+
+table.innerHTML=
+`
+<tr>
+
+<td colspan="4">
+
+<div class="empty">
+No notices.
+</div>
+
+</td>
+
+</tr>
+`;
+
+return;
+
+}
+
+table.innerHTML=
+rows.map(
+row=>`
+
+<tr>
+
+<td>
+
+<strong>
+${escapeHtml(
+row.title
+)}
+</strong>
+
+</td>
+
+<td>
+${escapeHtml(
+row.text
+)}
+</td>
+
+<td>
+
+<span class="badge ${
+row.status==="published"
+
+?
+
+"badge-green"
+:
+"badge-yellow"
+}">
+
+${escapeHtml(
+row.status
+)}
+
+</span>
+
+</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="${
+row.status==="published"
+?
+"warning"
+:
+"success"
+} notice-toggle"
+
+data-id="${row.id}"
+data-status="${row.status}">
+
+${
+row.status==="published"
+?
+"Unpublish"
+:
+"Publish"
+}
+
+</button>
+
+<button
+class="danger notice-delete"
+data-id="${row.id}">
+
+Delete
+
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`
+)
+.join("");
+
+document
+.querySelectorAll(".notice-toggle")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+const status=
+button.dataset.status==="published"
+?
+"draft"
+:
+"published";
+
+await updateDoc(
+doc(
+db,
+"notices",
+button.dataset.id
+),
+{
+status
+}
+);
+
+showMessage(
+status==="published"
+?
+"Notice published."
+:
+"Notice unpublished."
+);
+
+await loadNotices();
+
+});
+
+});
+
+
+document
+.querySelectorAll(".notice-delete")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+if(
+!confirm(
+"Delete this notice?"
+)
+)return;
+
+await deleteDoc(
+doc(
+db,
+"notices",
+button.dataset.id
+)
+);
+
+showMessage(
+"Notice deleted."
+);
+
+await loadNotices();
+
+});
+
+});
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* LEAVE */
+
+async function loadLeaves(){
+
+try{
+const snap=
+await getDocs(
+collection(
+db,
+"leaveRequests"
+)
+);
+
+const rows=
+snap.docs.map(
+item=>({
+
+id:item.id,
+
+...item.data()
+
+})
+);
+
+rows.sort(
+(a,b)=>
+(b.createdAt?.seconds||0)
+-
+(a.createdAt?.seconds||0)
+);
+
+$("leaveCount")
+.textContent=
+rows.length;
+
+const table=
+$("leaveTable");
+
+if(!rows.length){
+
+table.innerHTML=
+`
+<tr>
+
+<td colspan="7">
+
+<div class="empty">
+No leave requests.
+</div>
+
+</td>
+
+</tr>
+`;
+
+return;
+
+}
+
+table.innerHTML=
+rows.map(
+row=>`
+
+<tr>
+
+<td>
+
+<strong>
+${escapeHtml(
+studentNameByNumber(
+row.studentNumber
+)
+)}
+</strong>
+
+<br>
+
+${escapeHtml(
+row.studentNumber
+)}
+
+</td>
+
+<td>
+${escapeHtml(
+row.parentEmail||"-"
+)}
+</td>
+
+<td>
+${escapeHtml(
+row.leaveDate||"-"
+)}
+</td>
+
+<td>
+${escapeHtml(
+row.reason||"-"
+
+)}
+</td>
+
+<td>
+
+<span class="badge ${
+row.status==="approved"
+?
+"badge-green"
+:
+row.status==="rejected"
+?
+"badge-red"
+:
+"badge-yellow"
+}">
+
+${escapeHtml(
+row.status||"pending"
+)}
+
+</span>
+
+</td>
+
+<td>
+${escapeHtml(
+row.reply||"-"
+)}
+</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="success leave-approve"
+data-id="${row.id}">
+Approve
+</button>
+
+<button
+class="warning leave-reject"
+data-id="${row.id}">
+Reject
+</button>
+
+<button
+
+class="secondary leave-reply"
+data-id="${row.id}">
+Reply
+</button>
+
+<button
+class="danger leave-delete"
+data-id="${row.id}">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`
+)
+.join("");
+
+document
+.querySelectorAll(".leave-approve")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+await updateDoc(
+doc(
+db,
+"leaveRequests",
+button.dataset.id
+),
+{
+
+status:"approved",
+
+repliedAt:
+serverTimestamp()
+
+}
+);
+
+showMessage(
+"Leave approved."
+);
+
+await loadLeaves();
+
+});
+
+});
+
+
+document
+.querySelectorAll(".leave-reject")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+await updateDoc(
+doc(
+db,
+"leaveRequests",
+button.dataset.id
+),
+{
+
+status:"rejected",
+
+repliedAt:
+serverTimestamp()
+
+}
+);
+
+showMessage(
+"Leave rejected."
+);
+
+await loadLeaves();
+
+});
+
+});
+
+
+document
+.querySelectorAll(".leave-reply")
+.forEach(button=>{
+
+button.addEventListener(
+
+"click",
+async()=>{
+
+const reply=
+prompt(
+"Enter reply:"
+);
+
+if(reply===null)return;
+
+await updateDoc(
+doc(
+db,
+"leaveRequests",
+button.dataset.id
+),
+{
+
+reply:
+reply.trim(),
+
+repliedAt:
+serverTimestamp()
+
+}
+);
+
+showMessage(
+"Reply sent."
+);
+
+await loadLeaves();
+
+});
+
+});
+
+
+document
+.querySelectorAll(".leave-delete")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+if(
+!confirm(
+
+"Delete leave request?"
+)
+)return;
+
+await deleteDoc(
+doc(
+db,
+"leaveRequests",
+button.dataset.id
+)
+);
 
 showMessage(
 "Leave request deleted."
@@ -3492,7 +4789,8 @@ if(
 !confirm(
 "Verify this donation?"
 )
-)return;
+)
+return;
 
 const note=
 prompt(
@@ -3690,4 +4988,4 @@ $("studyDate")
 setDefaultDates();
 
 </script> </body>
-</html>
+</html>       
