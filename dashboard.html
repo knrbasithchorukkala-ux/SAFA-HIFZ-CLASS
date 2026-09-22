@@ -385,6 +385,54 @@ border-color:#0a956a;background:#fff;
 box-shadow:0 0 0 3px rgba(10,149,106,.11)
 }
 
+/* SEARCHABLE STUDENT SELECT */
+
+.student-search-wrap{
+display:flex;
+flex-direction:column;
+gap:7px
+}
+
+.student-search-wrap input{
+width:100%;
+padding:11px 12px;
+outline:none;
+color:var(--text);
+background:#f5fbf7;
+border:1px solid #c4dfcf;
+border-radius:10px;
+transition:.2s
+}
+
+.student-search-wrap input:focus{
+border-color:#0a956a;
+background:#fff;
+box-shadow:0 0 0 3px rgba(10,149,106,.11)
+}
+
+.student-search-wrap select{
+width:100%;
+padding:11px 12px;
+outline:none;
+color:var(--text);
+background:#f5fbf7;
+border:1px solid #c4dfcf;
+border-radius:10px;
+transition:.2s
+}
+
+.student-search-wrap select:focus{
+border-color:#0a956a;
+background:#fff;
+box-shadow:0 0 0 3px rgba(10,149,106,.11)
+}
+
+.student-search-hint{
+font-size:10px;
+color:var(--muted);
+font-weight:700
+}
+
 .study-info{
 grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);
 gap:12px;margin-bottom:3px
@@ -589,6 +637,11 @@ font-size:12px
 
 .attendance-person strong{color:#173e30}
 
+.attendance-person small{
+color:var(--muted);
+font-weight:700
+}
+
 .auto-present-note{
 margin-top:12px;
 padding:11px 13px;
@@ -712,6 +765,7 @@ border:1px solid rgba(212,175,55,.55)
 </div>
 
 <div class="form-grid">
+
 <div class="field">
 <label>Student Number</label>
 <input id="editStudentNumber" readonly>
@@ -746,16 +800,19 @@ border:1px solid rgba(212,175,55,.55)
 <label>Address</label>
 <textarea id="editStudentAddress"></textarea>
 </div>
+
 </div>
 
 <div class="modal-actions">
 <button class="secondary" id="cancelEditStudent">Cancel</button>
 <button class="primary" id="saveEditStudent">Save Changes</button>
 </div>
+
 </div>
 </div>
 
 <div class="modal-overlay" id="editAttendanceModal">
+
 <div class="edit-modal attendance-edit-modal">
 
 <div class="panel-head">
@@ -806,14 +863,18 @@ border:1px solid rgba(212,175,55,.55)
 <aside class="sidebar" id="sidebar">
 
 <div class="brand">
+
 <div class="brand-top">
+
 <div class="logo-box"></div>
 
 <div>
 <h1>SAFA QURAN COLLEGE</h1>
 <p>ONLINE PORTAL</p>
 </div>
+
 </div>
+
 </div>
 
 <div class="menu">
@@ -1153,7 +1214,6 @@ DAILY ATTENDANCE
 <div class="panel-head">
 
 <div>
-
 <h3>Mark Absent / Leave</h3>
 
 <div class="panel-desc">
@@ -1172,6 +1232,13 @@ Usthad only needs to add Absent or Leave. Students without a record are automati
 
 <label>Student</label>
 
+<div class="student-search-wrap">
+
+<input
+id="attendanceStudentSearch"
+placeholder="Search by student name or number..."
+autocomplete="off">
+
 <select id="attendanceStudent" required>
 
 <option value="">
@@ -1179,6 +1246,12 @@ Select student
 </option>
 
 </select>
+
+<div class="student-search-hint">
+Search Name or Student Number, then select the student.
+</div>
+
+</div>
 
 </div>
 
@@ -1438,11 +1511,29 @@ Record the student's daily Qur'an and Dars progress
 <div class="form-grid">
 
 <div class="field">
+
 <label>Student Search</label>
 
+<div class="student-search-wrap">
+
+<input
+id="studyStudentSearch"
+placeholder="Search by student name or number..."
+autocomplete="off">
+
 <select id="studyStudent" required>
-<option value="">Select student</option>
+
+<option value="">
+Select student
+</option>
+
 </select>
+
+<div class="student-search-hint">
+Search Name or Student Number, then select the student.
+</div>
+
+</div>
 
 </div>
 
@@ -1674,8 +1765,30 @@ RESULT MANAGEMENT
 <div class="form-grid">
 
 <div class="field">
-<label>Student</label>
-<select id="resultStudent" required></select>
+
+<label>Student Search</label>
+
+<div class="student-search-wrap">
+
+<input
+id="resultStudentSearch"
+placeholder="Search by student name or number..."
+autocomplete="off">
+
+<select id="resultStudent" required>
+
+<option value="">
+Select student
+</option>
+
+</select>
+
+<div class="student-search-hint">
+Search Name or Student Number, then select the student.
+</div>
+
+</div>
+
 </div>
 
 <div class="field">
@@ -2123,10 +2236,12 @@ box.style.display="none";
 function studentNameByNumber(number){
 
 const student=window.students.find(
-s=>String(s.studentNumber)===String(number)
+s=>String(s.studentNumber).trim()===String(number).trim()
 );
 
-return student?student.studentName:number;
+return student
+?(student.studentName||student.name||number)
+:number;
 
 }
 
@@ -2666,21 +2781,31 @@ showMessage(
 });
 
 
-/* STUDENT SELECTS */
+/* STUDENT SELECTS + SEARCH */
+
+const studentSelectConfig={
+
+attendanceStudent:{
+search:"attendanceStudentSearch"
+},
+
+studyStudent:{
+search:"studyStudentSearch"
+},
+
+resultStudent:{
+search:"resultStudentSearch"
+
+}
+
+};
 
 function populateStudentSelects(){
 
-const selects=[
+Object.entries(studentSelectConfig).forEach(
+([selectId,config])=>{
 
-"attendanceStudent",
-"studyStudent",
-"resultStudent"
-
-];
-
-selects.forEach(id=>{
-
-const select=$(id);
+const select=$(selectId);
 
 if(!select)return;
 
@@ -2691,7 +2816,26 @@ select.innerHTML=
 Select student
 </option>`;
 
-window.students.forEach(student=>{
+window.students
+.slice()
+.sort((a,b)=>{
+
+const aName=String(
+a.studentName||a.name||""
+).trim();
+
+const bName=String(
+b.studentName||b.name||""
+).trim();
+
+return aName.localeCompare(
+bName,
+undefined,
+{numeric:true,sensitivity:"base"}
+);
+
+})
+.forEach(student=>{
 
 const name=String(
 student.studentName||
@@ -2707,13 +2851,18 @@ student.number||
 
 if(!number)return;
 
-const option=document.createElement("option");
+const option=
+document.createElement("option");
 
 option.value=number;
 
-option.textContent=name
+option.textContent=
+name
 ?`${name} - ${number}`
 :number;
+
+option.dataset.search=
+`${name} ${number}`.toLowerCase();
 
 select.appendChild(option);
 
@@ -2725,6 +2874,106 @@ select.value=old;
 });
 
 }
+
+function filterStudentSelect(selectId,searchId){
+
+const select=$(selectId);
+const search=$(searchId);
+
+if(!select||!search)return;
+
+const query=
+search.value.toLowerCase().trim();
+
+const oldValue=select.value;
+
+Array.from(select.options).forEach(
+(option,index)=>{
+
+if(index===0){
+
+option.hidden=false;
+return;
+
+}
+
+const text=
+String(
+option.dataset.search||
+option.textContent||
+""
+).toLowerCase();
+
+option.hidden=
+query!==""&&!text.includes(query);
+
+});
+
+if(
+oldValue &&
+Array.from(select.options).some(
+option=>
+option.value===oldValue &&
+!option.hidden
+)
+){
+
+select.value=oldValue;
+
+}else{
+
+select.value="";
+
+}
+
+}
+
+function setupStudentSearch(){
+
+Object.entries(studentSelectConfig).forEach(
+([selectId,config])=>{
+
+const search=$(config.search);
+
+const select=$(selectId);
+
+if(!search||!select)return;
+
+search.addEventListener(
+"input",
+()=>{
+
+filterStudentSelect(
+selectId,
+config.search
+);
+
+});
+
+select.addEventListener(
+"change",
+()=>{
+
+const selected=
+select.options[select.selectedIndex];
+
+if(
+selected &&
+selected.value
+){
+
+search.value=
+selected.textContent;
+
+}
+
+});
+
+});
+
+}
+
+setupStudentSearch();
 
 
 /* ATTENDANCE */
@@ -3003,6 +3252,13 @@ $("attendanceNote").value="";
 
 $("attendanceStudent").value="";
 
+$("attendanceStudentSearch").value="";
+
+filterStudentSelect(
+"attendanceStudent",
+"attendanceStudentSearch"
+);
+
 await loadAttendance();
 
 $("attendanceSummaryDate").value=date;
@@ -3089,8 +3345,8 @@ table.innerHTML=`
 
 <tr>
 
-<th>Student</th>
-<th>Number</th>
+<th>Student Name</th>
+<th>Student Number</th>
 <th>Date</th>
 <th>Status</th>
 <th>Note</th>
@@ -3119,9 +3375,13 @@ row.studentNumber
 </td>
 
 <td>
+
+<strong>
 ${escapeHtml(
 row.studentNumber
 )}
+</strong>
+
 </td>
 
 <td>
@@ -3440,14 +3700,16 @@ absentStudents.map(row=>`
 
 <strong>
 ${escapeHtml(
-row.student.studentName
+row.student.studentName||
+row.student.name||
+"Unknown Student"
 )}
 </strong>
 
 <br>
 
 <small>
-${escapeHtml(
+Student No: ${escapeHtml(
 row.studentNumber
 )}
 </small>
@@ -3456,7 +3718,7 @@ ${
 row.note
 ?
 `<br><small>
-${escapeHtml(row.note)}
+Note: ${escapeHtml(row.note)}
 </small>`
 :""
 }
@@ -3494,14 +3756,16 @@ leaveStudents.map(row=>`
 
 <strong>
 ${escapeHtml(
-row.student.studentName
+row.student.studentName||
+row.student.name||
+"Unknown Student"
 )}
 </strong>
 
 <br>
 
 <small>
-${escapeHtml(
+Student No: ${escapeHtml(
 row.studentNumber
 )}
 </small>
@@ -3510,7 +3774,7 @@ ${
 row.note
 ?
 `<br><small>
-${escapeHtml(row.note)}
+Note: ${escapeHtml(row.note)}
 </small>`
 :""
 }
@@ -3668,14 +3932,27 @@ async event=>{
 
 event.preventDefault();
 
+const studentNumber=
+$("studyStudent").value.trim();
+
+if(!studentNumber){
+
+showMessage(
+"Please select a student.",
+"error"
+);
+
+return;
+
+}
+
 try{
 
 await addDoc(
 collection(db,"studyProgress"),
 {
 
-studentNumber:
-$("studyStudent").value,
+studentNumber,
 
 date:
 $("studyDate").value,
@@ -3711,6 +3988,13 @@ serverTimestamp()
 );
 
 $("studyForm").reset();
+
+$("studyStudentSearch").value="";
+
+filterStudentSelect(
+"studyStudent",
+"studyStudentSearch"
+);
 
 setDefaultDates();
 
@@ -3792,7 +4076,7 @@ row.studentNumber
 <br>
 
 <small>
-${escapeHtml(
+Student No: ${escapeHtml(
 row.studentNumber||""
 )}
 </small>
@@ -3927,14 +4211,27 @@ async event=>{
 
 event.preventDefault();
 
+const studentNumber=
+$("resultStudent").value.trim();
+
+if(!studentNumber){
+
+showMessage(
+"Please select a student.",
+"error"
+);
+
+return;
+
+}
+
 try{
 
 await addDoc(
 collection(db,"results"),
 {
 
-studentNumber:
-$("resultStudent").value,
+studentNumber,
 
 title:
 $("resultTitle").value.trim(),
@@ -3952,6 +4249,13 @@ serverTimestamp()
 );
 
 $("resultForm").reset();
+
+$("resultStudentSearch").value="";
+
+filterStudentSelect(
+"resultStudent",
+"resultStudentSearch"
+);
 
 showMessage(
 "Result added successfully."
@@ -4018,16 +4322,18 @@ rows.map(row=>`
 
 <td>
 
+<strong>
 ${escapeHtml(
 studentNameByNumber(
 row.studentNumber
 )
 )}
+</strong>
 
 <br>
 
 <small>
-${escapeHtml(
+Student No: ${escapeHtml(
 row.studentNumber
 )}
 </small>
@@ -4443,7 +4749,7 @@ row.studentNumber
 
 <br>
 
-${escapeHtml(
+Student No: ${escapeHtml(
 row.studentNumber
 )}
 
@@ -4715,15 +5021,17 @@ rows.map(row=>`
 
 <td>
 
+<strong>
 ${escapeHtml(
 studentNameByNumber(
 row.studentNumber
 )
 )}
+</strong>
 
 <br>
 
-${escapeHtml(
+Student No: ${escapeHtml(
 row.studentNumber
 )}
 
@@ -4953,7 +5261,7 @@ row.studentNumber
 <br>
 
 <small>
-${escapeHtml(
+Student No: ${escapeHtml(
 row.studentNumber||"-"
 )}
 </small>
