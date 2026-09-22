@@ -701,25 +701,17 @@ border:1px solid rgba(212,175,55,.55)
 <div id="loading">SAFA QURAN COLLEGE loading...</div>
 <div id="message"></div>
 
-<!-- STUDENT EDIT MODAL -->
-
 <div class="modal-overlay" id="editStudentModal">
-
 <div class="edit-modal">
-
 <div class="panel-head">
-
 <div>
 <h3>Edit Student</h3>
 <p class="panel-desc">Update student information</p>
 </div>
-
 <button class="danger" id="closeEditModal">✕</button>
-
 </div>
 
 <div class="form-grid">
-
 <div class="field">
 <label>Student Number</label>
 <input id="editStudentNumber" readonly>
@@ -754,33 +746,24 @@ border:1px solid rgba(212,175,55,.55)
 <label>Address</label>
 <textarea id="editStudentAddress"></textarea>
 </div>
-
 </div>
 
 <div class="modal-actions">
 <button class="secondary" id="cancelEditStudent">Cancel</button>
 <button class="primary" id="saveEditStudent">Save Changes</button>
 </div>
-
 </div>
 </div>
-
-
-<!-- ATTENDANCE EDIT MODAL -->
 
 <div class="modal-overlay" id="editAttendanceModal">
-
 <div class="edit-modal attendance-edit-modal">
 
 <div class="panel-head">
-
 <div>
 <h3>Edit Attendance</h3>
 <p class="panel-desc">Update the selected student's attendance</p>
 </div>
-
 <button class="danger" id="closeEditAttendanceModal">✕</button>
-
 </div>
 
 <div class="form-grid">
@@ -797,12 +780,10 @@ border:1px solid rgba(212,175,55,.55)
 
 <div class="field">
 <label>Status</label>
-
 <select id="editAttendanceStatus">
 <option value="absent">Absent</option>
 <option value="leave">Leave</option>
 </select>
-
 </div>
 
 <div class="field full">
@@ -813,36 +794,25 @@ border:1px solid rgba(212,175,55,.55)
 </div>
 
 <div class="modal-actions">
-
-<button class="secondary" id="cancelEditAttendance">
-Cancel
-</button>
-
-<button class="primary" id="saveEditAttendance">
-Save Changes
-</button>
-
+<button class="secondary" id="cancelEditAttendance">Cancel</button>
+<button class="primary" id="saveEditAttendance">Save Changes</button>
 </div>
 
 </div>
 </div>
-
 
 <div class="app">
 
 <aside class="sidebar" id="sidebar">
 
 <div class="brand">
-
 <div class="brand-top">
-
 <div class="logo-box"></div>
 
 <div>
 <h1>SAFA QURAN COLLEGE</h1>
 <p>ONLINE PORTAL</p>
 </div>
-
 </div>
 </div>
 
@@ -899,7 +869,6 @@ Save Changes
 </div>
 </aside>
 
-
 <main class="main">
 
 <header class="topbar">
@@ -927,11 +896,7 @@ Logout
 
 </header>
 
-
 <div class="content">
-
-
-<!-- HOME -->
 
 <section class="section active" id="home">
 
@@ -962,7 +927,6 @@ The best among you are those who learn the Qur'an and teach it.
 </div>
 </div>
 
-
 <div class="stats">
 
 <div class="stat">
@@ -991,20 +955,16 @@ The best among you are those who learn the Qur'an and teach it.
 
 </div>
 
-
 <div class="panel">
 
 <div class="panel-head">
-
 <div>
 <h3>Quick Access</h3>
 <div class="panel-desc">
 Manage your college portal quickly
 </div>
 </div>
-
 </div>
-
 
 <div class="quick">
 
@@ -1055,9 +1015,6 @@ Manage your college portal quickly
 
 </section>
 
-
-<!-- STUDENTS -->
-
 <section class="section" id="students">
 
 <div class="section-head">
@@ -1073,7 +1030,6 @@ STUDENT MANAGEMENT
 
 </div>
 
-
 <div class="panel">
 
 <div class="panel-head">
@@ -1086,7 +1042,6 @@ Create a new student profile
 </div>
 
 </div>
-
 
 <form id="studentForm">
 
@@ -1138,7 +1093,6 @@ Create a new student profile
 
 </div>
 
-
 <div class="panel">
 
 <div class="toolbar">
@@ -1150,7 +1104,6 @@ Create a new student profile
 <input class="search" id="studentSearch" placeholder="Search student...">
 
 </div>
-
 
 <div class="table-wrap">
 
@@ -1180,13 +1133,6 @@ Create a new student profile
 
 </section>
 
-
-<!-- =====================================================
-     ATTENDANCE
-     USTHAD ADDS ONLY ABSENT / LEAVE
-     NO RECORD = AUTO PRESENT
-===================================================== -->
-
 <section class="section" id="attendance">
 
 <div class="section-head">
@@ -1201,9 +1147,6 @@ DAILY ATTENDANCE
 </div>
 
 </div>
-
-
-<!-- ADD ABSENT / LEAVE -->
 
 <div class="panel">
 
@@ -1221,11 +1164,9 @@ Usthad only needs to add Absent or Leave. Students without a record are automati
 
 </div>
 
-
 <form id="attendanceForm">
 
 <div class="form-grid">
-
 
 <div class="field">
 
@@ -1241,7 +1182,6 @@ Select student
 
 </div>
 
-
 <div class="field">
 
 <label>Date</label>
@@ -1249,7 +1189,6 @@ Select student
 <input type="date" id="attendanceDate" required>
 
 </div>
-
 
 <div class="field">
 
@@ -1269,7 +1208,6 @@ Leave
 
 </div>
 
-
 <div class="field">
 
 <label>Note / Remark</label>
@@ -1279,7 +1217,6 @@ id="attendanceNote"
 placeholder="Optional note for parent">
 
 </div>
-
 
 <div class="field">
 
@@ -1294,15 +1231,11 @@ Save Attendance
 
 </div>
 
-
 </div>
 
 </form>
 
 </div>
-
-
-<!-- DATE SUMMARY -->
 
 <div class="panel">
 
@@ -1320,7 +1253,6 @@ Select a date to see that day's complete attendance.
 
 </div>
 
-
 <div class="attendance-date-box">
 
 <div class="field">
@@ -1334,7 +1266,6 @@ type="date"
 id="attendanceSummaryDate">
 
 </div>
-
 
 <div>
 
@@ -1354,7 +1285,6 @@ Today
 
 </div>
 
-
 <div class="attendance-summary">
 
 <div class="attendance-stat">
@@ -1369,7 +1299,6 @@ Present
 
 </div>
 
-
 <div class="attendance-stat">
 
 <small>
@@ -1382,7 +1311,6 @@ Absent
 
 </div>
 
-
 <div class="attendance-stat">
 
 <small>
@@ -1394,7 +1322,6 @@ Leave
 </strong>
 
 </div>
-
 
 <div class="attendance-stat">
 
@@ -1410,16 +1337,13 @@ Total Students
 
 </div>
 
-
 <div class="auto-present-note">
 
 ✓ Students who do not have an Absent or Leave record for this date are automatically counted as Present.
 
 </div>
 
-
 <div class="attendance-summary-list">
-
 
 <div class="attendance-summary-card absent-card">
 
@@ -1437,7 +1361,6 @@ No absent students.
 
 </div>
 
-
 <div class="attendance-summary-card leave-card">
 
 <h4>
@@ -1454,13 +1377,9 @@ No leave students.
 
 </div>
 
-
 </div>
 
 </div>
-
-
-<!-- ALL DAILY RECORDS -->
 
 <div class="panel">
 
@@ -1480,15 +1399,11 @@ Only Absent / Leave records are stored. Present is automatic.
 
 </div>
 
-
 <div id="attendanceTable"></div>
 
 </div>
 
 </section>
-
-
-<!-- STUDY -->
 
 <section class="section" id="study">
 
@@ -1505,7 +1420,6 @@ HIFZ PROGRESS
 
 </div>
 
-
 <div class="panel">
 
 <div class="panel-head">
@@ -1519,11 +1433,9 @@ Record the student's daily Qur'an and Dars progress
 
 </div>
 
-
 <form id="studyForm">
 
 <div class="form-grid">
-
 
 <div class="field">
 <label>Student Search</label>
@@ -1534,36 +1446,30 @@ Record the student's daily Qur'an and Dars progress
 
 </div>
 
-
 <div class="field">
 <label>Date</label>
 <input type="date" id="studyDate" required>
 </div>
-
 
 <div class="field">
 <label>Juz / Surah Studied</label>
 <input id="studySurah" placeholder="Example: Juz 5 / Surah Al-Ma'idah">
 </div>
 
-
 <div class="field">
 <label>Today's New Lesson Target (Pages)</label>
 <input id="newLesson" type="number" min="0" step="0.5" placeholder="Example: 5">
 </div>
-
 
 <div class="field">
 <label>Revision Completed</label>
 <input id="revision" placeholder="Example: 3 pages / 1 Juz">
 </div>
 
-
 <div class="field">
 <label>Study Status</label>
 <input id="studyStatus" placeholder="Enter status code">
 </div>
-
 
 <div class="field">
 
@@ -1601,7 +1507,6 @@ Needs Improvement
 
 </div>
 
-
 <div class="field">
 
 <label>
@@ -1613,7 +1518,6 @@ id="studyNote"
 placeholder="Teacher's comments about today's study">
 
 </div>
-
 
 <div class="field">
 
@@ -1651,7 +1555,6 @@ Needs Improvement
 
 </div>
 
-
 <div class="field">
 
 <label>
@@ -1688,7 +1591,6 @@ Needs Improvement
 
 </div>
 
-
 <div class="field">
 
 <button class="primary" type="submit">
@@ -1697,13 +1599,11 @@ Save Study Progress
 
 </div>
 
-
 </div>
 
 </form>
 
 </div>
-
 
 <div class="panel">
 
@@ -1717,7 +1617,6 @@ Daily Hifz, revision, performance, Dars level and discipline
 </div>
 
 </div>
-
 
 <div class="table-wrap">
 
@@ -1753,9 +1652,6 @@ Daily Hifz, revision, performance, Dars level and discipline
 
 </section>
 
-
-<!-- RESULTS -->
-
 <section class="section" id="results">
 
 <div class="section-head">
@@ -1771,31 +1667,26 @@ RESULT MANAGEMENT
 
 </div>
 
-
 <div class="panel">
 
 <form id="resultForm">
 
 <div class="form-grid">
 
-
 <div class="field">
 <label>Student</label>
 <select id="resultStudent" required></select>
 </div>
-
 
 <div class="field">
 <label>Test / Exam Title</label>
 <input id="resultTitle" required>
 </div>
 
-
 <div class="field">
 <label>Mark</label>
 <input id="resultMark" required>
 </div>
-
 
 <div class="field">
 
@@ -1817,7 +1708,6 @@ Published
 
 </div>
 
-
 <div class="field">
 
 <button class="primary" type="submit">
@@ -1826,13 +1716,11 @@ Add Result
 
 </div>
 
-
 </div>
 
 </form>
 
 </div>
-
 
 <div class="panel">
 
@@ -1862,9 +1750,6 @@ Add Result
 
 </section>
 
-
-<!-- NOTICES -->
-
 <section class="section" id="notices">
 
 <div class="section-head">
@@ -1880,19 +1765,16 @@ ANNOUNCEMENTS
 
 </div>
 
-
 <div class="panel">
 
 <form id="noticeForm">
 
 <div class="form-grid">
 
-
 <div class="field">
 <label>Notice Title</label>
 <input id="noticeTitle" required>
 </div>
-
 
 <div class="field">
 
@@ -1914,7 +1796,6 @@ Published
 
 </div>
 
-
 <div class="field full">
 
 <label>
@@ -1925,7 +1806,6 @@ Notice
 
 </div>
 
-
 <div class="field">
 
 <button class="primary" type="submit">
@@ -1934,13 +1814,11 @@ Add Notice
 
 </div>
 
-
 </div>
 
 </form>
 
 </div>
-
 
 <div class="panel">
 
@@ -1969,9 +1847,6 @@ Add Notice
 
 </section>
 
-
-<!-- LEAVE -->
-
 <section class="section" id="leave">
 
 <div class="section-head">
@@ -1986,7 +1861,6 @@ PARENT REQUESTS
 </div>
 
 </div>
-
 
 <div class="panel">
 
@@ -2018,9 +1892,6 @@ PARENT REQUESTS
 
 </section>
 
-
-<!-- MESSAGES -->
-
 <section class="section" id="messages">
 
 <div class="section-head">
@@ -2035,7 +1906,6 @@ COMMUNICATION
 </div>
 
 </div>
-
 
 <div class="panel">
 
@@ -2066,9 +1936,6 @@ COMMUNICATION
 
 </section>
 
-
-<!-- DONATIONS -->
-
 <section class="section" id="donations">
 
 <div class="section-head">
@@ -2083,7 +1950,6 @@ SAFA DONATION
 </div>
 
 </div>
-
 
 <div class="donation-summary">
 
@@ -2103,7 +1969,6 @@ SAFA DONATION
 </div>
 
 </div>
-
 
 <div class="panel">
 
@@ -2136,9 +2001,6 @@ SAFA DONATION
 
 </section>
 
-
-<!-- PUBLIC RESULT -->
-
 <section class="section" id="publicResult">
 
 <div class="section-head">
@@ -2153,7 +2015,6 @@ PUBLIC
 </div>
 
 </div>
-
 
 <div class="panel welcome">
 
@@ -2173,17 +2034,13 @@ Open the public result page where students and parents can check published resul
 
 </section>
 
-
 </div>
 </main>
 </div>
 
-
 <script type="module">
 
-import {
-initializeApp
-}
+import {initializeApp}
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 import {
@@ -2206,7 +2063,6 @@ serverTimestamp
 }
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-
 const firebaseConfig={
 
 apiKey:"AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
@@ -2225,7 +2081,6 @@ measurementId:"G-ZTBTJCB5SR"
 
 };
 
-
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
@@ -2235,9 +2090,6 @@ const $=id=>document.getElementById(id);
 let currentUser=null;
 
 window.students=[];
-
-
-/* UTILITIES */
 
 function escapeHtml(value){
 
@@ -2249,7 +2101,6 @@ return String(value??"")
 .replaceAll("'","&#039;");
 
 }
-
 
 function showMessage(text,type="success"){
 
@@ -2269,7 +2120,6 @@ box.style.display="none";
 
 }
 
-
 function studentNameByNumber(number){
 
 const student=window.students.find(
@@ -2279,7 +2129,6 @@ s=>String(s.studentNumber)===String(number)
 return student?student.studentName:number;
 
 }
-
 
 function formatDate(value){
 
@@ -2295,7 +2144,6 @@ return String(value);
 
 }
 
-
 function money(value){
 
 const n=Number(value||0);
@@ -2303,9 +2151,6 @@ const n=Number(value||0);
 return "₹"+n.toLocaleString("en-IN");
 
 }
-
-
-/* AUTH */
 
 onAuthStateChanged(auth,async user=>{
 
@@ -2365,9 +2210,6 @@ $("loading").textContent=
 
 });
 
-
-/* NAVIGATION */
-
 document.querySelectorAll(".menu-btn").forEach(button=>{
 
 button.addEventListener("click",()=>{
@@ -2380,7 +2222,6 @@ $("sidebar").classList.remove("open");
 
 });
 
-
 document.querySelectorAll(".quick-btn").forEach(button=>{
 
 button.addEventListener("click",()=>{
@@ -2390,7 +2231,6 @@ openSection(button.dataset.go);
 });
 
 });
-
 
 function openSection(id){
 
@@ -2419,13 +2259,11 @@ behavior:"smooth"
 
 }
 
-
 $("mobileMenu").addEventListener("click",()=>{
 
 $("sidebar").classList.toggle("open");
 
 });
-
 
 $("logoutBtn").addEventListener("click",async()=>{
 
@@ -2437,9 +2275,6 @@ await signOut(auth);
 location.href="index.html";
 
 });
-
-
-/* LOAD EVERYTHING */
 
 async function loadEverything(){
 
@@ -2464,9 +2299,6 @@ loadDonations()
 ]);
 
 }
-
-
-/* STUDENTS */
 
 async function loadStudents(){
 
@@ -2501,7 +2333,6 @@ $("studentsTable").innerHTML=
 
 }
 
-
 function renderStudents(list){
 
 const table=$("studentsTable");
@@ -2516,7 +2347,6 @@ table.innerHTML=
 return;
 
 }
-
 
 table.innerHTML=list.map(student=>`
 
@@ -2576,7 +2406,6 @@ Delete
 
 `).join("");
 
-
 document.querySelectorAll(".delete-student").forEach(button=>{
 
 button.addEventListener("click",async()=>{
@@ -2616,7 +2445,6 @@ showMessage(
 });
 
 });
-
 
 document.querySelectorAll(".edit-student").forEach(button=>{
 
@@ -2660,7 +2488,6 @@ student.id;
 
 }
 
-
 $("studentForm").addEventListener(
 "submit",
 async event=>{
@@ -2685,7 +2512,6 @@ showMessage(
 return;
 
 }
-
 
 try{
 
@@ -2739,7 +2565,6 @@ showMessage(
 
 });
 
-
 $("studentSearch").addEventListener(
 "input",
 event=>{
@@ -2770,9 +2595,6 @@ renderStudents(filtered);
 
 });
 
-
-/* EDIT STUDENT */
-
 $("closeEditModal").addEventListener(
 "click",
 ()=>$("editStudentModal")
@@ -2784,7 +2606,6 @@ $("cancelEditStudent").addEventListener(
 ()=>$("editStudentModal")
 .classList.remove("show")
 );
-
 
 $("saveEditStudent").addEventListener(
 "click",
@@ -2857,7 +2678,6 @@ const selects=[
 
 ];
 
-
 selects.forEach(id=>{
 
 const select=$(id);
@@ -2869,19 +2689,35 @@ const old=select.value;
 select.innerHTML=
 `<option value="">
 Select student
-</option>`+
+</option>`;
 
-window.students.map(student=>`
+window.students.forEach(student=>{
 
-<option value="${escapeHtml(student.studentNumber)}">
+const name=String(
+student.studentName||
+student.name||
+""
+).trim();
 
-${escapeHtml(student.studentName)}
--
-${escapeHtml(student.studentNumber)}
+const number=String(
+student.studentNumber||
+student.number||
+""
+).trim();
 
-</option>
+if(!number)return;
 
-`).join("");
+const option=document.createElement("option");
+
+option.value=number;
+
+option.textContent=name
+?`${name} - ${number}`
+:number;
+
+select.appendChild(option);
+
+});
 
 if(old)
 select.value=old;
@@ -2891,30 +2727,7 @@ select.value=old;
 }
 
 
-/* =========================================================
-   ATTENDANCE
-   USTHAD ADDS ONLY ABSENT / LEAVE
-   NO RECORD = AUTO PRESENT
-========================================================= */
-
-
-/*
-IMPORTANT:
-
-The attendance collection continues to use:
-
-studentNumber
-date
-status
-note
-createdAt
-
-Only Absent / Leave records are normally created.
-
-If an old Present record already exists, it is preserved
-and handled correctly when calculating the effective status.
-*/
-
+/* ATTENDANCE */
 
 const attendancePriority={
 
@@ -2923,7 +2736,6 @@ leave:2,
 absent:3
 
 };
-
 
 function attendanceKey(row){
 
@@ -2937,16 +2749,6 @@ row.date||""
 ).trim();
 
 }
-
-
-/*
-For old duplicate data:
-
-Absent > Leave > Present
-
-The data is NOT automatically deleted.
-Only the effective record is used.
-*/
 
 function getEffectiveAttendance(rows){
 
@@ -2970,7 +2772,6 @@ attendancePriority[old.status]||0;
 const newPriority=
 attendancePriority[row.status]||0;
 
-
 if(newPriority>oldPriority){
 
 grouped.set(key,row);
@@ -2993,9 +2794,6 @@ return Array.from(grouped.values());
 
 }
 
-
-/* DATE HELPERS */
-
 function getTodayString(){
 
 const now=new Date();
@@ -3012,7 +2810,6 @@ return `${year}-${month}-${day}`;
 
 }
 
-
 function formatSelectedDate(value){
 
 if(!value)
@@ -3027,15 +2824,11 @@ return `${parts[2]}-${parts[1]}-${parts[0]}`;
 
 }
 
-
-/* SAVE ATTENDANCE */
-
 $("attendanceForm").addEventListener(
 "submit",
 async event=>{
 
 event.preventDefault();
-
 
 const studentNumber=
 $("attendanceStudent").value.trim();
@@ -3049,7 +2842,6 @@ $("attendanceStatus").value;
 const note=
 $("attendanceNote").value.trim();
 
-
 if(!studentNumber||!date||!status){
 
 showMessage(
@@ -3060,12 +2852,6 @@ showMessage(
 return;
 
 }
-
-
-/*
-Only Absent / Leave can be saved.
-Present is automatic.
-*/
 
 if(
 status!=="absent" &&
@@ -3081,14 +2867,12 @@ return;
 
 }
 
-
 try{
 
 const snap=
 await getDocs(
 collection(db,"attendance")
 );
-
 
 const sameDateDocs=
 snap.docs.filter(item=>{
@@ -3115,17 +2899,9 @@ String(date).trim()
 
 });
 
-
 if(sameDateDocs.length){
 
-/*
-If an old record already exists for the
-same student/date, update the effective
-record rather than creating a new one.
-*/
-
 let targetDoc=sameDateDocs[0];
-
 
 if(sameDateDocs.length>1){
 
@@ -3154,7 +2930,6 @@ attendancePriority[
 bestData.status
 ]||0;
 
-
 if(currentPriority>bestPriority){
 
 best=sameDateDocs[i];
@@ -3175,7 +2950,6 @@ best=sameDateDocs[i];
 targetDoc=best;
 
 }
-
 
 await updateDoc(
 doc(db,"attendance",targetDoc.id),
@@ -3225,22 +2999,15 @@ showMessage(
 
 }
 
-
 $("attendanceNote").value="";
 
 $("attendanceStudent").value="";
 
 await loadAttendance();
 
-
-/*
-Keep summary on the same selected date.
-*/
-
 $("attendanceSummaryDate").value=date;
 
 await loadAttendanceSummary(date);
-
 
 }catch(error){
 
@@ -3256,9 +3023,6 @@ error.message,
 
 });
 
-
-/* LOAD ATTENDANCE */
-
 async function loadAttendance(){
 
 try{
@@ -3268,7 +3032,6 @@ await getDocs(
 collection(db,"attendance")
 );
 
-
 const allRows=
 snap.docs.map(item=>({
 
@@ -3277,15 +3040,8 @@ id:item.id,
 
 }));
 
-
 const rows=
 getEffectiveAttendance(allRows);
-
-
-/*
-Only stored attendance records are shown
-in the admin record table.
-*/
 
 rows.sort((a,b)=>{
 
@@ -3298,7 +3054,6 @@ String(a.date||"")
 if(dateCompare!==0)
 return dateCompare;
 
-
 return studentNameByNumber(
 a.studentNumber
 ).localeCompare(
@@ -3309,22 +3064,11 @@ b.studentNumber
 
 });
 
-
-/*
-Dashboard count:
-number of effective stored records.
-
-Since normal usage stores only Absent/Leave,
-this represents the number of exceptions.
-*/
-
 $("attendanceCount").textContent=
 rows.length;
 
-
 const table=
 $("attendanceTable");
-
 
 if(!rows.length){
 
@@ -3334,7 +3078,6 @@ No Absent / Leave records.
 </div>`;
 
 }else{
-
 
 table.innerHTML=`
 
@@ -3375,20 +3118,17 @@ row.studentNumber
 
 </td>
 
-
 <td>
 ${escapeHtml(
 row.studentNumber
 )}
 </td>
 
-
 <td>
 ${escapeHtml(
 row.date||""
 )}
 </td>
-
 
 <td>
 
@@ -3406,13 +3146,11 @@ row.status||""
 
 </td>
 
-
 <td>
 ${escapeHtml(
 row.note||"-"
 )}
 </td>
-
 
 <td>
 
@@ -3429,7 +3167,6 @@ data-note="${escapeHtml(row.note||"")}">
 Edit
 
 </button>
-
 
 <button
 class="danger attendance-delete-btn"
@@ -3456,9 +3193,6 @@ Delete
 `;
 
 }
-
-
-/* DELETE */
 
 document.querySelectorAll(
 ".attendance-delete-btn"
@@ -3511,9 +3245,6 @@ showMessage(
 
 });
 
-
-/* EDIT */
-
 document.querySelectorAll(
 ".attendance-edit-btn"
 ).forEach(button=>{
@@ -3542,7 +3273,6 @@ button.dataset.status==="leave"
 $("editAttendanceNote").value=
 button.dataset.note||"";
 
-
 $("saveEditAttendance").dataset.id=
 button.dataset.id;
 
@@ -3552,7 +3282,6 @@ $("editAttendanceModal")
 });
 
 });
-
 
 }catch(error){
 
@@ -3567,11 +3296,6 @@ Unable to load attendance.
 
 }
 
-
-/* =========================================================
-   DAILY ATTENDANCE SUMMARY
-========================================================= */
-
 async function loadAttendanceSummary(selectedDate){
 
 try{
@@ -3579,20 +3303,16 @@ try{
 if(!selectedDate)
 selectedDate=getTodayString();
 
-
 $("attendanceSummaryDate").value=
 selectedDate;
 
-
 $("attendanceSelectedDateText").textContent=
 formatSelectedDate(selectedDate);
-
 
 const snap=
 await getDocs(
 collection(db,"attendance")
 );
-
 
 const allRows=
 snap.docs.map(item=>({
@@ -3602,11 +3322,6 @@ id:item.id,
 
 }));
 
-
-/*
-Only records for the selected date.
-*/
-
 const dateRows=
 allRows.filter(row=>
 String(row.date||"").trim()
@@ -3614,18 +3329,10 @@ String(row.date||"").trim()
 String(selectedDate).trim()
 );
 
-
 const effectiveRows=
 getEffectiveAttendance(dateRows);
 
-
-/*
-Create map:
-studentNumber -> effective attendance
-*/
-
 const statusMap=new Map();
-
 
 effectiveRows.forEach(row=>{
 
@@ -3636,13 +3343,6 @@ row
 
 });
 
-
-/*
-Every student is included.
-
-No Absent / Leave record = Present.
-*/
-
 const dailyStudents=
 window.students.map(student=>{
 
@@ -3651,7 +3351,6 @@ String(student.studentNumber||"").trim();
 
 const record=
 statusMap.get(number);
-
 
 if(record){
 
@@ -3668,11 +3367,6 @@ record
 
 }
 
-
-/*
-AUTO PRESENT
-*/
-
 return {
 
 student,
@@ -3686,13 +3380,9 @@ record:null
 
 });
 
-
-/* COUNTS */
-
 let presentCount=0;
 let absentCount=0;
 let leaveCount=0;
-
 
 dailyStudents.forEach(row=>{
 
@@ -3707,7 +3397,6 @@ presentCount++;
 
 });
 
-
 $("attendancePresentCount").textContent=
 presentCount;
 
@@ -3720,28 +3409,18 @@ leaveCount;
 $("attendanceTotalCount").textContent=
 dailyStudents.length;
 
-
-/* ABSENT LIST */
-
 const absentStudents=
 dailyStudents.filter(
 row=>row.status==="absent"
 );
-
-
-/* LEAVE LIST */
 
 const leaveStudents=
 dailyStudents.filter(
 row=>row.status==="leave"
 );
 
-
-/* RENDER ABSENT */
-
 const absentList=
 $("attendanceAbsentList");
-
 
 if(!absentStudents.length){
 
@@ -3784,7 +3463,6 @@ ${escapeHtml(row.note)}
 
 </div>
 
-
 <span class="badge badge-red">
 Absent
 </span>
@@ -3795,12 +3473,8 @@ Absent
 
 }
 
-
-/* RENDER LEAVE */
-
 const leaveList=
 $("attendanceLeaveList");
-
 
 if(!leaveStudents.length){
 
@@ -3843,7 +3517,6 @@ ${escapeHtml(row.note)}
 
 </div>
 
-
 <span class="badge badge-yellow">
 Leave
 </span>
@@ -3853,7 +3526,6 @@ Leave
 `).join("");
 
 }
-
 
 }catch(error){
 
@@ -3878,9 +3550,6 @@ Unable to load summary.
 
 }
 
-
-/* DATE CHANGE */
-
 $("attendanceSummaryDate")
 .addEventListener(
 "change",
@@ -3893,9 +3562,6 @@ event.target.value
 }
 );
 
-
-/* ATTENDANCE EDIT MODAL */
-
 $("closeEditAttendanceModal")
 .addEventListener(
 "click",
@@ -3906,7 +3572,6 @@ $("editAttendanceModal")
 
 }
 );
-
 
 $("cancelEditAttendance")
 .addEventListener(
@@ -3919,7 +3584,6 @@ $("editAttendanceModal")
 }
 );
 
-
 $("saveEditAttendance")
 .addEventListener(
 "click",
@@ -3930,13 +3594,11 @@ $("saveEditAttendance").dataset.id;
 
 if(!id)return;
 
-
 const status=
 $("editAttendanceStatus").value;
 
 const note=
 $("editAttendanceNote").value.trim();
-
 
 if(
 status!=="absent" &&
@@ -3951,7 +3613,6 @@ showMessage(
 return;
 
 }
-
 
 try{
 
@@ -3969,7 +3630,6 @@ serverTimestamp()
 }
 );
 
-
 $("editAttendanceModal")
 .classList.remove("show");
 
@@ -3977,9 +3637,7 @@ showMessage(
 "Attendance updated successfully."
 );
 
-
 await loadAttendance();
-
 
 const selectedDate=
 $("attendanceSummaryDate").value;
@@ -3987,7 +3645,6 @@ $("attendanceSummaryDate").value;
 await loadAttendanceSummary(
 selectedDate||getTodayString()
 );
-
 
 }catch(error){
 
@@ -4076,7 +3733,6 @@ showMessage(
 
 });
 
-
 async function loadStudy(){
 
 try{
@@ -4103,7 +3759,6 @@ String(a.date||"")
 
 const table=$("studyTable");
 
-
 if(!rows.length){
 
 table.innerHTML=
@@ -4118,7 +3773,6 @@ No study records.
 return;
 
 }
-
 
 table.innerHTML=
 rows.map(row=>`
@@ -4217,7 +3871,6 @@ Delete
 </tr>
 
 `).join("");
-
 
 document.querySelectorAll(
 ".study-delete"
@@ -4319,7 +3972,6 @@ showMessage(
 
 });
 
-
 async function loadResults(){
 
 try{
@@ -4344,7 +3996,6 @@ rows.sort((a,b)=>
 
 const table=$("resultsTable");
 
-
 if(!rows.length){
 
 table.innerHTML=
@@ -4359,7 +4010,6 @@ No results found.
 return;
 
 }
-
 
 table.innerHTML=
 rows.map(row=>`
@@ -4445,7 +4095,6 @@ Delete
 
 `).join("");
 
-
 document.querySelectorAll(
 ".result-toggle"
 ).forEach(button=>{
@@ -4475,7 +4124,6 @@ await loadResults();
 });
 
 });
-
 
 document.querySelectorAll(
 ".result-delete"
@@ -4563,7 +4211,6 @@ showMessage(
 
 });
 
-
 async function loadNotices(){
 
 try{
@@ -4588,7 +4235,6 @@ rows.sort((a,b)=>
 
 const table=$("noticesTable");
 
-
 if(!rows.length){
 
 table.innerHTML=
@@ -4603,7 +4249,6 @@ No notices.
 return;
 
 }
-
 
 table.innerHTML=
 rows.map(row=>`
@@ -4671,7 +4316,6 @@ Delete
 
 `).join("");
 
-
 document.querySelectorAll(
 ".notice-toggle"
 ).forEach(button=>{
@@ -4701,7 +4345,6 @@ await loadNotices();
 });
 
 });
-
 
 document.querySelectorAll(
 ".notice-delete"
@@ -4768,7 +4411,6 @@ rows.length;
 
 const table=$("leaveTable");
 
-
 if(!rows.length){
 
 table.innerHTML=
@@ -4783,7 +4425,6 @@ No leave requests.
 return;
 
 }
-
 
 table.innerHTML=
 rows.map(row=>`
@@ -4886,7 +4527,6 @@ Delete
 
 `).join("");
 
-
 document.querySelectorAll(
 ".leave-approve"
 ).forEach(button=>{
@@ -4917,7 +4557,6 @@ await loadLeaves();
 
 });
 
-
 document.querySelectorAll(
 ".leave-reject"
 ).forEach(button=>{
@@ -4947,7 +4586,6 @@ await loadLeaves();
 });
 
 });
-
 
 document.querySelectorAll(
 ".leave-reply"
@@ -4984,7 +4622,6 @@ await loadLeaves();
 });
 
 });
-
 
 document.querySelectorAll(
 ".leave-delete"
@@ -5056,7 +4693,6 @@ rows.length;
 const table=
 $("messagesTable");
 
-
 if(!rows.length){
 
 table.innerHTML=
@@ -5071,7 +4707,6 @@ No parent messages.
 return;
 
 }
-
 
 table.innerHTML=
 rows.map(row=>`
@@ -5156,7 +4791,6 @@ Delete
 
 `).join("");
 
-
 document.querySelectorAll(
 ".message-reply"
 ).forEach(button=>{
@@ -5194,7 +4828,6 @@ await loadMessages();
 });
 
 });
-
 
 document.querySelectorAll(
 ".message-delete"
@@ -5256,11 +4889,9 @@ rows.sort((a,b)=>
 (a.createdAt?.seconds||0)
 );
 
-
 let total=0;
 let pending=0;
 let verified=0;
-
 
 rows.forEach(row=>{
 
@@ -5277,7 +4908,6 @@ verified+=amount;
 
 });
 
-
 $("donationTotal").textContent=
 money(total);
 
@@ -5287,10 +4917,8 @@ money(pending);
 $("donationVerified").textContent=
 money(verified);
 
-
 const table=
 $("donationsTable");
-
 
 if(!rows.length){
 
@@ -5306,7 +4934,6 @@ No donations found.
 return;
 
 }
-
 
 table.innerHTML=
 rows.map(row=>`
@@ -5394,7 +5021,6 @@ Verify
 :""
 }
 
-
 ${
 row.status!=="rejected"
 ?
@@ -5405,7 +5031,6 @@ Reject
 </button>`
 :""
 }
-
 
 <button
 class="danger donation-delete"
@@ -5422,7 +5047,6 @@ Delete
 </tr>
 
 `).join("");
-
 
 document.querySelectorAll(
 ".donation-verify"
@@ -5470,7 +5094,6 @@ await loadDonations();
 });
 
 });
-
 
 document.querySelectorAll(
 ".donation-reject"
@@ -5528,7 +5151,6 @@ await loadDonations();
 });
 
 });
-
 
 document.querySelectorAll(
 ".donation-delete"
@@ -5596,16 +5218,13 @@ function setDefaultDates(){
 const today=
 getTodayString();
 
-
 if($("attendanceDate"))
 $("attendanceDate").value=
 today;
 
-
 if($("attendanceSummaryDate"))
 $("attendanceSummaryDate").value=
 today;
-
 
 if($("studyDate"))
 $("studyDate").value=
@@ -5613,15 +5232,7 @@ today;
 
 }
 
-
 setDefaultDates();
-
-
-/*
-Load today's summary after page setup.
-This runs after students are loaded by
-loadEverything(), so the student list is ready.
-*/
 
 setTimeout(async()=>{
 
@@ -5639,7 +5250,6 @@ console.error(error);
 }
 
 },500);
-
 
 </script>
 
