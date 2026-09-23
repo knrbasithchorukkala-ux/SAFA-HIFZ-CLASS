@@ -2477,6 +2477,159 @@ showMessage(
 });
 
 
+/* ATTENDANCE NORMALIZER */
+
+function getAttendanceStudentNumber(item){
+
+return String(
+item?.studentNumber ??
+item?.studentNo ??
+item?.student_number ??
+item?.studentId ??
+item?.number ??
+""
+).trim();
+
+}
+
+
+function getAttendanceStudentName(item){
+
+return String(
+item?.studentName ??
+item?.name ??
+item?.fullName ??
+item?.student ??
+""
+).trim();
+
+}
+
+
+function getAttendanceDate(item,fallbackDate=""){
+
+const value=
+item?.date ??
+item?.attendanceDate ??
+item?.recordDate ??
+item?.day ??
+item?.attendance_date ??
+fallbackDate;
+
+if(!value)return"";
+
+if(typeof value==="string")
+return value;
+
+if(value?.toDate){
+
+try{
+
+return value.toDate()
+.toISOString()
+.split("T")[0];
+
+}catch(error){}
+
+}
+
+if(value?.seconds){
+
+try{
+
+return new Date(value.seconds*1000)
+.toISOString()
+.split("T")[0];
+
+}catch(error){}
+
+}
+
+return String(value);
+
+}
+
+
+function normalizeAttendanceStatus(value){
+
+if(value===undefined||value===null)
+return"";
+
+const status=
+String(value)
+.trim()
+.toLowerCase();
+
+if(
+status==="absent"||
+status==="a"||
+status==="abs"||
+status==="absence"
+)
+return"absent";
+
+if(
+status==="leave"||
+status==="l"||
+status==="on leave"
+)
+return"leave";
+
+return"";
+
+}
+
+
+function addNormalizedAttendance(
+output,
+item,
+fallbackDate="",
+fallbackStatus=""
+){
+
+if(!item)return;
+
+const studentNumber=
+getAttendanceStudentNumber(item);
+
+const studentName=
+getAttendanceStudentName(item);
+
+const date=
+getAttendanceDate(item,fallbackDate);
+
+const status=
+normalizeAttendanceStatus(
+item?.status ??
+item?.attendanceStatus ??
+item?.attendance_status ??
+fallbackStatus
+);
+
+if(
+!studentNumber||
+!date||
+!status
+)
+return;
+
+output.push({
+
+id:item.__docId||"",
+studentNumber,
+studentName,
+date,
+status,
+
+_original:item
+
+});
+
+}
+
+
+/* LOAD ATTENDANCE */
+
 async function loadAttendance(){
 
 try{
@@ -2484,21 +2637,197 @@ try{
 const snap=
 await getDocs(collection(db,"attendance"));
 
-attendanceRows=
-snap.docs.map(item=>({
-id:item.id,
-...item.data()
-}))
-.filter(
-row=>row.status==="absent"||
-row.status==="leave"
+const normalized=[];
+
+
+snap.docs.forEach(documentSnapshot=>{
+
+const data=documentSnapshot.data();
+
+const docId=documentSnapshot.id;
+
+
+/* CURRENT / NEW STRUCTURE */
+
+if(
+data.studentNumber!==undefined||
+data.studentNo!==undefined||
+data.student_number!==undefined||
+data.studentId!==undefined||
+data.number!==undefined
+){
+
+const row={
+...data,
+__docId:docId
+};
+
+addNormalizedAttendance(
+normalized,
+row
 );
+
+}
+
+
+/* OLD STRUCTURE: records[] */
+
+if(Array.isArray(data.records)){
+
+data.records.forEach(record=>{
+
+addNormalizedAttendance(
+normalized,
+{
+...record,
+__docId:docId
+},
+getAttendanceDate(data)
+);
+
+});
+
+}
+
+
+/* OLD STRUCTURE: attendance[] */
+
+if(Array.isArray(data.attendance)){
+
+data.attendance.forEach(record=>{
+
+addNormalizedAttendance(
+normalized,
+{
+...record,
+__docId:docId
+},
+getAttendanceDate(data)
+);
+
+});
+
+}
+
+
+/* OLD STRUCTURE: students[] */
+
+if(Array.isArray(data.students)){
+
+data.students.forEach(record=>{
+
+addNormalizedAttendance(
+normalized,
+{
+...record,
+__docId:docId
+},
+getAttendanceDate(data)
+);
+
+});
+
+}
+
+
+/* OLD STRUCTURE: absentStudents / absent */
+
+const absentList=
+Array.isArray(data.absentStudents)
+?data.absentStudents
+:Array.isArray(data.absent)
+?data.absent
+:[];
+
+
+absentList.forEach(student=>{
+
+const item=
+typeof student==="object"
+?student
+:{
+studentNumber:student
+};
+
+addNormalizedAttendance(
+normalized,
+{
+...item,
+__docId:docId,
+status:"absent"
+},
+getAttendanceDate(data)
+);
+
+});
+
+
+/* OLD STRUCTURE: leaveStudents / leave */
+
+const leaveList=
+Array.isArray(data.leaveStudents)
+?data.leaveStudents
+:Array.isArray(data.leave)
+?data.leave
+:[];
+
+
+leaveList.forEach(student=>{
+
+const item=
+typeof student==="object"
+?student
+:{
+studentNumber:student
+};
+
+addNormalizedAttendance(
+normalized,
+{
+...item,
+__docId:docId,
+status:"leave"
+},
+getAttendanceDate(data)
+);
+
+});
+
+});
+
+
+/* REMOVE DUPLICATES */
+
+const uniqueMap=new Map();
+
+
+normalized.forEach(row=>{
+
+const key=
+`${row.id}__${row.studentNumber}__${row.date}__${row.status}`;
+
+if(!uniqueMap.has(key)){
+
+uniqueMap.set(key,row);
+
+}
+
+});
+
+
+attendanceRows=
+Array.from(uniqueMap.values());
+
+
+/* SORT */
 
 attendanceRows.sort((a,b)=>{
 
 const dateCompare=
 String(b.date||"")
-.localeCompare(String(a.date||""));
+.localeCompare(
+String(a.date||"")
+);
 
 if(dateCompare!==0)
 return dateCompare;
@@ -2510,10 +2839,13 @@ String(b.studentNumber||"")
 
 });
 
+
 $("attendanceCount").textContent=
 attendanceRows.length;
 
+
 renderAttendance();
+
 
 }catch(error){
 
@@ -2522,12 +2854,30 @@ console.error(error);
 $("attendanceTable").innerHTML=
 `<div class="empty">
 Unable to load attendance.
+<br>
+<small>${escapeHtml(error.message||"")}</small>
 </div>`;
 
 }
 
 }
 
+
+/* ATTENDANCE STUDENT NAME */
+
+function attendanceStudentName(row){
+
+if(row.studentName)
+return row.studentName;
+
+return studentNameByNumber(
+row.studentNumber
+);
+
+}
+
+
+/* RENDER ATTENDANCE */
 
 function renderAttendance(){
 
@@ -2536,16 +2886,28 @@ const query=
 .trim()
 .toLowerCase();
 
-let filtered=
-attendanceRows.filter(row=>
-studentSearchMatch(
-row.studentNumber,
-studentNameByNumber(row.studentNumber),
+
+const filtered=
+attendanceRows.filter(row=>{
+
+const number=
+String(row.studentNumber||"");
+
+const name=
+attendanceStudentName(row);
+
+
+return studentSearchMatch(
+number,
+name,
 query
-)
 );
 
+});
+
+
 const groups={};
+
 
 filtered.forEach(row=>{
 
@@ -2556,9 +2918,11 @@ groups[row.date].push(row);
 
 });
 
+
 const dates=
 Object.keys(groups)
 .sort((a,b)=>b.localeCompare(a));
+
 
 if(!dates.length){
 
@@ -2588,6 +2952,7 @@ dates.map(date=>{
 
 const rows=groups[date];
 
+
 return`
 
 <div class="panel"
@@ -2608,6 +2973,7 @@ ${rows.length} Absent / Leave student(s)
 
 </div>
 
+
 <div class="table-wrap">
 
 <table>
@@ -2615,13 +2981,19 @@ ${rows.length} Absent / Leave student(s)
 <thead>
 
 <tr>
+
 <th>Student No</th>
+
 <th>Student Name</th>
+
 <th>Status</th>
+
 <th>Action</th>
+
 </tr>
 
 </thead>
+
 
 <tbody>
 
@@ -2630,16 +3002,22 @@ ${rows.map(row=>`
 <tr>
 
 <td>
+
 <strong>
 ${escapeHtml(row.studentNumber)}
 </strong>
+
 </td>
 
+
 <td>
+
 ${escapeHtml(
-studentNameByNumber(row.studentNumber)
+attendanceStudentName(row)
 )}
+
 </td>
+
 
 <td>
 
@@ -2655,19 +3033,20 @@ ${escapeHtml(row.status)}
 
 </td>
 
+
 <td>
 
 <div class="actions">
 
 <button
 class="secondary attendance-edit-btn"
-data-id="${row.id}">
+data-id="${escapeHtml(row.id)}">
 Edit
 </button>
 
 <button
 class="danger attendance-delete-btn"
-data-id="${row.id}">
+data-id="${escapeHtml(row.id)}">
 Delete
 </button>
 
@@ -2691,6 +3070,8 @@ Delete
 
 }).join("");
 
+
+/* EDIT */
 
 document.querySelectorAll(".attendance-edit-btn")
 .forEach(button=>{
@@ -2717,15 +3098,18 @@ row.status;
 
 $("attendanceStudentSearch").value=
 `${row.studentNumber} - ${
-studentNameByNumber(row.studentNumber)
+attendanceStudentName(row)
 }`;
 
+
 openSection("attendance");
+
 
 window.scrollTo({
 top:0,
 behavior:"smooth"
 });
+
 
 showMessage(
 "Attendance loaded for editing."
@@ -2735,6 +3119,8 @@ showMessage(
 
 });
 
+
+/* DELETE */
 
 document.querySelectorAll(".attendance-delete-btn")
 .forEach(button=>{
@@ -2748,17 +3134,21 @@ if(!confirm(
 ))
 return;
 
+
 try{
 
 await deleteDoc(
 doc(db,"attendance",button.dataset.id)
 );
 
+
 showMessage(
 "Attendance record deleted."
 );
 
+
 await loadAttendance();
+
 
 }catch(error){
 
@@ -2918,8 +3308,7 @@ $("studyTable").innerHTML=
 `<tr><td colspan="11">
 <div class="empty">
 No study records found.
-</div>
-</td></tr>`;
+</div></td></tr>`;
 
 return;
 
@@ -3540,8 +3929,7 @@ $("leaveTable").innerHTML=
 `<tr><td colspan="7">
 <div class="empty">
 No leave requests.
-</div>
-</td></tr>`;
+</div></td></tr>`;
 
 return;
 
@@ -3961,8 +4349,7 @@ $("donationsTable").innerHTML=
 `<tr><td colspan="8">
 <div class="empty">
 No donations found.
-</div>
-</td></tr>`;
+</div></td></tr>`;
 
 return;
 
