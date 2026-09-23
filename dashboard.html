@@ -268,26 +268,44 @@ border-bottom:2px solid rgba(212,175,55,.20)
 .panel h3{color:#164c39;font-size:17px;font-weight:900}
 .panel-desc{margin-top:3px;color:var(--muted);font-size:11px}
 
+/* QUICK ACCESS */
 .quick{
-display:grid;grid-template-columns:repeat(3,1fr);gap:14px
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:14px
 }
 
 .quick button{
 position:relative;
-padding:19px;text-align:left;border:1px solid #c7e1d3;
-border-radius:14px;color:var(--text);
+padding:19px;
+text-align:left;
+border:1px solid #c7e1d3;
+border-radius:14px;
+color:var(--text);
 background:linear-gradient(135deg,#f5fcf8,#e4f4eb);
 transition:.25s
 }
 
 .quick button:hover{
-transform:translateY(-4px);border-color:rgba(212,175,55,.8);
+transform:translateY(-4px);
+border-color:rgba(212,175,55,.8);
 box-shadow:0 12px 25px rgba(3,43,36,.13)
 }
 
-.quick-icon{margin-bottom:12px;color:#087f5b;font-size:23px}
-.quick strong{display:block;margin-bottom:5px}
-.quick small{color:var(--muted)}
+.quick-icon{
+margin-bottom:12px;
+color:#087f5b;
+font-size:23px
+}
+
+.quick strong{
+display:block;
+margin-bottom:5px
+}
+
+.quick small{
+color:var(--muted)
+}
 
 .quick-notify{
 position:absolute;
@@ -496,7 +514,7 @@ display:flex;justify-content:flex-end;gap:10px;margin-top:20px
 
 @media(max-width:1100px){
 .stats{grid-template-columns:repeat(2,1fr)}
-.quick{grid-template-columns:repeat(2,1fr)}
+.quick{grid-template-columns:repeat(3,1fr)}
 }
 
 @media(max-width:900px){
@@ -507,6 +525,7 @@ display:flex;justify-content:flex-end;gap:10px;margin-top:20px
 .topbar{padding:0 15px}
 .content{padding:18px}
 .admin-badge{display:none}
+.quick{grid-template-columns:repeat(2,1fr)}
 }
 
 @media(max-width:600px){
@@ -736,22 +755,9 @@ The best among you are those who learn the Qur'an and teach it.
 </div>
 
 
-<!-- TOP 4 DASHBOARD BOXES -->
+<!-- ONLY 4 TOP GREEN DASHBOARD BOXES -->
 
 <div class="stats">
-
-<div class="stat" data-go="students">
-
-<div class="stat-icon">👨‍🎓</div>
-
-<small>TOTAL STUDENTS</small>
-
-<strong id="studentCount">0</strong>
-
-<span class="dashboard-notify zero" id="studentNotify">0</span>
-
-</div>
-
 
 <div class="stat" data-go="study">
 
@@ -779,6 +785,19 @@ The best among you are those who learn the Qur'an and teach it.
 </div>
 
 
+<div class="stat" data-go="results">
+
+<div class="stat-icon">🏆</div>
+
+<small>RESULTS</small>
+
+<strong id="resultCount">0</strong>
+
+<span class="dashboard-notify zero" id="resultDashboardNotify">0</span>
+
+</div>
+
+
 <div class="stat" data-go="notices">
 
 <div class="stat-icon">📢</div>
@@ -794,76 +813,7 @@ The best among you are those who learn the Qur'an and teach it.
 </div>
 
 
-<!-- BOTTOM 5 DASHBOARD BOXES -->
-
-<div class="stats">
-
-<div class="stat" data-go="results">
-
-<div class="stat-icon">🏆</div>
-
-<small>RESULTS</small>
-
-<strong id="resultCount">0</strong>
-
-<span class="dashboard-notify zero" id="resultDashboardNotify">0</span>
-
-</div>
-
-
-<div class="stat" data-go="leave">
-
-<div class="stat-icon">📝</div>
-
-<small>LEAVE REQUESTS</small>
-
-<strong id="leaveCount">0</strong>
-
-<span class="dashboard-notify zero" id="leaveDashboardNotify">0</span>
-
-</div>
-
-
-<div class="stat" data-go="messages">
-
-<div class="stat-icon">💬</div>
-
-<small>PARENT MESSAGES</small>
-
-<strong id="messageCount">0</strong>
-
-<span class="dashboard-notify zero" id="messageDashboardNotify">0</span>
-
-</div>
-
-
-<div class="stat" data-go="donations">
-
-<div class="stat-icon">💰</div>
-
-<small>DONATIONS</small>
-
-<strong id="donationCount">0</strong>
-
-<span class="dashboard-notify zero" id="donationDashboardNotify">0</span>
-
-</div>
-
-
-<div class="stat" data-go="publicResult">
-
-<div class="stat-icon">🌐</div>
-
-<small>PUBLIC RESULT</small>
-
-<strong>OPEN</strong>
-
-<span class="dashboard-notify">→</span>
-
-</div>
-
-</div>
-
+<!-- QUICK ACCESS -->
 
 <div class="panel">
 
@@ -878,27 +828,7 @@ The best among you are those who learn the Qur'an and teach it.
 
 <div class="quick">
 
-<button class="quick-btn" data-go="study">
-
-<div class="quick-icon">📖</div>
-
-<strong>Study Progress</strong>
-
-<small>Update student study progress</small>
-
-</button>
-
-
-<button class="quick-btn" data-go="attendance">
-
-<div class="quick-icon">✓</div>
-
-<strong>Attendance</strong>
-
-<small>Manage daily attendance</small>
-
-</button>
-
+<!-- RESULT -->
 
 <button class="quick-btn" data-go="results">
 
@@ -913,15 +843,62 @@ The best among you are those who learn the Qur'an and teach it.
 </button>
 
 
-<button class="quick-btn" data-go="notices">
+<!-- LEAVE REQUESTS -->
 
-<div class="quick-icon">📢</div>
+<button class="quick-btn" data-go="leave">
 
-<strong>Notes</strong>
+<div class="quick-icon">📝</div>
 
-<small>Publish announcements</small>
+<strong>Leave Requests</strong>
 
-<span class="quick-notify zero" id="noticeNotify">0</span>
+<small>Review parent leave requests</small>
+
+<span class="quick-notify zero" id="leaveNotify">0</span>
+
+</button>
+
+
+<!-- PARENT MESSAGES -->
+
+<button class="quick-btn" data-go="messages">
+
+<div class="quick-icon">💬</div>
+
+<strong>Parent Messages</strong>
+
+<small>Read and reply to parents</small>
+
+<span class="quick-notify zero" id="messageNotify">0</span>
+
+</button>
+
+
+<!-- DONATIONS -->
+
+<button class="quick-btn" data-go="donations">
+
+<div class="quick-icon">💰</div>
+
+<strong>Donations</strong>
+
+<small>Review and verify donations</small>
+
+<span class="quick-notify zero" id="donationNotify">0</span>
+
+</button>
+
+
+<!-- PUBLIC RESULT -->
+
+<button class="quick-btn" data-go="publicResult">
+
+<div class="quick-icon">🌐</div>
+
+<strong>Public Result</strong>
+
+<small>Open public result system</small>
+
+<span class="quick-notify">→</span>
 
 </button>
 
@@ -2188,14 +2165,6 @@ id:item.id,
 }));
 
 renderStudents(window.students);
-
-$("studentCount").textContent=
-window.students.length;
-
-setDashboardNotification(
-"studentNotify",
-window.students.length
-);
 
 populateStudentSelects();
 
