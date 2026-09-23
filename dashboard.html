@@ -3,3189 +3,1680 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>SAFA QURAN COLLEGE ONLINE PORTAL | Parent Dashboard</title>
+<title>SAFA QURAN COLLEGE | ONLINE PORTAL</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --primary:#063b2f;
-  --primary2:#0b6650;
-  --primary3:#0e8063;
-  --gold:#d6a93a;
-  --gold2:#f2cf72;
-  --bg:#f3f8f5;
-  --card:#ffffff;
-  --text:#172033;
-  --muted:#718096;
-  --border:#dfe9e4;
-  --success:#16834f;
-  --danger:#c53b3b;
-  --warning:#b77b12;
-  --shadow:0 10px 30px rgba(4,45,35,.10);
+--navy:#032b24;--navy2:#06483a;--primary:#087f5b;--primary2:#10b981;
+--bg:#e9f5ef;--card:#fdfefe;--text:#12382d;--muted:#668178;
+--border:#c8e1d4;--gold:#d4af37;--gold2:#f6dc78;
+--green-light:#d9f2e4;--red:#b42318;--red-light:#fdebea;
+--yellow:#916300;--yellow-light:#fff1c9;
+--shadow:0 12px 32px rgba(3,43,36,.12)
 }
-
-html{
-  scroll-behavior:smooth;
-}
-
+html{scroll-behavior:smooth}
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:
-    radial-gradient(circle at 10% 10%,rgba(214,169,58,.12),transparent 25%),
-    radial-gradient(circle at 90% 90%,rgba(11,102,80,.12),transparent 30%),
-    var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  overflow-x:hidden;
+font-family:Arial,Helvetica,sans-serif;color:var(--text);min-height:100vh;
+background:radial-gradient(circle at 5% 5%,rgba(212,175,55,.14),transparent 22%),
+radial-gradient(circle at 95% 10%,rgba(16,185,129,.14),transparent 25%),
+radial-gradient(circle at 50% 100%,rgba(8,127,91,.08),transparent 30%),
+linear-gradient(135deg,#f9fdfb,#e3f3ea)
 }
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
 
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.055;
-  z-index:-1;
-  background-image:
-    linear-gradient(30deg,#0b6650 12%,transparent 12.5%,transparent 87%,#0b6650 87.5%,#0b6650),
-    linear-gradient(150deg,#0b6650 12%,transparent 12.5%,transparent 87%,#0b6650 87.5%,#0b6650),
-    linear-gradient(30deg,#0b6650 12%,transparent 12.5%,transparent 87%,#0b6650 87.5%,#0b6650),
-    linear-gradient(150deg,#0b6650 12%,transparent 12.5%,transparent 87%,#0b6650 87.5%,#0b6650);
-  background-size:80px 140px;
-  background-position:0 0,0 0,40px 70px,40px 70px;
-}
-
-/* LOADING */
 #loading{
-  position:fixed;
-  inset:0;
-  background:linear-gradient(135deg,#032b24,#06483a,#0b6650);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  color:white;
-  z-index:99999;
-  text-align:center;
+position:fixed;inset:0;z-index:99999;display:flex;align-items:center;
+justify-content:center;color:#fff;font-weight:900;letter-spacing:.5px;
+background:radial-gradient(circle at center,rgba(212,175,55,.15),transparent 30%),
+linear-gradient(135deg,#021f1a,#06483a,#087f5b)
 }
 
-.loading-logo{
-  width:72px;
-  height:72px;
-  border:3px solid rgba(242,207,114,.35);
-  border-top-color:var(--gold2);
-  border-radius:50%;
-  animation:spin 1s linear infinite;
-  margin-bottom:18px;
+#message{
+position:fixed;right:20px;bottom:20px;max-width:390px;padding:15px 19px;
+border-radius:14px;color:#fff;display:none;z-index:99999;
+box-shadow:0 15px 35px rgba(0,0,0,.22);font-size:14px;font-weight:800
 }
 
-@keyframes spin{
-  to{transform:rotate(360deg)}
-}
+.app{min-height:100vh;display:flex}
 
-#loading strong{
-  font-size:20px;
-  letter-spacing:.4px;
-}
-
-#loading small{
-  margin-top:8px;
-  opacity:.75;
-}
-
-/* SIDEBAR */
 .sidebar{
-  position:fixed;
-  left:0;
-  top:0;
-  bottom:0;
-  width:255px;
-  background:
-    linear-gradient(180deg,#032b24 0%,#06483a 55%,#06372d 100%);
-  color:white;
-  z-index:1000;
-  box-shadow:5px 0 25px rgba(0,0,0,.12);
-  overflow-y:auto;
+width:270px;position:fixed;left:0;top:0;bottom:0;z-index:1000;overflow-y:auto;
+color:#fff;background:radial-gradient(circle at 50% 12%,rgba(212,175,55,.15),transparent 25%),
+linear-gradient(180deg,#032b24 0%,#06483a 48%,#02251e 100%);
+border-right:1px solid rgba(212,175,55,.42);
+box-shadow:7px 0 30px rgba(3,43,36,.20)
 }
 
-.sidebar-header{
-  padding:25px 18px 20px;
-  text-align:center;
-  border-bottom:1px solid rgba(255,255,255,.12);
+.brand{padding:25px 19px 23px;border-bottom:1px solid rgba(212,175,55,.28)}
+.brand-top{display:flex;align-items:center;gap:12px}
+
+.logo-box{
+width:48px;height:48px;border-radius:14px;display:flex;align-items:center;
+justify-content:center;color:#173b2d;background:linear-gradient(135deg,#d4af37,#f5da78);
+box-shadow:0 7px 22px rgba(212,175,55,.28);font-size:25px
+}
+.logo-box:after{content:"✦"}
+
+.brand h1{font-size:17px;font-weight:900}
+.brand p{
+margin-top:5px;color:#f1d77d;font-size:10px;font-weight:900;
+letter-spacing:1.8px
 }
 
-.logo-circle{
-  width:62px;
-  height:62px;
-  border-radius:50%;
-  margin:0 auto 12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border:2px solid var(--gold2);
-  background:rgba(255,255,255,.08);
-  font-size:30px;
+.menu{padding:17px 11px 25px}
+.menu-label{
+padding:12px 14px 8px;color:#d4af37;font-size:9px;font-weight:900;
+letter-spacing:1.8px;text-transform:uppercase
 }
 
-.sidebar-header h2{
-  font-size:17px;
-  letter-spacing:.5px;
+.menu button{
+width:100%;border:0;background:transparent;color:#d9eee5;text-align:left;
+padding:12px 14px;margin-bottom:4px;border-radius:11px;font-size:13px;
+font-weight:700;transition:.2s
 }
 
-.sidebar-header p{
-  font-size:11px;
-  margin-top:5px;
-  opacity:.7;
-  letter-spacing:1px;
+.menu button:hover{
+color:#fff;background:rgba(212,175,55,.13);transform:translateX(2px)
 }
 
-.nav{
-  padding:15px 10px;
+.menu button.active{
+color:#183b2e;font-weight:900;
+background:linear-gradient(135deg,#d4af37,#f2d46d);
+box-shadow:0 7px 22px rgba(212,175,55,.23)
 }
 
-.nav-btn{
-  width:100%;
-  border:0;
-  background:transparent;
-  color:rgba(255,255,255,.82);
-  padding:13px 14px;
-  margin-bottom:5px;
-  border-radius:10px;
-  text-align:left;
-  cursor:pointer;
-  font-size:13px;
-  transition:.2s;
-  display:flex;
-  align-items:center;
-  gap:10px;
+.menu button span{
+display:inline-flex;width:31px;height:28px;align-items:center;
+justify-content:center;margin-right:2px;font-size:16px
 }
 
-.nav-btn span{
-  width:25px;
-  text-align:center;
-}
-
-.nav-btn:hover,
-.nav-btn.active{
-  background:linear-gradient(90deg,rgba(214,169,58,.22),rgba(255,255,255,.08));
-  color:#fff;
-  border-left:3px solid var(--gold2);
-}
-
-.nav-btn.active{
-  box-shadow:inset 0 0 20px rgba(255,255,255,.04);
-}
-
-/* MAIN */
 .main{
-  margin-left:255px;
-  min-height:100vh;
+margin-left:270px;width:calc(100% - 270px);min-height:100vh
 }
 
 .topbar{
-  height:72px;
-  background:rgba(255,255,255,.94);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 28px;
-  position:sticky;
-  top:0;
-  z-index:500;
+height:76px;position:sticky;top:0;z-index:500;display:flex;
+align-items:center;justify-content:space-between;padding:0 30px;
+background:rgba(248,253,250,.95);
+border-bottom:2px solid rgba(212,175,55,.25);
+backdrop-filter:blur(14px);
+box-shadow:0 5px 20px rgba(3,43,36,.07)
 }
 
-.topbar-left{
-  display:flex;
-  align-items:center;
-  gap:13px;
+.top-left,.top-right{display:flex;align-items:center;gap:14px}
+.top-title{color:#063b2b;font-size:20px;font-weight:900}
+.top-subtitle{margin-top:3px;color:var(--muted);font-size:11px}
+
+.admin-badge{
+padding:8px 14px;border-radius:20px;color:#087f5b;background:#e1f5e9;
+border:1px solid #acd7bd;font-size:10px;font-weight:900
 }
 
-.menu-toggle{
-  display:none;
-  border:0;
-  background:#edf5f1;
-  color:var(--primary);
-  width:40px;
-  height:40px;
-  border-radius:9px;
-  font-size:20px;
-  cursor:pointer;
+.logout{
+border:1px solid #efc5c0;padding:9px 14px;border-radius:9px;
+color:#a32016;background:#fff0ee;font-weight:900
 }
 
-.topbar h1{
-  color:var(--primary);
-  font-size:20px;
+.mobile-menu{
+display:none;border:0;padding:8px 11px;border-radius:9px;color:#fff;
+background:#063b2b;font-size:20px
 }
 
-.topbar small{
-  display:block;
-  color:var(--muted);
-  margin-top:3px;
-}
-
-.top-actions{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.badge{
-  padding:8px 13px;
-  border-radius:20px;
-  background:#e9f6f0;
-  color:var(--primary2);
-  font-size:11px;
-  font-weight:bold;
-  letter-spacing:.7px;
-}
-
-.logout-btn{
-  border:0;
-  background:#f8e9e9;
-  color:#b33131;
-  padding:9px 14px;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-/* CONTENT */
 .content{
-  padding:25px;
-  max-width:1450px;
-  margin:auto;
+position:relative;padding:30px;min-height:calc(100vh - 76px);overflow:hidden
 }
 
-.section{
-  display:none;
-  animation:fadeIn .25s ease;
-}
-
-.section.active{
-  display:block;
-}
+.section{display:none}
+.section.active{display:block;animation:fadeIn .25s ease}
 
 @keyframes fadeIn{
-  from{opacity:0;transform:translateY(5px)}
-  to{opacity:1;transform:translateY(0)}
+from{opacity:0;transform:translateY(5px)}
+to{opacity:1;transform:translateY(0)}
 }
 
-/* HOME */
-.welcome{
-  background:
-    linear-gradient(135deg,rgba(3,43,36,.97),rgba(11,102,80,.94)),
-    radial-gradient(circle,#fff,transparent);
-  border-radius:18px;
-  color:white;
-  padding:28px;
-  position:relative;
-  overflow:hidden;
-  box-shadow:var(--shadow);
-  margin-bottom:22px;
-}
-
-.arabic{
-  font-size:25px;
-  color:var(--gold2);
-  margin-bottom:8px;
-  direction:rtl;
-}
-
-.quran-hadith-line{
-  display:inline-block;
-  margin:2px 0 18px;
-  padding:10px 18px;
-  direction:rtl;
-  text-align:center;
-  font-family:"Amiri","Noto Naskh Arabic","Traditional Arabic",serif;
-  font-size:22px;
-  line-height:1.8;
-  color:#f8df91;
-  border-top:1px solid rgba(242,207,114,.45);
-  border-bottom:1px solid rgba(242,207,114,.45);
-  text-shadow:0 2px 8px rgba(0,0,0,.18);
-}
-
-.welcome h2{
-  font-size:26px;
-  margin-bottom:7px;
-}
-
-.welcome p{
-  opacity:.8;
-}
-
-/* FEATURED DONATION */
-.donation-featured{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  margin-bottom:22px;
-  padding:16px 20px;
-  border-radius:17px;
-  cursor:pointer;
-  position:relative;
-  overflow:hidden;
-  background:
-    radial-gradient(
-      circle at 85% 20%,
-      rgba(242,207,114,.30),
-      transparent 25%
-    ),
-    linear-gradient(
-      135deg,
-      #032b24,
-      #08745a
-    );
-  border:1px solid rgba(214,169,58,.55);
-  box-shadow:
-    0 10px 28px rgba(4,45,35,.18),
-    inset 0 1px 0 rgba(255,255,255,.08);
-  transition:.25s;
-}
-
-.donation-featured:hover{
-  transform:translateY(-2px);
-  box-shadow:
-    0 14px 32px rgba(4,45,35,.24),
-    inset 0 1px 0 rgba(255,255,255,.10);
-}
-
-.donation-featured-icon{
-  width:52px;
-  height:52px;
-  min-width:52px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:
-    linear-gradient(
-      135deg,
-      #f2cf72,
-      #d6a93a
-    );
-  color:#063b2f;
-  font-size:25px;
-  border:2px solid rgba(255,255,255,.35);
-  box-shadow:0 5px 15px rgba(0,0,0,.18);
-}
-
-.donation-featured-content{
-  flex:1;
-  position:relative;
-  z-index:2;
-}
-
-.donation-featured-title{
-  color:#fff;
-  font-size:17px;
-  font-weight:bold;
-  letter-spacing:.7px;
-}
-
-.donation-featured-subtitle{
-  color:#f2cf72;
-  font-size:12px;
-  margin-top:4px;
-}
-
-.donation-featured-arrow{
-  position:relative;
-  z-index:2;
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(255,255,255,.10);
-  color:#f2cf72;
-  font-size:20px;
-  font-weight:bold;
-}
-
-/* COLLEGE PHOTO */
-.college-photo-card{
-  background:white;
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:var(--shadow);
-  margin-bottom:22px;
-  border:1px solid var(--border);
-  position:relative;
-}
-
-.college-photo-wrap{
-  position:relative;
-  height:260px;
-  overflow:hidden;
-  background:linear-gradient(135deg,#06483a,#d6a93a);
-}
-
-.college-photo{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-.college-photo-overlay{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    180deg,
-    transparent 35%,
-    rgba(0,34,27,.78) 100%
-  );
-  display:flex;
-  align-items:flex-end;
-  padding:25px;
-  color:white;
-}
-
-.college-photo-overlay h3{
-  font-size:25px;
-  margin-bottom:5px;
-}
-
-.college-photo-overlay p{
-  color:#f6df98;
-}
-
-/* CARD */
-.card{
-  background:rgba(255,255,255,.96);
-  border:1px solid var(--border);
-  border-radius:16px;
-  box-shadow:var(--shadow);
-  padding:20px;
-  margin-bottom:20px;
-}
-
-.card-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:18px;
-}
-
-.card-title h3{
-  color:var(--primary);
-  font-size:18px;
-}
-
-.card-title span{
-  color:var(--muted);
-  font-size:12px;
-}
-
-/* CHILD CARD */
-.child-card{
-  background:
-    linear-gradient(135deg,#ffffff,#f1faf6);
-  border:1px solid #d8ebe3;
-}
-
-.child-head{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  margin-bottom:20px;
-}
-
-.avatar{
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  background:linear-gradient(135deg,var(--primary),var(--primary3));
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-  font-weight:bold;
-  border:3px solid #d8eee5;
-}
-
-.child-head h3{
-  color:var(--primary);
-  margin-bottom:5px;
-}
-
-.child-head p{
-  color:var(--muted);
-  font-size:12px;
-}
-
-.info-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-
-.info-box{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:11px;
-  padding:13px;
-}
-
-.info-box label{
-  display:block;
-  color:var(--muted);
-  font-size:11px;
-  margin-bottom:5px;
-}
-
-.info-box strong{
-  color:var(--text);
-  font-size:14px;
-  word-break:break-word;
-}
-
-/* STATS */
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
-  margin-bottom:20px;
-}
-
-.stat{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:15px;
-  padding:18px;
-  box-shadow:var(--shadow);
-  position:relative;
-  overflow:hidden;
-}
-
-.stat::after{
-  content:"";
-  position:absolute;
-  width:65px;
-  height:65px;
-  right:-20px;
-  bottom:-20px;
-  border-radius:50%;
-  background:rgba(11,102,80,.08);
-}
-
-.stat-icon{
-  font-size:22px;
-  margin-bottom:9px;
-}
-
-.stat strong{
-  display:block;
-  font-size:24px;
-  color:var(--primary);
-}
-
-.stat span{
-  font-size:12px;
-  color:var(--muted);
-}
-
-/* QUICK */
-.quick-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-}
-
-.quick-btn{
-  border:0;
-  background:white;
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:18px 12px;
-  cursor:pointer;
-  color:var(--primary);
-  font-weight:bold;
-  box-shadow:0 5px 18px rgba(0,0,0,.05);
-  transition:.2s;
-}
-
-.quick-btn:hover{
-  transform:translateY(-2px);
-  border-color:#bcdace;
-  box-shadow:var(--shadow);
-}
-
-.quick-btn .qicon{
-  display:block;
-  font-size:25px;
-  margin-bottom:7px;
-}
-
-/* SECTION HEAD */
 .section-head{
-  margin-bottom:20px;
+display:flex;align-items:flex-end;justify-content:space-between;
+gap:15px;margin-bottom:22px
 }
 
 .section-head h2{
-  color:var(--primary);
-  font-size:24px;
+color:#164c39;font-size:26px;font-weight:900;margin-bottom:5px
 }
 
-.section-head p{
-  color:var(--muted);
-  margin-top:5px;
-  font-size:13px;
+.section-head p{color:var(--muted);font-size:13px}
+
+.section-tag{
+padding:7px 13px;border-radius:20px;color:#087f5b;background:#dff3e7;
+border:1px solid #b9ddc8;font-size:10px;font-weight:900
 }
 
-/* TABLE */
+.college-header{
+position:relative;overflow:hidden;min-height:330px;margin-bottom:25px;
+border-radius:25px;border:2px solid rgba(212,175,55,.65);
+background:linear-gradient(135deg,#032b24,#087f5b);
+box-shadow:0 18px 45px rgba(3,43,36,.23)
+}
+
+.college-header img{
+width:100%;height:330px;display:block;object-fit:cover;
+object-position:center
+}
+
+.college-header-overlay{
+position:absolute;inset:0;display:flex;flex-direction:column;
+align-items:center;justify-content:center;text-align:center;padding:25px;
+background:linear-gradient(180deg,rgba(3,43,36,.18),
+rgba(3,43,36,.40) 35%,rgba(3,43,36,.94) 100%)
+}
+
+.college-title{
+color:#fff;font-size:31px;font-weight:900;letter-spacing:1px
+}
+
+.college-subtitle{
+margin-top:7px;color:#f4d778;font-size:13px;font-weight:900;
+letter-spacing:3px
+}
+
+.college-header-line{
+width:150px;height:3px;margin-top:14px;border-radius:10px;
+background:linear-gradient(90deg,transparent,#d4af37,#fff1a8,#d4af37,transparent)
+}
+
+.college-ayah{
+margin-top:18px;color:#f7dc83;direction:rtl;
+font-family:"Amiri","Traditional Arabic",serif;font-size:29px;
+font-weight:bold;line-height:1.8
+}
+
+.college-ayah-meaning{
+margin-top:5px;color:#fff;font-size:12px
+}
+
+.stats{
+display:grid;grid-template-columns:repeat(4,1fr);
+gap:16px;margin-bottom:25px
+}
+
+.stat{
+padding:20px;border-radius:17px;color:#fff;
+border:1px solid rgba(212,175,55,.35);box-shadow:var(--shadow)
+}
+
+.stat:nth-child(1){background:linear-gradient(135deg,#07583f,#0a9670)}
+.stat:nth-child(2){background:linear-gradient(135deg,#06483a,#087f5b)}
+.stat:nth-child(3){background:linear-gradient(135deg,#176247,#0b8b68)}
+.stat:nth-child(4){background:linear-gradient(135deg,#07503c,#08765a)}
+
+.stat-icon{
+width:44px;height:44px;display:flex;align-items:center;
+justify-content:center;margin-bottom:14px;border-radius:13px;
+color:#174331;background:linear-gradient(135deg,#f1d36a,#fff0a6);
+font-size:20px
+}
+
+.stat small{color:#dff4e9;font-size:11px;font-weight:800}
+.stat strong{
+display:block;margin-top:6px;color:#fff;font-size:30px;font-weight:900
+}
+
+.panel{
+padding:23px;margin-bottom:22px;border-radius:17px;
+background:linear-gradient(135deg,rgba(255,255,255,.98),rgba(239,249,244,.98));
+border:1px solid var(--border);box-shadow:var(--shadow)
+}
+
+.panel-head{
+display:flex;align-items:center;justify-content:space-between;
+gap:10px;margin-bottom:18px;padding-bottom:13px;
+border-bottom:2px solid rgba(212,175,55,.20)
+}
+
+.panel h3{color:#164c39;font-size:17px;font-weight:900}
+.panel-desc{margin-top:3px;color:var(--muted);font-size:11px}
+
+.quick{
+display:grid;grid-template-columns:repeat(3,1fr);gap:14px
+}
+
+.quick button{
+padding:19px;text-align:left;border:1px solid #c7e1d3;
+border-radius:14px;color:var(--text);
+background:linear-gradient(135deg,#f5fcf8,#e4f4eb);
+transition:.25s
+}
+
+.quick button:hover{
+transform:translateY(-4px);border-color:rgba(212,175,55,.8);
+box-shadow:0 12px 25px rgba(3,43,36,.13)
+}
+
+.quick-icon{margin-bottom:12px;color:#087f5b;font-size:23px}
+.quick strong{display:block;margin-bottom:5px}
+.quick small{color:var(--muted)}
+
+.form-grid{
+display:grid;grid-template-columns:repeat(2,1fr);gap:16px
+}
+
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:1/-1}
+
+.field label{
+color:#315b49;font-size:12px;font-weight:900
+}
+
+.field input,.field select,.field textarea,.search{
+width:100%;padding:11px 12px;outline:none;color:var(--text);
+background:#f5fbf7;border:1px solid #c4dfcf;border-radius:10px;
+transition:.2s
+}
+
+.field textarea{min-height:100px;resize:vertical}
+
+.field input:focus,.field select:focus,
+.field textarea:focus,.search:focus{
+border-color:#0a956a;background:#fff;
+box-shadow:0 0 0 3px rgba(10,149,106,.11)
+}
+
+.primary{
+border:0;padding:11px 18px;border-radius:10px;color:#fff;
+background:linear-gradient(135deg,#087f5b,#0aad78);font-weight:900
+}
+
+.secondary{
+padding:10px 15px;border:1px solid #c5dfcf;border-radius:9px;
+color:#315b49;background:#eef8f2;font-weight:800
+}
+
+.danger,.success,.warning{
+padding:8px 11px;border:0;border-radius:8px;font-weight:900
+}
+
+.danger{color:#b42318;background:#fdebea}
+.success{color:#087f5b;background:#dff3e7}
+.warning{color:#916300;background:#fff1ca}
+
 .table-wrap{
-  overflow-x:auto;
+overflow-x:auto;border-radius:12px;border:1px solid #d2e6da
 }
 
 table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:600px;
+width:100%;min-width:720px;border-collapse:collapse;background:#fdfefe
+}
+
+th,td{
+padding:13px 10px;border-bottom:1px solid #dcebe2;
+text-align:left;font-size:12px;vertical-align:middle
 }
 
 th{
-  background:#edf6f2;
-  color:var(--primary);
-  text-align:left;
-  font-size:12px;
-  padding:13px;
+color:#18513d;background:linear-gradient(135deg,#dff2e7,#cce9d9);
+font-size:10px;font-weight:900;text-transform:uppercase
 }
 
-td{
-  border-bottom:1px solid var(--border);
-  padding:13px;
-  font-size:13px;
+tr:hover td{background:#f0f9f4}
+td strong{color:#173e30}
+
+.study-table{min-width:1200px}
+.teacher-remark-cell{
+max-width:240px;white-space:normal;line-height:1.5
 }
 
-tr:last-child td{
-  border-bottom:0;
+.badge{
+display:inline-block;padding:5px 10px;border-radius:20px;
+font-size:10px;font-weight:900;text-transform:capitalize
 }
 
-.status{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:15px;
-  font-size:11px;
-  font-weight:bold;
+.badge-green{color:#087f5b;background:#dff3e6}
+.badge-red{color:#842029;background:#f8d7da}
+.badge-yellow{color:#856404;background:#fff3cd}
+
+.toolbar{
+display:flex;align-items:center;justify-content:space-between;
+gap:12px;margin-bottom:16px
 }
 
-.present{
-  background:#e6f6ed;
-  color:#147744;
+.search{width:300px}
+
+.actions{display:flex;flex-wrap:wrap;gap:6px}
+
+/* STUDENT SEARCH BOX */
+.student-picker{
+display:grid;
+grid-template-columns:minmax(0,1fr) auto;
+gap:8px;
+align-items:end
 }
 
-.absent{
-  background:#fdeaea;
-  color:#b83333;
+.student-search-box{
+display:flex;
+gap:8px;
+width:100%
 }
 
-.leave{
-  background:#fff3d9;
-  color:#9a6810;
+.student-search-box input{
+flex:1;
+min-width:0;
+padding:11px 12px;
+outline:none;
+color:var(--text);
+background:#f5fbf7;
+border:1px solid #c4dfcf;
+border-radius:10px;
+transition:.2s
 }
 
-.pending{
-  background:#fff4dc;
-  color:#9a6810;
+.student-search-box input:focus{
+border-color:#0a956a;
+background:#fff;
+box-shadow:0 0 0 3px rgba(10,149,106,.11)
 }
 
-.approved{
-  background:#e5f6ec;
-  color:#137341;
+.student-search-btn{
+border:0;
+padding:10px 15px;
+border-radius:9px;
+color:#fff;
+background:linear-gradient(135deg,#087f5b,#0aad78);
+font-weight:900;
+white-space:nowrap
 }
 
-.rejected{
-  background:#fdeaea;
-  color:#b83333;
+.student-search-btn:hover{
+transform:translateY(-1px);
+box-shadow:0 6px 15px rgba(8,127,91,.20)
 }
 
-/* PROGRESS */
-.progress-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:18px;
+.student-picker select{
+width:100%
 }
 
-.progress-card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:15px;
-  padding:18px;
-  box-shadow:var(--shadow);
+.donation-summary{
+display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;
+padding:15px;border:2px solid rgba(212,175,55,.58);border-radius:16px;
+background:linear-gradient(135deg,#dff2e7,#fff5cf)
 }
 
-.progress-card h3{
-  color:var(--primary);
-  margin-bottom:6px;
+.donation-stat{
+padding:17px;border:1px solid #d0e5d8;border-radius:12px;background:#fff
 }
 
-.progress-date{
-  color:var(--muted);
-  font-size:11px;
-  margin-bottom:15px;
+.donation-stat small{
+display:block;margin-bottom:5px;color:var(--muted);
+font-size:10px;font-weight:900
 }
 
-.progress-row{
-  display:flex;
-  justify-content:space-between;
-  padding:8px 0;
-  border-bottom:1px dashed var(--border);
-  font-size:13px;
-}
+.donation-stat strong{font-size:25px;color:#087f5b}
 
-.progress-row:last-child{
-  border-bottom:0;
-}
-
-.progress-bar{
-  height:8px;
-  background:#e8efec;
-  border-radius:20px;
-  overflow:hidden;
-  margin-top:7px;
-}
-
-.progress-fill{
-  height:100%;
-  background:linear-gradient(90deg,var(--primary2),var(--gold));
-  border-radius:20px;
-}
-
-/* RESULT */
-.result-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:18px;
-}
-
-.result-card{
-  background:white;
-  border-radius:15px;
-  border:1px solid var(--border);
-  padding:20px;
-  box-shadow:var(--shadow);
-}
-
-.result-card h3{
-  color:var(--primary);
-  margin-bottom:12px;
-}
-
-.result-mark{
-  font-size:32px;
-  font-weight:bold;
-  color:var(--primary2);
-  margin:8px 0;
-}
-
-/* NOTICE */
-.notice-card{
-  background:white;
-  border:1px solid var(--border);
-  border-left:5px solid var(--gold);
-  border-radius:12px;
-  padding:18px;
-  margin-bottom:13px;
-  box-shadow:0 5px 18px rgba(0,0,0,.04);
-}
-
-.notice-card h3{
-  color:var(--primary);
-  margin-bottom:7px;
-}
-
-.notice-card p{
-  color:#4a5568;
-  white-space:pre-wrap;
-  line-height:1.6;
-}
-
-.notice-date{
-  color:var(--muted);
-  font-size:11px;
-  margin-top:10px;
-}
-
-/* FORM */
-.form-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
-}
-
-.form-group{
-  margin-bottom:2px;
-}
-
-.form-group.full{
-  grid-column:1/-1;
-}
-
-.form-group label{
-  display:block;
-  font-size:12px;
-  color:var(--primary);
-  font-weight:bold;
-  margin-bottom:6px;
-}
-
-input,
-textarea,
-select{
-  width:100%;
-  border:1px solid var(--border);
-  border-radius:9px;
-  padding:12px;
-  font:inherit;
-  outline:none;
-  background:#fff;
-}
-
-input:focus,
-textarea:focus,
-select:focus{
-  border-color:var(--primary2);
-  box-shadow:0 0 0 3px rgba(11,102,80,.08);
-}
-
-textarea{
-  min-height:110px;
-  resize:vertical;
-}
-
-.primary-btn{
-  border:0;
-  background:linear-gradient(135deg,var(--primary),var(--primary3));
-  color:white;
-  padding:12px 18px;
-  border-radius:9px;
-  cursor:pointer;
-  font-weight:bold;
-  margin-top:12px;
-}
-
-.primary-btn:hover{
-  opacity:.93;
-}
-
-/* HISTORY */
-.history-card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:15px;
-  margin-top:10px;
-}
-
-.history-top{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  align-items:flex-start;
-}
-
-.history-card h4{
-  color:var(--primary);
-  margin-bottom:5px;
-}
-
-.history-card p{
-  color:#596579;
-  font-size:13px;
-  line-height:1.55;
-}
-
-.reply{
-  background:#f1f8f5;
-  border-left:3px solid var(--primary2);
-  padding:10px;
-  margin-top:10px;
-  border-radius:5px;
-}
-
-/* DONATION */
-.donation-hero{
-  background:
-    radial-gradient(circle at 85% 15%,rgba(242,207,114,.24),transparent 25%),
-    linear-gradient(135deg,#032b24,#08745a);
-  border-radius:18px;
-  padding:28px;
-  color:white;
-  margin-bottom:20px;
-  position:relative;
-  overflow:hidden;
-  box-shadow:var(--shadow);
-}
-
-.donation-hero h2{
-  color:#fff;
-  font-size:25px;
-  margin-bottom:8px;
-}
-
-.donation-hero p{
-  color:#e6f2ed;
-  line-height:1.6;
-  max-width:700px;
-}
-
-.donation-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-}
-
-.donation-panel{
-  background:white;
-  border-radius:17px;
-  padding:22px;
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-}
-
-.donation-panel h3{
-  color:var(--primary);
-  margin-bottom:16px;
-  font-size:18px;
-}
-
-.bank-details{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.bank-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  padding:12px;
-  border-radius:9px;
-  background:#f3f8f5;
-  border:1px solid #e0eee8;
-}
-
-.bank-row span{
-  color:var(--muted);
-  font-size:12px;
-}
-
-.bank-row strong{
-  color:var(--primary);
-  font-size:14px;
-  text-align:right;
-  word-break:break-word;
-}
-
-.upi-box{
-  margin-top:15px;
-  padding:16px;
-  border-radius:12px;
-  background:linear-gradient(135deg,#fff9e9,#f8f1d9);
-  border:1px solid #ead69a;
-  text-align:center;
-}
-
-.upi-label{
-  color:#856719;
-  font-size:12px;
-  font-weight:bold;
-  margin-bottom:5px;
-}
-
-.upi-id{
-  color:#5f4a0d;
-  font-size:20px;
-  font-weight:bold;
-  letter-spacing:.3px;
-  margin-bottom:12px;
-}
-
-.upi-pay-btn{
-  display:block;
-  text-decoration:none;
-  color:white;
-  background:linear-gradient(135deg,#087d5e,#0c9b73);
-  padding:13px 18px;
-  border-radius:10px;
-  font-weight:bold;
-  box-shadow:0 5px 15px rgba(8,125,94,.2);
-}
-
-.upi-pay-btn:hover{
-  transform:translateY(-1px);
-}
-
-.qr-panel{
-  text-align:center;
-}
-
-.qr-box{
-  width:250px;
-  height:250px;
-  margin:5px auto 15px;
-  background:white;
-  border:8px solid #f0f4f1;
-  border-radius:15px;
-  padding:5px;
-  box-shadow:0 5px 20px rgba(0,0,0,.08);
-}
-
-.qr-box img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-}
-
-.qr-panel p{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.5;
-}
-
-.donation-note{
-  margin-top:20px;
-  padding:14px;
-  border-radius:10px;
-  background:#eef8f3;
-  color:#376153;
-  font-size:12px;
-  line-height:1.6;
-  border:1px solid #d8ebe2;
-}
-
-/* EMPTY */
 .empty{
-  text-align:center;
-  padding:35px 20px;
-  color:var(--muted);
-  background:white;
-  border:1px dashed var(--border);
-  border-radius:12px;
+padding:28px;text-align:center;color:var(--muted);font-weight:700;
+background:#f3faf6;border-radius:10px
 }
 
-.error-box{
-  background:#fff0f0;
-  color:#a53030;
-  padding:15px;
-  border-radius:10px;
-  margin-bottom:15px;
+.welcome{
+color:#fff!important;background:linear-gradient(135deg,#032b24,#087f5b)!important
 }
 
-/* TOAST */
-#toast{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  max-width:360px;
-  background:#063b2f;
-  color:white;
-  padding:13px 17px;
-  border-radius:10px;
-  box-shadow:var(--shadow);
-  z-index:99998;
-  display:none;
+.modal-overlay{
+position:fixed;inset:0;display:none;align-items:center;
+justify-content:center;padding:20px;z-index:99990;
+background:rgba(3,35,25,.68);backdrop-filter:blur(5px)
 }
 
-/* MOBILE */
+.modal-overlay.show{display:flex}
+
+.edit-modal{
+width:100%;max-width:650px;max-height:90vh;overflow-y:auto;
+padding:25px;border:2px solid rgba(212,175,55,.4);
+border-radius:19px;background:linear-gradient(135deg,#fff,#eef8f2);
+box-shadow:0 25px 70px rgba(0,0,0,.28)
+}
+
+.modal-actions{
+display:flex;justify-content:flex-end;gap:10px;margin-top:20px
+}
+
+@media(max-width:1100px){
+.stats{grid-template-columns:repeat(2,1fr)}
+.quick{grid-template-columns:repeat(2,1fr)}
+}
+
 @media(max-width:900px){
-
-  .sidebar{
-    transform:translateX(-100%);
-    transition:.25s;
-  }
-
-  .sidebar.open{
-    transform:translateX(0);
-  }
-
-  .main{
-    margin-left:0;
-  }
-
-  .menu-toggle{
-    display:block;
-  }
-
-  .topbar{
-    padding:0 15px;
-  }
-
-  .badge{
-    display:none;
-  }
-
-  .content{
-    padding:15px;
-  }
-
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .quick-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .info-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .donation-grid{
-    grid-template-columns:1fr;
-  }
+.sidebar{transform:translateX(-100%);transition:.25s}
+.sidebar.open{transform:translateX(0)}
+.main{margin-left:0;width:100%}
+.mobile-menu{display:block}
+.topbar{padding:0 15px}
+.content{padding:18px}
+.admin-badge{display:none}
 }
 
 @media(max-width:600px){
+.form-grid{grid-template-columns:1fr}
+.field.full{grid-column:auto}
+.stats{grid-template-columns:1fr 1fr;gap:10px}
+.quick{grid-template-columns:1fr}
+.top-title{font-size:16px}
+.top-subtitle{display:none}
+.search{width:100%}
+.toolbar{flex-direction:column;align-items:stretch}
 
-  .topbar{
-    height:64px;
-  }
+.student-picker{
+grid-template-columns:1fr
+}
 
-  .topbar h1{
-    font-size:16px;
-  }
+.student-search-box{
+flex-direction:column
+}
 
-  .logout-btn{
-    padding:8px 10px;
-    font-size:11px;
-  }
+.student-search-btn{
+width:100%
+}
 
-  .welcome{
-    padding:22px;
-  }
+.college-header,.college-header img{
+height:250px;min-height:250px
+}
 
-  .arabic{
-    font-size:20px;
-  }
+.college-title{font-size:23px}
+.college-subtitle{font-size:10px}
+.college-ayah{font-size:21px}
 
-  .quran-hadith-line{
-    font-size:18px;
-    padding:8px 12px;
-  }
+.donation-summary{grid-template-columns:1fr}
 
-  .welcome h2{
-    font-size:21px;
-  }
+.modal-overlay{padding:10px}
+.edit-modal{padding:18px}
+.modal-actions{flex-direction:column}
+.modal-actions button{width:100%}
+}
 
-  .donation-featured{
-    padding:14px;
-    gap:12px;
-  }
-
-  .donation-featured-icon{
-    width:46px;
-    height:46px;
-    min-width:46px;
-    font-size:22px;
-  }
-
-  .donation-featured-title{
-    font-size:14px;
-  }
-
-  .donation-featured-subtitle{
-    font-size:11px;
-  }
-
-  .college-photo-wrap{
-    height:200px;
-  }
-
-  .college-photo-overlay{
-    padding:18px;
-  }
-
-  .college-photo-overlay h3{
-    font-size:20px;
-  }
-
-  .info-grid{
-    grid-template-columns:1fr;
-  }
-
-  .stats{
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  }
-
-  .stat{
-    padding:14px;
-  }
-
-  .stat strong{
-    font-size:21px;
-  }
-
-  .quick-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .progress-grid,
-  .result-grid,
-  .form-grid{
-    grid-template-columns:1fr;
-  }
-
-  .form-group.full{
-    grid-column:auto;
-  }
-
-  .donation-hero{
-    padding:22px;
-  }
-
-  .donation-hero h2{
-    font-size:21px;
-  }
-
-  .qr-box{
-    width:220px;
-    height:220px;
-  }
-
-  .bank-row{
-    align-items:flex-start;
-    flex-direction:column;
-    gap:4px;
-  }
-
-  .bank-row strong{
-    text-align:left;
-  }
+@media(max-width:400px){
+.stats{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOADING -->
-<div id="loading">
-  <div class="loading-logo"></div>
-  <strong>SAFA QURAN COLLEGE ONLINE PORTAL</strong>
-  <small>Loading Parent Dashboard...</small>
+<div id="loading">SAFA QURAN COLLEGE loading...</div>
+<div id="message"></div>
+
+<div class="modal-overlay" id="editStudentModal">
+<div class="edit-modal">
+
+<div class="panel-head">
+<div>
+<h3>Edit Student</h3>
+<p class="panel-desc">Update student information</p>
+</div>
+<button class="danger" id="closeEditModal">✕</button>
 </div>
 
-<!-- SIDEBAR -->
+<div class="form-grid">
+
+<div class="field">
+<label>Student Number</label>
+<input id="editStudentNumber" readonly>
+</div>
+
+<div class="field">
+<label>Student Name</label>
+<input id="editStudentName">
+</div>
+
+<div class="field">
+<label>Guardian Name</label>
+<input id="editGuardianName">
+</div>
+
+<div class="field">
+<label>Class</label>
+<input id="editClassName">
+</div>
+
+<div class="field">
+<label>Parent Email</label>
+<input id="editParentEmail" type="email">
+</div>
+
+<div class="field">
+<label>Phone Number</label>
+<input id="editPhoneNumber">
+</div>
+
+<div class="field full">
+<label>Address</label>
+<textarea id="editStudentAddress"></textarea>
+</div>
+
+</div>
+
+<div class="modal-actions">
+<button class="secondary" id="cancelEditStudent">Cancel</button>
+<button class="primary" id="saveEditStudent">Save Changes</button>
+</div>
+
+</div>
+</div>
+
+<div class="app">
+
 <aside class="sidebar" id="sidebar">
 
-  <div class="sidebar-header">
-    <div class="logo-circle"></div>
-    <h2>SAFA QURAN COLLEGE</h2>
-    <p>PARENT PORTAL</p>
-  </div>
+<div class="brand">
+<div class="brand-top">
+<div class="logo-box"></div>
+<div>
+<h1>SAFA QURAN COLLEGE</h1>
+<p>ONLINE PORTAL</p>
+</div>
+</div>
+</div>
 
-  <nav class="nav">
+<div class="menu">
 
-    <button class="nav-btn active" data-section="home">
-      <span>🏠</span> Home
-    </button>
+<div class="menu-label">Main</div>
 
-    <button class="nav-btn" data-section="child">
-      <span>👨‍🎓</span> My Child
-    </button>
+<button class="menu-btn active" data-section="home">
+<span>⌂</span>Dashboard
+</button>
 
-    <button class="nav-btn" data-section="attendance">
-      <span>📅</span> Attendance
-    </button>
+<button class="menu-btn" data-section="students">
+<span>👨‍🎓</span>Students
+</button>
 
-    <button class="nav-btn" data-section="study">
-      <span>📖</span> Study Progress
-    </button>
+<div class="menu-label">Academic</div>
 
-    <button class="nav-btn" data-section="results">
-      <span>📊</span> Results
-    </button>
+<button class="menu-btn" data-section="attendance">
+<span>✓</span>Attendance
+</button>
 
-    <button class="nav-btn" data-section="notices">
-      <span>📢</span> Notices
-    </button>
+<button class="menu-btn" data-section="study">
+<span>📖</span>Study Progress
+</button>
 
-    <button class="nav-btn" data-section="donation">
-      <span>💰</span> MY DONATION TO SAFA
-    </button>
+<button class="menu-btn" data-section="results">
+<span>🏆</span>Results
+</button>
 
-    <button class="nav-btn" data-section="leave">
-      <span>📝</span> Leave
-    </button>
+<button class="menu-btn" data-section="notices">
+<span>📢</span>Notices
+</button>
 
-    <button class="nav-btn" data-section="messages">
-      <span>💬</span> Messages
-    </button>
+<div class="menu-label">Communication</div>
 
-  </nav>
+<button class="menu-btn" data-section="leave">
+<span>📝</span>Leave Requests
+</button>
+
+<button class="menu-btn" data-section="messages">
+<span>💬</span>Parent Messages
+</button>
+
+<button class="menu-btn" data-section="donations">
+<span>💰</span>Donations
+</button>
+
+<div class="menu-label">Public</div>
+
+<button class="menu-btn" data-section="publicResult">
+<span>🌐</span>Public Result
+</button>
+
+</div>
 </aside>
 
-<!-- MAIN -->
 <main class="main">
 
-  <!-- TOPBAR -->
-  <header class="topbar">
+<header class="topbar">
 
-    <div class="topbar-left">
-      <button class="menu-toggle" id="menuToggle">☰</button>
+<div class="top-left">
 
-      <div>
-        <h1 id="pageTitle">Parent Dashboard</h1>
-        <small>SAFA QURAN COLLEGE ONLINE PORTAL</small>
-      </div>
-    </div>
+<button class="mobile-menu" id="mobileMenu">☰</button>
 
-    <div class="top-actions">
-      <span class="badge">PARENT PORTAL</span>
-      <button class="logout-btn" id="logoutBtn">Logout</button>
-    </div>
+<div>
+<div class="top-title">SAFA QURAN COLLEGE</div>
+<div class="top-subtitle">ONLINE PORTAL Management System</div>
+</div>
 
-  </header>
+</div>
 
-  <div class="content">
+<div class="top-right">
 
-    <!-- HOME -->
-    <section class="section active" id="home">
+<div class="admin-badge">ADMINISTRATOR</div>
 
-      <!-- MY DONATION TO SAFA -->
-      <div class="donation-featured" id="donationFeatured">
+<button class="logout" id="logoutBtn">Logout</button>
 
-        <div class="donation-featured-icon">
-          🤲
-        </div>
+</div>
 
-        <div class="donation-featured-content">
-          <div class="donation-featured-title">
-            MY DONATION TO SAFA
-          </div>
+</header>
 
-          <div class="donation-featured-subtitle">
-            Support SAFA QURAN COLLEGE
-          </div>
-        </div>
+<div class="content">
 
-        <div class="donation-featured-arrow">
-          →
-        </div>
+<section class="section active" id="home">
 
-      </div>
+<div class="college-header">
 
-      <div class="welcome">
+<img src="./IMG-20260921-WA0016.jpg" alt="SAFA QURAN COLLEGE">
 
-        <div class="arabic">
-          السَّلاَمُ عَلَيْكُمْ
-        </div>
+<div class="college-header-overlay">
 
-        <div class="quran-hadith-line">
-          خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ
-        </div>
+<div class="college-title">SAFA QURAN COLLEGE</div>
 
-        <p>
-          Welcome to SAFA QURAN COLLEGE Parent Dashboard.
-        </p>
+<div class="college-subtitle">ONLINE PORTAL</div>
 
-      </div>
+<div class="college-header-line"></div>
 
-      <!-- COLLEGE PHOTO -->
-      <div class="college-photo-card">
+<div class="college-ayah">
+خيركم من تعلم القرءان وعلمه
+</div>
 
-        <div class="college-photo-wrap">
+<div class="college-ayah-meaning">
+The best among you are those who learn the Qur'an and teach it.
+</div>
 
-          <img
-            src="./IMG-20260921-WA0016.jpg"
-            alt="SAFA QURAN COLLEGE"
-            class="college-photo"
-            onerror="this.style.display='none';"
-          >
+</div>
+</div>
 
-          <div class="college-photo-overlay">
-            <div>
-              <h3>SAFA QURAN COLLEGE</h3>
-              <p>Qur'an • Hifz • Islamic Education</p>
-            </div>
-          </div>
+<div class="stats">
 
-        </div>
+<div class="stat">
+<div class="stat-icon">👨‍🎓</div>
+<small>Total Students</small>
+<strong id="studentCount">0</strong>
+</div>
 
-      </div>
+<div class="stat">
+<div class="stat-icon">✓</div>
+<small>Attendance Records</small>
+<strong id="attendanceCount">0</strong>
+</div>
 
-      <!-- CHILD CARD -->
-      <div class="card child-card">
+<div class="stat">
+<div class="stat-icon">📝</div>
+<small>Leave Requests</small>
+<strong id="leaveCount">0</strong>
+</div>
 
-        <div class="child-head">
+<div class="stat">
+<div class="stat-icon">💬</div>
+<small>Parent Messages</small>
+<strong id="messageCount">0</strong>
+</div>
 
-          <div class="avatar" id="homeInitial">S</div>
+</div>
 
-          <div>
-            <h3 id="homeStudentName">Loading...</h3>
-            <p>Student No: <span id="homeStudentNumber">-</span></p>
-          </div>
+<div class="panel">
 
-        </div>
+<div class="panel-head">
+<div>
+<h3>Quick Access</h3>
+<div class="panel-desc">Manage your college portal quickly</div>
+</div>
+</div>
 
-        <div class="info-grid">
-
-          <div class="info-box">
-            <label>Student Name</label>
-            <strong id="homeNameInfo">-</strong>
-          </div>
-
-          <div class="info-box">
-            <label>Student Number</label>
-            <strong id="homeNoInfo">-</strong>
-          </div>
-
-          <div class="info-box">
-            <label>Class</label>
-            <strong id="homeClassInfo">-</strong>
-          </div>
-
-          <div class="info-box">
-            <label>Guardian Name</label>
-            <strong id="homeGuardianInfo">-</strong>
-          </div>
-
-          <div class="info-box">
-            <label>Phone Number</label>
-            <strong id="homePhoneInfo">-</strong>
-          </div>
-
-          <div class="info-box">
-            <label>Place / Address</label>
-            <strong id="homeAddressInfo">-</strong>
-          </div>
-
-        </div>
-
-      </div>
+<div class="quick">
 
-      <!-- STATS -->
-      <div class="stats">
-
-        <div class="stat">
-          <div class="stat-icon">👨‍🎓</div>
-          <strong id="studentCount">1</strong>
-          <span>My Child</span>
-        </div>
+<button class="quick-btn" data-go="students">
+<div class="quick-icon">👨‍🎓</div>
+<strong>Students</strong>
+<small>Manage student records</small>
+</button>
 
-        <div class="stat">
-          <div class="stat-icon">📅</div>
-          <strong id="attendanceTotal">0</strong>
-          <span>Attendance Records</span>
-        </div>
+<button class="quick-btn" data-go="attendance">
+<div class="quick-icon">✓</div>
+<strong>Attendance</strong>
+<small>Manage daily attendance</small>
+</button>
 
-        <div class="stat">
-          <div class="stat-icon">📖</div>
-          <strong id="studyTotal">0</strong>
-          <span>Study Updates</span>
-        </div>
+<button class="quick-btn" data-go="study">
+<div class="quick-icon">📖</div>
+<strong>Study Progress</strong>
+<small>Update</small>
+</button>
+
+<button class="quick-btn" data-go="results">
+<div class="quick-icon">🏆</div>
+<strong>Results</strong>
+<small>Publish student results</small>
+</button>
+
+<button class="quick-btn" data-go="notices">
+<div class="quick-icon">📢</div>
+<strong>Notices</strong>
+<small>Publish announcements</small>
+</button>
+
+<button class="quick-btn" data-go="donations">
+<div class="quick-icon">💰</div>
+<strong>Donations</strong>
+<small>Verify donations</small>
+</button>
+
+<button class="quick-btn" data-go="publicResult">
+<div class="quick-icon">🌐</div>
+<strong>Public Result</strong>
+<small>Open public result system</small>
+</button>
+
+</div>
+</div>
+
+</section>
+
+<section class="section" id="students">
+
+<div class="section-head">
+<div>
+<h2>Students</h2>
+<p>Manage student information</p>
+</div>
+<div class="section-tag">STUDENT MANAGEMENT</div>
+</div>
+
+<div class="panel">
 
-        <div class="stat">
-          <div class="stat-icon">📊</div>
-          <strong id="resultTotal">0</strong>
-          <span>Results</span>
-        </div>
-
-      </div>
+<div class="panel-head">
+<div>
+<h3>Add Student</h3>
+<div class="panel-desc">Create a new student profile</div>
+</div>
+</div>
 
-      <!-- QUICK ACTIONS -->
-      <div class="card">
-
-        <div class="card-title">
-          <h3>Quick Access</h3>
-          <span>Parent Services</span>
-        </div>
-
-        <div class="quick-grid">
-
-          <button class="quick-btn" data-go="child">
-            <span class="qicon">👨‍🎓</span>
-            My Child
-          </button>
-
-          <button class="quick-btn" data-go="attendance">
-            <span class="qicon">📅</span>
-            Attendance
-          </button>
+<form id="studentForm">
 
-          <button class="quick-btn" data-go="study">
-            <span class="qicon">📖</span>
-            Study Progress
-          </button>
+<div class="form-grid">
 
-          <button class="quick-btn" data-go="results">
-            <span class="qicon">📊</span>
-            Results
-          </button>
+<div class="field">
+<label>Student Number</label>
+<input id="studentNumber" required placeholder="Example: 131">
+</div>
 
-          <button class="quick-btn" data-go="notices">
-            <span class="qicon">📢</span>
-            Notices
-          </button>
+<div class="field">
+<label>Student Name</label>
+<input id="studentName" required>
+</div>
 
-          <button class="quick-btn donation-quick" data-go="donation">
-            <span class="qicon">💰</span>
-            Donation
-          </button>
+<div class="field">
+<label>Guardian Name</label>
+<input id="guardianName">
+</div>
 
-          <button class="quick-btn" data-go="leave">
-            <span class="qicon">📝</span>
-            Leave
-          </button>
-
-          <button class="quick-btn" data-go="messages">
-            <span class="qicon">💬</span>
-            Messages
-          </button>
+<div class="field">
+<label>Class</label>
+<input id="className" placeholder="HIFZ A">
+</div>
 
-        </div>
+<div class="field">
+<label>Parent Email</label>
+<input id="parentEmail" type="email">
+</div>
 
-      </div>
+<div class="field">
+<label>Phone Number</label>
+<input id="phoneNumber">
+</div>
 
-    </section>
+<div class="field full">
+<label>Address</label>
+<textarea id="studentAddress"></textarea>
+</div>
 
-    <!-- MY CHILD -->
-    <section class="section" id="child">
+<div class="field">
+<button class="primary" type="submit">Add Student</button>
+</div>
 
-      <div class="section-head">
-        <h2>My Child</h2>
-        <p>Student and guardian information</p>
-      </div>
+</div>
 
-      <div class="card child-card">
+</form>
+</div>
 
-        <div class="child-head">
+<div class="panel">
 
-          <div class="avatar" id="childInitial">S</div>
+<div class="toolbar">
+<h3>Student List</h3>
+<input class="search" id="studentSearch" placeholder="Search student...">
+</div>
 
-          <div>
-            <h3 id="childName">Loading...</h3>
-            <p>Student No: <span id="childNumber">-</span></p>
-          </div>
+<div class="table-wrap">
 
-        </div>
+<table>
 
-        <div class="info-grid">
+<thead>
+<tr>
+<th>Number</th>
+<th>Name</th>
+<th>Guardian</th>
+<th>Class</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Action</th>
+</tr>
+</thead>
 
-          <div class="info-box">
-            <label>Student Name</label>
-            <strong id="childNameInfo">-</strong>
-          </div>
+<tbody id="studentsTable"></tbody>
 
-          <div class="info-box">
-            <label>Student Number</label>
-            <strong id="childNoInfo">-</strong>
-          </div>
+</table>
 
-          <div class="info-box">
-            <label>Class</label>
-            <strong id="childClassInfo">-</strong>
-          </div>
+</div>
+</div>
 
-          <div class="info-box">
-            <label>Guardian Name</label>
-            <strong id="childGuardianInfo">-</strong>
-          </div>
+</section>
 
-          <div class="info-box">
-            <label>Phone Number</label>
-            <strong id="childPhoneInfo">-</strong>
-          </div>
+<section class="section" id="attendance">
 
-          <div class="info-box">
-            <label>Place / Address</label>
-            <strong id="childAddressInfo">-</strong>
-          </div>
+<div class="section-head">
 
-          <div class="info-box">
-            <label>Parent Email</label>
-            <strong id="childEmailInfo">-</strong>
-          </div>
+<div>
+<h2>Attendance</h2>
+<p>Manage daily student attendance</p>
+</div>
 
-        </div>
+<div class="section-tag">ACADEMIC</div>
 
-      </div>
+</div>
 
-    </section>
+<div class="panel">
 
-    <!-- ATTENDANCE -->
-    <section class="section" id="attendance">
+<div class="panel-head">
 
-      <div class="section-head">
-        <h2>Attendance</h2>
-        <p>Your child's attendance records</p>
-      </div>
+<div>
+<h3>Record Absent / Leave</h3>
+<div class="panel-desc">
+Only Absent or Leave students need to be recorded. All other students are automatically Present.
+</div>
+</div>
 
-      <div class="card">
+</div>
 
-        <div class="table-wrap">
+<form id="attendanceForm">
 
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Status</th>
-              </tr>
-            </thead>
+<div class="form-grid">
 
-            <tbody id="attendanceBody">
-              <tr>
-                <td colspan="2">Loading...</td>
-              </tr>
-            </tbody>
+<div class="field">
 
-          </table>
+<label>Student</label>
 
-        </div>
+<div class="student-picker">
 
-      </div>
+<div class="student-search-box">
 
-    </section>
+<input
+id="attendanceStudentSearch"
+type="text"
+placeholder="Search student no or name..."
+autocomplete="off"
+>
 
-    <!-- STUDY -->
-    <section class="section" id="study">
+<button
+type="button"
+class="student-search-btn"
+id="attendanceStudentSearchBtn">
+Search
+</button>
 
-      <div class="section-head">
-        <h2>Study Progress</h2>
-        <p>Hifz and study progress updates</p>
-      </div>
+</div>
 
-      <div id="studyList" class="progress-grid">
-        <div class="empty">Loading...</div>
-      </div>
+<select id="attendanceStudent" required>
+<option value="">Select student</option>
+</select>
 
-    </section>
+</div>
 
-    <!-- RESULTS -->
-    <section class="section" id="results">
+</div>
 
-      <div class="section-head">
-        <h2>Results</h2>
-        <p>Published examination results</p>
-      </div>
+<div class="field">
 
-      <div id="resultsList" class="result-grid">
-        <div class="empty">Loading...</div>
-      </div>
+<label>Date</label>
 
-    </section>
+<input type="date" id="attendanceDate" required>
 
-    <!-- NOTICES -->
-    <section class="section" id="notices">
+</div>
 
-      <div class="section-head">
-        <h2>Notices</h2>
-        <p>Important college announcements</p>
-      </div>
+<div class="field">
 
-      <div id="noticesList">
-        <div class="empty">Loading...</div>
-      </div>
+<label>Status</label>
 
-    </section>
+<select id="attendanceStatus" required>
 
-    <!-- DONATION -->
-    <section class="section" id="donation">
+<option value="absent">Absent</option>
+<option value="leave">Leave</option>
 
-      <div class="section-head">
-        <h2>MY DONATION TO SAFA</h2>
-        <p>Support SAFA QURAN COLLEGE</p>
-      </div>
+</select>
 
-      <div class="donation-hero">
+</div>
 
-        <h2>💚 Support SAFA QURAN COLLEGE</h2>
+<div class="field">
 
-        <p>
-          You can support the educational activities of SAFA QURAN COLLEGE
-          through direct UPI payment, QR code or bank transfer.
-          May Allah accept your contribution and reward you abundantly.
-        </p>
+<button class="primary" type="submit">
+Save Attendance
+</button>
 
-      </div>
+</div>
 
-      <div class="donation-grid">
+</div>
 
-        <!-- BANK / UPI -->
-        <div class="donation-panel">
+</form>
 
-          <h3>🏦 Bank & UPI Details</h3>
+</div>
 
-          <div class="bank-details">
+<div class="panel">
 
-            <div class="bank-row">
-              <span>Bank</span>
-              <strong>Federal Bank</strong>
-            </div>
+<div class="toolbar">
 
-            <div class="bank-row">
-              <span>A/C No</span>
-              <strong>10980200318831</strong>
-            </div>
+<div>
 
-            <div class="bank-row">
-              <span>IFSC</span>
-              <strong>FDRL0001098</strong>
-            </div>
+<h3>Attendance Records</h3>
 
-            <div class="bank-row">
-              <span>Branch</span>
-              <strong>KANNUR BRANCH</strong>
-            </div>
+<div class="panel-desc">
+Only Absent / Leave students are stored. Students without a record for a date are Present automatically.
+</div>
 
-          </div>
+</div>
 
-          <div class="upi-box">
+<input
+class="search"
+id="attendanceSearch"
+placeholder="Search student no or name..."
+>
 
-            <div class="upi-label">DIRECT UPI PAYMENT</div>
+</div>
 
-            <div class="upi-id">
-              563safa@fbl
-            </div>
+<div id="attendanceTable"></div>
 
-            <a
-              class="upi-pay-btn"
-              href="upi://pay?pa=563safa%40fbl&pn=SAFA%20QURAN%20COLLEGE&cu=INR">
-              💳 PAY DIRECTLY WITH UPI
-            </a>
+</div>
 
-          </div>
+</section>
 
-          <div class="donation-note">
-            If the UPI button does not open an app on your device,
-            you can copy the UPI ID <strong>563safa@fbl</strong>
-            and pay through your preferred UPI application.
-          </div>
+<section class="section" id="study">
 
-        </div>
+<div class="section-head">
 
-        <!-- QR -->
-        <div class="donation-panel qr-panel">
+<div>
+<h2>Study Progress</h2>
+<p>Record daily Hifz and Qur'an study progress</p>
+</div>
 
-          <h3>📱 Scan & Pay</h3>
+<div class="section-tag">HIFZ PROGRESS</div>
 
-          <div class="qr-box">
+</div>
 
-            <img
-              src="./20260225.jpg"
-              alt="SAFA Donation QR Code"
-              onerror="this.style.display='none';"
-            >
+<div class="panel">
 
-          </div>
+<div class="panel-head">
 
-          <p>
-            Scan the QR code using your UPI application
-            to make your donation.
-          </p>
+<div>
+<h3>Update Study Progress</h3>
+<div class="panel-desc">
+Record the student's daily Qur'an and Dars progress
+</div>
+</div>
 
-          <div class="donation-note">
-            <strong>UPI ID:</strong> 563safa@fbl
-          </div>
+</div>
 
-        </div>
+<form id="studyForm">
 
-      </div>
+<div class="form-grid">
 
-    </section>
+<div class="field">
 
-    <!-- LEAVE -->
-    <section class="section" id="leave">
+<label>Student Search</label>
 
-      <div class="section-head">
-        <h2>Leave Application</h2>
-        <p>Apply for leave and view replies from Usthad</p>
-      </div>
+<div class="student-picker">
 
-      <div class="card">
+<div class="student-search-box">
 
-        <div class="card-title">
-          <h3>Apply for Leave</h3>
-        </div>
+<input
+id="studyStudentSearch"
+type="text"
+placeholder="Search student no or name..."
+autocomplete="off"
+>
 
-        <form id="leaveForm">
+<button
+type="button"
+class="student-search-btn"
+id="studyStudentSearchBtn">
+Search
+</button>
 
-          <div class="form-grid">
+</div>
 
-            <div class="form-group">
-              <label>Leave Date</label>
-              <input type="date" id="leaveDate" required>
-            </div>
+<select id="studyStudent" required>
+<option value="">Select student</option>
+</select>
 
-            <div class="form-group">
-              <label>Reason</label>
-              <input
-                type="text"
-                id="leaveReason"
-                placeholder="Reason for leave"
-                required
-              >
-            </div>
+</div>
 
-            <div class="form-group full">
-              <label>Details</label>
-              <textarea
-                id="leaveDetails"
-                placeholder="Write additional details..."
-              ></textarea>
-            </div>
+</div>
 
-          </div>
+<div class="field">
+<label>Date</label>
+<input type="date" id="studyDate" required>
+</div>
 
-          <button class="primary-btn" type="submit">
-            Submit Leave Application
-          </button>
+<div class="field">
+<label>Juz / Surah Studied</label>
+<input id="studySurah" placeholder="Example: Juz 5 / Surah Al-Ma'idah">
+</div>
 
-        </form>
+<div class="field">
+<label>Today's New Lesson Target (Pages)</label>
+<input id="newLesson" type="number" min="0" step="0.5">
+</div>
 
-      </div>
+<div class="field">
+<label>Revision Completed</label>
+<input id="revision" placeholder="Example: 3 pages / 1 Juz">
+</div>
 
-      <div class="card">
+<div class="field">
+<label>Study Status</label>
+<input id="studyStatus" placeholder="Enter status code">
+</div>
 
-        <div class="card-title">
-          <h3>Leave History</h3>
-        </div>
+<div class="field">
+<label>Performance</label>
 
-        <div id="leaveHistory">
-          <div class="empty">Loading...</div>
-        </div>
+<select id="performance">
+<option value="">Select performance</option>
+<option>Excellent</option>
+<option>Very Good</option>
+<option>Good</option>
+<option>Average</option>
+<option>Needs Improvement</option>
+</select>
 
-      </div>
+</div>
 
-    </section>
+<div class="field">
+<label>Teacher's Remarks</label>
+<input id="studyNote" placeholder="Teacher's comments about today's study">
+</div>
 
-    <!-- MESSAGES -->
-    <section class="section" id="messages">
+<div class="field">
+<label>Dars Study Level</label>
 
-      <div class="section-head">
-        <h2>Parent Messages</h2>
-        <p>Send a message to Usthad / Administration</p>
-      </div>
+<select id="darsLevel">
+<option value="">Select level</option>
+<option>Excellent</option>
+<option>Very Good</option>
+<option>Good</option>
+<option>Average</option>
+<option>Needs Improvement</option>
+</select>
 
-      <div class="card">
+</div>
 
-        <div class="card-title">
-          <h3>Send Message</h3>
-        </div>
+<div class="field">
+<label>Discipline</label>
 
-        <form id="messageForm">
+<select id="discipline">
+<option value="">Select discipline</option>
+<option>Excellent</option>
+<option>Very Good</option>
+<option>Good</option>
+<option>Average</option>
+<option>Needs Improvement</option>
+</select>
 
-          <div class="form-group">
-            <label>Your Message</label>
+</div>
 
-            <textarea
-              id="messageText"
-              placeholder="Write your message..."
-              required
-            ></textarea>
+<div class="field">
 
-          </div>
+<button class="primary" type="submit">
+Save Study Progress
+</button>
 
-          <button class="primary-btn" type="submit">
-            Send Message
-          </button>
+</div>
 
-        </form>
+</div>
 
-      </div>
+</form>
 
-      <div class="card">
+</div>
 
-        <div class="card-title">
-          <h3>Message History</h3>
-        </div>
+<div class="panel">
 
-        <div id="messageHistory">
-          <div class="empty">Loading...</div>
-        </div>
+<div class="toolbar">
 
-      </div>
+<div>
+<h3>Study Progress Records</h3>
+<div class="panel-desc">
+Daily Hifz, revision, performance, Dars level and discipline
+</div>
+</div>
 
-    </section>
+<input
+class="search"
+id="studySearch"
+placeholder="Search student no or name..."
+>
 
-  </div>
+</div>
 
+<div class="table-wrap">
+
+<table class="study-table">
+
+<thead>
+
+<tr>
+<th>Student</th>
+<th>Date</th>
+<th>Juz / Surah Studied</th>
+<th>Today's New Lesson Target</th>
+<th>Revision Completed</th>
+<th>Study Status</th>
+<th>Performance</th>
+<th>Teacher's Remarks</th>
+<th>Dars Study Level</th>
+<th>Discipline</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="studyTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="results">
+
+<div class="section-head">
+
+<div>
+<h2>Results</h2>
+<p>Add and publish student results</p>
+</div>
+
+<div class="section-tag">RESULT MANAGEMENT</div>
+
+</div>
+
+<div class="panel">
+
+<form id="resultForm">
+
+<div class="form-grid">
+
+<div class="field">
+
+<label>Student</label>
+
+<div class="student-picker">
+
+<div class="student-search-box">
+
+<input
+id="resultStudentSearch"
+type="text"
+placeholder="Search student no or name..."
+autocomplete="off"
+>
+
+<button
+type="button"
+class="student-search-btn"
+id="resultStudentSearchBtn">
+Search
+</button>
+
+</div>
+
+<select id="resultStudent" required>
+<option value="">Select student</option>
+</select>
+
+</div>
+
+</div>
+
+<div class="field">
+<label>Test / Exam Title</label>
+<input id="resultTitle" required>
+</div>
+
+<div class="field">
+<label>Mark</label>
+<input id="resultMark" required>
+</div>
+
+<div class="field">
+
+<label>Status</label>
+
+<select id="resultStatus">
+<option value="draft">Draft</option>
+<option value="published">Published</option>
+</select>
+
+</div>
+
+<div class="field">
+
+<button class="primary" type="submit">
+Add Result
+</button>
+
+</div>
+
+</div>
+
+</form>
+
+</div>
+
+<div class="panel">
+
+<div class="toolbar">
+
+<h3>Result Records</h3>
+
+<input
+class="search"
+id="resultSearch"
+placeholder="Search student no or name..."
+>
+
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Student</th>
+<th>Title</th>
+<th>Mark</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="resultsTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="notices">
+
+<div class="section-head">
+
+<div>
+<h2>Notices</h2>
+<p>Publish announcements for parents</p>
+</div>
+
+<div class="section-tag">ANNOUNCEMENTS</div>
+
+</div>
+
+<div class="panel">
+
+<form id="noticeForm">
+
+<div class="form-grid">
+
+<div class="field">
+<label>Notice Title</label>
+<input id="noticeTitle" required>
+</div>
+
+<div class="field">
+
+<label>Status</label>
+
+<select id="noticeStatus">
+<option value="draft">Draft</option>
+<option value="published">Published</option>
+</select>
+
+</div>
+
+<div class="field full">
+<label>Notice</label>
+<textarea id="noticeText" required></textarea>
+</div>
+
+<div class="field">
+<button class="primary" type="submit">Add Notice</button>
+</div>
+
+</div>
+
+</form>
+
+</div>
+
+<div class="panel">
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Title</th>
+<th>Notice</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="noticesTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="leave">
+
+<div class="section-head">
+
+<div>
+<h2>Leave Requests</h2>
+<p>Review and respond to parent leave requests</p>
+</div>
+
+<div class="section-tag">PARENT REQUESTS</div>
+
+</div>
+
+<div class="panel">
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Student</th>
+<th>Parent</th>
+<th>Date</th>
+<th>Reason</th>
+<th>Status</th>
+<th>Reply</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="leaveTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="messages">
+
+<div class="section-head">
+
+<div>
+<h2>Parent Messages</h2>
+<p>Read and reply to parent messages</p>
+</div>
+
+<div class="section-tag">COMMUNICATION</div>
+
+</div>
+
+<div class="panel">
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Student</th>
+<th>Parent</th>
+<th>Message</th>
+<th>Status</th>
+<th>Reply</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="messagesTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="donations">
+
+<div class="section-head">
+
+<div>
+<h2>Donations</h2>
+<p>Review and verify parent donations</p>
+</div>
+
+<div class="section-tag">SAFA DONATION</div>
+
+</div>
+
+<div class="donation-summary">
+
+<div class="donation-stat">
+<small>Total Donations</small>
+<strong id="donationTotal">₹0</strong>
+</div>
+
+<div class="donation-stat">
+<small>Pending</small>
+<strong id="donationPending">₹0</strong>
+</div>
+
+<div class="donation-stat">
+<small>Verified</small>
+<strong id="donationVerified">₹0</strong>
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Student</th>
+<th>Parent Email</th>
+<th>Amount</th>
+<th>Transaction ID</th>
+<th>Date</th>
+<th>Status</th>
+<th>Admin Note</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="donationsTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="publicResult">
+
+<div class="section-head">
+
+<div>
+<h2>Public Result</h2>
+<p>Open the public result system</p>
+</div>
+
+<div class="section-tag">PUBLIC</div>
+
+</div>
+
+<div class="panel welcome">
+
+<h2 style="margin-bottom:10px">
+Public Student Result
+</h2>
+
+<p style="margin-bottom:20px">
+Open the public result page where students and parents can check published results.
+</p>
+
+<button class="primary" id="openPublicResult">
+🌐 Open Public Result
+</button>
+
+</div>
+
+</section>
+
+</div>
 </main>
+</div>
 
-<div id="toast"></div>
 
 <script type="module">
 
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-
-import {
-  getAuth,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  getDoc,
-  doc,
-  query,
-  where,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import{getAuth,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import{getFirestore,collection,getDocs,getDoc,doc,addDoc,updateDoc,deleteDoc,serverTimestamp}from"https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
-/* FIREBASE CONFIG */
-
-const firebaseConfig = {
-  apiKey:"AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
-  authDomain:"safa-hifz-class-7e84b.firebaseapp.com",
-  projectId:"safa-hifz-class-7e84b",
-  storageBucket:"safa-hifz-class-7e84b.firebasestorage.app",
-  messagingSenderId:"476801753196",
-  appId:"1:476801753196:web:d4c8a8b0c1a4203606f849",
-  measurementId:"G-ZTBTJCB5SR"
+const firebaseConfig={
+apiKey:"AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
+authDomain:"safa-hifz-class-7e84b.firebaseapp.com",
+projectId:"safa-hifz-class-7e84b",
+storageBucket:"safa-hifz-class-7e84b.firebasestorage.app",
+messagingSenderId:"476801753196",
+appId:"1:476801753196:web:d4c8a8b0c1a4203606f849",
+measurementId:"G-ZTBTJCB5SR"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+const $=id=>document.getElementById(id);
 
+let currentUser=null;
+window.students=[];
+let attendanceRows=[];
+let studyRows=[];
+let resultRows=[];
 
-/* HELPERS */
-
-const $ = id => document.getElementById(id);
 
 function escapeHtml(value){
-
-  if(value === null || value === undefined){
-    return "";
-  }
-
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+return String(value??"")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 }
 
 
-function showMessage(message){
+function showMessage(text,type="success"){
 
-  const toast = $("toast");
+const box=$("message");
 
-  toast.textContent = message;
-  toast.style.display = "block";
+box.textContent=text;
+box.style.display="block";
 
-  clearTimeout(window.toastTimer);
+box.style.background=
+type==="error"
+?"linear-gradient(135deg,#b42318,#d6453b)"
+:"linear-gradient(135deg,#087f5b,#0ca875)";
 
-  window.toastTimer = setTimeout(()=>{
-    toast.style.display = "none";
-  },3000);
-}
-
-
-function getDateText(value){
-
-  if(!value){
-    return "-";
-  }
-
-  try{
-
-    if(value.toDate){
-      return value.toDate().toLocaleDateString("en-IN");
-    }
-
-    const d = new Date(value);
-
-    if(!isNaN(d)){
-      return d.toLocaleDateString("en-IN");
-    }
-
-  }catch(e){}
-
-  return String(value);
-}
-
-
-function getInitial(name){
-
-  if(!name){
-    return "S";
-  }
-
-  return String(name).trim().charAt(0).toUpperCase();
-}
-
-
-/* GLOBALS */
-
-let currentUser = null;
-let studentNumber = "";
-let studentData = null;
-
-
-/* NAVIGATION */
-
-function openSection(sectionId){
-
-  document.querySelectorAll(".section").forEach(section=>{
-    section.classList.remove("active");
-  });
-
-  document.querySelectorAll(".nav-btn").forEach(button=>{
-    button.classList.remove("active");
-  });
-
-  const section = $(sectionId);
-
-  if(section){
-    section.classList.add("active");
-  }
-
-  const nav = document.querySelector(
-    `.nav-btn[data-section="${sectionId}"]`
-  );
-
-  if(nav){
-    nav.classList.add("active");
-  }
-
-  const titles = {
-    home:"Parent Dashboard",
-    child:"My Child",
-    attendance:"Attendance",
-    study:"Study Progress",
-    results:"Results",
-    notices:"Notices",
-    donation:"MY DONATION TO SAFA",
-    leave:"Leave Application",
-    messages:"Parent Messages"
-  };
-
-  $("pageTitle").textContent =
-    titles[sectionId] || "Parent Dashboard";
-
-  $("sidebar").classList.remove("open");
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-}
-
-
-document.querySelectorAll(".nav-btn").forEach(button=>{
-
-  button.addEventListener("click",()=>{
-
-    openSection(button.dataset.section);
-
-  });
-
-});
-
-
-document.querySelectorAll(".quick-btn").forEach(button=>{
-
-  button.addEventListener("click",()=>{
-
-    openSection(button.dataset.go);
-
-  });
-
-});
-
-
-/* MY DONATION FEATURED BOX */
-
-const donationFeatured =
-  document.getElementById("donationFeatured");
-
-if(donationFeatured){
-
-  donationFeatured.addEventListener("click",()=>{
-
-    openSection("donation");
-
-  });
+setTimeout(()=>box.style.display="none",3000);
 
 }
 
 
-/* MOBILE MENU */
+function studentNameByNumber(number){
 
-$("menuToggle").addEventListener("click",()=>{
+const student=window.students.find(
+s=>String(s.studentNumber)===String(number)
+);
 
-  $("sidebar").classList.toggle("open");
-
-});
-
-
-/* LOGOUT */
-
-$("logoutBtn").addEventListener("click",async()=>{
-
-  const ok = confirm("Are you sure you want to logout?");
-
-  if(!ok){
-    return;
-  }
-
-  try{
-
-    await signOut(auth);
-
-    location.href="index.html";
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage("Logout failed. Please try again.");
-
-  }
-
-});
-
-
-/* LOAD STUDENT */
-
-async function loadStudent(){
-
-  if(!studentNumber){
-    throw new Error("Student number not found.");
-  }
-
-  const q = query(
-    collection(db,"students"),
-    where("studentNumber","==",studentNumber)
-  );
-
-  const snap = await getDocs(q);
-
-  if(snap.empty){
-    throw new Error("Student record not found.");
-  }
-
-  const studentDoc = snap.docs[0];
-
-  studentData = {
-    id:studentDoc.id,
-    ...studentDoc.data()
-  };
-
-  const name =
-    studentData.studentName ||
-    studentData.name ||
-    "-";
-
-  const number =
-    studentData.studentNumber ||
-    studentNumber ||
-    "-";
-
-  const className =
-    studentData.className ||
-    studentData.class ||
-    "-";
-
-  const guardian =
-    studentData.guardianName ||
-    studentData.parentName ||
-    "-";
-
-  const phone =
-    studentData.phoneNumber ||
-    studentData.phone ||
-    "-";
-
-  const address =
-    studentData.studentAddress ||
-    studentData.address ||
-    studentData.place ||
-    "-";
-
-  const email =
-    currentUser?.email ||
-    studentData.parentEmail ||
-    "-";
-
-
-  /* HOME */
-
-  $("homeStudentName").textContent = name;
-  $("homeStudentNumber").textContent = number;
-
-  $("homeNameInfo").textContent = name;
-  $("homeNoInfo").textContent = number;
-  $("homeClassInfo").textContent = className;
-  $("homeGuardianInfo").textContent = guardian;
-  $("homePhoneInfo").textContent = phone;
-  $("homeAddressInfo").textContent = address;
-
-  $("homeInitial").textContent = getInitial(name);
-
-
-  /* CHILD */
-
-  $("childName").textContent = name;
-  $("childNumber").textContent = number;
-
-  $("childNameInfo").textContent = name;
-  $("childNoInfo").textContent = number;
-  $("childClassInfo").textContent = className;
-  $("childGuardianInfo").textContent = guardian;
-  $("childPhoneInfo").textContent = phone;
-  $("childAddressInfo").textContent = address;
-  $("childEmailInfo").textContent = email;
-
-  $("childInitial").textContent = getInitial(name);
+return student
+?(
+student.studentName||
+student.name||
+student.fullName||
+number
+)
+:number;
 
 }
 
 
-/* ATTENDANCE */
+function studentSearchMatch(number,name,query){
 
-async function loadAttendance(){
+if(!query)return true;
 
-  const body = $("attendanceBody");
-
-  try{
-
-    const q = query(
-      collection(db,"attendance"),
-      where("studentNumber","==",studentNumber)
-    );
-
-    const snap = await getDocs(q);
-
-    const dateMap = new Map();
-
-    snap.forEach(docSnap=>{
-
-      const row = docSnap.data();
-
-      const date =
-        row.date ||
-        row.attendanceDate ||
-        row.createdAt?.toDate?.().toISOString()?.slice(0,10) ||
-        "";
-
-      if(!date){
-        return;
-      }
-
-      const status =
-        row.status ||
-        "Present";
-
-      if(
-        !dateMap.has(date) ||
-        status === "Absent" ||
-        status === "Leave"
-      ){
-
-        dateMap.set(date,{
-          date,
-          status
-        });
-
-      }
-
-    });
-
-
-    const today = new Date();
-
-    const todayText =
-      today.toISOString().slice(0,10);
-
-    if(!dateMap.has(todayText)){
-
-      dateMap.set(todayText,{
-        date:todayText,
-        status:"Present"
-      });
-
-    }
-
-
-    const records =
-      Array.from(dateMap.values())
-      .sort((a,b)=>
-        String(b.date).localeCompare(String(a.date))
-      );
-
-
-    $("attendanceTotal").textContent = records.length;
-
-
-    if(!records.length){
-
-      body.innerHTML = `
-        <tr>
-          <td colspan="2">
-            <div class="empty">No attendance records found.</div>
-          </td>
-        </tr>
-      `;
-
-      return;
-    }
-
-
-    body.innerHTML = records.map(row=>{
-
-      const status =
-        String(row.status || "Present");
-
-      let cls = "present";
-
-      if(status.toLowerCase() === "absent"){
-        cls = "absent";
-      }
-
-      if(status.toLowerCase() === "leave"){
-        cls = "leave";
-      }
-
-      return `
-        <tr>
-          <td>${escapeHtml(row.date)}</td>
-          <td>
-            <span class="status ${cls}">
-              ${escapeHtml(status)}
-            </span>
-          </td>
-        </tr>
-      `;
-
-    }).join("");
-
-
-  }catch(error){
-
-    console.error("Attendance:",error);
-
-    body.innerHTML = `
-      <tr>
-        <td colspan="2">
-          <div class="empty">
-            Unable to load attendance.
-          </div>
-        </td>
-      </tr>
-    `;
-
-  }
+return`${number||""} ${name||""}`
+.toLowerCase()
+.includes(query.toLowerCase());
 
 }
 
 
-/* STUDY PROGRESS */
+function formatDate(value){
 
-async function loadStudy(){
+if(!value)return"";
 
-  const list = $("studyList");
+if(value.toDate)return value.toDate().toLocaleDateString();
 
-  try{
+if(value.seconds)
+return new Date(value.seconds*1000).toLocaleDateString();
 
-    const q = query(
-      collection(db,"studyProgress"),
-      where("studentNumber","==",studentNumber)
-    );
-
-    const snap = await getDocs(q);
-
-    const rows = [];
-
-    snap.forEach(docSnap=>{
-
-      rows.push({
-        id:docSnap.id,
-        ...docSnap.data()
-      });
-
-    });
-
-
-    rows.sort((a,b)=>{
-
-      const da =
-        a.date ||
-        a.createdAt?.toDate?.().getTime?.() ||
-        "";
-
-      const dbb =
-        b.date ||
-        b.createdAt?.toDate?.().getTime?.() ||
-        "";
-
-      return String(dbb).localeCompare(String(da));
-
-    });
-
-
-    $("studyTotal").textContent = rows.length;
-
-
-    if(!rows.length){
-
-      list.className = "";
-
-      list.innerHTML = `
-        <div class="empty">
-          No study progress records found.
-        </div>
-      `;
-
-      return;
-    }
-
-
-    list.className = "progress-grid";
-
-
-    list.innerHTML = rows.map(row=>{
-
-      const surah =
-        row.surah ||
-        row.title ||
-        row.subject ||
-        "Study Progress";
-
-      const date =
-        getDateText(row.date || row.createdAt);
-
-      const newLesson =
-        row.newLesson ||
-        row.lesson ||
-        "-";
-
-      const revision =
-        row.revision ||
-        row.revisionLesson ||
-        "-";
-
-      const performance =
-        row.performance ||
-        row.hifzPerformance ||
-        "-";
-
-      const studyStatus =
-        row.studyStatus ||
-        row.darsStudyStatus ||
-        "-";
-
-      const teacherNote =
-        row.teacherNote ||
-        row.note ||
-        "";
-
-      let progress = 0;
-
-      const p =
-        String(performance).toLowerCase();
-
-      if(
-        p.includes("excellent") ||
-        p.includes("very good")
-      ){
-        progress = 100;
-      }else if(
-        p.includes("good")
-      ){
-        progress = 80;
-      }else if(
-        p.includes("average")
-      ){
-        progress = 60;
-      }else if(
-        p.includes("poor")
-      ){
-        progress = 35;
-      }else{
-        progress = 70;
-      }
-
-
-      return `
-        <div class="progress-card">
-
-          <h3>${escapeHtml(surah)}</h3>
-
-          <div class="progress-date">
-            ${escapeHtml(date)}
-          </div>
-
-          <div class="progress-row">
-            <span>New Lesson</span>
-            <strong>${escapeHtml(newLesson)}</strong>
-          </div>
-
-          <div class="progress-row">
-            <span>Revision</span>
-            <strong>${escapeHtml(revision)}</strong>
-          </div>
-
-          <div class="progress-row">
-            <span>Hifz Performance</span>
-            <strong>${escapeHtml(performance)}</strong>
-          </div>
-
-          <div class="progress-bar">
-            <div
-              class="progress-fill"
-              style="width:${progress}%">
-            </div>
-          </div>
-
-          <div class="progress-row">
-            <span>Dars & Study Status</span>
-            <strong>${escapeHtml(studyStatus)}</strong>
-          </div>
-
-          ${
-            teacherNote
-            ? `
-              <div class="progress-row">
-                <span>Teacher Note</span>
-                <strong>${escapeHtml(teacherNote)}</strong>
-              </div>
-            `
-            : ""
-          }
-
-        </div>
-      `;
-
-    }).join("");
-
-
-  }catch(error){
-
-    console.error("Study:",error);
-
-    list.className = "";
-
-    list.innerHTML = `
-      <div class="empty">
-        Unable to load study progress.
-      </div>
-    `;
-
-  }
+return String(value);
 
 }
 
 
-/* RESULTS */
+function money(value){
 
-async function loadResults(){
-
-  const list = $("resultsList");
-
-  try{
-
-    const q = query(
-      collection(db,"results"),
-      where("studentNumber","==",studentNumber),
-      where("published","==",true)
-    );
-
-    const snap = await getDocs(q);
-
-    const rows = [];
-
-    snap.forEach(docSnap=>{
-
-      rows.push({
-        id:docSnap.id,
-        ...docSnap.data()
-      });
-
-    });
-
-
-    rows.sort((a,b)=>{
-
-      const da =
-        a.createdAt?.toDate?.().getTime?.() || 0;
-
-      const dbb =
-        b.createdAt?.toDate?.().getTime?.() || 0;
-
-      return dbb-da;
-
-    });
-
-
-    $("resultTotal").textContent = rows.length;
-
-
-    if(!rows.length){
-
-      list.innerHTML = `
-        <div class="empty">
-          No published results available.
-        </div>
-      `;
-
-      return;
-    }
-
-
-    list.innerHTML = rows.map(row=>{
-
-      const title =
-        row.title ||
-        row.examName ||
-        row.subject ||
-        "Result";
-
-      const mark =
-        row.mark ??
-        row.marks ??
-        row.result ??
-        "-";
-
-      const date =
-        getDateText(row.createdAt);
-
-
-      return `
-        <div class="result-card">
-
-          <h3>${escapeHtml(title)}</h3>
-
-          <div class="result-mark">
-            ${escapeHtml(mark)}
-          </div>
-
-          <span class="status approved">
-            Published
-          </span>
-
-          <div class="notice-date">
-            ${escapeHtml(date)}
-          </div>
-
-        </div>
-      `;
-
-    }).join("");
-
-
-  }catch(error){
-
-    console.error("Results:",error);
-
-    list.innerHTML = `
-      <div class="empty">
-        Unable to load results.
-      </div>
-    `;
-
-  }
-
-}
-
-
-/* NOTICES */
-
-async function loadNotices(){
-
-  const list = $("noticesList");
-
-  try{
-
-    const q = query(
-      collection(db,"notices"),
-      where("published","==",true)
-    );
-
-    const snap = await getDocs(q);
-
-    const rows = [];
-
-    snap.forEach(docSnap=>{
-
-      rows.push({
-        id:docSnap.id,
-        ...docSnap.data()
-      });
-
-    });
-
-
-    rows.sort((a,b)=>{
-
-      const da =
-        a.createdAt?.toDate?.().getTime?.() || 0;
-
-      const dbb =
-        b.createdAt?.toDate?.().getTime?.() || 0;
-
-      return dbb-da;
-
-    });
-
-
-    if(!rows.length){
-
-      list.innerHTML = `
-        <div class="empty">
-          No notices available.
-        </div>
-      `;
-
-      return;
-    }
-
-
-    list.innerHTML = rows.map(row=>{
-
-      const title =
-        row.title ||
-        "Notice";
-
-      const text =
-        row.text ||
-        row.message ||
-        row.description ||
-        "";
-
-      const date =
-        getDateText(row.createdAt);
-
-
-      return `
-        <div class="notice-card">
-
-          <h3>${escapeHtml(title)}</h3>
-
-          <p>${escapeHtml(text)}</p>
-
-          <div class="notice-date">
-            ${escapeHtml(date)}
-          </div>
-
-        </div>
-      `;
-
-    }).join("");
-
-
-  }catch(error){
-
-    console.error("Notices:",error);
-
-    list.innerHTML = `
-      <div class="empty">
-        Unable to load notices.
-      </div>
-    `;
-
-  }
-
-}
-
-
-/* LEAVE SUBMIT */
-
-$("leaveForm").addEventListener("submit",async event=>{
-
-  event.preventDefault();
-
-  if(!currentUser || !studentNumber){
-    showMessage("Parent account not ready.");
-    return;
-  }
-
-
-  const leaveDate =
-    $("leaveDate").value;
-
-  const reason =
-    $("leaveReason").value.trim();
-
-  const details =
-    $("leaveDetails").value.trim();
-
-
-  if(!leaveDate || !reason){
-
-    showMessage("Please enter leave date and reason.");
-
-    return;
-  }
-
-
-  try{
-
-    await addDoc(
-      collection(db,"leaveRequests"),
-      {
-        parentUid:currentUser.uid,
-        parentEmail:currentUser.email || "",
-        studentNumber:studentNumber,
-        leaveDate:leaveDate,
-        reason:reason,
-        details:details,
-        status:"pending",
-        reply:"",
-        createdAt:serverTimestamp()
-      }
-    );
-
-
-    $("leaveForm").reset();
-
-    $("leaveDate").value =
-      new Date().toISOString().slice(0,10);
-
-    showMessage("Leave application submitted.");
-
-    await loadLeaveHistory();
-
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      "Unable to submit leave application."
-    );
-
-  }
-
-});
-
-
-/* LEAVE HISTORY */
-
-async function loadLeaveHistory(){
-
-  const list = $("leaveHistory");
-
-  try{
-
-    const q = query(
-      collection(db,"leaveRequests"),
-      where("parentUid","==",currentUser.uid)
-    );
-
-    const snap = await getDocs(q);
-
-    const rows = [];
-
-    snap.forEach(docSnap=>{
-
-      rows.push({
-        id:docSnap.id,
-        ...docSnap.data()
-      });
-
-    });
-
-
-    rows.sort((a,b)=>{
-
-      const da =
-        a.createdAt?.toDate?.().getTime?.() || 0;
-
-      const dbb =
-        b.createdAt?.toDate?.().getTime?.() || 0;
-
-      return dbb-da;
-
-    });
-
-
-    if(!rows.length){
-
-      list.innerHTML = `
-        <div class="empty">
-          No leave applications yet.
-        </div>
-      `;
-
-      return;
-    }
-
-
-    list.innerHTML = rows.map(row=>{
-
-      const status =
-        String(row.status || "pending");
-
-      let cls = "pending";
-
-      if(status.toLowerCase() === "approved"){
-        cls = "approved";
-      }
-
-      if(status.toLowerCase() === "rejected"){
-        cls = "rejected";
-      }
-
-
-      return `
-        <div class="history-card">
-
-          <div class="history-top">
-
-            <div>
-              <h4>
-                Leave Date:
-                ${escapeHtml(row.leaveDate || "-")}
-              </h4>
-
-              <p>
-                <strong>Reason:</strong>
-                ${escapeHtml(row.reason || "-")}
-              </p>
-
-              ${
-                row.details
-                ? `
-                  <p>
-                    <strong>Details:</strong>
-                    ${escapeHtml(row.details)}
-                  </p>
-                `
-                : ""
-              }
-
-            </div>
-
-            <span class="status ${cls}">
-              ${escapeHtml(status)}
-            </span>
-
-          </div>
-
-          ${
-            row.reply
-            ? `
-              <div class="reply">
-                <strong>Usthad Reply:</strong><br>
-                ${escapeHtml(row.reply)}
-              </div>
-            `
-            : ""
-          }
-
-        </div>
-      `;
-
-    }).join("");
-
-
-  }catch(error){
-
-    console.error("Leave history:",error);
-
-    list.innerHTML = `
-      <div class="empty">
-        Unable to load leave history.
-      </div>
-    `;
-
-  }
-
-}
-
-
-/* MESSAGE SUBMIT */
-
-$("messageForm").addEventListener("submit",async event=>{
-
-  event.preventDefault();
-
-  if(!currentUser || !studentNumber){
-    showMessage("Parent account not ready.");
-    return;
-  }
-
-
-  const text =
-    $("messageText").value.trim();
-
-
-  if(!text){
-
-    showMessage("Please enter your message.");
-
-    return;
-  }
-
-
-  try{
-
-    await addDoc(
-      collection(db,"messages"),
-      {
-        parentUid:currentUser.uid,
-        parentEmail:currentUser.email || "",
-        studentNumber:studentNumber,
-        text:text,
-        reply:"",
-        status:"unread",
-        createdAt:serverTimestamp()
-      }
-    );
-
-
-    $("messageForm").reset();
-
-    showMessage("Message sent successfully.");
-
-    await loadMessageHistory();
-
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      "Unable to send message."
-    );
-
-  }
-
-});
-
-
-/* MESSAGE HISTORY */
-
-async function loadMessageHistory(){
-
-  const list = $("messageHistory");
-
-  try{
-
-    const q = query(
-      collection(db,"messages"),
-      where("parentUid","==",currentUser.uid)
-    );
-
-    const snap = await getDocs(q);
-
-    const rows = [];
-
-    snap.forEach(docSnap=>{
-
-      rows.push({
-        id:docSnap.id,
-        ...docSnap.data()
-      });
-
-    });
-
-
-    rows.sort((a,b)=>{
-
-      const da =
-        a.createdAt?.toDate?.().getTime?.() || 0;
-
-      const dbb =
-        b.createdAt?.toDate?.().getTime?.() || 0;
-
-      return dbb-da;
-
-    });
-
-
-    if(!rows.length){
-
-      list.innerHTML = `
-        <div class="empty">
-          No messages yet.
-        </div>
-      `;
-
-      return;
-    }
-
-
-    list.innerHTML = rows.map(row=>{
-
-      return `
-        <div class="history-card">
-
-          <div class="history-top">
-
-            <div>
-              <h4>Your Message</h4>
-
-              <p>
-                ${escapeHtml(row.text || "")}
-              </p>
-
-              <div class="notice-date">
-                ${escapeHtml(
-                  getDateText(row.createdAt)
-                )}
-              </div>
-
-            </div>
-
-            <span class="status ${
-              row.reply
-              ? "approved"
-              : "pending"
-            }">
-              ${
-                row.reply
-                ? "Replied"
-                : "Pending"
-              }
-            </span>
-
-          </div>
-
-          ${
-            row.reply
-            ? `
-              <div class="reply">
-                <strong>Usthad Reply:</strong><br>
-                ${escapeHtml(row.reply)}
-              </div>
-            `
-            : ""
-          }
-
-        </div>
-      `;
-
-    }).join("");
-
-
-  }catch(error){
-
-    console.error("Message history:",error);
-
-    list.innerHTML = `
-      <div class="empty">
-        Unable to load message history.
-      </div>
-    `;
-
-  }
+return"₹"+Number(value||0).toLocaleString("en-IN");
 
 }
 
@@ -3194,135 +1685,2916 @@ async function loadMessageHistory(){
 
 onAuthStateChanged(auth,async user=>{
 
-  try{
+try{
 
-    if(!user){
+if(!user){
+location.href="index.html";
+return;
+}
 
-      location.href="index.html";
+currentUser=user;
 
-      return;
-    }
+const userSnap=
+await getDoc(doc(db,"users",user.uid));
 
+if(!userSnap.exists()){
 
-    currentUser = user;
+alert("Admin profile not found.");
 
+await signOut(auth);
 
-    const userRef =
-      doc(db,"users",user.uid);
+location.href="index.html";
 
-    const userSnap =
-      await getDoc(userRef);
+return;
 
+}
 
-    if(!userSnap.exists()){
+if(userSnap.data().role!=="admin"){
 
-      throw new Error(
-        "Parent account details not found."
-      );
+alert("Admin access required.");
 
-    }
+await signOut(auth);
 
+location.href="index.html";
 
-    const userData =
-      userSnap.data();
+return;
 
+}
 
-    if(userData.role !== "parent"){
+$("loading").style.display="none";
 
-      throw new Error(
-        "This account is not registered as a parent account."
-      );
+await loadEverything();
 
-    }
+}catch(error){
 
+console.error(error);
 
-    studentNumber =
-      userData.studentNumber ||
-      userData.studentNo ||
-      "";
+$("loading").textContent=
+"Dashboard loading error: "+error.message;
 
-
-    if(!studentNumber){
-
-      throw new Error(
-        "Student number is not linked to this parent account."
-      );
-
-    }
-
-
-    await loadStudent();
-
-    await Promise.all([
-      loadAttendance(),
-      loadStudy(),
-      loadResults(),
-      loadNotices(),
-      loadLeaveHistory(),
-      loadMessageHistory()
-    ]);
-
-
-    $("loading").style.display = "none";
-
-
-  }catch(error){
-
-    console.error("Parent Dashboard Error:",error);
-
-    $("loading").innerHTML = `
-      <div style="
-        max-width:450px;
-        padding:25px;
-        text-align:center;
-      ">
-
-        <div style="
-          font-size:45px;
-          margin-bottom:15px;
-        ">
-          ⚠️
-        </div>
-
-        <strong>
-          Parent Dashboard Error
-        </strong>
-
-        <p style="
-          margin-top:10px;
-          opacity:.8;
-          line-height:1.5;
-        ">
-          ${escapeHtml(error.message)}
-        </p>
-
-        <button
-          onclick="location.href='index.html'"
-          style="
-            margin-top:20px;
-            border:0;
-            padding:12px 20px;
-            border-radius:8px;
-            background:#d6a93a;
-            color:#032b24;
-            font-weight:bold;
-            cursor:pointer;
-          ">
-          Back to Login
-        </button>
-
-      </div>
-    `;
-
-  }
+}
 
 });
 
 
-/* TODAY'S DATE */
+/* NAVIGATION */
 
-$("leaveDate").value =
-  new Date().toISOString().slice(0,10);
+document.querySelectorAll(".menu-btn").forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+openSection(button.dataset.section);
+
+$("sidebar").classList.remove("open");
+
+});
+
+});
+
+
+document.querySelectorAll(".quick-btn").forEach(button=>{
+
+button.addEventListener("click",()=>{
+openSection(button.dataset.go);
+});
+
+});
+
+
+function openSection(id){
+
+document.querySelectorAll(".section")
+.forEach(s=>s.classList.remove("active"));
+
+const target=$(id);
+
+if(target)
+target.classList.add("active");
+
+document.querySelectorAll(".menu-btn")
+.forEach(b=>
+b.classList.toggle(
+"active",
+b.dataset.section===id
+));
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+$("mobileMenu").addEventListener(
+"click",
+()=>$("sidebar").classList.toggle("open")
+);
+
+
+$("logoutBtn").addEventListener(
+"click",
+async()=>{
+
+if(!confirm("Logout from admin dashboard?"))
+return;
+
+await signOut(auth);
+
+location.href="index.html";
+
+});
+
+
+async function loadEverything(){
+
+await loadStudents();
+
+await Promise.all([
+loadAttendance(),
+loadStudy(),
+loadResults(),
+loadNotices(),
+loadLeaves(),
+loadMessages(),
+loadDonations()
+]);
+
+}
+
+
+/* STUDENTS */
+
+async function loadStudents(){
+
+try{
+
+const snap=
+await getDocs(collection(db,"students"));
+
+window.students=
+snap.docs.map(item=>({
+id:item.id,
+...item.data()
+}));
+
+renderStudents(window.students);
+
+$("studentCount").textContent=
+window.students.length;
+
+populateStudentSelects();
+
+}catch(error){
+
+console.error(error);
+
+$("studentsTable").innerHTML=
+`<tr><td colspan="7">
+<div class="empty">Unable to load students</div>
+</td></tr>`;
+
+}
+
+}
+
+
+function renderStudents(list){
+
+const table=$("studentsTable");
+
+if(!list.length){
+
+table.innerHTML=
+`<tr><td colspan="7">
+<div class="empty">No students found</div>
+</td></tr>`;
+
+return;
+
+}
+
+table.innerHTML=list.map(student=>`
+
+<tr>
+
+<td>
+<strong>${escapeHtml(student.studentNumber)}</strong>
+</td>
+
+<td>${escapeHtml(
+student.studentName||
+student.name||
+student.fullName||
+""
+)}</td>
+
+<td>${escapeHtml(student.guardianName||"-")}</td>
+
+<td>${escapeHtml(student.className||"-")}</td>
+
+<td>${escapeHtml(student.parentEmail||"-")}</td>
+
+<td>${escapeHtml(student.phoneNumber||"-")}</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="secondary edit-student"
+data-id="${student.id}">
+Edit
+</button>
+
+<button
+class="danger delete-student"
+data-id="${student.id}">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`).join("");
+
+
+document.querySelectorAll(".delete-student")
+.forEach(button=>{
+
+button.addEventListener("click",async()=>{
+
+const student=
+window.students.find(
+s=>s.id===button.dataset.id
+);
+
+if(!student||
+!confirm(`Delete ${student.studentName||student.name||student.fullName||""}?`))
+return;
+
+try{
+
+await deleteDoc(
+doc(db,"students",button.dataset.id)
+);
+
+showMessage("Student deleted.");
+
+await loadStudents();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"Unable to delete student.",
+"error"
+);
+
+}
+
+});
+
+});
+
+
+document.querySelectorAll(".edit-student")
+.forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+const student=
+window.students.find(
+s=>s.id===button.dataset.id
+);
+
+if(!student)return;
+
+$("editStudentNumber").value=
+student.studentNumber||"";
+
+$("editStudentName").value=
+student.studentName||
+student.name||
+student.fullName||
+"";
+
+$("editGuardianName").value=
+student.guardianName||"";
+
+$("editClassName").value=
+student.className||"";
+
+$("editParentEmail").value=
+student.parentEmail||"";
+
+$("editPhoneNumber").value=
+student.phoneNumber||"";
+
+$("editStudentAddress").value=
+student.studentAddress||"";
+
+$("editStudentModal")
+.classList.add("show");
+
+$("saveEditStudent").dataset.id=
+student.id;
+
+});
+
+});
+
+}
+
+
+$("studentForm").addEventListener(
+"submit",
+async event=>{
+
+event.preventDefault();
+
+const studentNumber=
+$("studentNumber").value.trim();
+
+const studentName=
+$("studentName").value.trim();
+
+if(window.students.some(
+s=>String(s.studentNumber).trim()===studentNumber
+)){
+
+showMessage(
+"Student number already exists.",
+"error"
+);
+
+return;
+
+}
+
+try{
+
+await addDoc(
+collection(db,"students"),
+{
+studentNumber,
+studentName,
+guardianName:
+$("guardianName").value.trim(),
+className:
+$("className").value.trim(),
+parentEmail:
+$("parentEmail").value.trim(),
+studentAddress:
+$("studentAddress").value.trim(),
+phoneNumber:
+$("phoneNumber").value.trim(),
+createdAt:serverTimestamp()
+}
+);
+
+$("studentForm").reset();
+
+showMessage("Student added successfully.");
+
+await loadStudents();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"Unable to add student: "+error.message,
+"error"
+);
+
+}
+
+});
+
+
+$("studentSearch").addEventListener(
+"input",
+event=>{
+
+const q=
+event.target.value.toLowerCase().trim();
+
+renderStudents(
+window.students.filter(student=>{
+
+return[
+student.studentNumber,
+student.studentName,
+student.name,
+student.fullName,
+student.guardianName,
+student.className,
+student.parentEmail,
+student.studentAddress,
+student.phoneNumber
+]
+.join(" ")
+.toLowerCase()
+.includes(q);
+
+})
+);
+
+});
+
+
+$("closeEditModal").addEventListener(
+"click",
+()=>$("editStudentModal").classList.remove("show")
+);
+
+
+$("cancelEditStudent").addEventListener(
+"click",
+()=>$("editStudentModal").classList.remove("show")
+);
+
+
+$("saveEditStudent").addEventListener(
+"click",
+async()=>{
+
+const id=
+$("saveEditStudent").dataset.id;
+
+if(!id)return;
+
+try{
+
+await updateDoc(
+doc(db,"students",id),
+{
+studentName:
+$("editStudentName").value.trim(),
+
+guardianName:
+$("editGuardianName").value.trim(),
+
+className:
+$("editClassName").value.trim(),
+
+parentEmail:
+$("editParentEmail").value.trim(),
+
+studentAddress:
+$("editStudentAddress").value.trim(),
+
+phoneNumber:
+$("editPhoneNumber").value.trim()
+}
+);
+
+$("editStudentModal")
+.classList.remove("show");
+
+showMessage(
+"Student updated successfully."
+);
+
+await loadStudents();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"Unable to update student.",
+"error"
+);
+
+}
+
+});
+
+
+/* STUDENT SELECTS + SEARCH */
+
+function populateStudentSelects(){
+
+["attendanceStudent","studyStudent","resultStudent"]
+.forEach(id=>{
+
+const select=$(id);
+
+if(!select)return;
+
+const old=select.value;
+
+select.innerHTML=
+`<option value="">Select student</option>`+
+window.students.map(student=>{
+
+const studentNumber=
+student.studentNumber||
+"";
+
+const studentName=
+student.studentName||
+student.name||
+student.fullName||
+"Name not available";
+
+return`
+
+<option value="${escapeHtml(studentNumber)}">
+${escapeHtml(studentNumber)} - ${escapeHtml(studentName)}
+</option>
+
+`;
+
+}).join("");
+
+if(old)
+select.value=old;
+
+});
+
+}
+
+
+/*
+SEARCHABLE STUDENT SELECT
+
+Search works using:
+1. Student Number
+2. Student Name
+
+The actual selected value remains Student Number,
+so existing Firebase data structure is unchanged.
+*/
+
+function searchStudentsForSelect(
+searchInputId,
+selectId,
+buttonId
+){
+
+const input=$(searchInputId);
+const select=$(selectId);
+const button=$(buttonId);
+
+if(!input||!select||!button)return;
+
+
+function runSearch(){
+
+const query=
+input.value.trim().toLowerCase();
+
+const currentValue=
+select.value;
+
+const matches=
+window.students.filter(student=>{
+
+const number=
+String(student.studentNumber||"")
+.toLowerCase();
+
+const name=
+String(
+student.studentName||
+student.name||
+student.fullName||
+""
+).toLowerCase();
+
+return !query||
+number.includes(query)||
+name.includes(query);
+
+});
+
+
+if(!matches.length){
+
+select.innerHTML=
+`<option value="">No matching student found</option>`;
+
+return;
+
+}
+
+
+select.innerHTML=
+`<option value="">Select student</option>`+
+matches.map(student=>{
+
+const studentNumber=
+student.studentNumber||
+"";
+
+const studentName=
+student.studentName||
+student.name||
+student.fullName||
+"Name not available";
+
+return`
+
+<option value="${escapeHtml(studentNumber)}">
+${escapeHtml(studentNumber)} - ${escapeHtml(studentName)}
+</option>
+
+`;
+
+}).join("");
+
+
+if(
+currentValue &&
+matches.some(
+s=>String(s.studentNumber)===String(currentValue)
+)
+){
+
+select.value=currentValue;
+
+}
+
+}
+
+
+button.addEventListener(
+"click",
+runSearch
+);
+
+
+input.addEventListener(
+"keydown",
+event=>{
+
+if(event.key==="Enter"){
+
+event.preventDefault();
+
+runSearch();
+
+}
+
+});
+
+
+input.addEventListener(
+"input",
+()=>{
+
+if(input.value.trim()===""){
+
+populateStudentSelects();
+
+}
+
+});
+
+}
+
+
+/* INITIALIZE THREE STUDENT SEARCHES */
+
+searchStudentsForSelect(
+"attendanceStudentSearch",
+"attendanceStudent",
+"attendanceStudentSearchBtn"
+);
+
+searchStudentsForSelect(
+"studyStudentSearch",
+"studyStudent",
+"studyStudentSearchBtn"
+);
+
+searchStudentsForSelect(
+"resultStudentSearch",
+"resultStudent",
+"resultStudentSearchBtn"
+);
+
+
+/* ATTENDANCE */
+
+$("attendanceForm").addEventListener(
+"submit",
+async event=>{
+
+event.preventDefault();
+
+const studentNumber=
+$("attendanceStudent").value;
+
+const date=
+$("attendanceDate").value;
+
+const status=
+$("attendanceStatus").value;
+
+if(
+!studentNumber||
+!date||
+!["absent","leave"].includes(status)
+){
+
+showMessage(
+"Please select student, date and Absent/Leave.",
+"error"
+);
+
+return;
+
+}
+
+try{
+
+const existing=
+attendanceRows.find(r=>
+String(r.studentNumber)===String(studentNumber)&&
+String(r.date)===String(date)
+);
+
+
+if(existing){
+
+await updateDoc(
+doc(db,"attendance",existing.id),
+{
+studentNumber,
+date,
+status,
+updatedAt:serverTimestamp()
+}
+);
+
+showMessage("Attendance updated.");
+
+}else{
+
+await addDoc(
+collection(db,"attendance"),
+{
+studentNumber,
+date,
+status,
+createdAt:serverTimestamp()
+}
+);
+
+showMessage("Absent/Leave saved.");
+
+}
+
+$("attendanceForm").reset();
+
+$("attendanceStudentSearch").value="";
+
+populateStudentSelects();
+
+setDefaultDates();
+
+await loadAttendance();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"Unable to save attendance.",
+"error"
+);
+
+}
+
+});
+
+
+/* ATTENDANCE NORMALIZER */
+
+function getAttendanceStudentNumber(item){
+
+return String(
+item?.studentNumber ??
+item?.studentNo ??
+item?.student_number ??
+item?.studentId ??
+item?.number ??
+""
+).trim();
+
+}
+
+
+function getAttendanceStudentName(item){
+
+return String(
+item?.studentName ??
+item?.name ??
+item?.fullName ??
+item?.student ??
+""
+).trim();
+
+}
+
+
+function getAttendanceDate(item,fallbackDate=""){
+
+const value=
+item?.date ??
+item?.attendanceDate ??
+item?.recordDate ??
+item?.day ??
+item?.attendance_date ??
+fallbackDate;
+
+if(!value)return"";
+
+if(typeof value==="string")
+return value;
+
+if(value?.toDate){
+
+try{
+
+return value.toDate()
+.toISOString()
+.split("T")[0];
+
+}catch(error){}
+
+}
+
+if(value?.seconds){
+
+try{
+
+return new Date(value.seconds*1000)
+.toISOString()
+.split("T")[0];
+
+}catch(error){}
+
+}
+
+return String(value);
+
+}
+
+
+function normalizeAttendanceStatus(value){
+
+if(value===undefined||value===null)
+return"";
+
+const status=
+String(value)
+.trim()
+.toLowerCase();
+
+if(
+status==="absent"||
+status==="a"||
+status==="abs"||
+status==="absence"
+)
+return"absent";
+
+if(
+status==="leave"||
+status==="l"||
+status==="on leave"
+)
+return"leave";
+
+return"";
+
+}
+
+
+function addNormalizedAttendance(
+output,
+item,
+fallbackDate="",
+fallbackStatus=""
+){
+
+if(!item)return;
+
+const studentNumber=
+getAttendanceStudentNumber(item);
+
+const studentName=
+getAttendanceStudentName(item);
+
+const date=
+getAttendanceDate(item,fallbackDate);
+
+const status=
+normalizeAttendanceStatus(
+item?.status ??
+item?.attendanceStatus ??
+item?.attendance_status ??
+fallbackStatus
+);
+
+if(
+!studentNumber||
+!date||
+!status
+)
+return;
+
+output.push({
+
+id:item.__docId||"",
+studentNumber,
+studentName,
+date,
+status,
+
+_original:item
+
+});
+
+}
+
+
+/* LOAD ATTENDANCE */
+
+async function loadAttendance(){
+
+try{
+
+const snap=
+await getDocs(collection(db,"attendance"));
+
+const normalized=[];
+
+
+snap.docs.forEach(documentSnapshot=>{
+
+const data=documentSnapshot.data();
+
+const docId=documentSnapshot.id;
+
+
+/* CURRENT / NEW STRUCTURE */
+
+if(
+data.studentNumber!==undefined||
+data.studentNo!==undefined||
+data.student_number!==undefined||
+data.studentId!==undefined||
+data.number!==undefined
+){
+
+const row={
+...data,
+__docId:docId
+};
+
+addNormalizedAttendance(
+normalized,
+row
+);
+
+}
+
+
+/* OLD STRUCTURE: records[] */
+
+if(Array.isArray(data.records)){
+
+data.records.forEach(record=>{
+
+addNormalizedAttendance(
+normalized,
+{
+...record,
+__docId:docId
+},
+getAttendanceDate(data)
+);
+
+});
+
+}
+
+
+/* OLD STRUCTURE: attendance[] */
+
+if(Array.isArray(data.attendance)){
+
+data.attendance.forEach(record=>{
+
+addNormalizedAttendance(
+normalized,
+{
+...record,
+__docId:docId
+},
+getAttendanceDate(data)
+);
+
+});
+
+}
+
+
+/* OLD STRUCTURE: students[] */
+
+if(Array.isArray(data.students)){
+
+data.students.forEach(record=>{
+
+addNormalizedAttendance(
+normalized,
+{
+...record,
+__docId:docId
+},
+getAttendanceDate(data)
+);
+
+});
+
+}
+
+
+/* OLD STRUCTURE: absentStudents / absent */
+
+const absentList=
+Array.isArray(data.absentStudents)
+?data.absentStudents
+:Array.isArray(data.absent)
+?data.absent
+:[];
+
+
+absentList.forEach(student=>{
+
+const item=
+typeof student==="object"
+?student
+:{
+studentNumber:student
+};
+
+addNormalizedAttendance(
+normalized,
+{
+...item,
+__docId:docId,
+status:"absent"
+},
+getAttendanceDate(data)
+);
+
+});
+
+
+/* OLD STRUCTURE: leaveStudents / leave */
+
+const leaveList=
+Array.isArray(data.leaveStudents)
+?data.leaveStudents
+:Array.isArray(data.leave)
+?data.leave
+:[];
+
+
+leaveList.forEach(student=>{
+
+const item=
+typeof student==="object"
+?student
+:{
+studentNumber:student
+};
+
+addNormalizedAttendance(
+normalized,
+{
+...item,
+__docId:docId,
+status:"leave"
+},
+getAttendanceDate(data)
+);
+
+});
+
+});
+
+
+/* REMOVE DUPLICATES */
+
+const uniqueMap=new Map();
+
+
+normalized.forEach(row=>{
+
+const key=
+`${row.id}__${row.studentNumber}__${row.date}__${row.status}`;
+
+if(!uniqueMap.has(key)){
+
+uniqueMap.set(key,row);
+
+}
+
+});
+
+
+attendanceRows=
+Array.from(uniqueMap.values());
+
+
+/* SORT */
+
+attendanceRows.sort((a,b)=>{
+
+const dateCompare=
+String(b.date||"")
+.localeCompare(
+String(a.date||"")
+);
+
+if(dateCompare!==0)
+return dateCompare;
+
+return String(a.studentNumber||"")
+.localeCompare(
+String(b.studentNumber||"")
+);
+
+});
+
+
+$("attendanceCount").textContent=
+attendanceRows.length;
+
+
+renderAttendance();
+
+
+}catch(error){
+
+console.error(error);
+
+$("attendanceTable").innerHTML=
+`<div class="empty">
+Unable to load attendance.
+<br>
+<small>${escapeHtml(error.message||"")}</small>
+</div>`;
+
+}
+
+}
+
+
+/* ATTENDANCE STUDENT NAME */
+
+function attendanceStudentName(row){
+
+if(row.studentName)
+return row.studentName;
+
+return studentNameByNumber(
+row.studentNumber
+);
+
+}
+
+
+/* RENDER ATTENDANCE */
+
+function renderAttendance(){
+
+const query=
+($("attendanceSearch")?.value||"")
+.trim()
+.toLowerCase();
+
+
+const filtered=
+attendanceRows.filter(row=>{
+
+const number=
+String(row.studentNumber||"");
+
+const name=
+attendanceStudentName(row);
+
+
+return studentSearchMatch(
+number,
+name,
+query
+);
+
+});
+
+
+const groups={};
+
+
+filtered.forEach(row=>{
+
+if(!groups[row.date])
+groups[row.date]=[];
+
+groups[row.date].push(row);
+
+});
+
+
+const dates=
+Object.keys(groups)
+.sort((a,b)=>b.localeCompare(a));
+
+
+if(!dates.length){
+
+$("attendanceTable").innerHTML=`
+
+<div class="empty">
+
+No Absent / Leave records found.
+
+<br>
+
+<small>
+Students without an attendance record for a date are automatically Present.
+</small>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+$("attendanceTable").innerHTML=
+dates.map(date=>{
+
+const rows=groups[date];
+
+
+return`
+
+<div class="panel"
+style="margin-bottom:14px;padding:16px">
+
+<div class="panel-head"
+style="margin-bottom:12px">
+
+<div>
+
+<h3>📅 ${escapeHtml(date)}</h3>
+
+<div class="panel-desc">
+${rows.length} Absent / Leave student(s)
+</div>
+
+</div>
+
+</div>
+
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Student No</th>
+
+<th>Student Name</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+${rows.map(row=>`
+
+<tr>
+
+<td>
+
+<strong>
+${escapeHtml(row.studentNumber)}
+</strong>
+
+</td>
+
+
+<td>
+
+${escapeHtml(
+attendanceStudentName(row)
+)}
+
+</td>
+
+
+<td>
+
+<span class="badge ${
+row.status==="leave"
+?"badge-yellow"
+:"badge-red"
+}">
+
+${escapeHtml(row.status)}
+
+</span>
+
+</td>
+
+
+<td>
+
+<div class="actions">
+
+<button
+class="secondary attendance-edit-btn"
+data-id="${escapeHtml(row.id)}">
+Edit
+</button>
+
+<button
+class="danger attendance-delete-btn"
+data-id="${escapeHtml(row.id)}">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`).join("")}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+
+/* EDIT */
+
+document.querySelectorAll(".attendance-edit-btn")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+()=>{
+
+const row=
+attendanceRows.find(
+r=>r.id===button.dataset.id
+);
+
+if(!row)return;
+
+$("attendanceStudent").value=
+row.studentNumber;
+
+$("attendanceDate").value=
+row.date;
+
+$("attendanceStatus").value=
+row.status;
+
+$("attendanceStudentSearch").value=
+`${row.studentNumber} - ${
+attendanceStudentName(row)
+}`;
+
+
+openSection("attendance");
+
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+
+showMessage(
+"Attendance loaded for editing."
+);
+
+});
+
+});
+
+
+/* DELETE */
+
+document.querySelectorAll(".attendance-delete-btn")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+if(!confirm(
+"Delete this attendance record?"
+))
+return;
+
+
+try{
+
+await deleteDoc(
+doc(db,"attendance",button.dataset.id)
+);
+
+
+showMessage(
+"Attendance record deleted."
+);
+
+
+await loadAttendance();
+
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"Unable to delete attendance.",
+"error"
+);
+
+}
+
+});
+
+});
+
+}
+
+
+$("attendanceSearch").addEventListener(
+"input",
+renderAttendance
+);
+
+
+/* STUDY */
+
+$("studyForm").addEventListener(
+"submit",
+async event=>{
+
+event.preventDefault();
+
+try{
+
+await addDoc(
+collection(db,"studyProgress"),
+{
+studentNumber:
+$("studyStudent").value,
+
+date:
+$("studyDate").value,
+
+surah:
+$("studySurah").value.trim(),
+
+newLesson:
+$("newLesson").value.trim(),
+
+revision:
+$("revision").value.trim(),
+
+performance:
+$("performance").value.trim(),
+
+studyStatus:
+$("studyStatus").value.trim(),
+
+note:
+$("studyNote").value.trim(),
+
+darsLevel:
+$("darsLevel").value,
+
+discipline:
+$("discipline").value,
+
+createdAt:serverTimestamp()
+}
+);
+
+$("studyForm").reset();
+
+$("studyStudentSearch").value="";
+
+populateStudentSelects();
+
+setDefaultDates();
+
+showMessage(
+"Study progress saved successfully."
+);
+
+await loadStudy();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"Unable to save study progress.",
+"error"
+);
+
+}
+
+});
+
+
+async function loadStudy(){
+
+try{
+
+const snap=
+await getDocs(collection(db,"studyProgress"));
+
+studyRows=
+snap.docs.map(item=>({
+id:item.id,
+...item.data()
+}));
+
+studyRows.sort(
+(a,b)=>
+String(b.date||"")
+.localeCompare(
+String(a.date||"")
+)
+);
+
+renderStudy();
+
+}catch(error){
+
+console.error(error);
+
+$("studyTable").innerHTML=
+`<tr><td colspan="11">
+Unable to load study records.
+</td></tr>`;
+
+}
+
+}
+
+
+function renderStudy(){
+
+const q=
+($("studySearch")?.value||"")
+.trim()
+.toLowerCase();
+
+const rows=
+studyRows.filter(row=>
+studentSearchMatch(
+row.studentNumber,
+studentNameByNumber(row.studentNumber),
+q
+)
+);
+
+if(!rows.length){
+
+$("studyTable").innerHTML=
+`<tr><td colspan="11">
+<div class="empty">
+No study records found.
+</div></td></tr>`;
+
+return;
+
+}
+
+$("studyTable").innerHTML=
+rows.map(row=>`
+
+<tr>
+
+<td>
+
+<strong>
+${escapeHtml(
+studentNameByNumber(row.studentNumber)
+)}
+</strong>
+
+<br>
+
+<small>
+${escapeHtml(row.studentNumber||"")}
+</small>
+
+</td>
+
+<td>
+${escapeHtml(row.date||"-")}
+</td>
+
+<td>
+${escapeHtml(row.surah||"-")}
+</td>
+
+<td>
+${escapeHtml(row.newLesson||"-")}
+${row.newLesson?" pages":""}
+</td>
+
+<td>
+${escapeHtml(row.revision||"-")}
+</td>
+
+<td>
+
+<span class="badge ${
+row.studyStatus
+?"badge-green"
+:"badge-yellow"
+}">
+
+${escapeHtml(row.studyStatus||"-")}
+
+</span>
+
+</td>
+
+<td>
+${escapeHtml(row.performance||"-")}
+</td>
+
+<td class="teacher-remark-cell">
+${escapeHtml(row.note||"-")}
+</td>
+
+<td>
+${escapeHtml(row.darsLevel||"-")}
+</td>
+
+<td>
+${escapeHtml(row.discipline||"-")}
+</td>
+
+<td>
+
+<button
+class="danger study-delete"
+data-id="${row.id}">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`).join("");
+
+
+document.querySelectorAll(".study-delete")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+if(!confirm(
+"Delete study record?"
+))
+return;
+
+await deleteDoc(
+doc(db,"studyProgress",button.dataset.id)
+);
+
+showMessage(
+"Study record deleted."
+);
+
+await loadStudy();
+
+});
+
+});
+
+}
+
+
+$("studySearch").addEventListener(
+"input",
+renderStudy
+);
+
+
+/* RESULTS */
+
+$("resultForm").addEventListener(
+"submit",
+async event=>{
+
+event.preventDefault();
+
+try{
+
+await addDoc(
+collection(db,"results"),
+{
+studentNumber:
+$("resultStudent").value,
+
+title:
+$("resultTitle").value.trim(),
+
+mark:
+$("resultMark").value.trim(),
+
+status:
+$("resultStatus").value,
+
+createdAt:serverTimestamp()
+}
+);
+
+$("resultForm").reset();
+
+$("resultStudentSearch").value="";
+
+populateStudentSelects();
+
+showMessage(
+"Result added successfully."
+);
+
+await loadResults();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"Unable to add result.",
+"error"
+);
+
+}
+
+});
+
+
+async function loadResults(){
+
+try{
+
+const snap=
+await getDocs(collection(db,"results"));
+
+resultRows=
+snap.docs.map(item=>({
+id:item.id,
+...item.data()
+}));
+
+resultRows.sort(
+(a,b)=>
+(b.createdAt?.seconds||0)-
+(a.createdAt?.seconds||0)
+);
+
+renderResults();
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+function renderResults(){
+
+const q=
+($("resultSearch")?.value||"")
+.trim()
+.toLowerCase();
+
+const rows=
+resultRows.filter(row=>
+studentSearchMatch(
+row.studentNumber,
+studentNameByNumber(row.studentNumber),
+q
+)
+);
+
+if(!rows.length){
+
+$("resultsTable").innerHTML=
+`<tr><td colspan="5">
+<div class="empty">
+No results found.
+</div></td></tr>`;
+
+return;
+
+}
+
+$("resultsTable").innerHTML=
+rows.map(row=>`
+
+<tr>
+
+<td>
+
+${escapeHtml(
+studentNameByNumber(row.studentNumber)
+)}
+
+<br>
+
+<small>
+${escapeHtml(row.studentNumber)}
+</small>
+
+</td>
+
+<td>
+${escapeHtml(row.title)}
+</td>
+
+<td>
+<strong>${escapeHtml(row.mark)}</strong>
+</td>
+
+<td>
+
+<span class="badge ${
+row.status==="published"
+?"badge-green"
+:"badge-yellow"
+}">
+
+${escapeHtml(row.status)}
+
+</span>
+
+</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="${
+row.status==="published"
+?"warning"
+:"success"
+} result-toggle"
+data-id="${row.id}"
+data-status="${row.status}">
+
+${
+row.status==="published"
+?"Unpublish"
+:"Publish"
+}
+
+</button>
+
+<button
+class="danger result-delete"
+data-id="${row.id}">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`).join("");
+
+
+document.querySelectorAll(".result-toggle")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+const newStatus=
+button.dataset.status==="published"
+?"draft"
+:"published";
+
+await updateDoc(
+doc(db,"results",button.dataset.id),
+{
+status:newStatus
+}
+);
+
+showMessage(
+newStatus==="published"
+?"Result published."
+:"Result unpublished."
+);
+
+await loadResults();
+
+});
+
+});
+
+
+document.querySelectorAll(".result-delete")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+if(!confirm(
+"Delete this result?"
+))
+return;
+
+await deleteDoc(
+doc(db,"results",button.dataset.id)
+);
+
+showMessage(
+"Result deleted."
+);
+
+await loadResults();
+
+});
+
+});
+
+}
+
+
+$("resultSearch").addEventListener(
+"input",
+renderResults
+);
+
+
+/* NOTICES */
+
+$("noticeForm").addEventListener(
+"submit",
+async event=>{
+
+event.preventDefault();
+
+try{
+
+await addDoc(
+collection(db,"notices"),
+{
+title:
+$("noticeTitle").value.trim(),
+
+text:
+$("noticeText").value.trim(),
+
+status:
+$("noticeStatus").value,
+
+createdAt:serverTimestamp()
+}
+);
+
+$("noticeForm").reset();
+
+showMessage(
+"Notice added successfully."
+);
+
+await loadNotices();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"Unable to add notice.",
+"error"
+);
+
+}
+
+});
+
+
+async function loadNotices(){
+
+try{
+
+const snap=
+await getDocs(collection(db,"notices"));
+
+const rows=
+snap.docs.map(item=>({
+id:item.id,
+...item.data()
+}));
+
+rows.sort(
+(a,b)=>
+(b.createdAt?.seconds||0)-
+(a.createdAt?.seconds||0)
+);
+
+const table=$("noticesTable");
+
+if(!rows.length){
+
+table.innerHTML=
+`<tr><td colspan="4">
+<div class="empty">No notices.</div>
+</td></tr>`;
+
+return;
+
+}
+
+table.innerHTML=
+rows.map(row=>`
+
+<tr>
+
+<td>
+<strong>
+${escapeHtml(row.title)}
+</strong>
+</td>
+
+<td>
+${escapeHtml(row.text)}
+</td>
+
+<td>
+
+<span class="badge ${
+row.status==="published"
+?"badge-green"
+:"badge-yellow"
+}">
+
+${escapeHtml(row.status)}
+
+</span>
+
+</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="${
+row.status==="published"
+?"warning"
+:"success"
+} notice-toggle"
+data-id="${row.id}"
+data-status="${row.status}">
+
+${
+row.status==="published"
+?"Unpublish"
+:"Publish"
+}
+
+</button>
+
+<button
+class="danger notice-delete"
+data-id="${row.id}">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`).join("");
+
+
+document.querySelectorAll(".notice-toggle")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+const status=
+button.dataset.status==="published"
+?"draft"
+:"published";
+
+await updateDoc(
+doc(db,"notices",button.dataset.id),
+{status}
+);
+
+showMessage(
+status==="published"
+?"Notice published."
+:"Notice unpublished."
+);
+
+await loadNotices();
+
+});
+
+});
+
+
+document.querySelectorAll(".notice-delete")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+if(!confirm(
+"Delete this notice?"
+))
+return;
+
+await deleteDoc(
+doc(db,"notices",button.dataset.id)
+);
+
+showMessage(
+"Notice deleted."
+);
+
+await loadNotices();
+
+});
+
+});
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* LEAVES */
+
+async function loadLeaves(){
+
+try{
+
+const snap=
+await getDocs(collection(db,"leaveRequests"));
+
+const rows=
+snap.docs.map(item=>({
+id:item.id,
+...item.data()
+}));
+
+rows.sort(
+(a,b)=>
+(b.createdAt?.seconds||0)-
+(a.createdAt?.seconds||0)
+);
+
+$("leaveCount").textContent=
+rows.length;
+
+if(!rows.length){
+
+$("leaveTable").innerHTML=
+`<tr><td colspan="7">
+<div class="empty">
+No leave requests.
+</div></td></tr>`;
+
+return;
+
+}
+
+$("leaveTable").innerHTML=
+rows.map(row=>`
+
+<tr>
+
+<td>
+
+<strong>
+${escapeHtml(
+studentNameByNumber(row.studentNumber)
+)}
+</strong>
+
+<br>
+
+${escapeHtml(row.studentNumber)}
+
+</td>
+
+<td>
+${escapeHtml(row.parentEmail||"-")}
+</td>
+
+<td>
+${escapeHtml(row.leaveDate||"-")}
+</td>
+
+<td>
+${escapeHtml(row.reason||"-")}
+</td>
+
+<td>
+
+<span class="badge ${
+row.status==="approved"
+?"badge-green"
+:
+row.status==="rejected"
+?"badge-red"
+:
+"badge-yellow"
+}">
+
+${escapeHtml(row.status||"pending")}
+
+</span>
+
+</td>
+
+<td>
+${escapeHtml(row.reply||"-")}
+</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="success leave-approve"
+data-id="${row.id}">
+Approve
+</button>
+
+<button
+class="warning leave-reject"
+data-id="${row.id}">
+Reject
+</button>
+
+<button
+class="secondary leave-reply"
+data-id="${row.id}">
+Reply
+</button>
+
+<button
+class="danger leave-delete"
+data-id="${row.id}">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`).join("");
+
+
+document.querySelectorAll(".leave-approve")
+.forEach(b=>
+b.addEventListener(
+"click",
+async()=>{
+
+await updateDoc(
+doc(db,"leaveRequests",b.dataset.id),
+{
+status:"approved",
+repliedAt:serverTimestamp()
+}
+);
+
+showMessage("Leave approved.");
+
+await loadLeaves();
+
+})
+);
+
+
+document.querySelectorAll(".leave-reject")
+.forEach(b=>
+b.addEventListener(
+"click",
+async()=>{
+
+await updateDoc(
+doc(db,"leaveRequests",b.dataset.id),
+{
+status:"rejected",
+repliedAt:serverTimestamp()
+}
+);
+
+showMessage("Leave rejected.");
+
+await loadLeaves();
+
+})
+);
+
+
+document.querySelectorAll(".leave-reply")
+.forEach(b=>
+b.addEventListener(
+"click",
+async()=>{
+
+const reply=
+prompt("Enter reply:");
+
+if(reply===null)return;
+
+await updateDoc(
+doc(db,"leaveRequests",b.dataset.id),
+{
+reply:reply.trim(),
+repliedAt:serverTimestamp()
+}
+);
+
+showMessage("Reply sent.");
+
+await loadLeaves();
+
+})
+);
+
+
+document.querySelectorAll(".leave-delete")
+.forEach(b=>
+b.addEventListener(
+"click",
+async()=>{
+
+if(!confirm(
+"Delete leave request?"
+))
+return;
+
+await deleteDoc(
+doc(db,"leaveRequests",b.dataset.id)
+);
+
+showMessage(
+"Leave request deleted."
+);
+
+await loadLeaves();
+
+})
+);
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* MESSAGES */
+
+async function loadMessages(){
+
+try{
+
+const snap=
+await getDocs(collection(db,"messages"));
+
+const rows=
+snap.docs.map(item=>({
+id:item.id,
+...item.data()
+}));
+
+rows.sort(
+(a,b)=>
+(b.createdAt?.seconds||0)-
+(a.createdAt?.seconds||0)
+);
+
+$("messageCount").textContent=
+rows.length;
+
+if(!rows.length){
+
+$("messagesTable").innerHTML=
+`<tr><td colspan="6">
+<div class="empty">
+No parent messages.
+</div></td></tr>`;
+
+return;
+
+}
+
+$("messagesTable").innerHTML=
+rows.map(row=>`
+
+<tr>
+
+<td>
+
+${escapeHtml(
+studentNameByNumber(row.studentNumber)
+)}
+
+<br>
+
+${escapeHtml(row.studentNumber)}
+
+</td>
+
+<td>
+${escapeHtml(row.parentEmail||"-")}
+</td>
+
+<td>
+${escapeHtml(row.text||"-")}
+</td>
+
+<td>
+
+<span class="badge ${
+row.status==="replied"
+?"badge-green"
+:"badge-yellow"
+}">
+
+${escapeHtml(row.status||"new")}
+
+</span>
+
+</td>
+
+<td>
+${escapeHtml(row.reply||"-")}
+</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="secondary message-reply"
+data-id="${row.id}">
+Reply
+</button>
+
+<button
+class="danger message-delete"
+data-id="${row.id}">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`).join("");
+
+
+document.querySelectorAll(".message-reply")
+.forEach(b=>
+b.addEventListener(
+"click",
+async()=>{
+
+const reply=
+prompt("Enter reply:");
+
+if(reply===null)return;
+
+await updateDoc(
+doc(db,"messages",b.dataset.id),
+{
+reply:reply.trim(),
+status:"replied",
+repliedAt:serverTimestamp()
+}
+);
+
+showMessage("Reply sent.");
+
+await loadMessages();
+
+})
+);
+
+
+document.querySelectorAll(".message-delete")
+.forEach(b=>
+b.addEventListener(
+"click",
+async()=>{
+
+if(!confirm(
+"Delete this message?"
+))
+return;
+
+await deleteDoc(
+doc(db,"messages",b.dataset.id)
+);
+
+showMessage(
+"Message deleted."
+);
+
+await loadMessages();
+
+})
+);
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* DONATIONS */
+
+async function loadDonations(){
+
+try{
+
+const snap=
+await getDocs(collection(db,"donations"));
+
+const rows=
+snap.docs.map(item=>({
+id:item.id,
+...item.data()
+}));
+
+rows.sort(
+(a,b)=>
+(b.createdAt?.seconds||0)-
+(a.createdAt?.seconds||0)
+);
+
+let total=0;
+let pending=0;
+let verified=0;
+
+rows.forEach(row=>{
+
+const amount=
+Number(row.amount||0);
+
+total+=amount;
+
+if(row.status==="pending")
+pending+=amount;
+
+if(row.status==="verified")
+verified+=amount;
+
+});
+
+$("donationTotal").textContent=
+money(total);
+
+$("donationPending").textContent=
+money(pending);
+
+$("donationVerified").textContent=
+money(verified);
+
+if(!rows.length){
+
+$("donationsTable").innerHTML=
+`<tr><td colspan="8">
+<div class="empty">
+No donations found.
+</div></td></tr>`;
+
+return;
+
+}
+
+$("donationsTable").innerHTML=
+rows.map(row=>`
+
+<tr>
+
+<td>
+
+<strong>
+${escapeHtml(
+studentNameByNumber(row.studentNumber)
+)}
+</strong>
+
+<br>
+
+<small>
+${escapeHtml(row.studentNumber||"-")}
+</small>
+
+</td>
+
+<td>
+${escapeHtml(row.parentEmail||"-")}
+</td>
+
+<td>
+<strong>
+${money(row.amount)}
+</strong>
+</td>
+
+<td>
+${escapeHtml(row.transactionId||"-")}
+</td>
+
+<td>
+${formatDate(row.createdAt)}
+</td>
+
+<td>
+
+<span class="badge ${
+row.status==="verified"
+?"badge-green"
+:
+row.status==="rejected"
+?"badge-red"
+:
+"badge-yellow"
+}">
+
+${escapeHtml(row.status||"pending")}
+
+</span>
+
+</td>
+
+<td>
+${escapeHtml(row.adminNote||"-")}
+</td>
+
+<td>
+
+<div class="actions">
+
+${
+row.status!=="verified"
+?
+`<button
+class="success donation-verify"
+data-id="${row.id}">
+Verify
+</button>`
+:""
+}
+
+${
+row.status!=="rejected"
+?
+`<button
+class="warning donation-reject"
+data-id="${row.id}">
+Reject
+</button>`
+:""
+}
+
+<button
+class="danger donation-delete"
+data-id="${row.id}">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`).join("");
+
+
+document.querySelectorAll(".donation-verify")
+.forEach(b=>
+b.addEventListener(
+"click",
+async()=>{
+
+if(!confirm(
+"Verify this donation?"
+))
+return;
+
+const note=
+prompt("Admin note (optional):");
+
+await updateDoc(
+doc(db,"donations",b.dataset.id),
+{
+status:"verified",
+adminNote:note||"",
+verifiedAt:serverTimestamp()
+}
+);
+
+showMessage(
+"Donation verified."
+);
+
+await loadDonations();
+
+})
+);
+
+
+document.querySelectorAll(".donation-reject")
+.forEach(b=>
+b.addEventListener(
+"click",
+async()=>{
+
+const note=
+prompt("Reason for rejection:");
+
+if(!note||!note.trim()){
+
+alert(
+"Please enter a rejection reason."
+);
+
+return;
+
+}
+
+if(!confirm(
+"Reject this donation?"
+))
+return;
+
+await updateDoc(
+doc(db,"donations",b.dataset.id),
+{
+status:"rejected",
+adminNote:note.trim(),
+rejectedAt:serverTimestamp()
+}
+);
+
+showMessage(
+"Donation rejected."
+);
+
+await loadDonations();
+
+})
+);
+
+
+document.querySelectorAll(".donation-delete")
+.forEach(b=>
+b.addEventListener(
+"click",
+async()=>{
+
+if(!confirm(
+"Delete this donation record?"
+))
+return;
+
+await deleteDoc(
+doc(db,"donations",b.dataset.id)
+);
+
+showMessage(
+"Donation deleted."
+);
+
+await loadDonations();
+
+})
+);
+
+}catch(error){
+
+console.error(error);
+
+$("donationsTable").innerHTML=
+`<tr><td colspan="8">
+Unable to load donations.
+</td></tr>`;
+
+}
+
+}
+
+
+/* PUBLIC RESULT */
+
+$("openPublicResult").addEventListener(
+"click",
+()=>location.href="result.html"
+);
+
+
+/* DEFAULT DATES */
+
+function setDefaultDates(){
+
+const today=
+new Date().toISOString().split("T")[0];
+
+if($("attendanceDate"))
+$("attendanceDate").value=today;
+
+if($("studyDate"))
+$("studyDate").value=today;
+
+}
+
+setDefaultDates();
 
 </script>
 
