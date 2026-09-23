@@ -759,15 +759,13 @@ The best among you are those who learn the Qur'an and teach it.
 
 <div class="stats">
 
-<div class="stat" data-go="study">
+<div class="stat" data-go="students">
 
-<div class="stat-icon">📖</div>
+<div class="stat-icon">👨‍🎓</div>
 
-<small>STUDY PROGRESS</small>
+<small>STUDENTS</small>
 
-<strong id="studyCount">0</strong>
-
-<span class="dashboard-notify zero" id="studyNotify">0</span>
+<strong id="studentCount">0</strong>
 
 </div>
 
@@ -785,15 +783,15 @@ The best among you are those who learn the Qur'an and teach it.
 </div>
 
 
-<div class="stat" data-go="results">
+<div class="stat" data-go="study">
 
-<div class="stat-icon">🏆</div>
+<div class="stat-icon">📖</div>
 
-<small>RESULTS</small>
+<small>STUDY PROGRESS</small>
 
-<strong id="resultCount">0</strong>
+<strong id="studyCount">0</strong>
 
-<span class="dashboard-notify zero" id="resultDashboardNotify">0</span>
+<span class="dashboard-notify zero" id="studyNotify">0</span>
 
 </div>
 
@@ -2163,6 +2161,11 @@ snap.docs.map(item=>({
 id:item.id,
 ...item.data()
 }));
+
+/* STUDENT COUNT FOR TOP DASHBOARD BOX */
+
+$("studentCount").textContent=
+window.students.length;
 
 renderStudents(window.students);
 
@@ -4758,6 +4761,7 @@ money(verified);
 
 /* DASHBOARD DONATION COUNT */
 
+if($("donationCount"))
 $("donationCount").textContent=
 rows.length;
 
