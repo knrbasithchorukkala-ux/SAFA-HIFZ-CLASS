@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>SAFA QURAN COLLEGE ONLINE PORTAL | Parent Dashboard</title>
-
-<style>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"><title>SAFA QURAN COLLEGE ONLINE PORTAL | Parent Dashboard</title><style>
 *{
   box-sizing:border-box;
   margin:0;
@@ -697,8 +692,26 @@ body::before{
   letter-spacing:.5px;
 }
 
+/* PROFESSIONAL NOTIFICATION BADGE */
+
 .service-notify{
-  font-size:18px;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  min-width:34px;
+  height:22px;
+  padding:0 8px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#c53b3b,#e45858);
+  color:#fff;
+  font-size:9px;
+  font-weight:bold;
+  letter-spacing:.5px;
+  box-shadow:0 3px 10px rgba(197,59,59,.25);
+}
+
+.service-notify.show{
+  display:flex;
 }
 
 /* QUICK */
@@ -728,20 +741,28 @@ body::before{
   box-shadow:var(--shadow);
 }
 
-.quick-notify{
+.notification-badge{
+  display:none;
   position:absolute;
   top:9px;
   right:10px;
-  width:27px;
-  height:27px;
-  border-radius:50%;
-  display:flex;
+  min-width:34px;
+  height:22px;
+  padding:0 8px;
+  border-radius:12px;
   align-items:center;
   justify-content:center;
-  background:#e9f6f0;
-  color:var(--primary2);
-  font-size:14px;
-  border:1px solid #cde5da;
+  background:linear-gradient(135deg,#c53b3b,#e45858);
+  color:#fff;
+  font-size:9px;
+  font-weight:bold;
+  letter-spacing:.5px;
+  box-shadow:0 3px 10px rgba(197,59,59,.25);
+  z-index:5;
+}
+
+.notification-badge.show{
+  display:flex;
 }
 
 .quick-btn .qicon{
@@ -1406,716 +1427,687 @@ textarea{
     text-align:left;
   }
 }
-</style>
-</head>
-
-<body>
-
-<!-- LOADING -->
-<div id="loading">
+</style></head><body><!-- LOADING --><div id="loading">
   <div class="loading-logo"></div>
   <strong>SAFA QURAN COLLEGE ONLINE PORTAL</strong>
   <small>Loading Parent Dashboard...</small>
-</div>
-
-<!-- SIDEBAR -->
-<aside class="sidebar" id="sidebar">
-
-  <div class="sidebar-header">
+</div><!-- SIDEBAR --><aside class="sidebar" id="sidebar">  <div class="sidebar-header">
     <div class="logo-circle"></div>
     <h2>SAFA QURAN COLLEGE</h2>
     <p>PARENT PORTAL</p>
-  </div>
+  </div>  <nav class="nav"><button class="nav-btn active" data-section="home">
+  <span>🏠</span> Home
+</button>
 
-  <nav class="nav">
+<button class="nav-btn" data-section="child">
+  <span>👨‍🎓</span> My Child
+</button>
 
-    <button class="nav-btn active" data-section="home">
-      <span>🏠</span> Home
-    </button>
+<button class="nav-btn" data-section="attendance">
+  <span>📅</span> Attendance
+</button>
 
-    <button class="nav-btn" data-section="child">
-      <span>👨‍🎓</span> My Child
-    </button>
+<button class="nav-btn" data-section="study">
+  <span>📖</span> Study Progress
+</button>
 
-    <button class="nav-btn" data-section="attendance">
-      <span>📅</span> Attendance
-    </button>
+<button class="nav-btn" data-section="results">
+  <span>📊</span> Results
+</button>
 
-    <button class="nav-btn" data-section="study">
-      <span>📖</span> Study Progress
-    </button>
+<button class="nav-btn" data-section="notices">
+  <span>📢</span> Notices
+</button>
 
-    <button class="nav-btn" data-section="results">
-      <span>📊</span> Results
-    </button>
+<button class="nav-btn" data-section="donation">
+  <span>💰</span> MY DONATION TO SAFA
+</button>
 
-    <button class="nav-btn" data-section="notices">
-      <span>📢</span> Notices
-    </button>
+<button class="nav-btn" data-section="leave">
+  <span>📝</span> Leave
+</button>
 
-    <button class="nav-btn" data-section="donation">
-      <span>💰</span> MY DONATION TO SAFA
-    </button>
-
-    <button class="nav-btn" data-section="leave">
-      <span>📝</span> Leave
-    </button>
-
-    <button class="nav-btn" data-section="messages">
-      <span>💬</span> Messages
-    </button>
+<button class="nav-btn" data-section="messages">
+  <span>💬</span> Messages
+</button>
 
   </nav>
-</aside>
+</aside><!-- MAIN --><main class="main">  <!-- TOPBAR -->  <header class="topbar"><div class="topbar-left">
+  <button class="menu-toggle" id="menuToggle">☰</button>
 
-<!-- MAIN -->
-<main class="main">
+  <div>
+    <h1 id="pageTitle">Parent Dashboard</h1>
+    <small>SAFA QURAN COLLEGE ONLINE PORTAL</small>
+  </div>
+</div>
 
-  <!-- TOPBAR -->
-  <header class="topbar">
+<div class="top-actions">
+  <span class="badge">PARENT PORTAL</span>
+  <button class="logout-btn" id="logoutBtn">Logout</button>
+</div>
 
-    <div class="topbar-left">
-      <button class="menu-toggle" id="menuToggle">☰</button>
+  </header>  <div class="content"><!-- HOME -->
+<section class="section active" id="home">
 
-      <div>
-        <h1 id="pageTitle">Parent Dashboard</h1>
-        <small>SAFA QURAN COLLEGE ONLINE PORTAL</small>
+  <div class="donation-featured" id="donationFeatured">
+
+    <div class="donation-featured-icon">
+      🤲
+    </div>
+
+    <div class="donation-featured-content">
+      <div class="donation-featured-title">
+        MY DONATION TO SAFA
+      </div>
+
+      <div class="donation-featured-subtitle">
+        Support SAFA QURAN COLLEGE
       </div>
     </div>
 
-    <div class="top-actions">
-      <span class="badge">PARENT PORTAL</span>
-      <button class="logout-btn" id="logoutBtn">Logout</button>
+    <div class="donation-featured-arrow">
+      →
     </div>
-
-  </header>
-
-  <div class="content">
-
-    <!-- HOME -->
-    <section class="section active" id="home">
-
-      <div class="donation-featured" id="donationFeatured">
-
-        <div class="donation-featured-icon">
-          🤲
-        </div>
-
-        <div class="donation-featured-content">
-          <div class="donation-featured-title">
-            MY DONATION TO SAFA
-          </div>
-
-          <div class="donation-featured-subtitle">
-            Support SAFA QURAN COLLEGE
-          </div>
-        </div>
-
-        <div class="donation-featured-arrow">
-          →
-        </div>
-
-      </div>
-
-      <div class="welcome">
-
-        <div class="arabic">
-          السَّلاَمُ عَلَيْكُمْ
-        </div>
-
-        <div class="quran-hadith-line">
-          خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ
-        </div>
-
-        <p>
-          Welcome to SAFA QURAN COLLEGE Parent Dashboard.
-        </p>
-
-      </div>
-
-      <div class="college-photo-card">
-
-        <div class="college-photo-wrap">
-
-          <img
-            src="./IMG-20260921-WA0016.jpg"
-            alt="SAFA QURAN COLLEGE"
-            class="college-photo"
-            onerror="this.style.display='none';"
-          >
-
-          <div class="college-photo-overlay">
-            <div>
-              <h3>SAFA QURAN COLLEGE</h3>
-              <p>Qur'an • Hifz • Islamic Education</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="card child-card">
-
-        <div class="child-head">
-
-          <div class="avatar" id="homeInitial">S</div>
-
-          <div>
-            <h3 id="homeStudentName">Loading...</h3>
-            <p>Student No: <span id="homeStudentNumber">-</span></p>
-          </div>
-
-        </div>
-
-        <div class="info-grid">
-
-          <div class="info-box">
-            <label>Student Name</label>
-            <strong id="homeNameInfo">-</strong>
-          </div>
-
-          <div class="info-box">
-            <label>Student Number</label>
-            <strong id="homeNoInfo">-</strong>
-          </div>
-
-          <div class="info-box">
-            <label>Class</label>
-            <strong id="homeClassInfo">-</strong>
-          </div>
-
-          <div class="info-box">
-            <label>Guardian Name</label>
-            <strong id="homeGuardianInfo">-</strong>
-          </div>
-
-          <div class="info-box">
-            <label>Phone Number</label>
-            <strong id="homePhoneInfo">-</strong>
-          </div>
-
-          <div class="info-box">
-            <label>Place / Address</label>
-            <strong id="homeAddressInfo">-</strong>
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="card">
-
-        <div class="card-title">
-          <h3>Parent Access</h3>
-          <span>Quick View</span>
-        </div>
-
-        <div class="service-grid">
-
-          <button class="service-card study-service" data-go="study">
-
-            <div class="service-card-icon">
-              📖
-            </div>
-
-            <div class="service-card-content">
-              <div class="service-card-title">
-                Study Progress
-              </div>
-
-              <div class="service-card-subtitle">
-                Hifz & Study Updates
-              </div>
-            </div>
-
-            <div class="service-card-footer">
-              <span class="service-access">
-                ↗ ACCESS
-              </span>
-
-              <span class="service-notify">
-                🔔
-              </span>
-            </div>
-
-          </button>
-
-          <button class="service-card attendance-service" data-go="attendance">
-
-            <div class="service-card-icon">
-              📅
-            </div>
-
-            <div class="service-card-content">
-              <div class="service-card-title">
-                Attendance
-              </div>
-
-              <div class="service-card-subtitle">
-                Daily Attendance Status
-              </div>
-            </div>
-
-            <div class="service-card-footer">
-              <span class="service-access">
-                ↗ ACCESS
-              </span>
-
-              <span class="service-notify">
-                🔔
-              </span>
-            </div>
-
-          </button>
-
-          <button class="service-card notice-service" data-go="notices">
-
-            <div class="service-card-icon">
-              📢
-            </div>
-
-            <div class="service-card-content">
-              <div class="service-card-title">
-                Notices
-              </div>
-
-              <div class="service-card-subtitle">
-                College Announcements
-              </div>
-            </div>
-
-            <div class="service-card-footer">
-              <span class="service-access">
-                ↗ ACCESS
-              </span>
-
-              <span class="service-notify">
-                🔔
-              </span>
-            </div>
-
-          </button>
-
-        </div>
-
-      </div>
-
-      <div class="card">
-
-        <div class="card-title">
-          <h3>Quick Access</h3>
-          <span>Parent Services</span>
-        </div>
-
-        <div class="quick-grid">
-
-          <button class="quick-btn" data-go="results">
-
-            <span class="quick-notify">🔔</span>
-
-            <span class="qicon">📊</span>
-            Results
-
-          </button>
-
-          <button class="quick-btn" data-go="leave">
-
-            <span class="quick-notify">🔔</span>
-
-            <span class="qicon">📝</span>
-            Leave Request
-
-          </button>
-
-          <button class="quick-btn" data-go="messages">
-
-            <span class="quick-notify">🔔</span>
-
-            <span class="qicon">💬</span>
-            Messages to Usthad
-
-          </button>
-
-          <button class="quick-btn donation-quick" data-go="donation">
-
-            <span class="quick-notify">🔔</span>
-
-            <span class="qicon">💰</span>
-            Donation
-
-          </button>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- MY CHILD -->
-    <section class="section" id="child">
-
-      <div class="section-head">
-        <h2>My Child</h2>
-        <p>Student and guardian information</p>
-      </div>
-
-      <div class="card child-card">
-
-        <div class="child-head">
-
-          <div class="avatar" id="childInitial">S</div>
-
-          <div>
-            <h3 id="childName">Loading...</h3>
-            <p>Student No: <span id="childNumber">-</span></p>
-          </div>
-
-        </div>
-
-        <div class="info-grid">
-
-          <div class="info-box">
-            <label>Student Name</label>
-            <strong id="childNameInfo">-</strong>
-          </div>
-
-          <div class="info-box">
-            <label>Student Number</label>
-            <strong id="childNoInfo">-</strong>
-          </div>
-
-          <div class="info-box">
-            <label>Class</label>
-            <strong id="childClassInfo">-</strong>
-          </div>
-
-          <div class="info-box">
-            <label>Guardian Name</label>
-            <strong id="childGuardianInfo">-</strong>
-          </div>
-
-          <div class="info-box">
-            <label>Phone Number</label>
-            <strong id="childPhoneInfo">-</strong>
-          </div>
-
-          <div class="info-box">
-            <label>Place / Address</label>
-            <strong id="childAddressInfo">-</strong>
-          </div>
-
-          <div class="info-box">
-            <label>Parent Email</label>
-            <strong id="childEmailInfo">-</strong>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- ATTENDANCE -->
-    <section class="section" id="attendance">
-
-      <div class="section-head">
-        <h2>Attendance</h2>
-        <p>Your child's attendance records</p>
-      </div>
-
-      <div class="card">
-
-        <div class="table-wrap">
-
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-
-            <tbody id="attendanceBody">
-              <tr>
-                <td colspan="2">Loading...</td>
-              </tr>
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- STUDY -->
-    <section class="section" id="study">
-
-      <div class="section-head">
-        <h2>Study Progress</h2>
-        <p>Hifz and study progress updates</p>
-      </div>
-
-      <div id="studyList" class="progress-grid">
-        <div class="empty">Loading...</div>
-      </div>
-
-    </section>
-
-    <!-- RESULTS -->
-    <section class="section" id="results">
-
-      <div class="section-head">
-        <h2>Results</h2>
-        <p>Published examination results</p>
-      </div>
-
-      <div id="resultsList" class="result-grid">
-        <div class="empty">Loading...</div>
-      </div>
-
-    </section>
-
-    <!-- NOTICES -->
-    <section class="section" id="notices">
-
-      <div class="section-head">
-        <h2>Notices</h2>
-        <p>Important college announcements</p>
-      </div>
-
-      <div id="noticesList">
-        <div class="empty">Loading...</div>
-      </div>
-
-    </section>
-
-    <!-- DONATION -->
-    <section class="section" id="donation">
-
-      <div class="section-head">
-        <h2>MY DONATION TO SAFA</h2>
-        <p>Support SAFA QURAN COLLEGE</p>
-      </div>
-
-      <div class="donation-hero">
-
-        <h2>💚 Support SAFA QURAN COLLEGE</h2>
-
-        <p>
-          You can support the educational activities of SAFA QURAN COLLEGE
-          through direct UPI payment, QR code or bank transfer.
-          May Allah accept your contribution and reward you abundantly.
-        </p>
-
-      </div>
-
-      <div class="donation-grid">
-
-        <div class="donation-panel">
-
-          <h3>🏦 Bank & UPI Details</h3>
-
-          <div class="bank-details">
-
-            <div class="bank-row">
-              <span>Bank</span>
-              <strong>Federal Bank</strong>
-            </div>
-
-            <div class="bank-row">
-              <span>A/C No</span>
-              <strong>10980200318831</strong>
-            </div>
-
-            <div class="bank-row">
-              <span>IFSC</span>
-              <strong>FDRL0001098</strong>
-            </div>
-
-            <div class="bank-row">
-              <span>Branch</span>
-              <strong>KANNUR BRANCH</strong>
-            </div>
-
-          </div>
-
-          <div class="upi-box">
-
-            <div class="upi-label">DIRECT UPI PAYMENT</div>
-
-            <div class="upi-id">
-              563safa@fbl
-            </div>
-
-            <a
-              class="upi-pay-btn"
-              href="upi://pay?pa=563safa%40fbl&pn=SAFA%20QURAN%20COLLEGE&cu=INR">
-              💳 PAY DIRECTLY WITH UPI
-            </a>
-
-          </div>
-
-          <div class="donation-note">
-            If the UPI button does not open an app on your device,
-            you can copy the UPI ID <strong>563safa@fbl</strong>
-            and pay through your preferred UPI application.
-          </div>
-
-        </div>
-
-        <div class="donation-panel qr-panel">
-
-          <h3>📱 Scan & Pay</h3>
-
-          <div class="qr-box">
-
-            <img
-              src="./20260225.jpg"
-              alt="SAFA Donation QR Code"
-              onerror="this.style.display='none';"
-            >
-
-          </div>
-
-          <p>
-            Scan the QR code using your UPI application
-            to make your donation.
-          </p>
-
-          <div class="donation-note">
-            <strong>UPI ID:</strong> 563safa@fbl
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- LEAVE -->
-    <section class="section" id="leave">
-
-      <div class="section-head">
-        <h2>Leave Application</h2>
-        <p>Apply for leave and view replies from Usthad</p>
-      </div>
-
-      <div class="card">
-
-        <div class="card-title">
-          <h3>Apply for Leave</h3>
-        </div>
-
-        <form id="leaveForm">
-
-          <div class="form-grid">
-
-            <div class="form-group">
-              <label>Leave Date</label>
-              <input type="date" id="leaveDate" required>
-            </div>
-
-            <div class="form-group">
-              <label>Reason</label>
-              <input
-                type="text"
-                id="leaveReason"
-                placeholder="Reason for leave"
-                required
-              >
-            </div>
-
-            <div class="form-group full">
-              <label>Details</label>
-              <textarea
-                id="leaveDetails"
-                placeholder="Write additional details..."
-              ></textarea>
-            </div>
-
-          </div>
-
-          <button class="primary-btn" type="submit">
-            Submit Leave Application
-          </button>
-
-        </form>
-
-      </div>
-
-      <div class="card">
-
-        <div class="card-title">
-          <h3>Leave History</h3>
-        </div>
-
-        <div id="leaveHistory">
-          <div class="empty">Loading...</div>
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- MESSAGES -->
-    <section class="section" id="messages">
-
-      <div class="section-head">
-        <h2>Parent Messages</h2>
-        <p>Send a message to Usthad / Administration</p>
-      </div>
-
-      <div class="card">
-
-        <div class="card-title">
-          <h3>Send Message</h3>
-        </div>
-
-        <form id="messageForm">
-
-          <div class="form-group">
-            <label>Your Message</label>
-
-            <textarea
-              id="messageText"
-              placeholder="Write your message..."
-              required
-            ></textarea>
-
-          </div>
-
-          <button class="primary-btn" type="submit">
-            Send Message
-          </button>
-
-        </form>
-
-      </div>
-
-      <div class="card">
-
-        <div class="card-title">
-          <h3>Message History</h3>
-        </div>
-
-        <div id="messageHistory">
-          <div class="empty">Loading...</div>
-        </div>
-
-      </div>
-
-    </section>
 
   </div>
 
-</main>
+  <div class="welcome">
 
-<div id="toast"></div>
+    <div class="arabic">
+      السَّلاَمُ عَلَيْكُمْ
+    </div>
 
-<script type="module">
+    <div class="quran-hadith-line">
+      خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ
+    </div>
+
+    <p>
+      Welcome to SAFA QURAN COLLEGE Parent Dashboard.
+    </p>
+
+  </div>
+
+  <div class="college-photo-card">
+
+    <div class="college-photo-wrap">
+
+      <img
+        src="./IMG-20260921-WA0016.jpg"
+        alt="SAFA QURAN COLLEGE"
+        class="college-photo"
+        onerror="this.style.display='none';"
+      >
+
+      <div class="college-photo-overlay">
+        <div>
+          <h3>SAFA QURAN COLLEGE</h3>
+          <p>Qur'an • Hifz • Islamic Education</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="card child-card">
+
+    <div class="child-head">
+
+      <div class="avatar" id="homeInitial">S</div>
+
+      <div>
+        <h3 id="homeStudentName">Loading...</h3>
+        <p>Student No: <span id="homeStudentNumber">-</span></p>
+      </div>
+
+    </div>
+
+    <div class="info-grid">
+
+      <div class="info-box">
+        <label>Student Name</label>
+        <strong id="homeNameInfo">-</strong>
+      </div>
+
+      <div class="info-box">
+        <label>Student Number</label>
+        <strong id="homeNoInfo">-</strong>
+      </div>
+
+      <div class="info-box">
+        <label>Class</label>
+        <strong id="homeClassInfo">-</strong>
+      </div>
+
+      <div class="info-box">
+        <label>Guardian Name</label>
+        <strong id="homeGuardianInfo">-</strong>
+      </div>
+
+      <div class="info-box">
+        <label>Phone Number</label>
+        <strong id="homePhoneInfo">-</strong>
+      </div>
+
+      <div class="info-box">
+        <label>Place / Address</label>
+        <strong id="homeAddressInfo">-</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="card-title">
+      <h3>Parent Access</h3>
+      <span>Quick View</span>
+    </div>
+
+    <div class="service-grid">
+
+      <button class="service-card study-service" data-go="study">
+
+        <div class="service-card-icon">
+          📖
+        </div>
+
+        <div class="service-card-content">
+          <div class="service-card-title">
+            Study Progress
+          </div>
+
+          <div class="service-card-subtitle">
+            Hifz & Study Updates
+          </div>
+        </div>
+
+        <div class="service-card-footer">
+          <span class="service-access">
+            ↗ ACCESS
+          </span>
+
+          <span class="service-notify" id="serviceNotifyStudy">
+            NEW
+          </span>
+        </div>
+
+      </button>
+
+      <button class="service-card attendance-service" data-go="attendance">
+
+        <div class="service-card-icon">
+          📅
+        </div>
+
+        <div class="service-card-content">
+          <div class="service-card-title">
+            Attendance
+          </div>
+
+          <div class="service-card-subtitle">
+            Daily Attendance Status
+          </div>
+        </div>
+
+        <div class="service-card-footer">
+          <span class="service-access">
+            ↗ ACCESS
+          </span>
+
+          <span class="service-notify" id="serviceNotifyAttendance">
+            NEW
+          </span>
+        </div>
+
+      </button>
+
+      <button class="service-card notice-service" data-go="notices">
+
+        <div class="service-card-icon">
+          📢
+        </div>
+
+        <div class="service-card-content">
+          <div class="service-card-title">
+            Notices
+          </div>
+
+          <div class="service-card-subtitle">
+            College Announcements
+          </div>
+        </div>
+
+        <div class="service-card-footer">
+          <span class="service-access">
+            ↗ ACCESS
+          </span>
+
+          <span class="service-notify" id="serviceNotifyNotices">
+            NEW
+          </span>
+        </div>
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="card-title">
+      <h3>Quick Access</h3>
+      <span>Parent Services</span>
+    </div>
+
+    <div class="quick-grid">
+
+      <button class="quick-btn" data-go="results">
+
+        <span class="notification-badge" id="notifyResults">
+          NEW
+        </span>
+
+        <span class="qicon">📊</span>
+        Results
+
+      </button>
+
+      <button class="quick-btn" data-go="leave">
+
+        <span class="notification-badge" id="notifyLeave">
+          NEW
+        </span>
+
+        <span class="qicon">📝</span>
+        Leave Request
+
+      </button>
+
+      <button class="quick-btn" data-go="messages">
+
+        <span class="notification-badge" id="notifyMessages">
+          NEW
+        </span>
+
+        <span class="qicon">💬</span>
+        Messages to Usthad
+
+      </button>
+
+      <button class="quick-btn donation-quick" data-go="donation">
+
+        <span class="qicon">💰</span>
+        Donation
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- MY CHILD -->
+<section class="section" id="child">
+
+  <div class="section-head">
+    <h2>My Child</h2>
+    <p>Student and guardian information</p>
+  </div>
+
+  <div class="card child-card">
+
+    <div class="child-head">
+
+      <div class="avatar" id="childInitial">S</div>
+
+      <div>
+        <h3 id="childName">Loading...</h3>
+        <p>Student No: <span id="childNumber">-</span></p>
+      </div>
+
+    </div>
+
+    <div class="info-grid">
+
+      <div class="info-box">
+        <label>Student Name</label>
+        <strong id="childNameInfo">-</strong>
+      </div>
+
+      <div class="info-box">
+        <label>Student Number</label>
+        <strong id="childNoInfo">-</strong>
+      </div>
+
+      <div class="info-box">
+        <label>Class</label>
+        <strong id="childClassInfo">-</strong>
+      </div>
+
+      <div class="info-box">
+        <label>Guardian Name</label>
+        <strong id="childGuardianInfo">-</strong>
+      </div>
+
+      <div class="info-box">
+        <label>Phone Number</label>
+        <strong id="childPhoneInfo">-</strong>
+      </div>
+
+      <div class="info-box">
+        <label>Place / Address</label>
+        <strong id="childAddressInfo">-</strong>
+      </div>
+
+      <div class="info-box">
+        <label>Parent Email</label>
+        <strong id="childEmailInfo">-</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ATTENDANCE -->
+<section class="section" id="attendance">
+
+  <div class="section-head">
+    <h2>Attendance</h2>
+    <p>Your child's attendance records</p>
+  </div>
+
+  <div class="card">
+
+    <div class="table-wrap">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody id="attendanceBody">
+          <tr>
+            <td colspan="2">Loading...</td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- STUDY -->
+<section class="section" id="study">
+
+  <div class="section-head">
+    <h2>Study Progress</h2>
+    <p>Hifz and study progress updates</p>
+  </div>
+
+  <div id="studyList" class="progress-grid">
+    <div class="empty">Loading...</div>
+  </div>
+
+</section>
+
+<!-- RESULTS -->
+<section class="section" id="results">
+
+  <div class="section-head">
+    <h2>Results</h2>
+    <p>Published examination results</p>
+  </div>
+
+  <div id="resultsList" class="result-grid">
+    <div class="empty">Loading...</div>
+  </div>
+
+</section>
+
+<!-- NOTICES -->
+<section class="section" id="notices">
+
+  <div class="section-head">
+    <h2>Notices</h2>
+    <p>Important college announcements</p>
+  </div>
+
+  <div id="noticesList">
+    <div class="empty">Loading...</div>
+  </div>
+
+</section>
+
+<!-- DONATION -->
+<section class="section" id="donation">
+
+  <div class="section-head">
+    <h2>MY DONATION TO SAFA</h2>
+    <p>Support SAFA QURAN COLLEGE</p>
+  </div>
+
+  <div class="donation-hero">
+
+    <h2>💚 Support SAFA QURAN COLLEGE</h2>
+
+    <p>
+      You can support the educational activities of SAFA QURAN COLLEGE
+      through direct UPI payment, QR code or bank transfer.
+      May Allah accept your contribution and reward you abundantly.
+    </p>
+
+  </div>
+
+  <div class="donation-grid">
+
+    <div class="donation-panel">
+
+      <h3>🏦 Bank & UPI Details</h3>
+
+      <div class="bank-details">
+
+        <div class="bank-row">
+          <span>Bank</span>
+          <strong>Federal Bank</strong>
+        </div>
+
+        <div class="bank-row">
+          <span>A/C No</span>
+          <strong>10980200318831</strong>
+        </div>
+
+        <div class="bank-row">
+          <span>IFSC</span>
+          <strong>FDRL0001098</strong>
+        </div>
+
+        <div class="bank-row">
+          <span>Branch</span>
+          <strong>KANNUR BRANCH</strong>
+        </div>
+
+      </div>
+
+      <div class="upi-box">
+
+        <div class="upi-label">DIRECT UPI PAYMENT</div>
+
+        <div class="upi-id">
+          563safa@fbl
+        </div>
+
+        <a
+          class="upi-pay-btn"
+          href="upi://pay?pa=563safa%40fbl&pn=SAFA%20QURAN%20COLLEGE&cu=INR">
+          💳 PAY DIRECTLY WITH UPI
+        </a>
+
+      </div>
+
+      <div class="donation-note">
+        If the UPI button does not open an app on your device,
+        you can copy the UPI ID <strong>563safa@fbl</strong>
+        and pay through your preferred UPI application.
+      </div>
+
+    </div>
+
+    <div class="donation-panel qr-panel">
+
+      <h3>📱 Scan & Pay</h3>
+
+      <div class="qr-box">
+
+        <img
+          src="./20260225.jpg"
+          alt="SAFA Donation QR Code"
+          onerror="this.style.display='none';"
+        >
+
+      </div>
+
+      <p>
+        Scan the QR code using your UPI application
+        to make your donation.
+      </p>
+
+      <div class="donation-note">
+        <strong>UPI ID:</strong> 563safa@fbl
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- LEAVE -->
+<section class="section" id="leave">
+
+  <div class="section-head">
+    <h2>Leave Application</h2>
+    <p>Apply for leave and view replies from Usthad</p>
+  </div>
+
+  <div class="card">
+
+    <div class="card-title">
+      <h3>Apply for Leave</h3>
+    </div>
+
+    <form id="leaveForm">
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Leave Date</label>
+          <input type="date" id="leaveDate" required>
+        </div>
+
+        <div class="form-group">
+          <label>Reason</label>
+          <input
+            type="text"
+            id="leaveReason"
+            placeholder="Reason for leave"
+            required
+          >
+        </div>
+
+        <div class="form-group full">
+          <label>Details</label>
+          <textarea
+            id="leaveDetails"
+            placeholder="Write additional details..."
+          ></textarea>
+        </div>
+
+      </div>
+
+      <button class="primary-btn" type="submit">
+        Submit Leave Application
+      </button>
+
+    </form>
+
+  </div>
+
+  <div class="card">
+
+    <div class="card-title">
+      <h3>Leave History</h3>
+    </div>
+
+    <div id="leaveHistory">
+      <div class="empty">Loading...</div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- MESSAGES -->
+<section class="section" id="messages">
+
+  <div class="section-head">
+    <h2>Parent Messages</h2>
+    <p>Send a message to Usthad / Administration</p>
+  </div>
+
+  <div class="card">
+
+    <div class="card-title">
+      <h3>Send Message</h3>
+    </div>
+
+    <form id="messageForm">
+
+      <div class="form-group">
+        <label>Your Message</label>
+
+        <textarea
+          id="messageText"
+          placeholder="Write your message..."
+          required
+        ></textarea>
+
+      </div>
+
+      <button class="primary-btn" type="submit">
+        Send Message
+      </button>
+
+    </form>
+
+  </div>
+
+  <div class="card">
+
+    <div class="card-title">
+      <h3>Message History</h3>
+    </div>
+
+    <div id="messageHistory">
+      <div class="empty">Loading...</div>
+    </div>
+
+  </div>
+
+</section>
+
+  </div></main><div id="toast"></div><script type="module">
 
 import {
   initializeApp
@@ -2232,53 +2224,449 @@ let studentNumber = "";
 let studentData = null;
 
 
+/* =========================================
+   PROFESSIONAL NOTIFICATION SYSTEM
+   ========================================= */
+
+const notificationKeys = {
+
+  attendance:"safa_parent_notification_attendance",
+
+  study:"safa_parent_notification_study",
+
+  results:"safa_parent_notification_results",
+
+  notices:"safa_parent_notification_notices",
+
+  leave:"safa_parent_notification_leave",
+
+  messages:"safa_parent_notification_messages"
+
+};
+
+
+/*
+  Notification state is stored separately for each
+  parent account and student.
+
+  This prevents one parent's read status from
+  affecting another parent.
+*/
+
+function getNotificationStorageKey(type){
+
+  if(!currentUser || !studentNumber){
+
+    return notificationKeys[type];
+
+  }
+
+  return `${notificationKeys[type]}_${currentUser.uid}_${studentNumber}`;
+
+}
+
+
+function getNotificationState(type){
+
+  try{
+
+    const value =
+      localStorage.getItem(
+        getNotificationStorageKey(type)
+      );
+
+    if(!value){
+      return null;
+    }
+
+    return JSON.parse(value);
+
+  }catch(error){
+
+    return null;
+
+  }
+
+}
+
+
+function setNotificationState(type,signature){
+
+  try{
+
+    localStorage.setItem(
+      getNotificationStorageKey(type),
+      JSON.stringify({
+        signature:signature,
+        seenAt:Date.now()
+      })
+    );
+
+  }catch(error){
+
+    console.error(
+      "Notification storage error:",
+      error
+    );
+
+  }
+
+}
+
+
+function showNotification(type){
+
+  const map = {
+
+    attendance:"serviceNotifyAttendance",
+
+    study:"serviceNotifyStudy",
+
+    results:"notifyResults",
+
+    notices:"serviceNotifyNotices",
+
+    leave:"notifyLeave",
+
+    messages:"notifyMessages"
+
+  };
+
+
+  const element = $(map[type]);
+
+  if(element){
+
+    element.classList.add("show");
+
+  }
+
+}
+
+
+function hideNotification(type){
+
+  const map = {
+
+    attendance:"serviceNotifyAttendance",
+
+    study:"serviceNotifyStudy",
+
+    results:"notifyResults",
+
+    notices:"serviceNotifyNotices",
+
+    leave:"notifyLeave",
+
+    messages:"notifyMessages"
+
+  };
+
+
+  const element = $(map[type]);
+
+  if(element){
+
+    element.classList.remove("show");
+
+  }
+
+}
+
+
+/*
+  Creates a stable signature for the current
+  notification-related data.
+*/
+
+function makeNotificationSignature(rows){
+
+  try{
+
+    return JSON.stringify(
+      rows.map(row=>{
+
+        return {
+          id:row.id || "",
+          status:row.status || "",
+          reply:row.reply || "",
+          date:row.date || "",
+          leaveDate:row.leaveDate || "",
+          createdAt:
+            row.createdAt?.seconds ||
+            row.createdAt ||
+            "",
+          updatedAt:
+            row.updatedAt?.seconds ||
+            row.updatedAt ||
+            "",
+          repliedAt:
+            row.repliedAt?.seconds ||
+            row.repliedAt ||
+            "",
+          replyAt:
+            row.replyAt?.seconds ||
+            row.replyAt ||
+            ""
+        };
+
+      })
+    );
+
+  }catch(error){
+
+    return String(rows.length);
+
+  }
+
+}
+
+
+/*
+  First time this parent opens the current version:
+  existing data is treated as already seen.
+
+  After that, only a changed/new notification
+  signature produces the NEW badge.
+*/
+
+function checkNotification(type,rows){
+
+  if(!Array.isArray(rows)){
+    return;
+  }
+
+
+  const signature =
+    makeNotificationSignature(rows);
+
+
+  const state =
+    getNotificationState(type);
+
+
+  /*
+    First visit:
+    Save current state silently.
+    This prevents old records from appearing
+    as NEW notifications.
+  */
+
+  if(!state){
+
+    setNotificationState(
+      type,
+      signature
+    );
+
+    hideNotification(type);
+
+    return;
+
+  }
+
+
+  /*
+    Current data is different from the data
+    previously seen by the parent.
+  */
+
+  if(state.signature !== signature){
+
+    showNotification(type);
+
+  }else{
+
+    hideNotification(type);
+
+  }
+
+}
+
+
+/*
+  When parent opens a section, its current
+  notification state becomes READ.
+*/
+
+function markNotificationSeen(type){
+
+  let rows = [];
+
+
+  if(type === "attendance"){
+    rows = window.parentNotificationData?.attendance || [];
+  }
+
+  if(type === "study"){
+    rows = window.parentNotificationData?.study || [];
+  }
+
+  if(type === "results"){
+    rows = window.parentNotificationData?.results || [];
+  }
+
+  if(type === "notices"){
+    rows = window.parentNotificationData?.notices || [];
+  }
+
+  if(type === "leave"){
+    rows = window.parentNotificationData?.leave || [];
+  }
+
+  if(type === "messages"){
+    rows = window.parentNotificationData?.messages || [];
+  }
+
+
+  const signature =
+    makeNotificationSignature(rows);
+
+
+  setNotificationState(
+    type,
+    signature
+  );
+
+
+  hideNotification(type);
+
+}
+
+
+/*
+  Notification data cache.
+*/
+
+window.parentNotificationData = {
+
+  attendance:[],
+
+  study:[],
+
+  results:[],
+
+  notices:[],
+
+  leave:[],
+
+  messages:[]
+
+};
+
+
 /* NAVIGATION */
 
 function openSection(sectionId){
 
   document.querySelectorAll(".section").forEach(section=>{
+
     section.classList.remove("active");
+
   });
 
+
   document.querySelectorAll(".nav-btn").forEach(button=>{
+
     button.classList.remove("active");
+
   });
+
 
   const section = $(sectionId);
 
   if(section){
+
     section.classList.add("active");
+
   }
+
 
   const nav = document.querySelector(
     `.nav-btn[data-section="${sectionId}"]`
   );
 
+
   if(nav){
+
     nav.classList.add("active");
+
   }
 
+
   const titles = {
+
     home:"Parent Dashboard",
+
     child:"My Child",
+
     attendance:"Attendance",
+
     study:"Study Progress",
+
     results:"Results",
+
     notices:"Notices",
+
     donation:"MY DONATION TO SAFA",
+
     leave:"Leave Application",
+
     messages:"Parent Messages"
+
   };
+
 
   $("pageTitle").textContent =
     titles[sectionId] || "Parent Dashboard";
 
+
+  /*
+    Mark notification as READ only when
+    the parent opens the relevant section.
+  */
+
+  const notificationMap = {
+
+    attendance:"attendance",
+
+    study:"study",
+
+    results:"results",
+
+    notices:"notices",
+
+    leave:"leave",
+
+    messages:"messages"
+
+  };
+
+
+  const notificationType =
+    notificationMap[sectionId];
+
+
+  if(notificationType){
+
+    markNotificationSeen(
+      notificationType
+    );
+
+  }
+
+
   $("sidebar").classList.remove("open");
 
+
   window.scrollTo({
+
     top:0,
+
     behavior:"smooth"
+
   });
+
 }
 
 
@@ -2322,6 +2710,7 @@ document.querySelectorAll(".service-card").forEach(button=>{
 const donationFeatured =
   document.getElementById("donationFeatured");
 
+
 if(donationFeatured){
 
   donationFeatured.addEventListener("click",()=>{
@@ -2346,11 +2735,18 @@ $("menuToggle").addEventListener("click",()=>{
 
 $("logoutBtn").addEventListener("click",async()=>{
 
-  const ok = confirm("Are you sure you want to logout?");
+  const ok =
+    confirm(
+      "Are you sure you want to logout?"
+    );
+
 
   if(!ok){
+
     return;
+
   }
+
 
   try{
 
@@ -2362,7 +2758,9 @@ $("logoutBtn").addEventListener("click",async()=>{
 
     console.error(error);
 
-    showMessage("Logout failed. Please try again.");
+    showMessage(
+      "Logout failed. Please try again."
+    );
 
   }
 
@@ -2374,57 +2772,89 @@ $("logoutBtn").addEventListener("click",async()=>{
 async function loadStudent(){
 
   if(!studentNumber){
-    throw new Error("Student number not found.");
+
+    throw new Error(
+      "Student number not found."
+    );
+
   }
+
 
   const q = query(
+
     collection(db,"students"),
-    where("studentNumber","==",studentNumber)
+
+    where(
+      "studentNumber",
+      "==",
+      studentNumber
+    )
+
   );
 
-  const snap = await getDocs(q);
+
+  const snap =
+    await getDocs(q);
+
 
   if(snap.empty){
-    throw new Error("Student record not found.");
+
+    throw new Error(
+      "Student record not found."
+    );
+
   }
 
-  const studentDoc = snap.docs[0];
+
+  const studentDoc =
+    snap.docs[0];
+
 
   studentData = {
+
     id:studentDoc.id,
+
     ...studentDoc.data()
+
   };
+
 
   const name =
     studentData.studentName ||
     studentData.name ||
     "-";
 
+
   const number =
     studentData.studentNumber ||
     studentNumber ||
     "-";
+
 
   const className =
     studentData.className ||
     studentData.class ||
     "-";
 
+
   const guardian =
     studentData.guardianName ||
     studentData.parentName ||
     "-";
+
 
   const phone =
     studentData.phoneNumber ||
     studentData.phone ||
     "-";
 
+
   const address =
     studentData.studentAddress ||
     studentData.address ||
     studentData.place ||
     "-";
+
 
   const email =
     currentUser?.email ||
@@ -2434,33 +2864,65 @@ async function loadStudent(){
 
   /* HOME */
 
-  $("homeStudentName").textContent = name;
-  $("homeStudentNumber").textContent = number;
+  $("homeStudentName").textContent =
+    name;
 
-  $("homeNameInfo").textContent = name;
-  $("homeNoInfo").textContent = number;
-  $("homeClassInfo").textContent = className;
-  $("homeGuardianInfo").textContent = guardian;
-  $("homePhoneInfo").textContent = phone;
-  $("homeAddressInfo").textContent = address;
+  $("homeStudentNumber").textContent =
+    number;
 
-  $("homeInitial").textContent = getInitial(name);
+  $("homeNameInfo").textContent =
+    name;
+
+  $("homeNoInfo").textContent =
+    number;
+
+  $("homeClassInfo").textContent =
+    className;
+
+  $("homeGuardianInfo").textContent =
+    guardian;
+
+  $("homePhoneInfo").textContent =
+    phone;
+
+  $("homeAddressInfo").textContent =
+    address;
+
+  $("homeInitial").textContent =
+    getInitial(name);
 
 
   /* CHILD */
 
-  $("childName").textContent = name;
-  $("childNumber").textContent = number;
+  $("childName").textContent =
+    name;
 
-  $("childNameInfo").textContent = name;
-  $("childNoInfo").textContent = number;
-  $("childClassInfo").textContent = className;
-  $("childGuardianInfo").textContent = guardian;
-  $("childPhoneInfo").textContent = phone;
-  $("childAddressInfo").textContent = address;
-  $("childEmailInfo").textContent = email;
+  $("childNumber").textContent =
+    number;
 
-  $("childInitial").textContent = getInitial(name);
+  $("childNameInfo").textContent =
+    name;
+
+  $("childNoInfo").textContent =
+    number;
+
+  $("childClassInfo").textContent =
+    className;
+
+  $("childGuardianInfo").textContent =
+    guardian;
+
+  $("childPhoneInfo").textContent =
+    phone;
+
+  $("childAddressInfo").textContent =
+    address;
+
+  $("childEmailInfo").textContent =
+    email;
+
+  $("childInitial").textContent =
+    getInitial(name);
 
 }
 
@@ -2469,130 +2931,251 @@ async function loadStudent(){
 
 async function loadAttendance(){
 
-  const body = $("attendanceBody");
+  const body =
+    $("attendanceBody");
+
 
   try{
 
     const q = query(
-      collection(db,"attendance"),
-      where("studentNumber","==",studentNumber)
+
+      collection(
+        db,
+        "attendance"
+      ),
+
+      where(
+        "studentNumber",
+        "==",
+        studentNumber
+      )
+
     );
 
-    const snap = await getDocs(q);
 
-    const dateMap = new Map();
+    const snap =
+      await getDocs(q);
+
+
+    const dateMap =
+      new Map();
+
 
     snap.forEach(docSnap=>{
 
-      const row = docSnap.data();
+      const row =
+        docSnap.data();
+
 
       const date =
         row.date ||
         row.attendanceDate ||
-        row.createdAt?.toDate?.().toISOString()?.slice(0,10) ||
+        row.createdAt?.toDate?.()
+          ?.toISOString()
+          ?.slice(0,10) ||
         "";
 
+
       if(!date){
+
         return;
+
       }
+
 
       const status =
         row.status ||
         "Present";
 
+
       if(
+
         !dateMap.has(date) ||
+
         status === "Absent" ||
+
         status === "Leave"
+
       ){
 
-        dateMap.set(date,{
+        dateMap.set(
+
           date,
-          status
-        });
+
+          {
+
+            date,
+
+            status
+
+          }
+
+        );
 
       }
 
     });
 
 
-    const today = new Date();
+    const today =
+      new Date();
+
 
     const todayText =
       today.toISOString().slice(0,10);
 
+
     if(!dateMap.has(todayText)){
 
-      dateMap.set(todayText,{
-        date:todayText,
-        status:"Present"
-      });
+      dateMap.set(
+
+        todayText,
+
+        {
+
+          date:todayText,
+
+          status:"Present"
+
+        }
+
+      );
 
     }
 
 
     const records =
-      Array.from(dateMap.values())
+      Array.from(
+        dateMap.values()
+      )
       .sort((a,b)=>
-        String(b.date).localeCompare(String(a.date))
+        String(b.date)
+          .localeCompare(
+            String(a.date)
+          )
       );
+
+
+    window.parentNotificationData.attendance =
+      records;
+
+
+    checkNotification(
+      "attendance",
+      records
+    );
 
 
     if(!records.length){
 
       body.innerHTML = `
+
         <tr>
+
           <td colspan="2">
-            <div class="empty">No attendance records found.</div>
+
+            <div class="empty">
+
+              No attendance records found.
+
+            </div>
+
           </td>
+
         </tr>
+
       `;
 
       return;
+
     }
 
 
-    body.innerHTML = records.map(row=>{
+    body.innerHTML =
+      records.map(row=>{
 
-      const status =
-        String(row.status || "Present");
+        const status =
+          String(
+            row.status ||
+            "Present"
+          );
 
-      let cls = "present";
 
-      if(status.toLowerCase() === "absent"){
-        cls = "absent";
-      }
+        let cls =
+          "present";
 
-      if(status.toLowerCase() === "leave"){
-        cls = "leave";
-      }
 
-      return `
-        <tr>
-          <td>${escapeHtml(row.date)}</td>
-          <td>
-            <span class="status ${cls}">
-              ${escapeHtml(status)}
-            </span>
-          </td>
-        </tr>
-      `;
+        if(
+          status.toLowerCase() ===
+          "absent"
+        ){
 
-    }).join("");
+          cls =
+            "absent";
+
+        }
+
+
+        if(
+          status.toLowerCase() ===
+          "leave"
+        ){
+
+          cls =
+            "leave";
+
+        }
+
+
+        return `
+
+          <tr>
+
+            <td>
+              ${escapeHtml(row.date)}
+            </td>
+
+            <td>
+
+              <span class="status ${cls}">
+
+                ${escapeHtml(status)}
+
+              </span>
+
+            </td>
+
+          </tr>
+
+        `;
+
+      }).join("");
 
 
   }catch(error){
 
-    console.error("Attendance:",error);
+    console.error(
+      "Attendance:",
+      error
+    );
+
 
     body.innerHTML = `
+
       <tr>
+
         <td colspan="2">
+
           <div class="empty">
+
             Unable to load attendance.
+
           </div>
+
         </td>
+
       </tr>
+
     `;
 
   }
@@ -2604,24 +3187,43 @@ async function loadAttendance(){
 
 async function loadStudy(){
 
-  const list = $("studyList");
+  const list =
+    $("studyList");
+
 
   try{
 
     const q = query(
-      collection(db,"studyProgress"),
-      where("studentNumber","==",studentNumber)
+
+      collection(
+        db,
+        "studyProgress"
+      ),
+
+      where(
+        "studentNumber",
+        "==",
+        studentNumber
+      )
+
     );
 
-    const snap = await getDocs(q);
+
+    const snap =
+      await getDocs(q);
+
 
     const rows = [];
+
 
     snap.forEach(docSnap=>{
 
       rows.push({
+
         id:docSnap.id,
+
         ...docSnap.data()
+
       });
 
     });
@@ -2631,17 +3233,34 @@ async function loadStudy(){
 
       const da =
         a.date ||
-        a.createdAt?.toDate?.().getTime?.() ||
+        a.createdAt?.toDate?.()
+          .getTime?.() ||
         "";
+
 
       const dbb =
         b.date ||
-        b.createdAt?.toDate?.().getTime?.() ||
+        b.createdAt?.toDate?.()
+          .getTime?.() ||
         "";
 
-      return String(dbb).localeCompare(String(da));
+
+      return String(dbb)
+        .localeCompare(
+          String(da)
+        );
 
     });
+
+
+    window.parentNotificationData.study =
+      rows;
+
+
+    checkNotification(
+      "study",
+      rows
+    );
 
 
     if(!rows.length){
@@ -2649,144 +3268,244 @@ async function loadStudy(){
       list.className = "";
 
       list.innerHTML = `
+
         <div class="empty">
+
           No study progress records found.
+
         </div>
+
       `;
 
       return;
+
     }
 
 
-    list.className = "progress-grid";
+    list.className =
+      "progress-grid";
 
 
-    list.innerHTML = rows.map(row=>{
+    list.innerHTML =
+      rows.map(row=>{
 
-      const surah =
-        row.surah ||
-        row.title ||
-        row.subject ||
-        "Study Progress";
-
-      const date =
-        getDateText(row.date || row.createdAt);
-
-      const newLesson =
-        row.newLesson ||
-        row.lesson ||
-        "-";
-
-      const revision =
-        row.revision ||
-        row.revisionLesson ||
-        "-";
-
-      const performance =
-        row.performance ||
-        row.hifzPerformance ||
-        "-";
-
-      const studyStatus =
-        row.studyStatus ||
-        row.darsStudyStatus ||
-        "-";
-
-      const teacherNote =
-        row.teacherNote ||
-        row.note ||
-        "";
-
-      let progress = 0;
-
-      const p =
-        String(performance).toLowerCase();
-
-      if(
-        p.includes("excellent") ||
-        p.includes("very good")
-      ){
-        progress = 100;
-      }else if(
-        p.includes("good")
-      ){
-        progress = 80;
-      }else if(
-        p.includes("average")
-      ){
-        progress = 60;
-      }else if(
-        p.includes("poor")
-      ){
-        progress = 35;
-      }else{
-        progress = 70;
-      }
+        const surah =
+          row.surah ||
+          row.title ||
+          row.subject ||
+          "Study Progress";
 
 
-      return `
-        <div class="progress-card">
+        const date =
+          getDateText(
+            row.date ||
+            row.createdAt
+          );
 
-          <h3>${escapeHtml(surah)}</h3>
 
-          <div class="progress-date">
-            ${escapeHtml(date)}
-          </div>
+        const newLesson =
+          row.newLesson ||
+          row.lesson ||
+          "-";
 
-          <div class="progress-row">
-            <span>New Lesson</span>
-            <strong>${escapeHtml(newLesson)}</strong>
-          </div>
 
-          <div class="progress-row">
-            <span>Revision</span>
-            <strong>${escapeHtml(revision)}</strong>
-          </div>
+        const revision =
+          row.revision ||
+          row.revisionLesson ||
+          "-";
 
-          <div class="progress-row">
-            <span>Hifz Performance</span>
-            <strong>${escapeHtml(performance)}</strong>
-          </div>
 
-          <div class="progress-bar">
-            <div
-              class="progress-fill"
-              style="width:${progress}%">
+        const performance =
+          row.performance ||
+          row.hifzPerformance ||
+          "-";
+
+
+        const studyStatus =
+          row.studyStatus ||
+          row.darsStudyStatus ||
+          "-";
+
+
+        const teacherNote =
+          row.teacherNote ||
+          row.note ||
+          "";
+
+
+        let progress =
+          0;
+
+
+        const p =
+          String(
+            performance
+          ).toLowerCase();
+
+
+        if(
+
+          p.includes("excellent") ||
+
+          p.includes("very good")
+
+        ){
+
+          progress =
+            100;
+
+        }else if(
+
+          p.includes("good")
+
+        ){
+
+          progress =
+            80;
+
+        }else if(
+
+          p.includes("average")
+
+        ){
+
+          progress =
+            60;
+
+        }else if(
+
+          p.includes("poor")
+
+        ){
+
+          progress =
+            35;
+
+        }else{
+
+          progress =
+            70;
+
+        }
+
+
+        return `
+
+          <div class="progress-card">
+
+            <h3>
+              ${escapeHtml(surah)}
+            </h3>
+
+            <div class="progress-date">
+
+              ${escapeHtml(date)}
+
             </div>
-          </div>
 
-          <div class="progress-row">
-            <span>Dars & Study Status</span>
-            <strong>${escapeHtml(studyStatus)}</strong>
-          </div>
+            <div class="progress-row">
 
-          ${
-            teacherNote
-            ? `
-              <div class="progress-row">
-                <span>Teacher Note</span>
-                <strong>${escapeHtml(teacherNote)}</strong>
+              <span>
+                New Lesson
+              </span>
+
+              <strong>
+                ${escapeHtml(newLesson)}
+              </strong>
+
+            </div>
+
+            <div class="progress-row">
+
+              <span>
+                Revision
+              </span>
+
+              <strong>
+                ${escapeHtml(revision)}
+              </strong>
+
+            </div>
+
+            <div class="progress-row">
+
+              <span>
+                Hifz Performance
+              </span>
+
+              <strong>
+                ${escapeHtml(performance)}
+              </strong>
+
+            </div>
+
+            <div class="progress-bar">
+
+              <div
+                class="progress-fill"
+                style="width:${progress}%">
               </div>
-            `
-            : ""
-          }
 
-        </div>
-      `;
+            </div>
 
-    }).join("");
+            <div class="progress-row">
+
+              <span>
+                Dars & Study Status
+              </span>
+
+              <strong>
+                ${escapeHtml(studyStatus)}
+              </strong>
+
+            </div>
+
+            ${
+              teacherNote
+              ? `
+
+                <div class="progress-row">
+
+                  <span>
+                    Teacher Note
+                  </span>
+
+                  <strong>
+                    ${escapeHtml(teacherNote)}
+                  </strong>
+
+                </div>
+
+              `
+              : ""
+            }
+
+          </div>
+
+        `;
+
+      }).join("");
 
 
   }catch(error){
 
-    console.error("Study:",error);
+    console.error(
+      "Study:",
+      error
+    );
+
 
     list.className = "";
 
+
     list.innerHTML = `
+
       <div class="empty">
+
         Unable to load study progress.
+
       </div>
+
     `;
 
   }
@@ -2798,27 +3517,53 @@ async function loadStudy(){
 
 async function loadResults(){
 
-  const list = $("resultsList");
+  const list =
+    $("resultsList");
+
 
   try{
 
     const q = query(
-      collection(db,"results"),
-      where("studentNumber","==",studentNumber),
-      where("status","==","published")
+
+      collection(
+        db,
+        "results"
+      ),
+
+      where(
+        "studentNumber",
+        "==",
+        studentNumber
+      ),
+
+      where(
+        "status",
+        "==",
+        "published"
+      )
+
     );
 
-    const snap = await getDocs(q);
+
+    const snap =
+      await getDocs(q);
+
 
     const rows = [];
 
+
     snap.forEach(docSnap=>{
 
-      const data = docSnap.data();
+      const data =
+        docSnap.data();
+
 
       rows.push({
+
         id:docSnap.id,
+
         ...data
+
       });
 
     });
@@ -2827,29 +3572,54 @@ async function loadResults(){
     rows.sort((a,b)=>{
 
       const da =
-        a.createdAt?.toDate?.().getTime?.() ||
-        a.createdAt?.seconds * 1000 ||
+        a.createdAt?.toDate?.()
+          .getTime?.() ||
+
+        a.createdAt?.seconds *
+          1000 ||
+
         0;
 
+
       const dbb =
-        b.createdAt?.toDate?.().getTime?.() ||
-        b.createdAt?.seconds * 1000 ||
+        b.createdAt?.toDate?.()
+          .getTime?.() ||
+
+        b.createdAt?.seconds *
+          1000 ||
+
         0;
+
 
       return dbb-da;
 
     });
 
 
+    window.parentNotificationData.results =
+      rows;
+
+
+    checkNotification(
+      "results",
+      rows
+    );
+
+
     if(!rows.length){
 
       list.innerHTML = `
+
         <div class="empty">
+
           No published results available.
+
         </div>
+
       `;
 
       return;
+
     }
 
 
@@ -2862,6 +3632,7 @@ async function loadResults(){
           row.subject ||
           "Result";
 
+
         const mark =
           row.mark ??
           row.marks ??
@@ -2870,33 +3641,46 @@ async function loadResults(){
           row.score ??
           "-";
 
+
         const date =
           getDateText(
+
             row.createdAt ||
             row.date
+
           );
 
 
         return `
+
           <div class="result-card">
 
             <h3>
+
               ${escapeHtml(title)}
+
             </h3>
 
             <div class="result-mark">
+
               ${escapeHtml(mark)}
+
             </div>
 
             <span class="status approved">
+
               Published
+
             </span>
 
             <div class="notice-date">
+
               ${escapeHtml(date)}
+
             </div>
 
           </div>
+
         `;
 
       }).join("");
@@ -2904,12 +3688,20 @@ async function loadResults(){
 
   }catch(error){
 
-    console.error("Results:",error);
+    console.error(
+      "Results:",
+      error
+    );
+
 
     list.innerHTML = `
+
       <div class="empty">
+
         Unable to load results.
+
       </div>
+
     `;
 
   }
@@ -2921,26 +3713,47 @@ async function loadResults(){
 
 async function loadNotices(){
 
-  const list = $("noticesList");
+  const list =
+    $("noticesList");
+
 
   try{
 
     const q = query(
-      collection(db,"notices"),
-      where("status","==","published")
+
+      collection(
+        db,
+        "notices"
+      ),
+
+      where(
+        "status",
+        "==",
+        "published"
+      )
+
     );
 
-    const snap = await getDocs(q);
+
+    const snap =
+      await getDocs(q);
+
 
     const rows = [];
 
+
     snap.forEach(docSnap=>{
 
-      const data = docSnap.data();
+      const data =
+        docSnap.data();
+
 
       rows.push({
+
         id:docSnap.id,
+
         ...data
+
       });
 
     });
@@ -2949,29 +3762,54 @@ async function loadNotices(){
     rows.sort((a,b)=>{
 
       const da =
-        a.createdAt?.toDate?.().getTime?.() ||
-        a.createdAt?.seconds * 1000 ||
+        a.createdAt?.toDate?.()
+          .getTime?.() ||
+
+        a.createdAt?.seconds *
+          1000 ||
+
         0;
 
+
       const dbb =
-        b.createdAt?.toDate?.().getTime?.() ||
-        b.createdAt?.seconds * 1000 ||
+        b.createdAt?.toDate?.()
+          .getTime?.() ||
+
+        b.createdAt?.seconds *
+          1000 ||
+
         0;
+
 
       return dbb-da;
 
     });
 
 
+    window.parentNotificationData.notices =
+      rows;
+
+
+    checkNotification(
+      "notices",
+      rows
+    );
+
+
     if(!rows.length){
 
       list.innerHTML = `
+
         <div class="empty">
+
           No notices available.
+
         </div>
+
       `;
 
       return;
+
     }
 
 
@@ -2984,6 +3822,7 @@ async function loadNotices(){
           row.heading ||
           "Notice";
 
+
         const text =
           row.text ||
           row.message ||
@@ -2991,29 +3830,40 @@ async function loadNotices(){
           row.content ||
           "";
 
+
         const date =
           getDateText(
+
             row.createdAt ||
             row.date
+
           );
 
 
         return `
+
           <div class="notice-card">
 
             <h3>
+
               ${escapeHtml(title)}
+
             </h3>
 
             <p>
+
               ${escapeHtml(text)}
+
             </p>
 
             <div class="notice-date">
+
               ${escapeHtml(date)}
+
             </div>
 
           </div>
+
         `;
 
       }).join("");
@@ -3021,12 +3871,20 @@ async function loadNotices(){
 
   }catch(error){
 
-    console.error("Notices:",error);
+    console.error(
+      "Notices:",
+      error
+    );
+
 
     list.innerHTML = `
+
       <div class="empty">
+
         Unable to load notices.
+
       </div>
+
     `;
 
   }
@@ -3036,97 +3894,173 @@ async function loadNotices(){
 
 /* LEAVE SUBMIT */
 
-$("leaveForm").addEventListener("submit",async event=>{
+$("leaveForm").addEventListener(
+  "submit",
+  async event=>{
 
-  event.preventDefault();
+    event.preventDefault();
 
-  if(!currentUser || !studentNumber){
-    showMessage("Parent account not ready.");
-    return;
+
+    if(
+      !currentUser ||
+      !studentNumber
+    ){
+
+      showMessage(
+        "Parent account not ready."
+      );
+
+      return;
+
+    }
+
+
+    const leaveDate =
+      $("leaveDate").value;
+
+
+    const reason =
+      $("leaveReason")
+        .value
+        .trim();
+
+
+    const details =
+      $("leaveDetails")
+        .value
+        .trim();
+
+
+    if(
+      !leaveDate ||
+      !reason
+    ){
+
+      showMessage(
+        "Please enter leave date and reason."
+      );
+
+      return;
+
+    }
+
+
+    try{
+
+      await addDoc(
+
+        collection(
+          db,
+          "leaveRequests"
+        ),
+
+        {
+
+          parentUid:
+            currentUser.uid,
+
+          parentEmail:
+            currentUser.email || "",
+
+          studentNumber:
+            studentNumber,
+
+          leaveDate:
+            leaveDate,
+
+          reason:
+            reason,
+
+          details:
+            details,
+
+          status:
+            "pending",
+
+          reply:
+            "",
+
+          createdAt:
+            serverTimestamp()
+
+        }
+
+      );
+
+
+      $("leaveForm").reset();
+
+
+      $("leaveDate").value =
+        new Date()
+          .toISOString()
+          .slice(0,10);
+
+
+      showMessage(
+        "Leave application submitted."
+      );
+
+
+      await loadLeaveHistory();
+
+
+    }catch(error){
+
+      console.error(error);
+
+
+      showMessage(
+        "Unable to submit leave application."
+      );
+
+    }
+
   }
-
-
-  const leaveDate =
-    $("leaveDate").value;
-
-  const reason =
-    $("leaveReason").value.trim();
-
-  const details =
-    $("leaveDetails").value.trim();
-
-
-  if(!leaveDate || !reason){
-
-    showMessage("Please enter leave date and reason.");
-
-    return;
-  }
-
-
-  try{
-
-    await addDoc(
-      collection(db,"leaveRequests"),
-      {
-        parentUid:currentUser.uid,
-        parentEmail:currentUser.email || "",
-        studentNumber:studentNumber,
-        leaveDate:leaveDate,
-        reason:reason,
-        details:details,
-        status:"pending",
-        reply:"",
-        createdAt:serverTimestamp()
-      }
-    );
-
-
-    $("leaveForm").reset();
-
-    $("leaveDate").value =
-      new Date().toISOString().slice(0,10);
-
-    showMessage("Leave application submitted.");
-
-    await loadLeaveHistory();
-
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      "Unable to submit leave application."
-    );
-
-  }
-
-});
+);
 
 
 /* LEAVE HISTORY */
 
 async function loadLeaveHistory(){
 
-  const list = $("leaveHistory");
+  const list =
+    $("leaveHistory");
+
 
   try{
 
     const q = query(
-      collection(db,"leaveRequests"),
-      where("parentUid","==",currentUser.uid)
+
+      collection(
+        db,
+        "leaveRequests"
+      ),
+
+      where(
+        "parentUid",
+        "==",
+        currentUser.uid
+      )
+
     );
 
-    const snap = await getDocs(q);
+
+    const snap =
+      await getDocs(q);
+
 
     const rows = [];
+
 
     snap.forEach(docSnap=>{
 
       rows.push({
+
         id:docSnap.id,
+
         ...docSnap.data()
+
       });
 
     });
@@ -3135,104 +4069,227 @@ async function loadLeaveHistory(){
     rows.sort((a,b)=>{
 
       const da =
-        a.createdAt?.toDate?.().getTime?.() || 0;
+        a.createdAt?.toDate?.()
+          .getTime?.() ||
+
+        0;
+
 
       const dbb =
-        b.createdAt?.toDate?.().getTime?.() || 0;
+        b.createdAt?.toDate?.()
+          .getTime?.() ||
+
+        0;
+
 
       return dbb-da;
 
     });
 
 
+    /*
+      Only Usthad's response/status is treated
+      as a parent notification.
+
+      Parent's own pending application is NOT
+      treated as a notification.
+    */
+
+    const notificationRows =
+      rows.filter(row=>{
+
+        const status =
+          String(
+            row.status || ""
+          ).toLowerCase();
+
+
+        const reply =
+          String(
+            row.reply || ""
+          ).trim();
+
+
+        return (
+
+          status === "approved" ||
+
+          status === "rejected" ||
+
+          reply !== ""
+
+        );
+
+      });
+
+
+    window.parentNotificationData.leave =
+      notificationRows;
+
+
+    checkNotification(
+      "leave",
+      notificationRows
+    );
+
+
     if(!rows.length){
 
       list.innerHTML = `
+
         <div class="empty">
+
           No leave applications yet.
+
         </div>
+
       `;
 
       return;
+
     }
 
 
-    list.innerHTML = rows.map(row=>{
+    list.innerHTML =
+      rows.map(row=>{
 
-      const status =
-        String(row.status || "pending");
-
-      let cls = "pending";
-
-      if(status.toLowerCase() === "approved"){
-        cls = "approved";
-      }
-
-      if(status.toLowerCase() === "rejected"){
-        cls = "rejected";
-      }
+        const status =
+          String(
+            row.status ||
+            "pending"
+          );
 
 
-      return `
-        <div class="history-card">
+        let cls =
+          "pending";
 
-          <div class="history-top">
 
-            <div>
-              <h4>
-                Leave Date:
-                ${escapeHtml(row.leaveDate || "-")}
-              </h4>
+        if(
+          status.toLowerCase() ===
+          "approved"
+        ){
 
-              <p>
-                <strong>Reason:</strong>
-                ${escapeHtml(row.reason || "-")}
-              </p>
+          cls =
+            "approved";
 
-              ${
-                row.details
-                ? `
-                  <p>
-                    <strong>Details:</strong>
-                    ${escapeHtml(row.details)}
-                  </p>
-                `
-                : ""
-              }
+        }
+
+
+        if(
+          status.toLowerCase() ===
+          "rejected"
+        ){
+
+          cls =
+            "rejected";
+
+        }
+
+
+        return `
+
+          <div class="history-card">
+
+            <div class="history-top">
+
+              <div>
+
+                <h4>
+
+                  Leave Date:
+                  ${escapeHtml(
+                    row.leaveDate || "-"
+                  )}
+
+                </h4>
+
+                <p>
+
+                  <strong>
+                    Reason:
+                  </strong>
+
+                  ${escapeHtml(
+                    row.reason || "-"
+                  )}
+
+                </p>
+
+                ${
+                  row.details
+                  ? `
+
+                    <p>
+
+                      <strong>
+                        Details:
+                      </strong>
+
+                      ${escapeHtml(
+                        row.details
+                      )}
+
+                    </p>
+
+                  `
+                  : ""
+                }
+
+              </div>
+
+              <span class="status ${cls}">
+
+                ${escapeHtml(status)}
+
+              </span>
 
             </div>
 
-            <span class="status ${cls}">
-              ${escapeHtml(status)}
-            </span>
+            ${
+              row.reply
+              ? `
+
+                <div class="reply">
+
+                  <strong>
+                    Usthad Reply:
+                  </strong>
+
+                  <br>
+
+                  ${escapeHtml(
+                    row.reply
+                  )}
+
+                </div>
+
+              `
+              : ""
+            }
 
           </div>
 
-          ${
-            row.reply
-            ? `
-              <div class="reply">
-                <strong>Usthad Reply:</strong><br>
-                ${escapeHtml(row.reply)}
-              </div>
-            `
-            : ""
-          }
+        `;
 
-        </div>
-      `;
-
-    }).join("");
+      }).join("");
 
 
   }catch(error){
 
-    console.error("Leave history:",error);
+    console.error(
+      "Leave history:",
+      error
+    );
+
 
     list.innerHTML = `
+
       <div class="empty">
+
         Unable to load leave history.
+
       </div>
+
     `;
 
   }
@@ -3242,86 +4299,148 @@ async function loadLeaveHistory(){
 
 /* MESSAGE SUBMIT */
 
-$("messageForm").addEventListener("submit",async event=>{
+$("messageForm").addEventListener(
+  "submit",
+  async event=>{
 
-  event.preventDefault();
+    event.preventDefault();
 
-  if(!currentUser || !studentNumber){
-    showMessage("Parent account not ready.");
-    return;
+
+    if(
+      !currentUser ||
+      !studentNumber
+    ){
+
+      showMessage(
+        "Parent account not ready."
+      );
+
+      return;
+
+    }
+
+
+    const text =
+      $("messageText")
+        .value
+        .trim();
+
+
+    if(!text){
+
+      showMessage(
+        "Please enter your message."
+      );
+
+      return;
+
+    }
+
+
+    try{
+
+      await addDoc(
+
+        collection(
+          db,
+          "messages"
+        ),
+
+        {
+
+          parentUid:
+            currentUser.uid,
+
+          parentEmail:
+            currentUser.email || "",
+
+          studentNumber:
+            studentNumber,
+
+          text:
+            text,
+
+          reply:
+            "",
+
+          status:
+            "unread",
+
+          createdAt:
+            serverTimestamp()
+
+        }
+
+      );
+
+
+      $("messageForm").reset();
+
+
+      showMessage(
+        "Message sent successfully."
+      );
+
+
+      await loadMessageHistory();
+
+
+    }catch(error){
+
+      console.error(error);
+
+
+      showMessage(
+        "Unable to send message."
+      );
+
+    }
+
   }
-
-
-  const text =
-    $("messageText").value.trim();
-
-
-  if(!text){
-
-    showMessage("Please enter your message.");
-
-    return;
-  }
-
-
-  try{
-
-    await addDoc(
-      collection(db,"messages"),
-      {
-        parentUid:currentUser.uid,
-        parentEmail:currentUser.email || "",
-        studentNumber:studentNumber,
-        text:text,
-        reply:"",
-        status:"unread",
-        createdAt:serverTimestamp()
-      }
-    );
-
-
-    $("messageForm").reset();
-
-    showMessage("Message sent successfully.");
-
-    await loadMessageHistory();
-
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      "Unable to send message."
-    );
-
-  }
-
-});
+);
 
 
 /* MESSAGE HISTORY */
 
 async function loadMessageHistory(){
 
-  const list = $("messageHistory");
+  const list =
+    $("messageHistory");
+
 
   try{
 
     const q = query(
-      collection(db,"messages"),
-      where("parentUid","==",currentUser.uid)
+
+      collection(
+        db,
+        "messages"
+      ),
+
+      where(
+        "parentUid",
+        "==",
+        currentUser.uid
+      )
+
     );
 
-    const snap = await getDocs(q);
+
+    const snap =
+      await getDocs(q);
+
 
     const rows = [];
+
 
     snap.forEach(docSnap=>{
 
       rows.push({
+
         id:docSnap.id,
+
         ...docSnap.data()
+
       });
 
     });
@@ -3330,89 +4449,164 @@ async function loadMessageHistory(){
     rows.sort((a,b)=>{
 
       const da =
-        a.createdAt?.toDate?.().getTime?.() || 0;
+        a.createdAt?.toDate?.()
+          .getTime?.() ||
+
+        0;
+
 
       const dbb =
-        b.createdAt?.toDate?.().getTime?.() || 0;
+        b.createdAt?.toDate?.()
+          .getTime?.() ||
+
+        0;
+
 
       return dbb-da;
 
     });
 
 
+    /*
+      Only Usthad reply is treated as
+      a notification.
+
+      Parent's own message is NOT a notification.
+    */
+
+    const notificationRows =
+      rows.filter(row=>{
+
+        return String(
+          row.reply || ""
+        ).trim() !== "";
+
+      });
+
+
+    window.parentNotificationData.messages =
+      notificationRows;
+
+
+    checkNotification(
+      "messages",
+      notificationRows
+    );
+
+
     if(!rows.length){
 
       list.innerHTML = `
+
         <div class="empty">
+
           No messages yet.
+
         </div>
+
       `;
 
       return;
+
     }
 
 
-    list.innerHTML = rows.map(row=>{
+    list.innerHTML =
+      rows.map(row=>{
 
-      return `
-        <div class="history-card">
+        return `
 
-          <div class="history-top">
+          <div class="history-card">
 
-            <div>
-              <h4>Your Message</h4>
+            <div class="history-top">
 
-              <p>
-                ${escapeHtml(row.text || "")}
-              </p>
+              <div>
 
-              <div class="notice-date">
-                ${escapeHtml(
-                  getDateText(row.createdAt)
-                )}
+                <h4>
+                  Your Message
+                </h4>
+
+                <p>
+
+                  ${escapeHtml(
+                    row.text || ""
+                  )}
+
+                </p>
+
+                <div class="notice-date">
+
+                  ${escapeHtml(
+                    getDateText(
+                      row.createdAt
+                    )
+                  )}
+
+                </div>
+
               </div>
+
+              <span class="status ${
+                row.reply
+                ? "approved"
+                : "pending"
+              }">
+
+                ${
+                  row.reply
+                  ? "Replied"
+                  : "Pending"
+                }
+
+              </span>
 
             </div>
 
-            <span class="status ${
+            ${
               row.reply
-              ? "approved"
-              : "pending"
-            }">
-              ${
-                row.reply
-                ? "Replied"
-                : "Pending"
-              }
-            </span>
+              ? `
+
+                <div class="reply">
+
+                  <strong>
+                    Usthad Reply:
+                  </strong>
+
+                  <br>
+
+                  ${escapeHtml(
+                    row.reply
+                  )}
+
+                </div>
+
+              `
+              : ""
+            }
 
           </div>
 
-          ${
-            row.reply
-            ? `
-              <div class="reply">
-                <strong>Usthad Reply:</strong><br>
-                ${escapeHtml(row.reply)}
-              </div>
-            `
-            : ""
-          }
+        `;
 
-        </div>
-      `;
-
-    }).join("");
+      }).join("");
 
 
   }catch(error){
 
-    console.error("Message history:",error);
+    console.error(
+      "Message history:",
+      error
+    );
+
 
     list.innerHTML = `
+
       <div class="empty">
+
         Unable to load message history.
+
       </div>
+
     `;
 
   }
@@ -3422,139 +4616,180 @@ async function loadMessageHistory(){
 
 /* AUTH */
 
-onAuthStateChanged(auth,async user=>{
+onAuthStateChanged(
+  auth,
+  async user=>{
 
-  try{
+    try{
 
-    if(!user){
+      if(!user){
 
-      location.href="index.html";
+        location.href =
+          "index.html";
 
-      return;
-    }
+        return;
 
-
-    currentUser = user;
-
-
-    const userRef =
-      doc(db,"users",user.uid);
-
-    const userSnap =
-      await getDoc(userRef);
+      }
 
 
-    if(!userSnap.exists()){
+      currentUser =
+        user;
 
-      throw new Error(
-        "Parent account details not found."
+
+      const userRef =
+        doc(
+          db,
+          "users",
+          user.uid
+        );
+
+
+      const userSnap =
+        await getDoc(
+          userRef
+        );
+
+
+      if(!userSnap.exists()){
+
+        throw new Error(
+          "Parent account details not found."
+        );
+
+      }
+
+
+      const userData =
+        userSnap.data();
+
+
+      if(
+        userData.role !==
+        "parent"
+      ){
+
+        throw new Error(
+          "This account is not registered as a parent account."
+        );
+
+      }
+
+
+      studentNumber =
+        userData.studentNumber ||
+        userData.studentNo ||
+        "";
+
+
+      if(!studentNumber){
+
+        throw new Error(
+          "Student number is not linked to this parent account."
+        );
+
+      }
+
+
+      await loadStudent();
+
+
+      await Promise.all([
+
+        loadAttendance(),
+
+        loadStudy(),
+
+        loadResults(),
+
+        loadNotices(),
+
+        loadLeaveHistory(),
+
+        loadMessageHistory()
+
+      ]);
+
+
+      $("loading").style.display =
+        "none";
+
+
+    }catch(error){
+
+      console.error(
+        "Parent Dashboard Error:",
+        error
       );
 
-    }
 
-
-    const userData =
-      userSnap.data();
-
-
-    if(userData.role !== "parent"){
-
-      throw new Error(
-        "This account is not registered as a parent account."
-      );
-
-    }
-
-
-    studentNumber =
-      userData.studentNumber ||
-      userData.studentNo ||
-      "";
-
-
-    if(!studentNumber){
-
-      throw new Error(
-        "Student number is not linked to this parent account."
-      );
-
-    }
-
-
-    await loadStudent();
-
-    await Promise.all([
-      loadAttendance(),
-      loadStudy(),
-      loadResults(),
-      loadNotices(),
-      loadLeaveHistory(),
-      loadMessageHistory()
-    ]);
-
-
-    $("loading").style.display = "none";
-
-
-  }catch(error){
-
-    console.error("Parent Dashboard Error:",error);
-
-    $("loading").innerHTML = `
-      <div style="
-        max-width:450px;
-        padding:25px;
-        text-align:center;
-      ">
+      $("loading").innerHTML = `
 
         <div style="
-          font-size:45px;
-          margin-bottom:15px;
+          max-width:450px;
+          padding:25px;
+          text-align:center;
         ">
-          ⚠️
+
+          <div style="
+            font-size:45px;
+            margin-bottom:15px;
+          ">
+
+            ⚠️
+
+          </div>
+
+          <strong>
+
+            Parent Dashboard Error
+
+          </strong>
+
+          <p style="
+            margin-top:10px;
+            opacity:.8;
+            line-height:1.5;
+          ">
+
+            ${escapeHtml(
+              error.message
+            )}
+
+          </p>
+
+          <button
+            onclick="location.href='index.html'"
+            style="
+              margin-top:20px;
+              border:0;
+              padding:12px 20px;
+              border-radius:8px;
+              background:#d6a93a;
+              color:#032b24;
+              font-weight:bold;
+              cursor:pointer;
+            ">
+
+            Back to Login
+
+          </button>
+
         </div>
 
-        <strong>
-          Parent Dashboard Error
-        </strong>
+      `;
 
-        <p style="
-          margin-top:10px;
-          opacity:.8;
-          line-height:1.5;
-        ">
-          ${escapeHtml(error.message)}
-        </p>
-
-        <button
-          onclick="location.href='index.html'"
-          style="
-            margin-top:20px;
-            border:0;
-            padding:12px 20px;
-            border-radius:8px;
-            background:#d6a93a;
-            color:#032b24;
-            font-weight:bold;
-            cursor:pointer;
-          ">
-          Back to Login
-        </button>
-
-      </div>
-    `;
+    }
 
   }
-
-});
+);
 
 
 /* TODAY'S DATE */
 
 $("leaveDate").value =
-  new Date().toISOString().slice(0,10);
+  new Date()
+    .toISOString()
+    .slice(0,10);
 
-</script>
-
-</body>
+</script></body>
 </html>
