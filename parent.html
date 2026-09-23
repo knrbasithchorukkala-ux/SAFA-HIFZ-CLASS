@@ -553,49 +553,104 @@ body::before{
   word-break:break-word;
 }
 
-/* STATS */
-.stats{
-  display:none;
+/* MAIN ACCESS */
+.main-access-grid{
+  display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:15px;
   margin-bottom:20px;
 }
 
-.stat{
+.main-access{
   background:white;
   border:1px solid var(--border);
   border-radius:15px;
-  padding:18px;
+  padding:20px;
   box-shadow:var(--shadow);
   position:relative;
   overflow:hidden;
+  cursor:pointer;
+  transition:.2s;
+  color:var(--primary);
+  text-align:left;
+  font-family:inherit;
 }
 
-.stat::after{
+.main-access:hover{
+  transform:translateY(-3px);
+  border-color:#bcdace;
+  box-shadow:0 14px 30px rgba(4,45,35,.13);
+}
+
+.main-access::after{
   content:"";
   position:absolute;
-  width:65px;
-  height:65px;
-  right:-20px;
-  bottom:-20px;
+  width:75px;
+  height:75px;
+  right:-25px;
+  bottom:-25px;
   border-radius:50%;
-  background:rgba(11,102,80,.08);
+  background:rgba(11,102,80,.07);
 }
 
-.stat-icon{
-  font-size:22px;
-  margin-bottom:9px;
+.main-access-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  position:relative;
+  z-index:2;
 }
 
-.stat strong{
-  display:block;
-  font-size:24px;
+.main-access-icon{
+  width:48px;
+  height:48px;
+  border-radius:12px;
+  background:#edf6f2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+}
+
+.main-access-notification{
+  min-width:28px;
+  height:28px;
+  padding:0 7px;
+  border-radius:20px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#063b2f;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.main-access h3{
+  margin-top:15px;
+  font-size:16px;
   color:var(--primary);
+  position:relative;
+  z-index:2;
 }
 
-.stat span{
-  font-size:12px;
+.main-access p{
+  margin-top:5px;
   color:var(--muted);
+  font-size:11px;
+  position:relative;
+  z-index:2;
+}
+
+.main-access-link{
+  display:block;
+  margin-top:14px;
+  color:var(--primary2);
+  font-size:11px;
+  font-weight:bold;
+  position:relative;
+  z-index:2;
 }
 
 /* QUICK */
@@ -616,8 +671,6 @@ body::before{
   font-weight:bold;
   box-shadow:0 5px 18px rgba(0,0,0,.05);
   transition:.2s;
-  position:relative;
-  min-height:105px;
 }
 
 .quick-btn:hover{
@@ -630,82 +683,6 @@ body::before{
   display:block;
   font-size:25px;
   margin-bottom:7px;
-}
-
-.quick-notification{
-  position:absolute;
-  top:8px;
-  right:8px;
-  min-width:22px;
-  height:22px;
-  padding:0 6px;
-  border-radius:20px;
-  background:#c53b3b;
-  color:white;
-  font-size:10px;
-  font-weight:bold;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:2px;
-  box-shadow:0 3px 8px rgba(197,59,59,.25);
-}
-
-.quick-notification.zero{
-  background:#edf6f2;
-  color:#718096;
-  box-shadow:none;
-}
-
-.quick-notification.zero::before{
-  content:"🔔";
-}
-
-.quick-notification:not(.zero)::before{
-  content:"🔔";
-  font-size:9px;
-}
-
-/* ISLAMIC MAIN QUICK ACCESS */
-.quick-grid .quick-btn{
-  background:
-    radial-gradient(
-      circle at 85% 15%,
-      rgba(242,207,114,.24),
-      transparent 32%
-    ),
-    linear-gradient(
-      135deg,
-      #063b2f,
-      #0b6650
-    );
-  color:#fff;
-  border:1px solid rgba(214,169,58,.55);
-  box-shadow:
-    0 8px 22px rgba(4,45,35,.16),
-    inset 0 1px 0 rgba(255,255,255,.08);
-}
-
-.quick-grid .quick-btn:hover{
-  transform:translateY(-3px);
-  border-color:var(--gold2);
-  box-shadow:
-    0 12px 28px rgba(4,45,35,.24),
-    inset 0 1px 0 rgba(255,255,255,.12);
-}
-
-.quick-grid .quick-btn .qicon{
-  color:#f2cf72;
-}
-
-.quick-grid .quick-notification.zero{
-  background:rgba(255,255,255,.15);
-  color:#f2cf72;
-}
-
-.quick-grid .quick-notification:not(.zero){
-  background:#d6a93a;
-  color:#063b2f;
 }
 
 /* SECTION HEAD */
@@ -1212,7 +1189,7 @@ textarea{
     padding:15px;
   }
 
-  .stats{
+  .main-access-grid{
     grid-template-columns:repeat(2,1fr);
   }
 
@@ -1297,17 +1274,23 @@ textarea{
     grid-template-columns:1fr;
   }
 
-  .stats{
+  .main-access-grid{
     grid-template-columns:1fr 1fr;
     gap:10px;
   }
 
-  .stat{
-    padding:14px;
+  .main-access{
+    padding:15px;
   }
 
-  .stat strong{
-    font-size:21px;
+  .main-access-icon{
+    width:42px;
+    height:42px;
+    font-size:22px;
+  }
+
+  .main-access h3{
+    font-size:14px;
   }
 
   .quick-grid{
@@ -1399,7 +1382,7 @@ textarea{
     </button>
 
     <button class="nav-btn" data-section="leave">
-      <span>📝</span> Leave
+      <span>📝</span> Leave Request
     </button>
 
     <button class="nav-btn" data-section="messages">
@@ -1498,200 +1481,139 @@ textarea{
 
       </div>
 
-      <!-- CHILD CARD -->
-      <div class="card child-card">
+      <!-- MAIN ACCESS -->
+      <div class="main-access-grid">
 
-        <div class="child-head">
+        <button class="main-access" data-go="study">
 
-          <div class="avatar" id="homeInitial">S</div>
+          <div class="main-access-top">
 
-          <div>
-            <h3 id="homeStudentName">Loading...</h3>
-            <p>Student No: <span id="homeStudentNumber">-</span></p>
+            <div class="main-access-icon">
+              📖
+            </div>
+
+            <div class="main-access-notification" id="studyTotal">
+              0
+            </div>
+
           </div>
 
-        </div>
+          <h3>Study Progress</h3>
 
-        <div class="info-grid">
+          <p>View your child's study progress</p>
 
-          <div class="info-box">
-            <label>Student Name</label>
-            <strong id="homeNameInfo">-</strong>
+          <span class="main-access-link">
+            Access →
+          </span>
+
+        </button>
+
+
+        <button class="main-access" data-go="attendance">
+
+          <div class="main-access-top">
+
+            <div class="main-access-icon">
+              📅
+            </div>
+
+            <div class="main-access-notification" id="attendanceTotal">
+              0
+            </div>
+
           </div>
 
-          <div class="info-box">
-            <label>Student Number</label>
-            <strong id="homeNoInfo">-</strong>
+          <h3>Attendance</h3>
+
+          <p>View attendance records</p>
+
+          <span class="main-access-link">
+            Access →
+          </span>
+
+        </button>
+
+
+        <button class="main-access" data-go="results">
+
+          <div class="main-access-top">
+
+            <div class="main-access-icon">
+              📊
+            </div>
+
+            <div class="main-access-notification" id="resultTotal">
+              0
+            </div>
+
           </div>
 
-          <div class="info-box">
-            <label>Class</label>
-            <strong id="homeClassInfo">-</strong>
+          <h3>Results</h3>
+
+          <p>View published results</p>
+
+          <span class="main-access-link">
+            Access →
+          </span>
+
+        </button>
+
+
+        <button class="main-access" data-go="notices">
+
+          <div class="main-access-top">
+
+            <div class="main-access-icon">
+              📢
+            </div>
+
+            <div class="main-access-notification">
+              🔔
+            </div>
+
           </div>
 
-          <div class="info-box">
-            <label>Guardian Name</label>
-            <strong id="homeGuardianInfo">-</strong>
-          </div>
+          <h3>Notices</h3>
 
-          <div class="info-box">
-            <label>Phone Number</label>
-            <strong id="homePhoneInfo">-</strong>
-          </div>
+          <p>View college notices</p>
 
-          <div class="info-box">
-            <label>Place / Address</label>
-            <strong id="homeAddressInfo">-</strong>
-          </div>
+          <span class="main-access-link">
+            Access →
+          </span>
 
-        </div>
+        </button>
 
       </div>
 
-      <!-- STATS HIDDEN -->
-      <div class="stats">
-
-        <div class="stat">
-          <div class="stat-icon">👨‍🎓</div>
-          <strong id="studentCount">1</strong>
-          <span>My Child</span>
-        </div>
-
-        <div class="stat">
-          <div class="stat-icon">📅</div>
-          <strong id="attendanceTotal">0</strong>
-          <span>Attendance Records</span>
-        </div>
-
-        <div class="stat">
-          <div class="stat-icon">📖</div>
-          <strong id="studyTotal">0</strong>
-          <span>Study Updates</span>
-        </div>
-
-        <div class="stat">
-          <div class="stat-icon">📊</div>
-          <strong id="resultTotal">0</strong>
-          <span>Results</span>
-        </div>
-
-      </div>
 
       <!-- QUICK ACTIONS -->
       <div class="card">
 
         <div class="card-title">
           <h3>Quick Access</h3>
-          <span>Parent Services & Notifications</span>
+          <span>Parent Services</span>
         </div>
 
         <div class="quick-grid">
 
-          <button class="quick-btn" data-go="leave">
-
-            <span class="qicon">📝</span>
-
-            Leave Request
-
-            <span
-              class="quick-notification zero"
-              id="leaveNotification">
-              0
-            </span>
-
+          <button class="quick-btn" data-go="child">
+            <span class="qicon">👨‍🎓</span>
+            My Child
           </button>
 
+          <button class="quick-btn" data-go="leave">
+            <span class="qicon">📝</span>
+            Leave Request
+          </button>
 
           <button class="quick-btn" data-go="messages">
-
             <span class="qicon">💬</span>
-
             Message to Usthad
-
-            <span
-              class="quick-notification zero"
-              id="messageNotification">
-              0
-            </span>
-
           </button>
 
-
-          <button class="quick-btn" data-go="donation">
-
-            <span class="qicon">🤲</span>
-
+          <button class="quick-btn donation-quick" data-go="donation">
+            <span class="qicon">💰</span>
             My Donation to SAFA
-
-          </button>
-
-
-          <button class="quick-btn" data-go="child">
-
-            <span class="qicon">👨‍🎓</span>
-
-            My Child
-
-          </button>
-
-
-          <button class="quick-btn" data-go="attendance">
-
-            <span class="qicon">📅</span>
-
-            Attendance
-
-            <span
-              class="quick-notification zero"
-              id="attendanceNotification">
-              0
-            </span>
-
-          </button>
-
-
-          <button class="quick-btn" data-go="study">
-
-            <span class="qicon">📖</span>
-
-            Study Progress
-
-            <span
-              class="quick-notification zero"
-              id="studyNotification">
-              0
-            </span>
-
-          </button>
-
-
-          <button class="quick-btn" data-go="results">
-
-            <span class="qicon">📊</span>
-
-            Results
-
-            <span
-              class="quick-notification zero"
-              id="resultNotification">
-              0
-            </span>
-
-          </button>
-
-
-          <button class="quick-btn" data-go="notices">
-
-            <span class="qicon">📢</span>
-
-            Notices
-
-            <span
-              class="quick-notification zero"
-              id="noticeNotification">
-              0
-            </span>
-
           </button>
 
         </div>
@@ -1862,6 +1784,7 @@ textarea{
 
       <div class="donation-grid">
 
+        <!-- BANK / UPI -->
         <div class="donation-panel">
 
           <h3>🏦 Bank & UPI Details</h3>
@@ -1914,6 +1837,7 @@ textarea{
 
         </div>
 
+        <!-- QR -->
         <div class="donation-panel qr-panel">
 
           <h3>📱 Scan & Pay</h3>
@@ -2173,29 +2097,6 @@ function getInitial(name){
 }
 
 
-/* NOTIFICATION */
-
-function setNotification(id,count){
-
-  const badge = $(id);
-
-  if(!badge){
-    return;
-  }
-
-  const value = Number(count) || 0;
-
-  badge.textContent = value;
-
-  if(value > 0){
-    badge.classList.remove("zero");
-  }else{
-    badge.classList.add("zero");
-  }
-
-}
-
-
 /* GLOBALS */
 
 let currentUser = null;
@@ -2265,6 +2166,19 @@ document.querySelectorAll(".nav-btn").forEach(button=>{
 
 
 document.querySelectorAll(".quick-btn").forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    openSection(button.dataset.go);
+
+  });
+
+});
+
+
+/* MAIN ACCESS */
+
+document.querySelectorAll(".main-access").forEach(button=>{
 
   button.addEventListener("click",()=>{
 
@@ -2390,22 +2304,7 @@ async function loadStudent(){
     "-";
 
 
-  /* HOME */
-
-  $("homeStudentName").textContent = name;
-  $("homeStudentNumber").textContent = number;
-
-  $("homeNameInfo").textContent = name;
-  $("homeNoInfo").textContent = number;
-  $("homeClassInfo").textContent = className;
-  $("homeGuardianInfo").textContent = guardian;
-  $("homePhoneInfo").textContent = phone;
-  $("homeAddressInfo").textContent = address;
-
-  $("homeInitial").textContent = getInitial(name);
-
-
-  /* CHILD */
+  /* CHILD SECTION */
 
   $("childName").textContent = name;
   $("childNumber").textContent = number;
@@ -2498,11 +2397,6 @@ async function loadAttendance(){
 
     $("attendanceTotal").textContent = records.length;
 
-    setNotification(
-      "attendanceNotification",
-      records.length
-    );
-
 
     if(!records.length){
 
@@ -2550,8 +2444,6 @@ async function loadAttendance(){
   }catch(error){
 
     console.error("Attendance:",error);
-
-    setNotification("attendanceNotification",0);
 
     body.innerHTML = `
       <tr>
@@ -2613,11 +2505,6 @@ async function loadStudy(){
 
 
     $("studyTotal").textContent = rows.length;
-
-    setNotification(
-      "studyNotification",
-      rows.length
-    );
 
 
     if(!rows.length){
@@ -2757,8 +2644,6 @@ async function loadStudy(){
 
     console.error("Study:",error);
 
-    setNotification("studyNotification",0);
-
     list.className = "";
 
     list.innerHTML = `
@@ -2783,7 +2668,7 @@ async function loadResults(){
     const q = query(
       collection(db,"results"),
       where("studentNumber","==",studentNumber),
-      where("status","==","published")
+      where("published","==",true)
     );
 
     const snap = await getDocs(q);
@@ -2814,11 +2699,6 @@ async function loadResults(){
 
 
     $("resultTotal").textContent = rows.length;
-
-    setNotification(
-      "resultNotification",
-      rows.length
-    );
 
 
     if(!rows.length){
@@ -2878,8 +2758,6 @@ async function loadResults(){
 
     console.error("Results:",error);
 
-    setNotification("resultNotification",0);
-
     list.innerHTML = `
       <div class="empty">
         Unable to load results.
@@ -2901,7 +2779,7 @@ async function loadNotices(){
 
     const q = query(
       collection(db,"notices"),
-      where("status","==","published")
+      where("published","==",true)
     );
 
     const snap = await getDocs(q);
@@ -2929,12 +2807,6 @@ async function loadNotices(){
       return dbb-da;
 
     });
-
-
-    setNotification(
-      "noticeNotification",
-      rows.length
-    );
 
 
     if(!rows.length){
@@ -2985,8 +2857,6 @@ async function loadNotices(){
   }catch(error){
 
     console.error("Notices:",error);
-
-    setNotification("noticeNotification",0);
 
     list.innerHTML = `
       <div class="empty">
@@ -3110,17 +2980,6 @@ async function loadLeaveHistory(){
     });
 
 
-    const pendingCount =
-      rows.filter(row=>
-        String(row.status || "pending").toLowerCase() === "pending"
-      ).length;
-
-    setNotification(
-      "leaveNotification",
-      pendingCount
-    );
-
-
     if(!rows.length){
 
       list.innerHTML = `
@@ -3204,8 +3063,6 @@ async function loadLeaveHistory(){
   }catch(error){
 
     console.error("Leave history:",error);
-
-    setNotification("leaveNotification",0);
 
     list.innerHTML = `
       <div class="empty">
@@ -3318,17 +3175,6 @@ async function loadMessageHistory(){
     });
 
 
-    const unreadCount =
-      rows.filter(row=>
-        String(row.status || "").toLowerCase() === "unread"
-      ).length;
-
-    setNotification(
-      "messageNotification",
-      unreadCount
-    );
-
-
     if(!rows.length){
 
       list.innerHTML = `
@@ -3397,8 +3243,6 @@ async function loadMessageHistory(){
   }catch(error){
 
     console.error("Message history:",error);
-
-    setNotification("messageNotification",0);
 
     list.innerHTML = `
       <div class="empty">
