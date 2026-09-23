@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>SAFA QURAN COLLEGE ONLINE PORTAL | Parent Dashboard</title>
 
 <style>
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -16,227 +14,185 @@
 }
 
 :root{
-  --primary:#123b5d;
-  --primary2:#176b87;
-  --accent:#24936e;
-  --bg:#f4f7fb;
+  --primary:#063b2f;
+  --primary2:#0b6650;
+  --primary3:#0e8063;
+  --gold:#d6a93a;
+  --gold2:#f2cf72;
+  --bg:#f3f8f5;
   --card:#ffffff;
   --text:#172033;
   --muted:#718096;
-  --border:#e5eaf0;
-  --shadow:0 8px 25px rgba(20,40,70,.06);
+  --border:#dfe9e4;
+  --success:#16834f;
+  --danger:#c53b3b;
+  --warning:#b77b12;
+  --shadow:0 10px 30px rgba(4,45,35,.10);
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-  font-family:Inter,Arial,sans-serif;
-  background:var(--bg);
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at 10% 10%,rgba(214,169,58,.12),transparent 25%),
+    radial-gradient(circle at 90% 90%,rgba(11,102,80,.12),transparent 30%),
+    var(--bg);
   color:var(--text);
-  position:relative;
+  min-height:100vh;
+  overflow-x:hidden;
 }
 
-button,
-input,
-textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-
-/* =========================
-   ISLAMIC BACKGROUND
-========================= */
-
+/* Islamic geometric background */
 body::before{
   content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
+  opacity:.055;
   z-index:-1;
-  opacity:.035;
-
   background-image:
-    linear-gradient(
-      30deg,
-      #123b5d 12%,
-      transparent 12.5%,
-      transparent 87%,
-      #123b5d 87.5%,
-      #123b5d
-    ),
-    linear-gradient(
-      150deg,
-      #123b5d 12%,
-      transparent 12.5%,
-      transparent 87%,
-      #123b5d 87.5%,
-      #123b5d
-    ),
-    linear-gradient(
-      30deg,
-      #123b5d 12%,
-      transparent 12.5%,
-      transparent 87%,
-      #123b5d 87.5%,
-      #123b5d
-    ),
-    linear-gradient(
-      150deg,
-      #123b5d 12%,
-      transparent 12.5%,
-      transparent 87%,
-      #123b5d 87.5%,
-      #123b5d
-    ),
-    linear-gradient(
-      60deg,
-      #123b5d 25%,
-      transparent 25.5%,
-      transparent 75%,
-      #123b5d 75%
-    );
-
-  background-size:
-    40px 70px,
-    40px 70px,
-    40px 70px,
-    40px 70px,
-    40px 70px;
-
-  background-position:
-    0 0,
-    0 0,
-    20px 35px,
-    20px 35px,
-    0 0;
+    linear-gradient(30deg,#0b6650 12%,transparent 12.5%,transparent 87%,#0b6650 87.5%,#0b6650),
+    linear-gradient(150deg,#0b6650 12%,transparent 12.5%,transparent 87%,#0b6650 87.5%,#0b6650),
+    linear-gradient(30deg,#0b6650 12%,transparent 12.5%,transparent 87%,#0b6650 87.5%,#0b6650),
+    linear-gradient(150deg,#0b6650 12%,transparent 12.5%,transparent 87%,#0b6650 87.5%,#0b6650);
+  background-size:80px 140px;
+  background-position:0 0,0 0,40px 70px,40px 70px;
 }
 
-
-/* =========================
-   LOADING
-========================= */
-
+/* LOADING */
 #loading{
   position:fixed;
   inset:0;
-  background:white;
+  background:linear-gradient(135deg,#032b24,#06483a,#0b6650);
   display:flex;
   align-items:center;
   justify-content:center;
   flex-direction:column;
-  gap:12px;
-  z-index:9999;
-  color:var(--primary);
-  font-weight:700;
+  color:white;
+  z-index:99999;
+  text-align:center;
 }
 
-.loader{
-  width:38px;
-  height:38px;
-  border:4px solid #e4edf3;
-  border-top-color:var(--primary2);
+.loading-logo{
+  width:72px;
+  height:72px;
+  border:3px solid rgba(242,207,114,.35);
+  border-top-color:var(--gold2);
   border-radius:50%;
-  animation:spin .8s linear infinite;
+  animation:spin 1s linear infinite;
+  margin-bottom:18px;
 }
 
 @keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
+  to{transform:rotate(360deg)}
 }
 
-
-/* =========================
-   APP
-========================= */
-
-.app{
-  min-height:100vh;
-  display:flex;
+#loading strong{
+  font-size:20px;
+  letter-spacing:.4px;
 }
 
+#loading small{
+  margin-top:8px;
+  opacity:.75;
+}
 
-/* =========================
-   SIDEBAR
-========================= */
-
+/* SIDEBAR */
 .sidebar{
-  width:255px;
   position:fixed;
   left:0;
   top:0;
   bottom:0;
-  background:linear-gradient(180deg,#102a43,#123b5d);
+  width:255px;
+  background:
+    linear-gradient(180deg,#032b24 0%,#06483a 55%,#06372d 100%);
   color:white;
   z-index:1000;
+  box-shadow:5px 0 25px rgba(0,0,0,.12);
   overflow-y:auto;
-  transition:.25s;
 }
 
-.brand{
-  padding:25px 20px;
+.sidebar-header{
+  padding:25px 18px 20px;
+  text-align:center;
   border-bottom:1px solid rgba(255,255,255,.12);
 }
 
-.brand h1{
-  font-size:20px;
+.logo-circle{
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  margin:0 auto 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid var(--gold2);
+  background:rgba(255,255,255,.08);
+  font-size:30px;
+}
+
+.sidebar-header h2{
+  font-size:17px;
   letter-spacing:.5px;
 }
 
-.brand p{
+.sidebar-header p{
+  font-size:11px;
   margin-top:5px;
-  font-size:12px;
   opacity:.7;
+  letter-spacing:1px;
 }
 
 .nav{
-  padding:16px 11px;
+  padding:15px 10px;
 }
 
-.nav button{
+.nav-btn{
   width:100%;
   border:0;
   background:transparent;
-  color:#dbe8f5;
-  text-align:left;
-  padding:13px 15px;
-  border-radius:9px;
+  color:rgba(255,255,255,.82);
+  padding:13px 14px;
   margin-bottom:5px;
+  border-radius:10px;
+  text-align:left;
+  cursor:pointer;
+  font-size:13px;
   transition:.2s;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-.nav button:hover,
-.nav button.active{
-  background:rgba(255,255,255,.13);
-  color:white;
+.nav-btn span{
+  width:25px;
+  text-align:center;
 }
 
-.nav button span{
-  display:inline-block;
-  width:30px;
+.nav-btn:hover,
+.nav-btn.active{
+  background:linear-gradient(90deg,rgba(214,169,58,.22),rgba(255,255,255,.08));
+  color:#fff;
+  border-left:3px solid var(--gold2);
 }
 
+.nav-btn.active{
+  box-shadow:inset 0 0 20px rgba(255,255,255,.04);
+}
 
-/* =========================
-   MAIN
-========================= */
-
+/* MAIN */
 .main{
   margin-left:255px;
-  width:calc(100% - 255px);
   min-height:100vh;
 }
 
-
-/* =========================
-   TOPBAR
-========================= */
-
 .topbar{
   height:72px;
-  background:white;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(12px);
   border-bottom:1px solid var(--border);
   display:flex;
   align-items:center;
@@ -244,379 +200,358 @@ body::before{
   padding:0 28px;
   position:sticky;
   top:0;
-  z-index:100;
+  z-index:500;
 }
 
-.left-top{
+.topbar-left{
   display:flex;
   align-items:center;
   gap:13px;
 }
 
-.mobile-menu{
+.menu-toggle{
   display:none;
   border:0;
-  background:var(--primary);
-  color:white;
-  padding:8px 11px;
-  border-radius:7px;
+  background:#edf5f1;
+  color:var(--primary);
+  width:40px;
+  height:40px;
+  border-radius:9px;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.topbar h1{
+  color:var(--primary);
   font-size:20px;
 }
 
-.top-title{
-  font-size:20px;
-  font-weight:750;
+.topbar small{
+  display:block;
+  color:var(--muted);
+  margin-top:3px;
 }
 
-.parent-badge{
-  background:#eaf3ff;
-  color:#185a9d;
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.badge{
   padding:8px 13px;
   border-radius:20px;
-  font-size:12px;
-  font-weight:700;
+  background:#e9f6f0;
+  color:var(--primary2);
+  font-size:11px;
+  font-weight:bold;
+  letter-spacing:.7px;
 }
 
-.logout{
+.logout-btn{
   border:0;
-  background:#e74c3c;
-  color:white;
+  background:#f8e9e9;
+  color:#b33131;
   padding:9px 14px;
-  border-radius:7px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
 }
 
-
-/* =========================
-   CONTENT
-========================= */
-
+/* CONTENT */
 .content{
-  padding:28px;
+  padding:25px;
+  max-width:1450px;
+  margin:auto;
 }
 
 .section{
   display:none;
+  animation:fadeIn .25s ease;
 }
 
 .section.active{
   display:block;
 }
 
-.section-head{
-  margin-bottom:20px;
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(5px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
-.section-head h2{
-  font-size:25px;
-  margin-bottom:5px;
-}
-
-.section-head p{
-  color:var(--muted);
-  font-size:14px;
-}
-
-
-/* =========================
-   ISLAMIC ASSALAMU ALAIKUM
-========================= */
-
-.islamic-welcome{
-  position:relative;
-  overflow:hidden;
-
-  margin-bottom:22px;
-
-  padding:27px 30px;
-
-  border-radius:20px;
-
-  color:white;
-
+/* HOME */
+.welcome{
   background:
-    linear-gradient(
-      135deg,
-      rgba(7,38,55,.98),
-      rgba(18,75,88,.96)
-    );
-
-  box-shadow:
-    0 12px 35px
-    rgba(11,31,51,.14);
-
-  border:
-    1px solid
-    rgba(255,255,255,.08);
-}
-
-.islamic-welcome::before{
-  content:"";
-
-  position:absolute;
-
-  width:220px;
-  height:220px;
-
-  right:-65px;
-  top:-90px;
-
-  border:
-    1px solid
-    rgba(255,255,255,.10);
-
-  border-radius:50%;
-
-  box-shadow:
-    0 0 0 25px
-    rgba(255,255,255,.025),
-
-    0 0 0 50px
-    rgba(255,255,255,.02);
-}
-
-.islamic-welcome::after{
-  content:"✦";
-
-  position:absolute;
-
-  right:80px;
-  bottom:12px;
-
-  font-size:55px;
-
-  color:
-    rgba(255,255,255,.08);
-}
-
-.welcome-arabic{
-  font-family:
-    "Amiri",
-    "Traditional Arabic",
-    serif;
-
-  font-size:25px;
-
-  line-height:1.8;
-
-  color:#f4d58b;
-
-  margin-bottom:4px;
-
-  direction:rtl;
-
-  text-align:center;
-
-  position:relative;
-  z-index:1;
-}
-
-.welcome-title{
-  font-size:22px;
-
-  font-weight:800;
-
-  margin-top:2px;
-
-  text-align:center;
-
-  position:relative;
-  z-index:1;
-}
-
-.islamic-line{
-  width:65px;
-
-  height:3px;
-
-  background:#d6ad55;
-
-  border-radius:10px;
-
-  margin:13px auto 0;
-
-  position:relative;
-  z-index:1;
-}
-
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
-  background:linear-gradient(135deg,#123b5d,#176b87);
-  color:white;
+    linear-gradient(135deg,rgba(3,43,36,.97),rgba(11,102,80,.94)),
+    radial-gradient(circle,#fff,transparent);
   border-radius:18px;
-  padding:30px;
-  margin-bottom:22px;
-  box-shadow:0 10px 30px rgba(18,59,93,.16);
+  color:white;
+  padding:28px;
   position:relative;
   overflow:hidden;
-}
-
-.hero:after{
-  content:"";
-  position:absolute;
-  width:180px;
-  height:180px;
-  border-radius:50%;
-  background:rgba(255,255,255,.06);
-  right:-50px;
-  top:-60px;
-}
-
-.hero small{
-  opacity:.75;
-}
-
-.hero h2{
-  margin-top:7px;
-  font-size:27px;
-}
-
-.hero p{
-  margin-top:8px;
-  opacity:.85;
-  font-size:14px;
-}
-
-
-/* =========================
-   CHILD CARD
-========================= */
-
-.child-card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:22px;
   box-shadow:var(--shadow);
   margin-bottom:22px;
 }
 
-.child-top{
+.welcome::after{
+  content:"☪";
+  position:absolute;
+  right:30px;
+  top:5px;
+  font-size:100px;
+  color:rgba(242,207,114,.13);
+}
+
+.arabic{
+  font-size:25px;
+  color:var(--gold2);
+  margin-bottom:12px;
+  direction:rtl;
+}
+
+.welcome h2{
+  font-size:26px;
+  margin-bottom:7px;
+}
+
+.welcome p{
+  opacity:.8;
+}
+
+/* COLLEGE PHOTO */
+.college-photo-card{
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  margin-bottom:22px;
+  border:1px solid var(--border);
+  position:relative;
+}
+
+.college-photo-wrap{
+  position:relative;
+  height:260px;
+  overflow:hidden;
+  background:linear-gradient(135deg,#06483a,#d6a93a);
+}
+
+.college-photo{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.college-photo-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    180deg,
+    transparent 35%,
+    rgba(0,34,27,.78) 100%
+  );
+  display:flex;
+  align-items:flex-end;
+  padding:25px;
+  color:white;
+}
+
+.college-photo-overlay h3{
+  font-size:25px;
+  margin-bottom:5px;
+}
+
+.college-photo-overlay p{
+  color:#f6df98;
+}
+
+/* CARD */
+.card{
+  background:rgba(255,255,255,.96);
+  border:1px solid var(--border);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  padding:20px;
+  margin-bottom:20px;
+}
+
+.card-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.card-title h3{
+  color:var(--primary);
+  font-size:18px;
+}
+
+.card-title span{
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* CHILD CARD */
+.child-card{
+  background:
+    linear-gradient(135deg,#ffffff,#f1faf6);
+  border:1px solid #d8ebe3;
+}
+
+.child-head{
   display:flex;
   align-items:center;
   gap:15px;
+  margin-bottom:20px;
 }
 
 .avatar{
   width:58px;
   height:58px;
   border-radius:50%;
-  background:linear-gradient(135deg,#176b87,#24936e);
+  background:linear-gradient(135deg,var(--primary),var(--primary3));
   color:white;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:23px;
-  font-weight:800;
+  font-size:22px;
+  font-weight:bold;
+  border:3px solid #d8eee5;
 }
 
-.child-info h3{
-  font-size:20px;
+.child-head h3{
+  color:var(--primary);
+  margin-bottom:5px;
 }
 
-.child-info p{
+.child-head p{
   color:var(--muted);
-  margin-top:4px;
-  font-size:13px;
+  font-size:12px;
 }
 
-.child-meta{
+.info-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:12px;
-  margin-top:20px;
 }
 
-.meta-box{
-  background:#f7f9fc;
-  border-radius:10px;
+.info-box{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:11px;
   padding:13px;
-  overflow:hidden;
 }
 
-.meta-box small{
+.info-box label{
   display:block;
   color:var(--muted);
   font-size:11px;
+  margin-bottom:5px;
 }
 
-.meta-box strong{
-  display:block;
-  margin-top:5px;
+.info-box strong{
+  color:var(--text);
   font-size:14px;
   word-break:break-word;
 }
 
-
-/* =========================
-   STATS
-========================= */
-
+/* STATS */
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:15px;
-  margin-bottom:22px;
+  margin-bottom:20px;
 }
 
 .stat{
   background:white;
   border:1px solid var(--border);
-  border-radius:14px;
-  padding:19px;
+  border-radius:15px;
+  padding:18px;
   box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+
+.stat::after{
+  content:"";
+  position:absolute;
+  width:65px;
+  height:65px;
+  right:-20px;
+  bottom:-20px;
+  border-radius:50%;
+  background:rgba(11,102,80,.08);
 }
 
 .stat-icon{
-  font-size:23px;
-}
-
-.stat small{
-  display:block;
-  margin-top:10px;
-  color:var(--muted);
+  font-size:22px;
+  margin-bottom:9px;
 }
 
 .stat strong{
   display:block;
-  margin-top:5px;
-  font-size:27px;
+  font-size:24px;
+  color:var(--primary);
 }
 
+.stat span{
+  font-size:12px;
+  color:var(--muted);
+}
 
-/* =========================
-   PANELS
-========================= */
+/* QUICK */
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
 
-.panel{
+.quick-btn{
+  border:0;
   background:white;
   border:1px solid var(--border);
-  border-radius:15px;
-  padding:22px;
-  margin-bottom:22px;
+  border-radius:13px;
+  padding:18px 12px;
+  cursor:pointer;
+  color:var(--primary);
+  font-weight:bold;
+  box-shadow:0 5px 18px rgba(0,0,0,.05);
+  transition:.2s;
+}
+
+.quick-btn:hover{
+  transform:translateY(-2px);
+  border-color:#bcdace;
   box-shadow:var(--shadow);
 }
 
-.panel h3{
-  margin-bottom:17px;
+.quick-btn .qicon{
+  display:block;
+  font-size:25px;
+  margin-bottom:7px;
 }
 
-.empty{
-  padding:25px;
-  text-align:center;
+/* SECTION HEAD */
+.section-head{
+  margin-bottom:20px;
+}
+
+.section-head h2{
+  color:var(--primary);
+  font-size:24px;
+}
+
+.section-head p{
   color:var(--muted);
-  background:#f8fafc;
-  border-radius:10px;
+  margin-top:5px;
+  font-size:13px;
 }
 
-
-/* =========================
-   TABLE
-========================= */
-
+/* TABLE */
 .table-wrap{
   overflow-x:auto;
 }
@@ -624,337 +559,469 @@ body::before{
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:500px;
-}
-
-th,
-td{
-  padding:12px 10px;
-  border-bottom:1px solid #edf0f4;
-  text-align:left;
-  font-size:13px;
+  min-width:600px;
 }
 
 th{
-  background:#f7f9fc;
-  color:#4a5b70;
-  font-weight:700;
+  background:#edf6f2;
+  color:var(--primary);
+  text-align:left;
+  font-size:12px;
+  padding:13px;
 }
 
-tr:hover td{
-  background:#fbfcfe;
+td{
+  border-bottom:1px solid var(--border);
+  padding:13px;
+  font-size:13px;
 }
 
+tr:last-child td{
+  border-bottom:0;
+}
 
-/* =========================
-   BADGES
-========================= */
-
-.badge{
+.status{
   display:inline-block;
-  padding:6px 10px;
-  border-radius:20px;
+  padding:5px 9px;
+  border-radius:15px;
   font-size:11px;
-  font-weight:700;
+  font-weight:bold;
 }
 
-.green{
-  background:#e7f7ef;
-  color:#18794e;
+.present{
+  background:#e6f6ed;
+  color:#147744;
 }
 
-.red{
+.absent{
   background:#fdeaea;
-  color:#b42318;
+  color:#b83333;
 }
 
-.blue{
-  background:#eaf3ff;
-  color:#185a9d;
+.leave{
+  background:#fff3d9;
+  color:#9a6810;
 }
 
-.yellow{
-  background:#fff4d8;
-  color:#916300;
+.pending{
+  background:#fff4dc;
+  color:#9a6810;
 }
 
+.approved{
+  background:#e5f6ec;
+  color:#137341;
+}
 
-/* =========================
-   PROGRESS
-========================= */
+.rejected{
+  background:#fdeaea;
+  color:#b83333;
+}
+
+/* PROGRESS */
+.progress-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
 
 .progress-card{
+  background:white;
   border:1px solid var(--border);
-  border-radius:13px;
+  border-radius:15px;
   padding:18px;
-  margin-bottom:12px;
+  box-shadow:var(--shadow);
 }
 
-.progress-head{
+.progress-card h3{
+  color:var(--primary);
+  margin-bottom:6px;
+}
+
+.progress-date{
+  color:var(--muted);
+  font-size:11px;
+  margin-bottom:15px;
+}
+
+.progress-row{
   display:flex;
   justify-content:space-between;
-  gap:10px;
-  margin-bottom:10px;
+  padding:8px 0;
+  border-bottom:1px dashed var(--border);
+  font-size:13px;
 }
 
-.progress-head strong{
-  font-size:14px;
+.progress-row:last-child{
+  border-bottom:0;
 }
 
-.progress-head span{
-  font-size:12px;
-  color:var(--muted);
-}
-
-.progress-line{
+.progress-bar{
   height:8px;
-  background:#edf2f6;
-  border-radius:10px;
+  background:#e8efec;
+  border-radius:20px;
   overflow:hidden;
+  margin-top:7px;
 }
 
 .progress-fill{
   height:100%;
-  width:70%;
-  background:linear-gradient(90deg,#176b87,#24936e);
-  border-radius:10px;
+  background:linear-gradient(90deg,var(--primary2),var(--gold));
+  border-radius:20px;
 }
 
-
-/* =========================
-   RESULT CARDS
-========================= */
+/* RESULT */
+.result-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
 
 .result-card{
+  background:white;
+  border-radius:15px;
   border:1px solid var(--border);
-  border-radius:14px;
-  padding:19px;
+  padding:20px;
+  box-shadow:var(--shadow);
+}
+
+.result-card h3{
+  color:var(--primary);
   margin-bottom:12px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-}
-
-.result-title{
-  font-weight:750;
-}
-
-.result-date{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:5px;
 }
 
 .result-mark{
-  font-size:24px;
-  font-weight:800;
+  font-size:32px;
+  font-weight:bold;
   color:var(--primary2);
+  margin:8px 0;
 }
 
-
-/* =========================
-   NOTICE
-========================= */
-
-.notice{
-  border-left:4px solid var(--primary2);
-  background:#f7fafc;
-  padding:17px;
-  border-radius:8px;
-  margin-bottom:12px;
+/* NOTICE */
+.notice-card{
+  background:white;
+  border:1px solid var(--border);
+  border-left:5px solid var(--gold);
+  border-radius:12px;
+  padding:18px;
+  margin-bottom:13px;
+  box-shadow:0 5px 18px rgba(0,0,0,.04);
 }
 
-.notice h4{
-  font-size:15px;
+.notice-card h3{
+  color:var(--primary);
+  margin-bottom:7px;
 }
 
-.notice p{
-  margin-top:8px;
-  color:#536477;
-  line-height:1.6;
+.notice-card p{
+  color:#4a5568;
   white-space:pre-wrap;
+  line-height:1.6;
 }
 
-.notice small{
-  display:block;
-  margin-top:10px;
+.notice-date{
   color:var(--muted);
+  font-size:11px;
+  margin-top:10px;
 }
 
-
-/* =========================
-   FORMS
-========================= */
-
+/* FORM */
 .form-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:15px;
 }
 
-.field{
-  display:flex;
-  flex-direction:column;
-  gap:7px;
+.form-group{
+  margin-bottom:2px;
 }
 
-.field.full{
+.form-group.full{
   grid-column:1/-1;
 }
 
-.field label{
-  font-size:13px;
-  font-weight:650;
-  color:#43546a;
+.form-group label{
+  display:block;
+  font-size:12px;
+  color:var(--primary);
+  font-weight:bold;
+  margin-bottom:6px;
 }
 
-.field input,
-.field textarea{
-  border:1px solid #d7dee8;
+input,
+textarea,
+select{
+  width:100%;
+  border:1px solid var(--border);
   border-radius:9px;
-  padding:11px 12px;
+  padding:12px;
+  font:inherit;
   outline:none;
+  background:#fff;
 }
 
-.field textarea{
-  min-height:105px;
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:var(--primary2);
+  box-shadow:0 0 0 3px rgba(11,102,80,.08);
+}
+
+textarea{
+  min-height:110px;
   resize:vertical;
 }
 
-.field input:focus,
-.field textarea:focus{
-  border-color:#2878b5;
-  box-shadow:0 0 0 3px rgba(40,120,181,.1);
-}
-
-.primary{
+.primary-btn{
   border:0;
-  background:#176b87;
+  background:linear-gradient(135deg,var(--primary),var(--primary3));
   color:white;
-  padding:11px 18px;
-  border-radius:8px;
-  font-weight:650;
+  padding:12px 18px;
+  border-radius:9px;
+  cursor:pointer;
+  font-weight:bold;
+  margin-top:12px;
 }
 
-.primary:hover{
-  background:#12586f;
+.primary-btn:hover{
+  opacity:.93;
 }
 
-
-/* =========================
-   LEAVE / MESSAGE CARDS
-========================= */
-
-.request-card{
+/* HISTORY */
+.history-card{
+  background:white;
   border:1px solid var(--border);
-  border-radius:13px;
-  padding:17px;
-  margin-bottom:12px;
+  border-radius:12px;
+  padding:15px;
+  margin-top:10px;
 }
 
-.request-top{
+.history-top{
   display:flex;
   justify-content:space-between;
   gap:10px;
+  align-items:flex-start;
 }
 
-.request-card h4{
-  font-size:15px;
-}
-
-.request-card p{
-  color:#536477;
-  margin-top:8px;
-  line-height:1.5;
-}
-
-.reply-box{
-  margin-top:13px;
-  background:#eef8f4;
-  border-radius:9px;
-  padding:12px;
-}
-
-.reply-box strong{
-  font-size:12px;
-  color:#18794e;
-}
-
-.reply-box p{
-  color:#285c49;
-  margin-top:5px;
-}
-
-
-/* =========================
-   QUICK ACTIONS
-========================= */
-
-.quick-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:13px;
-}
-
-.quick-btn{
-  border:1px solid var(--border);
-  background:white;
-  border-radius:12px;
-  padding:17px;
-  text-align:left;
-  transition:.2s;
-}
-
-.quick-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:var(--shadow);
-}
-
-.quick-btn strong{
-  display:block;
+.history-card h4{
+  color:var(--primary);
   margin-bottom:5px;
 }
 
-.quick-btn small{
-  color:var(--muted);
+.history-card p{
+  color:#596579;
+  font-size:13px;
+  line-height:1.55;
 }
 
+.reply{
+  background:#f1f8f5;
+  border-left:3px solid var(--primary2);
+  padding:10px;
+  margin-top:10px;
+  border-radius:5px;
+}
 
-/* =========================
-   MESSAGE
-========================= */
+/* DONATION */
+.donation-hero{
+  background:
+    radial-gradient(circle at 85% 15%,rgba(242,207,114,.24),transparent 25%),
+    linear-gradient(135deg,#032b24,#08745a);
+  border-radius:18px;
+  padding:28px;
+  color:white;
+  margin-bottom:20px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
 
-#message{
+.donation-hero::after{
+  content:"☪";
+  position:absolute;
+  right:28px;
+  top:-10px;
+  font-size:105px;
+  color:rgba(255,255,255,.07);
+}
+
+.donation-hero h2{
+  color:#fff;
+  font-size:25px;
+  margin-bottom:8px;
+}
+
+.donation-hero p{
+  color:#e6f2ed;
+  line-height:1.6;
+  max-width:700px;
+}
+
+.donation-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.donation-panel{
+  background:white;
+  border-radius:17px;
+  padding:22px;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+}
+
+.donation-panel h3{
+  color:var(--primary);
+  margin-bottom:16px;
+  font-size:18px;
+}
+
+.bank-details{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.bank-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  padding:12px;
+  border-radius:9px;
+  background:#f3f8f5;
+  border:1px solid #e0eee8;
+}
+
+.bank-row span{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.bank-row strong{
+  color:var(--primary);
+  font-size:14px;
+  text-align:right;
+  word-break:break-word;
+}
+
+.upi-box{
+  margin-top:15px;
+  padding:16px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#fff9e9,#f8f1d9);
+  border:1px solid #ead69a;
+  text-align:center;
+}
+
+.upi-label{
+  color:#856719;
+  font-size:12px;
+  font-weight:bold;
+  margin-bottom:5px;
+}
+
+.upi-id{
+  color:#5f4a0d;
+  font-size:20px;
+  font-weight:bold;
+  letter-spacing:.3px;
+  margin-bottom:12px;
+}
+
+.upi-pay-btn{
+  display:block;
+  text-decoration:none;
+  color:white;
+  background:linear-gradient(135deg,#087d5e,#0c9b73);
+  padding:13px 18px;
+  border-radius:10px;
+  font-weight:bold;
+  box-shadow:0 5px 15px rgba(8,125,94,.2);
+}
+
+.upi-pay-btn:hover{
+  transform:translateY(-1px);
+}
+
+.qr-panel{
+  text-align:center;
+}
+
+.qr-box{
+  width:250px;
+  height:250px;
+  margin:5px auto 15px;
+  background:white;
+  border:8px solid #f0f4f1;
+  border-radius:15px;
+  padding:5px;
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.qr-box img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.qr-panel p{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+}
+
+.donation-note{
+  margin-top:20px;
+  padding:14px;
+  border-radius:10px;
+  background:#eef8f3;
+  color:#376153;
+  font-size:12px;
+  line-height:1.6;
+  border:1px solid #d8ebe2;
+}
+
+/* EMPTY */
+.empty{
+  text-align:center;
+  padding:35px 20px;
+  color:var(--muted);
+  background:white;
+  border:1px dashed var(--border);
+  border-radius:12px;
+}
+
+.error-box{
+  background:#fff0f0;
+  color:#a53030;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:15px;
+}
+
+/* TOAST */
+#toast{
   position:fixed;
   right:20px;
   bottom:20px;
   max-width:360px;
-  padding:14px 18px;
-  border-radius:9px;
+  background:#063b2f;
   color:white;
+  padding:13px 17px;
+  border-radius:10px;
+  box-shadow:var(--shadow);
+  z-index:99998;
   display:none;
-  z-index:9999;
-  box-shadow:0 8px 25px rgba(0,0,0,.15);
 }
 
-.success-msg{
-  background:#198754;
-}
-
-.error-msg{
-  background:#dc3545;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
+/* MOBILE */
 @media(max-width:900px){
 
   .sidebar{
     transform:translateX(-100%);
+    transition:.25s;
   }
 
   .sidebar.open{
@@ -963,10 +1030,9 @@ tr:hover td{
 
   .main{
     margin-left:0;
-    width:100%;
   }
 
-  .mobile-menu{
+  .menu-toggle{
     display:block;
   }
 
@@ -974,8 +1040,12 @@ tr:hover td{
     padding:0 15px;
   }
 
+  .badge{
+    display:none;
+  }
+
   .content{
-    padding:18px;
+    padding:15px;
   }
 
   .stats{
@@ -983,1093 +1053,736 @@ tr:hover td{
   }
 
   .quick-grid{
-    grid-template-columns:1fr;
+    grid-template-columns:repeat(2,1fr);
   }
 
-}
+  .info-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 
+  .donation-grid{
+    grid-template-columns:1fr;
+  }
+}
 
 @media(max-width:600px){
 
-  .form-grid{
-    grid-template-columns:1fr;
+  .topbar{
+    height:64px;
   }
 
-  .field.full{
-    grid-column:auto;
+  .topbar h1{
+    font-size:16px;
+  }
+
+  .logout-btn{
+    padding:8px 10px;
+    font-size:11px;
+  }
+
+  .welcome{
+    padding:22px;
+  }
+
+  .arabic{
+    font-size:20px;
+  }
+
+  .welcome h2{
+    font-size:21px;
+  }
+
+  .college-photo-wrap{
+    height:200px;
+  }
+
+  .college-photo-overlay{
+    padding:18px;
+  }
+
+  .college-photo-overlay h3{
+    font-size:20px;
+  }
+
+  .info-grid{
+    grid-template-columns:1fr;
   }
 
   .stats{
     grid-template-columns:1fr 1fr;
+    gap:10px;
   }
 
-  .child-meta{
+  .stat{
+    padding:14px;
+  }
+
+  .stat strong{
+    font-size:21px;
+  }
+
+  .quick-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .progress-grid,
+  .result-grid,
+  .form-grid{
     grid-template-columns:1fr;
   }
 
-  .parent-badge{
-    display:none;
+  .form-group.full{
+    grid-column:auto;
   }
 
-  .top-title{
-    font-size:16px;
+  .donation-hero{
+    padding:22px;
   }
 
-  .hero{
-    padding:23px;
+  .donation-hero h2{
+    font-size:21px;
   }
 
-  .hero h2{
-    font-size:22px;
+  .qr-box{
+    width:220px;
+    height:220px;
   }
 
-  .result-card{
+  .bank-row{
     align-items:flex-start;
     flex-direction:column;
+    gap:4px;
   }
 
-  .islamic-welcome{
-    padding:22px 20px;
-    border-radius:16px;
+  .bank-row strong{
+    text-align:left;
   }
-
-  .welcome-arabic{
-    font-size:21px;
-    text-align:center;
-  }
-
-  .welcome-title{
-    font-size:19px;
-    text-align:center;
-  }
-
 }
-
 </style>
 </head>
 
 <body>
 
+<!-- LOADING -->
 <div id="loading">
-
-  <div class="loader"></div>
-
-  <div>
-    SAFA QURAN COLLEGE ONLINE PORTAL
-  </div>
-
-  <small>
-    Loading Parent Dashboard...
-  </small>
-
+  <div class="loading-logo"></div>
+  <strong>SAFA QURAN COLLEGE ONLINE PORTAL</strong>
+  <small>Loading Parent Dashboard...</small>
 </div>
 
-<div id="message"></div>
-
-<div class="app">
-
-
-<!-- =========================
-     SIDEBAR
-========================= -->
-
+<!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
 
-  <div class="brand">
-
-    <h1>
-      SAFA QURAN COLLEGE ONLINE PORTAL
-    </h1>
-
-    <p>
-      Parent Portal
-    </p>
-
+  <div class="sidebar-header">
+    <div class="logo-circle">☪</div>
+    <h2>SAFA QURAN COLLEGE</h2>
+    <p>PARENT PORTAL</p>
   </div>
 
+  <nav class="nav">
 
-  <div class="nav">
-
-    <button
-      class="nav-btn active"
-      data-section="home">
-
-      <span>🏠</span>
-      Home
-
+    <button class="nav-btn active" data-section="home">
+      <span>🏠</span> Home
     </button>
 
-
-    <button
-      class="nav-btn"
-      data-section="child">
-
-      <span>👦</span>
-      My Child
-
+    <button class="nav-btn" data-section="child">
+      <span>👨‍🎓</span> My Child
     </button>
 
-
-    <button
-      class="nav-btn"
-      data-section="attendance">
-
-      <span>✓</span>
-      Attendance
-
+    <button class="nav-btn" data-section="attendance">
+      <span>📅</span> Attendance
     </button>
 
-
-    <button
-      class="nav-btn"
-      data-section="study">
-
-      <span>📖</span>
-      Study Progress
-
+    <button class="nav-btn" data-section="study">
+      <span>📖</span> Study Progress
     </button>
 
-
-    <button
-      class="nav-btn"
-      data-section="results">
-
-      <span>🏆</span>
-      Results
-
+    <button class="nav-btn" data-section="results">
+      <span>📊</span> Results
     </button>
 
-
-    <button
-      class="nav-btn"
-      data-section="notices">
-
-      <span>📢</span>
-      Notices
-
+    <button class="nav-btn" data-section="notices">
+      <span>📢</span> Notices
     </button>
 
-
-    <button
-      class="nav-btn"
-      data-section="leave">
-
-      <span>📝</span>
-      Leave
-
+    <button class="nav-btn" data-section="donation">
+      <span>💰</span> MY DONATION TO SAFA
     </button>
 
-
-    <button
-      class="nav-btn"
-      data-section="messages">
-
-      <span>💬</span>
-      Messages
-
+    <button class="nav-btn" data-section="leave">
+      <span>📝</span> Leave
     </button>
 
-  </div>
+    <button class="nav-btn" data-section="messages">
+      <span>💬</span> Messages
+    </button>
 
+  </nav>
 </aside>
 
-
-<!-- =========================
-     MAIN
-========================= -->
-
+<!-- MAIN -->
 <main class="main">
 
-<header class="topbar">
+  <!-- TOPBAR -->
+  <header class="topbar">
 
-  <div class="left-top">
+    <div class="topbar-left">
+      <button class="menu-toggle" id="menuToggle">☰</button>
 
-    <button
-      class="mobile-menu"
-      id="mobileMenu">
-
-      ☰
-
-    </button>
-
-
-    <div class="top-title">
-      Parent Dashboard
+      <div>
+        <h1 id="pageTitle">Parent Dashboard</h1>
+        <small>SAFA QURAN COLLEGE ONLINE PORTAL</small>
+      </div>
     </div>
 
-  </div>
-
-
-  <div
-    style="
-      display:flex;
-      align-items:center;
-      gap:12px;
-    ">
-
-    <div class="parent-badge">
-      PARENT PORTAL
+    <div class="top-actions">
+      <span class="badge">PARENT PORTAL</span>
+      <button class="logout-btn" id="logoutBtn">Logout</button>
     </div>
 
+  </header>
 
-    <button
-      class="logout"
-      id="logoutBtn">
+  <div class="content">
 
-      Logout
+    <!-- HOME -->
+    <section class="section active" id="home">
 
-    </button>
+      <div class="welcome">
+        <div class="arabic">
+          السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
+        </div>
 
-  </div>
+        <h2>Assalamu Alaikum</h2>
 
-</header>
+        <p>
+          Welcome to SAFA QURAN COLLEGE Parent Dashboard.
+        </p>
+      </div>
 
+      <!-- COLLEGE PHOTO -->
+      <div class="college-photo-card">
 
-<div class="content">
+        <div class="college-photo-wrap">
 
+          <img
+            src="./IMG-20260921-WA0016.jpg"
+            alt="SAFA QURAN COLLEGE"
+            class="college-photo"
+            onerror="this.style.display='none';"
+          >
 
-<!-- =========================
-     HOME
-========================= -->
+          <div class="college-photo-overlay">
+            <div>
+              <h3>SAFA QURAN COLLEGE</h3>
+              <p>Qur'an • Hifz • Islamic Education</p>
+            </div>
+          </div>
 
-<section
-  class="section active"
-  id="home">
-
-
-  <div class="islamic-welcome">
-
-    <div class="welcome-arabic">
-      السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
-    </div>
-
-    <div class="welcome-title">
-      Assalamu Alaikum
-    </div>
-
-    <div class="islamic-line"></div>
-
-  </div>
-
-
-  <div class="child-card">
-
-    <div class="child-top">
-
-      <div
-        class="avatar"
-        id="avatar">
-
-        S
+        </div>
 
       </div>
 
+      <!-- CHILD CARD -->
+      <div class="card child-card">
 
-      <div class="child-info">
+        <div class="child-head">
 
-        <h3 id="homeChildName">
-          Loading...
-        </h3>
+          <div class="avatar" id="homeInitial">S</div>
+
+          <div>
+            <h3 id="homeStudentName">Loading...</h3>
+            <p>Student No: <span id="homeStudentNumber">-</span></p>
+          </div>
+
+        </div>
+
+        <div class="info-grid">
+
+          <div class="info-box">
+            <label>Student Name</label>
+            <strong id="homeNameInfo">-</strong>
+          </div>
+
+          <div class="info-box">
+            <label>Student Number</label>
+            <strong id="homeNoInfo">-</strong>
+          </div>
+
+          <div class="info-box">
+            <label>Class</label>
+            <strong id="homeClassInfo">-</strong>
+          </div>
+
+          <div class="info-box">
+            <label>Guardian Name</label>
+            <strong id="homeGuardianInfo">-</strong>
+          </div>
+
+          <div class="info-box">
+            <label>Phone Number</label>
+            <strong id="homePhoneInfo">-</strong>
+          </div>
+
+          <div class="info-box">
+            <label>Place / Address</label>
+            <strong id="homeAddressInfo">-</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- STATS -->
+      <div class="stats">
+
+        <div class="stat">
+          <div class="stat-icon">👨‍🎓</div>
+          <strong id="studentCount">1</strong>
+          <span>My Child</span>
+        </div>
+
+        <div class="stat">
+          <div class="stat-icon">📅</div>
+          <strong id="attendanceTotal">0</strong>
+          <span>Attendance Records</span>
+        </div>
+
+        <div class="stat">
+          <div class="stat-icon">📖</div>
+          <strong id="studyTotal">0</strong>
+          <span>Study Updates</span>
+        </div>
+
+        <div class="stat">
+          <div class="stat-icon">📊</div>
+          <strong id="resultTotal">0</strong>
+          <span>Results</span>
+        </div>
+
+      </div>
+
+      <!-- QUICK ACTIONS -->
+      <div class="card">
+
+        <div class="card-title">
+          <h3>Quick Access</h3>
+          <span>Parent Services</span>
+        </div>
+
+        <div class="quick-grid">
+
+          <button class="quick-btn" data-go="child">
+            <span class="qicon">👨‍🎓</span>
+            My Child
+          </button>
+
+          <button class="quick-btn" data-go="attendance">
+            <span class="qicon">📅</span>
+            Attendance
+          </button>
+
+          <button class="quick-btn" data-go="study">
+            <span class="qicon">📖</span>
+            Study Progress
+          </button>
+
+          <button class="quick-btn" data-go="results">
+            <span class="qicon">📊</span>
+            Results
+          </button>
+
+          <button class="quick-btn" data-go="notices">
+            <span class="qicon">📢</span>
+            Notices
+          </button>
+
+          <button class="quick-btn donation-quick" data-go="donation">
+            <span class="qicon">💰</span>
+            Donation
+          </button>
+
+          <button class="quick-btn" data-go="leave">
+            <span class="qicon">📝</span>
+            Leave
+          </button>
+
+          <button class="quick-btn" data-go="messages">
+            <span class="qicon">💬</span>
+            Messages
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- MY CHILD -->
+    <section class="section" id="child">
+
+      <div class="section-head">
+        <h2>My Child</h2>
+        <p>Student and guardian information</p>
+      </div>
+
+      <div class="card child-card">
+
+        <div class="child-head">
+
+          <div class="avatar" id="childInitial">S</div>
+
+          <div>
+            <h3 id="childName">Loading...</h3>
+            <p>Student No: <span id="childNumber">-</span></p>
+          </div>
+
+        </div>
+
+        <div class="info-grid">
+
+          <div class="info-box">
+            <label>Student Name</label>
+            <strong id="childNameInfo">-</strong>
+          </div>
+
+          <div class="info-box">
+            <label>Student Number</label>
+            <strong id="childNoInfo">-</strong>
+          </div>
+
+          <div class="info-box">
+            <label>Class</label>
+            <strong id="childClassInfo">-</strong>
+          </div>
+
+          <div class="info-box">
+            <label>Guardian Name</label>
+            <strong id="childGuardianInfo">-</strong>
+          </div>
+
+          <div class="info-box">
+            <label>Phone Number</label>
+            <strong id="childPhoneInfo">-</strong>
+          </div>
+
+          <div class="info-box">
+            <label>Place / Address</label>
+            <strong id="childAddressInfo">-</strong>
+          </div>
+
+          <div class="info-box">
+            <label>Parent Email</label>
+            <strong id="childEmailInfo">-</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ATTENDANCE -->
+    <section class="section" id="attendance">
+
+      <div class="section-head">
+        <h2>Attendance</h2>
+        <p>Your child's attendance records</p>
+      </div>
+
+      <div class="card">
+
+        <div class="table-wrap">
+
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody id="attendanceBody">
+              <tr>
+                <td colspan="2">Loading...</td>
+              </tr>
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- STUDY -->
+    <section class="section" id="study">
+
+      <div class="section-head">
+        <h2>Study Progress</h2>
+        <p>Hifz and study progress updates</p>
+      </div>
+
+      <div id="studyList" class="progress-grid">
+        <div class="empty">Loading...</div>
+      </div>
+
+    </section>
+
+    <!-- RESULTS -->
+    <section class="section" id="results">
+
+      <div class="section-head">
+        <h2>Results</h2>
+        <p>Published examination results</p>
+      </div>
+
+      <div id="resultsList" class="result-grid">
+        <div class="empty">Loading...</div>
+      </div>
+
+    </section>
+
+    <!-- NOTICES -->
+    <section class="section" id="notices">
+
+      <div class="section-head">
+        <h2>Notices</h2>
+        <p>Important college announcements</p>
+      </div>
+
+      <div id="noticesList">
+        <div class="empty">Loading...</div>
+      </div>
+
+    </section>
+
+    <!-- DONATION -->
+    <section class="section" id="donation">
+
+      <div class="section-head">
+        <h2>MY DONATION TO SAFA</h2>
+        <p>Support SAFA QURAN COLLEGE</p>
+      </div>
+
+      <div class="donation-hero">
+
+        <h2>💚 Support SAFA QURAN COLLEGE</h2>
 
         <p>
-          Student No.
-          <strong id="homeStudentNumber">
-            -
-          </strong>
+          You can support the educational activities of SAFA QURAN COLLEGE
+          through direct UPI payment, QR code or bank transfer.
+          May Allah accept your contribution and reward you abundantly.
         </p>
 
       </div>
 
-    </div>
+      <div class="donation-grid">
 
+        <!-- BANK / UPI -->
+        <div class="donation-panel">
 
-    <div class="child-meta">
+          <h3>🏦 Bank & UPI Details</h3>
 
-      <div class="meta-box">
+          <div class="bank-details">
 
-        <small>
-          Student Number
-        </small>
+            <div class="bank-row">
+              <span>Bank</span>
+              <strong>Federal Bank</strong>
+            </div>
 
-        <strong id="homeNo">
-          -
-        </strong>
+            <div class="bank-row">
+              <span>A/C No</span>
+              <strong>10980200318831</strong>
+            </div>
 
-      </div>
+            <div class="bank-row">
+              <span>IFSC</span>
+              <strong>FDRL0001098</strong>
+            </div>
 
+            <div class="bank-row">
+              <span>Branch</span>
+              <strong>KANNUR BRANCH</strong>
+            </div>
 
-      <div class="meta-box">
+          </div>
 
-        <small>
-          Class
-        </small>
+          <div class="upi-box">
 
-        <strong id="homeClass">
-          -
-        </strong>
+            <div class="upi-label">DIRECT UPI PAYMENT</div>
 
-      </div>
+            <div class="upi-id">
+              563safa@fbl
+            </div>
 
+            <a
+              class="upi-pay-btn"
+              href="upi://pay?pa=563safa%40fbl&pn=SAFA%20QURAN%20COLLEGE&cu=INR">
+              💳 PAY DIRECTLY WITH UPI
+            </a>
 
-      <div class="meta-box">
+          </div>
 
-        <small>
-          Email ID
-        </small>
-
-        <strong id="homeParentEmail">
-          -
-        </strong>
-
-      </div>
-
-
-      <div class="meta-box">
-
-        <small>
-          Guardian Name
-        </small>
-
-        <strong id="homeGuardianName">
-          -
-        </strong>
-
-      </div>
-
-
-      <div class="meta-box">
-
-        <small>
-          Phone Number
-        </small>
-
-        <strong id="homePhoneNumber">
-          -
-        </strong>
-
-      </div>
-
-
-      <div class="meta-box">
-
-        <small>
-          Address / Place
-        </small>
-
-        <strong id="homeStudentAddress">
-          -
-        </strong>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="stats">
-
-    <div class="stat">
-
-      <div class="stat-icon">
-        ✓
-      </div>
-
-      <small>
-        Attendance Records
-      </small>
-
-      <strong id="attendanceTotal">
-        0
-      </strong>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div class="stat-icon">
-        📖
-      </div>
-
-      <small>
-        Study Records
-      </small>
-
-      <strong id="studyTotal">
-        0
-      </strong>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div class="stat-icon">
-        🏆
-      </div>
-
-      <small>
-        Published Results
-      </small>
-
-      <strong id="resultTotal">
-        0
-      </strong>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div class="stat-icon">
-        📢
-      </div>
-
-      <small>
-        Notices
-      </small>
-
-      <strong id="noticeTotal">
-        0
-      </strong>
-
-    </div>
-
-  </div>
-
-
-  <div class="panel">
-
-    <h3>
-      Quick Access
-    </h3>
-
-
-    <div class="quick-grid">
-
-      <button
-        class="quick-btn"
-        data-go="attendance">
-
-        <strong>
-          ✓ Attendance
-        </strong>
-
-        <small>
-          View attendance records
-        </small>
-
-      </button>
-
-
-      <button
-        class="quick-btn"
-        data-go="study">
-
-        <strong>
-          📖 Study Progress
-        </strong>
-
-        <small>
-          View study progress
-        </small>
-
-      </button>
-
-
-      <button
-        class="quick-btn"
-        data-go="results">
-
-        <strong>
-          🏆 Results
-        </strong>
-
-        <small>
-          View published results
-        </small>
-
-      </button>
-
-
-      <button
-        class="quick-btn"
-        data-go="notices">
-
-        <strong>
-          📢 Notices
-        </strong>
-
-        <small>
-          View class announcements
-        </small>
-
-      </button>
-
-
-      <button
-        class="quick-btn"
-        data-go="leave">
-
-        <strong>
-          📝 Apply Leave
-        </strong>
-
-        <small>
-          Send leave application
-        </small>
-
-      </button>
-
-
-      <button
-        class="quick-btn"
-        data-go="messages">
-
-        <strong>
-          💬 Contact Usthad
-        </strong>
-
-        <small>
-          Send a message
-        </small>
-
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     CHILD
-========================= -->
-
-<section
-  class="section"
-  id="child">
-
-  <div class="section-head">
-
-    <h2>
-      My Child
-    </h2>
-
-    <p>
-      Student information connected to this parent account.
-    </p>
-
-  </div>
-
-
-  <div class="child-card">
-
-    <div class="child-top">
-
-      <div
-        class="avatar"
-        id="childAvatar">
-
-        S
-
-      </div>
-
-
-      <div class="child-info">
-
-        <h3 id="childName">
-          -
-        </h3>
-
-        <p>
-          Hifz Student
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="child-meta">
-
-      <div class="meta-box">
-
-        <small>
-          Student Number
-        </small>
-
-        <strong id="childNumber">
-          -
-        </strong>
-
-      </div>
-
-
-      <div class="meta-box">
-
-        <small>
-          Class
-        </small>
-
-        <strong id="childClass">
-          -
-        </strong>
-
-      </div>
-
-
-      <div class="meta-box">
-
-        <small>
-          Email ID
-        </small>
-
-        <strong id="childParentEmail">
-          -
-        </strong>
-
-      </div>
-
-
-      <div class="meta-box">
-
-        <small>
-          Guardian Name
-        </small>
-
-        <strong id="childGuardianName">
-          -
-        </strong>
-
-      </div>
-
-
-      <div class="meta-box">
-
-        <small>
-          Phone Number
-        </small>
-
-        <strong id="childPhoneNumber">
-          -
-        </strong>
-
-      </div>
-
-
-      <div class="meta-box">
-
-        <small>
-          Address / Place
-        </small>
-
-        <strong id="childStudentAddress">
-          -
-        </strong>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     ATTENDANCE
-========================= -->
-
-<section
-  class="section"
-  id="attendance">
-
-  <div class="section-head">
-
-    <h2>
-      Attendance
-    </h2>
-
-    <p>
-      Your child's attendance records.
-    </p>
-
-  </div>
-
-
-  <div class="panel">
-
-    <div class="table-wrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>
-              Date
-            </th>
-
-            <th>
-              Status
-            </th>
-
-          </tr>
-
-        </thead>
-
-
-        <tbody
-          id="attendanceTable">
-        </tbody>
-
-      </table>
-
-    </div>
-
-
-    <div
-      class="empty"
-      id="attendanceEmpty"
-      style="display:none;">
-
-      No attendance records available.
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     STUDY
-========================= -->
-
-<section
-  class="section"
-  id="study">
-
-  <div class="section-head">
-
-    <h2>
-      Study Progress
-    </h2>
-
-    <p>
-      View your child's Quran study progress.
-    </p>
-
-  </div>
-
-
-  <div id="studyList"></div>
-
-
-  <div
-    class="empty"
-    id="studyEmpty"
-    style="display:none;">
-
-    No study progress records available.
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     RESULTS
-========================= -->
-
-<section
-  class="section"
-  id="results">
-
-  <div class="section-head">
-
-    <h2>
-      Results
-    </h2>
-
-    <p>
-      Published examination results.
-    </p>
-
-  </div>
-
-
-  <div id="resultList"></div>
-
-
-  <div
-    class="empty"
-    id="resultEmpty"
-    style="display:none;">
-
-    No published results available.
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     NOTICES
-========================= -->
-
-<section
-  class="section"
-  id="notices">
-
-  <div class="section-head">
-
-    <h2>
-      Notices
-    </h2>
-
-    <p>
-      Important announcements from
-      SAFA QURAN COLLEGE ONLINE PORTAL.
-    </p>
-
-  </div>
-
-
-  <div id="noticeList"></div>
-
-
-  <div
-    class="empty"
-    id="noticeEmpty"
-    style="display:none;">
-
-    No notices available.
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     LEAVE
-========================= -->
-
-<section
-  class="section"
-  id="leave">
-
-  <div class="section-head">
-
-    <h2>
-      Leave Application
-    </h2>
-
-    <p>
-      Apply for leave and check the response from Usthad.
-    </p>
-
-  </div>
-
-
-  <div class="panel">
-
-    <h3>
-      New Leave Application
-    </h3>
-
-
-    <form id="leaveForm">
-
-      <div class="form-grid">
-
-        <div class="field">
-
-          <label>
-            Leave Date
-          </label>
-
-          <input
-            type="date"
-            id="leaveDate"
-            required
-          >
+          <div class="donation-note">
+            If the UPI button does not open an app on your device,
+            you can copy the UPI ID <strong>563safa@fbl</strong>
+            and pay through your preferred UPI application.
+          </div>
 
         </div>
 
+        <!-- QR -->
+        <div class="donation-panel qr-panel">
 
-        <div class="field">
+          <h3>📱 Scan & Pay</h3>
 
-          <label>
-            Reason
-          </label>
+          <div class="qr-box">
 
-          <input
-            id="leaveReason"
-            required
-            placeholder="Reason for leave"
-          >
+            <img
+              src="./20260225.jpg"
+              alt="SAFA Donation QR Code"
+              onerror="this.style.display='none';"
+            >
 
-        </div>
+          </div>
 
+          <p>
+            Scan the QR code using your UPI application
+            to make your donation.
+          </p>
 
-        <div class="field full">
-
-          <label>
-            Additional Details
-          </label>
-
-          <textarea
-            id="leaveDetails"
-            placeholder="Additional information (optional)"
-          ></textarea>
+          <div class="donation-note">
+            <strong>UPI ID:</strong> 563safa@fbl
+          </div>
 
         </div>
 
       </div>
 
+    </section>
 
-      <br>
+    <!-- LEAVE -->
+    <section class="section" id="leave">
 
+      <div class="section-head">
+        <h2>Leave Application</h2>
+        <p>Apply for leave and view replies from Usthad</p>
+      </div>
 
-      <button
-        class="primary"
-        type="submit">
+      <div class="card">
 
-        Submit Leave Application
+        <div class="card-title">
+          <h3>Apply for Leave</h3>
+        </div>
 
-      </button>
+        <form id="leaveForm">
 
-    </form>
+          <div class="form-grid">
 
-  </div>
+            <div class="form-group">
+              <label>Leave Date</label>
+              <input type="date" id="leaveDate" required>
+            </div>
 
+            <div class="form-group">
+              <label>Reason</label>
+              <input
+                type="text"
+                id="leaveReason"
+                placeholder="Reason for leave"
+                required
+              >
+            </div>
 
-  <div class="panel">
+            <div class="form-group full">
+              <label>Details</label>
+              <textarea
+                id="leaveDetails"
+                placeholder="Write additional details..."
+              ></textarea>
+            </div>
 
-    <h3>
-      My Leave Applications
-    </h3>
+          </div>
 
+          <button class="primary-btn" type="submit">
+            Submit Leave Application
+          </button>
 
-    <div id="leaveList"></div>
-
-
-    <div
-      class="empty"
-      id="leaveEmpty"
-      style="display:none;">
-
-      No leave applications yet.
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     MESSAGES
-========================= -->
-
-<section
-  class="section"
-  id="messages">
-
-  <div class="section-head">
-
-    <h2>
-      Messages
-    </h2>
-
-    <p>
-      Contact Usthad regarding your child's studies.
-    </p>
-
-  </div>
-
-
-  <div class="panel">
-
-    <h3>
-      Send Message
-    </h3>
-
-
-    <form id="messageForm">
-
-      <div class="field">
-
-        <label>
-          Message
-        </label>
-
-        <textarea
-          id="messageText"
-          required
-          placeholder="Write your message here..."
-        ></textarea>
+        </form>
 
       </div>
 
+      <div class="card">
 
-      <br>
+        <div class="card-title">
+          <h3>Leave History</h3>
+        </div>
 
+        <div id="leaveHistory">
+          <div class="empty">Loading...</div>
+        </div>
 
-      <button
-        class="primary"
-        type="submit">
+      </div>
 
-        Send Message
+    </section>
 
-      </button>
+    <!-- MESSAGES -->
+    <section class="section" id="messages">
 
-    </form>
+      <div class="section-head">
+        <h2>Parent Messages</h2>
+        <p>Send a message to Usthad / Administration</p>
+      </div>
+
+      <div class="card">
+
+        <div class="card-title">
+          <h3>Send Message</h3>
+        </div>
+
+        <form id="messageForm">
+
+          <div class="form-group">
+            <label>Your Message</label>
+
+            <textarea
+              id="messageText"
+              placeholder="Write your message..."
+              required
+            ></textarea>
+
+          </div>
+
+          <button class="primary-btn" type="submit">
+            Send Message
+          </button>
+
+        </form>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-title">
+          <h3>Message History</h3>
+        </div>
+
+        <div id="messageHistory">
+          <div class="empty">Loading...</div>
+        </div>
+
+      </div>
+
+    </section>
 
   </div>
-
-
-  <div class="panel">
-
-    <h3>
-      Message History
-    </h3>
-
-
-    <div id="messageList"></div>
-
-
-    <div
-      class="empty"
-      id="messageEmpty"
-      style="display:none;">
-
-      No messages yet.
-
-    </div>
-
-  </div>
-
-</section>
-
-
-</div>
 
 </main>
 
-</div>
-
+<div id="toast"></div>
 
 <script type="module">
-
-/* =========================================================
-   FIREBASE
-========================================================= */
 
 import {
   initializeApp
@@ -2094,98 +1807,54 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
+/* FIREBASE CONFIG */
+
 const firebaseConfig = {
-
-  apiKey:
-    "AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
-
-  authDomain:
-    "safa-hifz-class-7e84b.firebaseapp.com",
-
-  projectId:
-    "safa-hifz-class-7e84b",
-
-  storageBucket:
-    "safa-hifz-class-7e84b.firebasestorage.app",
-
-  messagingSenderId:
-    "476801753196",
-
-  appId:
-    "1:476801753196:web:d4c8a8b0c1a4203606f849",
-
-  measurementId:
-    "G-ZTBTJCB5SR"
-
+  apiKey:"AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
+  authDomain:"safa-hifz-class-7e84b.firebaseapp.com",
+  projectId:"safa-hifz-class-7e84b",
+  storageBucket:"safa-hifz-class-7e84b.firebasestorage.app",
+  messagingSenderId:"476801753196",
+  appId:"1:476801753196:web:d4c8a8b0c1a4203606f849",
+  measurementId:"G-ZTBTJCB5SR"
 };
 
-
-const app =
-  initializeApp(firebaseConfig);
-
-const auth =
-  getAuth(app);
-
-const db =
-  getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 
-/* =========================================================
-   HELPERS
-========================================================= */
+/* HELPERS */
 
-const $ =
-  id => document.getElementById(id);
-
+const $ = id => document.getElementById(id);
 
 function escapeHtml(value){
 
-  if(
-    value === null ||
-    value === undefined
-  ){
-
+  if(value === null || value === undefined){
     return "";
-
   }
 
   return String(value)
-
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 }
 
 
-function showMessage(
-  text,
-  type="success"
-){
+function showMessage(message){
 
-  const box =
-    $("message");
+  const toast = $("toast");
 
-  box.textContent =
-    text;
+  toast.textContent = message;
+  toast.style.display = "block";
 
-  box.className =
-    type === "error"
-      ? "error-msg"
-      : "success-msg";
+  clearTimeout(window.toastTimer);
 
-  box.style.display =
-    "block";
-
-  setTimeout(()=>{
-
-    box.style.display =
-      "none";
-
-  },3500);
-
+  window.toastTimer = setTimeout(()=>{
+    toast.style.display = "none";
+  },3000);
 }
 
 
@@ -2195,19 +1864,21 @@ function getDateText(value){
     return "-";
   }
 
-  if(
-    typeof value === "object" &&
-    value.seconds
-  ){
+  try{
 
-    return new Date(
-      value.seconds * 1000
-    ).toLocaleDateString("en-IN");
+    if(value.toDate){
+      return value.toDate().toLocaleDateString("en-IN");
+    }
 
-  }
+    const d = new Date(value);
+
+    if(!isNaN(d)){
+      return d.toLocaleDateString("en-IN");
+    }
+
+  }catch(e){}
 
   return String(value);
-
 }
 
 
@@ -2217,1827 +1888,1287 @@ function getInitial(name){
     return "S";
   }
 
-  return String(name)
-    .trim()
-    .charAt(0)
-    .toUpperCase();
-
+  return String(name).trim().charAt(0).toUpperCase();
 }
 
 
-/* =========================================================
-   GLOBAL
-========================================================= */
+/* GLOBALS */
 
 let currentUser = null;
-
 let studentNumber = "";
-
 let studentData = null;
 
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
+/* NAVIGATION */
 
-document
-  .querySelectorAll(".nav-btn")
-  .forEach(button=>{
+function openSection(sectionId){
 
-    button.addEventListener(
-      "click",
-      ()=>{
-
-        openSection(
-          button.dataset.section
-        );
-
-        $("sidebar")
-          .classList
-          .remove("open");
-
-      }
-    );
-
+  document.querySelectorAll(".section").forEach(section=>{
+    section.classList.remove("active");
   });
 
-
-document
-  .querySelectorAll(".quick-btn")
-  .forEach(button=>{
-
-    button.addEventListener(
-      "click",
-      ()=>{
-
-        openSection(
-          button.dataset.go
-        );
-
-      }
-    );
-
+  document.querySelectorAll(".nav-btn").forEach(button=>{
+    button.classList.remove("active");
   });
 
-
-function openSection(id){
-
-  document
-    .querySelectorAll(".section")
-    .forEach(section=>{
-
-      section
-        .classList
-        .remove("active");
-
-    });
-
-
-  document
-    .querySelectorAll(".nav-btn")
-    .forEach(button=>{
-
-      button
-        .classList
-        .remove("active");
-
-    });
-
-
-  const section =
-    $(id);
+  const section = $(sectionId);
 
   if(section){
-
-    section
-      .classList
-      .add("active");
-
+    section.classList.add("active");
   }
 
-
-  const nav =
-    document.querySelector(
-      `.nav-btn[data-section="${id}"]`
-    );
+  const nav = document.querySelector(
+    `.nav-btn[data-section="${sectionId}"]`
+  );
 
   if(nav){
-
-    nav
-      .classList
-      .add("active");
-
+    nav.classList.add("active");
   }
 
+  const titles = {
+    home:"Parent Dashboard",
+    child:"My Child",
+    attendance:"Attendance",
+    study:"Study Progress",
+    results:"Results",
+    notices:"Notices",
+    donation:"MY DONATION TO SAFA",
+    leave:"Leave Application",
+    messages:"Parent Messages"
+  };
+
+  $("pageTitle").textContent =
+    titles[sectionId] || "Parent Dashboard";
+
+  $("sidebar").classList.remove("open");
 
   window.scrollTo({
     top:0,
     behavior:"smooth"
   });
-
 }
 
 
-/* =========================================================
-   MOBILE MENU
-========================================================= */
+document.querySelectorAll(".nav-btn").forEach(button=>{
 
-$("mobileMenu")
-  .addEventListener(
-    "click",
-    ()=>{
+  button.addEventListener("click",()=>{
 
-      $("sidebar")
-        .classList
-        .toggle("open");
-
-    }
-  );
-
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-$("logoutBtn")
-  .addEventListener(
-    "click",
-    async ()=>{
-
-      if(
-        confirm(
-          "Logout from Parent Dashboard?"
-        )
-      ){
-
-        await signOut(auth);
-
-        location.href =
-          "index.html";
-
-      }
-
-    }
-  );
-
-
-/* =========================================================
-   AUTH
-========================================================= */
-
-onAuthStateChanged(
-  auth,
-  async user=>{
-
-    if(!user){
-
-      location.href =
-        "index.html";
-
-      return;
-
-    }
-
-    currentUser =
-      user;
-
-
-    try{
-
-      const userRef =
-        doc(
-          db,
-          "users",
-          user.uid
-        );
-
-
-      const userSnap =
-        await getDoc(
-          userRef
-        );
-
-
-      if(!userSnap.exists()){
-
-        throw new Error(
-          "Parent profile not found."
-        );
-
-      }
-
-
-      const userData =
-        userSnap.data();
-
-
-      const role =
-        String(
-          userData.role || ""
-        )
-        .trim()
-        .toLowerCase();
-
-
-      if(role !== "parent"){
-
-        throw new Error(
-          "This account is not a parent account."
-        );
-
-      }
-
-
-      studentNumber =
-        String(
-          userData.studentNumber || ""
-        ).trim();
-
-
-      if(!studentNumber){
-
-        throw new Error(
-          "Student number is not linked to this parent account."
-        );
-
-      }
-
-
-      await loadStudent();
-
-
-      await Promise.all([
-
-        loadAttendance(),
-
-        loadStudy(),
-
-        loadResults(),
-
-        loadNotices(),
-
-        loadLeaves(),
-
-        loadMessages()
-
-      ]);
-
-
-      $("loading")
-        .style
-        .display =
-        "none";
-
-
-    }catch(error){
-
-      console.error(error);
-
-      $("loading").innerHTML =
-
-        `<div style="
-          text-align:center;
-          padding:25px;
-          max-width:420px;
-        ">
-
-          <h3 style="margin-bottom:10px;">
-            Parent Dashboard Error
-          </h3>
-
-          <p style="
-            color:#718096;
-            font-weight:400;
-            line-height:1.6;
-          ">
-            ${escapeHtml(error.message)}
-          </p>
-
-          <br>
-
-          <button
-            id="errorLogout"
-            class="primary">
-
-            Back to Login
-
-          </button>
-
-        </div>`;
-
-
-      const errorLogout =
-        $("errorLogout");
-
-
-      if(errorLogout){
-
-        errorLogout.onclick =
-          async()=>{
-
-            await signOut(auth);
-
-            location.href =
-              "index.html";
-
-          };
-
-      }
-
-    }
+    openSection(button.dataset.section);
 
   });
 
-
-/* =========================================================
-   LOAD STUDENT
-========================================================= */
-
-async function loadStudent(){
-
-  const q =
-    query(
-      collection(db,"students"),
-      where(
-        "studentNumber",
-        "==",
-        studentNumber
-      )
-    );
+});
 
 
-  const snap =
-    await getDocs(q);
+document.querySelectorAll(".quick-btn").forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    openSection(button.dataset.go);
+
+  });
+
+});
 
 
-  if(snap.empty){
+/* MOBILE MENU */
 
-    throw new Error(
-      "Linked student was not found."
-    );
+$("menuToggle").addEventListener("click",()=>{
+
+  $("sidebar").classList.toggle("open");
+
+});
+
+
+/* LOGOUT */
+
+$("logoutBtn").addEventListener("click",async()=>{
+
+  const ok = confirm("Are you sure you want to logout?");
+
+  if(!ok){
+    return;
+  }
+
+  try{
+
+    await signOut(auth);
+
+    location.href="index.html";
+
+  }catch(error){
+
+    console.error(error);
+
+    showMessage("Logout failed. Please try again.");
 
   }
 
+});
 
-  const first =
-    snap.docs[0];
 
+/* LOAD STUDENT */
+
+async function loadStudent(){
+
+  if(!studentNumber){
+    throw new Error("Student number not found.");
+  }
+
+  const q = query(
+    collection(db,"students"),
+    where("studentNumber","==",studentNumber)
+  );
+
+  const snap = await getDocs(q);
+
+  if(snap.empty){
+    throw new Error("Student record not found.");
+  }
+
+  const studentDoc = snap.docs[0];
 
   studentData = {
-
-    id:first.id,
-
-    ...first.data()
-
+    id:studentDoc.id,
+    ...studentDoc.data()
   };
 
-
   const name =
-    studentData.name || "-";
-
+    studentData.studentName ||
+    studentData.name ||
+    "-";
 
   const number =
-    studentData.studentNumber || "-";
-
+    studentData.studentNumber ||
+    studentNumber ||
+    "-";
 
   const className =
-    studentData.className || "-";
+    studentData.className ||
+    studentData.class ||
+    "-";
 
+  const guardian =
+    studentData.guardianName ||
+    studentData.parentName ||
+    "-";
 
-  const parentEmail =
+  const phone =
+    studentData.phoneNumber ||
+    studentData.phone ||
+    "-";
+
+  const address =
+    studentData.studentAddress ||
+    studentData.address ||
+    studentData.place ||
+    "-";
+
+  const email =
     currentUser?.email ||
     studentData.parentEmail ||
     "-";
 
 
-  const guardianName =
-    studentData.guardianName || "-";
+  /* HOME */
+
+  $("homeStudentName").textContent = name;
+  $("homeStudentNumber").textContent = number;
+
+  $("homeNameInfo").textContent = name;
+  $("homeNoInfo").textContent = number;
+  $("homeClassInfo").textContent = className;
+  $("homeGuardianInfo").textContent = guardian;
+  $("homePhoneInfo").textContent = phone;
+  $("homeAddressInfo").textContent = address;
+
+  $("homeInitial").textContent = getInitial(name);
 
 
-  const phoneNumber =
-    studentData.phoneNumber || "-";
+  /* CHILD */
 
+  $("childName").textContent = name;
+  $("childNumber").textContent = number;
 
-  const studentAddress =
-    studentData.studentAddress || "-";
+  $("childNameInfo").textContent = name;
+  $("childNoInfo").textContent = number;
+  $("childClassInfo").textContent = className;
+  $("childGuardianInfo").textContent = guardian;
+  $("childPhoneInfo").textContent = phone;
+  $("childAddressInfo").textContent = address;
+  $("childEmailInfo").textContent = email;
 
-
-  /* =========================
-     HOME DETAILS
-  ========================= */
-
-  $("homeChildName")
-    .textContent =
-    name;
-
-
-  $("homeStudentNumber")
-    .textContent =
-    number;
-
-
-  $("homeNo")
-    .textContent =
-    number;
-
-
-  $("homeClass")
-    .textContent =
-    className;
-
-
-  $("homeParentEmail")
-    .textContent =
-    parentEmail;
-
-
-  $("homeGuardianName")
-    .textContent =
-    guardianName;
-
-
-  $("homePhoneNumber")
-    .textContent =
-    phoneNumber;
-
-
-  $("homeStudentAddress")
-    .textContent =
-    studentAddress;
-
-
-  /* =========================
-     MY CHILD DETAILS
-  ========================= */
-
-  $("childName")
-    .textContent =
-    name;
-
-
-  $("childNumber")
-    .textContent =
-    number;
-
-
-  $("childClass")
-    .textContent =
-    className;
-
-
-  $("childParentEmail")
-    .textContent =
-    parentEmail;
-
-
-  $("childGuardianName")
-    .textContent =
-    guardianName;
-
-
-  $("childPhoneNumber")
-    .textContent =
-    phoneNumber;
-
-
-  $("childStudentAddress")
-    .textContent =
-    studentAddress;
-
-
-  const initial =
-    getInitial(name);
-
-
-  $("avatar")
-    .textContent =
-    initial;
-
-
-  $("childAvatar")
-    .textContent =
-    initial;
+  $("childInitial").textContent = getInitial(name);
 
 }
 
 
-/* =========================================================
-   ATTENDANCE
-========================================================= */
+/* ATTENDANCE */
 
 async function loadAttendance(){
 
-  const q =
-    query(
+  const body = $("attendanceBody");
+
+  try{
+
+    const q = query(
       collection(db,"attendance"),
-      where(
-        "studentNumber",
-        "==",
-        studentNumber
-      )
+      where("studentNumber","==",studentNumber)
     );
 
+    const snap = await getDocs(q);
 
-  const snap =
-    await getDocs(q);
+    const dateMap = new Map();
 
+    snap.forEach(docSnap=>{
 
-  const records = [];
+      const row = docSnap.data();
 
+      const date =
+        row.date ||
+        row.attendanceDate ||
+        row.createdAt?.toDate?.().toISOString()?.slice(0,10) ||
+        "";
 
-  snap.forEach(item=>{
+      if(!date){
+        return;
+      }
 
-    records.push({
-
-      id:item.id,
-
-      ...item.data()
-
-    });
-
-  });
-
-
-  const today =
-    new Date()
-      .toISOString()
-      .split("T")[0];
-
-
-  const dateMap = {};
-
-
-  records.forEach(data=>{
-
-    const date =
-      String(
-        data.date || ""
-      ).trim();
-
-
-    if(!date){
-      return;
-    }
-
-
-    const status =
-      String(
-        data.status || ""
-      ).trim();
-
-
-    if(!dateMap[date]){
-
-      dateMap[date] = {
-
-        date:date,
-
-        status:
-          status || "Present"
-
-      };
-
-    }else{
+      const status =
+        row.status ||
+        "Present";
 
       if(
+        !dateMap.has(date) ||
         status === "Absent" ||
         status === "Leave"
       ){
 
-        dateMap[date].status =
-          status;
+        dateMap.set(date,{
+          date,
+          status
+        });
 
       }
-
-    }
-
-  });
-
-
-  if(!dateMap[today]){
-
-    dateMap[today] = {
-
-      date:today,
-
-      status:"Present"
-
-    };
-
-  }
-
-
-  const rows =
-    Object.values(dateMap);
-
-
-  rows.sort((a,b)=>
-    String(b.date)
-      .localeCompare(
-        String(a.date)
-      )
-  );
-
-
-  $("attendanceTable")
-    .innerHTML =
-    "";
-
-
-  if(rows.length === 0){
-
-    $("attendanceEmpty")
-      .style
-      .display =
-      "block";
-
-  }else{
-
-    $("attendanceEmpty")
-      .style
-      .display =
-      "none";
-
-
-    rows.forEach(data=>{
-
-      let status =
-        data.status ||
-        "Present";
-
-
-      let badge =
-        "green";
-
-
-      if(status === "Absent"){
-
-        badge =
-          "red";
-
-      }else if(status === "Leave"){
-
-        badge =
-          "yellow";
-
-      }else{
-
-        status =
-          "Present";
-
-        badge =
-          "green";
-
-      }
-
-
-      const tr =
-        document.createElement(
-          "tr"
-        );
-
-
-      tr.innerHTML = `
-
-        <td>
-          ${escapeHtml(
-            data.date || "-"
-          )}
-        </td>
-
-        <td>
-
-          <span class="badge ${badge}">
-            ${escapeHtml(status)}
-          </span>
-
-        </td>
-
-      `;
-
-
-      $("attendanceTable")
-        .appendChild(tr);
 
     });
 
+
+    const today = new Date();
+
+    const todayText =
+      today.toISOString().slice(0,10);
+
+    if(!dateMap.has(todayText)){
+
+      dateMap.set(todayText,{
+        date:todayText,
+        status:"Present"
+      });
+
+    }
+
+
+    const records =
+      Array.from(dateMap.values())
+      .sort((a,b)=>
+        String(b.date).localeCompare(String(a.date))
+      );
+
+
+    $("attendanceTotal").textContent = records.length;
+
+
+    if(!records.length){
+
+      body.innerHTML = `
+        <tr>
+          <td colspan="2">
+            <div class="empty">No attendance records found.</div>
+          </td>
+        </tr>
+      `;
+
+      return;
+    }
+
+
+    body.innerHTML = records.map(row=>{
+
+      const status =
+        String(row.status || "Present");
+
+      let cls = "present";
+
+      if(status.toLowerCase() === "absent"){
+        cls = "absent";
+      }
+
+      if(status.toLowerCase() === "leave"){
+        cls = "leave";
+      }
+
+      return `
+        <tr>
+          <td>${escapeHtml(row.date)}</td>
+          <td>
+            <span class="status ${cls}">
+              ${escapeHtml(status)}
+            </span>
+          </td>
+        </tr>
+      `;
+
+    }).join("");
+
+
+  }catch(error){
+
+    console.error("Attendance:",error);
+
+    body.innerHTML = `
+      <tr>
+        <td colspan="2">
+          <div class="empty">
+            Unable to load attendance.
+          </div>
+        </td>
+      </tr>
+    `;
+
   }
-
-
-  $("attendanceTotal")
-    .textContent =
-    records.length;
 
 }
 
 
-/* =========================================================
-   STUDY PROGRESS
-========================================================= */
+/* STUDY PROGRESS */
 
 async function loadStudy(){
 
-  const q =
-    query(
+  const list = $("studyList");
+
+  try{
+
+    const q = query(
       collection(db,"studyProgress"),
-      where(
-        "studentNumber",
-        "==",
-        studentNumber
-      )
+      where("studentNumber","==",studentNumber)
     );
 
+    const snap = await getDocs(q);
 
-  const snap =
-    await getDocs(q);
+    const rows = [];
 
+    snap.forEach(docSnap=>{
 
-  const rows = [];
-
-
-  snap.forEach(item=>{
-
-    rows.push({
-
-      id:item.id,
-
-      ...item.data()
+      rows.push({
+        id:docSnap.id,
+        ...docSnap.data()
+      });
 
     });
 
-  });
+
+    rows.sort((a,b)=>{
+
+      const da =
+        a.date ||
+        a.createdAt?.toDate?.().getTime?.() ||
+        "";
+
+      const dbb =
+        b.date ||
+        b.createdAt?.toDate?.().getTime?.() ||
+        "";
+
+      return String(dbb).localeCompare(String(da));
+
+    });
 
 
-  rows.sort((a,b)=>
-    String(
-      b.date || ""
-    ).localeCompare(
-      String(
-        a.date || ""
-      )
-    )
-  );
+    $("studyTotal").textContent = rows.length;
 
 
-  $("studyList")
-    .innerHTML =
-    "";
+    if(!rows.length){
+
+      list.className = "";
+
+      list.innerHTML = `
+        <div class="empty">
+          No study progress records found.
+        </div>
+      `;
+
+      return;
+    }
 
 
-  if(rows.length === 0){
-
-    $("studyEmpty")
-      .style
-      .display =
-      "block";
-
-  }else{
-
-    $("studyEmpty")
-      .style
-      .display =
-      "none";
+    list.className = "progress-grid";
 
 
-    rows.forEach(data=>{
+    list.innerHTML = rows.map(row=>{
 
-      let performance =
-        data.performance ||
-        "Not specified";
+      const surah =
+        row.surah ||
+        row.title ||
+        row.subject ||
+        "Study Progress";
 
+      const date =
+        getDateText(row.date || row.createdAt);
 
-      let studyStatus =
-        data.studyStatus ||
-        "Not specified";
+      const newLesson =
+        row.newLesson ||
+        row.lesson ||
+        "-";
 
+      const revision =
+        row.revision ||
+        row.revisionLesson ||
+        "-";
 
-      let width =
-        70;
+      const performance =
+        row.performance ||
+        row.hifzPerformance ||
+        "-";
 
+      const studyStatus =
+        row.studyStatus ||
+        row.darsStudyStatus ||
+        "-";
+
+      const teacherNote =
+        row.teacherNote ||
+        row.note ||
+        "";
+
+      let progress = 0;
+
+      const p =
+        String(performance).toLowerCase();
 
       if(
-        performance ===
-        "Excellent"
+        p.includes("excellent") ||
+        p.includes("very good")
       ){
-
-        width = 100;
-
+        progress = 100;
       }else if(
-        performance ===
-        "Very Good"
+        p.includes("good")
       ){
-
-        width = 85;
-
+        progress = 80;
       }else if(
-        performance ===
-        "Good"
+        p.includes("average")
       ){
-
-        width = 70;
-
+        progress = 60;
       }else if(
-        performance ===
-        "Needs Improvement"
+        p.includes("poor")
       ){
-
-        width = 45;
-
+        progress = 35;
+      }else{
+        progress = 70;
       }
 
 
-      const div =
-        document.createElement(
-          "div"
-        );
+      return `
+        <div class="progress-card">
 
+          <h3>${escapeHtml(surah)}</h3>
 
-      div.className =
-        "progress-card";
-
-
-      div.innerHTML = `
-
-        <div class="progress-head">
-
-          <strong>
-            ${escapeHtml(
-              data.surah ||
-              "Study Progress"
-            )}
-          </strong>
-
-          <span>
-            ${escapeHtml(
-              data.date || "-"
-            )}
-          </span>
-
-        </div>
-
-
-        <div style="
-          font-size:13px;
-          color:#536477;
-          margin-bottom:10px;
-        ">
-
-          <b>New Lesson:</b>
-
-          ${escapeHtml(
-            data.newLesson || "-"
-          )}
-
-          &nbsp; | &nbsp;
-
-          <b>Revision:</b>
-
-          ${escapeHtml(
-            data.revision || "-"
-          )}
-
-        </div>
-
-
-        <div class="progress-line">
-
-          <div
-            class="progress-fill"
-            style="width:${width}%">
+          <div class="progress-date">
+            ${escapeHtml(date)}
           </div>
 
-        </div>
+          <div class="progress-row">
+            <span>New Lesson</span>
+            <strong>${escapeHtml(newLesson)}</strong>
+          </div>
 
+          <div class="progress-row">
+            <span>Revision</span>
+            <strong>${escapeHtml(revision)}</strong>
+          </div>
 
-        <div style="
-          margin-top:12px;
-          display:flex;
-          flex-wrap:wrap;
-          gap:8px;
-        ">
+          <div class="progress-row">
+            <span>Hifz Performance</span>
+            <strong>${escapeHtml(performance)}</strong>
+          </div>
 
-          <span class="badge blue">
-
-            Hifz Performance:
-
-            ${escapeHtml(
-              performance
-            )}
-
-          </span>
-
-
-          <span class="badge green">
-
-            Dars & Study Status:
-
-            ${escapeHtml(
-              studyStatus
-            )}
-
-          </span>
-
-        </div>
-
-
-        ${
-          data.note
-          ? `
-            <div style="
-              margin-top:10px;
-              color:#718096;
-              font-size:12px;
-            ">
-
-              <b>Teacher Note:</b>
-
-              ${escapeHtml(
-                data.note
-              )}
-
+          <div class="progress-bar">
+            <div
+              class="progress-fill"
+              style="width:${progress}%">
             </div>
-          `
-          : ""
-        }
+          </div>
 
+          <div class="progress-row">
+            <span>Dars & Study Status</span>
+            <strong>${escapeHtml(studyStatus)}</strong>
+          </div>
+
+          ${
+            teacherNote
+            ? `
+              <div class="progress-row">
+                <span>Teacher Note</span>
+                <strong>${escapeHtml(teacherNote)}</strong>
+              </div>
+            `
+            : ""
+          }
+
+        </div>
       `;
 
+    }).join("");
 
-      $("studyList")
-        .appendChild(div);
 
-    });
+  }catch(error){
+
+    console.error("Study:",error);
+
+    list.className = "";
+
+    list.innerHTML = `
+      <div class="empty">
+        Unable to load study progress.
+      </div>
+    `;
 
   }
-
-
-  $("studyTotal")
-    .textContent =
-    rows.length;
 
 }
 
 
-/* =========================================================
-   RESULTS
-========================================================= */
+/* RESULTS */
 
 async function loadResults(){
 
-  const q =
-    query(
+  const list = $("resultsList");
+
+  try{
+
+    const q = query(
       collection(db,"results"),
-      where(
-        "studentNumber",
-        "==",
-        studentNumber
-      ),
-      where(
-        "status",
-        "==",
-        "published"
-      )
+      where("studentNumber","==",studentNumber),
+      where("published","==",true)
     );
 
+    const snap = await getDocs(q);
 
-  const snap =
-    await getDocs(q);
+    const rows = [];
 
+    snap.forEach(docSnap=>{
 
-  const rows = [];
-
-
-  snap.forEach(item=>{
-
-    rows.push({
-
-      id:item.id,
-
-      ...item.data()
+      rows.push({
+        id:docSnap.id,
+        ...docSnap.data()
+      });
 
     });
 
-  });
+
+    rows.sort((a,b)=>{
+
+      const da =
+        a.createdAt?.toDate?.().getTime?.() || 0;
+
+      const dbb =
+        b.createdAt?.toDate?.().getTime?.() || 0;
+
+      return dbb-da;
+
+    });
 
 
-  rows.sort((a,b)=>{
-
-    const aa =
-      a.createdAt?.seconds ||
-      0;
-
-    const bb =
-      b.createdAt?.seconds ||
-      0;
-
-    return bb-aa;
-
-  });
+    $("resultTotal").textContent = rows.length;
 
 
-  $("resultList")
-    .innerHTML =
-    "";
+    if(!rows.length){
 
-
-  if(rows.length === 0){
-
-    $("resultEmpty")
-      .style
-      .display =
-      "block";
-
-  }else{
-
-    $("resultEmpty")
-      .style
-      .display =
-      "none";
-
-
-    rows.forEach(data=>{
-
-      const div =
-        document.createElement(
-          "div"
-        );
-
-
-      div.className =
-        "result-card";
-
-
-      div.innerHTML = `
-
-        <div>
-
-          <div class="result-title">
-
-            ${escapeHtml(
-              data.title ||
-              "Study Result"
-            )}
-
-          </div>
-
-
-          <div class="result-date">
-
-            Published result
-
-          </div>
-
+      list.innerHTML = `
+        <div class="empty">
+          No published results available.
         </div>
-
-
-        <div>
-
-          <div class="result-mark">
-
-            ${escapeHtml(
-              data.mark || "-"
-            )}
-
-          </div>
-
-
-          <span class="badge green">
-
-            Published
-
-          </span>
-
-        </div>
-
       `;
 
+      return;
+    }
 
-      $("resultList")
-        .appendChild(div);
 
-    });
+    list.innerHTML = rows.map(row=>{
+
+      const title =
+        row.title ||
+        row.examName ||
+        row.subject ||
+        "Result";
+
+      const mark =
+        row.mark ??
+        row.marks ??
+        row.result ??
+        "-";
+
+      const date =
+        getDateText(row.createdAt);
+
+
+      return `
+        <div class="result-card">
+
+          <h3>${escapeHtml(title)}</h3>
+
+          <div class="result-mark">
+            ${escapeHtml(mark)}
+          </div>
+
+          <span class="status approved">
+            Published
+          </span>
+
+          <div class="notice-date">
+            ${escapeHtml(date)}
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
+
+
+  }catch(error){
+
+    console.error("Results:",error);
+
+    list.innerHTML = `
+      <div class="empty">
+        Unable to load results.
+      </div>
+    `;
 
   }
-
-
-  $("resultTotal")
-    .textContent =
-    rows.length;
 
 }
 
 
-/* =========================================================
-   NOTICES
-========================================================= */
+/* NOTICES */
 
 async function loadNotices(){
 
-  const q =
-    query(
+  const list = $("noticesList");
+
+  try{
+
+    const q = query(
       collection(db,"notices"),
-      where(
-        "status",
-        "==",
-        "published"
-      )
+      where("published","==",true)
     );
 
+    const snap = await getDocs(q);
 
-  const snap =
-    await getDocs(q);
+    const rows = [];
 
+    snap.forEach(docSnap=>{
 
-  const rows = [];
-
-
-  snap.forEach(item=>{
-
-    rows.push({
-
-      id:item.id,
-
-      ...item.data()
+      rows.push({
+        id:docSnap.id,
+        ...docSnap.data()
+      });
 
     });
 
-  });
+
+    rows.sort((a,b)=>{
+
+      const da =
+        a.createdAt?.toDate?.().getTime?.() || 0;
+
+      const dbb =
+        b.createdAt?.toDate?.().getTime?.() || 0;
+
+      return dbb-da;
+
+    });
 
 
-  rows.sort((a,b)=>{
+    if(!rows.length){
 
-    const aa =
-      a.createdAt?.seconds ||
-      0;
-
-    const bb =
-      b.createdAt?.seconds ||
-      0;
-
-    return bb-aa;
-
-  });
-
-
-  $("noticeList")
-    .innerHTML =
-    "";
-
-
-  if(rows.length === 0){
-
-    $("noticeEmpty")
-      .style
-      .display =
-      "block";
-
-  }else{
-
-    $("noticeEmpty")
-      .style
-      .display =
-      "none";
-
-
-    rows.forEach(data=>{
-
-      const div =
-        document.createElement(
-          "div"
-        );
-
-
-      div.className =
-        "notice";
-
-
-      div.innerHTML = `
-
-        <h4>
-
-          ${escapeHtml(
-            data.title ||
-            "Notice"
-          )}
-
-        </h4>
-
-
-        <p>
-
-          ${escapeHtml(
-            data.text || ""
-          )}
-
-        </p>
-
-
-        <small>
-
-          ${getDateText(
-            data.createdAt
-          )}
-
-        </small>
-
+      list.innerHTML = `
+        <div class="empty">
+          No notices available.
+        </div>
       `;
 
-
-      $("noticeList")
-        .appendChild(div);
-
-    });
-
-  }
-
-
-  $("noticeTotal")
-    .textContent =
-    rows.length;
-
-}
-
-
-/* =========================================================
-   LEAVE APPLICATION
-========================================================= */
-
-$("leaveForm")
-  .addEventListener(
-    "submit",
-    async e=>{
-
-      e.preventDefault();
-
-
-      if(!currentUser){
-
-        showMessage(
-          "Please login again.",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      try{
-
-        await addDoc(
-          collection(
-            db,
-            "leaveRequests"
-          ),
-          {
-
-            parentUid:
-              currentUser.uid,
-
-            parentEmail:
-              currentUser.email || "",
-
-            studentNumber:
-              studentNumber,
-
-            leaveDate:
-              $("leaveDate")
-                .value,
-
-            reason:
-              $("leaveReason")
-                .value
-                .trim(),
-
-            details:
-              $("leaveDetails")
-                .value
-                .trim(),
-
-            status:
-              "pending",
-
-            reply:
-              "",
-
-            createdAt:
-              serverTimestamp()
-
-          }
-        );
-
-
-        $("leaveForm")
-          .reset();
-
-
-        showMessage(
-          "Leave application submitted successfully."
-        );
-
-
-        await loadLeaves();
-
-
-      }catch(error){
-
-        console.error(error);
-
-        showMessage(
-          error.message,
-          "error"
-        );
-
-      }
-
-    }
-  );
-
-
-/* =========================================================
-   LOAD LEAVES
-========================================================= */
-
-async function loadLeaves(){
-
-  const q =
-    query(
-      collection(db,"leaveRequests"),
-      where(
-        "parentUid",
-        "==",
-        currentUser.uid
-      )
-    );
-
-
-  const snap =
-    await getDocs(q);
-
-
-  const rows = [];
-
-
-  snap.forEach(item=>{
-
-    rows.push({
-
-      id:item.id,
-
-      ...item.data()
-
-    });
-
-  });
-
-
-  rows.sort((a,b)=>{
-
-    const aa =
-      a.createdAt?.seconds ||
-      0;
-
-    const bb =
-      b.createdAt?.seconds ||
-      0;
-
-    return bb-aa;
-
-  });
-
-
-  $("leaveList")
-    .innerHTML =
-    "";
-
-
-  if(rows.length === 0){
-
-    $("leaveEmpty")
-      .style
-      .display =
-      "block";
-
-    return;
-
-  }
-
-
-  $("leaveEmpty")
-    .style
-    .display =
-    "none";
-
-
-  rows.forEach(data=>{
-
-    const status =
-      data.status ||
-      "pending";
-
-
-    let badge =
-      "yellow";
-
-
-    if(status === "approved"){
-
-      badge =
-        "green";
-
-    }else if(
-      status === "rejected"
-    ){
-
-      badge =
-        "red";
-
+      return;
     }
 
 
-    const div =
-      document.createElement(
-        "div"
-      );
+    list.innerHTML = rows.map(row=>{
 
-
-    div.className =
-      "request-card";
-
-
-    div.innerHTML = `
-
-      <div class="request-top">
-
-        <div>
-
-          <h4>
-            Leave Application
-          </h4>
-
-          <small style="
-            color:#718096;
-          ">
-
-            ${escapeHtml(
-              data.leaveDate || "-"
-            )}
-
-          </small>
-
-        </div>
-
-
-        <span class="badge ${badge}">
-
-          ${escapeHtml(
-            status
-          )}
-
-        </span>
-
-      </div>
-
-
-      <p>
-
-        <strong>
-          Reason:
-        </strong>
-
-        ${escapeHtml(
-          data.reason || "-"
-        )}
-
-      </p>
-
-
-      ${
-        data.details
-        ? `
-          <p>
-
-            <strong>
-              Details:
-            </strong>
-
-            ${escapeHtml(
-              data.details
-            )}
-
-          </p>
-        `
-        : ""
-      }
-
-
-      ${
-        data.reply
-        ? `
-          <div class="reply-box">
-
-            <strong>
-              USTHAD REPLY
-            </strong>
-
-            <p>
-
-              ${escapeHtml(
-                data.reply
-              )}
-
-            </p>
-
-          </div>
-        `
-        : ""
-      }
-
-    `;
-
-
-    $("leaveList")
-      .appendChild(div);
-
-  });
-
-}
-
-
-/* =========================================================
-   MESSAGE FORM
-========================================================= */
-
-$("messageForm")
-  .addEventListener(
-    "submit",
-    async e=>{
-
-      e.preventDefault();
-
+      const title =
+        row.title ||
+        "Notice";
 
       const text =
-        $("messageText")
-          .value
-          .trim();
+        row.text ||
+        row.message ||
+        row.description ||
+        "";
 
+      const date =
+        getDateText(row.createdAt);
 
-      if(!text){
 
-        showMessage(
-          "Please enter a message.",
-          "error"
-        );
+      return `
+        <div class="notice-card">
 
-        return;
+          <h3>${escapeHtml(title)}</h3>
 
-      }
+          <p>${escapeHtml(text)}</p>
 
+          <div class="notice-date">
+            ${escapeHtml(date)}
+          </div>
 
-      try{
+        </div>
+      `;
 
-        await addDoc(
-          collection(
-            db,
-            "messages"
-          ),
-          {
+    }).join("");
 
-            parentUid:
-              currentUser.uid,
 
-            parentEmail:
-              currentUser.email || "",
+  }catch(error){
 
-            studentNumber:
-              studentNumber,
+    console.error("Notices:",error);
 
-            text:
-              text,
-
-            reply:
-              "",
-
-            status:
-              "unread",
-
-            createdAt:
-              serverTimestamp()
-
-          }
-        );
-
-
-        $("messageForm")
-          .reset();
-
-
-        showMessage(
-          "Message sent successfully."
-        );
-
-
-        await loadMessages();
-
-
-      }catch(error){
-
-        console.error(error);
-
-        showMessage(
-          error.message,
-          "error"
-        );
-
-      }
-
-    }
-  );
-
-
-/* =========================================================
-   LOAD MESSAGES
-========================================================= */
-
-async function loadMessages(){
-
-  const q =
-    query(
-      collection(db,"messages"),
-      where(
-        "parentUid",
-        "==",
-        currentUser.uid
-      )
-    );
-
-
-  const snap =
-    await getDocs(q);
-
-
-  const rows = [];
-
-
-  snap.forEach(item=>{
-
-    rows.push({
-
-      id:item.id,
-
-      ...item.data()
-
-    });
-
-  });
-
-
-  rows.sort((a,b)=>{
-
-    const aa =
-      a.createdAt?.seconds ||
-      0;
-
-    const bb =
-      b.createdAt?.seconds ||
-      0;
-
-    return bb-aa;
-
-  });
-
-
-  $("messageList")
-    .innerHTML =
-    "";
-
-
-  if(rows.length === 0){
-
-    $("messageEmpty")
-      .style
-      .display =
-      "block";
-
-    return;
-
-  }
-
-
-  $("messageEmpty")
-    .style
-    .display =
-    "none";
-
-
-  rows.forEach(data=>{
-
-    const status =
-      data.status ||
-      "unread";
-
-
-    const badge =
-      status === "replied"
-        ? "green"
-        : "yellow";
-
-
-    const div =
-      document.createElement(
-        "div"
-      );
-
-
-    div.className =
-      "request-card";
-
-
-    div.innerHTML = `
-
-      <div class="request-top">
-
-        <h4>
-          My Message
-        </h4>
-
-
-        <span class="badge ${badge}">
-
-          ${escapeHtml(
-            status
-          )}
-
-        </span>
-
+    list.innerHTML = `
+      <div class="empty">
+        Unable to load notices.
       </div>
-
-
-      <p>
-
-        ${escapeHtml(
-          data.text || "-"
-        )}
-
-      </p>
-
-
-      ${
-        data.reply
-        ? `
-          <div class="reply-box">
-
-            <strong>
-              USTHAD REPLY
-            </strong>
-
-            <p>
-
-              ${escapeHtml(
-                data.reply
-              )}
-
-            </p>
-
-          </div>
-        `
-        : `
-          <div style="
-            margin-top:12px;
-            color:#718096;
-            font-size:12px;
-          ">
-
-            Waiting for Usthad's reply...
-
-          </div>
-        `
-      }
-
     `;
 
-
-    $("messageList")
-      .appendChild(div);
-
-  });
+  }
 
 }
 
 
-/* =========================================================
-   INITIAL DATE
-========================================================= */
+/* LEAVE SUBMIT */
 
-const today =
-  new Date()
-    .toISOString()
-    .split("T")[0];
+$("leaveForm").addEventListener("submit",async event=>{
+
+  event.preventDefault();
+
+  if(!currentUser || !studentNumber){
+    showMessage("Parent account not ready.");
+    return;
+  }
 
 
-$("leaveDate")
-  .value =
-  today;
+  const leaveDate =
+    $("leaveDate").value;
+
+  const reason =
+    $("leaveReason").value.trim();
+
+  const details =
+    $("leaveDetails").value.trim();
+
+
+  if(!leaveDate || !reason){
+
+    showMessage("Please enter leave date and reason.");
+
+    return;
+  }
+
+
+  try{
+
+    await addDoc(
+      collection(db,"leaveRequests"),
+      {
+        parentUid:currentUser.uid,
+        parentEmail:currentUser.email || "",
+        studentNumber:studentNumber,
+        leaveDate:leaveDate,
+        reason:reason,
+        details:details,
+        status:"pending",
+        reply:"",
+        createdAt:serverTimestamp()
+      }
+    );
+
+
+    $("leaveForm").reset();
+
+    $("leaveDate").value =
+      new Date().toISOString().slice(0,10);
+
+    showMessage("Leave application submitted.");
+
+    await loadLeaveHistory();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "Unable to submit leave application."
+    );
+
+  }
+
+});
+
+
+/* LEAVE HISTORY */
+
+async function loadLeaveHistory(){
+
+  const list = $("leaveHistory");
+
+  try{
+
+    const q = query(
+      collection(db,"leaveRequests"),
+      where("parentUid","==",currentUser.uid)
+    );
+
+    const snap = await getDocs(q);
+
+    const rows = [];
+
+    snap.forEach(docSnap=>{
+
+      rows.push({
+        id:docSnap.id,
+        ...docSnap.data()
+      });
+
+    });
+
+
+    rows.sort((a,b)=>{
+
+      const da =
+        a.createdAt?.toDate?.().getTime?.() || 0;
+
+      const dbb =
+        b.createdAt?.toDate?.().getTime?.() || 0;
+
+      return dbb-da;
+
+    });
+
+
+    if(!rows.length){
+
+      list.innerHTML = `
+        <div class="empty">
+          No leave applications yet.
+        </div>
+      `;
+
+      return;
+    }
+
+
+    list.innerHTML = rows.map(row=>{
+
+      const status =
+        String(row.status || "pending");
+
+      let cls = "pending";
+
+      if(status.toLowerCase() === "approved"){
+        cls = "approved";
+      }
+
+      if(status.toLowerCase() === "rejected"){
+        cls = "rejected";
+      }
+
+
+      return `
+        <div class="history-card">
+
+          <div class="history-top">
+
+            <div>
+              <h4>
+                Leave Date:
+                ${escapeHtml(row.leaveDate || "-")}
+              </h4>
+
+              <p>
+                <strong>Reason:</strong>
+                ${escapeHtml(row.reason || "-")}
+              </p>
+
+              ${
+                row.details
+                ? `
+                  <p>
+                    <strong>Details:</strong>
+                    ${escapeHtml(row.details)}
+                  </p>
+                `
+                : ""
+              }
+
+            </div>
+
+            <span class="status ${cls}">
+              ${escapeHtml(status)}
+            </span>
+
+          </div>
+
+          ${
+            row.reply
+            ? `
+              <div class="reply">
+                <strong>Usthad Reply:</strong><br>
+                ${escapeHtml(row.reply)}
+              </div>
+            `
+            : ""
+          }
+
+        </div>
+      `;
+
+    }).join("");
+
+
+  }catch(error){
+
+    console.error("Leave history:",error);
+
+    list.innerHTML = `
+      <div class="empty">
+        Unable to load leave history.
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* MESSAGE SUBMIT */
+
+$("messageForm").addEventListener("submit",async event=>{
+
+  event.preventDefault();
+
+  if(!currentUser || !studentNumber){
+    showMessage("Parent account not ready.");
+    return;
+  }
+
+
+  const text =
+    $("messageText").value.trim();
+
+
+  if(!text){
+
+    showMessage("Please enter your message.");
+
+    return;
+  }
+
+
+  try{
+
+    await addDoc(
+      collection(db,"messages"),
+      {
+        parentUid:currentUser.uid,
+        parentEmail:currentUser.email || "",
+        studentNumber:studentNumber,
+        text:text,
+        reply:"",
+        status:"unread",
+        createdAt:serverTimestamp()
+      }
+    );
+
+
+    $("messageForm").reset();
+
+    showMessage("Message sent successfully.");
+
+    await loadMessageHistory();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "Unable to send message."
+    );
+
+  }
+
+});
+
+
+/* MESSAGE HISTORY */
+
+async function loadMessageHistory(){
+
+  const list = $("messageHistory");
+
+  try{
+
+    const q = query(
+      collection(db,"messages"),
+      where("parentUid","==",currentUser.uid)
+    );
+
+    const snap = await getDocs(q);
+
+    const rows = [];
+
+    snap.forEach(docSnap=>{
+
+      rows.push({
+        id:docSnap.id,
+        ...docSnap.data()
+      });
+
+    });
+
+
+    rows.sort((a,b)=>{
+
+      const da =
+        a.createdAt?.toDate?.().getTime?.() || 0;
+
+      const dbb =
+        b.createdAt?.toDate?.().getTime?.() || 0;
+
+      return dbb-da;
+
+    });
+
+
+    if(!rows.length){
+
+      list.innerHTML = `
+        <div class="empty">
+          No messages yet.
+        </div>
+      `;
+
+      return;
+    }
+
+
+    list.innerHTML = rows.map(row=>{
+
+      return `
+        <div class="history-card">
+
+          <div class="history-top">
+
+            <div>
+              <h4>Your Message</h4>
+
+              <p>
+                ${escapeHtml(row.text || "")}
+              </p>
+
+              <div class="notice-date">
+                ${escapeHtml(
+                  getDateText(row.createdAt)
+                )}
+              </div>
+
+            </div>
+
+            <span class="status ${
+              row.reply
+              ? "approved"
+              : "pending"
+            }">
+              ${
+                row.reply
+                ? "Replied"
+                : "Pending"
+              }
+            </span>
+
+          </div>
+
+          ${
+            row.reply
+            ? `
+              <div class="reply">
+                <strong>Usthad Reply:</strong><br>
+                ${escapeHtml(row.reply)}
+              </div>
+            `
+            : ""
+          }
+
+        </div>
+      `;
+
+    }).join("");
+
+
+  }catch(error){
+
+    console.error("Message history:",error);
+
+    list.innerHTML = `
+      <div class="empty">
+        Unable to load message history.
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* AUTH */
+
+onAuthStateChanged(auth,async user=>{
+
+  try{
+
+    if(!user){
+
+      location.href="index.html";
+
+      return;
+    }
+
+
+    currentUser = user;
+
+
+    const userRef =
+      doc(db,"users",user.uid);
+
+    const userSnap =
+      await getDoc(userRef);
+
+
+    if(!userSnap.exists()){
+
+      throw new Error(
+        "Parent account details not found."
+      );
+
+    }
+
+
+    const userData =
+      userSnap.data();
+
+
+    if(userData.role !== "parent"){
+
+      throw new Error(
+        "This account is not registered as a parent account."
+      );
+
+    }
+
+
+    studentNumber =
+      userData.studentNumber ||
+      userData.studentNo ||
+      "";
+
+
+    if(!studentNumber){
+
+      throw new Error(
+        "Student number is not linked to this parent account."
+      );
+
+    }
+
+
+    await loadStudent();
+
+    await Promise.all([
+      loadAttendance(),
+      loadStudy(),
+      loadResults(),
+      loadNotices(),
+      loadLeaveHistory(),
+      loadMessageHistory()
+    ]);
+
+
+    $("loading").style.display = "none";
+
+
+  }catch(error){
+
+    console.error("Parent Dashboard Error:",error);
+
+    $("loading").innerHTML = `
+      <div style="
+        max-width:450px;
+        padding:25px;
+        text-align:center;
+      ">
+
+        <div style="
+          font-size:45px;
+          margin-bottom:15px;
+        ">
+          ⚠️
+        </div>
+
+        <strong>
+          Parent Dashboard Error
+        </strong>
+
+        <p style="
+          margin-top:10px;
+          opacity:.8;
+          line-height:1.5;
+        ">
+          ${escapeHtml(error.message)}
+        </p>
+
+        <button
+          onclick="location.href='index.html'"
+          style="
+            margin-top:20px;
+            border:0;
+            padding:12px 20px;
+            border-radius:8px;
+            background:#d6a93a;
+            color:#032b24;
+            font-weight:bold;
+            cursor:pointer;
+          ">
+          Back to Login
+        </button>
+
+      </div>
+    `;
+
+  }
+
+});
+
+
+/* TODAY'S DATE */
+
+$("leaveDate").value =
+  new Date().toISOString().slice(0,10);
 
 </script>
 
