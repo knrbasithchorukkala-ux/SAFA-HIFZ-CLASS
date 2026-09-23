@@ -2778,19 +2778,34 @@ async function loadResults(){
 
   try{
 
+    let snap;
+
     /*
-      IMPORTANT:
-      Only studentNumber is used in Firestore query.
-      published=true is checked after loading.
-      This avoids the composite-index problem.
+      RESULT ONLY:
+      First check studentNumber.
+      If the Result collection uses studentNo instead,
+      check that field also.
+      No composite index is required.
     */
 
-    const q = query(
+    const q1 = query(
       collection(db,"results"),
       where("studentNumber","==",studentNumber)
     );
 
-    const snap = await getDocs(q);
+    snap = await getDocs(q1);
+
+    if(snap.empty){
+
+      const q2 = query(
+        collection(db,"results"),
+        where("studentNo","==",studentNumber)
+      );
+
+      snap = await getDocs(q2);
+
+    }
+
 
     const rows = [];
 
@@ -2798,7 +2813,17 @@ async function loadResults(){
 
       const data = docSnap.data();
 
-      if(data.published === true){
+      const publishedValue =
+        data.published;
+
+      const isPublished =
+        publishedValue === true ||
+        String(publishedValue).toLowerCase() === "true" ||
+        String(publishedValue).toLowerCase() === "published" ||
+        data.isPublished === true ||
+        String(data.isPublished).toLowerCase() === "true";
+
+      if(isPublished){
 
         rows.push({
           id:docSnap.id,
@@ -2813,10 +2838,12 @@ async function loadResults(){
     rows.sort((a,b)=>{
 
       const da =
-        a.createdAt?.toDate?.().getTime?.() || 0;
+        a.createdAt?.toDate?.().getTime?.() ||
+        0;
 
       const dbb =
-        b.createdAt?.toDate?.().getTime?.() || 0;
+        b.createdAt?.toDate?.().getTime?.() ||
+        0;
 
       return dbb-da;
 
@@ -2841,16 +2868,22 @@ async function loadResults(){
         row.title ||
         row.examName ||
         row.subject ||
+        row.name ||
         "Result";
 
       const mark =
         row.mark ??
         row.marks ??
         row.result ??
+        row.total ??
+        row.score ??
         "-";
 
       const date =
-        getDateText(row.createdAt);
+        getDateText(
+          row.createdAt ||
+          row.date
+        );
 
 
       return `
