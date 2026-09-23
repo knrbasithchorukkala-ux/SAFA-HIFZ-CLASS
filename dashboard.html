@@ -23,7 +23,8 @@ radial-gradient(circle at 95% 10%,rgba(16,185,129,.14),transparent 25%),
 radial-gradient(circle at 50% 100%,rgba(8,127,91,.08),transparent 30%),
 linear-gradient(135deg,#f9fdfb,#e3f3ea)
 }
-button,input,select,textarea{font:inherit}button{cursor:pointer}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
 
 #loading{
 position:fixed;inset:0;z-index:99999;display:flex;align-items:center;
@@ -31,124 +32,470 @@ justify-content:center;color:#fff;font-weight:900;letter-spacing:.5px;
 background:radial-gradient(circle at center,rgba(212,175,55,.15),transparent 30%),
 linear-gradient(135deg,#021f1a,#06483a,#087f5b)
 }
+
 #message{
 position:fixed;right:20px;bottom:20px;max-width:390px;padding:15px 19px;
 border-radius:14px;color:#fff;display:none;z-index:99999;
 box-shadow:0 15px 35px rgba(0,0,0,.22);font-size:14px;font-weight:800
 }
+
 .app{min-height:100vh;display:flex}
+
 .sidebar{
 width:270px;position:fixed;left:0;top:0;bottom:0;z-index:1000;overflow-y:auto;
 color:#fff;background:radial-gradient(circle at 50% 12%,rgba(212,175,55,.15),transparent 25%),
 linear-gradient(180deg,#032b24 0%,#06483a 48%,#02251e 100%);
-border-right:1px solid rgba(212,175,55,.42);box-shadow:7px 0 30px rgba(3,43,36,.20)
+border-right:1px solid rgba(212,175,55,.42);
+box-shadow:7px 0 30px rgba(3,43,36,.20)
 }
+
 .brand{padding:25px 19px 23px;border-bottom:1px solid rgba(212,175,55,.28)}
 .brand-top{display:flex;align-items:center;gap:12px}
+
 .logo-box{
 width:48px;height:48px;border-radius:14px;display:flex;align-items:center;
 justify-content:center;color:#173b2d;background:linear-gradient(135deg,#d4af37,#f5da78);
 box-shadow:0 7px 22px rgba(212,175,55,.28);font-size:25px
 }
 .logo-box:after{content:"✦"}
+
 .brand h1{font-size:17px;font-weight:900}
-.brand p{margin-top:5px;color:#f1d77d;font-size:10px;font-weight:900;letter-spacing:1.8px}
-.menu{padding:17px 11px 25px}
-.menu-label{padding:12px 14px 8px;color:#d4af37;font-size:9px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase}
-.menu button{
-width:100%;border:0;background:transparent;color:#d9eee5;text-align:left;padding:12px 14px;
-margin-bottom:4px;border-radius:11px;font-size:13px;font-weight:700;transition:.2s
+.brand p{
+margin-top:5px;color:#f1d77d;font-size:10px;font-weight:900;
+letter-spacing:1.8px
 }
-.menu button:hover{color:#fff;background:rgba(212,175,55,.13);transform:translateX(2px)}
-.menu button.active{color:#183b2e;font-weight:900;background:linear-gradient(135deg,#d4af37,#f2d46d);box-shadow:0 7px 22px rgba(212,175,55,.23)}
-.menu button span{display:inline-flex;width:31px;height:28px;align-items:center;justify-content:center;margin-right:2px;font-size:16px}
-.main{margin-left:270px;width:calc(100% - 270px);min-height:100vh}
+
+.menu{padding:17px 11px 25px}
+.menu-label{
+padding:12px 14px 8px;color:#d4af37;font-size:9px;font-weight:900;
+letter-spacing:1.8px;text-transform:uppercase
+}
+
+.menu button{
+width:100%;border:0;background:transparent;color:#d9eee5;text-align:left;
+padding:12px 14px;margin-bottom:4px;border-radius:11px;font-size:13px;
+font-weight:700;transition:.2s
+}
+
+.menu button:hover{
+color:#fff;background:rgba(212,175,55,.13);transform:translateX(2px)
+}
+
+.menu button.active{
+color:#183b2e;font-weight:900;
+background:linear-gradient(135deg,#d4af37,#f2d46d);
+box-shadow:0 7px 22px rgba(212,175,55,.23)
+}
+
+.menu button span{
+display:inline-flex;width:31px;height:28px;align-items:center;
+justify-content:center;margin-right:2px;font-size:16px
+}
+
+.main{
+margin-left:270px;width:calc(100% - 270px);min-height:100vh
+}
+
 .topbar{
-height:76px;position:sticky;top:0;z-index:500;display:flex;align-items:center;
-justify-content:space-between;padding:0 30px;background:rgba(248,253,250,.95);
-border-bottom:2px solid rgba(212,175,55,.25);backdrop-filter:blur(14px);
+height:76px;position:sticky;top:0;z-index:500;display:flex;
+align-items:center;justify-content:space-between;padding:0 30px;
+background:rgba(248,253,250,.95);
+border-bottom:2px solid rgba(212,175,55,.25);
+backdrop-filter:blur(14px);
 box-shadow:0 5px 20px rgba(3,43,36,.07)
 }
+
 .top-left,.top-right{display:flex;align-items:center;gap:14px}
 .top-title{color:#063b2b;font-size:20px;font-weight:900}
 .top-subtitle{margin-top:3px;color:var(--muted);font-size:11px}
-.admin-badge{padding:8px 14px;border-radius:20px;color:#087f5b;background:#e1f5e9;border:1px solid #acd7bd;font-size:10px;font-weight:900}
-.logout{border:1px solid #efc5c0;padding:9px 14px;border-radius:9px;color:#a32016;background:#fff0ee;font-weight:900}
-.mobile-menu{display:none;border:0;padding:8px 11px;border-radius:9px;color:#fff;background:#063b2b;font-size:20px}
-.content{position:relative;padding:30px;min-height:calc(100vh - 76px);overflow:hidden}
-.section{display:none}.section.active{display:block;animation:fadeIn .25s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;margin-bottom:22px}
-.section-head h2{color:#164c39;font-size:26px;font-weight:900;margin-bottom:5px}
+
+.admin-badge{
+padding:8px 14px;border-radius:20px;color:#087f5b;background:#e1f5e9;
+border:1px solid #acd7bd;font-size:10px;font-weight:900
+}
+
+.logout{
+border:1px solid #efc5c0;padding:9px 14px;border-radius:9px;
+color:#a32016;background:#fff0ee;font-weight:900
+}
+
+.mobile-menu{
+display:none;border:0;padding:8px 11px;border-radius:9px;color:#fff;
+background:#063b2b;font-size:20px
+}
+
+.content{
+position:relative;padding:30px;min-height:calc(100vh - 76px);overflow:hidden
+}
+
+.section{display:none}
+.section.active{display:block;animation:fadeIn .25s ease}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(5px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+.section-head{
+display:flex;align-items:flex-end;justify-content:space-between;
+gap:15px;margin-bottom:22px
+}
+
+.section-head h2{
+color:#164c39;font-size:26px;font-weight:900;margin-bottom:5px
+}
+
 .section-head p{color:var(--muted);font-size:13px}
-.section-tag{padding:7px 13px;border-radius:20px;color:#087f5b;background:#dff3e7;border:1px solid #b9ddc8;font-size:10px;font-weight:900}
-.college-header{position:relative;overflow:hidden;min-height:330px;margin-bottom:25px;border-radius:25px;border:2px solid rgba(212,175,55,.65);background:linear-gradient(135deg,#032b24,#087f5b);box-shadow:0 18px 45px rgba(3,43,36,.23)}
-.college-header img{width:100%;height:330px;display:block;object-fit:cover;object-position:center}
-.college-header-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:25px;background:linear-gradient(180deg,rgba(3,43,36,.18),rgba(3,43,36,.40) 35%,rgba(3,43,36,.94) 100%)}
-.college-title{color:#fff;font-size:31px;font-weight:900;letter-spacing:1px}
-.college-subtitle{margin-top:7px;color:#f4d778;font-size:13px;font-weight:900;letter-spacing:3px}
-.college-header-line{width:150px;height:3px;margin-top:14px;border-radius:10px;background:linear-gradient(90deg,transparent,#d4af37,#fff1a8,#d4af37,transparent)}
-.college-ayah{margin-top:18px;color:#f7dc83;direction:rtl;font-family:"Amiri","Traditional Arabic",serif;font-size:29px;font-weight:bold;line-height:1.8}
-.college-ayah-meaning{margin-top:5px;color:#fff;font-size:12px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:25px}
-.stat{padding:20px;border-radius:17px;color:#fff;border:1px solid rgba(212,175,55,.35);box-shadow:var(--shadow)}
+
+.section-tag{
+padding:7px 13px;border-radius:20px;color:#087f5b;background:#dff3e7;
+border:1px solid #b9ddc8;font-size:10px;font-weight:900
+}
+
+.college-header{
+position:relative;overflow:hidden;min-height:330px;margin-bottom:25px;
+border-radius:25px;border:2px solid rgba(212,175,55,.65);
+background:linear-gradient(135deg,#032b24,#087f5b);
+box-shadow:0 18px 45px rgba(3,43,36,.23)
+}
+
+.college-header img{
+width:100%;height:330px;display:block;object-fit:cover;
+object-position:center
+}
+
+.college-header-overlay{
+position:absolute;inset:0;display:flex;flex-direction:column;
+align-items:center;justify-content:center;text-align:center;padding:25px;
+background:linear-gradient(180deg,rgba(3,43,36,.18),
+rgba(3,43,36,.40) 35%,rgba(3,43,36,.94) 100%)
+}
+
+.college-title{
+color:#fff;font-size:31px;font-weight:900;letter-spacing:1px
+}
+
+.college-subtitle{
+margin-top:7px;color:#f4d778;font-size:13px;font-weight:900;
+letter-spacing:3px
+}
+
+.college-header-line{
+width:150px;height:3px;margin-top:14px;border-radius:10px;
+background:linear-gradient(90deg,transparent,#d4af37,#fff1a8,#d4af37,transparent)
+}
+
+.college-ayah{
+margin-top:18px;color:#f7dc83;direction:rtl;
+font-family:"Amiri","Traditional Arabic",serif;font-size:29px;
+font-weight:bold;line-height:1.8
+}
+
+.college-ayah-meaning{
+margin-top:5px;color:#fff;font-size:12px
+}
+
+.stats{
+display:grid;grid-template-columns:repeat(4,1fr);
+gap:16px;margin-bottom:25px
+}
+
+.stat{
+padding:20px;border-radius:17px;color:#fff;
+border:1px solid rgba(212,175,55,.35);box-shadow:var(--shadow)
+}
+
 .stat:nth-child(1){background:linear-gradient(135deg,#07583f,#0a9670)}
 .stat:nth-child(2){background:linear-gradient(135deg,#06483a,#087f5b)}
 .stat:nth-child(3){background:linear-gradient(135deg,#176247,#0b8b68)}
 .stat:nth-child(4){background:linear-gradient(135deg,#07503c,#08765a)}
-.stat-icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;border-radius:13px;color:#174331;background:linear-gradient(135deg,#f1d36a,#fff0a6);font-size:20px}
-.stat small{color:#dff4e9;font-size:11px;font-weight:800}.stat strong{display:block;margin-top:6px;color:#fff;font-size:30px;font-weight:900}
-.panel{padding:23px;margin-bottom:22px;border-radius:17px;background:linear-gradient(135deg,rgba(255,255,255,.98),rgba(239,249,244,.98));border:1px solid var(--border);box-shadow:var(--shadow)}
-.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px;padding-bottom:13px;border-bottom:2px solid rgba(212,175,55,.20)}
-.panel h3{color:#164c39;font-size:17px;font-weight:900}.panel-desc{margin-top:3px;color:var(--muted);font-size:11px}
-.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.quick button{padding:19px;text-align:left;border:1px solid #c7e1d3;border-radius:14px;color:var(--text);background:linear-gradient(135deg,#f5fcf8,#e4f4eb);transition:.25s}
-.quick button:hover{transform:translateY(-4px);border-color:rgba(212,175,55,.8);box-shadow:0 12px 25px rgba(3,43,36,.13)}
-.quick-icon{margin-bottom:12px;color:#087f5b;font-size:23px}.quick strong{display:block;margin-bottom:5px}.quick small{color:var(--muted)}
-.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}
-.field label{color:#315b49;font-size:12px;font-weight:900}
-.field input,.field select,.field textarea,.search{
-width:100%;padding:11px 12px;outline:none;color:var(--text);background:#f5fbf7;
-border:1px solid #c4dfcf;border-radius:10px;transition:.2s
-}
-.field textarea{min-height:100px;resize:vertical}
-.field input:focus,.field select:focus,.field textarea:focus,.search:focus{border-color:#0a956a;background:#fff;box-shadow:0 0 0 3px rgba(10,149,106,.11)}
-.primary{border:0;padding:11px 18px;border-radius:10px;color:#fff;background:linear-gradient(135deg,#087f5b,#0aad78);font-weight:900}
-.secondary{padding:10px 15px;border:1px solid #c5dfcf;border-radius:9px;color:#315b49;background:#eef8f2;font-weight:800}
-.danger,.success,.warning{padding:8px 11px;border:0;border-radius:8px;font-weight:900}
-.danger{color:#b42318;background:#fdebea}.success{color:#087f5b;background:#dff3e7}.warning{color:#916300;background:#fff1ca}
-.table-wrap{overflow-x:auto;border-radius:12px;border:1px solid #d2e6da}
-table{width:100%;min-width:720px;border-collapse:collapse;background:#fdfefe}
-th,td{padding:13px 10px;border-bottom:1px solid #dcebe2;text-align:left;font-size:12px;vertical-align:middle}
-th{color:#18513d;background:linear-gradient(135deg,#dff2e7,#cce9d9);font-size:10px;font-weight:900;text-transform:uppercase}
-tr:hover td{background:#f0f9f4}td strong{color:#173e30}
-.study-table{min-width:1200px}.teacher-remark-cell{max-width:240px;white-space:normal;line-height:1.5}
-.badge{display:inline-block;padding:5px 10px;border-radius:20px;font-size:10px;font-weight:900;text-transform:capitalize}
-.badge-green{color:#087f5b;background:#dff3e6}.badge-red{color:#842029;background:#f8d7da}.badge-yellow{color:#856404;background:#fff3cd}
-.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.search{width:300px}
-.actions{display:flex;flex-wrap:wrap;gap:6px}
-.donation-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;padding:15px;border:2px solid rgba(212,175,55,.58);border-radius:16px;background:linear-gradient(135deg,#dff2e7,#fff5cf)}
-.donation-stat{padding:17px;border:1px solid #d0e5d8;border-radius:12px;background:#fff}.donation-stat small{display:block;margin-bottom:5px;color:var(--muted);font-size:10px;font-weight:900}.donation-stat strong{font-size:25px;color:#087f5b}
-.empty{padding:28px;text-align:center;color:var(--muted);font-weight:700;background:#f3faf6;border-radius:10px}
-.welcome{color:#fff!important;background:linear-gradient(135deg,#032b24,#087f5b)!important}
-.modal-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:20px;z-index:99990;background:rgba(3,35,25,.68);backdrop-filter:blur(5px)}
-.modal-overlay.show{display:flex}.edit-modal{width:100%;max-width:650px;max-height:90vh;overflow-y:auto;padding:25px;border:2px solid rgba(212,175,55,.4);border-radius:19px;background:linear-gradient(135deg,#fff,#eef8f2);box-shadow:0 25px 70px rgba(0,0,0,.28)}
-.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
 
-@media(max-width:1100px){.stats{grid-template-columns:repeat(2,1fr)}.quick{grid-template-columns:repeat(2,1fr)}}
+.stat-icon{
+width:44px;height:44px;display:flex;align-items:center;
+justify-content:center;margin-bottom:14px;border-radius:13px;
+color:#174331;background:linear-gradient(135deg,#f1d36a,#fff0a6);
+font-size:20px
+}
+
+.stat small{color:#dff4e9;font-size:11px;font-weight:800}
+.stat strong{
+display:block;margin-top:6px;color:#fff;font-size:30px;font-weight:900
+}
+
+.panel{
+padding:23px;margin-bottom:22px;border-radius:17px;
+background:linear-gradient(135deg,rgba(255,255,255,.98),rgba(239,249,244,.98));
+border:1px solid var(--border);box-shadow:var(--shadow)
+}
+
+.panel-head{
+display:flex;align-items:center;justify-content:space-between;
+gap:10px;margin-bottom:18px;padding-bottom:13px;
+border-bottom:2px solid rgba(212,175,55,.20)
+}
+
+.panel h3{color:#164c39;font-size:17px;font-weight:900}
+.panel-desc{margin-top:3px;color:var(--muted);font-size:11px}
+
+.quick{
+display:grid;grid-template-columns:repeat(3,1fr);gap:14px
+}
+
+.quick button{
+padding:19px;text-align:left;border:1px solid #c7e1d3;
+border-radius:14px;color:var(--text);
+background:linear-gradient(135deg,#f5fcf8,#e4f4eb);
+transition:.25s
+}
+
+.quick button:hover{
+transform:translateY(-4px);border-color:rgba(212,175,55,.8);
+box-shadow:0 12px 25px rgba(3,43,36,.13)
+}
+
+.quick-icon{margin-bottom:12px;color:#087f5b;font-size:23px}
+.quick strong{display:block;margin-bottom:5px}
+.quick small{color:var(--muted)}
+
+.form-grid{
+display:grid;grid-template-columns:repeat(2,1fr);gap:16px
+}
+
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:1/-1}
+
+.field label{
+color:#315b49;font-size:12px;font-weight:900
+}
+
+.field input,.field select,.field textarea,.search{
+width:100%;padding:11px 12px;outline:none;color:var(--text);
+background:#f5fbf7;border:1px solid #c4dfcf;border-radius:10px;
+transition:.2s
+}
+
+.field textarea{min-height:100px;resize:vertical}
+
+.field input:focus,.field select:focus,
+.field textarea:focus,.search:focus{
+border-color:#0a956a;background:#fff;
+box-shadow:0 0 0 3px rgba(10,149,106,.11)
+}
+
+.primary{
+border:0;padding:11px 18px;border-radius:10px;color:#fff;
+background:linear-gradient(135deg,#087f5b,#0aad78);font-weight:900
+}
+
+.secondary{
+padding:10px 15px;border:1px solid #c5dfcf;border-radius:9px;
+color:#315b49;background:#eef8f2;font-weight:800
+}
+
+.danger,.success,.warning{
+padding:8px 11px;border:0;border-radius:8px;font-weight:900
+}
+
+.danger{color:#b42318;background:#fdebea}
+.success{color:#087f5b;background:#dff3e7}
+.warning{color:#916300;background:#fff1ca}
+
+.table-wrap{
+overflow-x:auto;border-radius:12px;border:1px solid #d2e6da
+}
+
+table{
+width:100%;min-width:720px;border-collapse:collapse;background:#fdfefe
+}
+
+th,td{
+padding:13px 10px;border-bottom:1px solid #dcebe2;
+text-align:left;font-size:12px;vertical-align:middle
+}
+
+th{
+color:#18513d;background:linear-gradient(135deg,#dff2e7,#cce9d9);
+font-size:10px;font-weight:900;text-transform:uppercase
+}
+
+tr:hover td{background:#f0f9f4}
+td strong{color:#173e30}
+
+.study-table{min-width:1200px}
+.teacher-remark-cell{
+max-width:240px;white-space:normal;line-height:1.5
+}
+
+.badge{
+display:inline-block;padding:5px 10px;border-radius:20px;
+font-size:10px;font-weight:900;text-transform:capitalize
+}
+
+.badge-green{color:#087f5b;background:#dff3e6}
+.badge-red{color:#842029;background:#f8d7da}
+.badge-yellow{color:#856404;background:#fff3cd}
+
+.toolbar{
+display:flex;align-items:center;justify-content:space-between;
+gap:12px;margin-bottom:16px
+}
+
+.search{width:300px}
+
+.actions{display:flex;flex-wrap:wrap;gap:6px}
+
+/* STUDENT SEARCH BOX */
+.student-picker{
+display:grid;
+grid-template-columns:minmax(0,1fr) auto;
+gap:8px;
+align-items:end
+}
+
+.student-search-box{
+display:flex;
+gap:8px;
+width:100%
+}
+
+.student-search-box input{
+flex:1;
+min-width:0;
+padding:11px 12px;
+outline:none;
+color:var(--text);
+background:#f5fbf7;
+border:1px solid #c4dfcf;
+border-radius:10px;
+transition:.2s
+}
+
+.student-search-box input:focus{
+border-color:#0a956a;
+background:#fff;
+box-shadow:0 0 0 3px rgba(10,149,106,.11)
+}
+
+.student-search-btn{
+border:0;
+padding:10px 15px;
+border-radius:9px;
+color:#fff;
+background:linear-gradient(135deg,#087f5b,#0aad78);
+font-weight:900;
+white-space:nowrap
+}
+
+.student-search-btn:hover{
+transform:translateY(-1px);
+box-shadow:0 6px 15px rgba(8,127,91,.20)
+}
+
+.student-picker select{
+width:100%
+}
+
+.donation-summary{
+display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;
+padding:15px;border:2px solid rgba(212,175,55,.58);border-radius:16px;
+background:linear-gradient(135deg,#dff2e7,#fff5cf)
+}
+
+.donation-stat{
+padding:17px;border:1px solid #d0e5d8;border-radius:12px;background:#fff
+}
+
+.donation-stat small{
+display:block;margin-bottom:5px;color:var(--muted);
+font-size:10px;font-weight:900
+}
+
+.donation-stat strong{font-size:25px;color:#087f5b}
+
+.empty{
+padding:28px;text-align:center;color:var(--muted);font-weight:700;
+background:#f3faf6;border-radius:10px
+}
+
+.welcome{
+color:#fff!important;background:linear-gradient(135deg,#032b24,#087f5b)!important
+}
+
+.modal-overlay{
+position:fixed;inset:0;display:none;align-items:center;
+justify-content:center;padding:20px;z-index:99990;
+background:rgba(3,35,25,.68);backdrop-filter:blur(5px)
+}
+
+.modal-overlay.show{display:flex}
+
+.edit-modal{
+width:100%;max-width:650px;max-height:90vh;overflow-y:auto;
+padding:25px;border:2px solid rgba(212,175,55,.4);
+border-radius:19px;background:linear-gradient(135deg,#fff,#eef8f2);
+box-shadow:0 25px 70px rgba(0,0,0,.28)
+}
+
+.modal-actions{
+display:flex;justify-content:flex-end;gap:10px;margin-top:20px
+}
+
+@media(max-width:1100px){
+.stats{grid-template-columns:repeat(2,1fr)}
+.quick{grid-template-columns:repeat(2,1fr)}
+}
+
 @media(max-width:900px){
-.sidebar{transform:translateX(-100%);transition:.25s}.sidebar.open{transform:translateX(0)}
-.main{margin-left:0;width:100%}.mobile-menu{display:block}.topbar{padding:0 15px}.content{padding:18px}.admin-badge{display:none}
+.sidebar{transform:translateX(-100%);transition:.25s}
+.sidebar.open{transform:translateX(0)}
+.main{margin-left:0;width:100%}
+.mobile-menu{display:block}
+.topbar{padding:0 15px}
+.content{padding:18px}
+.admin-badge{display:none}
 }
+
 @media(max-width:600px){
-.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.stats{grid-template-columns:1fr 1fr;gap:10px}
-.quick{grid-template-columns:1fr}.top-title{font-size:16px}.top-subtitle{display:none}.search{width:100%}
-.toolbar{flex-direction:column;align-items:stretch}.college-header,.college-header img{height:250px;min-height:250px}
-.college-title{font-size:23px}.college-subtitle{font-size:10px}.college-ayah{font-size:21px}.donation-summary{grid-template-columns:1fr}
-.modal-overlay{padding:10px}.edit-modal{padding:18px}.modal-actions{flex-direction:column}.modal-actions button{width:100%}
+.form-grid{grid-template-columns:1fr}
+.field.full{grid-column:auto}
+.stats{grid-template-columns:1fr 1fr;gap:10px}
+.quick{grid-template-columns:1fr}
+.top-title{font-size:16px}
+.top-subtitle{display:none}
+.search{width:100%}
+.toolbar{flex-direction:column;align-items:stretch}
+
+.student-picker{
+grid-template-columns:1fr
 }
-@media(max-width:400px){.stats{grid-template-columns:1fr}}
+
+.student-search-box{
+flex-direction:column
+}
+
+.student-search-btn{
+width:100%
+}
+
+.college-header,.college-header img{
+height:250px;min-height:250px
+}
+
+.college-title{font-size:23px}
+.college-subtitle{font-size:10px}
+.college-ayah{font-size:21px}
+
+.donation-summary{grid-template-columns:1fr}
+
+.modal-overlay{padding:10px}
+.edit-modal{padding:18px}
+.modal-actions{flex-direction:column}
+.modal-actions button{width:100%}
+}
+
+@media(max-width:400px){
+.stats{grid-template-columns:1fr}
+}
 </style>
 </head>
 
@@ -159,304 +506,1110 @@ tr:hover td{background:#f0f9f4}td strong{color:#173e30}
 
 <div class="modal-overlay" id="editStudentModal">
 <div class="edit-modal">
+
 <div class="panel-head">
-<div><h3>Edit Student</h3><p class="panel-desc">Update student information</p></div>
+<div>
+<h3>Edit Student</h3>
+<p class="panel-desc">Update student information</p>
+</div>
 <button class="danger" id="closeEditModal">✕</button>
 </div>
+
 <div class="form-grid">
-<div class="field"><label>Student Number</label><input id="editStudentNumber" readonly></div>
-<div class="field"><label>Student Name</label><input id="editStudentName"></div>
-<div class="field"><label>Guardian Name</label><input id="editGuardianName"></div>
-<div class="field"><label>Class</label><input id="editClassName"></div>
-<div class="field"><label>Parent Email</label><input id="editParentEmail" type="email"></div>
-<div class="field"><label>Phone Number</label><input id="editPhoneNumber"></div>
-<div class="field full"><label>Address</label><textarea id="editStudentAddress"></textarea></div>
+
+<div class="field">
+<label>Student Number</label>
+<input id="editStudentNumber" readonly>
 </div>
+
+<div class="field">
+<label>Student Name</label>
+<input id="editStudentName">
+</div>
+
+<div class="field">
+<label>Guardian Name</label>
+<input id="editGuardianName">
+</div>
+
+<div class="field">
+<label>Class</label>
+<input id="editClassName">
+</div>
+
+<div class="field">
+<label>Parent Email</label>
+<input id="editParentEmail" type="email">
+</div>
+
+<div class="field">
+<label>Phone Number</label>
+<input id="editPhoneNumber">
+</div>
+
+<div class="field full">
+<label>Address</label>
+<textarea id="editStudentAddress"></textarea>
+</div>
+
+</div>
+
 <div class="modal-actions">
 <button class="secondary" id="cancelEditStudent">Cancel</button>
 <button class="primary" id="saveEditStudent">Save Changes</button>
 </div>
+
 </div>
 </div>
 
 <div class="app">
 
 <aside class="sidebar" id="sidebar">
+
 <div class="brand">
 <div class="brand-top">
 <div class="logo-box"></div>
-<div><h1>SAFA QURAN COLLEGE</h1><p>ONLINE PORTAL</p></div>
+<div>
+<h1>SAFA QURAN COLLEGE</h1>
+<p>ONLINE PORTAL</p>
+</div>
 </div>
 </div>
 
 <div class="menu">
+
 <div class="menu-label">Main</div>
-<button class="menu-btn active" data-section="home"><span>⌂</span>Dashboard</button>
-<button class="menu-btn" data-section="students"><span>👨‍🎓</span>Students</button>
+
+<button class="menu-btn active" data-section="home">
+<span>⌂</span>Dashboard
+</button>
+
+<button class="menu-btn" data-section="students">
+<span>👨‍🎓</span>Students
+</button>
 
 <div class="menu-label">Academic</div>
-<button class="menu-btn" data-section="attendance"><span>✓</span>Attendance</button>
-<button class="menu-btn" data-section="study"><span>📖</span>Study Progress</button>
-<button class="menu-btn" data-section="results"><span>🏆</span>Results</button>
-<button class="menu-btn" data-section="notices"><span>📢</span>Notices</button>
+
+<button class="menu-btn" data-section="attendance">
+<span>✓</span>Attendance
+</button>
+
+<button class="menu-btn" data-section="study">
+<span>📖</span>Study Progress
+</button>
+
+<button class="menu-btn" data-section="results">
+<span>🏆</span>Results
+</button>
+
+<button class="menu-btn" data-section="notices">
+<span>📢</span>Notices
+</button>
 
 <div class="menu-label">Communication</div>
-<button class="menu-btn" data-section="leave"><span>📝</span>Leave Requests</button>
-<button class="menu-btn" data-section="messages"><span>💬</span>Parent Messages</button>
-<button class="menu-btn" data-section="donations"><span>💰</span>Donations</button>
+
+<button class="menu-btn" data-section="leave">
+<span>📝</span>Leave Requests
+</button>
+
+<button class="menu-btn" data-section="messages">
+<span>💬</span>Parent Messages
+</button>
+
+<button class="menu-btn" data-section="donations">
+<span>💰</span>Donations
+</button>
 
 <div class="menu-label">Public</div>
-<button class="menu-btn" data-section="publicResult"><span>🌐</span>Public Result</button>
+
+<button class="menu-btn" data-section="publicResult">
+<span>🌐</span>Public Result
+</button>
+
 </div>
 </aside>
 
 <main class="main">
 
 <header class="topbar">
+
 <div class="top-left">
+
 <button class="mobile-menu" id="mobileMenu">☰</button>
-<div><div class="top-title">SAFA QURAN COLLEGE</div><div class="top-subtitle">ONLINE PORTAL Management System</div></div>
+
+<div>
+<div class="top-title">SAFA QURAN COLLEGE</div>
+<div class="top-subtitle">ONLINE PORTAL Management System</div>
 </div>
+
+</div>
+
 <div class="top-right">
+
 <div class="admin-badge">ADMINISTRATOR</div>
+
 <button class="logout" id="logoutBtn">Logout</button>
+
 </div>
+
 </header>
 
 <div class="content">
 
+<!-- HOME -->
+
 <section class="section active" id="home">
 
 <div class="college-header">
+
 <img src="./IMG-20260921-WA0016.jpg" alt="SAFA QURAN COLLEGE">
+
 <div class="college-header-overlay">
+
 <div class="college-title">SAFA QURAN COLLEGE</div>
+
 <div class="college-subtitle">ONLINE PORTAL</div>
+
 <div class="college-header-line"></div>
-<div class="college-ayah">خيركم من تعلم القرءان وعلمه</div>
-<div class="college-ayah-meaning">The best among you are those who learn the Qur'an and teach it.</div>
+
+<div class="college-ayah">
+خيركم من تعلم القرءان وعلمه
+</div>
+
+<div class="college-ayah-meaning">
+The best among you are those who learn the Qur'an and teach it.
+</div>
+
 </div>
 </div>
 
 <div class="stats">
-<div class="stat"><div class="stat-icon">👨‍🎓</div><small>Total Students</small><strong id="studentCount">0</strong></div>
-<div class="stat"><div class="stat-icon">✓</div><small>Attendance Records</small><strong id="attendanceCount">0</strong></div>
-<div class="stat"><div class="stat-icon">📝</div><small>Leave Requests</small><strong id="leaveCount">0</strong></div>
-<div class="stat"><div class="stat-icon">💬</div><small>Parent Messages</small><strong id="messageCount">0</strong></div>
+
+<div class="stat">
+<div class="stat-icon">👨‍🎓</div>
+<small>Total Students</small>
+<strong id="studentCount">0</strong>
+</div>
+
+<div class="stat">
+<div class="stat-icon">✓</div>
+<small>Attendance Records</small>
+<strong id="attendanceCount">0</strong>
+</div>
+
+<div class="stat">
+<div class="stat-icon">📝</div>
+<small>Leave Requests</small>
+<strong id="leaveCount">0</strong>
+</div>
+
+<div class="stat">
+<div class="stat-icon">💬</div>
+<small>Parent Messages</small>
+<strong id="messageCount">0</strong>
+</div>
+
 </div>
 
 <div class="panel">
-<div class="panel-head"><div><h3>Quick Access</h3><div class="panel-desc">Manage your college portal quickly</div></div></div>
+
+<div class="panel-head">
+<div>
+<h3>Quick Access</h3>
+<div class="panel-desc">Manage your college portal quickly</div>
+</div>
+</div>
+
 <div class="quick">
-<button class="quick-btn" data-go="students"><div class="quick-icon">👨‍🎓</div><strong>Students</strong><small>Manage student records</small></button>
-<button class="quick-btn" data-go="attendance"><div class="quick-icon">✓</div><strong>Attendance</strong><small>Manage daily attendance</small></button>
-<button class="quick-btn" data-go="study"><div class="quick-icon">📖</div><strong>Study Progress</strong><small>Update</small></button>
-<button class="quick-btn" data-go="results"><div class="quick-icon">🏆</div><strong>Results</strong><small>Publish student results</small></button>
-<button class="quick-btn" data-go="notices"><div class="quick-icon">📢</div><strong>Notices</strong><small>Publish announcements</small></button>
-<button class="quick-btn" data-go="donations"><div class="quick-icon">💰</div><strong>Donations</strong><small>Verify donations</small></button>
-<button class="quick-btn" data-go="publicResult"><div class="quick-icon">🌐</div><strong>Public Result</strong><small>Open public result system</small></button>
+
+<button class="quick-btn" data-go="students">
+<div class="quick-icon">👨‍🎓</div>
+<strong>Students</strong>
+<small>Manage student records</small>
+</button>
+
+<button class="quick-btn" data-go="attendance">
+<div class="quick-icon">✓</div>
+<strong>Attendance</strong>
+<small>Manage daily attendance</small>
+</button>
+
+<button class="quick-btn" data-go="study">
+<div class="quick-icon">📖</div>
+<strong>Study Progress</strong>
+<small>Update</small>
+</button>
+
+<button class="quick-btn" data-go="results">
+<div class="quick-icon">🏆</div>
+<strong>Results</strong>
+<small>Publish student results</small>
+</button>
+
+<button class="quick-btn" data-go="notices">
+<div class="quick-icon">📢</div>
+<strong>Notices</strong>
+<small>Publish announcements</small>
+</button>
+
+<button class="quick-btn" data-go="donations">
+<div class="quick-icon">💰</div>
+<strong>Donations</strong>
+<small>Verify donations</small>
+</button>
+
+<button class="quick-btn" data-go="publicResult">
+<div class="quick-icon">🌐</div>
+<strong>Public Result</strong>
+<small>Open public result system</small>
+</button>
+
 </div>
 </div>
 
 </section>
 
+
+<!-- STUDENTS -->
+
 <section class="section" id="students">
-<div class="section-head"><div><h2>Students</h2><p>Manage student information</p></div><div class="section-tag">STUDENT MANAGEMENT</div></div>
+
+<div class="section-head">
+<div>
+<h2>Students</h2>
+<p>Manage student information</p>
+</div>
+<div class="section-tag">STUDENT MANAGEMENT</div>
+</div>
 
 <div class="panel">
-<div class="panel-head"><div><h3>Add Student</h3><div class="panel-desc">Create a new student profile</div></div></div>
-<form id="studentForm">
-<div class="form-grid">
-<div class="field"><label>Student Number</label><input id="studentNumber" required placeholder="Example: 131"></div>
-<div class="field"><label>Student Name</label><input id="studentName" required></div>
-<div class="field"><label>Guardian Name</label><input id="guardianName"></div>
-<div class="field"><label>Class</label><input id="className" placeholder="HIFZ A"></div>
-<div class="field"><label>Parent Email</label><input id="parentEmail" type="email"></div>
-<div class="field"><label>Phone Number</label><input id="phoneNumber"></div>
-<div class="field full"><label>Address</label><textarea id="studentAddress"></textarea></div>
-<div class="field"><button class="primary" type="submit">Add Student</button></div>
+
+<div class="panel-head">
+<div>
+<h3>Add Student</h3>
+<div class="panel-desc">Create a new student profile</div>
 </div>
+</div>
+
+<form id="studentForm">
+
+<div class="form-grid">
+
+<div class="field">
+<label>Student Number</label>
+<input id="studentNumber" required placeholder="Example: 131">
+</div>
+
+<div class="field">
+<label>Student Name</label>
+<input id="studentName" required>
+</div>
+
+<div class="field">
+<label>Guardian Name</label>
+<input id="guardianName">
+</div>
+
+<div class="field">
+<label>Class</label>
+<input id="className" placeholder="HIFZ A">
+</div>
+
+<div class="field">
+<label>Parent Email</label>
+<input id="parentEmail" type="email">
+</div>
+
+<div class="field">
+<label>Phone Number</label>
+<input id="phoneNumber">
+</div>
+
+<div class="field full">
+<label>Address</label>
+<textarea id="studentAddress"></textarea>
+</div>
+
+<div class="field">
+<button class="primary" type="submit">Add Student</button>
+</div>
+
+</div>
+
 </form>
 </div>
 
 <div class="panel">
-<div class="toolbar"><h3>Student List</h3><input class="search" id="studentSearch" placeholder="Search student..."></div>
-<div class="table-wrap"><table>
-<thead><tr><th>Number</th><th>Name</th><th>Guardian</th><th>Class</th><th>Email</th><th>Phone</th><th>Action</th></tr></thead>
-<tbody id="studentsTable"></tbody>
-</table></div>
+
+<div class="toolbar">
+<h3>Student List</h3>
+<input class="search" id="studentSearch" placeholder="Search student...">
 </div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Number</th>
+<th>Name</th>
+<th>Guardian</th>
+<th>Class</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="studentsTable"></tbody>
+
+</table>
+
+</div>
+</div>
+
 </section>
 
+
+<!-- ATTENDANCE -->
+
 <section class="section" id="attendance">
-<div class="section-head"><div><h2>Attendance</h2><p>Manage daily student attendance</p></div><div class="section-tag">ACADEMIC</div></div>
+
+<div class="section-head">
+
+<div>
+<h2>Attendance</h2>
+<p>Manage daily student attendance</p>
+</div>
+
+<div class="section-tag">ACADEMIC</div>
+
+</div>
 
 <div class="panel">
+
 <div class="panel-head">
+
 <div>
 <h3>Record Absent / Leave</h3>
-<div class="panel-desc">Only Absent or Leave students need to be recorded. All other students are automatically Present.</div>
+<div class="panel-desc">
+Only Absent or Leave students need to be recorded. All other students are automatically Present.
 </div>
+</div>
+
 </div>
 
 <form id="attendanceForm">
+
 <div class="form-grid">
+
 <div class="field">
+
 <label>Student</label>
-<select id="attendanceStudent" required></select>
+
+<div class="student-picker">
+
+<div class="student-search-box">
+
+<input
+id="attendanceStudentSearch"
+type="text"
+placeholder="Search student no or name..."
+autocomplete="off"
+>
+
+<button
+type="button"
+class="student-search-btn"
+id="attendanceStudentSearchBtn">
+Search
+</button>
+
 </div>
+
+<select id="attendanceStudent" required>
+<option value="">Select student</option>
+</select>
+
+</div>
+
+</div>
+
 <div class="field">
+
 <label>Date</label>
+
 <input type="date" id="attendanceDate" required>
+
 </div>
+
 <div class="field">
+
 <label>Status</label>
+
 <select id="attendanceStatus" required>
+
 <option value="absent">Absent</option>
 <option value="leave">Leave</option>
+
 </select>
+
 </div>
-<div class="field"><button class="primary" type="submit">Save Attendance</button></div>
+
+<div class="field">
+
+<button class="primary" type="submit">
+Save Attendance
+</button>
+
 </div>
+
+</div>
+
 </form>
+
 </div>
 
 <div class="panel">
+
 <div class="toolbar">
+
 <div>
+
 <h3>Attendance Records</h3>
-<div class="panel-desc">Only Absent / Leave students are stored. Students without a record for a date are Present automatically.</div>
+
+<div class="panel-desc">
+Only Absent / Leave students are stored. Students without a record for a date are Present automatically.
 </div>
-<input class="search" id="attendanceSearch" placeholder="Search student no or name...">
+
 </div>
+
+<input
+class="search"
+id="attendanceSearch"
+placeholder="Search student no or name..."
+>
+
+</div>
+
 <div id="attendanceTable"></div>
+
 </div>
+
 </section>
+
+
+<!-- STUDY -->
 
 <section class="section" id="study">
-<div class="section-head"><div><h2>Study Progress</h2><p>Record daily Hifz and Qur'an study progress</p></div><div class="section-tag">HIFZ PROGRESS</div></div>
+
+<div class="section-head">
+
+<div>
+<h2>Study Progress</h2>
+<p>Record daily Hifz and Qur'an study progress</p>
+</div>
+
+<div class="section-tag">HIFZ PROGRESS</div>
+
+</div>
 
 <div class="panel">
-<div class="panel-head"><div><h3>Update Study Progress</h3><div class="panel-desc">Record the student's daily Qur'an and Dars progress</div></div></div>
+
+<div class="panel-head">
+
+<div>
+<h3>Update Study Progress</h3>
+<div class="panel-desc">
+Record the student's daily Qur'an and Dars progress
+</div>
+</div>
+
+</div>
+
 <form id="studyForm">
+
 <div class="form-grid">
-<div class="field"><label>Student Search</label><select id="studyStudent" required><option value="">Select student</option></select></div>
-<div class="field"><label>Date</label><input type="date" id="studyDate" required></div>
-<div class="field"><label>Juz / Surah Studied</label><input id="studySurah" placeholder="Example: Juz 5 / Surah Al-Ma'idah"></div>
-<div class="field"><label>Today's New Lesson Target (Pages)</label><input id="newLesson" type="number" min="0" step="0.5"></div>
-<div class="field"><label>Revision Completed</label><input id="revision" placeholder="Example: 3 pages / 1 Juz"></div>
-<div class="field"><label>Study Status</label><input id="studyStatus" placeholder="Enter status code"></div>
-<div class="field"><label>Performance</label><select id="performance"><option value="">Select performance</option><option>Excellent</option><option>Very Good</option><option>Good</option><option>Average</option><option>Needs Improvement</option></select></div>
-<div class="field"><label>Teacher's Remarks</label><input id="studyNote" placeholder="Teacher's comments about today's study"></div>
-<div class="field"><label>Dars Study Level</label><select id="darsLevel"><option value="">Select level</option><option>Excellent</option><option>Very Good</option><option>Good</option><option>Average</option><option>Needs Improvement</option></select></div>
-<div class="field"><label>Discipline</label><select id="discipline"><option value="">Select discipline</option><option>Excellent</option><option>Very Good</option><option>Good</option><option>Average</option><option>Needs Improvement</option></select></div>
-<div class="field"><button class="primary" type="submit">Save Study Progress</button></div>
+
+<div class="field">
+
+<label>Student Search</label>
+
+<div class="student-picker">
+
+<div class="student-search-box">
+
+<input
+id="studyStudentSearch"
+type="text"
+placeholder="Search student no or name..."
+autocomplete="off"
+>
+
+<button
+type="button"
+class="student-search-btn"
+id="studyStudentSearchBtn">
+Search
+</button>
+
 </div>
+
+<select id="studyStudent" required>
+<option value="">Select student</option>
+</select>
+
+</div>
+
+</div>
+
+<div class="field">
+<label>Date</label>
+<input type="date" id="studyDate" required>
+</div>
+
+<div class="field">
+<label>Juz / Surah Studied</label>
+<input id="studySurah" placeholder="Example: Juz 5 / Surah Al-Ma'idah">
+</div>
+
+<div class="field">
+<label>Today's New Lesson Target (Pages)</label>
+<input id="newLesson" type="number" min="0" step="0.5">
+</div>
+
+<div class="field">
+<label>Revision Completed</label>
+<input id="revision" placeholder="Example: 3 pages / 1 Juz">
+</div>
+
+<div class="field">
+<label>Study Status</label>
+<input id="studyStatus" placeholder="Enter status code">
+</div>
+
+<div class="field">
+<label>Performance</label>
+
+<select id="performance">
+<option value="">Select performance</option>
+<option>Excellent</option>
+<option>Very Good</option>
+<option>Good</option>
+<option>Average</option>
+<option>Needs Improvement</option>
+</select>
+
+</div>
+
+<div class="field">
+<label>Teacher's Remarks</label>
+<input id="studyNote" placeholder="Teacher's comments about today's study">
+</div>
+
+<div class="field">
+<label>Dars Study Level</label>
+
+<select id="darsLevel">
+<option value="">Select level</option>
+<option>Excellent</option>
+<option>Very Good</option>
+<option>Good</option>
+<option>Average</option>
+<option>Needs Improvement</option>
+</select>
+
+</div>
+
+<div class="field">
+<label>Discipline</label>
+
+<select id="discipline">
+<option value="">Select discipline</option>
+<option>Excellent</option>
+<option>Very Good</option>
+<option>Good</option>
+<option>Average</option>
+<option>Needs Improvement</option>
+</select>
+
+</div>
+
+<div class="field">
+
+<button class="primary" type="submit">
+Save Study Progress
+</button>
+
+</div>
+
+</div>
+
 </form>
+
 </div>
 
 <div class="panel">
+
 <div class="toolbar">
-<div><h3>Study Progress Records</h3><div class="panel-desc">Daily Hifz, revision, performance, Dars level and discipline</div></div>
-<input class="search" id="studySearch" placeholder="Search student no or name...">
+
+<div>
+<h3>Study Progress Records</h3>
+<div class="panel-desc">
+Daily Hifz, revision, performance, Dars level and discipline
 </div>
-<div class="table-wrap"><table class="study-table">
-<thead><tr><th>Student</th><th>Date</th><th>Juz / Surah Studied</th><th>Today's New Lesson Target</th><th>Revision Completed</th><th>Study Status</th><th>Performance</th><th>Teacher's Remarks</th><th>Dars Study Level</th><th>Discipline</th><th>Action</th></tr></thead>
+</div>
+
+<input
+class="search"
+id="studySearch"
+placeholder="Search student no or name..."
+>
+
+</div>
+
+<div class="table-wrap">
+
+<table class="study-table">
+
+<thead>
+
+<tr>
+<th>Student</th>
+<th>Date</th>
+<th>Juz / Surah Studied</th>
+<th>Today's New Lesson Target</th>
+<th>Revision Completed</th>
+<th>Study Status</th>
+<th>Performance</th>
+<th>Teacher's Remarks</th>
+<th>Dars Study Level</th>
+<th>Discipline</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
 <tbody id="studyTable"></tbody>
-</table></div>
+
+</table>
+
 </div>
+
+</div>
+
 </section>
+
+
+<!-- RESULTS -->
 
 <section class="section" id="results">
-<div class="section-head"><div><h2>Results</h2><p>Add and publish student results</p></div><div class="section-tag">RESULT MANAGEMENT</div></div>
+
+<div class="section-head">
+
+<div>
+<h2>Results</h2>
+<p>Add and publish student results</p>
+</div>
+
+<div class="section-tag">RESULT MANAGEMENT</div>
+
+</div>
 
 <div class="panel">
+
 <form id="resultForm">
+
 <div class="form-grid">
-<div class="field"><label>Student</label><select id="resultStudent" required></select></div>
-<div class="field"><label>Test / Exam Title</label><input id="resultTitle" required></div>
-<div class="field"><label>Mark</label><input id="resultMark" required></div>
-<div class="field"><label>Status</label><select id="resultStatus"><option value="draft">Draft</option><option value="published">Published</option></select></div>
-<div class="field"><button class="primary" type="submit">Add Result</button></div>
+
+<div class="field">
+
+<label>Student</label>
+
+<div class="student-picker">
+
+<div class="student-search-box">
+
+<input
+id="resultStudentSearch"
+type="text"
+placeholder="Search student no or name..."
+autocomplete="off"
+>
+
+<button
+type="button"
+class="student-search-btn"
+id="resultStudentSearchBtn">
+Search
+</button>
+
 </div>
+
+<select id="resultStudent" required>
+<option value="">Select student</option>
+</select>
+
+</div>
+
+</div>
+
+<div class="field">
+<label>Test / Exam Title</label>
+<input id="resultTitle" required>
+</div>
+
+<div class="field">
+<label>Mark</label>
+<input id="resultMark" required>
+</div>
+
+<div class="field">
+
+<label>Status</label>
+
+<select id="resultStatus">
+<option value="draft">Draft</option>
+<option value="published">Published</option>
+</select>
+
+</div>
+
+<div class="field">
+
+<button class="primary" type="submit">
+Add Result
+</button>
+
+</div>
+
+</div>
+
 </form>
+
 </div>
 
 <div class="panel">
+
 <div class="toolbar">
+
 <h3>Result Records</h3>
-<input class="search" id="resultSearch" placeholder="Search student no or name...">
+
+<input
+class="search"
+id="resultSearch"
+placeholder="Search student no or name..."
+>
+
 </div>
-<div class="table-wrap"><table>
-<thead><tr><th>Student</th><th>Title</th><th>Mark</th><th>Status</th><th>Action</th></tr></thead>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Student</th>
+<th>Title</th>
+<th>Mark</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
 <tbody id="resultsTable"></tbody>
-</table></div>
+
+</table>
+
 </div>
+
+</div>
+
 </section>
+
+
+<!-- NOTICES -->
 
 <section class="section" id="notices">
-<div class="section-head"><div><h2>Notices</h2><p>Publish announcements for parents</p></div><div class="section-tag">ANNOUNCEMENTS</div></div>
-<div class="panel">
-<form id="noticeForm"><div class="form-grid">
-<div class="field"><label>Notice Title</label><input id="noticeTitle" required></div>
-<div class="field"><label>Status</label><select id="noticeStatus"><option value="draft">Draft</option><option value="published">Published</option></select></div>
-<div class="field full"><label>Notice</label><textarea id="noticeText" required></textarea></div>
-<div class="field"><button class="primary" type="submit">Add Notice</button></div>
-</div></form>
+
+<div class="section-head">
+
+<div>
+<h2>Notices</h2>
+<p>Publish announcements for parents</p>
 </div>
-<div class="panel"><div class="table-wrap"><table>
-<thead><tr><th>Title</th><th>Notice</th><th>Status</th><th>Action</th></tr></thead>
+
+<div class="section-tag">ANNOUNCEMENTS</div>
+
+</div>
+
+<div class="panel">
+
+<form id="noticeForm">
+
+<div class="form-grid">
+
+<div class="field">
+<label>Notice Title</label>
+<input id="noticeTitle" required>
+</div>
+
+<div class="field">
+
+<label>Status</label>
+
+<select id="noticeStatus">
+<option value="draft">Draft</option>
+<option value="published">Published</option>
+</select>
+
+</div>
+
+<div class="field full">
+<label>Notice</label>
+<textarea id="noticeText" required></textarea>
+</div>
+
+<div class="field">
+<button class="primary" type="submit">Add Notice</button>
+</div>
+
+</div>
+
+</form>
+
+</div>
+
+<div class="panel">
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Title</th>
+<th>Notice</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
 <tbody id="noticesTable"></tbody>
-</table></div></div>
+
+</table>
+
+</div>
+
+</div>
+
 </section>
+
+
+<!-- LEAVE -->
 
 <section class="section" id="leave">
-<div class="section-head"><div><h2>Leave Requests</h2><p>Review and respond to parent leave requests</p></div><div class="section-tag">PARENT REQUESTS</div></div>
-<div class="panel"><div class="table-wrap"><table>
-<thead><tr><th>Student</th><th>Parent</th><th>Date</th><th>Reason</th><th>Status</th><th>Reply</th><th>Action</th></tr></thead>
+
+<div class="section-head">
+
+<div>
+<h2>Leave Requests</h2>
+<p>Review and respond to parent leave requests</p>
+</div>
+
+<div class="section-tag">PARENT REQUESTS</div>
+
+</div>
+
+<div class="panel">
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Student</th>
+<th>Parent</th>
+<th>Date</th>
+<th>Reason</th>
+<th>Status</th>
+<th>Reply</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
 <tbody id="leaveTable"></tbody>
-</table></div></div>
+
+</table>
+
+</div>
+
+</div>
+
 </section>
+
+
+<!-- MESSAGES -->
 
 <section class="section" id="messages">
-<div class="section-head"><div><h2>Parent Messages</h2><p>Read and reply to parent messages</p></div><div class="section-tag">COMMUNICATION</div></div>
-<div class="panel"><div class="table-wrap"><table>
-<thead><tr><th>Student</th><th>Parent</th><th>Message</th><th>Status</th><th>Reply</th><th>Action</th></tr></thead>
+
+<div class="section-head">
+
+<div>
+<h2>Parent Messages</h2>
+<p>Read and reply to parent messages</p>
+</div>
+
+<div class="section-tag">COMMUNICATION</div>
+
+</div>
+
+<div class="panel">
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Student</th>
+<th>Parent</th>
+<th>Message</th>
+<th>Status</th>
+<th>Reply</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
 <tbody id="messagesTable"></tbody>
-</table></div></div>
+
+</table>
+
+</div>
+
+</div>
+
 </section>
+
+
+<!-- DONATIONS -->
 
 <section class="section" id="donations">
-<div class="section-head"><div><h2>Donations</h2><p>Review and verify parent donations</p></div><div class="section-tag">SAFA DONATION</div></div>
-<div class="donation-summary">
-<div class="donation-stat"><small>Total Donations</small><strong id="donationTotal">₹0</strong></div>
-<div class="donation-stat"><small>Pending</small><strong id="donationPending">₹0</strong></div>
-<div class="donation-stat"><small>Verified</small><strong id="donationVerified">₹0</strong></div>
+
+<div class="section-head">
+
+<div>
+<h2>Donations</h2>
+<p>Review and verify parent donations</p>
 </div>
-<div class="panel"><div class="table-wrap"><table>
-<thead><tr><th>Student</th><th>Parent Email</th><th>Amount</th><th>Transaction ID</th><th>Date</th><th>Status</th><th>Admin Note</th><th>Action</th></tr></thead>
+
+<div class="section-tag">SAFA DONATION</div>
+
+</div>
+
+<div class="donation-summary">
+
+<div class="donation-stat">
+<small>Total Donations</small>
+<strong id="donationTotal">₹0</strong>
+</div>
+
+<div class="donation-stat">
+<small>Pending</small>
+<strong id="donationPending">₹0</strong>
+</div>
+
+<div class="donation-stat">
+<small>Verified</small>
+<strong id="donationVerified">₹0</strong>
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Student</th>
+<th>Parent Email</th>
+<th>Amount</th>
+<th>Transaction ID</th>
+<th>Date</th>
+<th>Status</th>
+<th>Admin Note</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
 <tbody id="donationsTable"></tbody>
-</table></div></div>
+
+</table>
+
+</div>
+
+</div>
+
 </section>
 
+
+<!-- PUBLIC RESULT -->
+
 <section class="section" id="publicResult">
-<div class="section-head"><div><h2>Public Result</h2><p>Open the public result system</p></div><div class="section-tag">PUBLIC</div></div>
-<div class="panel welcome">
-<h2 style="margin-bottom:10px">Public Student Result</h2>
-<p style="margin-bottom:20px">Open the public result page where students and parents can check published results.</p>
-<button class="primary" id="openPublicResult">🌐 Open Public Result</button>
+
+<div class="section-head">
+
+<div>
+<h2>Public Result</h2>
+<p>Open the public result system</p>
 </div>
+
+<div class="section-tag">PUBLIC</div>
+
+</div>
+
+<div class="panel welcome">
+
+<h2 style="margin-bottom:10px">
+Public Student Result
+</h2>
+
+<p style="margin-bottom:20px">
+Open the public result page where students and parents can check published results.
+</p>
+
+<button class="primary" id="openPublicResult">
+🌐 Open Public Result
+</button>
+
+</div>
+
 </section>
 
 </div>
 </main>
 </div>
 
+
 <script type="module">
 
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 import{getAuth,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import{getFirestore,collection,getDocs,getDoc,doc,addDoc,updateDoc,deleteDoc,serverTimestamp}from"https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
 
 const firebaseConfig={
 apiKey:"AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
@@ -479,101 +1632,206 @@ let attendanceRows=[];
 let studyRows=[];
 let resultRows=[];
 
+
 function escapeHtml(value){
-return String(value??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+return String(value??"")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 }
+
 
 function showMessage(text,type="success"){
+
 const box=$("message");
+
 box.textContent=text;
 box.style.display="block";
-box.style.background=type==="error"?"linear-gradient(135deg,#b42318,#d6453b)":"linear-gradient(135deg,#087f5b,#0ca875)";
+
+box.style.background=
+type==="error"
+?"linear-gradient(135deg,#b42318,#d6453b)"
+:"linear-gradient(135deg,#087f5b,#0ca875)";
+
 setTimeout(()=>box.style.display="none",3000);
+
 }
+
 
 function studentNameByNumber(number){
-const student=window.students.find(s=>String(s.studentNumber)===String(number));
+
+const student=window.students.find(
+s=>String(s.studentNumber)===String(number)
+);
+
 return student?student.studentName:number;
+
 }
+
 
 function studentSearchMatch(number,name,query){
+
 if(!query)return true;
-return`${number||""} ${name||""}`.toLowerCase().includes(query.toLowerCase());
+
+return`${number||""} ${name||""}`
+.toLowerCase()
+.includes(query.toLowerCase());
+
 }
+
 
 function formatDate(value){
+
 if(!value)return"";
+
 if(value.toDate)return value.toDate().toLocaleDateString();
-if(value.seconds)return new Date(value.seconds*1000).toLocaleDateString();
+
+if(value.seconds)
+return new Date(value.seconds*1000).toLocaleDateString();
+
 return String(value);
+
 }
 
+
 function money(value){
+
 return"₹"+Number(value||0).toLocaleString("en-IN");
+
 }
+
 
 /* AUTH */
 
 onAuthStateChanged(auth,async user=>{
-try{
-if(!user){location.href="index.html";return}
-currentUser=user;
-const userSnap=await getDoc(doc(db,"users",user.uid));
 
-if(!userSnap.exists()){
-alert("Admin profile not found.");
-await signOut(auth);
+try{
+
+if(!user){
 location.href="index.html";
 return;
+}
+
+currentUser=user;
+
+const userSnap=
+await getDoc(doc(db,"users",user.uid));
+
+if(!userSnap.exists()){
+
+alert("Admin profile not found.");
+
+await signOut(auth);
+
+location.href="index.html";
+
+return;
+
 }
 
 if(userSnap.data().role!=="admin"){
+
 alert("Admin access required.");
+
 await signOut(auth);
+
 location.href="index.html";
+
 return;
+
 }
 
 $("loading").style.display="none";
+
 await loadEverything();
 
 }catch(error){
+
 console.error(error);
-$("loading").textContent="Dashboard loading error: "+error.message;
+
+$("loading").textContent=
+"Dashboard loading error: "+error.message;
+
 }
+
 });
+
 
 /* NAVIGATION */
 
 document.querySelectorAll(".menu-btn").forEach(button=>{
+
 button.addEventListener("click",()=>{
+
 openSection(button.dataset.section);
+
 $("sidebar").classList.remove("open");
+
 });
+
 });
+
 
 document.querySelectorAll(".quick-btn").forEach(button=>{
-button.addEventListener("click",()=>openSection(button.dataset.go));
+
+button.addEventListener("click",()=>{
+openSection(button.dataset.go);
 });
+
+});
+
 
 function openSection(id){
-document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+
+document.querySelectorAll(".section")
+.forEach(s=>s.classList.remove("active"));
+
 const target=$(id);
-if(target)target.classList.add("active");
-document.querySelectorAll(".menu-btn").forEach(b=>b.classList.toggle("active",b.dataset.section===id));
-window.scrollTo({top:0,behavior:"smooth"});
-}
 
-$("mobileMenu").addEventListener("click",()=>$("sidebar").classList.toggle("open"));
+if(target)
+target.classList.add("active");
 
-$("logoutBtn").addEventListener("click",async()=>{
-if(!confirm("Logout from admin dashboard?"))return;
-await signOut(auth);
-location.href="index.html";
+document.querySelectorAll(".menu-btn")
+.forEach(b=>
+b.classList.toggle(
+"active",
+b.dataset.section===id
+));
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
 });
 
+}
+
+
+$("mobileMenu").addEventListener(
+"click",
+()=>$("sidebar").classList.toggle("open")
+);
+
+
+$("logoutBtn").addEventListener(
+"click",
+async()=>{
+
+if(!confirm("Logout from admin dashboard?"))
+return;
+
+await signOut(auth);
+
+location.href="index.html";
+
+});
+
+
 async function loadEverything(){
+
 await loadStudents();
+
 await Promise.all([
 loadAttendance(),
 loadStudy(),
@@ -583,111 +1841,266 @@ loadLeaves(),
 loadMessages(),
 loadDonations()
 ]);
+
 }
+
 
 /* STUDENTS */
 
 async function loadStudents(){
+
 try{
-const snap=await getDocs(collection(db,"students"));
-window.students=snap.docs.map(item=>({id:item.id,...item.data()}));
+
+const snap=
+await getDocs(collection(db,"students"));
+
+window.students=
+snap.docs.map(item=>({
+id:item.id,
+...item.data()
+}));
+
 renderStudents(window.students);
-$("studentCount").textContent=window.students.length;
+
+$("studentCount").textContent=
+window.students.length;
+
 populateStudentSelects();
+
 }catch(error){
+
 console.error(error);
-$("studentsTable").innerHTML=`<tr><td colspan="7"><div class="empty">Unable to load students</div></td></tr>`;
-}
+
+$("studentsTable").innerHTML=
+`<tr><td colspan="7">
+<div class="empty">Unable to load students</div>
+</td></tr>`;
+
 }
 
+}
+
+
 function renderStudents(list){
+
 const table=$("studentsTable");
 
 if(!list.length){
-table.innerHTML=`<tr><td colspan="7"><div class="empty">No students found</div></td></tr>`;
+
+table.innerHTML=
+`<tr><td colspan="7">
+<div class="empty">No students found</div>
+</td></tr>`;
+
 return;
+
 }
 
 table.innerHTML=list.map(student=>`
+
 <tr>
-<td><strong>${escapeHtml(student.studentNumber)}</strong></td>
+
+<td>
+<strong>${escapeHtml(student.studentNumber)}</strong>
+</td>
+
 <td>${escapeHtml(student.studentName)}</td>
+
 <td>${escapeHtml(student.guardianName||"-")}</td>
+
 <td>${escapeHtml(student.className||"-")}</td>
+
 <td>${escapeHtml(student.parentEmail||"-")}</td>
+
 <td>${escapeHtml(student.phoneNumber||"-")}</td>
-<td><div class="actions">
-<button class="secondary edit-student" data-id="${student.id}">Edit</button>
-<button class="danger delete-student" data-id="${student.id}">Delete</button>
-</div></td>
-</tr>`).join("");
 
-document.querySelectorAll(".delete-student").forEach(button=>{
+<td>
+
+<div class="actions">
+
+<button
+class="secondary edit-student"
+data-id="${student.id}">
+Edit
+</button>
+
+<button
+class="danger delete-student"
+data-id="${student.id}">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`).join("");
+
+
+document.querySelectorAll(".delete-student")
+.forEach(button=>{
+
 button.addEventListener("click",async()=>{
-const student=window.students.find(s=>s.id===button.dataset.id);
-if(!student||!confirm(`Delete ${student.studentName}?`))return;
-try{
-await deleteDoc(doc(db,"students",button.dataset.id));
-showMessage("Student deleted.");
-await loadStudents();
-}catch(error){console.error(error);showMessage("Unable to delete student.","error")}
-});
-});
 
-document.querySelectorAll(".edit-student").forEach(button=>{
-button.addEventListener("click",()=>{
-const student=window.students.find(s=>s.id===button.dataset.id);
-if(!student)return;
-$("editStudentNumber").value=student.studentNumber||"";
-$("editStudentName").value=student.studentName||"";
-$("editGuardianName").value=student.guardianName||"";
-$("editClassName").value=student.className||"";
-$("editParentEmail").value=student.parentEmail||"";
-$("editPhoneNumber").value=student.phoneNumber||"";
-$("editStudentAddress").value=student.studentAddress||"";
-$("editStudentModal").classList.add("show");
-$("saveEditStudent").dataset.id=student.id;
-});
-});
-}
+const student=
+window.students.find(
+s=>s.id===button.dataset.id
+);
 
-$("studentForm").addEventListener("submit",async event=>{
-event.preventDefault();
-
-const studentNumber=$("studentNumber").value.trim();
-const studentName=$("studentName").value.trim();
-
-if(window.students.some(s=>String(s.studentNumber).trim()===studentNumber)){
-showMessage("Student number already exists.","error");
+if(!student||
+!confirm(`Delete ${student.studentName}?`))
 return;
-}
 
 try{
-await addDoc(collection(db,"students"),{
-studentNumber,
-studentName,
-guardianName:$("guardianName").value.trim(),
-className:$("className").value.trim(),
-parentEmail:$("parentEmail").value.trim(),
-studentAddress:$("studentAddress").value.trim(),
-phoneNumber:$("phoneNumber").value.trim(),
-createdAt:serverTimestamp()
-});
 
-$("studentForm").reset();
-showMessage("Student added successfully.");
+await deleteDoc(
+doc(db,"students",button.dataset.id)
+);
+
+showMessage("Student deleted.");
+
 await loadStudents();
 
 }catch(error){
+
 console.error(error);
-showMessage("Unable to add student: "+error.message,"error");
+
+showMessage(
+"Unable to delete student.",
+"error"
+);
+
 }
+
 });
 
-$("studentSearch").addEventListener("input",event=>{
-const q=event.target.value.toLowerCase().trim();
+});
 
-renderStudents(window.students.filter(student=>{
+
+document.querySelectorAll(".edit-student")
+.forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+const student=
+window.students.find(
+s=>s.id===button.dataset.id
+);
+
+if(!student)return;
+
+$("editStudentNumber").value=
+student.studentNumber||"";
+
+$("editStudentName").value=
+student.studentName||"";
+
+$("editGuardianName").value=
+student.guardianName||"";
+
+$("editClassName").value=
+student.className||"";
+
+$("editParentEmail").value=
+student.parentEmail||"";
+
+$("editPhoneNumber").value=
+student.phoneNumber||"";
+
+$("editStudentAddress").value=
+student.studentAddress||"";
+
+$("editStudentModal")
+.classList.add("show");
+
+$("saveEditStudent").dataset.id=
+student.id;
+
+});
+
+});
+
+}
+
+
+$("studentForm").addEventListener(
+"submit",
+async event=>{
+
+event.preventDefault();
+
+const studentNumber=
+$("studentNumber").value.trim();
+
+const studentName=
+$("studentName").value.trim();
+
+if(window.students.some(
+s=>String(s.studentNumber).trim()===studentNumber
+)){
+
+showMessage(
+"Student number already exists.",
+"error"
+);
+
+return;
+
+}
+
+try{
+
+await addDoc(
+collection(db,"students"),
+{
+studentNumber,
+studentName,
+guardianName:
+$("guardianName").value.trim(),
+className:
+$("className").value.trim(),
+parentEmail:
+$("parentEmail").value.trim(),
+studentAddress:
+$("studentAddress").value.trim(),
+phoneNumber:
+$("phoneNumber").value.trim(),
+createdAt:serverTimestamp()
+}
+);
+
+$("studentForm").reset();
+
+showMessage("Student added successfully.");
+
+await loadStudents();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"Unable to add student: "+error.message,
+"error"
+);
+
+}
+
+});
+
+
+$("studentSearch").addEventListener(
+"input",
+event=>{
+
+const q=
+event.target.value.toLowerCase().trim();
+
+renderStudents(
+window.students.filter(student=>{
+
 return[
 student.studentNumber,
 student.studentName,
@@ -696,140 +2109,420 @@ student.className,
 student.parentEmail,
 student.studentAddress,
 student.phoneNumber
-].join(" ").toLowerCase().includes(q);
-}));
+]
+.join(" ")
+.toLowerCase()
+.includes(q);
+
+})
+);
+
 });
 
-$("closeEditModal").addEventListener("click",()=>$("editStudentModal").classList.remove("show"));
-$("cancelEditStudent").addEventListener("click",()=>$("editStudentModal").classList.remove("show"));
 
-$("saveEditStudent").addEventListener("click",async()=>{
-const id=$("saveEditStudent").dataset.id;
+$("closeEditModal").addEventListener(
+"click",
+()=>$("editStudentModal").classList.remove("show")
+);
+
+
+$("cancelEditStudent").addEventListener(
+"click",
+()=>$("editStudentModal").classList.remove("show")
+);
+
+
+$("saveEditStudent").addEventListener(
+"click",
+async()=>{
+
+const id=
+$("saveEditStudent").dataset.id;
+
 if(!id)return;
 
 try{
-await updateDoc(doc(db,"students",id),{
-studentName:$("editStudentName").value.trim(),
-guardianName:$("editGuardianName").value.trim(),
-className:$("editClassName").value.trim(),
-parentEmail:$("editParentEmail").value.trim(),
-studentAddress:$("editStudentAddress").value.trim(),
-phoneNumber:$("editPhoneNumber").value.trim()
-});
 
-$("editStudentModal").classList.remove("show");
-showMessage("Student updated successfully.");
+await updateDoc(
+doc(db,"students",id),
+{
+studentName:
+$("editStudentName").value.trim(),
+
+guardianName:
+$("editGuardianName").value.trim(),
+
+className:
+$("editClassName").value.trim(),
+
+parentEmail:
+$("editParentEmail").value.trim(),
+
+studentAddress:
+$("editStudentAddress").value.trim(),
+
+phoneNumber:
+$("editPhoneNumber").value.trim()
+}
+);
+
+$("editStudentModal")
+.classList.remove("show");
+
+showMessage(
+"Student updated successfully."
+);
+
 await loadStudents();
 
 }catch(error){
+
 console.error(error);
-showMessage("Unable to update student.","error");
+
+showMessage(
+"Unable to update student.",
+"error"
+);
+
 }
+
 });
 
-/* STUDENT SELECTS */
+
+/* STUDENT SELECTS + SEARCH */
 
 function populateStudentSelects(){
-["attendanceStudent","studyStudent","resultStudent"].forEach(id=>{
+
+["attendanceStudent","studyStudent","resultStudent"]
+.forEach(id=>{
+
 const select=$(id);
+
 if(!select)return;
+
 const old=select.value;
 
-select.innerHTML=`<option value="">Select student</option>`+
+select.innerHTML=
+`<option value="">Select student</option>`+
 window.students.map(student=>`
+
 <option value="${escapeHtml(student.studentNumber)}">
 ${escapeHtml(student.studentNumber)} - ${escapeHtml(student.studentName)}
-</option>`).join("");
+</option>
 
-if(old)select.value=old;
+`).join("");
+
+if(old)
+select.value=old;
+
 });
+
 }
 
-/* ATTENDANCE
-   IMPORTANT:
-   Only Absent / Leave documents are stored.
-   No Present document is created.
-   Parent side can treat missing status as Present.
+
+/*
+SEARCHABLE STUDENT SELECT
+
+Search works using:
+1. Student Number
+2. Student Name
+
+The actual selected value remains Student Number,
+so existing Firebase data structure is unchanged.
 */
 
-$("attendanceForm").addEventListener("submit",async event=>{
+function searchStudentsForSelect(
+searchInputId,
+selectId,
+buttonId
+){
+
+const input=$(searchInputId);
+const select=$(selectId);
+const button=$(buttonId);
+
+if(!input||!select||!button)return;
+
+
+function runSearch(){
+
+const query=
+input.value.trim().toLowerCase();
+
+const currentValue=
+select.value;
+
+const matches=
+window.students.filter(student=>{
+
+const number=
+String(student.studentNumber||"")
+.toLowerCase();
+
+const name=
+String(student.studentName||"")
+.toLowerCase();
+
+return !query||
+number.includes(query)||
+name.includes(query);
+
+});
+
+
+if(!matches.length){
+
+select.innerHTML=
+`<option value="">No matching student found</option>`;
+
+return;
+
+}
+
+
+select.innerHTML=
+`<option value="">Select student</option>`+
+matches.map(student=>`
+
+<option value="${escapeHtml(student.studentNumber)}">
+${escapeHtml(student.studentNumber)} - ${escapeHtml(student.studentName)}
+</option>
+
+`).join("");
+
+
+if(
+currentValue &&
+matches.some(
+s=>String(s.studentNumber)===String(currentValue)
+)
+){
+
+select.value=currentValue;
+
+}
+
+}
+
+
+button.addEventListener(
+"click",
+runSearch
+);
+
+
+input.addEventListener(
+"keydown",
+event=>{
+
+if(event.key==="Enter"){
+
 event.preventDefault();
 
-const studentNumber=$("attendanceStudent").value;
-const date=$("attendanceDate").value;
-const status=$("attendanceStatus").value;
+runSearch();
 
-if(!studentNumber||!date||!["absent","leave"].includes(status)){
-showMessage("Please select student, date and Absent/Leave.","error");
+}
+
+});
+
+
+input.addEventListener(
+"input",
+()=>{
+
+if(input.value.trim()===""){
+
+populateStudentSelects();
+
+}
+
+});
+
+}
+
+
+/* INITIALIZE THREE STUDENT SEARCHES */
+
+searchStudentsForSelect(
+"attendanceStudentSearch",
+"attendanceStudent",
+"attendanceStudentSearchBtn"
+);
+
+searchStudentsForSelect(
+"studyStudentSearch",
+"studyStudent",
+"studyStudentSearchBtn"
+);
+
+searchStudentsForSelect(
+"resultStudentSearch",
+"resultStudent",
+"resultStudentSearchBtn"
+);
+
+
+/* ATTENDANCE
+IMPORTANT:
+Only Absent / Leave documents are stored.
+No Present document is created.
+Parent side can treat missing status as Present.
+*/
+
+$("attendanceForm").addEventListener(
+"submit",
+async event=>{
+
+event.preventDefault();
+
+const studentNumber=
+$("attendanceStudent").value;
+
+const date=
+$("attendanceDate").value;
+
+const status=
+$("attendanceStatus").value;
+
+if(
+!studentNumber||
+!date||
+!["absent","leave"].includes(status)
+){
+
+showMessage(
+"Please select student, date and Absent/Leave.",
+"error"
+);
+
 return;
+
 }
 
 try{
 
-/* If same student/date already exists, update it instead of creating duplicate. */
-const existing=attendanceRows.find(r=>
-String(r.studentNumber)===String(studentNumber)&&String(r.date)===String(date)
+const existing=
+attendanceRows.find(r=>
+String(r.studentNumber)===String(studentNumber)&&
+String(r.date)===String(date)
 );
 
+
 if(existing){
-await updateDoc(doc(db,"attendance",existing.id),{
+
+await updateDoc(
+doc(db,"attendance",existing.id),
+{
 studentNumber,
 date,
 status,
 updatedAt:serverTimestamp()
-});
+}
+);
+
 showMessage("Attendance updated.");
+
 }else{
-await addDoc(collection(db,"attendance"),{
+
+await addDoc(
+collection(db,"attendance"),
+{
 studentNumber,
 date,
 status,
 createdAt:serverTimestamp()
-});
+}
+);
+
 showMessage("Absent/Leave saved.");
+
 }
 
 $("attendanceForm").reset();
+
+$("attendanceStudentSearch").value="";
+
+populateStudentSelects();
+
 setDefaultDates();
+
 await loadAttendance();
 
 }catch(error){
+
 console.error(error);
-showMessage("Unable to save attendance.","error");
+
+showMessage(
+"Unable to save attendance.",
+"error"
+);
+
 }
+
 });
+
 
 async function loadAttendance(){
+
 try{
 
-const snap=await getDocs(collection(db,"attendance"));
+const snap=
+await getDocs(collection(db,"attendance"));
 
-attendanceRows=snap.docs.map(item=>({
+attendanceRows=
+snap.docs.map(item=>({
 id:item.id,
 ...item.data()
-})).filter(row=>row.status==="absent"||row.status==="leave");
+}))
+.filter(
+row=>row.status==="absent"||
+row.status==="leave"
+);
 
 attendanceRows.sort((a,b)=>{
-const dateCompare=String(b.date||"").localeCompare(String(a.date||""));
-if(dateCompare!==0)return dateCompare;
-return String(a.studentNumber||"").localeCompare(String(b.studentNumber||""));
+
+const dateCompare=
+String(b.date||"")
+.localeCompare(String(a.date||""));
+
+if(dateCompare!==0)
+return dateCompare;
+
+return String(a.studentNumber||"")
+.localeCompare(
+String(b.studentNumber||"")
+);
+
 });
 
-$("attendanceCount").textContent=attendanceRows.length;
+$("attendanceCount").textContent=
+attendanceRows.length;
 
 renderAttendance();
 
 }catch(error){
+
 console.error(error);
-$("attendanceTable").innerHTML=`<div class="empty">Unable to load attendance.</div>`;
+
+$("attendanceTable").innerHTML=
+`<div class="empty">
+Unable to load attendance.
+</div>`;
+
 }
+
 }
+
 
 function renderAttendance(){
 
-const query=($("attendanceSearch")?.value||"").trim().toLowerCase();
+const query=
+($("attendanceSearch")?.value||"")
+.trim()
+.toLowerCase();
 
-let filtered=attendanceRows.filter(row=>
+let filtered=
+attendanceRows.filter(row=>
 studentSearchMatch(
 row.studentNumber,
 studentNameByNumber(row.studentNumber),
@@ -840,573 +2533,1670 @@ query
 const groups={};
 
 filtered.forEach(row=>{
-if(!groups[row.date])groups[row.date]=[];
+
+if(!groups[row.date])
+groups[row.date]=[];
+
 groups[row.date].push(row);
+
 });
 
-const dates=Object.keys(groups).sort((a,b)=>b.localeCompare(a));
+const dates=
+Object.keys(groups)
+.sort((a,b)=>b.localeCompare(a));
 
 if(!dates.length){
+
 $("attendanceTable").innerHTML=`
+
 <div class="empty">
+
 No Absent / Leave records found.
+
 <br>
-<small>Students without an attendance record for a date are automatically Present.</small>
-</div>`;
+
+<small>
+Students without an attendance record for a date are automatically Present.
+</small>
+
+</div>
+
+`;
+
 return;
+
 }
 
-$("attendanceTable").innerHTML=dates.map(date=>{
+
+$("attendanceTable").innerHTML=
+dates.map(date=>{
 
 const rows=groups[date];
 
 return`
-<div class="panel" style="margin-bottom:14px;padding:16px">
-<div class="panel-head" style="margin-bottom:12px">
+
+<div class="panel"
+style="margin-bottom:14px;padding:16px">
+
+<div class="panel-head"
+style="margin-bottom:12px">
+
 <div>
+
 <h3>📅 ${escapeHtml(date)}</h3>
-<div class="panel-desc">${rows.length} Absent / Leave student(s)</div>
+
+<div class="panel-desc">
+${rows.length} Absent / Leave student(s)
 </div>
+
+</div>
+
 </div>
 
 <div class="table-wrap">
+
 <table>
+
 <thead>
+
 <tr>
 <th>Student No</th>
 <th>Student Name</th>
 <th>Status</th>
 <th>Action</th>
 </tr>
+
 </thead>
+
 <tbody>
+
 ${rows.map(row=>`
+
 <tr>
-<td><strong>${escapeHtml(row.studentNumber)}</strong></td>
-<td>${escapeHtml(studentNameByNumber(row.studentNumber))}</td>
+
 <td>
-<span class="badge ${row.status==="leave"?"badge-yellow":"badge-red"}">
+<strong>
+${escapeHtml(row.studentNumber)}
+</strong>
+</td>
+
+<td>
+${escapeHtml(
+studentNameByNumber(row.studentNumber)
+)}
+</td>
+
+<td>
+
+<span class="badge ${
+row.status==="leave"
+?"badge-yellow"
+:"badge-red"
+}">
+
 ${escapeHtml(row.status)}
+
 </span>
+
 </td>
+
 <td>
+
 <div class="actions">
-<button class="secondary attendance-edit-btn"
-data-id="${row.id}">Edit</button>
-<button class="danger attendance-delete-btn"
-data-id="${row.id}">Delete</button>
+
+<button
+class="secondary attendance-edit-btn"
+data-id="${row.id}">
+Edit
+</button>
+
+<button
+class="danger attendance-delete-btn"
+data-id="${row.id}">
+Delete
+</button>
+
 </div>
+
 </td>
-</tr>`).join("")}
+
+</tr>
+
+`).join("")}
+
 </tbody>
+
 </table>
+
 </div>
-</div>`;
+
+</div>
+
+`;
+
 }).join("");
 
-document.querySelectorAll(".attendance-edit-btn").forEach(button=>{
-button.addEventListener("click",()=>{
-const row=attendanceRows.find(r=>r.id===button.dataset.id);
+
+document.querySelectorAll(".attendance-edit-btn")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+()=>{
+
+const row=
+attendanceRows.find(
+r=>r.id===button.dataset.id
+);
+
 if(!row)return;
 
-$("attendanceStudent").value=row.studentNumber;
-$("attendanceDate").value=row.date;
-$("attendanceStatus").value=row.status;
+$("attendanceStudent").value=
+row.studentNumber;
+
+$("attendanceDate").value=
+row.date;
+
+$("attendanceStatus").value=
+row.status;
+
+$("attendanceStudentSearch").value=
+`${row.studentNumber} - ${
+studentNameByNumber(row.studentNumber)
+}`;
 
 openSection("attendance");
 
-window.scrollTo({top:0,behavior:"smooth"});
-
-showMessage("Attendance loaded for editing.");
+window.scrollTo({
+top:0,
+behavior:"smooth"
 });
+
+showMessage(
+"Attendance loaded for editing."
+);
+
 });
 
-document.querySelectorAll(".attendance-delete-btn").forEach(button=>{
-button.addEventListener("click",async()=>{
-if(!confirm("Delete this attendance record?"))return;
+});
+
+
+document.querySelectorAll(".attendance-delete-btn")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+if(!confirm(
+"Delete this attendance record?"
+))
+return;
 
 try{
-await deleteDoc(doc(db,"attendance",button.dataset.id));
-showMessage("Attendance record deleted.");
+
+await deleteDoc(
+doc(db,"attendance",button.dataset.id)
+);
+
+showMessage(
+"Attendance record deleted."
+);
+
 await loadAttendance();
+
 }catch(error){
+
 console.error(error);
-showMessage("Unable to delete attendance.","error");
-}
-});
-});
+
+showMessage(
+"Unable to delete attendance.",
+"error"
+);
+
 }
 
-$("attendanceSearch").addEventListener("input",renderAttendance);
+});
+
+});
+
+}
+
+
+$("attendanceSearch").addEventListener(
+"input",
+renderAttendance
+);
+
 
 /* STUDY */
 
-$("studyForm").addEventListener("submit",async event=>{
+$("studyForm").addEventListener(
+"submit",
+async event=>{
+
 event.preventDefault();
 
 try{
-await addDoc(collection(db,"studyProgress"),{
-studentNumber:$("studyStudent").value,
-date:$("studyDate").value,
-surah:$("studySurah").value.trim(),
-newLesson:$("newLesson").value.trim(),
-revision:$("revision").value.trim(),
-performance:$("performance").value.trim(),
-studyStatus:$("studyStatus").value.trim(),
-note:$("studyNote").value.trim(),
-darsLevel:$("darsLevel").value,
-discipline:$("discipline").value,
+
+await addDoc(
+collection(db,"studyProgress"),
+{
+studentNumber:
+$("studyStudent").value,
+
+date:
+$("studyDate").value,
+
+surah:
+$("studySurah").value.trim(),
+
+newLesson:
+$("newLesson").value.trim(),
+
+revision:
+$("revision").value.trim(),
+
+performance:
+$("performance").value.trim(),
+
+studyStatus:
+$("studyStatus").value.trim(),
+
+note:
+$("studyNote").value.trim(),
+
+darsLevel:
+$("darsLevel").value,
+
+discipline:
+$("discipline").value,
+
 createdAt:serverTimestamp()
-});
+}
+);
 
 $("studyForm").reset();
+
+$("studyStudentSearch").value="";
+
+populateStudentSelects();
+
 setDefaultDates();
-showMessage("Study progress saved successfully.");
+
+showMessage(
+"Study progress saved successfully."
+);
+
 await loadStudy();
 
 }catch(error){
+
 console.error(error);
-showMessage("Unable to save study progress.","error");
+
+showMessage(
+"Unable to save study progress.",
+"error"
+);
+
 }
+
 });
 
+
 async function loadStudy(){
+
 try{
 
-const snap=await getDocs(collection(db,"studyProgress"));
+const snap=
+await getDocs(collection(db,"studyProgress"));
 
-studyRows=snap.docs.map(item=>({
-id:item.id,...item.data()
+studyRows=
+snap.docs.map(item=>({
+id:item.id,
+...item.data()
 }));
 
-studyRows.sort((a,b)=>String(b.date||"").localeCompare(String(a.date||"")));
+studyRows.sort(
+(a,b)=>
+String(b.date||"")
+.localeCompare(
+String(a.date||"")
+)
+);
 
 renderStudy();
 
 }catch(error){
+
 console.error(error);
-$("studyTable").innerHTML=`<tr><td colspan="11">Unable to load study records.</td></tr>`;
+
+$("studyTable").innerHTML=
+`<tr><td colspan="11">
+Unable to load study records.
+</td></tr>`;
+
 }
+
 }
+
 
 function renderStudy(){
 
-const q=($("studySearch")?.value||"").trim().toLowerCase();
+const q=
+($("studySearch")?.value||"")
+.trim()
+.toLowerCase();
 
-const rows=studyRows.filter(row=>
-studentSearchMatch(row.studentNumber,studentNameByNumber(row.studentNumber),q)
+const rows=
+studyRows.filter(row=>
+studentSearchMatch(
+row.studentNumber,
+studentNameByNumber(row.studentNumber),
+q
+)
 );
 
 if(!rows.length){
-$("studyTable").innerHTML=`<tr><td colspan="11"><div class="empty">No study records found.</div></td></tr>`;
+
+$("studyTable").innerHTML=
+`<tr><td colspan="11">
+<div class="empty">
+No study records found.
+</div>
+</td></tr>`;
+
 return;
+
 }
 
-$("studyTable").innerHTML=rows.map(row=>`
+$("studyTable").innerHTML=
+rows.map(row=>`
+
 <tr>
-<td><strong>${escapeHtml(studentNameByNumber(row.studentNumber))}</strong><br><small>${escapeHtml(row.studentNumber||"")}</small></td>
-<td>${escapeHtml(row.date||"-")}</td>
-<td>${escapeHtml(row.surah||"-")}</td>
-<td>${escapeHtml(row.newLesson||"-")}${row.newLesson?" pages":""}</td>
-<td>${escapeHtml(row.revision||"-")}</td>
-<td><span class="badge ${row.studyStatus?"badge-green":"badge-yellow"}">${escapeHtml(row.studyStatus||"-")}</span></td>
-<td>${escapeHtml(row.performance||"-")}</td>
-<td class="teacher-remark-cell">${escapeHtml(row.note||"-")}</td>
-<td>${escapeHtml(row.darsLevel||"-")}</td>
-<td>${escapeHtml(row.discipline||"-")}</td>
-<td><button class="danger study-delete" data-id="${row.id}">Delete</button></td>
-</tr>`).join("");
 
-document.querySelectorAll(".study-delete").forEach(button=>{
-button.addEventListener("click",async()=>{
-if(!confirm("Delete study record?"))return;
-await deleteDoc(doc(db,"studyProgress",button.dataset.id));
-showMessage("Study record deleted.");
+<td>
+
+<strong>
+${escapeHtml(
+studentNameByNumber(row.studentNumber)
+)}
+</strong>
+
+<br>
+
+<small>
+${escapeHtml(row.studentNumber||"")}
+</small>
+
+</td>
+
+<td>
+${escapeHtml(row.date||"-")}
+</td>
+
+<td>
+${escapeHtml(row.surah||"-")}
+</td>
+
+<td>
+${escapeHtml(row.newLesson||"-")}
+${row.newLesson?" pages":""}
+</td>
+
+<td>
+${escapeHtml(row.revision||"-")}
+</td>
+
+<td>
+
+<span class="badge ${
+row.studyStatus
+?"badge-green"
+:"badge-yellow"
+}">
+
+${escapeHtml(row.studyStatus||"-")}
+
+</span>
+
+</td>
+
+<td>
+${escapeHtml(row.performance||"-")}
+</td>
+
+<td class="teacher-remark-cell">
+${escapeHtml(row.note||"-")}
+</td>
+
+<td>
+${escapeHtml(row.darsLevel||"-")}
+</td>
+
+<td>
+${escapeHtml(row.discipline||"-")}
+</td>
+
+<td>
+
+<button
+class="danger study-delete"
+data-id="${row.id}">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`).join("");
+
+
+document.querySelectorAll(".study-delete")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+if(!confirm(
+"Delete study record?"
+))
+return;
+
+await deleteDoc(
+doc(db,"studyProgress",button.dataset.id)
+);
+
+showMessage(
+"Study record deleted."
+);
+
 await loadStudy();
+
 });
+
 });
+
 }
 
-$("studySearch").addEventListener("input",renderStudy);
+
+$("studySearch").addEventListener(
+"input",
+renderStudy
+);
+
 
 /* RESULTS */
 
-$("resultForm").addEventListener("submit",async event=>{
+$("resultForm").addEventListener(
+"submit",
+async event=>{
+
 event.preventDefault();
 
 try{
-await addDoc(collection(db,"results"),{
-studentNumber:$("resultStudent").value,
-title:$("resultTitle").value.trim(),
-mark:$("resultMark").value.trim(),
-status:$("resultStatus").value,
+
+await addDoc(
+collection(db,"results"),
+{
+studentNumber:
+$("resultStudent").value,
+
+title:
+$("resultTitle").value.trim(),
+
+mark:
+$("resultMark").value.trim(),
+
+status:
+$("resultStatus").value,
+
 createdAt:serverTimestamp()
-});
+}
+);
 
 $("resultForm").reset();
-showMessage("Result added successfully.");
+
+$("resultStudentSearch").value="";
+
+populateStudentSelects();
+
+showMessage(
+"Result added successfully."
+);
+
 await loadResults();
 
 }catch(error){
+
 console.error(error);
-showMessage("Unable to add result.","error");
+
+showMessage(
+"Unable to add result.",
+"error"
+);
+
 }
+
 });
 
+
 async function loadResults(){
+
 try{
 
-const snap=await getDocs(collection(db,"results"));
+const snap=
+await getDocs(collection(db,"results"));
 
-resultRows=snap.docs.map(item=>({
-id:item.id,...item.data()
+resultRows=
+snap.docs.map(item=>({
+id:item.id,
+...item.data()
 }));
 
-resultRows.sort((a,b)=>
-(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0)
+resultRows.sort(
+(a,b)=>
+(b.createdAt?.seconds||0)-
+(a.createdAt?.seconds||0)
 );
 
 renderResults();
 
 }catch(error){
+
 console.error(error);
+
 }
+
 }
+
 
 function renderResults(){
 
-const q=($("resultSearch")?.value||"").trim().toLowerCase();
+const q=
+($("resultSearch")?.value||"")
+.trim()
+.toLowerCase();
 
-const rows=resultRows.filter(row=>
-studentSearchMatch(row.studentNumber,studentNameByNumber(row.studentNumber),q)
+const rows=
+resultRows.filter(row=>
+studentSearchMatch(
+row.studentNumber,
+studentNameByNumber(row.studentNumber),
+q
+)
 );
 
 if(!rows.length){
-$("resultsTable").innerHTML=`<tr><td colspan="5"><div class="empty">No results found.</div></td></tr>`;
-return;
-}
 
-$("resultsTable").innerHTML=rows.map(row=>`
-<tr>
-<td>${escapeHtml(studentNameByNumber(row.studentNumber))}<br><small>${escapeHtml(row.studentNumber)}</small></td>
-<td>${escapeHtml(row.title)}</td>
-<td><strong>${escapeHtml(row.mark)}</strong></td>
-<td><span class="badge ${row.status==="published"?"badge-green":"badge-yellow"}">${escapeHtml(row.status)}</span></td>
-<td>
-<div class="actions">
-<button class="${row.status==="published"?"warning":"success"} result-toggle"
-data-id="${row.id}" data-status="${row.status}">
-${row.status==="published"?"Unpublish":"Publish"}
-</button>
-<button class="danger result-delete" data-id="${row.id}">Delete</button>
+$("resultsTable").innerHTML=
+`<tr><td colspan="5">
+<div class="empty">
+No results found.
 </div>
-</td>
-</tr>`).join("");
+</td></tr>`;
 
-document.querySelectorAll(".result-toggle").forEach(button=>{
-button.addEventListener("click",async()=>{
-const newStatus=button.dataset.status==="published"?"draft":"published";
-await updateDoc(doc(db,"results",button.dataset.id),{status:newStatus});
-showMessage(newStatus==="published"?"Result published.":"Result unpublished.");
-await loadResults();
-});
-});
+return;
 
-document.querySelectorAll(".result-delete").forEach(button=>{
-button.addEventListener("click",async()=>{
-if(!confirm("Delete this result?"))return;
-await deleteDoc(doc(db,"results",button.dataset.id));
-showMessage("Result deleted.");
-await loadResults();
-});
-});
 }
 
-$("resultSearch").addEventListener("input",renderResults);
+$("resultsTable").innerHTML=
+rows.map(row=>`
+
+<tr>
+
+<td>
+
+${escapeHtml(
+studentNameByNumber(row.studentNumber)
+)}
+
+<br>
+
+<small>
+${escapeHtml(row.studentNumber)}
+</small>
+
+</td>
+
+<td>
+${escapeHtml(row.title)}
+</td>
+
+<td>
+<strong>${escapeHtml(row.mark)}</strong>
+</td>
+
+<td>
+
+<span class="badge ${
+row.status==="published"
+?"badge-green"
+:"badge-yellow"
+}">
+
+${escapeHtml(row.status)}
+
+</span>
+
+</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="${
+row.status==="published"
+?"warning"
+:"success"
+} result-toggle"
+data-id="${row.id}"
+data-status="${row.status}">
+
+${
+row.status==="published"
+?"Unpublish"
+:"Publish"
+}
+
+</button>
+
+<button
+class="danger result-delete"
+data-id="${row.id}">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`).join("");
+
+
+document.querySelectorAll(".result-toggle")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+const newStatus=
+button.dataset.status==="published"
+?"draft"
+:"published";
+
+await updateDoc(
+doc(db,"results",button.dataset.id),
+{
+status:newStatus
+}
+);
+
+showMessage(
+newStatus==="published"
+?"Result published."
+:"Result unpublished."
+);
+
+await loadResults();
+
+});
+
+});
+
+
+document.querySelectorAll(".result-delete")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+if(!confirm(
+"Delete this result?"
+))
+return;
+
+await deleteDoc(
+doc(db,"results",button.dataset.id)
+);
+
+showMessage(
+"Result deleted."
+);
+
+await loadResults();
+
+});
+
+});
+
+}
+
+
+$("resultSearch").addEventListener(
+"input",
+renderResults
+);
+
 
 /* NOTICES */
 
-$("noticeForm").addEventListener("submit",async event=>{
+$("noticeForm").addEventListener(
+"submit",
+async event=>{
+
 event.preventDefault();
 
 try{
-await addDoc(collection(db,"notices"),{
-title:$("noticeTitle").value.trim(),
-text:$("noticeText").value.trim(),
-status:$("noticeStatus").value,
+
+await addDoc(
+collection(db,"notices"),
+{
+title:
+$("noticeTitle").value.trim(),
+
+text:
+$("noticeText").value.trim(),
+
+status:
+$("noticeStatus").value,
+
 createdAt:serverTimestamp()
-});
+}
+);
 
 $("noticeForm").reset();
-showMessage("Notice added successfully.");
+
+showMessage(
+"Notice added successfully."
+);
+
 await loadNotices();
 
 }catch(error){
+
 console.error(error);
-showMessage("Unable to add notice.","error");
+
+showMessage(
+"Unable to add notice.",
+"error"
+);
+
 }
+
 });
 
+
 async function loadNotices(){
+
 try{
 
-const snap=await getDocs(collection(db,"notices"));
+const snap=
+await getDocs(collection(db,"notices"));
 
-const rows=snap.docs.map(item=>({
-id:item.id,...item.data()
+const rows=
+snap.docs.map(item=>({
+id:item.id,
+...item.data()
 }));
 
-rows.sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+rows.sort(
+(a,b)=>
+(b.createdAt?.seconds||0)-
+(a.createdAt?.seconds||0)
+);
 
 const table=$("noticesTable");
 
 if(!rows.length){
-table.innerHTML=`<tr><td colspan="4"><div class="empty">No notices.</div></td></tr>`;
+
+table.innerHTML=
+`<tr><td colspan="4">
+<div class="empty">No notices.</div>
+</td></tr>`;
+
 return;
+
 }
 
-table.innerHTML=rows.map(row=>`
+table.innerHTML=
+rows.map(row=>`
+
 <tr>
-<td><strong>${escapeHtml(row.title)}</strong></td>
-<td>${escapeHtml(row.text)}</td>
-<td><span class="badge ${row.status==="published"?"badge-green":"badge-yellow"}">${escapeHtml(row.status)}</span></td>
+
 <td>
-<div class="actions">
-<button class="${row.status==="published"?"warning":"success"} notice-toggle"
-data-id="${row.id}" data-status="${row.status}">
-${row.status==="published"?"Unpublish":"Publish"}
-</button>
-<button class="danger notice-delete" data-id="${row.id}">Delete</button>
-</div>
+<strong>
+${escapeHtml(row.title)}
+</strong>
 </td>
-</tr>`).join("");
 
-document.querySelectorAll(".notice-toggle").forEach(button=>{
-button.addEventListener("click",async()=>{
-const status=button.dataset.status==="published"?"draft":"published";
-await updateDoc(doc(db,"notices",button.dataset.id),{status});
-showMessage(status==="published"?"Notice published.":"Notice unpublished.");
-await loadNotices();
-});
-});
+<td>
+${escapeHtml(row.text)}
+</td>
 
-document.querySelectorAll(".notice-delete").forEach(button=>{
-button.addEventListener("click",async()=>{
-if(!confirm("Delete this notice?"))return;
-await deleteDoc(doc(db,"notices",button.dataset.id));
-showMessage("Notice deleted.");
-await loadNotices();
-});
-});
+<td>
 
-}catch(error){console.error(error)}
+<span class="badge ${
+row.status==="published"
+?"badge-green"
+:"badge-yellow"
+}">
+
+${escapeHtml(row.status)}
+
+</span>
+
+</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="${
+row.status==="published"
+?"warning"
+:"success"
+} notice-toggle"
+data-id="${row.id}"
+data-status="${row.status}">
+
+${
+row.status==="published"
+?"Unpublish"
+:"Publish"
 }
+
+</button>
+
+<button
+class="danger notice-delete"
+data-id="${row.id}">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`).join("");
+
+
+document.querySelectorAll(".notice-toggle")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+const status=
+button.dataset.status==="published"
+?"draft"
+:"published";
+
+await updateDoc(
+doc(db,"notices",button.dataset.id),
+{status}
+);
+
+showMessage(
+status==="published"
+?"Notice published."
+:"Notice unpublished."
+);
+
+await loadNotices();
+
+});
+
+});
+
+
+document.querySelectorAll(".notice-delete")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+async()=>{
+
+if(!confirm(
+"Delete this notice?"
+))
+return;
+
+await deleteDoc(
+doc(db,"notices",button.dataset.id)
+);
+
+showMessage(
+"Notice deleted."
+);
+
+await loadNotices();
+
+});
+
+});
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
 
 /* LEAVES */
 
 async function loadLeaves(){
+
 try{
 
-const snap=await getDocs(collection(db,"leaveRequests"));
+const snap=
+await getDocs(collection(db,"leaveRequests"));
 
-const rows=snap.docs.map(item=>({
-id:item.id,...item.data()
+const rows=
+snap.docs.map(item=>({
+id:item.id,
+...item.data()
 }));
 
-rows.sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+rows.sort(
+(a,b)=>
+(b.createdAt?.seconds||0)-
+(a.createdAt?.seconds||0)
+);
 
-$("leaveCount").textContent=rows.length;
+$("leaveCount").textContent=
+rows.length;
 
 if(!rows.length){
-$("leaveTable").innerHTML=`<tr><td colspan="7"><div class="empty">No leave requests.</div></td></tr>`;
-return;
-}
 
-$("leaveTable").innerHTML=rows.map(row=>`
-<tr>
-<td><strong>${escapeHtml(studentNameByNumber(row.studentNumber))}</strong><br>${escapeHtml(row.studentNumber)}</td>
-<td>${escapeHtml(row.parentEmail||"-")}</td>
-<td>${escapeHtml(row.leaveDate||"-")}</td>
-<td>${escapeHtml(row.reason||"-")}</td>
-<td><span class="badge ${row.status==="approved"?"badge-green":row.status==="rejected"?"badge-red":"badge-yellow"}">${escapeHtml(row.status||"pending")}</span></td>
-<td>${escapeHtml(row.reply||"-")}</td>
-<td>
-<div class="actions">
-<button class="success leave-approve" data-id="${row.id}">Approve</button>
-<button class="warning leave-reject" data-id="${row.id}">Reject</button>
-<button class="secondary leave-reply" data-id="${row.id}">Reply</button>
-<button class="danger leave-delete" data-id="${row.id}">Delete</button>
+$("leaveTable").innerHTML=
+`<tr><td colspan="7">
+<div class="empty">
+No leave requests.
 </div>
-</td>
-</tr>`).join("");
+</td></tr>`;
 
-document.querySelectorAll(".leave-approve").forEach(b=>b.addEventListener("click",async()=>{
-await updateDoc(doc(db,"leaveRequests",b.dataset.id),{status:"approved",repliedAt:serverTimestamp()});
-showMessage("Leave approved.");await loadLeaves();
-}));
+return;
 
-document.querySelectorAll(".leave-reject").forEach(b=>b.addEventListener("click",async()=>{
-await updateDoc(doc(db,"leaveRequests",b.dataset.id),{status:"rejected",repliedAt:serverTimestamp()});
-showMessage("Leave rejected.");await loadLeaves();
-}));
-
-document.querySelectorAll(".leave-reply").forEach(b=>b.addEventListener("click",async()=>{
-const reply=prompt("Enter reply:");
-if(reply===null)return;
-await updateDoc(doc(db,"leaveRequests",b.dataset.id),{reply:reply.trim(),repliedAt:serverTimestamp()});
-showMessage("Reply sent.");await loadLeaves();
-}));
-
-document.querySelectorAll(".leave-delete").forEach(b=>b.addEventListener("click",async()=>{
-if(!confirm("Delete leave request?"))return;
-await deleteDoc(doc(db,"leaveRequests",b.dataset.id));
-showMessage("Leave request deleted.");await loadLeaves();
-}));
-
-}catch(error){console.error(error)}
 }
+
+$("leaveTable").innerHTML=
+rows.map(row=>`
+
+<tr>
+
+<td>
+
+<strong>
+${escapeHtml(
+studentNameByNumber(row.studentNumber)
+)}
+</strong>
+
+<br>
+
+${escapeHtml(row.studentNumber)}
+
+</td>
+
+<td>
+${escapeHtml(row.parentEmail||"-")}
+</td>
+
+<td>
+${escapeHtml(row.leaveDate||"-")}
+</td>
+
+<td>
+${escapeHtml(row.reason||"-")}
+</td>
+
+<td>
+
+<span class="badge ${
+row.status==="approved"
+?"badge-green"
+:
+row.status==="rejected"
+?"badge-red"
+:
+"badge-yellow"
+}">
+
+${escapeHtml(row.status||"pending")}
+
+</span>
+
+</td>
+
+<td>
+${escapeHtml(row.reply||"-")}
+</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="success leave-approve"
+data-id="${row.id}">
+Approve
+</button>
+
+<button
+class="warning leave-reject"
+data-id="${row.id}">
+Reject
+</button>
+
+<button
+class="secondary leave-reply"
+data-id="${row.id}">
+Reply
+</button>
+
+<button
+class="danger leave-delete"
+data-id="${row.id}">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`).join("");
+
+
+document.querySelectorAll(".leave-approve")
+.forEach(b=>
+b.addEventListener(
+"click",
+async()=>{
+
+await updateDoc(
+doc(db,"leaveRequests",b.dataset.id),
+{
+status:"approved",
+repliedAt:serverTimestamp()
+}
+);
+
+showMessage("Leave approved.");
+
+await loadLeaves();
+
+})
+);
+
+
+document.querySelectorAll(".leave-reject")
+.forEach(b=>
+b.addEventListener(
+"click",
+async()=>{
+
+await updateDoc(
+doc(db,"leaveRequests",b.dataset.id),
+{
+status:"rejected",
+repliedAt:serverTimestamp()
+}
+);
+
+showMessage("Leave rejected.");
+
+await loadLeaves();
+
+})
+);
+
+
+document.querySelectorAll(".leave-reply")
+.forEach(b=>
+b.addEventListener(
+"click",
+async()=>{
+
+const reply=
+prompt("Enter reply:");
+
+if(reply===null)return;
+
+await updateDoc(
+doc(db,"leaveRequests",b.dataset.id),
+{
+reply:reply.trim(),
+repliedAt:serverTimestamp()
+}
+);
+
+showMessage("Reply sent.");
+
+await loadLeaves();
+
+})
+);
+
+
+document.querySelectorAll(".leave-delete")
+.forEach(b=>
+b.addEventListener(
+"click",
+async()=>{
+
+if(!confirm(
+"Delete leave request?"
+))
+return;
+
+await deleteDoc(
+doc(db,"leaveRequests",b.dataset.id)
+);
+
+showMessage(
+"Leave request deleted."
+);
+
+await loadLeaves();
+
+})
+);
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
 
 /* MESSAGES */
 
 async function loadMessages(){
+
 try{
 
-const snap=await getDocs(collection(db,"messages"));
+const snap=
+await getDocs(collection(db,"messages"));
 
-const rows=snap.docs.map(item=>({
-id:item.id,...item.data()
+const rows=
+snap.docs.map(item=>({
+id:item.id,
+...item.data()
 }));
 
-rows.sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+rows.sort(
+(a,b)=>
+(b.createdAt?.seconds||0)-
+(a.createdAt?.seconds||0)
+);
 
-$("messageCount").textContent=rows.length;
+$("messageCount").textContent=
+rows.length;
 
 if(!rows.length){
-$("messagesTable").innerHTML=`<tr><td colspan="6"><div class="empty">No parent messages.</div></td></tr>`;
-return;
-}
 
-$("messagesTable").innerHTML=rows.map(row=>`
-<tr>
-<td>${escapeHtml(studentNameByNumber(row.studentNumber))}<br>${escapeHtml(row.studentNumber)}</td>
-<td>${escapeHtml(row.parentEmail||"-")}</td>
-<td>${escapeHtml(row.text||"-")}</td>
-<td><span class="badge ${row.status==="replied"?"badge-green":"badge-yellow"}">${escapeHtml(row.status||"new")}</span></td>
-<td>${escapeHtml(row.reply||"-")}</td>
-<td>
-<div class="actions">
-<button class="secondary message-reply" data-id="${row.id}">Reply</button>
-<button class="danger message-delete" data-id="${row.id}">Delete</button>
+$("messagesTable").innerHTML=
+`<tr><td colspan="6">
+<div class="empty">
+No parent messages.
 </div>
-</td>
-</tr>`).join("");
+</td></tr>`;
 
-document.querySelectorAll(".message-reply").forEach(b=>b.addEventListener("click",async()=>{
-const reply=prompt("Enter reply:");
-if(reply===null)return;
-await updateDoc(doc(db,"messages",b.dataset.id),{reply:reply.trim(),status:"replied",repliedAt:serverTimestamp()});
-showMessage("Reply sent.");await loadMessages();
-}));
+return;
 
-document.querySelectorAll(".message-delete").forEach(b=>b.addEventListener("click",async()=>{
-if(!confirm("Delete this message?"))return;
-await deleteDoc(doc(db,"messages",b.dataset.id));
-showMessage("Message deleted.");await loadMessages();
-}));
-
-}catch(error){console.error(error)}
 }
+
+$("messagesTable").innerHTML=
+rows.map(row=>`
+
+<tr>
+
+<td>
+
+${escapeHtml(
+studentNameByNumber(row.studentNumber)
+)}
+
+<br>
+
+${escapeHtml(row.studentNumber)}
+
+</td>
+
+<td>
+${escapeHtml(row.parentEmail||"-")}
+</td>
+
+<td>
+${escapeHtml(row.text||"-")}
+</td>
+
+<td>
+
+<span class="badge ${
+row.status==="replied"
+?"badge-green"
+:"badge-yellow"
+}">
+
+${escapeHtml(row.status||"new")}
+
+</span>
+
+</td>
+
+<td>
+${escapeHtml(row.reply||"-")}
+</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="secondary message-reply"
+data-id="${row.id}">
+Reply
+</button>
+
+<button
+class="danger message-delete"
+data-id="${row.id}">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`).join("");
+
+
+document.querySelectorAll(".message-reply")
+.forEach(b=>
+b.addEventListener(
+"click",
+async()=>{
+
+const reply=
+prompt("Enter reply:");
+
+if(reply===null)return;
+
+await updateDoc(
+doc(db,"messages",b.dataset.id),
+{
+reply:reply.trim(),
+status:"replied",
+repliedAt:serverTimestamp()
+}
+);
+
+showMessage("Reply sent.");
+
+await loadMessages();
+
+})
+);
+
+
+document.querySelectorAll(".message-delete")
+.forEach(b=>
+b.addEventListener(
+"click",
+async()=>{
+
+if(!confirm(
+"Delete this message?"
+))
+return;
+
+await deleteDoc(
+doc(db,"messages",b.dataset.id)
+);
+
+showMessage(
+"Message deleted."
+);
+
+await loadMessages();
+
+})
+);
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
 
 /* DONATIONS */
 
 async function loadDonations(){
+
 try{
 
-const snap=await getDocs(collection(db,"donations"));
+const snap=
+await getDocs(collection(db,"donations"));
 
-const rows=snap.docs.map(item=>({
-id:item.id,...item.data()
+const rows=
+snap.docs.map(item=>({
+id:item.id,
+...item.data()
 }));
 
-rows.sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+rows.sort(
+(a,b)=>
+(b.createdAt?.seconds||0)-
+(a.createdAt?.seconds||0)
+);
 
-let total=0,pending=0,verified=0;
+let total=0;
+let pending=0;
+let verified=0;
 
 rows.forEach(row=>{
-const amount=Number(row.amount||0);
+
+const amount=
+Number(row.amount||0);
+
 total+=amount;
-if(row.status==="pending")pending+=amount;
-if(row.status==="verified")verified+=amount;
+
+if(row.status==="pending")
+pending+=amount;
+
+if(row.status==="verified")
+verified+=amount;
+
 });
 
-$("donationTotal").textContent=money(total);
-$("donationPending").textContent=money(pending);
-$("donationVerified").textContent=money(verified);
+$("donationTotal").textContent=
+money(total);
+
+$("donationPending").textContent=
+money(pending);
+
+$("donationVerified").textContent=
+money(verified);
 
 if(!rows.length){
-$("donationsTable").innerHTML=`<tr><td colspan="8"><div class="empty">No donations found.</div></td></tr>`;
+
+$("donationsTable").innerHTML=
+`<tr><td colspan="8">
+<div class="empty">
+No donations found.
+</div>
+</td></tr>`;
+
 return;
+
 }
 
-$("donationsTable").innerHTML=rows.map(row=>`
+$("donationsTable").innerHTML=
+rows.map(row=>`
+
 <tr>
-<td><strong>${escapeHtml(studentNameByNumber(row.studentNumber))}</strong><br><small>${escapeHtml(row.studentNumber||"-")}</small></td>
-<td>${escapeHtml(row.parentEmail||"-")}</td>
-<td><strong>${money(row.amount)}</strong></td>
-<td>${escapeHtml(row.transactionId||"-")}</td>
-<td>${formatDate(row.createdAt)}</td>
-<td><span class="badge ${row.status==="verified"?"badge-green":row.status==="rejected"?"badge-red":"badge-yellow"}">${escapeHtml(row.status||"pending")}</span></td>
-<td>${escapeHtml(row.adminNote||"-")}</td>
+
 <td>
-<div class="actions">
-${row.status!=="verified"?`<button class="success donation-verify" data-id="${row.id}">Verify</button>`:""}
-${row.status!=="rejected"?`<button class="warning donation-reject" data-id="${row.id}">Reject</button>`:""}
-<button class="danger donation-delete" data-id="${row.id}">Delete</button>
-</div>
+
+<strong>
+${escapeHtml(
+studentNameByNumber(row.studentNumber)
+)}
+</strong>
+
+<br>
+
+<small>
+${escapeHtml(row.studentNumber||"-")}
+</small>
+
 </td>
-</tr>`).join("");
 
-document.querySelectorAll(".donation-verify").forEach(b=>b.addEventListener("click",async()=>{
-if(!confirm("Verify this donation?"))return;
-const note=prompt("Admin note (optional):");
-await updateDoc(doc(db,"donations",b.dataset.id),{status:"verified",adminNote:note||"",verifiedAt:serverTimestamp()});
-showMessage("Donation verified.");await loadDonations();
-}));
+<td>
+${escapeHtml(row.parentEmail||"-")}
+</td>
 
-document.querySelectorAll(".donation-reject").forEach(b=>b.addEventListener("click",async()=>{
-const note=prompt("Reason for rejection:");
-if(!note||!note.trim()){alert("Please enter a rejection reason.");return}
-if(!confirm("Reject this donation?"))return;
-await updateDoc(doc(db,"donations",b.dataset.id),{status:"rejected",adminNote:note.trim(),rejectedAt:serverTimestamp()});
-showMessage("Donation rejected.");await loadDonations();
-}));
+<td>
+<strong>
+${money(row.amount)}
+</strong>
+</td>
 
-document.querySelectorAll(".donation-delete").forEach(b=>b.addEventListener("click",async()=>{
-if(!confirm("Delete this donation record?"))return;
-await deleteDoc(doc(db,"donations",b.dataset.id));
-showMessage("Donation deleted.");await loadDonations();
-}));
+<td>
+${escapeHtml(row.transactionId||"-")}
+</td>
+
+<td>
+${formatDate(row.createdAt)}
+</td>
+
+<td>
+
+<span class="badge ${
+row.status==="verified"
+?"badge-green"
+:
+row.status==="rejected"
+?"badge-red"
+:
+"badge-yellow"
+}">
+
+${escapeHtml(row.status||"pending")}
+
+</span>
+
+</td>
+
+<td>
+${escapeHtml(row.adminNote||"-")}
+</td>
+
+<td>
+
+<div class="actions">
+
+${
+row.status!=="verified"
+?
+`<button
+class="success donation-verify"
+data-id="${row.id}">
+Verify
+</button>`
+:""
+}
+
+${
+row.status!=="rejected"
+?
+`<button
+class="warning donation-reject"
+data-id="${row.id}">
+Reject
+</button>`
+:""
+}
+
+<button
+class="danger donation-delete"
+data-id="${row.id}">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`).join("");
+
+
+document.querySelectorAll(".donation-verify")
+.forEach(b=>
+b.addEventListener(
+"click",
+async()=>{
+
+if(!confirm(
+"Verify this donation?"
+))
+return;
+
+const note=
+prompt("Admin note (optional):");
+
+await updateDoc(
+doc(db,"donations",b.dataset.id),
+{
+status:"verified",
+adminNote:note||"",
+verifiedAt:serverTimestamp()
+}
+);
+
+showMessage(
+"Donation verified."
+);
+
+await loadDonations();
+
+})
+);
+
+
+document.querySelectorAll(".donation-reject")
+.forEach(b=>
+b.addEventListener(
+"click",
+async()=>{
+
+const note=
+prompt("Reason for rejection:");
+
+if(!note||!note.trim()){
+
+alert(
+"Please enter a rejection reason."
+);
+
+return;
+
+}
+
+if(!confirm(
+"Reject this donation?"
+))
+return;
+
+await updateDoc(
+doc(db,"donations",b.dataset.id),
+{
+status:"rejected",
+adminNote:note.trim(),
+rejectedAt:serverTimestamp()
+}
+);
+
+showMessage(
+"Donation rejected."
+);
+
+await loadDonations();
+
+})
+);
+
+
+document.querySelectorAll(".donation-delete")
+.forEach(b=>
+b.addEventListener(
+"click",
+async()=>{
+
+if(!confirm(
+"Delete this donation record?"
+))
+return;
+
+await deleteDoc(
+doc(db,"donations",b.dataset.id)
+);
+
+showMessage(
+"Donation deleted."
+);
+
+await loadDonations();
+
+})
+);
 
 }catch(error){
+
 console.error(error);
-$("donationsTable").innerHTML=`<tr><td colspan="8">Unable to load donations.</td></tr>`;
+
+$("donationsTable").innerHTML=
+`<tr><td colspan="8">
+Unable to load donations.
+</td></tr>`;
+
 }
+
 }
+
 
 /* PUBLIC RESULT */
 
-$("openPublicResult").addEventListener("click",()=>location.href="result.html");
+$("openPublicResult").addEventListener(
+"click",
+()=>location.href="result.html"
+);
+
 
 /* DEFAULT DATES */
 
 function setDefaultDates(){
-const today=new Date().toISOString().split("T")[0];
-if($("attendanceDate"))$("attendanceDate").value=today;
-if($("studyDate"))$("studyDate").value=today;
+
+const today=
+new Date().toISOString().split("T")[0];
+
+if($("attendanceDate"))
+$("attendanceDate").value=today;
+
+if($("studyDate"))
+$("studyDate").value=today;
+
 }
 
 setDefaultDates();
 
 </script>
+
 </body>
 </html>
