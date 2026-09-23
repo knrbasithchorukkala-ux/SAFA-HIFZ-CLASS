@@ -2778,40 +2778,25 @@ async function loadResults(){
 
   try{
 
-    let snap;
-
-    /*
-      RESULT ONLY:
-      First check studentNumber.
-      If the Result collection uses studentNo instead,
-      check that field also.
-      No composite index is required.
-    */
-
-    const q1 = query(
-      collection(db,"results"),
-      where("studentNumber","==",studentNumber)
+    const snap = await getDocs(
+      collection(db,"results")
     );
-
-    snap = await getDocs(q1);
-
-    if(snap.empty){
-
-      const q2 = query(
-        collection(db,"results"),
-        where("studentNo","==",studentNumber)
-      );
-
-      snap = await getDocs(q2);
-
-    }
-
 
     const rows = [];
 
     snap.forEach(docSnap=>{
 
       const data = docSnap.data();
+
+      const resultStudentNumber =
+        data.studentNumber ??
+        data.studentNo ??
+        data.student_number ??
+        "";
+
+      if(String(resultStudentNumber) !== String(studentNumber)){
+        return;
+      }
 
       const publishedValue =
         data.published;
@@ -2932,21 +2917,34 @@ async function loadNotices(){
 
   try{
 
-    const q = query(
-      collection(db,"notices"),
-      where("published","==",true)
+    const snap = await getDocs(
+      collection(db,"notices")
     );
-
-    const snap = await getDocs(q);
 
     const rows = [];
 
     snap.forEach(docSnap=>{
 
-      rows.push({
-        id:docSnap.id,
-        ...docSnap.data()
-      });
+      const data = docSnap.data();
+
+      const publishedValue =
+        data.published;
+
+      const isPublished =
+        publishedValue === true ||
+        String(publishedValue).toLowerCase() === "true" ||
+        String(publishedValue).toLowerCase() === "published" ||
+        data.isPublished === true ||
+        String(data.isPublished).toLowerCase() === "true";
+
+      if(isPublished){
+
+        rows.push({
+          id:docSnap.id,
+          ...data
+        });
+
+      }
 
     });
 
@@ -2980,16 +2978,22 @@ async function loadNotices(){
 
       const title =
         row.title ||
+        row.noticeTitle ||
+        row.heading ||
         "Notice";
 
       const text =
         row.text ||
         row.message ||
         row.description ||
+        row.content ||
         "";
 
       const date =
-        getDateText(row.createdAt);
+        getDateText(
+          row.createdAt ||
+          row.date
+        );
 
 
       return `
