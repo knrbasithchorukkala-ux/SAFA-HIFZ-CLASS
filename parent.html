@@ -553,104 +553,49 @@ body::before{
   word-break:break-word;
 }
 
-/* MAIN ACCESS */
-.main-access-grid{
+/* STATS */
+.stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:15px;
   margin-bottom:20px;
 }
 
-.main-access{
+.stat{
   background:white;
   border:1px solid var(--border);
   border-radius:15px;
-  padding:20px;
+  padding:18px;
   box-shadow:var(--shadow);
   position:relative;
   overflow:hidden;
-  cursor:pointer;
-  transition:.2s;
-  color:var(--primary);
-  text-align:left;
-  font-family:inherit;
 }
 
-.main-access:hover{
-  transform:translateY(-3px);
-  border-color:#bcdace;
-  box-shadow:0 14px 30px rgba(4,45,35,.13);
-}
-
-.main-access::after{
+.stat::after{
   content:"";
   position:absolute;
-  width:75px;
-  height:75px;
-  right:-25px;
-  bottom:-25px;
+  width:65px;
+  height:65px;
+  right:-20px;
+  bottom:-20px;
   border-radius:50%;
-  background:rgba(11,102,80,.07);
+  background:rgba(11,102,80,.08);
 }
 
-.main-access-top{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:10px;
-  position:relative;
-  z-index:2;
+.stat-icon{
+  font-size:22px;
+  margin-bottom:9px;
 }
 
-.main-access-icon{
-  width:48px;
-  height:48px;
-  border-radius:12px;
-  background:#edf6f2;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:25px;
-}
-
-.main-access-notification{
-  min-width:28px;
-  height:28px;
-  padding:0 7px;
-  border-radius:20px;
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  color:#063b2f;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:11px;
-  font-weight:bold;
-}
-
-.main-access h3{
-  margin-top:15px;
-  font-size:16px;
-  color:var(--primary);
-  position:relative;
-  z-index:2;
-}
-
-.main-access p{
-  margin-top:5px;
-  color:var(--muted);
-  font-size:11px;
-  position:relative;
-  z-index:2;
-}
-
-.main-access-link{
+.stat strong{
   display:block;
-  margin-top:14px;
-  color:var(--primary2);
-  font-size:11px;
-  font-weight:bold;
-  position:relative;
-  z-index:2;
+  font-size:24px;
+  color:var(--primary);
+}
+
+.stat span{
+  font-size:12px;
+  color:var(--muted);
 }
 
 /* QUICK */
@@ -1189,7 +1134,7 @@ textarea{
     padding:15px;
   }
 
-  .main-access-grid{
+  .stats{
     grid-template-columns:repeat(2,1fr);
   }
 
@@ -1274,23 +1219,17 @@ textarea{
     grid-template-columns:1fr;
   }
 
-  .main-access-grid{
+  .stats{
     grid-template-columns:1fr 1fr;
     gap:10px;
   }
 
-  .main-access{
-    padding:15px;
+  .stat{
+    padding:14px;
   }
 
-  .main-access-icon{
-    width:42px;
-    height:42px;
-    font-size:22px;
-  }
-
-  .main-access h3{
-    font-size:14px;
+  .stat strong{
+    font-size:21px;
   }
 
   .quick-grid{
@@ -1382,7 +1321,7 @@ textarea{
     </button>
 
     <button class="nav-btn" data-section="leave">
-      <span>📝</span> Leave Request
+      <span>📝</span> Leave
     </button>
 
     <button class="nav-btn" data-section="messages">
@@ -1481,110 +1420,84 @@ textarea{
 
       </div>
 
-      <!-- MAIN ACCESS -->
-      <div class="main-access-grid">
+      <!-- CHILD CARD -->
+      <div class="card child-card">
 
-        <button class="main-access" data-go="study">
+        <div class="child-head">
 
-          <div class="main-access-top">
+          <div class="avatar" id="homeInitial">S</div>
 
-            <div class="main-access-icon">
-              📖
-            </div>
-
-            <div class="main-access-notification" id="studyTotal">
-              0
-            </div>
-
+          <div>
+            <h3 id="homeStudentName">Loading...</h3>
+            <p>Student No: <span id="homeStudentNumber">-</span></p>
           </div>
 
-          <h3>Study Progress</h3>
+        </div>
 
-          <p>View your child's study progress</p>
+        <div class="info-grid">
 
-          <span class="main-access-link">
-            Access →
-          </span>
-
-        </button>
-
-
-        <button class="main-access" data-go="attendance">
-
-          <div class="main-access-top">
-
-            <div class="main-access-icon">
-              📅
-            </div>
-
-            <div class="main-access-notification" id="attendanceTotal">
-              0
-            </div>
-
+          <div class="info-box">
+            <label>Student Name</label>
+            <strong id="homeNameInfo">-</strong>
           </div>
 
-          <h3>Attendance</h3>
-
-          <p>View attendance records</p>
-
-          <span class="main-access-link">
-            Access →
-          </span>
-
-        </button>
-
-
-        <button class="main-access" data-go="results">
-
-          <div class="main-access-top">
-
-            <div class="main-access-icon">
-              📊
-            </div>
-
-            <div class="main-access-notification" id="resultTotal">
-              0
-            </div>
-
+          <div class="info-box">
+            <label>Student Number</label>
+            <strong id="homeNoInfo">-</strong>
           </div>
 
-          <h3>Results</h3>
-
-          <p>View published results</p>
-
-          <span class="main-access-link">
-            Access →
-          </span>
-
-        </button>
-
-
-        <button class="main-access" data-go="notices">
-
-          <div class="main-access-top">
-
-            <div class="main-access-icon">
-              📢
-            </div>
-
-            <div class="main-access-notification">
-              🔔
-            </div>
-
+          <div class="info-box">
+            <label>Class</label>
+            <strong id="homeClassInfo">-</strong>
           </div>
 
-          <h3>Notices</h3>
+          <div class="info-box">
+            <label>Guardian Name</label>
+            <strong id="homeGuardianInfo">-</strong>
+          </div>
 
-          <p>View college notices</p>
+          <div class="info-box">
+            <label>Phone Number</label>
+            <strong id="homePhoneInfo">-</strong>
+          </div>
 
-          <span class="main-access-link">
-            Access →
-          </span>
+          <div class="info-box">
+            <label>Place / Address</label>
+            <strong id="homeAddressInfo">-</strong>
+          </div>
 
-        </button>
+        </div>
 
       </div>
 
+      <!-- STATS -->
+      <div class="stats">
+
+        <div class="stat">
+          <div class="stat-icon">👨‍🎓</div>
+          <strong id="studentCount">1</strong>
+          <span>My Child</span>
+        </div>
+
+        <div class="stat">
+          <div class="stat-icon">📅</div>
+          <strong id="attendanceTotal">0</strong>
+          <span>Attendance Records</span>
+        </div>
+
+        <div class="stat">
+          <div class="stat-icon">📖</div>
+          <strong id="studyTotal">0</strong>
+          <span>Study Updates</span>
+        </div>
+
+        <div class="stat">
+          <div class="stat-icon">📊</div>
+          <strong id="resultTotal">0</strong>
+          <span>Results</span>
+        </div>
+
+      </div>
 
       <!-- QUICK ACTIONS -->
       <div class="card">
@@ -1601,19 +1514,39 @@ textarea{
             My Child
           </button>
 
-          <button class="quick-btn" data-go="leave">
-            <span class="qicon">📝</span>
-            Leave Request
+          <button class="quick-btn" data-go="attendance">
+            <span class="qicon">📅</span>
+            Attendance
           </button>
 
-          <button class="quick-btn" data-go="messages">
-            <span class="qicon">💬</span>
-            Message to Usthad
+          <button class="quick-btn" data-go="study">
+            <span class="qicon">📖</span>
+            Study Progress
+          </button>
+
+          <button class="quick-btn" data-go="results">
+            <span class="qicon">📊</span>
+            Results
+          </button>
+
+          <button class="quick-btn" data-go="notices">
+            <span class="qicon">📢</span>
+            Notices
           </button>
 
           <button class="quick-btn donation-quick" data-go="donation">
             <span class="qicon">💰</span>
-            My Donation to SAFA
+            Donation
+          </button>
+
+          <button class="quick-btn" data-go="leave">
+            <span class="qicon">📝</span>
+            Leave
+          </button>
+
+          <button class="quick-btn" data-go="messages">
+            <span class="qicon">💬</span>
+            Messages
           </button>
 
         </div>
@@ -2015,7 +1948,7 @@ import {
 /* FIREBASE CONFIG */
 
 const firebaseConfig = {
-  apiKey:"AIzaSyC6WpY_AThyG49YPS92rnPG9zy0PYDPVt0",
+  apiKey:"AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
   authDomain:"safa-hifz-class-7e84b.firebaseapp.com",
   projectId:"safa-hifz-class-7e84b",
   storageBucket:"safa-hifz-class-7e84b.firebasestorage.app",
@@ -2176,19 +2109,6 @@ document.querySelectorAll(".quick-btn").forEach(button=>{
 });
 
 
-/* MAIN ACCESS */
-
-document.querySelectorAll(".main-access").forEach(button=>{
-
-  button.addEventListener("click",()=>{
-
-    openSection(button.dataset.go);
-
-  });
-
-});
-
-
 /* MY DONATION FEATURED BOX */
 
 const donationFeatured =
@@ -2304,7 +2224,22 @@ async function loadStudent(){
     "-";
 
 
-  /* CHILD SECTION */
+  /* HOME */
+
+  $("homeStudentName").textContent = name;
+  $("homeStudentNumber").textContent = number;
+
+  $("homeNameInfo").textContent = name;
+  $("homeNoInfo").textContent = number;
+  $("homeClassInfo").textContent = className;
+  $("homeGuardianInfo").textContent = guardian;
+  $("homePhoneInfo").textContent = phone;
+  $("homeAddressInfo").textContent = address;
+
+  $("homeInitial").textContent = getInitial(name);
+
+
+  /* CHILD */
 
   $("childName").textContent = name;
   $("childNumber").textContent = number;
