@@ -728,7 +728,6 @@ body::before{
   box-shadow:var(--shadow);
 }
 
-/* QUICK ACCESS NOTIFICATION */
 .quick-notify{
   position:absolute;
   top:9px;
@@ -1496,7 +1495,6 @@ textarea{
     <!-- HOME -->
     <section class="section active" id="home">
 
-      <!-- MY DONATION TO SAFA -->
       <div class="donation-featured" id="donationFeatured">
 
         <div class="donation-featured-icon">
@@ -1535,7 +1533,6 @@ textarea{
 
       </div>
 
-      <!-- COLLEGE PHOTO -->
       <div class="college-photo-card">
 
         <div class="college-photo-wrap">
@@ -1558,7 +1555,6 @@ textarea{
 
       </div>
 
-      <!-- CHILD CARD -->
       <div class="card child-card">
 
         <div class="child-head">
@@ -1608,7 +1604,6 @@ textarea{
 
       </div>
 
-      <!-- PARENT SERVICE ACCESS -->
       <div class="card">
 
         <div class="card-title">
@@ -1646,7 +1641,6 @@ textarea{
 
           </button>
 
-
           <button class="service-card attendance-service" data-go="attendance">
 
             <div class="service-card-icon">
@@ -1674,7 +1668,6 @@ textarea{
             </div>
 
           </button>
-
 
           <button class="service-card notice-service" data-go="notices">
 
@@ -1708,7 +1701,6 @@ textarea{
 
       </div>
 
-      <!-- QUICK ACTIONS -->
       <div class="card">
 
         <div class="card-title">
@@ -2810,38 +2802,19 @@ async function loadResults(){
 
   try{
 
-    const snap =
-      await getDocs(
-        collection(db,"results")
-      );
+    const q = query(
+      collection(db,"results"),
+      where("studentNumber","==",studentNumber),
+      where("status","==","published")
+    );
+
+    const snap = await getDocs(q);
 
     const rows = [];
 
     snap.forEach(docSnap=>{
 
       const data = docSnap.data();
-
-      const resultStudentNumber =
-        data.studentNumber ??
-        data.studentNo ??
-        data.student_number ??
-        "";
-
-      if(
-        String(resultStudentNumber).trim() !==
-        String(studentNumber).trim()
-      ){
-        return;
-      }
-
-      const status =
-        String(data.status ?? "")
-        .trim()
-        .toLowerCase();
-
-      if(status !== "published"){
-        return;
-      }
 
       rows.push({
         id:docSnap.id,
@@ -2952,25 +2925,18 @@ async function loadNotices(){
 
   try{
 
-    const snap =
-      await getDocs(
-        collection(db,"notices")
-      );
+    const q = query(
+      collection(db,"notices"),
+      where("status","==","published")
+    );
+
+    const snap = await getDocs(q);
 
     const rows = [];
 
     snap.forEach(docSnap=>{
 
       const data = docSnap.data();
-
-      const status =
-        String(data.status ?? "")
-        .trim()
-        .toLowerCase();
-
-      if(status !== "published"){
-        return;
-      }
 
       rows.push({
         id:docSnap.id,
