@@ -1419,7 +1419,6 @@ textarea{
     <!-- HOME -->
     <section class="section active" id="home">
 
-      <!-- MY DONATION TO SAFA -->
       <div class="donation-featured" id="donationFeatured">
 
         <div class="donation-featured-icon">
@@ -1458,7 +1457,6 @@ textarea{
 
       </div>
 
-      <!-- COLLEGE PHOTO -->
       <div class="college-photo-card">
 
         <div class="college-photo-wrap">
@@ -1481,7 +1479,6 @@ textarea{
 
       </div>
 
-      <!-- MAIN ACCESS -->
       <div class="main-access-grid">
 
         <button class="main-access" data-go="study">
@@ -1586,7 +1583,6 @@ textarea{
       </div>
 
 
-      <!-- QUICK ACTIONS -->
       <div class="card">
 
         <div class="card-title">
@@ -1784,7 +1780,6 @@ textarea{
 
       <div class="donation-grid">
 
-        <!-- BANK / UPI -->
         <div class="donation-panel">
 
           <h3>🏦 Bank & UPI Details</h3>
@@ -1837,7 +1832,6 @@ textarea{
 
         </div>
 
-        <!-- QR -->
         <div class="donation-panel qr-panel">
 
           <h3>📱 Scan & Pay</h3>
@@ -1996,7 +1990,9 @@ import {
 import {
   getAuth,
   onAuthStateChanged,
-  signOut
+  signOut,
+  setPersistence,
+  browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 import {
@@ -2020,13 +2016,39 @@ const firebaseConfig = {
   projectId:"safa-hifz-class-7e84b",
   storageBucket:"safa-hifz-class-7e84b.firebasestorage.app",
   messagingSenderId:"476801753196",
-  appId:"1:476801753196:web:d4c8a8b0c1a4203606f849",
+  appId:"1:476801753196:web:d4a8a8b0c1a4203606f849",
   measurementId:"G-ZTBTJCB5SR"
 };
 
 const app = initializeApp(firebaseConfig);
+
 const auth = getAuth(app);
+
 const db = getFirestore(app);
+
+
+/*
+  PARENT SESSION FIX
+  ------------------
+  Keep Firebase authentication persistent
+  without changing index.html.
+*/
+
+let authReady = false;
+
+const authPersistenceReady =
+  setPersistence(auth,browserLocalPersistence)
+    .then(()=>{
+      authReady = true;
+    })
+    .catch(error=>{
+      console.error(
+        "Firebase persistence error:",
+        error
+      );
+
+      authReady = true;
+    });
 
 
 /* HELPERS */
@@ -2303,8 +2325,6 @@ async function loadStudent(){
     studentData.parentEmail ||
     "-";
 
-
-  /* CHILD SECTION */
 
   $("childName").textContent = name;
   $("childNumber").textContent = number;
@@ -3257,131 +3277,159 @@ async function loadMessageHistory(){
 
 /* AUTH */
 
-onAuthStateChanged(auth,async user=>{
+(async()=>{
 
-  try{
+  /*
+    Wait for Firebase persistence setup first.
+    This prevents the parent page from immediately
+    treating the authentication session as missing.
+  */
 
-    if(!user){
+  await authPersistenceReady;
 
-      location.href="index.html";
+  onAuthStateChanged(auth,async user=>{
 
-      return;
-    }
+    try{
+
+      if(!user){
+
+        /*
+          Give Firebase one extra moment to restore
+          the persisted authentication session.
+        */
+
+        setTimeout(()=>{
+
+          if(auth.currentUser){
+            return;
+          }
+
+          location.href="index.html";
+
+        },1200);
+
+        return;
+      }
 
 
-    currentUser = user;
+      currentUser = user;
 
 
-    const userRef =
-      doc(db,"users",user.uid);
+      const userRef =
+        doc(db,"users",user.uid);
 
-    const userSnap =
-      await getDoc(userRef);
+      const userSnap =
+        await getDoc(userRef);
 
 
-    if(!userSnap.exists()){
+      if(!userSnap.exists()){
 
-      throw new Error(
-        "Parent account details not found."
+        throw new Error(
+          "Parent account details not found."
+        );
+
+      }
+
+
+      const userData =
+        userSnap.data();
+
+
+      if(userData.role !== "parent"){
+
+        throw new Error(
+          "This account is not registered as a parent account."
+        );
+
+      }
+
+
+      studentNumber =
+        userData.studentNumber ||
+        userData.studentNo ||
+        "";
+
+
+      if(!studentNumber){
+
+        throw new Error(
+          "Student number is not linked to this parent account."
+        );
+
+      }
+
+
+      await loadStudent();
+
+      await Promise.all([
+        loadAttendance(),
+        loadStudy(),
+        loadResults(),
+        loadNotices(),
+        loadLeaveHistory(),
+        loadMessageHistory()
+      ]);
+
+
+      $("loading").style.display = "none";
+
+
+    }catch(error){
+
+      console.error(
+        "Parent Dashboard Error:",
+        error
       );
 
-    }
-
-
-    const userData =
-      userSnap.data();
-
-
-    if(userData.role !== "parent"){
-
-      throw new Error(
-        "This account is not registered as a parent account."
-      );
-
-    }
-
-
-    studentNumber =
-      userData.studentNumber ||
-      userData.studentNo ||
-      "";
-
-
-    if(!studentNumber){
-
-      throw new Error(
-        "Student number is not linked to this parent account."
-      );
-
-    }
-
-
-    await loadStudent();
-
-    await Promise.all([
-      loadAttendance(),
-      loadStudy(),
-      loadResults(),
-      loadNotices(),
-      loadLeaveHistory(),
-      loadMessageHistory()
-    ]);
-
-
-    $("loading").style.display = "none";
-
-
-  }catch(error){
-
-    console.error("Parent Dashboard Error:",error);
-
-    $("loading").innerHTML = `
-      <div style="
-        max-width:450px;
-        padding:25px;
-        text-align:center;
-      ">
-
+      $("loading").innerHTML = `
         <div style="
-          font-size:45px;
-          margin-bottom:15px;
+          max-width:450px;
+          padding:25px;
+          text-align:center;
         ">
-          ⚠️
-        </div>
 
-        <strong>
-          Parent Dashboard Error
-        </strong>
-
-        <p style="
-          margin-top:10px;
-          opacity:.8;
-          line-height:1.5;
-        ">
-          ${escapeHtml(error.message)}
-        </p>
-
-        <button
-          onclick="location.href='index.html'"
-          style="
-            margin-top:20px;
-            border:0;
-            padding:12px 20px;
-            border-radius:8px;
-            background:#d6a93a;
-            color:#032b24;
-            font-weight:bold;
-            cursor:pointer;
+          <div style="
+            font-size:45px;
+            margin-bottom:15px;
           ">
-          Back to Login
-        </button>
+            ⚠️
+          </div>
 
-      </div>
-    `;
+          <strong>
+            Parent Dashboard Error
+          </strong>
 
-  }
+          <p style="
+            margin-top:10px;
+            opacity:.8;
+            line-height:1.5;
+          ">
+            ${escapeHtml(error.message)}
+          </p>
 
-});
+          <button
+            onclick="location.href='index.html'"
+            style="
+              margin-top:20px;
+              border:0;
+              padding:12px 20px;
+              border-radius:8px;
+              background:#d6a93a;
+              color:#032b24;
+              font-weight:bold;
+              cursor:pointer;
+            ">
+            Back to Login
+          </button>
+
+        </div>
+      `;
+
+    }
+
+  });
+
+})();
 
 
 /* TODAY'S DATE */
