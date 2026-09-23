@@ -201,8 +201,17 @@ gap:16px;margin-bottom:25px
 }
 
 .stat{
+position:relative;
 padding:20px;border-radius:17px;color:#fff;
-border:1px solid rgba(212,175,55,.35);box-shadow:var(--shadow)
+border:1px solid rgba(212,175,55,.35);box-shadow:var(--shadow);
+cursor:pointer;
+transition:.25s
+}
+
+.stat:hover{
+transform:translateY(-5px);
+box-shadow:0 16px 35px rgba(3,43,36,.22);
+border-color:rgba(212,175,55,.8)
 }
 
 .stat:nth-child(1){background:linear-gradient(135deg,#07583f,#0a9670)}
@@ -220,6 +229,28 @@ font-size:20px
 .stat small{color:#dff4e9;font-size:11px;font-weight:800}
 .stat strong{
 display:block;margin-top:6px;color:#fff;font-size:30px;font-weight:900
+}
+
+.dashboard-notify{
+position:absolute;
+top:11px;
+right:11px;
+min-width:24px;
+height:24px;
+padding:0 7px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50px;
+color:#fff;
+background:#b42318;
+font-size:10px;
+font-weight:900;
+box-shadow:0 4px 10px rgba(180,35,24,.22)
+}
+
+.dashboard-notify.zero{
+display:none
 }
 
 .panel{
@@ -328,7 +359,7 @@ overflow-x:auto;border-radius:12px;border:1px solid #d2e6da
 }
 
 table{
-width:100%;min-width:720px;border-collapse:collapse;background:#fdfefe
+width:100%;min-width:820px;border-collapse:collapse;background:#fdfefe
 }
 
 th,td{
@@ -704,94 +735,228 @@ The best among you are those who learn the Qur'an and teach it.
 </div>
 </div>
 
+
+<!-- TOP 4 DASHBOARD BOXES -->
+
 <div class="stats">
 
-<div class="stat">
+<div class="stat" data-go="students">
+
 <div class="stat-icon">👨‍🎓</div>
-<small>Total Students</small>
+
+<small>TOTAL STUDENTS</small>
+
 <strong id="studentCount">0</strong>
+
+<span class="dashboard-notify zero" id="studentNotify">0</span>
+
 </div>
 
-<div class="stat">
+
+<div class="stat" data-go="study">
+
+<div class="stat-icon">📖</div>
+
+<small>STUDY PROGRESS</small>
+
+<strong id="studyCount">0</strong>
+
+<span class="dashboard-notify zero" id="studyNotify">0</span>
+
+</div>
+
+
+<div class="stat" data-go="attendance">
+
 <div class="stat-icon">✓</div>
-<small>Attendance Records</small>
+
+<small>ATTENDANCE</small>
+
 <strong id="attendanceCount">0</strong>
+
+<span class="dashboard-notify zero" id="attendanceNotify">0</span>
+
 </div>
 
-<div class="stat">
+
+<div class="stat" data-go="notices">
+
+<div class="stat-icon">📢</div>
+
+<small>NOTES</small>
+
+<strong id="noticeCount">0</strong>
+
+<span class="dashboard-notify zero" id="noticeDashboardNotify">0</span>
+
+</div>
+
+</div>
+
+
+<!-- BOTTOM 5 DASHBOARD BOXES -->
+
+<div class="stats">
+
+<div class="stat" data-go="results">
+
+<div class="stat-icon">🏆</div>
+
+<small>RESULTS</small>
+
+<strong id="resultCount">0</strong>
+
+<span class="dashboard-notify zero" id="resultDashboardNotify">0</span>
+
+</div>
+
+
+<div class="stat" data-go="leave">
+
 <div class="stat-icon">📝</div>
-<small>Leave Requests</small>
+
+<small>LEAVE REQUESTS</small>
+
 <strong id="leaveCount">0</strong>
+
+<span class="dashboard-notify zero" id="leaveDashboardNotify">0</span>
+
 </div>
 
-<div class="stat">
+
+<div class="stat" data-go="messages">
+
 <div class="stat-icon">💬</div>
-<small>Parent Messages</small>
+
+<small>PARENT MESSAGES</small>
+
 <strong id="messageCount">0</strong>
+
+<span class="dashboard-notify zero" id="messageDashboardNotify">0</span>
+
+</div>
+
+
+<div class="stat" data-go="donations">
+
+<div class="stat-icon">💰</div>
+
+<small>DONATIONS</small>
+
+<strong id="donationCount">0</strong>
+
+<span class="dashboard-notify zero" id="donationDashboardNotify">0</span>
+
+</div>
+
+
+<div class="stat" data-go="publicResult">
+
+<div class="stat-icon">🌐</div>
+
+<small>PUBLIC RESULT</small>
+
+<strong>OPEN</strong>
+
+<span class="dashboard-notify">→</span>
+
 </div>
 
 </div>
+
 
 <div class="panel">
 
 <div class="panel-head">
+
 <div>
 <h3>Quick Access</h3>
 <div class="panel-desc">Manage your college portal quickly</div>
 </div>
+
 </div>
 
 <div class="quick">
 
 <button class="quick-btn" data-go="study">
+
 <div class="quick-icon">📖</div>
+
 <strong>Study Progress</strong>
+
 <small>Update student study progress</small>
+
 </button>
+
 
 <button class="quick-btn" data-go="attendance">
+
 <div class="quick-icon">✓</div>
+
 <strong>Attendance</strong>
+
 <small>Manage daily attendance</small>
+
 </button>
+
 
 <button class="quick-btn" data-go="results">
+
 <div class="quick-icon">🏆</div>
+
 <strong>Result</strong>
+
 <small>Publish student results</small>
+
 <span class="quick-notify zero" id="resultNotify">0</span>
+
 </button>
 
+
 <button class="quick-btn" data-go="notices">
+
 <div class="quick-icon">📢</div>
+
 <strong>Notes</strong>
+
 <small>Publish announcements</small>
+
 <span class="quick-notify zero" id="noticeNotify">0</span>
+
 </button>
 
 </div>
+
 </div>
 
 </section>
 
+
 <section class="section" id="students">
 
 <div class="section-head">
+
 <div>
 <h2>Students</h2>
 <p>Manage student information</p>
 </div>
+
 <div class="section-tag">STUDENT MANAGEMENT</div>
+
 </div>
+
 
 <div class="panel">
 
 <div class="panel-head">
+
 <div>
 <h3>Add Student</h3>
 <div class="panel-desc">Create a new student profile</div>
 </div>
+
 </div>
+
 
 <form id="studentForm">
 
@@ -839,29 +1004,40 @@ The best among you are those who learn the Qur'an and teach it.
 </div>
 
 </form>
+
 </div>
+
 
 <div class="panel">
 
 <div class="toolbar">
+
 <h3>Student List</h3>
+
 <input class="search" id="studentSearch" placeholder="Search student...">
+
 </div>
+
 
 <div class="table-wrap">
 
 <table>
 
 <thead>
+
 <tr>
+
 <th>Number</th>
 <th>Name</th>
 <th>Guardian</th>
 <th>Class</th>
 <th>Email</th>
 <th>Phone</th>
+<th>Address</th>
 <th>Action</th>
+
 </tr>
+
 </thead>
 
 <tbody id="studentsTable"></tbody>
@@ -869,9 +1045,11 @@ The best among you are those who learn the Qur'an and teach it.
 </table>
 
 </div>
+
 </div>
 
 </section>
+
 
 <section class="section" id="attendance">
 
@@ -886,18 +1064,23 @@ The best among you are those who learn the Qur'an and teach it.
 
 </div>
 
+
 <div class="panel">
 
 <div class="panel-head">
 
 <div>
+
 <h3>Record Absent / Leave</h3>
+
 <div class="panel-desc">
 Only Absent or Leave students need to be recorded. All other students are automatically Present.
 </div>
+
 </div>
 
 </div>
+
 
 <form id="attendanceForm">
 
@@ -935,6 +1118,7 @@ Search
 
 </div>
 
+
 <div class="field">
 
 <label>Date</label>
@@ -943,6 +1127,7 @@ Search
 
 </div>
 
+
 <div class="field">
 
 <label>Status</label>
@@ -950,11 +1135,13 @@ Search
 <select id="attendanceStatus" required>
 
 <option value="absent">Absent</option>
+
 <option value="leave">Leave</option>
 
 </select>
 
 </div>
+
 
 <div class="field">
 
@@ -969,6 +1156,7 @@ Save Attendance
 </form>
 
 </div>
+
 
 <div class="panel">
 
@@ -998,6 +1186,7 @@ placeholder="Search student no or name..."
 
 </section>
 
+
 <section class="section" id="study">
 
 <div class="section-head">
@@ -1011,18 +1200,23 @@ placeholder="Search student no or name..."
 
 </div>
 
+
 <div class="panel">
 
 <div class="panel-head">
 
 <div>
+
 <h3>Update Study Progress</h3>
+
 <div class="panel-desc">
 Record the student's daily Qur'an and Dars progress
 </div>
+
 </div>
 
 </div>
+
 
 <form id="studyForm">
 
@@ -1060,77 +1254,114 @@ Search
 
 </div>
 
+
 <div class="field">
+
 <label>Date</label>
+
 <input type="date" id="studyDate" required>
+
 </div>
 
+
 <div class="field">
+
 <label>Juz / Surah Studied</label>
+
 <input id="studySurah" placeholder="Example: Juz 5 / Surah Al-Ma'idah">
+
 </div>
 
+
 <div class="field">
+
 <label>Today's New Lesson Target (Pages)</label>
+
 <input id="newLesson" type="number" min="0" step="0.5">
+
 </div>
 
+
 <div class="field">
+
 <label>Revision Completed</label>
+
 <input id="revision" placeholder="Example: 3 pages / 1 Juz">
+
 </div>
 
+
 <div class="field">
+
 <label>Study Status</label>
+
 <input id="studyStatus" placeholder="Enter status code">
+
 </div>
 
+
 <div class="field">
+
 <label>Performance</label>
 
 <select id="performance">
+
 <option value="">Select performance</option>
 <option>Excellent</option>
 <option>Very Good</option>
 <option>Good</option>
 <option>Average</option>
 <option>Needs Improvement</option>
+
 </select>
 
 </div>
 
-<div class="field">
-<label>Teacher's Remarks</label>
-<input id="studyNote" placeholder="Teacher's comments about today's study">
-</div>
 
 <div class="field">
+
+<label>Teacher's Remarks</label>
+
+<input id="studyNote" placeholder="Teacher's comments about today's study">
+
+</div>
+
+
+<div class="field">
+
 <label>Dars Study Level</label>
 
 <select id="darsLevel">
+
 <option value="">Select level</option>
 <option>Excellent</option>
 <option>Very Good</option>
 <option>Good</option>
 <option>Average</option>
 <option>Needs Improvement</option>
+
 </select>
 
 </div>
 
+
 <div class="field">
+
 <label>Discipline</label>
 
 <select id="discipline">
+
 <option value="">Select discipline</option>
 <option>Excellent</option>
 <option>Very Good</option>
 <option>Good</option>
 <option>Average</option>
 <option>Needs Improvement</option>
+
 </select>
 
 </div>
+
 
 <div class="field">
 
@@ -1146,15 +1377,19 @@ Save Study Progress
 
 </div>
 
+
 <div class="panel">
 
 <div class="toolbar">
 
 <div>
+
 <h3>Study Progress Records</h3>
+
 <div class="panel-desc">
 Daily Hifz, revision, performance, Dars level and discipline
 </div>
+
 </div>
 
 <input
@@ -1165,6 +1400,7 @@ placeholder="Search student no or name..."
 
 </div>
 
+
 <div class="table-wrap">
 
 <table class="study-table">
@@ -1172,6 +1408,7 @@ placeholder="Search student no or name..."
 <thead>
 
 <tr>
+
 <th>Student</th>
 <th>Date</th>
 <th>Juz / Surah Studied</th>
@@ -1183,6 +1420,7 @@ placeholder="Search student no or name..."
 <th>Dars Study Level</th>
 <th>Discipline</th>
 <th>Action</th>
+
 </tr>
 
 </thead>
@@ -1197,6 +1435,7 @@ placeholder="Search student no or name..."
 
 </section>
 
+
 <section class="section" id="results">
 
 <div class="section-head">
@@ -1209,6 +1448,7 @@ placeholder="Search student no or name..."
 <div class="section-tag">RESULT MANAGEMENT</div>
 
 </div>
+
 
 <div class="panel">
 
@@ -1248,26 +1488,38 @@ Search
 
 </div>
 
-<div class="field">
-<label>Test / Exam Title</label>
-<input id="resultTitle" required>
-</div>
 
 <div class="field">
-<label>Mark</label>
-<input id="resultMark" required>
+
+<label>Test / Exam Title</label>
+
+<input id="resultTitle" required>
+
 </div>
+
+
+<div class="field">
+
+<label>Mark</label>
+
+<input id="resultMark" required>
+
+</div>
+
 
 <div class="field">
 
 <label>Status</label>
 
 <select id="resultStatus">
+
 <option value="draft">Draft</option>
 <option value="published">Published</option>
+
 </select>
 
 </div>
+
 
 <div class="field">
 
@@ -1283,6 +1535,7 @@ Add Result
 
 </div>
 
+
 <div class="panel">
 
 <div class="toolbar">
@@ -1297,6 +1550,7 @@ placeholder="Search student no or name..."
 
 </div>
 
+
 <div class="table-wrap">
 
 <table>
@@ -1304,11 +1558,13 @@ placeholder="Search student no or name..."
 <thead>
 
 <tr>
+
 <th>Student</th>
 <th>Title</th>
 <th>Mark</th>
 <th>Status</th>
 <th>Action</th>
+
 </tr>
 
 </thead>
@@ -1323,6 +1579,7 @@ placeholder="Search student no or name..."
 
 </section>
 
+
 <section class="section" id="notices">
 
 <div class="section-head">
@@ -1336,6 +1593,7 @@ placeholder="Search student no or name..."
 
 </div>
 
+
 <div class="panel">
 
 <form id="noticeForm">
@@ -1343,28 +1601,41 @@ placeholder="Search student no or name..."
 <div class="form-grid">
 
 <div class="field">
+
 <label>Notice Title</label>
+
 <input id="noticeTitle" required>
+
 </div>
+
 
 <div class="field">
 
 <label>Status</label>
 
 <select id="noticeStatus">
+
 <option value="draft">Draft</option>
 <option value="published">Published</option>
+
 </select>
 
 </div>
 
+
 <div class="field full">
+
 <label>Notice</label>
+
 <textarea id="noticeText" required></textarea>
+
 </div>
 
+
 <div class="field">
+
 <button class="primary" type="submit">Add Notice</button>
+
 </div>
 
 </div>
@@ -1373,6 +1644,7 @@ placeholder="Search student no or name..."
 
 </div>
 
+
 <div class="panel">
 
 <div class="table-wrap">
@@ -1380,12 +1652,14 @@ placeholder="Search student no or name..."
 <table>
 
 <thead>
+
 <tr>
 <th>Title</th>
 <th>Notice</th>
 <th>Status</th>
 <th>Action</th>
 </tr>
+
 </thead>
 
 <tbody id="noticesTable"></tbody>
@@ -1397,6 +1671,7 @@ placeholder="Search student no or name..."
 </div>
 
 </section>
+
 
 <section class="section" id="leave">
 
@@ -1410,6 +1685,7 @@ placeholder="Search student no or name..."
 <div class="section-tag">PARENT REQUESTS</div>
 
 </div>
+
 
 <div class="panel">
 
@@ -1441,6 +1717,7 @@ placeholder="Search student no or name..."
 
 </section>
 
+
 <section class="section" id="messages">
 
 <div class="section-head">
@@ -1453,6 +1730,7 @@ placeholder="Search student no or name..."
 <div class="section-tag">COMMUNICATION</div>
 
 </div>
+
 
 <div class="panel">
 
@@ -1483,6 +1761,7 @@ placeholder="Search student no or name..."
 
 </section>
 
+
 <section class="section" id="donations">
 
 <div class="section-head">
@@ -1495,6 +1774,7 @@ placeholder="Search student no or name..."
 <div class="section-tag">SAFA DONATION</div>
 
 </div>
+
 
 <div class="donation-summary">
 
@@ -1514,6 +1794,7 @@ placeholder="Search student no or name..."
 </div>
 
 </div>
+
 
 <div class="panel">
 
@@ -1546,6 +1827,7 @@ placeholder="Search student no or name..."
 
 </section>
 
+
 <section class="section" id="publicResult">
 
 <div class="section-head">
@@ -1558,6 +1840,7 @@ placeholder="Search student no or name..."
 <div class="section-tag">PUBLIC</div>
 
 </div>
+
 
 <div class="panel welcome">
 
@@ -1578,7 +1861,9 @@ Open the public result page where students and parents can check published resul
 </section>
 
 </div>
+
 </main>
+
 </div>
 
 
@@ -1705,6 +1990,23 @@ badge.classList.toggle("zero",number<=0);
 }
 
 
+/* DASHBOARD BOX NOTIFICATIONS */
+
+function setDashboardNotification(id,count){
+
+const badge=$(id);
+
+if(!badge)return;
+
+const number=Number(count||0);
+
+badge.textContent=number>99?"99+":String(number);
+
+badge.classList.toggle("zero",number<=0);
+
+}
+
+
 /* AUTH */
 
 onAuthStateChanged(auth,async user=>{
@@ -1780,6 +2082,29 @@ document.querySelectorAll(".quick-btn").forEach(button=>{
 
 button.addEventListener("click",()=>{
 openSection(button.dataset.go);
+});
+
+});
+
+
+/* DASHBOARD BOX CLICK */
+
+document.querySelectorAll(".stat[data-go]").forEach(box=>{
+
+box.addEventListener("click",()=>{
+
+const target=box.dataset.go;
+
+if(target==="publicResult"){
+
+location.href="result.html";
+
+return;
+
+}
+
+openSection(target);
+
 });
 
 });
@@ -1867,6 +2192,11 @@ renderStudents(window.students);
 $("studentCount").textContent=
 window.students.length;
 
+setDashboardNotification(
+"studentNotify",
+window.students.length
+);
+
 populateStudentSelects();
 
 }catch(error){
@@ -1874,7 +2204,7 @@ populateStudentSelects();
 console.error(error);
 
 $("studentsTable").innerHTML=
-`<tr><td colspan="7">
+`<tr><td colspan="8">
 <div class="empty">Unable to load students</div>
 </td></tr>`;
 
@@ -1890,7 +2220,7 @@ const table=$("studentsTable");
 if(!list.length){
 
 table.innerHTML=
-`<tr><td colspan="7">
+`<tr><td colspan="8">
 <div class="empty">No students found</div>
 </td></tr>`;
 
@@ -1920,6 +2250,8 @@ student.fullName||
 <td>${escapeHtml(student.parentEmail||"-")}</td>
 
 <td>${escapeHtml(student.phoneNumber||"-")}</td>
+
+<td>${escapeHtml(student.studentAddress||"-")}</td>
 
 <td>
 
@@ -2867,6 +3199,10 @@ String(b.studentNumber||"")
 $("attendanceCount").textContent=
 attendanceRows.length;
 
+setDashboardNotification(
+"attendanceNotify",
+attendanceRows.length
+);
 
 renderAttendance();
 
@@ -3007,11 +3343,8 @@ ${rows.length} Absent / Leave student(s)
 <tr>
 
 <th>Student No</th>
-
 <th>Student Name</th>
-
 <th>Status</th>
-
 <th>Action</th>
 
 </tr>
@@ -3294,6 +3627,14 @@ String(a.date||"")
 )
 );
 
+$("studyCount").textContent=
+studyRows.length;
+
+setDashboardNotification(
+"studyNotify",
+studyRows.length
+);
+
 renderStudy();
 
 }catch(error){
@@ -3536,6 +3877,14 @@ const publishedCount=
 resultRows.filter(
 row=>row.status==="published"
 ).length;
+
+$("resultCount").textContent=
+publishedCount;
+
+setDashboardNotification(
+"resultDashboardNotify",
+publishedCount
+);
 
 setQuickNotification(
 "resultNotify",
@@ -3797,6 +4146,14 @@ rows.filter(
 row=>row.status==="published"
 ).length;
 
+$("noticeCount").textContent=
+publishedCount;
+
+setDashboardNotification(
+"noticeDashboardNotify",
+publishedCount
+);
+
 setQuickNotification(
 "noticeNotify",
 publishedCount
@@ -3979,6 +4336,11 @@ String(row.status||"pending")
 
 setQuickNotification(
 "leaveNotify",
+pendingLeaves
+);
+
+setDashboardNotification(
+"leaveDashboardNotify",
 pendingLeaves
 );
 
@@ -4228,6 +4590,11 @@ setQuickNotification(
 newMessages
 );
 
+setDashboardNotification(
+"messageDashboardNotify",
+newMessages
+);
+
 
 if(!rows.length){
 
@@ -4420,6 +4787,12 @@ $("donationVerified").textContent=
 money(verified);
 
 
+/* DASHBOARD DONATION COUNT */
+
+$("donationCount").textContent=
+rows.length;
+
+
 /* QUICK ACCESS NOTIFICATION */
 
 const pendingDonations=
@@ -4431,6 +4804,11 @@ String(row.status||"pending")
 
 setQuickNotification(
 "donationNotify",
+pendingDonations
+);
+
+setDashboardNotification(
+"donationDashboardNotify",
 pendingDonations
 );
 
