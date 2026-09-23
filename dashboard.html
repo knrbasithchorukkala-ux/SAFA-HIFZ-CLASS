@@ -242,6 +242,7 @@ display:grid;grid-template-columns:repeat(3,1fr);gap:14px
 }
 
 .quick button{
+position:relative;
 padding:19px;text-align:left;border:1px solid #c7e1d3;
 border-radius:14px;color:var(--text);
 background:linear-gradient(135deg,#f5fcf8,#e4f4eb);
@@ -256,6 +257,28 @@ box-shadow:0 12px 25px rgba(3,43,36,.13)
 .quick-icon{margin-bottom:12px;color:#087f5b;font-size:23px}
 .quick strong{display:block;margin-bottom:5px}
 .quick small{color:var(--muted)}
+
+.quick-notify{
+position:absolute;
+top:10px;
+right:10px;
+min-width:23px;
+height:23px;
+padding:0 6px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50px;
+color:#fff;
+background:#b42318;
+font-size:10px;
+font-weight:900;
+box-shadow:0 4px 10px rgba(180,35,24,.22)
+}
+
+.quick-notify.zero{
+display:none
+}
 
 .form-grid{
 display:grid;grid-template-columns:repeat(2,1fr);gap:16px
@@ -742,18 +765,35 @@ The best among you are those who learn the Qur'an and teach it.
 <div class="quick-icon">🏆</div>
 <strong>Results</strong>
 <small>Publish student results</small>
+<span class="quick-notify zero" id="resultNotify">0</span>
 </button>
 
 <button class="quick-btn" data-go="notices">
 <div class="quick-icon">📢</div>
 <strong>Notices</strong>
 <small>Publish announcements</small>
+<span class="quick-notify zero" id="noticeNotify">0</span>
+</button>
+
+<button class="quick-btn" data-go="leave">
+<div class="quick-icon">📝</div>
+<strong>Leave Requests</strong>
+<small>Review parent requests</small>
+<span class="quick-notify zero" id="leaveNotify">0</span>
+</button>
+
+<button class="quick-btn" data-go="messages">
+<div class="quick-icon">💬</div>
+<strong>Parent Messages</strong>
+<small>Read and reply</small>
+<span class="quick-notify zero" id="messageNotify">0</span>
 </button>
 
 <button class="quick-btn" data-go="donations">
 <div class="quick-icon">💰</div>
 <strong>Donations</strong>
 <small>Verify donations</small>
+<span class="quick-notify zero" id="donationNotify">0</span>
 </button>
 
 <button class="quick-btn" data-go="publicResult">
@@ -1677,6 +1717,23 @@ return String(value);
 function money(value){
 
 return"₹"+Number(value||0).toLocaleString("en-IN");
+
+}
+
+
+/* QUICK ACCESS NOTIFICATIONS */
+
+function setQuickNotification(id,count){
+
+const badge=$(id);
+
+if(!badge)return;
+
+const number=Number(count||0);
+
+badge.textContent=number>99?"99+":String(number);
+
+badge.classList.toggle("zero",number<=0);
 
 }
 
@@ -3508,6 +3565,16 @@ resultRows.sort(
 
 renderResults();
 
+const publishedCount=
+resultRows.filter(
+row=>row.status==="published"
+).length;
+
+setQuickNotification(
+"resultNotify",
+publishedCount
+);
+
 }catch(error){
 
 console.error(error);
@@ -3758,6 +3825,16 @@ rows.sort(
 
 const table=$("noticesTable");
 
+const publishedCount=
+rows.filter(
+row=>row.status==="published"
+).length;
+
+setQuickNotification(
+"noticeNotify",
+publishedCount
+);
+
 if(!rows.length){
 
 table.innerHTML=
@@ -3922,6 +3999,22 @@ rows.sort(
 
 $("leaveCount").textContent=
 rows.length;
+
+
+/* QUICK ACCESS NOTIFICATION */
+
+const pendingLeaves=
+rows.filter(
+row=>
+String(row.status||"pending")
+.toLowerCase()==="pending"
+).length;
+
+setQuickNotification(
+"leaveNotify",
+pendingLeaves
+);
+
 
 if(!rows.length){
 
@@ -4153,6 +4246,22 @@ rows.sort(
 $("messageCount").textContent=
 rows.length;
 
+
+/* QUICK ACCESS NOTIFICATION */
+
+const newMessages=
+rows.filter(
+row=>
+String(row.status||"new")
+.toLowerCase()!=="replied"
+).length;
+
+setQuickNotification(
+"messageNotify",
+newMessages
+);
+
+
 if(!rows.length){
 
 $("messagesTable").innerHTML=
@@ -4342,6 +4451,22 @@ money(pending);
 
 $("donationVerified").textContent=
 money(verified);
+
+
+/* QUICK ACCESS NOTIFICATION */
+
+const pendingDonations=
+rows.filter(
+row=>
+String(row.status||"pending")
+.toLowerCase()==="pending"
+).length;
+
+setQuickNotification(
+"donationNotify",
+pendingDonations
+);
+
 
 if(!rows.length){
 
