@@ -1359,7 +1359,7 @@ textarea{
     <section class="section active" id="home">
 
       <!-- MY DONATION TO SAFA -->
-      <div class="donation-featured" onclick="openSection('donation')">
+      <div class="donation-featured" id="donationFeatured">
 
         <div class="donation-featured-icon">
           🤲
@@ -2109,6 +2109,22 @@ document.querySelectorAll(".quick-btn").forEach(button=>{
 });
 
 
+/* MY DONATION FEATURED BOX */
+
+const donationFeatured =
+  document.getElementById("donationFeatured");
+
+if(donationFeatured){
+
+  donationFeatured.addEventListener("click",()=>{
+
+    openSection("donation");
+
+  });
+
+}
+
+
 /* MOBILE MENU */
 
 $("menuToggle").addEventListener("click",()=>{
@@ -2415,7 +2431,7 @@ async function loadStudy(){
 
       const dbb =
         b.date ||
-        b.createdAt?.toDate?.getTime?.() ||
+        b.createdAt?.toDate?.().getTime?.() ||
         "";
 
       return String(dbb).localeCompare(String(da));
