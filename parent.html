@@ -553,6 +553,98 @@ body::before{
   word-break:break-word;
 }
 
+/* ISLAMIC MAIN ACCESS */
+.main-access-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  margin-bottom:22px;
+}
+
+.main-access-card{
+  border:1px solid #d9e9e2;
+  border-radius:17px;
+  padding:22px 18px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(242,207,114,.22),
+      transparent 30%
+    ),
+    linear-gradient(135deg,#ffffff,#eef8f3);
+  box-shadow:var(--shadow);
+  transition:.25s;
+  text-align:left;
+  color:var(--primary);
+}
+
+.main-access-card::before{
+  content:"";
+  position:absolute;
+  width:90px;
+  height:90px;
+  right:-30px;
+  bottom:-35px;
+  border-radius:50%;
+  background:rgba(11,102,80,.08);
+}
+
+.main-access-card:hover{
+  transform:translateY(-3px);
+  border-color:#c2dfd3;
+  box-shadow:
+    0 14px 32px rgba(4,45,35,.14);
+}
+
+.main-access-icon{
+  width:52px;
+  height:52px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  margin-bottom:13px;
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary3)
+  );
+  color:#f2cf72;
+  border:2px solid rgba(214,169,58,.35);
+  box-shadow:0 5px 15px rgba(4,45,35,.12);
+}
+
+.main-access-title{
+  font-size:16px;
+  font-weight:bold;
+  color:var(--primary);
+  margin-bottom:5px;
+}
+
+.main-access-sub{
+  font-size:11px;
+  color:var(--muted);
+}
+
+.main-access-arrow{
+  position:absolute;
+  right:16px;
+  top:17px;
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#e6f3ed;
+  color:var(--primary2);
+  font-weight:bold;
+}
+
 /* STATS */
 .stats{
   display:grid;
@@ -1149,6 +1241,19 @@ textarea{
   .donation-grid{
     grid-template-columns:1fr;
   }
+
+  .main-access-grid{
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+  }
+
+  .main-access-card{
+    padding:16px 12px;
+  }
+
+  .main-access-title{
+    font-size:13px;
+  }
 }
 
 @media(max-width:600px){
@@ -1267,6 +1372,31 @@ textarea{
 
   .bank-row strong{
     text-align:left;
+  }
+
+  .main-access-grid{
+    grid-template-columns:1fr;
+    gap:11px;
+  }
+
+  .main-access-card{
+    padding:16px;
+    display:flex;
+    align-items:center;
+    gap:13px;
+  }
+
+  .main-access-icon{
+    margin-bottom:0;
+    min-width:48px;
+    width:48px;
+    height:48px;
+  }
+
+  .main-access-arrow{
+    right:13px;
+    top:50%;
+    transform:translateY(-50%);
   }
 }
 </style>
@@ -1420,53 +1550,76 @@ textarea{
 
       </div>
 
-      <!-- CHILD CARD -->
-      <div class="card child-card">
+      <!-- MAIN ACCESS -->
+      <div class="main-access-grid">
 
-        <div class="child-head">
+        <button class="main-access-card" data-go="study">
 
-          <div class="avatar" id="homeInitial">S</div>
+          <div class="main-access-icon">
+            📖
+          </div>
 
           <div>
-            <h3 id="homeStudentName">Loading...</h3>
-            <p>Student No: <span id="homeStudentNumber">-</span></p>
+            <div class="main-access-title">
+              Study Progress
+            </div>
+
+            <div class="main-access-sub">
+              View your child's Hifz & Study Progress
+            </div>
           </div>
 
-        </div>
-
-        <div class="info-grid">
-
-          <div class="info-box">
-            <label>Student Name</label>
-            <strong id="homeNameInfo">-</strong>
+          <div class="main-access-arrow">
+            →
           </div>
 
-          <div class="info-box">
-            <label>Student Number</label>
-            <strong id="homeNoInfo">-</strong>
+        </button>
+
+
+        <button class="main-access-card" data-go="attendance">
+
+          <div class="main-access-icon">
+            🕌
           </div>
 
-          <div class="info-box">
-            <label>Class</label>
-            <strong id="homeClassInfo">-</strong>
+          <div>
+            <div class="main-access-title">
+              Attendance
+            </div>
+
+            <div class="main-access-sub">
+              View attendance & daily status
+            </div>
           </div>
 
-          <div class="info-box">
-            <label>Guardian Name</label>
-            <strong id="homeGuardianInfo">-</strong>
+          <div class="main-access-arrow">
+            →
           </div>
 
-          <div class="info-box">
-            <label>Phone Number</label>
-            <strong id="homePhoneInfo">-</strong>
+        </button>
+
+
+        <button class="main-access-card" data-go="notices">
+
+          <div class="main-access-icon">
+            🔔
           </div>
 
-          <div class="info-box">
-            <label>Place / Address</label>
-            <strong id="homeAddressInfo">-</strong>
+          <div>
+            <div class="main-access-title">
+              Notices
+            </div>
+
+            <div class="main-access-sub">
+              College announcements & notifications
+            </div>
           </div>
 
-        </div>
+          <div class="main-access-arrow">
+            →
+          </div>
+
+        </button>
 
       </div>
 
@@ -1509,44 +1662,24 @@ textarea{
 
         <div class="quick-grid">
 
-          <button class="quick-btn" data-go="child">
-            <span class="qicon">👨‍🎓</span>
-            My Child
-          </button>
-
-          <button class="quick-btn" data-go="attendance">
-            <span class="qicon">📅</span>
-            Attendance
-          </button>
-
-          <button class="quick-btn" data-go="study">
-            <span class="qicon">📖</span>
-            Study Progress
-          </button>
-
           <button class="quick-btn" data-go="results">
             <span class="qicon">📊</span>
-            Results
-          </button>
-
-          <button class="quick-btn" data-go="notices">
-            <span class="qicon">📢</span>
-            Notices
-          </button>
-
-          <button class="quick-btn donation-quick" data-go="donation">
-            <span class="qicon">💰</span>
-            Donation
+            Result
           </button>
 
           <button class="quick-btn" data-go="leave">
             <span class="qicon">📝</span>
-            Leave
+            Leave Request
           </button>
 
           <button class="quick-btn" data-go="messages">
             <span class="qicon">💬</span>
-            Messages
+            Message to Usthad
+          </button>
+
+          <button class="quick-btn donation-quick" data-go="donation">
+            <span class="qicon">🤲</span>
+            Donation
           </button>
 
         </div>
@@ -1948,12 +2081,12 @@ import {
 /* FIREBASE CONFIG */
 
 const firebaseConfig = {
-  apiKey:"AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
+  apiKey:"AIzaSyC6WpY_AThyG49YPS92rnPG9zy0PYDPVt0",
   authDomain:"safa-hifz-class-7e84b.firebaseapp.com",
   projectId:"safa-hifz-class-7e84b",
   storageBucket:"safa-hifz-class-7e84b.firebasestorage.app",
   messagingSenderId:"476801753196",
-  appId:"1:476801753196:web:d4c8a8b0c1a4203606f849",
+  appId:"1:476801753196:web:d4a8a8b0c1a4203606f849",
   measurementId:"G-ZTBTJCB5SR"
 };
 
@@ -2099,6 +2232,19 @@ document.querySelectorAll(".nav-btn").forEach(button=>{
 
 
 document.querySelectorAll(".quick-btn").forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    openSection(button.dataset.go);
+
+  });
+
+});
+
+
+/* MAIN ACCESS CARDS */
+
+document.querySelectorAll(".main-access-card").forEach(button=>{
 
   button.addEventListener("click",()=>{
 
