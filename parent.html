@@ -555,7 +555,7 @@ body::before{
 
 /* STATS */
 .stats{
-  display:grid;
+  display:none;
   grid-template-columns:repeat(4,1fr);
   gap:15px;
   margin-bottom:20px;
@@ -1548,7 +1548,7 @@ textarea{
 
       </div>
 
-      <!-- STATS -->
+      <!-- STATS HIDDEN -->
       <div class="stats">
 
         <div class="stat">
@@ -1587,19 +1587,53 @@ textarea{
 
         <div class="quick-grid">
 
-          <button class="quick-btn" data-go="study">
+          <button class="quick-btn" data-go="leave">
 
-            <span class="qicon">📖</span>
+            <span class="qicon">📝</span>
 
-            Study Progress
+            Leave Request
 
             <span
               class="quick-notification zero"
-              id="studyNotification">
+              id="leaveNotification">
               0
             </span>
 
           </button>
+
+
+          <button class="quick-btn" data-go="messages">
+
+            <span class="qicon">💬</span>
+
+            Message to Usthad
+
+            <span
+              class="quick-notification zero"
+              id="messageNotification">
+              0
+            </span>
+
+          </button>
+
+
+          <button class="quick-btn" data-go="donation">
+
+            <span class="qicon">🤲</span>
+
+            My Donation to SAFA
+
+          </button>
+
+
+          <button class="quick-btn" data-go="child">
+
+            <span class="qicon">👨‍🎓</span>
+
+            My Child
+
+          </button>
+
 
           <button class="quick-btn" data-go="attendance">
 
@@ -1615,11 +1649,27 @@ textarea{
 
           </button>
 
+
+          <button class="quick-btn" data-go="study">
+
+            <span class="qicon">📖</span>
+
+            Study Progress
+
+            <span
+              class="quick-notification zero"
+              id="studyNotification">
+              0
+            </span>
+
+          </button>
+
+
           <button class="quick-btn" data-go="results">
 
             <span class="qicon">📊</span>
 
-            Result
+            Results
 
             <span
               class="quick-notification zero"
@@ -1629,11 +1679,12 @@ textarea{
 
           </button>
 
+
           <button class="quick-btn" data-go="notices">
 
             <span class="qicon">📢</span>
 
-            Notes
+            Notices
 
             <span
               class="quick-notification zero"
@@ -1811,7 +1862,6 @@ textarea{
 
       <div class="donation-grid">
 
-        <!-- BANK / UPI -->
         <div class="donation-panel">
 
           <h3>🏦 Bank & UPI Details</h3>
@@ -1864,7 +1914,6 @@ textarea{
 
         </div>
 
-        <!-- QR -->
         <div class="donation-panel qr-panel">
 
           <h3>📱 Scan & Pay</h3>
@@ -2042,7 +2091,7 @@ import {
 /* FIREBASE CONFIG */
 
 const firebaseConfig = {
-  apiKey:"AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYDPVt0",
+  apiKey:"AIzaSyC6WpY_AThyG49yPS92rnPG9zy0PYVt0",
   authDomain:"safa-hifz-class-7e84b.firebaseapp.com",
   projectId:"safa-hifz-class-7e84b",
   storageBucket:"safa-hifz-class-7e84b.firebasestorage.app",
