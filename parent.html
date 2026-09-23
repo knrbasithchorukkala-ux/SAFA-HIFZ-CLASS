@@ -292,15 +292,6 @@ body::before{
   margin-bottom:22px;
 }
 
-.welcome::after{
-  content:"☪";
-  position:absolute;
-  right:30px;
-  top:5px;
-  font-size:100px;
-  color:rgba(242,207,114,.13);
-}
-
 .arabic{
   font-size:25px;
   color:var(--gold2);
@@ -359,16 +350,6 @@ body::before{
     0 10px 28px rgba(4,45,35,.18),
     inset 0 1px 0 rgba(255,255,255,.08);
   transition:.25s;
-}
-
-.donation-featured::after{
-  content:"☪";
-  position:absolute;
-  right:45px;
-  top:-25px;
-  font-size:85px;
-  color:rgba(242,207,114,.07);
-  pointer-events:none;
 }
 
 .donation-featured:hover{
@@ -950,15 +931,6 @@ textarea{
   box-shadow:var(--shadow);
 }
 
-.donation-hero::after{
-  content:"☪";
-  position:absolute;
-  right:28px;
-  top:-10px;
-  font-size:105px;
-  color:rgba(255,255,255,.07);
-}
-
 .donation-hero h2{
   color:#fff;
   font-size:25px;
@@ -1387,7 +1359,7 @@ textarea{
     <section class="section active" id="home">
 
       <!-- MY DONATION TO SAFA -->
-      <div class="donation-featured" onclick="openSection('donation')">
+      <div class="donation-featured" id="donationFeatured">
 
         <div class="donation-featured-icon">
           🤲
@@ -1745,7 +1717,6 @@ textarea{
 
       <div class="donation-grid">
 
-        <!-- BANK / UPI -->
         <div class="donation-panel">
 
           <h3>🏦 Bank & UPI Details</h3>
@@ -1798,7 +1769,6 @@ textarea{
 
         </div>
 
-        <!-- QR -->
         <div class="donation-panel qr-panel">
 
           <h3>📱 Scan & Pay</h3>
@@ -2133,6 +2103,13 @@ document.querySelectorAll(".quick-btn").forEach(button=>{
     openSection(button.dataset.go);
 
   });
+
+});
+
+
+$("donationFeatured").addEventListener("click",()=>{
+
+  openSection("donation");
 
 });
 
@@ -2749,7 +2726,7 @@ async function loadNotices(){
         a.createdAt?.toDate?.().getTime?.() || 0;
 
       const dbb =
-        b.createdAt?.toDate?.().getTime?.() || 0;
+        b.createdAt?.toDate?.getTime?.() || 0;
 
       return dbb-da;
 
