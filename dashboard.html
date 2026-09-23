@@ -810,8 +810,6 @@ The best among you are those who learn the Qur'an and teach it.
 </div>
 
 
-<!-- ONLY 4 TOP GREEN DASHBOARD BOXES -->
-
 <div class="stats">
 
 <div class="stat" data-go="students">
@@ -866,8 +864,6 @@ The best among you are those who learn the Qur'an and teach it.
 </div>
 
 
-<!-- QUICK ACCESS -->
-
 <div class="panel">
 
 <div class="panel-head">
@@ -880,8 +876,6 @@ The best among you are those who learn the Qur'an and teach it.
 </div>
 
 <div class="quick">
-
-<!-- RESULT -->
 
 <button class="quick-btn" data-go="results">
 
@@ -896,8 +890,6 @@ The best among you are those who learn the Qur'an and teach it.
 </button>
 
 
-<!-- LEAVE REQUESTS -->
-
 <button class="quick-btn" data-go="leave">
 
 <div class="quick-icon">📝</div>
@@ -910,8 +902,6 @@ The best among you are those who learn the Qur'an and teach it.
 
 </button>
 
-
-<!-- PARENT MESSAGES -->
 
 <button class="quick-btn" data-go="messages">
 
@@ -926,8 +916,6 @@ The best among you are those who learn the Qur'an and teach it.
 </button>
 
 
-<!-- DONATIONS -->
-
 <button class="quick-btn" data-go="donations">
 
 <div class="quick-icon">💰</div>
@@ -940,8 +928,6 @@ The best among you are those who learn the Qur'an and teach it.
 
 </button>
 
-
-<!-- PUBLIC RESULT -->
 
 <button class="quick-btn" data-go="publicResult">
 
@@ -2217,8 +2203,6 @@ id:item.id,
 ...item.data()
 }));
 
-/* STUDENT COUNT FOR TOP DASHBOARD BOX */
-
 $("studentCount").textContent=
 window.students.length;
 
@@ -2605,17 +2589,6 @@ select.value=old;
 }
 
 
-/*
-SEARCHABLE STUDENT SELECT
-
-Search works using:
-1. Student Number
-2. Student Name
-
-The actual selected value remains Student Number,
-so existing Firebase data structure is unchanged.
-*/
-
 function searchStudentsForSelect(
 searchInputId,
 selectId,
@@ -2744,8 +2717,6 @@ populateStudentSelects();
 }
 
 
-/* INITIALIZE THREE STUDENT SEARCHES */
-
 searchStudentsForSelect(
 "attendanceStudentSearch",
 "attendanceStudent",
@@ -2859,8 +2830,6 @@ showMessage(
 
 });
 
-
-/* ATTENDANCE NORMALIZER */
 
 function getAttendanceStudentNumber(item){
 
@@ -3011,8 +2980,6 @@ _original:item
 }
 
 
-/* LOAD ATTENDANCE */
-
 async function loadAttendance(){
 
 try{
@@ -3029,8 +2996,6 @@ const data=documentSnapshot.data();
 
 const docId=documentSnapshot.id;
 
-
-/* CURRENT / NEW STRUCTURE */
 
 if(
 data.studentNumber!==undefined||
@@ -3053,8 +3018,6 @@ row
 }
 
 
-/* OLD STRUCTURE: records[] */
-
 if(Array.isArray(data.records)){
 
 data.records.forEach(record=>{
@@ -3072,8 +3035,6 @@ getAttendanceDate(data)
 
 }
 
-
-/* OLD STRUCTURE: attendance[] */
 
 if(Array.isArray(data.attendance)){
 
@@ -3093,8 +3054,6 @@ getAttendanceDate(data)
 }
 
 
-/* OLD STRUCTURE: students[] */
-
 if(Array.isArray(data.students)){
 
 data.students.forEach(record=>{
@@ -3112,8 +3071,6 @@ getAttendanceDate(data)
 
 }
 
-
-/* OLD STRUCTURE: absentStudents / absent */
 
 const absentList=
 Array.isArray(data.absentStudents)
@@ -3144,8 +3101,6 @@ getAttendanceDate(data)
 
 });
 
-
-/* OLD STRUCTURE: leaveStudents / leave */
 
 const leaveList=
 Array.isArray(data.leaveStudents)
@@ -3179,8 +3134,6 @@ getAttendanceDate(data)
 });
 
 
-/* REMOVE DUPLICATES */
-
 const uniqueMap=new Map();
 
 
@@ -3201,8 +3154,6 @@ uniqueMap.set(key,row);
 attendanceRows=
 Array.from(uniqueMap.values());
 
-
-/* SORT */
 
 attendanceRows.sort((a,b)=>{
 
@@ -3250,8 +3201,6 @@ Unable to load attendance.
 }
 
 
-/* ATTENDANCE STUDENT NAME */
-
 function attendanceStudentName(row){
 
 if(row.studentName)
@@ -3263,8 +3212,6 @@ row.studentNumber
 
 }
 
-
-/* RENDER ATTENDANCE */
 
 function renderAttendance(){
 
@@ -3455,8 +3402,6 @@ Delete
 }).join("");
 
 
-/* EDIT */
-
 document.querySelectorAll(".attendance-edit-btn")
 .forEach(button=>{
 
@@ -3503,8 +3448,6 @@ showMessage(
 
 });
 
-
-/* DELETE */
 
 document.querySelectorAll(".attendance-delete-btn")
 .forEach(button=>{
@@ -3905,6 +3848,10 @@ resultRows.filter(
 row=>row.status==="published"
 ).length;
 
+
+/* FIX: resultCount does not exist in current dashboard HTML */
+
+if($("resultCount"))
 $("resultCount").textContent=
 publishedCount;
 
@@ -3921,6 +3868,15 @@ publishedCount
 }catch(error){
 
 console.error(error);
+
+$("resultsTable").innerHTML=
+`<tr><td colspan="5">
+<div class="empty">
+Unable to load results.
+<br>
+<small>${escapeHtml(error.message||"")}</small>
+</div>
+</td></tr>`;
 
 }
 
@@ -4322,6 +4278,15 @@ await loadNotices();
 
 console.error(error);
 
+$("noticesTable").innerHTML=
+`<tr><td colspan="4">
+<div class="empty">
+Unable to load notices.
+<br>
+<small>${escapeHtml(error.message||"")}</small>
+</div>
+</td></tr>`;
+
 }
 
 }
@@ -4348,6 +4313,10 @@ rows.sort(
 (a.createdAt?.seconds||0)
 );
 
+
+/* FIX: leaveCount does not exist in current dashboard HTML */
+
+if($("leaveCount"))
 $("leaveCount").textContent=
 rows.length;
 
@@ -4384,6 +4353,9 @@ return;
 
 }
 
+
+/* FULL LEAVE REQUEST RECORDS */
+
 $("leaveTable").innerHTML=
 rows.map(row=>`
 
@@ -4399,7 +4371,7 @@ studentNameByNumber(row.studentNumber)
 
 <br>
 
-${escapeHtml(row.studentNumber)}
+${escapeHtml(row.studentNumber||"-")}
 
 </td>
 
@@ -4412,16 +4384,16 @@ ${escapeHtml(row.leaveDate||"-")}
 </td>
 
 <td>
-${escapeHtml(row.reason||"-")}
+${escapeHtml(row.reason||row.details||"-")}
 </td>
 
 <td>
 
 <span class="badge ${
-row.status==="approved"
+String(row.status||"pending").toLowerCase()==="approved"
 ?"badge-green"
 :
-row.status==="rejected"
+String(row.status||"pending").toLowerCase()==="rejected"
 ?"badge-red"
 :
 "badge-yellow"
@@ -4573,6 +4545,15 @@ await loadLeaves();
 
 console.error(error);
 
+$("leaveTable").innerHTML=
+`<tr><td colspan="7">
+<div class="empty">
+Unable to load leave requests.
+<br>
+<small>${escapeHtml(error.message||"")}</small>
+</div>
+</td></tr>`;
+
 }
 
 }
@@ -4599,6 +4580,10 @@ rows.sort(
 (a.createdAt?.seconds||0)
 );
 
+
+/* FIX: messageCount does not exist in current dashboard HTML */
+
+if($("messageCount"))
 $("messageCount").textContent=
 rows.length;
 
@@ -4635,6 +4620,9 @@ return;
 
 }
 
+
+/* FULL PARENT MESSAGE RECORDS */
+
 $("messagesTable").innerHTML=
 rows.map(row=>`
 
@@ -4648,7 +4636,7 @@ studentNameByNumber(row.studentNumber)
 
 <br>
 
-${escapeHtml(row.studentNumber)}
+${escapeHtml(row.studentNumber||"-")}
 
 </td>
 
@@ -4657,13 +4645,13 @@ ${escapeHtml(row.parentEmail||"-")}
 </td>
 
 <td>
-${escapeHtml(row.text||"-")}
+${escapeHtml(row.text||row.message||"-")}
 </td>
 
 <td>
 
 <span class="badge ${
-row.status==="replied"
+String(row.status||"new").toLowerCase()==="replied"
 ?"badge-green"
 :"badge-yellow"
 }">
@@ -4759,6 +4747,15 @@ await loadMessages();
 
 console.error(error);
 
+$("messagesTable").innerHTML=
+`<tr><td colspan="6">
+<div class="empty">
+Unable to load parent messages.
+<br>
+<small>${escapeHtml(error.message||"")}</small>
+</div>
+</td></tr>`;
+
 }
 
 }
@@ -4814,14 +4811,10 @@ $("donationVerified").textContent=
 money(verified);
 
 
-/* DASHBOARD DONATION COUNT */
-
 if($("donationCount"))
 $("donationCount").textContent=
 rows.length;
 
-
-/* QUICK ACCESS NOTIFICATION */
 
 const pendingDonations=
 rows.filter(
