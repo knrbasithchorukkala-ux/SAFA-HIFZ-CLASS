@@ -1590,35 +1590,6 @@ textarea{
 
       </div>
 
-      <!-- STATS -->
-      <div class="stats">
-
-        <div class="stat">
-          <div class="stat-icon">👨‍🎓</div>
-          <strong id="studentCount">1</strong>
-          <span>My Child</span>
-        </div>
-
-        <div class="stat">
-          <div class="stat-icon">📅</div>
-          <strong id="attendanceTotal">0</strong>
-          <span>Attendance Records</span>
-        </div>
-
-        <div class="stat">
-          <div class="stat-icon">📖</div>
-          <strong id="studyTotal">0</strong>
-          <span>Study Updates</span>
-        </div>
-
-        <div class="stat">
-          <div class="stat-icon">📊</div>
-          <strong id="resultTotal">0</strong>
-          <span>Results</span>
-        </div>
-
-      </div>
-
       <!-- PARENT SERVICE ACCESS -->
       <div class="card">
 
@@ -2153,7 +2124,7 @@ const firebaseConfig = {
   projectId:"safa-hifz-class-7e84b",
   storageBucket:"safa-hifz-class-7e84b.firebasestorage.app",
   messagingSenderId:"476801753196",
-  appId:"1:476801753196:web:d4c8a8b0c1a4203606f849",
+  appId:"1:476801753196:web:d4a8a8b0c1a4203606f849",
   measurementId:"G-ZTBTJCB5SR"
 };
 
@@ -2543,9 +2514,6 @@ async function loadAttendance(){
       );
 
 
-    $("attendanceTotal").textContent = records.length;
-
-
     if(!records.length){
 
       body.innerHTML = `
@@ -2650,9 +2618,6 @@ async function loadStudy(){
       return String(dbb).localeCompare(String(da));
 
     });
-
-
-    $("studyTotal").textContent = rows.length;
 
 
     if(!rows.length){
@@ -2813,10 +2778,16 @@ async function loadResults(){
 
   try{
 
+    /*
+      IMPORTANT:
+      Only studentNumber is used in Firestore query.
+      published=true is checked after loading.
+      This avoids the composite-index problem.
+    */
+
     const q = query(
       collection(db,"results"),
-      where("studentNumber","==",studentNumber),
-      where("published","==",true)
+      where("studentNumber","==",studentNumber)
     );
 
     const snap = await getDocs(q);
@@ -2825,10 +2796,16 @@ async function loadResults(){
 
     snap.forEach(docSnap=>{
 
-      rows.push({
-        id:docSnap.id,
-        ...docSnap.data()
-      });
+      const data = docSnap.data();
+
+      if(data.published === true){
+
+        rows.push({
+          id:docSnap.id,
+          ...data
+        });
+
+      }
 
     });
 
@@ -2844,9 +2821,6 @@ async function loadResults(){
       return dbb-da;
 
     });
-
-
-    $("resultTotal").textContent = rows.length;
 
 
     if(!rows.length){
