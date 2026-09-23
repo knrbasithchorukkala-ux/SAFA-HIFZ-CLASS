@@ -666,6 +666,48 @@ body::before{
   font-size:9px;
 }
 
+/* ISLAMIC MAIN QUICK ACCESS */
+.quick-grid .quick-btn{
+  background:
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(242,207,114,.24),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #063b2f,
+      #0b6650
+    );
+  color:#fff;
+  border:1px solid rgba(214,169,58,.55);
+  box-shadow:
+    0 8px 22px rgba(4,45,35,.16),
+    inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.quick-grid .quick-btn:hover{
+  transform:translateY(-3px);
+  border-color:var(--gold2);
+  box-shadow:
+    0 12px 28px rgba(4,45,35,.24),
+    inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.quick-grid .quick-btn .qicon{
+  color:#f2cf72;
+}
+
+.quick-grid .quick-notification.zero{
+  background:rgba(255,255,255,.15);
+  color:#f2cf72;
+}
+
+.quick-grid .quick-notification:not(.zero){
+  background:#d6a93a;
+  color:#063b2f;
+}
+
 /* SECTION HEAD */
 .section-head{
   margin-bottom:20px;
@@ -1546,25 +1588,59 @@ textarea{
         <div class="quick-grid">
 
           <button class="quick-btn" data-go="study">
+
             <span class="qicon">📖</span>
+
             Study Progress
+
+            <span
+              class="quick-notification zero"
+              id="studyNotification">
+              0
+            </span>
+
           </button>
 
           <button class="quick-btn" data-go="attendance">
+
             <span class="qicon">📅</span>
+
             Attendance
+
+            <span
+              class="quick-notification zero"
+              id="attendanceNotification">
+              0
+            </span>
+
           </button>
 
           <button class="quick-btn" data-go="results">
+
             <span class="qicon">📊</span>
+
             Result
-            <span class="quick-notification zero" id="resultNotification">0</span>
+
+            <span
+              class="quick-notification zero"
+              id="resultNotification">
+              0
+            </span>
+
           </button>
 
           <button class="quick-btn" data-go="notices">
+
             <span class="qicon">📢</span>
+
             Notes
-            <span class="quick-notification zero" id="noticeNotification">0</span>
+
+            <span
+              class="quick-notification zero"
+              id="noticeNotification">
+              0
+            </span>
+
           </button>
 
         </div>
@@ -2373,6 +2449,11 @@ async function loadAttendance(){
 
     $("attendanceTotal").textContent = records.length;
 
+    setNotification(
+      "attendanceNotification",
+      records.length
+    );
+
 
     if(!records.length){
 
@@ -2420,6 +2501,8 @@ async function loadAttendance(){
   }catch(error){
 
     console.error("Attendance:",error);
+
+    setNotification("attendanceNotification",0);
 
     body.innerHTML = `
       <tr>
@@ -2481,6 +2564,11 @@ async function loadStudy(){
 
 
     $("studyTotal").textContent = rows.length;
+
+    setNotification(
+      "studyNotification",
+      rows.length
+    );
 
 
     if(!rows.length){
@@ -2619,6 +2707,8 @@ async function loadStudy(){
   }catch(error){
 
     console.error("Study:",error);
+
+    setNotification("studyNotification",0);
 
     list.className = "";
 
