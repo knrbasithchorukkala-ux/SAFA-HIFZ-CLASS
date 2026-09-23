@@ -616,6 +616,8 @@ body::before{
   font-weight:bold;
   box-shadow:0 5px 18px rgba(0,0,0,.05);
   transition:.2s;
+  position:relative;
+  min-height:105px;
 }
 
 .quick-btn:hover{
@@ -628,6 +630,40 @@ body::before{
   display:block;
   font-size:25px;
   margin-bottom:7px;
+}
+
+.quick-notification{
+  position:absolute;
+  top:8px;
+  right:8px;
+  min-width:22px;
+  height:22px;
+  padding:0 6px;
+  border-radius:20px;
+  background:#c53b3b;
+  color:white;
+  font-size:10px;
+  font-weight:bold;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+  box-shadow:0 3px 8px rgba(197,59,59,.25);
+}
+
+.quick-notification.zero{
+  background:#edf6f2;
+  color:#718096;
+  box-shadow:none;
+}
+
+.quick-notification.zero::before{
+  content:"🔔";
+}
+
+.quick-notification:not(.zero)::before{
+  content:"🔔";
+  font-size:9px;
 }
 
 /* SECTION HEAD */
@@ -1504,10 +1540,15 @@ textarea{
 
         <div class="card-title">
           <h3>Quick Access</h3>
-          <span>Parent Services</span>
+          <span>Parent Services & Notifications</span>
         </div>
 
         <div class="quick-grid">
+
+          <button class="quick-btn" data-go="home">
+            <span class="qicon">🏠</span>
+            Home
+          </button>
 
           <button class="quick-btn" data-go="child">
             <span class="qicon">👨‍🎓</span>
@@ -1527,26 +1568,30 @@ textarea{
           <button class="quick-btn" data-go="results">
             <span class="qicon">📊</span>
             Results
+            <span class="quick-notification zero" id="resultNotification">0</span>
           </button>
 
           <button class="quick-btn" data-go="notices">
             <span class="qicon">📢</span>
             Notices
+            <span class="quick-notification zero" id="noticeNotification">0</span>
           </button>
 
           <button class="quick-btn donation-quick" data-go="donation">
             <span class="qicon">💰</span>
-            Donation
+            MY DONATION TO SAFA
           </button>
 
           <button class="quick-btn" data-go="leave">
             <span class="qicon">📝</span>
             Leave
+            <span class="quick-notification zero" id="leaveNotification">0</span>
           </button>
 
           <button class="quick-btn" data-go="messages">
             <span class="qicon">💬</span>
             Messages
+            <span class="quick-notification zero" id="messageNotification">0</span>
           </button>
 
         </div>
@@ -2027,6 +2072,29 @@ function getInitial(name){
   }
 
   return String(name).trim().charAt(0).toUpperCase();
+}
+
+
+/* NOTIFICATION */
+
+function setNotification(id,count){
+
+  const badge = $(id);
+
+  if(!badge){
+    return;
+  }
+
+  const value = Number(count) || 0;
+
+  badge.textContent = value;
+
+  if(value > 0){
+    badge.classList.remove("zero");
+  }else{
+    badge.classList.add("zero");
+  }
+
 }
 
 
@@ -2603,7 +2671,7 @@ async function loadResults(){
     const q = query(
       collection(db,"results"),
       where("studentNumber","==",studentNumber),
-      where("published","==",true)
+      where("status","==","published")
     );
 
     const snap = await getDocs(q);
@@ -2634,6 +2702,11 @@ async function loadResults(){
 
 
     $("resultTotal").textContent = rows.length;
+
+    setNotification(
+      "resultNotification",
+      rows.length
+    );
 
 
     if(!rows.length){
@@ -2693,6 +2766,8 @@ async function loadResults(){
 
     console.error("Results:",error);
 
+    setNotification("resultNotification",0);
+
     list.innerHTML = `
       <div class="empty">
         Unable to load results.
@@ -2714,7 +2789,7 @@ async function loadNotices(){
 
     const q = query(
       collection(db,"notices"),
-      where("published","==",true)
+      where("status","==","published")
     );
 
     const snap = await getDocs(q);
@@ -2742,6 +2817,12 @@ async function loadNotices(){
       return dbb-da;
 
     });
+
+
+    setNotification(
+      "noticeNotification",
+      rows.length
+    );
 
 
     if(!rows.length){
@@ -2792,6 +2873,8 @@ async function loadNotices(){
   }catch(error){
 
     console.error("Notices:",error);
+
+    setNotification("noticeNotification",0);
 
     list.innerHTML = `
       <div class="empty">
@@ -2915,6 +2998,17 @@ async function loadLeaveHistory(){
     });
 
 
+    const pendingCount =
+      rows.filter(row=>
+        String(row.status || "pending").toLowerCase() === "pending"
+      ).length;
+
+    setNotification(
+      "leaveNotification",
+      pendingCount
+    );
+
+
     if(!rows.length){
 
       list.innerHTML = `
@@ -2998,6 +3092,8 @@ async function loadLeaveHistory(){
   }catch(error){
 
     console.error("Leave history:",error);
+
+    setNotification("leaveNotification",0);
 
     list.innerHTML = `
       <div class="empty">
@@ -3110,6 +3206,17 @@ async function loadMessageHistory(){
     });
 
 
+    const unreadCount =
+      rows.filter(row=>
+        String(row.status || "").toLowerCase() === "unread"
+      ).length;
+
+    setNotification(
+      "messageNotification",
+      unreadCount
+    );
+
+
     if(!rows.length){
 
       list.innerHTML = `
@@ -3178,6 +3285,8 @@ async function loadMessageHistory(){
   }catch(error){
 
     console.error("Message history:",error);
+
+    setNotification("messageNotification",0);
 
     list.innerHTML = `
       <div class="empty">
