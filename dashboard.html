@@ -656,8 +656,6 @@ height:250px;min-height:250px
 
 <div class="content">
 
-<!-- HOME -->
-
 <section class="section active" id="home">
 
 <div class="college-header">
@@ -769,9 +767,6 @@ The best among you are those who learn the Qur'an and teach it.
 
 </section>
 
-
-<!-- STUDENTS -->
-
 <section class="section" id="students">
 
 <div class="section-head">
@@ -870,9 +865,6 @@ The best among you are those who learn the Qur'an and teach it.
 </div>
 
 </section>
-
-
-<!-- ATTENDANCE -->
 
 <section class="section" id="attendance">
 
@@ -998,9 +990,6 @@ placeholder="Search student no or name..."
 </div>
 
 </section>
-
-
-<!-- STUDY -->
 
 <section class="section" id="study">
 
@@ -1201,9 +1190,6 @@ placeholder="Search student no or name..."
 
 </section>
 
-
-<!-- RESULTS -->
-
 <section class="section" id="results">
 
 <div class="section-head">
@@ -1330,9 +1316,6 @@ placeholder="Search student no or name..."
 
 </section>
 
-
-<!-- NOTICES -->
-
 <section class="section" id="notices">
 
 <div class="section-head">
@@ -1408,9 +1391,6 @@ placeholder="Search student no or name..."
 
 </section>
 
-
-<!-- LEAVE -->
-
 <section class="section" id="leave">
 
 <div class="section-head">
@@ -1454,9 +1434,6 @@ placeholder="Search student no or name..."
 
 </section>
 
-
-<!-- MESSAGES -->
-
 <section class="section" id="messages">
 
 <div class="section-head">
@@ -1498,9 +1475,6 @@ placeholder="Search student no or name..."
 </div>
 
 </section>
-
-
-<!-- DONATIONS -->
 
 <section class="section" id="donations">
 
@@ -1564,9 +1538,6 @@ placeholder="Search student no or name..."
 </div>
 
 </section>
-
-
-<!-- PUBLIC RESULT -->
 
 <section class="section" id="publicResult">
 
@@ -1666,7 +1637,14 @@ const student=window.students.find(
 s=>String(s.studentNumber)===String(number)
 );
 
-return student?student.studentName:number;
+return student
+?(
+student.studentName||
+student.name||
+student.fullName||
+number
+)
+:number;
 
 }
 
@@ -1904,7 +1882,12 @@ table.innerHTML=list.map(student=>`
 <strong>${escapeHtml(student.studentNumber)}</strong>
 </td>
 
-<td>${escapeHtml(student.studentName)}</td>
+<td>${escapeHtml(
+student.studentName||
+student.name||
+student.fullName||
+""
+)}</td>
 
 <td>${escapeHtml(student.guardianName||"-")}</td>
 
@@ -1950,7 +1933,7 @@ s=>s.id===button.dataset.id
 );
 
 if(!student||
-!confirm(`Delete ${student.studentName}?`))
+!confirm(`Delete ${student.studentName||student.name||student.fullName||""}?`))
 return;
 
 try{
@@ -1995,7 +1978,10 @@ $("editStudentNumber").value=
 student.studentNumber||"";
 
 $("editStudentName").value=
-student.studentName||"";
+student.studentName||
+student.name||
+student.fullName||
+"";
 
 $("editGuardianName").value=
 student.guardianName||"";
@@ -2104,6 +2090,8 @@ window.students.filter(student=>{
 return[
 student.studentNumber,
 student.studentName,
+student.name,
+student.fullName,
 student.guardianName,
 student.className,
 student.parentEmail,
@@ -2204,13 +2192,27 @@ const old=select.value;
 
 select.innerHTML=
 `<option value="">Select student</option>`+
-window.students.map(student=>`
+window.students.map(student=>{
 
-<option value="${escapeHtml(student.studentNumber)}">
-${escapeHtml(student.studentNumber)} - ${escapeHtml(student.studentName)}
+const studentNumber=
+student.studentNumber||
+"";
+
+const studentName=
+student.studentName||
+student.name||
+student.fullName||
+"Name not available";
+
+return`
+
+<option value="${escapeHtml(studentNumber)}">
+${escapeHtml(studentNumber)} - ${escapeHtml(studentName)}
 </option>
 
-`).join("");
+`;
+
+}).join("");
 
 if(old)
 select.value=old;
@@ -2260,8 +2262,12 @@ String(student.studentNumber||"")
 .toLowerCase();
 
 const name=
-String(student.studentName||"")
-.toLowerCase();
+String(
+student.studentName||
+student.name||
+student.fullName||
+""
+).toLowerCase();
 
 return !query||
 number.includes(query)||
@@ -2282,13 +2288,27 @@ return;
 
 select.innerHTML=
 `<option value="">Select student</option>`+
-matches.map(student=>`
+matches.map(student=>{
 
-<option value="${escapeHtml(student.studentNumber)}">
-${escapeHtml(student.studentNumber)} - ${escapeHtml(student.studentName)}
+const studentNumber=
+student.studentNumber||
+"";
+
+const studentName=
+student.studentName||
+student.name||
+student.fullName||
+"Name not available";
+
+return`
+
+<option value="${escapeHtml(studentNumber)}">
+${escapeHtml(studentNumber)} - ${escapeHtml(studentName)}
 </option>
 
-`).join("");
+`;
+
+}).join("");
 
 
 if(
@@ -2362,12 +2382,7 @@ searchStudentsForSelect(
 );
 
 
-/* ATTENDANCE
-IMPORTANT:
-Only Absent / Leave documents are stored.
-No Present document is created.
-Parent side can treat missing status as Present.
-*/
+/* ATTENDANCE */
 
 $("attendanceForm").addEventListener(
 "submit",
@@ -3135,8 +3150,7 @@ $("resultsTable").innerHTML=
 `<tr><td colspan="5">
 <div class="empty">
 No results found.
-</div>
-</td></tr>`;
+</div></td></tr>`;
 
 return;
 
@@ -3757,8 +3771,7 @@ $("messagesTable").innerHTML=
 `<tr><td colspan="6">
 <div class="empty">
 No parent messages.
-</div>
-</td></tr>`;
+</div></td></tr>`;
 
 return;
 
