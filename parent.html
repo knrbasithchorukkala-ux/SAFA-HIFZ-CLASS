@@ -2778,9 +2778,10 @@ async function loadResults(){
 
   try{
 
-    const snap = await getDocs(
-      collection(db,"results")
-    );
+    const snap =
+      await getDocs(
+        collection(db,"results")
+      );
 
     const rows = [];
 
@@ -2794,28 +2795,34 @@ async function loadResults(){
         data.student_number ??
         "";
 
-      if(String(resultStudentNumber) !== String(studentNumber)){
+      if(
+        String(resultStudentNumber).trim() !==
+        String(studentNumber).trim()
+      ){
         return;
       }
 
-      const publishedValue =
-        data.published;
+      /*
+        ADMIN DASHBOARD USES:
+        status:"draft"
+        status:"published"
 
-      const isPublished =
-        publishedValue === true ||
-        String(publishedValue).toLowerCase() === "true" ||
-        String(publishedValue).toLowerCase() === "published" ||
-        data.isPublished === true ||
-        String(data.isPublished).toLowerCase() === "true";
+        Parent should show only published results.
+      */
 
-      if(isPublished){
+      const status =
+        String(data.status ?? "")
+        .trim()
+        .toLowerCase();
 
-        rows.push({
-          id:docSnap.id,
-          ...data
-        });
-
+      if(status !== "published"){
+        return;
       }
+
+      rows.push({
+        id:docSnap.id,
+        ...data
+      });
 
     });
 
@@ -2824,10 +2831,12 @@ async function loadResults(){
 
       const da =
         a.createdAt?.toDate?.().getTime?.() ||
+        a.createdAt?.seconds * 1000 ||
         0;
 
       const dbb =
         b.createdAt?.toDate?.().getTime?.() ||
+        b.createdAt?.seconds * 1000 ||
         0;
 
       return dbb-da;
@@ -2847,51 +2856,53 @@ async function loadResults(){
     }
 
 
-    list.innerHTML = rows.map(row=>{
+    list.innerHTML =
+      rows.map(row=>{
 
-      const title =
-        row.title ||
-        row.examName ||
-        row.subject ||
-        row.name ||
-        "Result";
+        const title =
+          row.title ||
+          row.examName ||
+          row.subject ||
+          "Result";
 
-      const mark =
-        row.mark ??
-        row.marks ??
-        row.result ??
-        row.total ??
-        row.score ??
-        "-";
+        const mark =
+          row.mark ??
+          row.marks ??
+          row.result ??
+          row.total ??
+          row.score ??
+          "-";
 
-      const date =
-        getDateText(
-          row.createdAt ||
-          row.date
-        );
+        const date =
+          getDateText(
+            row.createdAt ||
+            row.date
+          );
 
 
-      return `
-        <div class="result-card">
+        return `
+          <div class="result-card">
 
-          <h3>${escapeHtml(title)}</h3>
+            <h3>
+              ${escapeHtml(title)}
+            </h3>
 
-          <div class="result-mark">
-            ${escapeHtml(mark)}
+            <div class="result-mark">
+              ${escapeHtml(mark)}
+            </div>
+
+            <span class="status approved">
+              Published
+            </span>
+
+            <div class="notice-date">
+              ${escapeHtml(date)}
+            </div>
+
           </div>
+        `;
 
-          <span class="status approved">
-            Published
-          </span>
-
-          <div class="notice-date">
-            ${escapeHtml(date)}
-          </div>
-
-        </div>
-      `;
-
-    }).join("");
+      }).join("");
 
 
   }catch(error){
@@ -2917,9 +2928,10 @@ async function loadNotices(){
 
   try{
 
-    const snap = await getDocs(
-      collection(db,"notices")
-    );
+    const snap =
+      await getDocs(
+        collection(db,"notices")
+      );
 
     const rows = [];
 
@@ -2927,24 +2939,27 @@ async function loadNotices(){
 
       const data = docSnap.data();
 
-      const publishedValue =
-        data.published;
+      /*
+        ADMIN DASHBOARD USES:
+        status:"draft"
+        status:"published"
 
-      const isPublished =
-        publishedValue === true ||
-        String(publishedValue).toLowerCase() === "true" ||
-        String(publishedValue).toLowerCase() === "published" ||
-        data.isPublished === true ||
-        String(data.isPublished).toLowerCase() === "true";
+        Parent should show only published notices.
+      */
 
-      if(isPublished){
+      const status =
+        String(data.status ?? "")
+        .trim()
+        .toLowerCase();
 
-        rows.push({
-          id:docSnap.id,
-          ...data
-        });
-
+      if(status !== "published"){
+        return;
       }
+
+      rows.push({
+        id:docSnap.id,
+        ...data
+      });
 
     });
 
@@ -2952,10 +2967,14 @@ async function loadNotices(){
     rows.sort((a,b)=>{
 
       const da =
-        a.createdAt?.toDate?.().getTime?.() || 0;
+        a.createdAt?.toDate?.().getTime?.() ||
+        a.createdAt?.seconds * 1000 ||
+        0;
 
       const dbb =
-        b.createdAt?.toDate?.().getTime?.() || 0;
+        b.createdAt?.toDate?.().getTime?.() ||
+        b.createdAt?.seconds * 1000 ||
+        0;
 
       return dbb-da;
 
@@ -2974,43 +2993,48 @@ async function loadNotices(){
     }
 
 
-    list.innerHTML = rows.map(row=>{
+    list.innerHTML =
+      rows.map(row=>{
 
-      const title =
-        row.title ||
-        row.noticeTitle ||
-        row.heading ||
-        "Notice";
+        const title =
+          row.title ||
+          row.noticeTitle ||
+          row.heading ||
+          "Notice";
 
-      const text =
-        row.text ||
-        row.message ||
-        row.description ||
-        row.content ||
-        "";
+        const text =
+          row.text ||
+          row.message ||
+          row.description ||
+          row.content ||
+          "";
 
-      const date =
-        getDateText(
-          row.createdAt ||
-          row.date
-        );
+        const date =
+          getDateText(
+            row.createdAt ||
+            row.date
+          );
 
 
-      return `
-        <div class="notice-card">
+        return `
+          <div class="notice-card">
 
-          <h3>${escapeHtml(title)}</h3>
+            <h3>
+              ${escapeHtml(title)}
+            </h3>
 
-          <p>${escapeHtml(text)}</p>
+            <p>
+              ${escapeHtml(text)}
+            </p>
 
-          <div class="notice-date">
-            ${escapeHtml(date)}
+            <div class="notice-date">
+              ${escapeHtml(date)}
+            </div>
+
           </div>
+        `;
 
-        </div>
-      `;
-
-    }).join("");
+      }).join("");
 
 
   }catch(error){
