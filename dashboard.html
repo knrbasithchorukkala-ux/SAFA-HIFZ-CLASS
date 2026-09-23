@@ -92,6 +92,32 @@ display:inline-flex;width:31px;height:28px;align-items:center;
 justify-content:center;margin-right:2px;font-size:16px
 }
 
+/* NOTIFICATION BELL IN SIDEBAR */
+.menu button .menu-notify{
+display:none;
+float:right;
+width:28px;
+height:28px;
+align-items:center;
+justify-content:center;
+margin:0;
+border-radius:50%;
+color:#fff;
+background:#b42318;
+font-size:15px;
+box-shadow:0 4px 10px rgba(180,35,24,.28);
+animation:bellPulse 1.5s infinite;
+}
+
+.menu button .menu-notify.show{
+display:inline-flex;
+}
+
+@keyframes bellPulse{
+0%,100%{transform:scale(1)}
+50%{transform:scale(1.10)}
+}
+
 .main{
 margin-left:270px;width:calc(100% - 270px);min-height:100vh
 }
@@ -362,22 +388,27 @@ font-size:11px
 }
 
 .quick-notify{
+display:none;
 position:absolute;
 z-index:5;
 top:10px;
 right:10px;
-min-width:24px;
-height:24px;
-padding:0 6px;
-display:flex;
+width:30px;
+height:30px;
+padding:0;
 align-items:center;
 justify-content:center;
-border-radius:50px;
+border-radius:50%;
 color:#fff;
 background:#b42318;
-font-size:10px;
+font-size:15px;
 font-weight:900;
-box-shadow:0 4px 10px rgba(180,35,24,.22)
+box-shadow:0 4px 10px rgba(180,35,24,.28);
+animation:bellPulse 1.5s infinite
+}
+
+.quick-notify.show{
+display:flex
 }
 
 .quick-notify.zero{
@@ -738,14 +769,17 @@ height:250px;min-height:250px
 
 <button class="menu-btn" data-section="leave">
 <span>📝</span>Leave Requests
+<span class="menu-notify" id="leaveMenuNotify">🔔</span>
 </button>
 
 <button class="menu-btn" data-section="messages">
 <span>💬</span>Parent Messages
+<span class="menu-notify" id="messageMenuNotify">🔔</span>
 </button>
 
 <button class="menu-btn" data-section="donations">
 <span>💰</span>Donations
+<span class="menu-notify" id="donationMenuNotify">🔔</span>
 </button>
 
 <div class="menu-label">Public</div>
@@ -885,8 +919,6 @@ The best among you are those who learn the Qur'an and teach it.
 
 <small>Publish student results</small>
 
-<span class="quick-notify zero" id="resultNotify">0</span>
-
 </button>
 
 
@@ -898,7 +930,7 @@ The best among you are those who learn the Qur'an and teach it.
 
 <small>Review parent leave requests</small>
 
-<span class="quick-notify zero" id="leaveNotify">0</span>
+<span class="quick-notify" id="leaveNotify">🔔</span>
 
 </button>
 
@@ -911,7 +943,7 @@ The best among you are those who learn the Qur'an and teach it.
 
 <small>Read and reply to parents</small>
 
-<span class="quick-notify zero" id="messageNotify">0</span>
+<span class="quick-notify" id="messageNotify">🔔</span>
 
 </button>
 
@@ -924,7 +956,7 @@ The best among you are those who learn the Qur'an and teach it.
 
 <small>Review and verify donations</small>
 
-<span class="quick-notify zero" id="donationNotify">0</span>
+<span class="quick-notify" id="donationNotify">🔔</span>
 
 </button>
 
@@ -1911,14 +1943,351 @@ let attendanceRows=[];
 let studyRows=[];
 let resultRows=[];
 
+/* Notification data */
+window.adminLeaveRows=[];
+window.adminMessageRows=[];
+window.adminDonationRows=[];
+
+
+/* =========================================================
+   ADMIN NOTIFICATION STORAGE
+   ========================================================= */
+
+const ADMIN_NOTIFICATION_KEY=
+"safa_admin_notifications_v2";
+
+
+function getAdminNotificationState(){
+
+try{
+
+return JSON.parse(
+localStorage.getItem(
+ADMIN_NOTIFICATION_KEY
+)||"{}"
+);
+
+}catch(error){
+
+return {};
+
+}
+
+}
+
+
+function saveAdminNotificationState(state){
+
+try{
+
+localStorage.setItem(
+ADMIN_NOTIFICATION_KEY,
+JSON.stringify(state)
+);
+
+}catch(error){
+
+console.error(
+"Unable to save notification state:",
+error
+);
+
+}
+
+}
+
+
+/*
+Only document ID + creation time are used.
+
+This is intentional:
+
+- Adding a new document = notification
+- Editing an old document = NO new notification
+- Approving/rejecting an old leave = NO new notification
+- Replying to an old message = NO new notification
+- Deleting an old document = NO new notification
+*/
+
+function getNotificationRecordIds(rows){
+
+return rows
+.map(row=>{
+
+const id=
+String(row.id||"");
+
+const createdAt=
+row.createdAt?.seconds!==undefined
+?String(row.createdAt.seconds)
+:
+row.createdAt?.toDate
+?String(
+row.createdAt
+.toDate()
+.getTime()
+)
+:
+String(row.createdAt||"");
+
+return id+"__"+createdAt;
+
+})
+.filter(Boolean)
+.sort();
+
+}
+
+
+function updateAdminNotification(
+type,
+rows,
+quickId,
+menuId
+){
+
+const state=
+getAdminNotificationState();
+
+const currentIds=
+getNotificationRecordIds(rows);
+
+const currentSet=
+new Set(currentIds);
+
+
+/*
+First time:
+
+Store existing records as already known.
+Do NOT show bell.
+*/
+
+if(!state[type]){
+
+state[type]={
+knownIds:currentIds,
+seenIds:currentIds
+};
+
+saveAdminNotificationState(state);
+
+setQuickNotification(
+quickId,
+false
+);
+
+setMenuNotification(
+menuId,
+false
+);
+
+return;
+
+}
+
+
+const knownIds=
+Array.isArray(state[type].knownIds)
+?state[type].knownIds
+:[];
+
+
+const seenIds=
+Array.isArray(state[type].seenIds)
+?state[type].seenIds
+:[];
+
+
+const knownSet=
+new Set(knownIds);
+
+const seenSet=
+new Set(seenIds);
+
+
+/*
+Only IDs that were not previously known
+are considered genuinely new.
+*/
+
+const newlyArrived=
+currentIds.filter(
+id=>!knownSet.has(id)
+);
+
+
+/*
+Update known IDs immediately.
+
+This prevents the same new notification
+from being counted again after refresh.
+*/
+
+state[type].knownIds=currentIds;
+
+
+/*
+If there are newly arrived records and
+they haven't been seen yet, show bell.
+*/
+
+const unseenNew=
+currentIds.filter(
+id=>!seenSet.has(id)
+);
+
+
+const shouldShow=
+newlyArrived.length>0 ||
+unseenNew.length>0;
+
+
+saveAdminNotificationState(state);
+
+
+setQuickNotification(
+quickId,
+shouldShow
+);
+
+setMenuNotification(
+menuId,
+shouldShow
+);
+
+}
+
+
+/*
+When Admin opens the section, all currently
+existing records are considered seen.
+
+Old records remain known.
+Future newly added records will create
+a new bell.
+*/
+
+function markAdminNotificationSeen(
+type,
+quickId,
+menuId
+){
+
+const state=
+getAdminNotificationState();
+
+const rows=
+type==="leave"
+?window.adminLeaveRows||[]
+:type==="messages"
+?window.adminMessageRows||[]
+:type==="donations"
+?window.adminDonationRows||[]
+:[];
+
+
+const currentIds=
+getNotificationRecordIds(rows);
+
+
+if(!state[type]){
+
+state[type]={
+knownIds:currentIds,
+seenIds:currentIds
+};
+
+}else{
+
+state[type].knownIds=currentIds;
+state[type].seenIds=currentIds;
+
+}
+
+
+saveAdminNotificationState(state);
+
+
+setQuickNotification(
+quickId,
+false
+);
+
+setMenuNotification(
+menuId,
+false
+);
+
+}
+
+
+function setQuickNotification(
+id,
+show
+){
+
+const badge=$(id);
+
+if(!badge)return;
+
+badge.classList.toggle(
+"show",
+!!show
+);
+
+}
+
+
+function setMenuNotification(
+id,
+show
+){
+
+const badge=$(id);
+
+if(!badge)return;
+
+badge.classList.toggle(
+"show",
+!!show
+);
+
+}
+
+
+/* OLD DASHBOARD BOX FUNCTION KEPT */
+
+function setDashboardNotification(id,count){
+
+const badge=$(id);
+
+if(!badge)return;
+
+const number=Number(count||0);
+
+badge.textContent=
+number>99
+?"99+"
+:String(number);
+
+badge.classList.toggle(
+"zero",
+number<=0
+);
+
+}
+
 
 function escapeHtml(value){
+
 return String(value??"")
 .replaceAll("&","&amp;")
 .replaceAll("<","&lt;")
 .replaceAll(">","&gt;")
 .replaceAll('"',"&quot;")
 .replaceAll("'","&#039;");
+
 }
 
 
@@ -1934,15 +2303,20 @@ type==="error"
 ?"linear-gradient(135deg,#b42318,#d6453b)"
 :"linear-gradient(135deg,#087f5b,#0ca875)";
 
-setTimeout(()=>box.style.display="none",3000);
+setTimeout(
+()=>box.style.display="none",
+3000
+);
 
 }
 
 
 function studentNameByNumber(number){
 
-const student=window.students.find(
-s=>String(s.studentNumber)===String(number)
+const student=
+window.students.find(
+s=>
+String(s.studentNumber)===String(number)
 );
 
 return student
@@ -1957,13 +2331,19 @@ number
 }
 
 
-function studentSearchMatch(number,name,query){
+function studentSearchMatch(
+number,
+name,
+query
+){
 
 if(!query)return true;
 
 return`${number||""} ${name||""}`
 .toLowerCase()
-.includes(query.toLowerCase());
+.includes(
+query.toLowerCase()
+);
 
 }
 
@@ -1972,10 +2352,13 @@ function formatDate(value){
 
 if(!value)return"";
 
-if(value.toDate)return value.toDate().toLocaleDateString();
+if(value.toDate)
+return value.toDate().toLocaleDateString();
 
 if(value.seconds)
-return new Date(value.seconds*1000).toLocaleDateString();
+return new Date(
+value.seconds*1000
+).toLocaleDateString();
 
 return String(value);
 
@@ -1984,60 +2367,36 @@ return String(value);
 
 function money(value){
 
-return"₹"+Number(value||0).toLocaleString("en-IN");
+return"₹"+
+Number(value||0)
+.toLocaleString("en-IN");
 
 }
 
 
-/* QUICK ACCESS NOTIFICATIONS */
+/* =========================================================
+   AUTH
+   ========================================================= */
 
-function setQuickNotification(id,count){
-
-const badge=$(id);
-
-if(!badge)return;
-
-const number=Number(count||0);
-
-badge.textContent=number>99?"99+":String(number);
-
-badge.classList.toggle("zero",number<=0);
-
-}
-
-
-/* DASHBOARD BOX NOTIFICATIONS */
-
-function setDashboardNotification(id,count){
-
-const badge=$(id);
-
-if(!badge)return;
-
-const number=Number(count||0);
-
-badge.textContent=number>99?"99+":String(number);
-
-badge.classList.toggle("zero",number<=0);
-
-}
-
-
-/* AUTH */
-
-onAuthStateChanged(auth,async user=>{
+onAuthStateChanged(
+auth,
+async user=>{
 
 try{
 
 if(!user){
+
 location.href="index.html";
 return;
+
 }
 
 currentUser=user;
 
 const userSnap=
-await getDoc(doc(db,"users",user.uid));
+await getDoc(
+doc(db,"users",user.uid)
+);
 
 if(!userSnap.exists()){
 
@@ -2051,7 +2410,9 @@ return;
 
 }
 
-if(userSnap.data().role!=="admin"){
+if(
+userSnap.data().role!=="admin"
+){
 
 alert("Admin access required.");
 
@@ -2072,44 +2433,67 @@ await loadEverything();
 console.error(error);
 
 $("loading").textContent=
-"Dashboard loading error: "+error.message;
+"Dashboard loading error: "+
+error.message;
 
 }
 
 });
 
 
-/* NAVIGATION */
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
 
-document.querySelectorAll(".menu-btn").forEach(button=>{
+document.querySelectorAll(
+".menu-btn"
+).forEach(button=>{
 
-button.addEventListener("click",()=>{
+button.addEventListener(
+"click",
+()=>{
 
-openSection(button.dataset.section);
+openSection(
+button.dataset.section
+);
 
-$("sidebar").classList.remove("open");
+$("sidebar")
+.classList.remove("open");
+
+}
+);
 
 });
 
+
+document.querySelectorAll(
+".quick-btn"
+).forEach(button=>{
+
+button.addEventListener(
+"click",
+()=>{
+
+openSection(
+button.dataset.go
+);
+
+}
+);
+
 });
 
 
-document.querySelectorAll(".quick-btn").forEach(button=>{
+document.querySelectorAll(
+".stat[data-go]"
+).forEach(box=>{
 
-button.addEventListener("click",()=>{
-openSection(button.dataset.go);
-});
+box.addEventListener(
+"click",
+()=>{
 
-});
-
-
-/* DASHBOARD BOX CLICK */
-
-document.querySelectorAll(".stat[data-go]").forEach(box=>{
-
-box.addEventListener("click",()=>{
-
-const target=box.dataset.go;
+const target=
+box.dataset.go;
 
 if(target==="publicResult"){
 
@@ -2121,27 +2505,75 @@ return;
 
 openSection(target);
 
-});
+}
+);
 
 });
 
 
 function openSection(id){
 
-document.querySelectorAll(".section")
-.forEach(s=>s.classList.remove("active"));
+document.querySelectorAll(
+".section"
+)
+.forEach(
+s=>s.classList.remove("active")
+);
 
 const target=$(id);
 
 if(target)
 target.classList.add("active");
 
-document.querySelectorAll(".menu-btn")
-.forEach(b=>
+
+document.querySelectorAll(
+".menu-btn"
+)
+.forEach(
+b=>
 b.classList.toggle(
 "active",
 b.dataset.section===id
-));
+)
+);
+
+
+/* =====================================================
+   MARK ADMIN NOTIFICATION AS SEEN
+   ===================================================== */
+
+if(id==="leave"){
+
+markAdminNotificationSeen(
+"leave",
+"leaveNotify",
+"leaveMenuNotify"
+);
+
+}
+
+
+if(id==="messages"){
+
+markAdminNotificationSeen(
+"messages",
+"messageNotify",
+"messageMenuNotify"
+);
+
+}
+
+
+if(id==="donations"){
+
+markAdminNotificationSeen(
+"donations",
+"donationNotify",
+"donationMenuNotify"
+);
+
+}
+
 
 window.scrollTo({
 top:0,
@@ -2153,7 +2585,9 @@ behavior:"smooth"
 
 $("mobileMenu").addEventListener(
 "click",
-()=>$("sidebar").classList.toggle("open")
+()=>
+$("sidebar")
+.classList.toggle("open")
 );
 
 
@@ -2161,7 +2595,11 @@ $("logoutBtn").addEventListener(
 "click",
 async()=>{
 
-if(!confirm("Logout from admin dashboard?"))
+if(
+!confirm(
+"Logout from admin dashboard?"
+)
+)
 return;
 
 await signOut(auth);
@@ -2170,6 +2608,10 @@ location.href="index.html";
 
 });
 
+
+/* =========================================================
+   LOAD EVERYTHING
+   ========================================================= */
 
 async function loadEverything(){
 
@@ -2188,25 +2630,33 @@ loadDonations()
 }
 
 
-/* STUDENTS */
+/* =========================================================
+   STUDENTS
+   ========================================================= */
 
 async function loadStudents(){
 
 try{
 
 const snap=
-await getDocs(collection(db,"students"));
+await getDocs(
+collection(db,"students")
+);
 
 window.students=
-snap.docs.map(item=>({
+snap.docs.map(
+item=>({
 id:item.id,
 ...item.data()
-}));
+})
+);
 
 $("studentCount").textContent=
 window.students.length;
 
-renderStudents(window.students);
+renderStudents(
+window.students
+);
 
 populateStudentSelects();
 
@@ -2216,7 +2666,9 @@ console.error(error);
 
 $("studentsTable").innerHTML=
 `<tr><td colspan="8">
-<div class="empty">Unable to load students</div>
+<div class="empty">
+Unable to load students
+</div>
 </td></tr>`;
 
 }
@@ -2226,43 +2678,73 @@ $("studentsTable").innerHTML=
 
 function renderStudents(list){
 
-const table=$("studentsTable");
+const table=
+$("studentsTable");
 
 if(!list.length){
 
 table.innerHTML=
 `<tr><td colspan="8">
-<div class="empty">No students found</div>
+<div class="empty">
+No students found
+</div>
 </td></tr>`;
 
 return;
 
 }
 
-table.innerHTML=list.map(student=>`
+table.innerHTML=
+list.map(student=>`
 
 <tr>
 
 <td>
-<strong>${escapeHtml(student.studentNumber)}</strong>
+<strong>
+${escapeHtml(
+student.studentNumber
+)}
+</strong>
 </td>
 
-<td>${escapeHtml(
+<td>
+${escapeHtml(
 student.studentName||
 student.name||
 student.fullName||
 ""
-)}</td>
+)}
+</td>
 
-<td>${escapeHtml(student.guardianName||"-")}</td>
+<td>
+${escapeHtml(
+student.guardianName||"-"
+)}
+</td>
 
-<td>${escapeHtml(student.className||"-")}</td>
+<td>
+${escapeHtml(
+student.className||"-"
+)}
+</td>
 
-<td>${escapeHtml(student.parentEmail||"-")}</td>
+<td>
+${escapeHtml(
+student.parentEmail||"-"
+)}
+</td>
 
-<td>${escapeHtml(student.phoneNumber||"-")}</td>
+<td>
+${escapeHtml(
+student.phoneNumber||"-"
+)}
+</td>
 
-<td>${escapeHtml(student.studentAddress||"-")}</td>
+<td>
+${escapeHtml(
+student.studentAddress||"-"
+)}
+</td>
 
 <td>
 
@@ -2289,27 +2771,47 @@ Delete
 `).join("");
 
 
-document.querySelectorAll(".delete-student")
+document.querySelectorAll(
+".delete-student"
+)
 .forEach(button=>{
 
-button.addEventListener("click",async()=>{
+button.addEventListener(
+"click",
+async()=>{
 
 const student=
 window.students.find(
-s=>s.id===button.dataset.id
+s=>
+s.id===button.dataset.id
 );
 
-if(!student||
-!confirm(`Delete ${student.studentName||student.name||student.fullName||""}?`))
+if(
+!student||
+!confirm(
+`Delete ${
+student.studentName||
+student.name||
+student.fullName||
+""
+}?`
+)
+)
 return;
 
 try{
 
 await deleteDoc(
-doc(db,"students",button.dataset.id)
+doc(
+db,
+"students",
+button.dataset.id
+)
 );
 
-showMessage("Student deleted.");
+showMessage(
+"Student deleted."
+);
 
 await loadStudents();
 
@@ -2329,14 +2831,19 @@ showMessage(
 });
 
 
-document.querySelectorAll(".edit-student")
+document.querySelectorAll(
+".edit-student"
+)
 .forEach(button=>{
 
-button.addEventListener("click",()=>{
+button.addEventListener(
+"click",
+()=>{
 
 const student=
 window.students.find(
-s=>s.id===button.dataset.id
+s=>
+s.id===button.dataset.id
 );
 
 if(!student)return;
@@ -2385,14 +2892,22 @@ async event=>{
 event.preventDefault();
 
 const studentNumber=
-$("studentNumber").value.trim();
+$("studentNumber")
+.value
+.trim();
 
 const studentName=
-$("studentName").value.trim();
+$("studentName")
+.value
+.trim();
 
-if(window.students.some(
-s=>String(s.studentNumber).trim()===studentNumber
-)){
+if(
+window.students.some(
+s=>
+String(s.studentNumber)
+.trim()===studentNumber
+)
+){
 
 showMessage(
 "Student number already exists.",
@@ -2411,22 +2926,30 @@ collection(db,"students"),
 studentNumber,
 studentName,
 guardianName:
-$("guardianName").value.trim(),
+$("guardianName")
+.value.trim(),
 className:
-$("className").value.trim(),
+$("className")
+.value.trim(),
 parentEmail:
-$("parentEmail").value.trim(),
+$("parentEmail")
+.value.trim(),
 studentAddress:
-$("studentAddress").value.trim(),
+$("studentAddress")
+.value.trim(),
 phoneNumber:
-$("phoneNumber").value.trim(),
-createdAt:serverTimestamp()
+$("phoneNumber")
+.value.trim(),
+createdAt:
+serverTimestamp()
 }
 );
 
 $("studentForm").reset();
 
-showMessage("Student added successfully.");
+showMessage(
+"Student added successfully."
+);
 
 await loadStudents();
 
@@ -2435,7 +2958,8 @@ await loadStudents();
 console.error(error);
 
 showMessage(
-"Unable to add student: "+error.message,
+"Unable to add student: "+
+error.message,
 "error"
 );
 
@@ -2449,10 +2973,13 @@ $("studentSearch").addEventListener(
 event=>{
 
 const q=
-event.target.value.toLowerCase().trim();
+event.target.value
+.toLowerCase()
+.trim();
 
 renderStudents(
-window.students.filter(student=>{
+window.students.filter(
+student=>{
 
 return[
 student.studentNumber,
@@ -2469,7 +2996,8 @@ student.phoneNumber
 .toLowerCase()
 .includes(q);
 
-})
+}
+)
 );
 
 });
@@ -2477,13 +3005,17 @@ student.phoneNumber
 
 $("closeEditModal").addEventListener(
 "click",
-()=>$("editStudentModal").classList.remove("show")
+()=>
+$("editStudentModal")
+.classList.remove("show")
 );
 
 
 $("cancelEditStudent").addEventListener(
 "click",
-()=>$("editStudentModal").classList.remove("show")
+()=>
+$("editStudentModal")
+.classList.remove("show")
 );
 
 
@@ -2502,22 +3034,28 @@ await updateDoc(
 doc(db,"students",id),
 {
 studentName:
-$("editStudentName").value.trim(),
+$("editStudentName")
+.value.trim(),
 
 guardianName:
-$("editGuardianName").value.trim(),
+$("editGuardianName")
+.value.trim(),
 
 className:
-$("editClassName").value.trim(),
+$("editClassName")
+.value.trim(),
 
 parentEmail:
-$("editParentEmail").value.trim(),
+$("editParentEmail")
+.value.trim(),
 
 studentAddress:
-$("editStudentAddress").value.trim(),
+$("editStudentAddress")
+.value.trim(),
 
 phoneNumber:
-$("editPhoneNumber").value.trim()
+$("editPhoneNumber")
+.value.trim()
 }
 );
 
@@ -2544,26 +3082,35 @@ showMessage(
 });
 
 
-/* STUDENT SELECTS + SEARCH */
+/* =========================================================
+   STUDENT SELECTS + SEARCH
+   ========================================================= */
 
 function populateStudentSelects(){
 
-["attendanceStudent","studyStudent","resultStudent"]
+[
+"attendanceStudent",
+"studyStudent",
+"resultStudent"
+]
 .forEach(id=>{
 
 const select=$(id);
 
 if(!select)return;
 
-const old=select.value;
+const old=
+select.value;
 
 select.innerHTML=
-`<option value="">Select student</option>`+
-window.students.map(student=>{
+`<option value="">
+Select student
+</option>`+
+window.students
+.map(student=>{
 
 const studentNumber=
-student.studentNumber||
-"";
+student.studentNumber||"";
 
 const studentName=
 student.studentName||
@@ -2573,13 +3120,18 @@ student.fullName||
 
 return`
 
-<option value="${escapeHtml(studentNumber)}">
-${escapeHtml(studentNumber)} - ${escapeHtml(studentName)}
+<option value="${
+escapeHtml(studentNumber)
+}">
+${escapeHtml(studentNumber)}
+-
+${escapeHtml(studentName)}
 </option>
 
 `;
 
-}).join("");
+})
+.join("");
 
 if(old)
 select.value=old;
@@ -2595,26 +3147,37 @@ selectId,
 buttonId
 ){
 
-const input=$(searchInputId);
-const select=$(selectId);
-const button=$(buttonId);
+const input=
+$(searchInputId);
 
-if(!input||!select||!button)return;
+const select=
+$(selectId);
+
+const button=
+$(buttonId);
+
+if(!input||!select||!button)
+return;
 
 
 function runSearch(){
 
 const query=
-input.value.trim().toLowerCase();
+input.value
+.trim()
+.toLowerCase();
 
 const currentValue=
 select.value;
 
 const matches=
-window.students.filter(student=>{
+window.students.filter(
+student=>{
 
 const number=
-String(student.studentNumber||"")
+String(
+student.studentNumber||""
+)
 .toLowerCase();
 
 const name=
@@ -2623,19 +3186,24 @@ student.studentName||
 student.name||
 student.fullName||
 ""
-).toLowerCase();
+)
+.toLowerCase();
 
-return !query||
+return!
+query||
 number.includes(query)||
 name.includes(query);
 
-});
+}
+);
 
 
 if(!matches.length){
 
 select.innerHTML=
-`<option value="">No matching student found</option>`;
+`<option value="">
+No matching student found
+</option>`;
 
 return;
 
@@ -2643,12 +3211,14 @@ return;
 
 
 select.innerHTML=
-`<option value="">Select student</option>`+
-matches.map(student=>{
+`<option value="">
+Select student
+</option>`+
+matches
+.map(student=>{
 
 const studentNumber=
-student.studentNumber||
-"";
+student.studentNumber||"";
 
 const studentName=
 student.studentName||
@@ -2658,19 +3228,26 @@ student.fullName||
 
 return`
 
-<option value="${escapeHtml(studentNumber)}">
-${escapeHtml(studentNumber)} - ${escapeHtml(studentName)}
+<option value="${
+escapeHtml(studentNumber)
+}">
+${escapeHtml(studentNumber)}
+-
+${escapeHtml(studentName)}
 </option>
 
 `;
 
-}).join("");
+})
+.join("");
 
 
 if(
 currentValue &&
 matches.some(
-s=>String(s.studentNumber)===String(currentValue)
+s=>
+String(s.studentNumber)===
+String(currentValue)
 )
 ){
 
@@ -2706,7 +3283,9 @@ input.addEventListener(
 "input",
 ()=>{
 
-if(input.value.trim()===""){
+if(
+input.value.trim()===""
+){
 
 populateStudentSelects();
 
@@ -2736,7 +3315,9 @@ searchStudentsForSelect(
 );
 
 
-/* ATTENDANCE */
+/* =========================================================
+   ATTENDANCE
+   ========================================================= */
 
 $("attendanceForm").addEventListener(
 "submit",
@@ -2771,8 +3352,10 @@ return;
 try{
 
 const existing=
-attendanceRows.find(r=>
-String(r.studentNumber)===String(studentNumber)&&
+attendanceRows.find(
+r=>
+String(r.studentNumber)===
+String(studentNumber)&&
 String(r.date)===String(date)
 );
 
@@ -2780,16 +3363,23 @@ String(r.date)===String(date)
 if(existing){
 
 await updateDoc(
-doc(db,"attendance",existing.id),
+doc(
+db,
+"attendance",
+existing.id
+),
 {
 studentNumber,
 date,
 status,
-updatedAt:serverTimestamp()
+updatedAt:
+serverTimestamp()
 }
 );
 
-showMessage("Attendance updated.");
+showMessage(
+"Attendance updated."
+);
 
 }else{
 
@@ -2799,11 +3389,14 @@ collection(db,"attendance"),
 studentNumber,
 date,
 status,
-createdAt:serverTimestamp()
+createdAt:
+serverTimestamp()
 }
 );
 
-showMessage("Absent/Leave saved.");
+showMessage(
+"Absent/Leave saved."
+);
 
 }
 
@@ -2858,7 +3451,10 @@ item?.student ??
 }
 
 
-function getAttendanceDate(item,fallbackDate=""){
+function getAttendanceDate(
+item,
+fallbackDate=""
+){
 
 const value=
 item?.date ??
@@ -2889,7 +3485,9 @@ if(value?.seconds){
 
 try{
 
-return new Date(value.seconds*1000)
+return new Date(
+value.seconds*1000
+)
 .toISOString()
 .split("T")[0];
 
@@ -2904,7 +3502,10 @@ return String(value);
 
 function normalizeAttendanceStatus(value){
 
-if(value===undefined||value===null)
+if(
+value===undefined||
+value===null
+)
 return"";
 
 const status=
@@ -2948,7 +3549,10 @@ const studentName=
 getAttendanceStudentName(item);
 
 const date=
-getAttendanceDate(item,fallbackDate);
+getAttendanceDate(
+item,
+fallbackDate
+);
 
 const status=
 normalizeAttendanceStatus(
@@ -2972,7 +3576,6 @@ studentNumber,
 studentName,
 date,
 status,
-
 _original:item
 
 });
@@ -2985,16 +3588,21 @@ async function loadAttendance(){
 try{
 
 const snap=
-await getDocs(collection(db,"attendance"));
+await getDocs(
+collection(db,"attendance")
+);
 
 const normalized=[];
 
 
-snap.docs.forEach(documentSnapshot=>{
+snap.docs.forEach(
+documentSnapshot=>{
 
-const data=documentSnapshot.data();
+const data=
+documentSnapshot.data();
 
-const docId=documentSnapshot.id;
+const docId=
+documentSnapshot.id;
 
 
 if(
@@ -3018,27 +3626,12 @@ row
 }
 
 
-if(Array.isArray(data.records)){
+if(
+Array.isArray(data.records)
+){
 
-data.records.forEach(record=>{
-
-addNormalizedAttendance(
-normalized,
-{
-...record,
-__docId:docId
-},
-getAttendanceDate(data)
-);
-
-});
-
-}
-
-
-if(Array.isArray(data.attendance)){
-
-data.attendance.forEach(record=>{
+data.records.forEach(
+record=>{
 
 addNormalizedAttendance(
 normalized,
@@ -3054,9 +3647,33 @@ getAttendanceDate(data)
 }
 
 
-if(Array.isArray(data.students)){
+if(
+Array.isArray(data.attendance)
+){
 
-data.students.forEach(record=>{
+data.attendance.forEach(
+record=>{
+
+addNormalizedAttendance(
+normalized,
+{
+...record,
+__docId:docId
+},
+getAttendanceDate(data)
+);
+
+});
+
+}
+
+
+if(
+Array.isArray(data.students)
+){
+
+data.students.forEach(
+record=>{
 
 addNormalizedAttendance(
 normalized,
@@ -3073,14 +3690,17 @@ getAttendanceDate(data)
 
 
 const absentList=
-Array.isArray(data.absentStudents)
+Array.isArray(
+data.absentStudents
+)
 ?data.absentStudents
 :Array.isArray(data.absent)
 ?data.absent
 :[];
 
 
-absentList.forEach(student=>{
+absentList.forEach(
+student=>{
 
 const item=
 typeof student==="object"
@@ -3103,14 +3723,17 @@ getAttendanceDate(data)
 
 
 const leaveList=
-Array.isArray(data.leaveStudents)
+Array.isArray(
+data.leaveStudents
+)
 ?data.leaveStudents
 :Array.isArray(data.leave)
 ?data.leave
 :[];
 
 
-leaveList.forEach(student=>{
+leaveList.forEach(
+student=>{
 
 const item=
 typeof student==="object"
@@ -3134,7 +3757,8 @@ getAttendanceDate(data)
 });
 
 
-const uniqueMap=new Map();
+const uniqueMap=
+new Map();
 
 
 normalized.forEach(row=>{
@@ -3152,10 +3776,13 @@ uniqueMap.set(key,row);
 
 
 attendanceRows=
-Array.from(uniqueMap.values());
+Array.from(
+uniqueMap.values()
+);
 
 
-attendanceRows.sort((a,b)=>{
+attendanceRows.sort(
+(a,b)=>{
 
 const dateCompare=
 String(b.date||"")
@@ -3166,7 +3793,9 @@ String(a.date||"")
 if(dateCompare!==0)
 return dateCompare;
 
-return String(a.studentNumber||"")
+return String(
+a.studentNumber||""
+)
 .localeCompare(
 String(b.studentNumber||"")
 );
@@ -3174,7 +3803,8 @@ String(b.studentNumber||"")
 });
 
 
-$("attendanceCount").textContent=
+$("attendanceCount")
+.textContent=
 attendanceRows.length;
 
 setDashboardNotification(
@@ -3193,7 +3823,11 @@ $("attendanceTable").innerHTML=
 `<div class="empty">
 Unable to load attendance.
 <br>
-<small>${escapeHtml(error.message||"")}</small>
+<small>
+${escapeHtml(
+error.message||""
+)}
+</small>
 </div>`;
 
 }
@@ -3216,13 +3850,17 @@ row.studentNumber
 function renderAttendance(){
 
 const query=
-($("attendanceSearch")?.value||"")
+(
+$("attendanceSearch")?.value||
+""
+)
 .trim()
 .toLowerCase();
 
 
 const filtered=
-attendanceRows.filter(row=>{
+attendanceRows.filter(
+row=>{
 
 const number=
 String(row.studentNumber||"");
@@ -3230,14 +3868,14 @@ String(row.studentNumber||"");
 const name=
 attendanceStudentName(row);
 
-
 return studentSearchMatch(
 number,
 name,
 query
 );
 
-});
+}
+);
 
 
 const groups={};
@@ -3255,7 +3893,10 @@ groups[row.date].push(row);
 
 const dates=
 Object.keys(groups)
-.sort((a,b)=>b.localeCompare(a));
+.sort(
+(a,b)=>
+b.localeCompare(a)
+);
 
 
 if(!dates.length){
@@ -3284,8 +3925,8 @@ return;
 $("attendanceTable").innerHTML=
 dates.map(date=>{
 
-const rows=groups[date];
-
+const rows=
+groups[date];
 
 return`
 
@@ -3297,10 +3938,13 @@ style="margin-bottom:12px">
 
 <div>
 
-<h3>📅 ${escapeHtml(date)}</h3>
+<h3>
+📅 ${escapeHtml(date)}
+</h3>
 
 <div class="panel-desc">
-${rows.length} Absent / Leave student(s)
+${rows.length}
+Absent / Leave student(s)
 </div>
 
 </div>
@@ -3335,7 +3979,9 @@ ${rows.map(row=>`
 <td>
 
 <strong>
-${escapeHtml(row.studentNumber)}
+${escapeHtml(
+row.studentNumber
+)}
 </strong>
 
 </td>
@@ -3358,7 +4004,9 @@ row.status==="leave"
 :"badge-red"
 }">
 
-${escapeHtml(row.status)}
+${escapeHtml(
+row.status
+)}
 
 </span>
 
@@ -3402,7 +4050,9 @@ Delete
 }).join("");
 
 
-document.querySelectorAll(".attendance-edit-btn")
+document.querySelectorAll(
+".attendance-edit-btn"
+)
 .forEach(button=>{
 
 button.addEventListener(
@@ -3411,7 +4061,8 @@ button.addEventListener(
 
 const row=
 attendanceRows.find(
-r=>r.id===button.dataset.id
+r=>
+r.id===button.dataset.id
 );
 
 if(!row)return;
@@ -3430,15 +4081,12 @@ $("attendanceStudentSearch").value=
 attendanceStudentName(row)
 }`;
 
-
 openSection("attendance");
-
 
 window.scrollTo({
 top:0,
 behavior:"smooth"
 });
-
 
 showMessage(
 "Attendance loaded for editing."
@@ -3449,33 +4097,37 @@ showMessage(
 });
 
 
-document.querySelectorAll(".attendance-delete-btn")
+document.querySelectorAll(
+".attendance-delete-btn"
+)
 .forEach(button=>{
 
 button.addEventListener(
 "click",
 async()=>{
 
-if(!confirm(
+if(
+!confirm(
 "Delete this attendance record?"
-))
+)
+)
 return;
-
 
 try{
 
 await deleteDoc(
-doc(db,"attendance",button.dataset.id)
+doc(
+db,
+"attendance",
+button.dataset.id
+)
 );
-
 
 showMessage(
 "Attendance record deleted."
 );
 
-
 await loadAttendance();
-
 
 }catch(error){
 
@@ -3501,7 +4153,9 @@ renderAttendance
 );
 
 
-/* STUDY */
+/* =========================================================
+   STUDY
+   ========================================================= */
 
 $("studyForm").addEventListener(
 "submit",
@@ -3544,7 +4198,8 @@ $("darsLevel").value,
 discipline:
 $("discipline").value,
 
-createdAt:serverTimestamp()
+createdAt:
+serverTimestamp()
 }
 );
 
@@ -3581,13 +4236,17 @@ async function loadStudy(){
 try{
 
 const snap=
-await getDocs(collection(db,"studyProgress"));
+await getDocs(
+collection(db,"studyProgress")
+);
 
 studyRows=
-snap.docs.map(item=>({
+snap.docs.map(
+item=>({
 id:item.id,
 ...item.data()
-}));
+})
+);
 
 studyRows.sort(
 (a,b)=>
@@ -3624,15 +4283,21 @@ Unable to load study records.
 function renderStudy(){
 
 const q=
-($("studySearch")?.value||"")
+(
+$("studySearch")?.value||
+""
+)
 .trim()
 .toLowerCase();
 
 const rows=
-studyRows.filter(row=>
+studyRows.filter(
+row=>
 studentSearchMatch(
 row.studentNumber,
-studentNameByNumber(row.studentNumber),
+studentNameByNumber(
+row.studentNumber
+),
 q
 )
 );
@@ -3643,7 +4308,8 @@ $("studyTable").innerHTML=
 `<tr><td colspan="11">
 <div class="empty">
 No study records found.
-</div></td></tr>`;
+</div>
+</td></tr>`;
 
 return;
 
@@ -3658,33 +4324,45 @@ rows.map(row=>`
 
 <strong>
 ${escapeHtml(
-studentNameByNumber(row.studentNumber)
+studentNameByNumber(
+row.studentNumber
+)
 )}
 </strong>
 
 <br>
 
 <small>
-${escapeHtml(row.studentNumber||"")}
+${escapeHtml(
+row.studentNumber||""
+)}
 </small>
 
 </td>
 
 <td>
-${escapeHtml(row.date||"-")}
+${escapeHtml(
+row.date||"-"
+)}
 </td>
 
 <td>
-${escapeHtml(row.surah||"-")}
+${escapeHtml(
+row.surah||"-"
+)}
 </td>
 
 <td>
-${escapeHtml(row.newLesson||"-")}
+${escapeHtml(
+row.newLesson||"-"
+)}
 ${row.newLesson?" pages":""}
 </td>
 
 <td>
-${escapeHtml(row.revision||"-")}
+${escapeHtml(
+row.revision||"-"
+)}
 </td>
 
 <td>
@@ -3695,26 +4373,36 @@ row.studyStatus
 :"badge-yellow"
 }">
 
-${escapeHtml(row.studyStatus||"-")}
+${escapeHtml(
+row.studyStatus||"-"
+)}
 
 </span>
 
 </td>
 
 <td>
-${escapeHtml(row.performance||"-")}
+${escapeHtml(
+row.performance||"-"
+)}
 </td>
 
 <td class="teacher-remark-cell">
-${escapeHtml(row.note||"-")}
+${escapeHtml(
+row.note||"-"
+)}
 </td>
 
 <td>
-${escapeHtml(row.darsLevel||"-")}
+${escapeHtml(
+row.darsLevel||"-"
+)}
 </td>
 
 <td>
-${escapeHtml(row.discipline||"-")}
+${escapeHtml(
+row.discipline||"-"
+)}
 </td>
 
 <td>
@@ -3732,20 +4420,28 @@ Delete
 `).join("");
 
 
-document.querySelectorAll(".study-delete")
+document.querySelectorAll(
+".study-delete"
+)
 .forEach(button=>{
 
 button.addEventListener(
 "click",
 async()=>{
 
-if(!confirm(
+if(
+!confirm(
 "Delete study record?"
-))
+)
+)
 return;
 
 await deleteDoc(
-doc(db,"studyProgress",button.dataset.id)
+doc(
+db,
+"studyProgress",
+button.dataset.id
+)
 );
 
 showMessage(
@@ -3767,7 +4463,9 @@ renderStudy
 );
 
 
-/* RESULTS */
+/* =========================================================
+   RESULTS
+   ========================================================= */
 
 $("resultForm").addEventListener(
 "submit",
@@ -3792,7 +4490,8 @@ $("resultMark").value.trim(),
 status:
 $("resultStatus").value,
 
-createdAt:serverTimestamp()
+createdAt:
+serverTimestamp()
 }
 );
 
@@ -3827,13 +4526,17 @@ async function loadResults(){
 try{
 
 const snap=
-await getDocs(collection(db,"results"));
+await getDocs(
+collection(db,"results")
+);
 
 resultRows=
-snap.docs.map(item=>({
+snap.docs.map(
+item=>({
 id:item.id,
 ...item.data()
-}));
+})
+);
 
 resultRows.sort(
 (a,b)=>
@@ -3845,11 +4548,9 @@ renderResults();
 
 const publishedCount=
 resultRows.filter(
-row=>row.status==="published"
+row=>
+row.status==="published"
 ).length;
-
-
-/* FIX: resultCount does not exist in current dashboard HTML */
 
 if($("resultCount"))
 $("resultCount").textContent=
@@ -3857,11 +4558,6 @@ publishedCount;
 
 setDashboardNotification(
 "resultDashboardNotify",
-publishedCount
-);
-
-setQuickNotification(
-"resultNotify",
 publishedCount
 );
 
@@ -3874,7 +4570,11 @@ $("resultsTable").innerHTML=
 <div class="empty">
 Unable to load results.
 <br>
-<small>${escapeHtml(error.message||"")}</small>
+<small>
+${escapeHtml(
+error.message||""
+)}
+</small>
 </div>
 </td></tr>`;
 
@@ -3886,15 +4586,21 @@ Unable to load results.
 function renderResults(){
 
 const q=
-($("resultSearch")?.value||"")
+(
+$("resultSearch")?.value||
+""
+)
 .trim()
 .toLowerCase();
 
 const rows=
-resultRows.filter(row=>
+resultRows.filter(
+row=>
 studentSearchMatch(
 row.studentNumber,
-studentNameByNumber(row.studentNumber),
+studentNameByNumber(
+row.studentNumber
+),
 q
 )
 );
@@ -3905,7 +4611,8 @@ $("resultsTable").innerHTML=
 `<tr><td colspan="5">
 <div class="empty">
 No results found.
-</div></td></tr>`;
+</div>
+</td></tr>`;
 
 return;
 
@@ -3919,23 +4626,33 @@ rows.map(row=>`
 <td>
 
 ${escapeHtml(
-studentNameByNumber(row.studentNumber)
+studentNameByNumber(
+row.studentNumber
+)
 )}
 
 <br>
 
 <small>
-${escapeHtml(row.studentNumber)}
+${escapeHtml(
+row.studentNumber
+)}
 </small>
 
 </td>
 
 <td>
-${escapeHtml(row.title)}
+${escapeHtml(
+row.title
+)}
 </td>
 
 <td>
-<strong>${escapeHtml(row.mark)}</strong>
+<strong>
+${escapeHtml(
+row.mark
+)}
+</strong>
 </td>
 
 <td>
@@ -3946,7 +4663,9 @@ row.status==="published"
 :"badge-yellow"
 }">
 
-${escapeHtml(row.status)}
+${escapeHtml(
+row.status
+)}
 
 </span>
 
@@ -3988,7 +4707,9 @@ Delete
 `).join("");
 
 
-document.querySelectorAll(".result-toggle")
+document.querySelectorAll(
+".result-toggle"
+)
 .forEach(button=>{
 
 button.addEventListener(
@@ -4001,7 +4722,11 @@ button.dataset.status==="published"
 :"published";
 
 await updateDoc(
-doc(db,"results",button.dataset.id),
+doc(
+db,
+"results",
+button.dataset.id
+),
 {
 status:newStatus
 }
@@ -4020,20 +4745,28 @@ await loadResults();
 });
 
 
-document.querySelectorAll(".result-delete")
+document.querySelectorAll(
+".result-delete"
+)
 .forEach(button=>{
 
 button.addEventListener(
 "click",
 async()=>{
 
-if(!confirm(
+if(
+!confirm(
 "Delete this result?"
-))
+)
+)
 return;
 
 await deleteDoc(
-doc(db,"results",button.dataset.id)
+doc(
+db,
+"results",
+button.dataset.id
+)
 );
 
 showMessage(
@@ -4055,7 +4788,9 @@ renderResults
 );
 
 
-/* NOTICES */
+/* =========================================================
+   NOTICES
+   ========================================================= */
 
 $("noticeForm").addEventListener(
 "submit",
@@ -4069,15 +4804,18 @@ await addDoc(
 collection(db,"notices"),
 {
 title:
-$("noticeTitle").value.trim(),
+$("noticeTitle")
+.value.trim(),
 
 text:
-$("noticeText").value.trim(),
+$("noticeText")
+.value.trim(),
 
 status:
 $("noticeStatus").value,
 
-createdAt:serverTimestamp()
+createdAt:
+serverTimestamp()
 }
 );
 
@@ -4108,13 +4846,17 @@ async function loadNotices(){
 try{
 
 const snap=
-await getDocs(collection(db,"notices"));
+await getDocs(
+collection(db,"notices")
+);
 
 const rows=
-snap.docs.map(item=>({
+snap.docs.map(
+item=>({
 id:item.id,
 ...item.data()
-}));
+})
+);
 
 rows.sort(
 (a,b)=>
@@ -4122,14 +4864,17 @@ rows.sort(
 (a.createdAt?.seconds||0)
 );
 
-const table=$("noticesTable");
+const table=
+$("noticesTable");
 
 const publishedCount=
 rows.filter(
-row=>row.status==="published"
+row=>
+row.status==="published"
 ).length;
 
-$("noticeCount").textContent=
+$("noticeCount")
+.textContent=
 publishedCount;
 
 setDashboardNotification(
@@ -4137,16 +4882,13 @@ setDashboardNotification(
 publishedCount
 );
 
-setQuickNotification(
-"noticeNotify",
-publishedCount
-);
-
 if(!rows.length){
 
 table.innerHTML=
 `<tr><td colspan="4">
-<div class="empty">No notices.</div>
+<div class="empty">
+No notices.
+</div>
 </td></tr>`;
 
 return;
@@ -4160,12 +4902,16 @@ rows.map(row=>`
 
 <td>
 <strong>
-${escapeHtml(row.title)}
+${escapeHtml(
+row.title
+)}
 </strong>
 </td>
 
 <td>
-${escapeHtml(row.text)}
+${escapeHtml(
+row.text
+)}
 </td>
 
 <td>
@@ -4176,7 +4922,9 @@ row.status==="published"
 :"badge-yellow"
 }">
 
-${escapeHtml(row.status)}
+${escapeHtml(
+row.status
+)}
 
 </span>
 
@@ -4218,7 +4966,9 @@ Delete
 `).join("");
 
 
-document.querySelectorAll(".notice-toggle")
+document.querySelectorAll(
+".notice-toggle"
+)
 .forEach(button=>{
 
 button.addEventListener(
@@ -4231,7 +4981,11 @@ button.dataset.status==="published"
 :"published";
 
 await updateDoc(
-doc(db,"notices",button.dataset.id),
+doc(
+db,
+"notices",
+button.dataset.id
+),
 {status}
 );
 
@@ -4248,20 +5002,28 @@ await loadNotices();
 });
 
 
-document.querySelectorAll(".notice-delete")
+document.querySelectorAll(
+".notice-delete"
+)
 .forEach(button=>{
 
 button.addEventListener(
 "click",
 async()=>{
 
-if(!confirm(
+if(
+!confirm(
 "Delete this notice?"
-))
+)
+)
 return;
 
 await deleteDoc(
-doc(db,"notices",button.dataset.id)
+doc(
+db,
+"notices",
+button.dataset.id
+)
 );
 
 showMessage(
@@ -4283,7 +5045,11 @@ $("noticesTable").innerHTML=
 <div class="empty">
 Unable to load notices.
 <br>
-<small>${escapeHtml(error.message||"")}</small>
+<small>
+${escapeHtml(
+error.message||""
+)}
+</small>
 </div>
 </td></tr>`;
 
@@ -4292,20 +5058,26 @@ Unable to load notices.
 }
 
 
-/* LEAVES */
+/* =========================================================
+   LEAVES
+   ========================================================= */
 
 async function loadLeaves(){
 
 try{
 
 const snap=
-await getDocs(collection(db,"leaveRequests"));
+await getDocs(
+collection(db,"leaveRequests")
+);
 
 const rows=
-snap.docs.map(item=>({
+snap.docs.map(
+item=>({
 id:item.id,
 ...item.data()
-}));
+})
+);
 
 rows.sort(
 (a,b)=>
@@ -4314,31 +5086,31 @@ rows.sort(
 );
 
 
-/* FIX: leaveCount does not exist in current dashboard HTML */
+/*
+Store current rows for the notification system.
+*/
+
+window.adminLeaveRows=rows;
+
+
+/*
+NEW NOTIFICATION:
+Only a newly-created leave request produces
+a bell notification.
+Existing records and status changes do not.
+*/
+
+updateAdminNotification(
+"leave",
+rows,
+"leaveNotify",
+"leaveMenuNotify"
+);
+
 
 if($("leaveCount"))
 $("leaveCount").textContent=
 rows.length;
-
-
-/* QUICK ACCESS NOTIFICATION */
-
-const pendingLeaves=
-rows.filter(
-row=>
-String(row.status||"pending")
-.toLowerCase()==="pending"
-).length;
-
-setQuickNotification(
-"leaveNotify",
-pendingLeaves
-);
-
-setDashboardNotification(
-"leaveDashboardNotify",
-pendingLeaves
-);
 
 
 if(!rows.length){
@@ -4347,14 +5119,13 @@ $("leaveTable").innerHTML=
 `<tr><td colspan="7">
 <div class="empty">
 No leave requests.
-</div></td></tr>`;
+</div>
+</td></tr>`;
 
 return;
 
 }
 
-
-/* FULL LEAVE REQUEST RECORDS */
 
 $("leaveTable").innerHTML=
 rows.map(row=>`
@@ -4365,48 +5136,67 @@ rows.map(row=>`
 
 <strong>
 ${escapeHtml(
-studentNameByNumber(row.studentNumber)
+studentNameByNumber(
+row.studentNumber
+)
 )}
 </strong>
 
 <br>
 
-${escapeHtml(row.studentNumber||"-")}
+${escapeHtml(
+row.studentNumber||"-"
+)}
 
 </td>
 
 <td>
-${escapeHtml(row.parentEmail||"-")}
+${escapeHtml(
+row.parentEmail||"-"
+)}
 </td>
 
 <td>
-${escapeHtml(row.leaveDate||"-")}
+${escapeHtml(
+row.leaveDate||"-"
+)}
 </td>
 
 <td>
-${escapeHtml(row.reason||row.details||"-")}
+${escapeHtml(
+row.reason||
+row.details||
+"-"
+)}
 </td>
 
 <td>
 
 <span class="badge ${
-String(row.status||"pending").toLowerCase()==="approved"
+String(
+row.status||"pending"
+).toLowerCase()==="approved"
 ?"badge-green"
 :
-String(row.status||"pending").toLowerCase()==="rejected"
+String(
+row.status||"pending"
+).toLowerCase()==="rejected"
 ?"badge-red"
-:
-"badge-yellow"
+:"badge-yellow"
 }">
 
-${escapeHtml(row.status||"pending")}
+${escapeHtml(
+row.status||"pending"
+)}
 
 </span>
 
 </td>
 
 <td>
-${escapeHtml(row.reply||"-")}
+${escapeHtml(
+row.reply||"-"
+)}
 </td>
 
 <td>
@@ -4446,21 +5236,31 @@ Delete
 `).join("");
 
 
-document.querySelectorAll(".leave-approve")
-.forEach(b=>
+document.querySelectorAll(
+".leave-approve"
+)
+.forEach(
+b=>
 b.addEventListener(
 "click",
 async()=>{
 
 await updateDoc(
-doc(db,"leaveRequests",b.dataset.id),
+doc(
+db,
+"leaveRequests",
+b.dataset.id
+),
 {
 status:"approved",
-repliedAt:serverTimestamp()
+repliedAt:
+serverTimestamp()
 }
 );
 
-showMessage("Leave approved.");
+showMessage(
+"Leave approved."
+);
 
 await loadLeaves();
 
@@ -4468,21 +5268,31 @@ await loadLeaves();
 );
 
 
-document.querySelectorAll(".leave-reject")
-.forEach(b=>
+document.querySelectorAll(
+".leave-reject"
+)
+.forEach(
+b=>
 b.addEventListener(
 "click",
 async()=>{
 
 await updateDoc(
-doc(db,"leaveRequests",b.dataset.id),
+doc(
+db,
+"leaveRequests",
+b.dataset.id
+),
 {
 status:"rejected",
-repliedAt:serverTimestamp()
+repliedAt:
+serverTimestamp()
 }
 );
 
-showMessage("Leave rejected.");
+showMessage(
+"Leave rejected."
+);
 
 await loadLeaves();
 
@@ -4490,26 +5300,39 @@ await loadLeaves();
 );
 
 
-document.querySelectorAll(".leave-reply")
-.forEach(b=>
+document.querySelectorAll(
+".leave-reply"
+)
+.forEach(
+b=>
 b.addEventListener(
 "click",
 async()=>{
 
 const reply=
-prompt("Enter reply:");
+prompt(
+"Enter reply:"
+);
 
-if(reply===null)return;
+if(reply===null)
+return;
 
 await updateDoc(
-doc(db,"leaveRequests",b.dataset.id),
+doc(
+db,
+"leaveRequests",
+b.dataset.id
+),
 {
 reply:reply.trim(),
-repliedAt:serverTimestamp()
+repliedAt:
+serverTimestamp()
 }
 );
 
-showMessage("Reply sent.");
+showMessage(
+"Reply sent."
+);
 
 await loadLeaves();
 
@@ -4517,19 +5340,28 @@ await loadLeaves();
 );
 
 
-document.querySelectorAll(".leave-delete")
-.forEach(b=>
+document.querySelectorAll(
+".leave-delete"
+)
+.forEach(
+b=>
 b.addEventListener(
 "click",
 async()=>{
 
-if(!confirm(
+if(
+!confirm(
 "Delete leave request?"
-))
+)
+)
 return;
 
 await deleteDoc(
-doc(db,"leaveRequests",b.dataset.id)
+doc(
+db,
+"leaveRequests",
+b.dataset.id
+)
 );
 
 showMessage(
@@ -4550,7 +5382,11 @@ $("leaveTable").innerHTML=
 <div class="empty">
 Unable to load leave requests.
 <br>
-<small>${escapeHtml(error.message||"")}</small>
+<small>
+${escapeHtml(
+error.message||""
+)}
+</small>
 </div>
 </td></tr>`;
 
@@ -4559,20 +5395,26 @@ Unable to load leave requests.
 }
 
 
-/* MESSAGES */
+/* =========================================================
+   MESSAGES
+   ========================================================= */
 
 async function loadMessages(){
 
 try{
 
 const snap=
-await getDocs(collection(db,"messages"));
+await getDocs(
+collection(db,"messages")
+);
 
 const rows=
-snap.docs.map(item=>({
+snap.docs.map(
+item=>({
 id:item.id,
 ...item.data()
-}));
+})
+);
 
 rows.sort(
 (a,b)=>
@@ -4581,31 +5423,33 @@ rows.sort(
 );
 
 
-/* FIX: messageCount does not exist in current dashboard HTML */
+/*
+Store current rows for notification system.
+*/
+
+window.adminMessageRows=rows;
+
+
+/*
+NEW NOTIFICATION:
+Only a newly-created parent message produces
+a bell notification.
+
+Replying to an existing message does NOT
+create another Admin notification.
+*/
+
+updateAdminNotification(
+"messages",
+rows,
+"messageNotify",
+"messageMenuNotify"
+);
+
 
 if($("messageCount"))
 $("messageCount").textContent=
 rows.length;
-
-
-/* QUICK ACCESS NOTIFICATION */
-
-const newMessages=
-rows.filter(
-row=>
-String(row.status||"new")
-.toLowerCase()!=="replied"
-).length;
-
-setQuickNotification(
-"messageNotify",
-newMessages
-);
-
-setDashboardNotification(
-"messageDashboardNotify",
-newMessages
-);
 
 
 if(!rows.length){
@@ -4621,8 +5465,6 @@ return;
 }
 
 
-/* FULL PARENT MESSAGE RECORDS */
-
 $("messagesTable").innerHTML=
 rows.map(row=>`
 
@@ -4631,39 +5473,55 @@ rows.map(row=>`
 <td>
 
 ${escapeHtml(
-studentNameByNumber(row.studentNumber)
+studentNameByNumber(
+row.studentNumber
+)
 )}
 
 <br>
 
-${escapeHtml(row.studentNumber||"-")}
+${escapeHtml(
+row.studentNumber||"-"
+)}
 
 </td>
 
 <td>
-${escapeHtml(row.parentEmail||"-")}
+${escapeHtml(
+row.parentEmail||"-"
+)}
 </td>
 
 <td>
-${escapeHtml(row.text||row.message||"-")}
+${escapeHtml(
+row.text||
+row.message||
+"-"
+)}
 </td>
 
 <td>
 
 <span class="badge ${
-String(row.status||"new").toLowerCase()==="replied"
+String(
+row.status||"new"
+).toLowerCase()==="replied"
 ?"badge-green"
 :"badge-yellow"
 }">
 
-${escapeHtml(row.status||"new")}
+${escapeHtml(
+row.status||"new"
+)}
 
 </span>
 
 </td>
 
 <td>
-${escapeHtml(row.reply||"-")}
+${escapeHtml(
+row.reply||"-"
+)}
 </td>
 
 <td>
@@ -4691,27 +5549,40 @@ Delete
 `).join("");
 
 
-document.querySelectorAll(".message-reply")
-.forEach(b=>
+document.querySelectorAll(
+".message-reply"
+)
+.forEach(
+b=>
 b.addEventListener(
 "click",
 async()=>{
 
 const reply=
-prompt("Enter reply:");
+prompt(
+"Enter reply:"
+);
 
-if(reply===null)return;
+if(reply===null)
+return;
 
 await updateDoc(
-doc(db,"messages",b.dataset.id),
+doc(
+db,
+"messages",
+b.dataset.id
+),
 {
 reply:reply.trim(),
 status:"replied",
-repliedAt:serverTimestamp()
+repliedAt:
+serverTimestamp()
 }
 );
 
-showMessage("Reply sent.");
+showMessage(
+"Reply sent."
+);
 
 await loadMessages();
 
@@ -4719,19 +5590,28 @@ await loadMessages();
 );
 
 
-document.querySelectorAll(".message-delete")
-.forEach(b=>
+document.querySelectorAll(
+".message-delete"
+)
+.forEach(
+b=>
 b.addEventListener(
 "click",
 async()=>{
 
-if(!confirm(
+if(
+!confirm(
 "Delete this message?"
-))
+)
+)
 return;
 
 await deleteDoc(
-doc(db,"messages",b.dataset.id)
+doc(
+db,
+"messages",
+b.dataset.id
+)
 );
 
 showMessage(
@@ -4752,7 +5632,11 @@ $("messagesTable").innerHTML=
 <div class="empty">
 Unable to load parent messages.
 <br>
-<small>${escapeHtml(error.message||"")}</small>
+<small>
+${escapeHtml(
+error.message||""
+)}
+</small>
 </div>
 </td></tr>`;
 
@@ -4761,20 +5645,26 @@ Unable to load parent messages.
 }
 
 
-/* DONATIONS */
+/* =========================================================
+   DONATIONS
+   ========================================================= */
 
 async function loadDonations(){
 
 try{
 
 const snap=
-await getDocs(collection(db,"donations"));
+await getDocs(
+collection(db,"donations")
+);
 
 const rows=
-snap.docs.map(item=>({
+snap.docs.map(
+item=>({
 id:item.id,
 ...item.data()
-}));
+})
+);
 
 rows.sort(
 (a,b)=>
@@ -4782,9 +5672,35 @@ rows.sort(
 (a.createdAt?.seconds||0)
 );
 
+
+/*
+Store current rows for notification system.
+*/
+
+window.adminDonationRows=rows;
+
+
+/*
+NEW NOTIFICATION:
+Only a newly-created donation produces
+a bell notification.
+
+Changing Pending -> Verified/Rejected
+does NOT create a new notification.
+*/
+
+updateAdminNotification(
+"donations",
+rows,
+"donationNotify",
+"donationMenuNotify"
+);
+
+
 let total=0;
 let pending=0;
 let verified=0;
+
 
 rows.forEach(row=>{
 
@@ -4801,6 +5717,7 @@ verified+=amount;
 
 });
 
+
 $("donationTotal").textContent=
 money(total);
 
@@ -4816,24 +5733,6 @@ $("donationCount").textContent=
 rows.length;
 
 
-const pendingDonations=
-rows.filter(
-row=>
-String(row.status||"pending")
-.toLowerCase()==="pending"
-).length;
-
-setQuickNotification(
-"donationNotify",
-pendingDonations
-);
-
-setDashboardNotification(
-"donationDashboardNotify",
-pendingDonations
-);
-
-
 if(!rows.length){
 
 $("donationsTable").innerHTML=
@@ -4846,6 +5745,7 @@ return;
 
 }
 
+
 $("donationsTable").innerHTML=
 rows.map(row=>`
 
@@ -4855,20 +5755,26 @@ rows.map(row=>`
 
 <strong>
 ${escapeHtml(
-studentNameByNumber(row.studentNumber)
+studentNameByNumber(
+row.studentNumber
+)
 )}
 </strong>
 
 <br>
 
 <small>
-${escapeHtml(row.studentNumber||"-")}
+${escapeHtml(
+row.studentNumber||"-"
+)}
 </small>
 
 </td>
 
 <td>
-${escapeHtml(row.parentEmail||"-")}
+${escapeHtml(
+row.parentEmail||"-"
+)}
 </td>
 
 <td>
@@ -4878,11 +5784,15 @@ ${money(row.amount)}
 </td>
 
 <td>
-${escapeHtml(row.transactionId||"-")}
+${escapeHtml(
+row.transactionId||"-"
+)}
 </td>
 
 <td>
-${formatDate(row.createdAt)}
+${formatDate(
+row.createdAt
+)}
 </td>
 
 <td>
@@ -4893,18 +5803,21 @@ row.status==="verified"
 :
 row.status==="rejected"
 ?"badge-red"
-:
-"badge-yellow"
+:"badge-yellow"
 }">
 
-${escapeHtml(row.status||"pending")}
+${escapeHtml(
+row.status||"pending"
+)}
 
 </span>
 
 </td>
 
 <td>
-${escapeHtml(row.adminNote||"-")}
+${escapeHtml(
+row.adminNote||"-"
+)}
 </td>
 
 <td>
@@ -4948,26 +5861,38 @@ Delete
 `).join("");
 
 
-document.querySelectorAll(".donation-verify")
-.forEach(b=>
+document.querySelectorAll(
+".donation-verify"
+)
+.forEach(
+b=>
 b.addEventListener(
 "click",
 async()=>{
 
-if(!confirm(
+if(
+!confirm(
 "Verify this donation?"
-))
+)
+)
 return;
 
 const note=
-prompt("Admin note (optional):");
+prompt(
+"Admin note (optional):"
+);
 
 await updateDoc(
-doc(db,"donations",b.dataset.id),
+doc(
+db,
+"donations",
+b.dataset.id
+),
 {
 status:"verified",
 adminNote:note||"",
-verifiedAt:serverTimestamp()
+verifiedAt:
+serverTimestamp()
 }
 );
 
@@ -4981,16 +5906,24 @@ await loadDonations();
 );
 
 
-document.querySelectorAll(".donation-reject")
-.forEach(b=>
+document.querySelectorAll(
+".donation-reject"
+)
+.forEach(
+b=>
 b.addEventListener(
 "click",
 async()=>{
 
 const note=
-prompt("Reason for rejection:");
+prompt(
+"Reason for rejection:"
+);
 
-if(!note||!note.trim()){
+if(
+!note||
+!note.trim()
+){
 
 alert(
 "Please enter a rejection reason."
@@ -5000,17 +5933,24 @@ return;
 
 }
 
-if(!confirm(
+if(
+!confirm(
 "Reject this donation?"
-))
+)
+)
 return;
 
 await updateDoc(
-doc(db,"donations",b.dataset.id),
+doc(
+db,
+"donations",
+b.dataset.id
+),
 {
 status:"rejected",
 adminNote:note.trim(),
-rejectedAt:serverTimestamp()
+rejectedAt:
+serverTimestamp()
 }
 );
 
@@ -5024,19 +5964,28 @@ await loadDonations();
 );
 
 
-document.querySelectorAll(".donation-delete")
-.forEach(b=>
+document.querySelectorAll(
+".donation-delete"
+)
+.forEach(
+b=>
 b.addEventListener(
 "click",
 async()=>{
 
-if(!confirm(
+if(
+!confirm(
 "Delete this donation record?"
-))
+)
+)
 return;
 
 await deleteDoc(
-doc(db,"donations",b.dataset.id)
+doc(
+db,
+"donations",
+b.dataset.id
+)
 );
 
 showMessage(
@@ -5062,26 +6011,35 @@ Unable to load donations.
 }
 
 
-/* PUBLIC RESULT */
+/* =========================================================
+   PUBLIC RESULT
+   ========================================================= */
 
 $("openPublicResult").addEventListener(
 "click",
-()=>location.href="result.html"
+()=>
+location.href="result.html"
 );
 
 
-/* DEFAULT DATES */
+/* =========================================================
+   DEFAULT DATES
+   ========================================================= */
 
 function setDefaultDates(){
 
 const today=
-new Date().toISOString().split("T")[0];
+new Date()
+.toISOString()
+.split("T")[0];
 
 if($("attendanceDate"))
-$("attendanceDate").value=today;
+$("attendanceDate").value=
+today;
 
 if($("studyDate"))
-$("studyDate").value=today;
+$("studyDate").value=
+today;
 
 }
 
