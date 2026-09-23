@@ -19,64 +19,212 @@
       margin: 0;
       min-height: 100vh;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0f766e, #164e63);
+      background:
+        linear-gradient(rgba(3,43,36,0.82), rgba(3,43,36,0.88)),
+        url("./IMG-20260921-WA0016.jpg") center/cover no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 20px;
     }
 
+    .login-wrapper {
+      width: 100%;
+      max-width: 950px;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      background: rgba(255,255,255,0.97);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.35);
+    }
+
+    .college-panel {
+      min-height: 570px;
+      position: relative;
+      background:
+        linear-gradient(rgba(3,43,36,0.48), rgba(3,43,36,0.72)),
+        url("./IMG-20260921-WA0016.jpg") center/cover no-repeat;
+      display: flex;
+      align-items: flex-end;
+      padding: 42px;
+      color: white;
+    }
+
+    .college-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(242,207,114,0.25);
+      pointer-events: none;
+    }
+
+    .college-info {
+      position: relative;
+      z-index: 2;
+    }
+
+    .college-badge {
+      display: inline-block;
+      padding: 8px 15px;
+      border: 1px solid rgba(242,207,114,0.7);
+      border-radius: 30px;
+      color: #f2cf72;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+      background: rgba(3,43,36,0.55);
+    }
+
+    .college-panel h2 {
+      margin: 0;
+      font-size: 32px;
+      line-height: 1.2;
+      letter-spacing: .5px;
+    }
+
+    .college-panel p {
+      margin: 12px 0 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(255,255,255,.86);
+    }
+
     .login-box {
       width: 100%;
-      max-width: 420px;
+      padding: 42px 34px;
       background: white;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    }
+
+    .logo-circle {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #06483a, #0f766e);
+      color: #f2cf72;
+      border: 3px solid #d6a93a;
+      font-size: 26px;
+      font-weight: bold;
+      box-shadow: 0 8px 22px rgba(6,72,58,.25);
     }
 
     h1 {
       text-align: center;
-      color: #0f766e;
-      margin-bottom: 8px;
+      color: #06483a;
+      margin: 0;
+      font-size: 25px;
+      line-height: 1.25;
     }
 
     .subtitle {
       text-align: center;
-      color: #666;
-      margin-bottom: 25px;
+      color: #777;
+      margin: 9px 0 30px;
+      font-size: 14px;
+    }
+
+    .form-group {
+      margin-top: 17px;
     }
 
     label {
       display: block;
-      margin-top: 15px;
-      margin-bottom: 7px;
+      margin-bottom: 8px;
       font-weight: bold;
+      color: #164e43;
+      font-size: 14px;
+    }
+
+    .input-wrap {
+      position: relative;
     }
 
     input {
       width: 100%;
-      padding: 13px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
+      padding: 14px 15px;
+      border: 1px solid #d5ddd9;
+      border-radius: 11px;
       font-size: 16px;
+      outline: none;
+      background: #fafcfb;
+      color: #173b34;
+      transition: .2s;
     }
 
-    button {
+    input:focus {
+      border-color: #0f766e;
+      box-shadow: 0 0 0 3px rgba(15,118,110,.10);
+      background: white;
+    }
+
+    #password {
+      padding-right: 48px;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      color: #0f766e;
+      font-size: 18px;
+      border: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .password-toggle:hover {
+      background: transparent;
+      color: #06483a;
+    }
+
+    button#loginBtn {
       width: 100%;
-      margin-top: 22px;
+      margin-top: 26px;
       padding: 14px;
       border: 0;
-      border-radius: 10px;
-      background: #0f766e;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #06483a, #0f766e);
       color: white;
       font-size: 17px;
       font-weight: bold;
       cursor: pointer;
+      box-shadow: 0 8px 20px rgba(6,72,58,.22);
+      transition: .2s;
     }
 
-    button:disabled {
+    button#loginBtn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 11px 25px rgba(6,72,58,.28);
+    }
+
+    button#loginBtn:disabled {
       opacity: 0.6;
+      transform: none;
+    }
+
+    .login-footer {
+      text-align: center;
+      margin-top: 22px;
+      color: #999;
+      font-size: 11px;
+    }
+
+    .login-footer span {
+      color: #b18421;
+      font-weight: bold;
     }
 
     #message {
@@ -86,6 +234,7 @@
       display: none;
       text-align: center;
       font-size: 14px;
+      line-height: 1.5;
     }
 
     .error {
@@ -97,41 +246,129 @@
       background: #dcfce7;
       color: #166534;
     }
+
+    @media (max-width: 800px) {
+      .login-wrapper {
+        max-width: 430px;
+        grid-template-columns: 1fr;
+      }
+
+      .college-panel {
+        min-height: 220px;
+        padding: 28px;
+        align-items: flex-end;
+      }
+
+      .college-panel h2 {
+        font-size: 25px;
+      }
+
+      .college-panel p {
+        font-size: 13px;
+      }
+
+      .login-box {
+        padding: 32px 25px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+      }
+
+      .login-wrapper {
+        border-radius: 20px;
+      }
+
+      .college-panel {
+        min-height: 190px;
+        padding: 23px;
+      }
+
+      .college-panel h2 {
+        font-size: 22px;
+      }
+
+      .login-box {
+        padding: 28px 20px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-<div class="login-box">
+<div class="login-wrapper">
 
-  <h1>SAFA QURAN COLLEGE ONLINE PORTAL</h1>
-  <div class="subtitle">Usthad / Parent Login</div>
+  <div class="college-panel">
+    <div class="college-info">
+      <div class="college-badge">SAFA QURAN COLLEGE</div>
+      <h2>SAFA QURAN COLLEGE<br>ONLINE PORTAL</h2>
+      <p>
+        Welcome to the official online portal for
+        Usthad and Parent access.
+      </p>
+    </div>
+  </div>
 
-  <form id="loginForm">
+  <div class="login-box">
 
-    <label>Email</label>
-    <input
-      type="email"
-      id="email"
-      placeholder="Enter email"
-      required
-    >
+    <div class="logo-circle">SQC</div>
 
-    <label>Password</label>
-    <input
-      type="password"
-      id="password"
-      placeholder="Enter password"
-      required
-    >
+    <h1>SAFA QURAN COLLEGE</h1>
+    <div class="subtitle">Usthad / Parent Login</div>
 
-    <button type="submit" id="loginBtn">
-      Login
-    </button>
+    <form id="loginForm">
 
-  </form>
+      <div class="form-group">
+        <label>Email</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter email"
+          required
+        >
+      </div>
 
-  <div id="message"></div>
+      <div class="form-group">
+        <label>Password</label>
+
+        <div class="input-wrap">
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter password"
+            required
+          >
+
+          <button
+            type="button"
+            class="password-toggle"
+            id="passwordToggle"
+            aria-label="Show password"
+          >👁️</button>
+        </div>
+      </div>
+
+      <button type="submit" id="loginBtn">
+        Login
+      </button>
+
+    </form>
+
+    <div id="message"></div>
+
+    <div class="login-footer">
+      <span>SAFA QURAN COLLEGE</span><br>
+      Online Management Portal
+    </div>
+
+  </div>
 
 </div>
 
@@ -163,7 +400,7 @@ const firebaseConfig = {
   projectId: "safa-hifz-class-7e84b",
   storageBucket: "safa-hifz-class-7e84b.firebasestorage.app",
   messagingSenderId: "476801753196",
-  appId: "1:476801753196:web:d4c8a8b0c1a4203606f849",
+  appId: "1:476801753196:web:d4a8a8b0c1a4203606f849",
   measurementId: "G-ZTBTJCB5SR"
 };
 
@@ -292,6 +529,25 @@ form.addEventListener("submit", async (e) => {
     loginBtn.disabled = false;
     loginBtn.textContent = "Login";
 
+  }
+
+});
+
+
+/* Password Show / Hide */
+const passwordToggle = document.getElementById("passwordToggle");
+const passwordInput = document.getElementById("password");
+
+passwordToggle.addEventListener("click", () => {
+
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    passwordToggle.textContent = "🙈";
+    passwordToggle.setAttribute("aria-label", "Hide password");
+  } else {
+    passwordInput.type = "password";
+    passwordToggle.textContent = "👁️";
+    passwordToggle.setAttribute("aria-label", "Show password");
   }
 
 });
