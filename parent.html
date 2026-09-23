@@ -45,7 +45,6 @@ body{
   overflow-x:hidden;
 }
 
-/* Islamic geometric background */
 body::before{
   content:"";
   position:fixed;
@@ -305,8 +304,23 @@ body::before{
 .arabic{
   font-size:25px;
   color:var(--gold2);
-  margin-bottom:12px;
+  margin-bottom:8px;
   direction:rtl;
+}
+
+.quran-hadith-line{
+  display:inline-block;
+  margin:2px 0 18px;
+  padding:10px 18px;
+  direction:rtl;
+  text-align:center;
+  font-family:"Amiri","Noto Naskh Arabic","Traditional Arabic",serif;
+  font-size:22px;
+  line-height:1.8;
+  color:#f8df91;
+  border-top:1px solid rgba(242,207,114,.45);
+  border-bottom:1px solid rgba(242,207,114,.45);
+  text-shadow:0 2px 8px rgba(0,0,0,.18);
 }
 
 .welcome h2{
@@ -316,6 +330,106 @@ body::before{
 
 .welcome p{
   opacity:.8;
+}
+
+/* FEATURED DONATION */
+.donation-featured{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin-bottom:22px;
+  padding:16px 20px;
+  border-radius:17px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(242,207,114,.30),
+      transparent 25%
+    ),
+    linear-gradient(
+      135deg,
+      #032b24,
+      #08745a
+    );
+  border:1px solid rgba(214,169,58,.55);
+  box-shadow:
+    0 10px 28px rgba(4,45,35,.18),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  transition:.25s;
+}
+
+.donation-featured::after{
+  content:"☪";
+  position:absolute;
+  right:45px;
+  top:-25px;
+  font-size:85px;
+  color:rgba(242,207,114,.07);
+  pointer-events:none;
+}
+
+.donation-featured:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 14px 32px rgba(4,45,35,.24),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.donation-featured-icon{
+  width:52px;
+  height:52px;
+  min-width:52px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    linear-gradient(
+      135deg,
+      #f2cf72,
+      #d6a93a
+    );
+  color:#063b2f;
+  font-size:25px;
+  border:2px solid rgba(255,255,255,.35);
+  box-shadow:0 5px 15px rgba(0,0,0,.18);
+}
+
+.donation-featured-content{
+  flex:1;
+  position:relative;
+  z-index:2;
+}
+
+.donation-featured-title{
+  color:#fff;
+  font-size:17px;
+  font-weight:bold;
+  letter-spacing:.7px;
+}
+
+.donation-featured-subtitle{
+  color:#f2cf72;
+  font-size:12px;
+  margin-top:4px;
+}
+
+.donation-featured-arrow{
+  position:relative;
+  z-index:2;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.10);
+  color:#f2cf72;
+  font-size:20px;
+  font-weight:bold;
 }
 
 /* COLLEGE PHOTO */
@@ -1088,8 +1202,33 @@ textarea{
     font-size:20px;
   }
 
+  .quran-hadith-line{
+    font-size:18px;
+    padding:8px 12px;
+  }
+
   .welcome h2{
     font-size:21px;
+  }
+
+  .donation-featured{
+    padding:14px;
+    gap:12px;
+  }
+
+  .donation-featured-icon{
+    width:46px;
+    height:46px;
+    min-width:46px;
+    font-size:22px;
+  }
+
+  .donation-featured-title{
+    font-size:14px;
+  }
+
+  .donation-featured-subtitle{
+    font-size:11px;
   }
 
   .college-photo-wrap{
@@ -1247,16 +1386,43 @@ textarea{
     <!-- HOME -->
     <section class="section active" id="home">
 
-      <div class="welcome">
-        <div class="arabic">
-          السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
+      <!-- MY DONATION TO SAFA -->
+      <div class="donation-featured" onclick="openSection('donation')">
+
+        <div class="donation-featured-icon">
+          🤲
         </div>
 
-        <h2>Assalamu Alaikum</h2>
+        <div class="donation-featured-content">
+          <div class="donation-featured-title">
+            MY DONATION TO SAFA
+          </div>
+
+          <div class="donation-featured-subtitle">
+            Support SAFA QURAN COLLEGE
+          </div>
+        </div>
+
+        <div class="donation-featured-arrow">
+          →
+        </div>
+
+      </div>
+
+      <div class="welcome">
+
+        <div class="arabic">
+          السَّلاَمُ عَلَيْكُمْ
+        </div>
+
+        <div class="quran-hadith-line">
+          خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ
+        </div>
 
         <p>
           Welcome to SAFA QURAN COLLEGE Parent Dashboard.
         </p>
+
       </div>
 
       <!-- COLLEGE PHOTO -->
@@ -2277,7 +2443,7 @@ async function loadStudy(){
 
       const dbb =
         b.date ||
-        b.createdAt?.toDate?.().getTime?.() ||
+        b.createdAt?.toDate?.getTime?.() ||
         "";
 
       return String(dbb).localeCompare(String(da));
