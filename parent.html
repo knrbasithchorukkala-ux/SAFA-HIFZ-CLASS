@@ -719,12 +719,30 @@ body::before{
   font-weight:bold;
   box-shadow:0 5px 18px rgba(0,0,0,.05);
   transition:.2s;
+  position:relative;
 }
 
 .quick-btn:hover{
   transform:translateY(-2px);
   border-color:#bcdace;
   box-shadow:var(--shadow);
+}
+
+/* QUICK ACCESS NOTIFICATION */
+.quick-notify{
+  position:absolute;
+  top:9px;
+  right:10px;
+  width:27px;
+  height:27px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#e9f6f0;
+  color:var(--primary2);
+  font-size:14px;
+  border:1px solid #cde5da;
 }
 
 .quick-btn .qicon{
@@ -1701,23 +1719,39 @@ textarea{
         <div class="quick-grid">
 
           <button class="quick-btn" data-go="results">
+
+            <span class="quick-notify">🔔</span>
+
             <span class="qicon">📊</span>
-            Result
+            Results
+
           </button>
 
           <button class="quick-btn" data-go="leave">
+
+            <span class="quick-notify">🔔</span>
+
             <span class="qicon">📝</span>
             Leave Request
+
           </button>
 
           <button class="quick-btn" data-go="messages">
+
+            <span class="quick-notify">🔔</span>
+
             <span class="qicon">💬</span>
             Messages to Usthad
+
           </button>
 
           <button class="quick-btn donation-quick" data-go="donation">
+
+            <span class="quick-notify">🔔</span>
+
             <span class="qicon">💰</span>
             Donation
+
           </button>
 
         </div>
@@ -1888,7 +1922,6 @@ textarea{
 
       <div class="donation-grid">
 
-        <!-- BANK / UPI -->
         <div class="donation-panel">
 
           <h3>🏦 Bank & UPI Details</h3>
@@ -1941,7 +1974,6 @@ textarea{
 
         </div>
 
-        <!-- QR -->
         <div class="donation-panel qr-panel">
 
           <h3>📱 Scan & Pay</h3>
@@ -2280,7 +2312,7 @@ document.querySelectorAll(".quick-btn").forEach(button=>{
 });
 
 
-/* NEW PARENT SERVICE BOXES */
+/* PARENT SERVICE BOXES */
 
 document.querySelectorAll(".service-card").forEach(button=>{
 
@@ -2802,14 +2834,6 @@ async function loadResults(){
         return;
       }
 
-      /*
-        ADMIN DASHBOARD USES:
-        status:"draft"
-        status:"published"
-
-        Parent should show only published results.
-      */
-
       const status =
         String(data.status ?? "")
         .trim()
@@ -2938,14 +2962,6 @@ async function loadNotices(){
     snap.forEach(docSnap=>{
 
       const data = docSnap.data();
-
-      /*
-        ADMIN DASHBOARD USES:
-        status:"draft"
-        status:"published"
-
-        Parent should show only published notices.
-      */
 
       const status =
         String(data.status ?? "")
