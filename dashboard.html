@@ -865,8 +865,6 @@ The best among you are those who learn the Qur'an and teach it.
 
 <strong id="attendanceCount">0</strong>
 
-<span class="dashboard-notify zero" id="attendanceNotify">0</span>
-
 </div>
 
 
@@ -878,8 +876,6 @@ The best among you are those who learn the Qur'an and teach it.
 
 <strong id="studyCount">0</strong>
 
-<span class="dashboard-notify zero" id="studyNotify">0</span>
-
 </div>
 
 
@@ -890,8 +886,6 @@ The best among you are those who learn the Qur'an and teach it.
 <small>NOTES</small>
 
 <strong id="noticeCount">0</strong>
-
-<span class="dashboard-notify zero" id="noticeDashboardNotify">0</span>
 
 </div>
 
@@ -1946,7 +1940,7 @@ let resultRows=[];
 /* Notification data */
 window.adminLeaveRows=[];
 window.adminMessageRows=[];
-window.adminDonationRows=[];
+window.adminDonationRows;
 
 
 /* =========================================================
@@ -1997,18 +1991,6 @@ error
 }
 
 
-/*
-Only document ID + creation time are used.
-
-This is intentional:
-
-- Adding a new document = notification
-- Editing an old document = NO new notification
-- Approving/rejecting an old leave = NO new notification
-- Replying to an old message = NO new notification
-- Deleting an old document = NO new notification
-*/
-
 function getNotificationRecordIds(rows){
 
 return rows
@@ -2055,14 +2037,6 @@ getNotificationRecordIds(rows);
 const currentSet=
 new Set(currentIds);
 
-
-/*
-First time:
-
-Store existing records as already known.
-Do NOT show bell.
-*/
-
 if(!state[type]){
 
 state[type]={
@@ -2106,31 +2080,14 @@ const seenSet=
 new Set(seenIds);
 
 
-/*
-Only IDs that were not previously known
-are considered genuinely new.
-*/
-
 const newlyArrived=
 currentIds.filter(
 id=>!knownSet.has(id)
 );
 
 
-/*
-Update known IDs immediately.
-
-This prevents the same new notification
-from being counted again after refresh.
-*/
-
 state[type].knownIds=currentIds;
 
-
-/*
-If there are newly arrived records and
-they haven't been seen yet, show bell.
-*/
 
 const unseenNew=
 currentIds.filter(
@@ -2158,15 +2115,6 @@ shouldShow
 
 }
 
-
-/*
-When Admin opens the section, all currently
-existing records are considered seen.
-
-Old records remain known.
-Future newly added records will create
-a new bell.
-*/
 
 function markAdminNotificationSeen(
 type,
@@ -2255,8 +2203,6 @@ badge.classList.toggle(
 
 }
 
-
-/* OLD DASHBOARD BOX FUNCTION KEPT */
 
 function setDashboardNotification(id,count){
 
@@ -2537,10 +2483,6 @@ b.dataset.section===id
 )
 );
 
-
-/* =====================================================
-   MARK ADMIN NOTIFICATION AS SEEN
-   ===================================================== */
 
 if(id==="leave"){
 
@@ -3807,11 +3749,6 @@ $("attendanceCount")
 .textContent=
 attendanceRows.length;
 
-setDashboardNotification(
-"attendanceNotify",
-attendanceRows.length
-);
-
 renderAttendance();
 
 
@@ -3854,8 +3791,7 @@ const query=
 $("attendanceSearch")?.value||
 ""
 )
-.trim()
-.toLowerCase();
+.trim().toLowerCase();
 
 
 const filtered=
@@ -4258,11 +4194,6 @@ String(a.date||"")
 
 $("studyCount").textContent=
 studyRows.length;
-
-setDashboardNotification(
-"studyNotify",
-studyRows.length
-);
 
 renderStudy();
 
@@ -4877,19 +4808,13 @@ $("noticeCount")
 .textContent=
 publishedCount;
 
-setDashboardNotification(
-"noticeDashboardNotify",
-publishedCount
-);
-
 if(!rows.length){
 
 table.innerHTML=
 `<tr><td colspan="4">
 <div class="empty">
 No notices.
-</div>
-</td></tr>`;
+</div></td></tr>`;
 
 return;
 
@@ -5050,8 +4975,7 @@ ${escapeHtml(
 error.message||""
 )}
 </small>
-</div>
-</td></tr>`;
+</div></td></tr>`;
 
 }
 
@@ -5085,20 +5009,7 @@ rows.sort(
 (a.createdAt?.seconds||0)
 );
 
-
-/*
-Store current rows for the notification system.
-*/
-
 window.adminLeaveRows=rows;
-
-
-/*
-NEW NOTIFICATION:
-Only a newly-created leave request produces
-a bell notification.
-Existing records and status changes do not.
-*/
 
 updateAdminNotification(
 "leave",
@@ -5106,7 +5017,6 @@ rows,
 "leaveNotify",
 "leaveMenuNotify"
 );
-
 
 if($("leaveCount"))
 $("leaveCount").textContent=
@@ -5119,8 +5029,7 @@ $("leaveTable").innerHTML=
 `<tr><td colspan="7">
 <div class="empty">
 No leave requests.
-</div>
-</td></tr>`;
+</div></td></tr>`;
 
 return;
 
@@ -5387,8 +5296,7 @@ ${escapeHtml(
 error.message||""
 )}
 </small>
-</div>
-</td></tr>`;
+</div></td></tr>`;
 
 }
 
@@ -5422,22 +5330,7 @@ rows.sort(
 (a.createdAt?.seconds||0)
 );
 
-
-/*
-Store current rows for notification system.
-*/
-
 window.adminMessageRows=rows;
-
-
-/*
-NEW NOTIFICATION:
-Only a newly-created parent message produces
-a bell notification.
-
-Replying to an existing message does NOT
-create another Admin notification.
-*/
 
 updateAdminNotification(
 "messages",
@@ -5445,7 +5338,6 @@ rows,
 "messageNotify",
 "messageMenuNotify"
 );
-
 
 if($("messageCount"))
 $("messageCount").textContent=
@@ -5637,8 +5529,7 @@ ${escapeHtml(
 error.message||""
 )}
 </small>
-</div>
-</td></tr>`;
+</div></td></tr>`;
 
 }
 
@@ -5672,22 +5563,7 @@ rows.sort(
 (a.createdAt?.seconds||0)
 );
 
-
-/*
-Store current rows for notification system.
-*/
-
 window.adminDonationRows=rows;
-
-
-/*
-NEW NOTIFICATION:
-Only a newly-created donation produces
-a bell notification.
-
-Changing Pending -> Verified/Rejected
-does NOT create a new notification.
-*/
 
 updateAdminNotification(
 "donations",
