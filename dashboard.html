@@ -253,8 +253,17 @@ font-size:20px
 }
 
 .stat small{color:#dff4e9;font-size:11px;font-weight:800}
+
 .stat strong{
 display:block;margin-top:6px;color:#fff;font-size:30px;font-weight:900
+}
+
+/* HIDE ONLY THE THREE DASHBOARD COUNTS.
+   IDs are kept so Firebase/JS logic remains unchanged. */
+#attendanceCount,
+#studyCount,
+#noticeCount{
+display:none;
 }
 
 .dashboard-notify{
@@ -4542,8 +4551,7 @@ $("resultsTable").innerHTML=
 `<tr><td colspan="5">
 <div class="empty">
 No results found.
-</div>
-</td></tr>`;
+</div></td></tr>`;
 
 return;
 
@@ -5295,8 +5303,7 @@ Unable to load leave requests.
 ${escapeHtml(
 error.message||""
 )}
-</small>
-</div></td></tr>`;
+</small></div></td></tr>`;
 
 }
 
@@ -5528,8 +5535,7 @@ Unable to load parent messages.
 ${escapeHtml(
 error.message||""
 )}
-</small>
-</div></td></tr>`;
+</small></div></td></tr>`;
 
 }
 
