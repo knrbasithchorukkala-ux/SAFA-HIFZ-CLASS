@@ -1,7 +1,11 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0"><title>SAFA QURAN COLLEGE ONLINE PORTAL | Parent Dashboard</title><style>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SAFA QURAN COLLEGE ONLINE PORTAL | Parent Dashboard</title>
+
+<style>
 *{
   box-sizing:border-box;
   margin:0;
@@ -330,16 +334,8 @@ body::before{
   position:relative;
   overflow:hidden;
   background:
-    radial-gradient(
-      circle at 85% 20%,
-      rgba(242,207,114,.30),
-      transparent 25%
-    ),
-    linear-gradient(
-      135deg,
-      #032b24,
-      #08745a
-    );
+    radial-gradient(circle at 85% 20%,rgba(242,207,114,.30),transparent 25%),
+    linear-gradient(135deg,#032b24,#08745a);
   border:1px solid rgba(214,169,58,.55);
   box-shadow:
     0 10px 28px rgba(4,45,35,.18),
@@ -362,12 +358,7 @@ body::before{
   display:flex;
   align-items:center;
   justify-content:center;
-  background:
-    linear-gradient(
-      135deg,
-      #f2cf72,
-      #d6a93a
-    );
+  background:linear-gradient(135deg,#f2cf72,#d6a93a);
   color:#063b2f;
   font-size:25px;
   border:2px solid rgba(255,255,255,.35);
@@ -436,11 +427,7 @@ body::before{
 .college-photo-overlay{
   position:absolute;
   inset:0;
-  background:linear-gradient(
-    180deg,
-    transparent 35%,
-    rgba(0,34,27,.78) 100%
-  );
+  background:linear-gradient(180deg,transparent 35%,rgba(0,34,27,.78) 100%);
   display:flex;
   align-items:flex-end;
   padding:25px;
@@ -486,8 +473,7 @@ body::before{
 
 /* CHILD CARD */
 .child-card{
-  background:
-    linear-gradient(135deg,#ffffff,#f1faf6);
+  background:linear-gradient(135deg,#ffffff,#f1faf6);
   border:1px solid #d8ebe3;
 }
 
@@ -692,22 +678,20 @@ body::before{
   letter-spacing:.5px;
 }
 
-/* PROFESSIONAL NOTIFICATION BADGE */
-
+/* NOTIFICATION BELL */
 .service-notify{
   display:none;
   align-items:center;
   justify-content:center;
-  min-width:34px;
-  height:22px;
-  padding:0 8px;
-  border-radius:12px;
-  background:linear-gradient(135deg,#c53b3b,#e45858);
-  color:#fff;
-  font-size:9px;
-  font-weight:bold;
-  letter-spacing:.5px;
-  box-shadow:0 3px 10px rgba(197,59,59,.25);
+  width:30px;
+  height:30px;
+  padding:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.12);
+  color:#f2cf72;
+  font-size:18px;
+  line-height:1;
+  box-shadow:0 3px 10px rgba(0,0,0,.15);
 }
 
 .service-notify.show{
@@ -744,20 +728,19 @@ body::before{
 .notification-badge{
   display:none;
   position:absolute;
-  top:9px;
-  right:10px;
-  min-width:34px;
-  height:22px;
-  padding:0 8px;
-  border-radius:12px;
+  top:8px;
+  right:9px;
+  width:28px;
+  height:28px;
+  padding:0;
+  border-radius:50%;
   align-items:center;
   justify-content:center;
-  background:linear-gradient(135deg,#c53b3b,#e45858);
-  color:#fff;
-  font-size:9px;
-  font-weight:bold;
-  letter-spacing:.5px;
-  box-shadow:0 3px 10px rgba(197,59,59,.25);
+  background:#fff8df;
+  color:#b78616;
+  font-size:17px;
+  line-height:1;
+  box-shadow:0 3px 10px rgba(0,0,0,.12);
   z-index:5;
 }
 
@@ -1427,687 +1410,937 @@ textarea{
     text-align:left;
   }
 }
-</style></head><body><!-- LOADING --><div id="loading">
+</style>
+</head>
+
+<body>
+
+<!-- LOADING -->
+<div id="loading">
   <div class="loading-logo"></div>
   <strong>SAFA QURAN COLLEGE ONLINE PORTAL</strong>
   <small>Loading Parent Dashboard...</small>
-</div><!-- SIDEBAR --><aside class="sidebar" id="sidebar">  <div class="sidebar-header">
+</div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+  <div class="sidebar-header">
+
     <div class="logo-circle"></div>
+
     <h2>SAFA QURAN COLLEGE</h2>
+
     <p>PARENT PORTAL</p>
-  </div>  <nav class="nav"><button class="nav-btn active" data-section="home">
-  <span>🏠</span> Home
-</button>
 
-<button class="nav-btn" data-section="child">
-  <span>👨‍🎓</span> My Child
-</button>
+  </div>
 
-<button class="nav-btn" data-section="attendance">
-  <span>📅</span> Attendance
-</button>
+  <nav class="nav">
 
-<button class="nav-btn" data-section="study">
-  <span>📖</span> Study Progress
-</button>
+    <button class="nav-btn active" data-section="home">
+      <span>🏠</span> Home
+    </button>
 
-<button class="nav-btn" data-section="results">
-  <span>📊</span> Results
-</button>
+    <button class="nav-btn" data-section="child">
+      <span>👨‍🎓</span> My Child
+    </button>
 
-<button class="nav-btn" data-section="notices">
-  <span>📢</span> Notices
-</button>
+    <button class="nav-btn" data-section="attendance">
+      <span>📅</span> Attendance
+    </button>
 
-<button class="nav-btn" data-section="donation">
-  <span>💰</span> MY DONATION TO SAFA
-</button>
+    <button class="nav-btn" data-section="study">
+      <span>📖</span> Study Progress
+    </button>
 
-<button class="nav-btn" data-section="leave">
-  <span>📝</span> Leave
-</button>
+    <button class="nav-btn" data-section="results">
+      <span>📊</span> Results
+    </button>
 
-<button class="nav-btn" data-section="messages">
-  <span>💬</span> Messages
-</button>
+    <button class="nav-btn" data-section="notices">
+      <span>📢</span> Notices
+    </button>
+
+    <button class="nav-btn" data-section="donation">
+      <span>💰</span> MY DONATION TO SAFA
+    </button>
+
+    <button class="nav-btn" data-section="leave">
+      <span>📝</span> Leave
+    </button>
+
+    <button class="nav-btn" data-section="messages">
+      <span>💬</span> Messages
+    </button>
 
   </nav>
-</aside><!-- MAIN --><main class="main">  <!-- TOPBAR -->  <header class="topbar"><div class="topbar-left">
-  <button class="menu-toggle" id="menuToggle">☰</button>
 
-  <div>
-    <h1 id="pageTitle">Parent Dashboard</h1>
-    <small>SAFA QURAN COLLEGE ONLINE PORTAL</small>
-  </div>
-</div>
+</aside>
 
-<div class="top-actions">
-  <span class="badge">PARENT PORTAL</span>
-  <button class="logout-btn" id="logoutBtn">Logout</button>
-</div>
+<!-- MAIN -->
+<main class="main">
 
-  </header>  <div class="content"><!-- HOME -->
-<section class="section active" id="home">
+  <!-- TOPBAR -->
+  <header class="topbar">
 
-  <div class="donation-featured" id="donationFeatured">
+    <div class="topbar-left">
 
-    <div class="donation-featured-icon">
-      🤲
-    </div>
-
-    <div class="donation-featured-content">
-      <div class="donation-featured-title">
-        MY DONATION TO SAFA
-      </div>
-
-      <div class="donation-featured-subtitle">
-        Support SAFA QURAN COLLEGE
-      </div>
-    </div>
-
-    <div class="donation-featured-arrow">
-      →
-    </div>
-
-  </div>
-
-  <div class="welcome">
-
-    <div class="arabic">
-      السَّلاَمُ عَلَيْكُمْ
-    </div>
-
-    <div class="quran-hadith-line">
-      خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ
-    </div>
-
-    <p>
-      Welcome to SAFA QURAN COLLEGE Parent Dashboard.
-    </p>
-
-  </div>
-
-  <div class="college-photo-card">
-
-    <div class="college-photo-wrap">
-
-      <img
-        src="./IMG-20260921-WA0016.jpg"
-        alt="SAFA QURAN COLLEGE"
-        class="college-photo"
-        onerror="this.style.display='none';"
-      >
-
-      <div class="college-photo-overlay">
-        <div>
-          <h3>SAFA QURAN COLLEGE</h3>
-          <p>Qur'an • Hifz • Islamic Education</p>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="card child-card">
-
-    <div class="child-head">
-
-      <div class="avatar" id="homeInitial">S</div>
+      <button class="menu-toggle" id="menuToggle">
+        ☰
+      </button>
 
       <div>
-        <h3 id="homeStudentName">Loading...</h3>
-        <p>Student No: <span id="homeStudentNumber">-</span></p>
+
+        <h1 id="pageTitle">
+          Parent Dashboard
+        </h1>
+
+        <small>
+          SAFA QURAN COLLEGE ONLINE PORTAL
+        </small>
+
       </div>
 
     </div>
 
-    <div class="info-grid">
+    <div class="top-actions">
 
-      <div class="info-box">
-        <label>Student Name</label>
-        <strong id="homeNameInfo">-</strong>
-      </div>
+      <span class="badge">
+        PARENT PORTAL
+      </span>
 
-      <div class="info-box">
-        <label>Student Number</label>
-        <strong id="homeNoInfo">-</strong>
-      </div>
-
-      <div class="info-box">
-        <label>Class</label>
-        <strong id="homeClassInfo">-</strong>
-      </div>
-
-      <div class="info-box">
-        <label>Guardian Name</label>
-        <strong id="homeGuardianInfo">-</strong>
-      </div>
-
-      <div class="info-box">
-        <label>Phone Number</label>
-        <strong id="homePhoneInfo">-</strong>
-      </div>
-
-      <div class="info-box">
-        <label>Place / Address</label>
-        <strong id="homeAddressInfo">-</strong>
-      </div>
+      <button class="logout-btn" id="logoutBtn">
+        Logout
+      </button>
 
     </div>
 
-  </div>
+  </header>
 
-  <div class="card">
+  <div class="content">
 
-    <div class="card-title">
-      <h3>Parent Access</h3>
-      <span>Quick View</span>
-    </div>
+    <!-- HOME -->
+    <section class="section active" id="home">
 
-    <div class="service-grid">
+      <div class="donation-featured" id="donationFeatured">
 
-      <button class="service-card study-service" data-go="study">
-
-        <div class="service-card-icon">
-          📖
+        <div class="donation-featured-icon">
+          🤲
         </div>
 
-        <div class="service-card-content">
-          <div class="service-card-title">
-            Study Progress
+        <div class="donation-featured-content">
+
+          <div class="donation-featured-title">
+            MY DONATION TO SAFA
           </div>
 
-          <div class="service-card-subtitle">
-            Hifz & Study Updates
-          </div>
-        </div>
-
-        <div class="service-card-footer">
-          <span class="service-access">
-            ↗ ACCESS
-          </span>
-
-          <span class="service-notify" id="serviceNotifyStudy">
-            NEW
-          </span>
-        </div>
-
-      </button>
-
-      <button class="service-card attendance-service" data-go="attendance">
-
-        <div class="service-card-icon">
-          📅
-        </div>
-
-        <div class="service-card-content">
-          <div class="service-card-title">
-            Attendance
+          <div class="donation-featured-subtitle">
+            Support SAFA QURAN COLLEGE
           </div>
 
-          <div class="service-card-subtitle">
-            Daily Attendance Status
-          </div>
         </div>
 
-        <div class="service-card-footer">
-          <span class="service-access">
-            ↗ ACCESS
-          </span>
-
-          <span class="service-notify" id="serviceNotifyAttendance">
-            NEW
-          </span>
-        </div>
-
-      </button>
-
-      <button class="service-card notice-service" data-go="notices">
-
-        <div class="service-card-icon">
-          📢
-        </div>
-
-        <div class="service-card-content">
-          <div class="service-card-title">
-            Notices
-          </div>
-
-          <div class="service-card-subtitle">
-            College Announcements
-          </div>
-        </div>
-
-        <div class="service-card-footer">
-          <span class="service-access">
-            ↗ ACCESS
-          </span>
-
-          <span class="service-notify" id="serviceNotifyNotices">
-            NEW
-          </span>
-        </div>
-
-      </button>
-
-    </div>
-
-  </div>
-
-  <div class="card">
-
-    <div class="card-title">
-      <h3>Quick Access</h3>
-      <span>Parent Services</span>
-    </div>
-
-    <div class="quick-grid">
-
-      <button class="quick-btn" data-go="results">
-
-        <span class="notification-badge" id="notifyResults">
-          NEW
-        </span>
-
-        <span class="qicon">📊</span>
-        Results
-
-      </button>
-
-      <button class="quick-btn" data-go="leave">
-
-        <span class="notification-badge" id="notifyLeave">
-          NEW
-        </span>
-
-        <span class="qicon">📝</span>
-        Leave Request
-
-      </button>
-
-      <button class="quick-btn" data-go="messages">
-
-        <span class="notification-badge" id="notifyMessages">
-          NEW
-        </span>
-
-        <span class="qicon">💬</span>
-        Messages to Usthad
-
-      </button>
-
-      <button class="quick-btn donation-quick" data-go="donation">
-
-        <span class="qicon">💰</span>
-        Donation
-
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- MY CHILD -->
-<section class="section" id="child">
-
-  <div class="section-head">
-    <h2>My Child</h2>
-    <p>Student and guardian information</p>
-  </div>
-
-  <div class="card child-card">
-
-    <div class="child-head">
-
-      <div class="avatar" id="childInitial">S</div>
-
-      <div>
-        <h3 id="childName">Loading...</h3>
-        <p>Student No: <span id="childNumber">-</span></p>
-      </div>
-
-    </div>
-
-    <div class="info-grid">
-
-      <div class="info-box">
-        <label>Student Name</label>
-        <strong id="childNameInfo">-</strong>
-      </div>
-
-      <div class="info-box">
-        <label>Student Number</label>
-        <strong id="childNoInfo">-</strong>
-      </div>
-
-      <div class="info-box">
-        <label>Class</label>
-        <strong id="childClassInfo">-</strong>
-      </div>
-
-      <div class="info-box">
-        <label>Guardian Name</label>
-        <strong id="childGuardianInfo">-</strong>
-      </div>
-
-      <div class="info-box">
-        <label>Phone Number</label>
-        <strong id="childPhoneInfo">-</strong>
-      </div>
-
-      <div class="info-box">
-        <label>Place / Address</label>
-        <strong id="childAddressInfo">-</strong>
-      </div>
-
-      <div class="info-box">
-        <label>Parent Email</label>
-        <strong id="childEmailInfo">-</strong>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- ATTENDANCE -->
-<section class="section" id="attendance">
-
-  <div class="section-head">
-    <h2>Attendance</h2>
-    <p>Your child's attendance records</p>
-  </div>
-
-  <div class="card">
-
-    <div class="table-wrap">
-
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-
-        <tbody id="attendanceBody">
-          <tr>
-            <td colspan="2">Loading...</td>
-          </tr>
-        </tbody>
-
-      </table>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- STUDY -->
-<section class="section" id="study">
-
-  <div class="section-head">
-    <h2>Study Progress</h2>
-    <p>Hifz and study progress updates</p>
-  </div>
-
-  <div id="studyList" class="progress-grid">
-    <div class="empty">Loading...</div>
-  </div>
-
-</section>
-
-<!-- RESULTS -->
-<section class="section" id="results">
-
-  <div class="section-head">
-    <h2>Results</h2>
-    <p>Published examination results</p>
-  </div>
-
-  <div id="resultsList" class="result-grid">
-    <div class="empty">Loading...</div>
-  </div>
-
-</section>
-
-<!-- NOTICES -->
-<section class="section" id="notices">
-
-  <div class="section-head">
-    <h2>Notices</h2>
-    <p>Important college announcements</p>
-  </div>
-
-  <div id="noticesList">
-    <div class="empty">Loading...</div>
-  </div>
-
-</section>
-
-<!-- DONATION -->
-<section class="section" id="donation">
-
-  <div class="section-head">
-    <h2>MY DONATION TO SAFA</h2>
-    <p>Support SAFA QURAN COLLEGE</p>
-  </div>
-
-  <div class="donation-hero">
-
-    <h2>💚 Support SAFA QURAN COLLEGE</h2>
-
-    <p>
-      You can support the educational activities of SAFA QURAN COLLEGE
-      through direct UPI payment, QR code or bank transfer.
-      May Allah accept your contribution and reward you abundantly.
-    </p>
-
-  </div>
-
-  <div class="donation-grid">
-
-    <div class="donation-panel">
-
-      <h3>🏦 Bank & UPI Details</h3>
-
-      <div class="bank-details">
-
-        <div class="bank-row">
-          <span>Bank</span>
-          <strong>Federal Bank</strong>
-        </div>
-
-        <div class="bank-row">
-          <span>A/C No</span>
-          <strong>10980200318831</strong>
-        </div>
-
-        <div class="bank-row">
-          <span>IFSC</span>
-          <strong>FDRL0001098</strong>
-        </div>
-
-        <div class="bank-row">
-          <span>Branch</span>
-          <strong>KANNUR BRANCH</strong>
+        <div class="donation-featured-arrow">
+          →
         </div>
 
       </div>
 
-      <div class="upi-box">
+      <div class="welcome">
 
-        <div class="upi-label">DIRECT UPI PAYMENT</div>
-
-        <div class="upi-id">
-          563safa@fbl
+        <div class="arabic">
+          السَّلاَمُ عَلَيْكُمْ
         </div>
 
-        <a
-          class="upi-pay-btn"
-          href="upi://pay?pa=563safa%40fbl&pn=SAFA%20QURAN%20COLLEGE&cu=INR">
-          💳 PAY DIRECTLY WITH UPI
-        </a>
-
-      </div>
-
-      <div class="donation-note">
-        If the UPI button does not open an app on your device,
-        you can copy the UPI ID <strong>563safa@fbl</strong>
-        and pay through your preferred UPI application.
-      </div>
-
-    </div>
-
-    <div class="donation-panel qr-panel">
-
-      <h3>📱 Scan & Pay</h3>
-
-      <div class="qr-box">
-
-        <img
-          src="./20260225.jpg"
-          alt="SAFA Donation QR Code"
-          onerror="this.style.display='none';"
-        >
-
-      </div>
-
-      <p>
-        Scan the QR code using your UPI application
-        to make your donation.
-      </p>
-
-      <div class="donation-note">
-        <strong>UPI ID:</strong> 563safa@fbl
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- LEAVE -->
-<section class="section" id="leave">
-
-  <div class="section-head">
-    <h2>Leave Application</h2>
-    <p>Apply for leave and view replies from Usthad</p>
-  </div>
-
-  <div class="card">
-
-    <div class="card-title">
-      <h3>Apply for Leave</h3>
-    </div>
-
-    <form id="leaveForm">
-
-      <div class="form-grid">
-
-        <div class="form-group">
-          <label>Leave Date</label>
-          <input type="date" id="leaveDate" required>
+        <div class="quran-hadith-line">
+          خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ
         </div>
 
-        <div class="form-group">
-          <label>Reason</label>
-          <input
-            type="text"
-            id="leaveReason"
-            placeholder="Reason for leave"
-            required
+        <p>
+          Welcome to SAFA QURAN COLLEGE Parent Dashboard.
+        </p>
+
+      </div>
+
+      <div class="college-photo-card">
+
+        <div class="college-photo-wrap">
+
+          <img
+            src="./IMG-20260921-WA0016.jpg"
+            alt="SAFA QURAN COLLEGE"
+            class="college-photo"
+            onerror="this.style.display='none';"
           >
-        </div>
 
-        <div class="form-group full">
-          <label>Details</label>
-          <textarea
-            id="leaveDetails"
-            placeholder="Write additional details..."
-          ></textarea>
+          <div class="college-photo-overlay">
+
+            <div>
+
+              <h3>
+                SAFA QURAN COLLEGE
+              </h3>
+
+              <p>
+                Qur'an • Hifz • Islamic Education
+              </p>
+
+            </div>
+
+          </div>
+
         </div>
 
       </div>
 
-      <button class="primary-btn" type="submit">
-        Submit Leave Application
-      </button>
+      <div class="card child-card">
 
-    </form>
+        <div class="child-head">
 
-  </div>
+          <div class="avatar" id="homeInitial">
+            S
+          </div>
 
-  <div class="card">
+          <div>
 
-    <div class="card-title">
-      <h3>Leave History</h3>
-    </div>
+            <h3 id="homeStudentName">
+              Loading...
+            </h3>
 
-    <div id="leaveHistory">
-      <div class="empty">Loading...</div>
-    </div>
+            <p>
+              Student No:
+              <span id="homeStudentNumber">
+                -
+              </span>
+            </p>
 
-  </div>
+          </div>
 
-</section>
+        </div>
 
-<!-- MESSAGES -->
-<section class="section" id="messages">
+        <div class="info-grid">
 
-  <div class="section-head">
-    <h2>Parent Messages</h2>
-    <p>Send a message to Usthad / Administration</p>
-  </div>
+          <div class="info-box">
+            <label>Student Name</label>
+            <strong id="homeNameInfo">-</strong>
+          </div>
 
-  <div class="card">
+          <div class="info-box">
+            <label>Student Number</label>
+            <strong id="homeNoInfo">-</strong>
+          </div>
 
-    <div class="card-title">
-      <h3>Send Message</h3>
-    </div>
+          <div class="info-box">
+            <label>Class</label>
+            <strong id="homeClassInfo">-</strong>
+          </div>
 
-    <form id="messageForm">
+          <div class="info-box">
+            <label>Guardian Name</label>
+            <strong id="homeGuardianInfo">-</strong>
+          </div>
 
-      <div class="form-group">
-        <label>Your Message</label>
+          <div class="info-box">
+            <label>Phone Number</label>
+            <strong id="homePhoneInfo">-</strong>
+          </div>
 
-        <textarea
-          id="messageText"
-          placeholder="Write your message..."
-          required
-        ></textarea>
+          <div class="info-box">
+            <label>Place / Address</label>
+            <strong id="homeAddressInfo">-</strong>
+          </div>
+
+        </div>
 
       </div>
 
-      <button class="primary-btn" type="submit">
-        Send Message
-      </button>
+      <div class="card">
 
-    </form>
+        <div class="card-title">
+          <h3>Parent Access</h3>
+          <span>Quick View</span>
+        </div>
+
+        <div class="service-grid">
+
+          <button class="service-card study-service" data-go="study">
+
+            <div class="service-card-icon">
+              📖
+            </div>
+
+            <div class="service-card-content">
+
+              <div class="service-card-title">
+                Study Progress
+              </div>
+
+              <div class="service-card-subtitle">
+                Hifz & Study Updates
+              </div>
+
+            </div>
+
+            <div class="service-card-footer">
+
+              <span class="service-access">
+                ↗ ACCESS
+              </span>
+
+              <span class="service-notify" id="serviceNotifyStudy">
+                🔔
+              </span>
+
+            </div>
+
+          </button>
+
+          <button class="service-card attendance-service" data-go="attendance">
+
+            <div class="service-card-icon">
+              📅
+            </div>
+
+            <div class="service-card-content">
+
+              <div class="service-card-title">
+                Attendance
+              </div>
+
+              <div class="service-card-subtitle">
+                Daily Attendance Status
+              </div>
+
+            </div>
+
+            <div class="service-card-footer">
+
+              <span class="service-access">
+                ↗ ACCESS
+              </span>
+
+              <span class="service-notify" id="serviceNotifyAttendance">
+                🔔
+              </span>
+
+            </div>
+
+          </button>
+
+          <button class="service-card notice-service" data-go="notices">
+
+            <div class="service-card-icon">
+              📢
+            </div>
+
+            <div class="service-card-content">
+
+              <div class="service-card-title">
+                Notices
+              </div>
+
+              <div class="service-card-subtitle">
+                College Announcements
+              </div>
+
+            </div>
+
+            <div class="service-card-footer">
+
+              <span class="service-access">
+                ↗ ACCESS
+              </span>
+
+              <span class="service-notify" id="serviceNotifyNotices">
+                🔔
+              </span>
+
+            </div>
+
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-title">
+          <h3>Quick Access</h3>
+          <span>Parent Services</span>
+        </div>
+
+        <div class="quick-grid">
+
+          <button class="quick-btn" data-go="results">
+
+            <span class="notification-badge" id="notifyResults">
+              🔔
+            </span>
+
+            <span class="qicon">
+              📊
+            </span>
+
+            Results
+
+          </button>
+
+          <button class="quick-btn" data-go="leave">
+
+            <span class="notification-badge" id="notifyLeave">
+              🔔
+            </span>
+
+            <span class="qicon">
+              📝
+            </span>
+
+            Leave Request
+
+          </button>
+
+          <button class="quick-btn" data-go="messages">
+
+            <span class="notification-badge" id="notifyMessages">
+              🔔
+            </span>
+
+            <span class="qicon">
+              💬
+            </span>
+
+            Messages to Usthad
+
+          </button>
+
+          <button class="quick-btn donation-quick" data-go="donation">
+
+            <span class="qicon">
+              💰
+            </span>
+
+            Donation
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- MY CHILD -->
+    <section class="section" id="child">
+
+      <div class="section-head">
+
+        <h2>
+          My Child
+        </h2>
+
+        <p>
+          Student and guardian information
+        </p>
+
+      </div>
+
+      <div class="card child-card">
+
+        <div class="child-head">
+
+          <div class="avatar" id="childInitial">
+            S
+          </div>
+
+          <div>
+
+            <h3 id="childName">
+              Loading...
+            </h3>
+
+            <p>
+              Student No:
+              <span id="childNumber">
+                -
+              </span>
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="info-grid">
+
+          <div class="info-box">
+            <label>Student Name</label>
+            <strong id="childNameInfo">-</strong>
+          </div>
+
+          <div class="info-box">
+            <label>Student Number</label>
+            <strong id="childNoInfo">-</strong>
+          </div>
+
+          <div class="info-box">
+            <label>Class</label>
+            <strong id="childClassInfo">-</strong>
+          </div>
+
+          <div class="info-box">
+            <label>Guardian Name</label>
+            <strong id="childGuardianInfo">-</strong>
+          </div>
+
+          <div class="info-box">
+            <label>Phone Number</label>
+            <strong id="childPhoneInfo">-</strong>
+          </div>
+
+          <div class="info-box">
+            <label>Place / Address</label>
+            <strong id="childAddressInfo">-</strong>
+          </div>
+
+          <div class="info-box">
+            <label>Parent Email</label>
+            <strong id="childEmailInfo">-</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ATTENDANCE -->
+    <section class="section" id="attendance">
+
+      <div class="section-head">
+
+        <h2>
+          Attendance
+        </h2>
+
+        <p>
+          Your child's attendance records
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+
+            </thead>
+
+            <tbody id="attendanceBody">
+
+              <tr>
+                <td colspan="2">
+                  Loading...
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- STUDY -->
+    <section class="section" id="study">
+
+      <div class="section-head">
+
+        <h2>
+          Study Progress
+        </h2>
+
+        <p>
+          Hifz and study progress updates
+        </p>
+
+      </div>
+
+      <div id="studyList" class="progress-grid">
+        <div class="empty">
+          Loading...
+        </div>
+      </div>
+
+    </section>
+
+    <!-- RESULTS -->
+    <section class="section" id="results">
+
+      <div class="section-head">
+
+        <h2>
+          Results
+        </h2>
+
+        <p>
+          Published examination results
+        </p>
+
+      </div>
+
+      <div id="resultsList" class="result-grid">
+
+        <div class="empty">
+          Loading...
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- NOTICES -->
+    <section class="section" id="notices">
+
+      <div class="section-head">
+
+        <h2>
+          Notices
+        </h2>
+
+        <p>
+          Important college announcements
+        </p>
+
+      </div>
+
+      <div id="noticesList">
+
+        <div class="empty">
+          Loading...
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- DONATION -->
+    <section class="section" id="donation">
+
+      <div class="section-head">
+
+        <h2>
+          MY DONATION TO SAFA
+        </h2>
+
+        <p>
+          Support SAFA QURAN COLLEGE
+        </p>
+
+      </div>
+
+      <div class="donation-hero">
+
+        <h2>
+          💚 Support SAFA QURAN COLLEGE
+        </h2>
+
+        <p>
+          You can support the educational activities of SAFA QURAN COLLEGE
+          through direct UPI payment, QR code or bank transfer.
+          May Allah accept your contribution and reward you abundantly.
+        </p>
+
+      </div>
+
+      <div class="donation-grid">
+
+        <div class="donation-panel">
+
+          <h3>
+            🏦 Bank & UPI Details
+          </h3>
+
+          <div class="bank-details">
+
+            <div class="bank-row">
+              <span>Bank</span>
+              <strong>Federal Bank</strong>
+            </div>
+
+            <div class="bank-row">
+              <span>A/C No</span>
+              <strong>10980200318831</strong>
+            </div>
+
+            <div class="bank-row">
+              <span>IFSC</span>
+              <strong>FDRL0001098</strong>
+            </div>
+
+            <div class="bank-row">
+              <span>Branch</span>
+              <strong>KANNUR BRANCH</strong>
+            </div>
+
+          </div>
+
+          <div class="upi-box">
+
+            <div class="upi-label">
+              DIRECT UPI PAYMENT
+            </div>
+
+            <div class="upi-id">
+              563safa@fbl
+            </div>
+
+            <a
+              class="upi-pay-btn"
+              href="upi://pay?pa=563safa%40fbl&pn=SAFA%20QURAN%20COLLEGE&cu=INR">
+              💳 PAY DIRECTLY WITH UPI
+            </a>
+
+          </div>
+
+          <div class="donation-note">
+
+            If the UPI button does not open an app on your device,
+            you can copy the UPI ID <strong>563safa@fbl</strong>
+            and pay through your preferred UPI application.
+
+          </div>
+
+        </div>
+
+        <div class="donation-panel qr-panel">
+
+          <h3>
+            📱 Scan & Pay
+          </h3>
+
+          <div class="qr-box">
+
+            <img
+              src="./20260225.jpg"
+              alt="SAFA Donation QR Code"
+              onerror="this.style.display='none';"
+            >
+
+          </div>
+
+          <p>
+            Scan the QR code using your UPI application
+            to make your donation.
+          </p>
+
+          <div class="donation-note">
+            <strong>UPI ID:</strong> 563safa@fbl
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- LEAVE -->
+    <section class="section" id="leave">
+
+      <div class="section-head">
+
+        <h2>
+          Leave Application
+        </h2>
+
+        <p>
+          Apply for leave and view replies from Usthad
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-title">
+          <h3>
+            Apply for Leave
+          </h3>
+        </div>
+
+        <form id="leaveForm">
+
+          <div class="form-grid">
+
+            <div class="form-group">
+
+              <label>
+                Leave Date
+              </label>
+
+              <input
+                type="date"
+                id="leaveDate"
+                required
+              >
+
+            </div>
+
+            <div class="form-group">
+
+              <label>
+                Reason
+              </label>
+
+              <input
+                type="text"
+                id="leaveReason"
+                placeholder="Reason for leave"
+                required
+              >
+
+            </div>
+
+            <div class="form-group full">
+
+              <label>
+                Details
+              </label>
+
+              <textarea
+                id="leaveDetails"
+                placeholder="Write additional details..."
+              ></textarea>
+
+            </div>
+
+          </div>
+
+          <button
+            class="primary-btn"
+            type="submit">
+
+            Submit Leave Application
+
+          </button>
+
+        </form>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-title">
+
+          <h3>
+            Leave History
+          </h3>
+
+        </div>
+
+        <div id="leaveHistory">
+
+          <div class="empty">
+            Loading...
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- MESSAGES -->
+    <section class="section" id="messages">
+
+      <div class="section-head">
+
+        <h2>
+          Parent Messages
+        </h2>
+
+        <p>
+          Send a message to Usthad / Administration
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-title">
+
+          <h3>
+            Send Message
+          </h3>
+
+        </div>
+
+        <form id="messageForm">
+
+          <div class="form-group">
+
+            <label>
+              Your Message
+            </label>
+
+            <textarea
+              id="messageText"
+              placeholder="Write your message..."
+              required
+            ></textarea>
+
+          </div>
+
+          <button
+            class="primary-btn"
+            type="submit">
+
+            Send Message
+
+          </button>
+
+        </form>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-title">
+
+          <h3>
+            Message History
+          </h3>
+
+        </div>
+
+        <div id="messageHistory">
+
+          <div class="empty">
+            Loading...
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
 
   </div>
 
-  <div class="card">
+</main>
 
-    <div class="card-title">
-      <h3>Message History</h3>
-    </div>
+<div id="toast"></div>
 
-    <div id="messageHistory">
-      <div class="empty">Loading...</div>
-    </div>
-
-  </div>
-
-</section>
-
-  </div></main><div id="toast"></div><script type="module">
+<script type="module">
 
 import {
   initializeApp
@@ -2225,7 +2458,7 @@ let studentData = null;
 
 
 /* =========================================
-   PROFESSIONAL NOTIFICATION SYSTEM
+   NOTIFICATION SYSTEM
    ========================================= */
 
 const notificationKeys = {
@@ -2244,14 +2477,6 @@ const notificationKeys = {
 
 };
 
-
-/*
-  Notification state is stored separately for each
-  parent account and student.
-
-  This prevents one parent's read status from
-  affecting another parent.
-*/
 
 function getNotificationStorageKey(type){
 
@@ -2295,11 +2520,17 @@ function setNotificationState(type,signature){
   try{
 
     localStorage.setItem(
+
       getNotificationStorageKey(type),
+
       JSON.stringify({
+
         signature:signature,
+
         seenAt:Date.now()
+
       })
+
     );
 
   }catch(error){
@@ -2313,6 +2544,8 @@ function setNotificationState(type,signature){
 
 }
 
+
+/* SHOW BELL */
 
 function showNotification(type){
 
@@ -2343,6 +2576,8 @@ function showNotification(type){
 
 }
 
+
+/* HIDE BELL */
 
 function hideNotification(type){
 
@@ -2375,8 +2610,7 @@ function hideNotification(type){
 
 
 /*
-  Creates a stable signature for the current
-  notification-related data.
+  Create a stable signature from notification data.
 */
 
 function makeNotificationSignature(rows){
@@ -2384,33 +2618,73 @@ function makeNotificationSignature(rows){
   try{
 
     return JSON.stringify(
+
       rows.map(row=>{
 
         return {
-          id:row.id || "",
-          status:row.status || "",
-          reply:row.reply || "",
-          date:row.date || "",
-          leaveDate:row.leaveDate || "",
+
+          id:
+            row.id || "",
+
+          status:
+            String(
+              row.status || ""
+            ).toLowerCase(),
+
+          reply:
+            String(
+              row.reply || ""
+            ),
+
+          date:
+            row.date ||
+            row.attendanceDate ||
+            "",
+
+          leaveDate:
+            row.leaveDate ||
+            "",
+
           createdAt:
-            row.createdAt?.seconds ||
-            row.createdAt ||
-            "",
+            row.createdAt?.seconds
+              ? row.createdAt.seconds
+              : (
+                  row.createdAt
+                  ? String(row.createdAt)
+                  : ""
+                ),
+
           updatedAt:
-            row.updatedAt?.seconds ||
-            row.updatedAt ||
-            "",
+            row.updatedAt?.seconds
+              ? row.updatedAt.seconds
+              : (
+                  row.updatedAt
+                  ? String(row.updatedAt)
+                  : ""
+                ),
+
           repliedAt:
-            row.repliedAt?.seconds ||
-            row.repliedAt ||
-            "",
+            row.repliedAt?.seconds
+              ? row.repliedAt.seconds
+              : (
+                  row.repliedAt
+                  ? String(row.repliedAt)
+                  : ""
+                ),
+
           replyAt:
-            row.replyAt?.seconds ||
-            row.replyAt ||
-            ""
+            row.replyAt?.seconds
+              ? row.replyAt.seconds
+              : (
+                  row.replyAt
+                  ? String(row.replyAt)
+                  : ""
+                )
+
         };
 
       })
+
     );
 
   }catch(error){
@@ -2423,11 +2697,8 @@ function makeNotificationSignature(rows){
 
 
 /*
-  First time this parent opens the current version:
-  existing data is treated as already seen.
-
-  After that, only a changed/new notification
-  signature produces the NEW badge.
+  Check whether the current data is newer/different
+  from the last data seen by this parent.
 */
 
 function checkNotification(type,rows){
@@ -2446,10 +2717,8 @@ function checkNotification(type,rows){
 
 
   /*
-    First visit:
-    Save current state silently.
-    This prevents old records from appearing
-    as NEW notifications.
+    First time:
+    Existing data is treated as already seen.
   */
 
   if(!state){
@@ -2467,8 +2736,7 @@ function checkNotification(type,rows){
 
 
   /*
-    Current data is different from the data
-    previously seen by the parent.
+    Data changed after previous visit.
   */
 
   if(state.signature !== signature){
@@ -2485,8 +2753,7 @@ function checkNotification(type,rows){
 
 
 /*
-  When parent opens a section, its current
-  notification state becomes READ.
+  Mark the current section as READ.
 */
 
 function markNotificationSeen(type){
@@ -2495,27 +2762,45 @@ function markNotificationSeen(type){
 
 
   if(type === "attendance"){
-    rows = window.parentNotificationData?.attendance || [];
+
+    rows =
+      window.parentNotificationData?.attendance || [];
+
   }
 
   if(type === "study"){
-    rows = window.parentNotificationData?.study || [];
+
+    rows =
+      window.parentNotificationData?.study || [];
+
   }
 
   if(type === "results"){
-    rows = window.parentNotificationData?.results || [];
+
+    rows =
+      window.parentNotificationData?.results || [];
+
   }
 
   if(type === "notices"){
-    rows = window.parentNotificationData?.notices || [];
+
+    rows =
+      window.parentNotificationData?.notices || [];
+
   }
 
   if(type === "leave"){
-    rows = window.parentNotificationData?.leave || [];
+
+    rows =
+      window.parentNotificationData?.leave || [];
+
   }
 
   if(type === "messages"){
-    rows = window.parentNotificationData?.messages || [];
+
+    rows =
+      window.parentNotificationData?.messages || [];
+
   }
 
 
@@ -2534,9 +2819,7 @@ function markNotificationSeen(type){
 }
 
 
-/*
-  Notification data cache.
-*/
+/* NOTIFICATION DATA */
 
 window.parentNotificationData = {
 
@@ -2622,8 +2905,7 @@ function openSection(sectionId){
 
 
   /*
-    Mark notification as READ only when
-    the parent opens the relevant section.
+    Opening a notification section marks it READ.
   */
 
   const notificationMap = {
@@ -2692,7 +2974,7 @@ document.querySelectorAll(".quick-btn").forEach(button=>{
 });
 
 
-/* PARENT SERVICE BOXES */
+/* SERVICE BOXES */
 
 document.querySelectorAll(".service-card").forEach(button=>{
 
@@ -2705,7 +2987,7 @@ document.querySelectorAll(".service-card").forEach(button=>{
 });
 
 
-/* MY DONATION FEATURED BOX */
+/* DONATION FEATURED */
 
 const donationFeatured =
   document.getElementById("donationFeatured");
@@ -2862,8 +3144,6 @@ async function loadStudent(){
     "-";
 
 
-  /* HOME */
-
   $("homeStudentName").textContent =
     name;
 
@@ -2891,8 +3171,6 @@ async function loadStudent(){
   $("homeInitial").textContent =
     getInitial(name);
 
-
-  /* CHILD */
 
   $("childName").textContent =
     name;
@@ -2983,18 +3261,33 @@ async function loadAttendance(){
       }
 
 
-      const status =
-        row.status ||
-        "Present";
+      const rawStatus =
+        String(
+          row.status ||
+          row.attendanceStatus ||
+          "Present"
+        ).trim();
+
+
+      const normalizedStatus =
+        rawStatus.toLowerCase();
+
+
+      const finalStatus =
+        normalizedStatus === "leave"
+          ? "Leave"
+          : normalizedStatus === "absent"
+            ? "Absent"
+            : "Present";
 
 
       if(
 
         !dateMap.has(date) ||
 
-        status === "Absent" ||
+        finalStatus === "Absent" ||
 
-        status === "Leave"
+        finalStatus === "Leave"
 
       ){
 
@@ -3004,9 +3297,9 @@ async function loadAttendance(){
 
           {
 
-            date,
+            date:date,
 
-            status
+            status:finalStatus
 
           }
 
@@ -3075,9 +3368,7 @@ async function loadAttendance(){
           <td colspan="2">
 
             <div class="empty">
-
               No attendance records found.
-
             </div>
 
           </td>
@@ -3138,9 +3429,7 @@ async function loadAttendance(){
             <td>
 
               <span class="status ${cls}">
-
                 ${escapeHtml(status)}
-
               </span>
 
             </td>
@@ -3167,9 +3456,7 @@ async function loadAttendance(){
         <td colspan="2">
 
           <div class="empty">
-
             Unable to load attendance.
-
           </div>
 
         </td>
@@ -3270,9 +3557,7 @@ async function loadStudy(){
       list.innerHTML = `
 
         <div class="empty">
-
           No study progress records found.
-
         </div>
 
       `;
@@ -3344,47 +3629,33 @@ async function loadStudy(){
 
 
         if(
-
           p.includes("excellent") ||
-
           p.includes("very good")
-
         ){
 
-          progress =
-            100;
+          progress = 100;
 
         }else if(
-
           p.includes("good")
-
         ){
 
-          progress =
-            80;
+          progress = 80;
 
         }else if(
-
           p.includes("average")
-
         ){
 
-          progress =
-            60;
+          progress = 60;
 
         }else if(
-
           p.includes("poor")
-
         ){
 
-          progress =
-            35;
+          progress = 35;
 
         }else{
 
-          progress =
-            70;
+          progress = 70;
 
         }
 
@@ -3398,9 +3669,7 @@ async function loadStudy(){
             </h3>
 
             <div class="progress-date">
-
               ${escapeHtml(date)}
-
             </div>
 
             <div class="progress-row">
@@ -3501,9 +3770,7 @@ async function loadStudy(){
     list.innerHTML = `
 
       <div class="empty">
-
         Unable to load study progress.
-
       </div>
 
     `;
@@ -3611,9 +3878,7 @@ async function loadResults(){
       list.innerHTML = `
 
         <div class="empty">
-
           No published results available.
-
         </div>
 
       `;
@@ -3644,10 +3909,8 @@ async function loadResults(){
 
         const date =
           getDateText(
-
             row.createdAt ||
             row.date
-
           );
 
 
@@ -3656,27 +3919,19 @@ async function loadResults(){
           <div class="result-card">
 
             <h3>
-
               ${escapeHtml(title)}
-
             </h3>
 
             <div class="result-mark">
-
               ${escapeHtml(mark)}
-
             </div>
 
             <span class="status approved">
-
               Published
-
             </span>
 
             <div class="notice-date">
-
               ${escapeHtml(date)}
-
             </div>
 
           </div>
@@ -3697,9 +3952,7 @@ async function loadResults(){
     list.innerHTML = `
 
       <div class="empty">
-
         Unable to load results.
-
       </div>
 
     `;
@@ -3801,9 +4054,7 @@ async function loadNotices(){
       list.innerHTML = `
 
         <div class="empty">
-
           No notices available.
-
         </div>
 
       `;
@@ -3833,10 +4084,8 @@ async function loadNotices(){
 
         const date =
           getDateText(
-
             row.createdAt ||
             row.date
-
           );
 
 
@@ -3845,21 +4094,15 @@ async function loadNotices(){
           <div class="notice-card">
 
             <h3>
-
               ${escapeHtml(title)}
-
             </h3>
 
             <p>
-
               ${escapeHtml(text)}
-
             </p>
 
             <div class="notice-date">
-
               ${escapeHtml(date)}
-
             </div>
 
           </div>
@@ -3880,9 +4123,7 @@ async function loadNotices(){
     list.innerHTML = `
 
       <div class="empty">
-
         Unable to load notices.
-
       </div>
 
     `;
@@ -4088,10 +4329,7 @@ async function loadLeaveHistory(){
 
 
     /*
-      Only Usthad's response/status is treated
-      as a parent notification.
-
-      Parent's own pending application is NOT
+      Only Usthad response/status is
       treated as a notification.
     */
 
@@ -4138,9 +4376,7 @@ async function loadLeaveHistory(){
       list.innerHTML = `
 
         <div class="empty">
-
           No leave applications yet.
-
         </div>
 
       `;
@@ -4285,9 +4521,7 @@ async function loadLeaveHistory(){
     list.innerHTML = `
 
       <div class="empty">
-
         Unable to load leave history.
-
       </div>
 
     `;
@@ -4470,8 +4704,6 @@ async function loadMessageHistory(){
     /*
       Only Usthad reply is treated as
       a notification.
-
-      Parent's own message is NOT a notification.
     */
 
     const notificationRows =
@@ -4499,9 +4731,7 @@ async function loadMessageHistory(){
       list.innerHTML = `
 
         <div class="empty">
-
           No messages yet.
-
         </div>
 
       `;
@@ -4527,11 +4757,9 @@ async function loadMessageHistory(){
                 </h4>
 
                 <p>
-
                   ${escapeHtml(
                     row.text || ""
                   )}
-
                 </p>
 
                 <div class="notice-date">
@@ -4602,9 +4830,7 @@ async function loadMessageHistory(){
     list.innerHTML = `
 
       <div class="empty">
-
         Unable to load message history.
-
       </div>
 
     `;
@@ -4734,15 +4960,11 @@ onAuthStateChanged(
             font-size:45px;
             margin-bottom:15px;
           ">
-
             ⚠️
-
           </div>
 
           <strong>
-
             Parent Dashboard Error
-
           </strong>
 
           <p style="
@@ -4791,5 +5013,7 @@ $("leaveDate").value =
     .toISOString()
     .slice(0,10);
 
-</script></body>
+</script>
+
+</body>
 </html>
