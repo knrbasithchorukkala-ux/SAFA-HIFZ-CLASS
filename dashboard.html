@@ -424,6 +424,72 @@ display:flex
 display:none
 }
 
+
+/* =========================================================
+   LEAVE SUMMARY - ONLY NEW FEATURE
+   ========================================================= */
+
+.leave-summary-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px
+}
+
+.leave-summary-card{
+padding:16px;
+border:1px solid #c8e1d4;
+border-radius:12px;
+background:linear-gradient(135deg,#fdfefe,#edf8f2);
+transition:.2s
+}
+
+.leave-summary-card:hover{
+transform:translateY(-2px);
+box-shadow:0 8px 20px rgba(3,43,36,.10)
+}
+
+.leave-summary-card strong{
+display:block;
+color:#164c39;
+font-size:15px;
+font-weight:900
+}
+
+.leave-summary-card small{
+display:block;
+margin-top:4px;
+color:var(--muted);
+font-size:11px
+}
+
+.leave-summary-count{
+margin-top:10px;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+min-width:42px;
+height:32px;
+padding:0 10px;
+border-radius:20px;
+color:#fff;
+background:linear-gradient(135deg,#087f5b,#0aad78);
+font-size:13px;
+font-weight:900
+}
+
+@media(max-width:900px){
+.leave-summary-grid{
+grid-template-columns:repeat(2,1fr)
+}
+}
+
+@media(max-width:600px){
+.leave-summary-grid{
+grid-template-columns:1fr
+}
+}
+
+
 .form-grid{
 display:grid;grid-template-columns:repeat(2,1fr);gap:16px
 }
@@ -1205,6 +1271,37 @@ Save Attendance
 </div>
 
 </form>
+
+</div>
+
+
+<!-- =====================================================
+     LEAVE SUMMARY - ONLY NEW FEATURE
+     ===================================================== -->
+
+<div class="panel">
+
+<div class="panel-head">
+
+<div>
+
+<h3>Leave Summary</h3>
+
+<div class="panel-desc">
+Total leave taken by each student
+</div>
+
+</div>
+
+</div>
+
+<div id="leaveSummary">
+
+<div class="empty">
+Loading leave summary...
+</div>
+
+</div>
 
 </div>
 
@@ -3732,6 +3829,13 @@ uniqueMap.values()
 );
 
 
+/* =========================================================
+   LEAVE SUMMARY - ONLY NEW FEATURE
+   ========================================================= */
+
+renderLeaveSummary();
+
+
 attendanceRows.sort(
 (a,b)=>{
 
@@ -3777,6 +3881,146 @@ error.message||""
 </div>`;
 
 }
+
+}
+
+
+/* =========================================================
+   LEAVE SUMMARY - ONLY NEW FEATURE
+   ========================================================= */
+
+function renderLeaveSummary(){
+
+const container=$("leaveSummary");
+
+if(!container)return;
+
+const summaryMap=new Map();
+
+
+/* Count existing Leave attendance records */
+
+attendanceRows.forEach(row=>{
+
+if(
+String(row.status||"").toLowerCase()!=="leave"
+)
+return;
+
+const number=
+String(row.studentNumber||"").trim();
+
+if(!number)return;
+
+const name=
+attendanceStudentName(row);
+
+
+if(!summaryMap.has(number)){
+
+summaryMap.set(
+number,
+{
+studentNumber:number,
+studentName:name,
+totalLeave:0
+}
+);
+
+}
+
+summaryMap.get(number).totalLeave++;
+
+});
+
+
+/* Add students who have 0 leave */
+
+window.students.forEach(student=>{
+
+const number=
+String(
+student.studentNumber||""
+).trim();
+
+if(!number)return;
+
+const name=
+student.studentName||
+student.name||
+student.fullName||
+"";
+
+
+if(!summaryMap.has(number)){
+
+summaryMap.set(
+number,
+{
+studentNumber:number,
+studentName:name,
+totalLeave:0
+}
+);
+
+}
+
+});
+
+
+const rows=
+Array.from(
+summaryMap.values()
+).sort(
+(a,b)=>
+String(a.studentNumber)
+.localeCompare(
+String(b.studentNumber),
+undefined,
+{numeric:true}
+)
+);
+
+
+if(!rows.length){
+
+container.innerHTML=
+`<div class="empty">
+No students found.
+</div>`;
+
+return;
+
+}
+
+
+container.innerHTML=`
+
+<div class="leave-summary-grid">
+
+${rows.map(row=>`
+
+<div class="leave-summary-card">
+
+<strong>
+${escapeHtml(row.studentName)}
+</strong>
+
+<small>
+Student No: ${escapeHtml(row.studentNumber)}
+</small>
+
+<span class="leave-summary-count">
+${row.totalLeave} Leave
+</span>
+
+</div>
+
+`).join("")}
+
+</div>
+
+`;
 
 }
 
@@ -4248,8 +4492,7 @@ $("studyTable").innerHTML=
 `<tr><td colspan="11">
 <div class="empty">
 No study records found.
-</div>
-</td></tr>`;
+</div></td></tr>`;
 
 return;
 
@@ -4982,8 +5225,7 @@ Unable to load notices.
 ${escapeHtml(
 error.message||""
 )}
-</small>
-</div></td></tr>`;
+</small></div></td></tr>`;
 
 }
 
