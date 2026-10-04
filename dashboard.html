@@ -1340,11 +1340,33 @@ Only Absent / Leave students are stored. Students without a record for a date ar
 
 </div>
 
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+
+<select
+id="attendanceYearFilter"
+class="search"
+style="width:auto;min-width:120px">
+
+<option value="all">All Years</option>
+
+</select>
+
+<select
+id="attendanceMonthFilter"
+class="search"
+style="width:auto;min-width:140px">
+
+<option value="all">All Months</option>
+
+</select>
+
 <input
 class="search"
 id="attendanceSearch"
 placeholder="Search student no or name..."
 >
+
+</div>
 
 </div>
 
@@ -3882,6 +3904,13 @@ $("attendanceCount")
 .textContent=
 attendanceRows.length;
 
+
+/* =========================================================
+   ATTENDANCE YEAR / MONTH FILTERS
+   ========================================================= */
+
+populateAttendanceDateFilters();
+
 renderAttendance();
 
 
@@ -3899,6 +3928,132 @@ error.message||""
 )}
 </small>
 </div>`;
+
+}
+
+}
+
+
+/* =========================================================
+   ATTENDANCE YEAR / MONTH FILTERS
+   ========================================================= */
+
+function populateAttendanceDateFilters(){
+
+const yearSelect=
+$("attendanceYearFilter");
+
+const monthSelect=
+$("attendanceMonthFilter");
+
+if(!yearSelect||!monthSelect)
+return;
+
+
+/* Preserve currently selected filters */
+
+const oldYear=
+yearSelect.value||"all";
+
+const oldMonth=
+monthSelect.value||"all";
+
+
+/* Years from attendance records */
+
+const years=
+[
+...new Set(
+attendanceRows
+.map(row=>{
+
+const date=
+String(row.date||"");
+
+return date.split("-")[0];
+
+})
+.filter(Boolean)
+)
+]
+.sort(
+(a,b)=>
+b.localeCompare(a)
+);
+
+
+yearSelect.innerHTML=
+`<option value="all">All Years</option>`+
+years.map(year=>`
+
+<option value="${escapeHtml(year)}">
+${escapeHtml(year)}
+</option>
+
+`).join("");
+
+
+/* All months */
+
+const months=[
+["01","January"],
+["02","February"],
+["03","March"],
+["04","April"],
+["05","May"],
+["06","June"],
+["07","July"],
+["08","August"],
+["09","September"],
+["10","October"],
+["11","November"],
+["12","December"]
+];
+
+
+monthSelect.innerHTML=
+`<option value="all">All Months</option>`+
+months.map(month=>`
+
+<option value="${month[0]}">
+${month[1]}
+</option>
+
+`).join("");
+
+
+/* Restore previous selections if available */
+
+if(
+[...yearSelect.options]
+.some(
+option=>
+option.value===oldYear
+)
+){
+
+yearSelect.value=oldYear;
+
+}else{
+
+yearSelect.value="all";
+
+}
+
+
+if(
+[...monthSelect.options]
+.some(
+option=>
+option.value===oldMonth
+)
+){
+
+monthSelect.value=oldMonth;
+
+}else{
+
+monthSelect.value="all";
 
 }
 
@@ -4109,6 +4264,19 @@ $("attendanceSearch")?.value||
 .trim().toLowerCase();
 
 
+/* =========================================================
+   YEAR / MONTH FILTER VALUES
+   ========================================================= */
+
+const yearFilter=
+$("attendanceYearFilter")?.value||
+"all";
+
+const monthFilter=
+$("attendanceMonthFilter")?.value||
+"all";
+
+
 const filtered=
 attendanceRows.filter(
 row=>{
@@ -4119,10 +4287,40 @@ String(row.studentNumber||"");
 const name=
 attendanceStudentName(row);
 
-return studentSearchMatch(
+
+/* Date is stored as YYYY-MM-DD */
+
+const date=
+String(row.date||"");
+
+const parts=
+date.split("-");
+
+const rowYear=
+parts[0]||"";
+
+const rowMonth=
+parts[1]||"";
+
+
+const yearMatch=
+yearFilter==="all"||
+rowYear===yearFilter;
+
+
+const monthMatch=
+monthFilter==="all"||
+rowMonth===monthFilter;
+
+
+return(
+yearMatch &&
+monthMatch &&
+studentSearchMatch(
 number,
 name,
 query
+)
 );
 
 }
@@ -4400,6 +4598,21 @@ showMessage(
 
 $("attendanceSearch").addEventListener(
 "input",
+renderAttendance
+);
+
+
+/* =========================================================
+   ATTENDANCE YEAR / MONTH FILTER EVENTS
+   ========================================================= */
+
+$("attendanceYearFilter").addEventListener(
+"change",
+renderAttendance
+);
+
+$("attendanceMonthFilter").addEventListener(
+"change",
 renderAttendance
 );
 
