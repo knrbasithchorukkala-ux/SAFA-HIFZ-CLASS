@@ -462,19 +462,39 @@ color:var(--muted);
 font-size:11px
 }
 
-.leave-summary-count{
+/* LEAVE SUMMARY COUNTS */
+.leave-summary-counts{
 margin-top:10px;
+display:flex;
+flex-wrap:wrap;
+gap:7px
+}
+
+.leave-summary-count{
 display:inline-flex;
 align-items:center;
 justify-content:center;
-min-width:42px;
+min-width:70px;
 height:32px;
 padding:0 10px;
 border-radius:20px;
-color:#fff;
-background:linear-gradient(135deg,#087f5b,#0aad78);
-font-size:13px;
+font-size:12px;
 font-weight:900
+}
+
+.leave-summary-count.absent{
+color:#842029;
+background:#f8d7da
+}
+
+.leave-summary-count.leave{
+color:#856404;
+background:#fff3cd
+}
+
+.leave-summary-count.total{
+color:#087f5b;
+background:#dff3e7
 }
 
 @media(max-width:900px){
@@ -3898,12 +3918,16 @@ if(!container)return;
 const summaryMap=new Map();
 
 
-/* Count existing Leave attendance records */
+/* Count Absent + Leave attendance records */
 
 attendanceRows.forEach(row=>{
 
+const status=
+String(row.status||"").toLowerCase();
+
 if(
-String(row.status||"").toLowerCase()!=="leave"
+status!=="absent" &&
+status!=="leave"
 )
 return;
 
@@ -3923,18 +3947,35 @@ number,
 {
 studentNumber:number,
 studentName:name,
+totalAbsent:0,
 totalLeave:0
 }
 );
 
 }
 
-summaryMap.get(number).totalLeave++;
+
+const summary=
+summaryMap.get(number);
+
+
+if(status==="absent"){
+
+summary.totalAbsent++;
+
+}
+
+
+if(status==="leave"){
+
+summary.totalLeave++;
+
+}
 
 });
 
 
-/* Add students who have 0 leave */
+/* Add students who have 0 Absent / 0 Leave */
 
 window.students.forEach(student=>{
 
@@ -3959,6 +4000,7 @@ number,
 {
 studentNumber:number,
 studentName:name,
+totalAbsent:0,
 totalLeave:0
 }
 );
@@ -3998,7 +4040,13 @@ container.innerHTML=`
 
 <div class="leave-summary-grid">
 
-${rows.map(row=>`
+${rows.map(row=>{
+
+const total=
+row.totalAbsent+
+row.totalLeave;
+
+return `
 
 <div class="leave-summary-card">
 
@@ -4010,13 +4058,27 @@ ${escapeHtml(row.studentName)}
 Student No: ${escapeHtml(row.studentNumber)}
 </small>
 
-<span class="leave-summary-count">
-${row.totalLeave} Leave
+<div class="leave-summary-counts">
+
+<span class="leave-summary-count absent">
+Absent: ${row.totalAbsent}
+</span>
+
+<span class="leave-summary-count leave">
+Leave: ${row.totalLeave}
+</span>
+
+<span class="leave-summary-count total">
+Total: ${total}
 </span>
 
 </div>
 
-`).join("")}
+</div>
+
+`;
+
+}).join("")}
 
 </div>
 
