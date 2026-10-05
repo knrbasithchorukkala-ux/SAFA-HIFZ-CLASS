@@ -426,7 +426,7 @@ display:none
 
 
 /* =========================================================
-   LEAVE SUMMARY - ONLY NEW FEATURE
+   LEAVE SUMMARY
    ========================================================= */
 
 .leave-summary-grid{
@@ -462,7 +462,6 @@ color:var(--muted);
 font-size:11px
 }
 
-/* LEAVE SUMMARY COUNTS */
 .leave-summary-counts{
 margin-top:10px;
 display:flex;
@@ -497,6 +496,44 @@ color:#087f5b;
 background:#dff3e7
 }
 
+
+/* LEAVE SUMMARY FILTER */
+
+.leave-summary-filters{
+display:flex;
+align-items:center;
+gap:8px;
+flex-wrap:wrap;
+margin-bottom:18px;
+padding:12px;
+border:1px solid #c8e1d4;
+border-radius:12px;
+background:linear-gradient(135deg,#f5fbf7,#edf8f2)
+}
+
+.leave-summary-filters label{
+color:#315b49;
+font-size:11px;
+font-weight:900;
+white-space:nowrap
+}
+
+.leave-summary-filters select{
+padding:10px 12px;
+outline:none;
+color:var(--text);
+background:#fff;
+border:1px solid #c4dfcf;
+border-radius:9px;
+min-width:125px;
+font-weight:700
+}
+
+.leave-summary-filters select:focus{
+border-color:#0a956a;
+box-shadow:0 0 0 3px rgba(10,149,106,.11)
+}
+
 @media(max-width:900px){
 .leave-summary-grid{
 grid-template-columns:repeat(2,1fr)
@@ -506,6 +543,19 @@ grid-template-columns:repeat(2,1fr)
 @media(max-width:600px){
 .leave-summary-grid{
 grid-template-columns:1fr
+}
+
+.leave-summary-filters{
+align-items:stretch;
+flex-direction:column
+}
+
+.leave-summary-filters label{
+width:100%
+}
+
+.leave-summary-filters select{
+width:100%
 }
 }
 
@@ -1295,10 +1345,6 @@ Save Attendance
 </div>
 
 
-<!-- =====================================================
-     LEAVE SUMMARY - ONLY NEW FEATURE
-     ===================================================== -->
-
 <div class="panel">
 
 <div class="panel-head">
@@ -1308,12 +1354,42 @@ Save Attendance
 <h3>Leave Summary</h3>
 
 <div class="panel-desc">
-Total leave taken by each student
+Absent / Leave total for each student. Use the filters below to view a specific year or month.
 </div>
 
 </div>
 
 </div>
+
+
+<!-- =====================================================
+     LEAVE SUMMARY FILTER
+     ===================================================== -->
+
+<div class="leave-summary-filters">
+
+<label>Filter:</label>
+
+<select
+id="leaveSummaryYearFilter">
+
+<option value="all">
+All Years
+</option>
+
+</select>
+
+<select
+id="leaveSummaryMonthFilter">
+
+<option value="all">
+All Months
+</option>
+
+</select>
+
+</div>
+
 
 <div id="leaveSummary">
 
@@ -2085,7 +2161,6 @@ let attendanceRows=[];
 let studyRows=[];
 let resultRows=[];
 
-/* Notification data */
 window.adminLeaveRows=[];
 window.adminMessageRows=[];
 window.adminDonationRows;
@@ -3871,13 +3946,6 @@ uniqueMap.values()
 );
 
 
-/* =========================================================
-   LEAVE SUMMARY - ONLY NEW FEATURE
-   ========================================================= */
-
-renderLeaveSummary();
-
-
 attendanceRows.sort(
 (a,b)=>{
 
@@ -3906,6 +3974,15 @@ attendanceRows.length;
 
 
 /* =========================================================
+   LEAVE SUMMARY FILTERS + SUMMARY
+   ========================================================= */
+
+populateLeaveSummaryDateFilters();
+
+renderLeaveSummary();
+
+
+/* =========================================================
    ATTENDANCE YEAR / MONTH FILTERS
    ========================================================= */
 
@@ -3928,6 +4005,132 @@ error.message||""
 )}
 </small>
 </div>`;
+
+}
+
+}
+
+
+/* =========================================================
+   LEAVE SUMMARY YEAR / MONTH FILTERS
+   ========================================================= */
+
+function populateLeaveSummaryDateFilters(){
+
+const yearSelect=
+$("leaveSummaryYearFilter");
+
+const monthSelect=
+$("leaveSummaryMonthFilter");
+
+if(!yearSelect||!monthSelect)
+return;
+
+
+/* Preserve currently selected filters */
+
+const oldYear=
+yearSelect.value||"all";
+
+const oldMonth=
+monthSelect.value||"all";
+
+
+/* Get years from attendance records */
+
+const years=
+[
+...new Set(
+attendanceRows
+.map(row=>{
+
+const date=
+String(row.date||"");
+
+return date.split("-")[0];
+
+})
+.filter(Boolean)
+)
+]
+.sort(
+(a,b)=>
+b.localeCompare(a)
+);
+
+
+yearSelect.innerHTML=
+`<option value="all">
+All Years
+</option>`+
+years.map(year=>`
+
+<option value="${escapeHtml(year)}">
+${escapeHtml(year)}
+</option>
+
+`).join("");
+
+
+const months=[
+["01","January"],
+["02","February"],
+["03","March"],
+["04","April"],
+["05","May"],
+["06","June"],
+["07","July"],
+["08","August"],
+["09","September"],
+["10","October"],
+["11","November"],
+["12","December"]
+];
+
+
+monthSelect.innerHTML=
+`<option value="all">
+All Months
+</option>`+
+months.map(month=>`
+
+<option value="${month[0]}">
+${month[1]}
+</option>
+
+`).join("");
+
+
+if(
+[...yearSelect.options]
+.some(
+option=>
+option.value===oldYear
+)
+){
+
+yearSelect.value=oldYear;
+
+}else{
+
+yearSelect.value="all";
+
+}
+
+
+if(
+[...monthSelect.options]
+.some(
+option=>
+option.value===oldMonth
+)
+){
+
+monthSelect.value=oldMonth;
+
+}else{
+
+monthSelect.value="all";
 
 }
 
@@ -3993,8 +4196,6 @@ ${escapeHtml(year)}
 `).join("");
 
 
-/* All months */
-
 const months=[
 ["01","January"],
 ["02","February"],
@@ -4021,8 +4222,6 @@ ${month[1]}
 
 `).join("");
 
-
-/* Restore previous selections if available */
 
 if(
 [...yearSelect.options]
@@ -4061,7 +4260,7 @@ monthSelect.value="all";
 
 
 /* =========================================================
-   LEAVE SUMMARY - ONLY NEW FEATURE
+   LEAVE SUMMARY
    ========================================================= */
 
 function renderLeaveSummary(){
@@ -4069,6 +4268,20 @@ function renderLeaveSummary(){
 const container=$("leaveSummary");
 
 if(!container)return;
+
+
+/* =========================================================
+   APPLY LEAVE SUMMARY YEAR / MONTH FILTER
+   ========================================================= */
+
+const yearFilter=
+$("leaveSummaryYearFilter")?.value||
+"all";
+
+const monthFilter=
+$("leaveSummaryMonthFilter")?.value||
+"all";
+
 
 const summaryMap=new Map();
 
@@ -4086,10 +4299,44 @@ status!=="leave"
 )
 return;
 
+
 const number=
 String(row.studentNumber||"").trim();
 
 if(!number)return;
+
+
+const date=
+String(row.date||"");
+
+const parts=
+date.split("-");
+
+const rowYear=
+parts[0]||"";
+
+const rowMonth=
+parts[1]||"";
+
+
+const yearMatch=
+yearFilter==="all"||
+rowYear===yearFilter;
+
+
+const monthMatch=
+monthFilter==="all"||
+rowMonth===monthFilter;
+
+
+/* Filter the attendance record before counting */
+
+if(
+!yearMatch||
+!monthMatch
+)
+return;
+
 
 const name=
 attendanceStudentName(row);
@@ -4254,6 +4501,25 @@ row.studentNumber
 }
 
 
+/* =========================================================
+   LEAVE SUMMARY FILTER EVENTS
+   ========================================================= */
+
+$("leaveSummaryYearFilter").addEventListener(
+"change",
+renderLeaveSummary
+);
+
+$("leaveSummaryMonthFilter").addEventListener(
+"change",
+renderLeaveSummary
+);
+
+
+/* =========================================================
+   ATTENDANCE RECORDS
+   ========================================================= */
+
 function renderAttendance(){
 
 const query=
@@ -4263,10 +4529,6 @@ $("attendanceSearch")?.value||
 )
 .trim().toLowerCase();
 
-
-/* =========================================================
-   YEAR / MONTH FILTER VALUES
-   ========================================================= */
 
 const yearFilter=
 $("attendanceYearFilter")?.value||
@@ -4287,8 +4549,6 @@ String(row.studentNumber||"");
 const name=
 attendanceStudentName(row);
 
-
-/* Date is stored as YYYY-MM-DD */
 
 const date=
 String(row.date||"");
@@ -4601,10 +4861,6 @@ $("attendanceSearch").addEventListener(
 renderAttendance
 );
 
-
-/* =========================================================
-   ATTENDANCE YEAR / MONTH FILTER EVENTS
-   ========================================================= */
 
 $("attendanceYearFilter").addEventListener(
 "change",
