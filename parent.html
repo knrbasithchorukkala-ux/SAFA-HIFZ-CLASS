@@ -2633,7 +2633,21 @@ function makeNotificationSignature(rows){
 
           reply:
             String(
-              row.reply || ""
+              row.reply ||
+              row.adminReply ||
+              row.usthadReply ||
+              row.response ||
+              row.messageReply ||
+              row.replyMessage ||
+              ""
+            ),
+
+          response:
+            String(
+              row.response ||
+              row.adminResponse ||
+              row.usthadResponse ||
+              ""
             ),
 
           date:
@@ -2678,6 +2692,15 @@ function makeNotificationSignature(rows){
               : (
                   row.replyAt
                   ? String(row.replyAt)
+                  : ""
+                ),
+
+          respondedAt:
+            row.respondedAt?.seconds
+              ? row.respondedAt.seconds
+              : (
+                  row.respondedAt
+                  ? String(row.respondedAt)
                   : ""
                 )
 
@@ -4339,13 +4362,38 @@ async function loadLeaveHistory(){
         const status =
           String(
             row.status || ""
-          ).toLowerCase();
+          ).toLowerCase()
+          .trim();
 
 
         const reply =
           String(
-            row.reply || ""
+            row.reply ||
+            row.adminReply ||
+            row.usthadReply ||
+            row.response ||
+            row.messageReply ||
+            row.replyMessage ||
+            ""
           ).trim();
+
+
+        const response =
+          String(
+            row.adminResponse ||
+            row.usthadResponse ||
+            row.responseMessage ||
+            ""
+          ).trim();
+
+
+        const hasResponseTime =
+          !!(
+            row.updatedAt ||
+            row.repliedAt ||
+            row.replyAt ||
+            row.respondedAt
+          );
 
 
         return (
@@ -4354,7 +4402,11 @@ async function loadLeaveHistory(){
 
           status === "rejected" ||
 
-          reply !== ""
+          reply !== "" ||
+
+          response !== "" ||
+
+          hasResponseTime
 
         );
 
@@ -4422,6 +4474,19 @@ async function loadLeaveHistory(){
         }
 
 
+        const reply =
+          row.reply ||
+          row.adminReply ||
+          row.usthadReply ||
+          row.response ||
+          row.messageReply ||
+          row.replyMessage ||
+          row.adminResponse ||
+          row.usthadResponse ||
+          row.responseMessage ||
+          "";
+
+
         return `
 
           <div class="history-card">
@@ -4482,7 +4547,7 @@ async function loadLeaveHistory(){
             </div>
 
             ${
-              row.reply
+              reply
               ? `
 
                 <div class="reply">
@@ -4494,7 +4559,7 @@ async function loadLeaveHistory(){
                   <br>
 
                   ${escapeHtml(
-                    row.reply
+                    reply
                   )}
 
                 </div>
@@ -4709,9 +4774,55 @@ async function loadMessageHistory(){
     const notificationRows =
       rows.filter(row=>{
 
-        return String(
-          row.reply || ""
-        ).trim() !== "";
+        const reply =
+          String(
+            row.reply ||
+            row.adminReply ||
+            row.usthadReply ||
+            row.response ||
+            row.messageReply ||
+            row.replyMessage ||
+            ""
+          ).trim();
+
+
+        const response =
+          String(
+            row.adminResponse ||
+            row.usthadResponse ||
+            row.responseMessage ||
+            ""
+          ).trim();
+
+
+        const status =
+          String(
+            row.status || ""
+          ).toLowerCase()
+          .trim();
+
+
+        const hasResponseTime =
+          !!(
+            row.updatedAt ||
+            row.repliedAt ||
+            row.replyAt ||
+            row.respondedAt
+          );
+
+
+        return (
+
+          reply !== "" ||
+
+          response !== "" ||
+
+          (
+            hasResponseTime &&
+            status !== "unread"
+          )
+
+        );
 
       });
 
@@ -4744,6 +4855,19 @@ async function loadMessageHistory(){
     list.innerHTML =
       rows.map(row=>{
 
+        const reply =
+          row.reply ||
+          row.adminReply ||
+          row.usthadReply ||
+          row.response ||
+          row.messageReply ||
+          row.replyMessage ||
+          row.adminResponse ||
+          row.usthadResponse ||
+          row.responseMessage ||
+          "";
+
+
         return `
 
           <div class="history-card">
@@ -4775,13 +4899,13 @@ async function loadMessageHistory(){
               </div>
 
               <span class="status ${
-                row.reply
+                reply
                 ? "approved"
                 : "pending"
               }">
 
                 ${
-                  row.reply
+                  reply
                   ? "Replied"
                   : "Pending"
                 }
@@ -4791,7 +4915,7 @@ async function loadMessageHistory(){
             </div>
 
             ${
-              row.reply
+              reply
               ? `
 
                 <div class="reply">
@@ -4803,7 +4927,7 @@ async function loadMessageHistory(){
                   <br>
 
                   ${escapeHtml(
-                    row.reply
+                    reply
                   )}
 
                 </div>
